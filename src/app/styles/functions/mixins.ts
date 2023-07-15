@@ -9,7 +9,6 @@ export const AdaptiveValue = (
   minSize: number,
   widthFrom = wrapperWidth,
   widthTo = minWidth,
-  keepSize = 0
 ) => {
   if (startSize === 0) startSize = 0.000001
 
@@ -24,7 +23,7 @@ export const AdaptiveValue = (
   const widthToMedia = Em(widthTo)
 
   // formula of fly value
-  const slope = ((startSize - minSize) / (widthFrom - widthTo))
+  const slope = (startSize - minSize) / (widthFrom - widthTo)
   let yIntersection = -widthTo * slope + minSize
   if (yIntersection === 0) {
     yIntersection = 0.000001
@@ -33,10 +32,12 @@ export const AdaptiveValue = (
   const flyValue = `calc(${Rem(yIntersection)} + (${slope} * 100vw))`
   ///
   // getting property value
-  let propertyValue = "clamp(" + Rem(minSize) + "," + flyValue + "," + Rem(startSize) + ")"
+  let propertyValue =
+    "clamp(" + Rem(minSize) + "," + flyValue + "," + Rem(startSize) + ")"
   // used if property value is a negative number
   if (minSize > startSize) {
-    propertyValue = "clamp(" + Rem(startSize) + "," + flyValue + "," + Rem(minSize) + ")"
+    propertyValue =
+      "clamp(" + Rem(startSize) + "," + flyValue + "," + Rem(minSize) + ")"
   }
 
   return propertyValue + ""
