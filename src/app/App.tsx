@@ -5,11 +5,7 @@ import "./styles/style.scss"
 import Layout from "./layout/Layout"
 
 function App() {
-  return (
-    <Layout>
-      <Routing />
-    </Layout>
-  )
+  return <Routing />
 }
 
 export default withProviders(App)

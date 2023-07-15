@@ -45,6 +45,8 @@ const LinkLayout = styled(NavLink)`
 
   .icon {
     position: relative;
+    width: 25px;
+    height: 25px;
 
     img.active {
       transition: 0.5s;
@@ -56,7 +58,7 @@ const LinkLayout = styled(NavLink)`
     }
 
     img {
-      width: 25px;
+      width: 100%;
     }
   }
 
