@@ -1,0 +1,11 @@
+*.d.ts
+next.config.js
+.yarn
+.next
+dist
+node_modules
+_document.js
+vite.config.ts
+
+mixins.ts
+settings.ts
