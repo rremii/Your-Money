@@ -2,11 +2,15 @@ import styled from "styled-components"
 import React from "react"
 import { Header } from "@widgets/Header"
 import { Footer } from "@widgets/Footer"
+import { InfoSubHeader } from "@widgets/Header/ui/InfoSubHeader.tsx"
 
 const AccountsPage = () => {
   return (
     <AccountsLayout>
-      <Header right={<div>ri</div>} />
+      <Header
+        SubHeader={<InfoSubHeader>ACCOUNTS</InfoSubHeader>}
+        right={<div>ri</div>}
+      />
       <main>Accounts</main>
     </AccountsLayout>
   )

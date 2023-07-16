@@ -3,11 +3,15 @@ import React from "react"
 import { Header } from "@widgets/Header"
 import { Footer } from "@widgets/Footer"
 import Categories from "@shared/assets/LightTheme/categories.png"
+import { DateSubHeader } from "@widgets/Header/ui/DateSubHeader.tsx"
 
 const TransactionsPage = () => {
   return (
     <TransactionsLayout>
-      <Header right={<img src={Categories} alt="" />} />
+      <Header
+        SubHeader={<DateSubHeader />}
+        right={<img src={Categories} alt="" />}
+      />
       <main>transactions</main>
     </TransactionsLayout>
   )

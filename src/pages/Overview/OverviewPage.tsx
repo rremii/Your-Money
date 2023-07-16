@@ -2,11 +2,12 @@ import styled from "styled-components"
 import React from "react"
 import { Header } from "@widgets/Header"
 import { Footer } from "@widgets/Footer"
+import { DateSubHeader } from "@widgets/Header/ui/DateSubHeader.tsx"
 
 const OverviewPage = () => {
   return (
     <OverviewLayout>
-      <Header right={<div>ri</div>} />
+      <Header SubHeader={<DateSubHeader />} right={<div>ri</div>} />
       <main>overview</main>
     </OverviewLayout>
   )
