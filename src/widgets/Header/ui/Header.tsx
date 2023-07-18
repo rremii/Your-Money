@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import { FC } from "react"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { setIsSideBar } from "@entities/SideBar"
 
 interface props {
   right?: React.ReactNode
@@ -9,9 +11,14 @@ interface props {
 }
 
 export const Header: FC<props> = ({ right, SubHeader }) => {
+  const dispatch = useAppDispatch()
+  const OpenSideBar = () => {
+    dispatch(setIsSideBar(true))
+  }
+
   return (
     <HeaderLayout>
-      <div className="burger left">
+      <div onClick={OpenSideBar} className="burger left">
         <span />
         <span />
         <span />

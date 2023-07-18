@@ -1,9 +1,19 @@
 import styled from "styled-components"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { useMemo } from "react"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { setIsSideBar } from "@entities/SideBar"
 
 //todo decomposite by header profile and so on
 export const SideBar = () => {
+  const dispatch = useAppDispatch()
+
+  const isSideBar = useTypedSelector((state) => state.SideBar.isSideBarOpen)
+
+  const CloseSideBar = () => {
+    dispatch(setIsSideBar(false))
+  }
+
   const SettingsSectionContent = useMemo(
     () => [
       { icon: Categories, title: "Language", subTitle: "Default" },
@@ -27,8 +37,8 @@ export const SideBar = () => {
 
   return (
     <>
-      <OverLay />
-      <SideBarLayout>
+      <OverLay onClick={CloseSideBar} isSideBar={isSideBar} />
+      <SideBarLayout isSideBar={isSideBar}>
         <div className="header">
           <div className="avatar-box">
             <img className="avatar" src={Categories} alt="avatar" />
@@ -75,12 +85,14 @@ export const SideBar = () => {
     </>
   )
 }
-const SideBarLayout = styled.div`
+const SideBarLayout = styled.div<{
+  isSideBar: boolean
+}>`
   position: absolute;
   background-color: var(--bg-1);
   z-index: 10;
   top: 0;
-  left: 0;
+  left: ${({ isSideBar }) => (isSideBar ? "0" : "-100%")};
   width: 75%;
   min-width: 270px;
   height: 100%;
@@ -88,6 +100,7 @@ const SideBarLayout = styled.div`
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
+  transition: left 0.5s;
 
   .header {
     padding-left: 20px;
@@ -222,7 +235,9 @@ const SideBarLayout = styled.div`
     }
   }
 `
-const OverLay = styled.div`
+const OverLay = styled.div<{
+  isSideBar: boolean
+}>`
   position: absolute;
   z-index: 5;
   top: 0;
@@ -230,4 +245,7 @@ const OverLay = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.68);
+  opacity: ${({ isSideBar }) => (isSideBar ? 1 : 0)};
+  pointer-events: ${({ isSideBar }) => (isSideBar ? "initial" : "none")};
+  transition: 0.5s;
 `

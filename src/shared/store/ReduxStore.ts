@@ -4,9 +4,10 @@ import {
   PreloadedState,
 } from "@reduxjs/toolkit"
 import { Api } from "../api/config/Api"
+import { SideBarReducer } from "@entities/SideBar"
 
 const rootReducer = combineReducers({
-  // Hard: HardReducer,
+  SideBar: SideBarReducer,
   [Api.reducerPath]: Api.reducer,
 })
 
