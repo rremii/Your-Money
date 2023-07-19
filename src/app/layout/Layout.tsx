@@ -10,21 +10,11 @@ interface Props {
 
 const Layout: FC<Props> = ({ children }) => {
   return (
-    <LayoutStyles>
-      {/*<Header right={<div>right</div>} />*/}
+    <>
       <SideBar />
       {children}
       <Footer />
-    </LayoutStyles>
+    </>
   )
 }
 export default Layout
-const LayoutStyles = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  max-width: 450px;
-  position: relative;
-  overflow: hidden;
-  margin: 0 auto;
-`

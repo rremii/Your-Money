@@ -2,7 +2,7 @@ import React from "react"
 import { withProviders } from "./providers"
 import { Routing } from "../pages"
 import "./styles/style.scss"
-import Layout from "./layout/Layout"
+import AppLayout from "./layout/AppLayout.tsx"
 
 function App() {
   return <Routing />

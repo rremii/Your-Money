@@ -1,6 +1,6 @@
 import React, { lazy, useEffect } from "react"
 import { Route, Routes, useNavigate } from "react-router-dom"
-import Layout from "../app/layout/Layout.tsx"
+import AppLayout from "../app/layout/AppLayout.tsx"
 
 // const Categories = lazy(() => import("./Categories/CategoriesPage.tsx"))
 // const Transactions = lazy(() => import("./Transactions/TransactionsPage.tsx"))
@@ -10,6 +10,11 @@ import Categories from "./Categories/CategoriesPage.tsx"
 import Transactions from "./Transactions/TransactionsPage.tsx"
 import Overview from "./Overview/OverviewPage.tsx"
 import Accounts from "./Accounts/AccountsPage.tsx"
+import SignIn from "./SignIn/SignIn.tsx"
+import SignUpEmail from "./SignUp/SignUpEmail.tsx"
+import SignUpCode from "./SignUp/SignUpCode.tsx"
+import SignUpPassword from "./SignUp/SignUpPassword.tsx"
+import Layout from "../app/layout/Layout.tsx"
 
 export const Routing = () => {
   // const { isLoggedIn, isPending } = useIsAuth()
@@ -17,19 +22,53 @@ export const Routing = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    navigate("categories")
+    navigate("/sign-up/code")
   }, [])
 
   return (
     <>
-      <Layout>
+      <AppLayout>
         <Routes>
-          <Route path="/accounts" element={<Accounts />} />
-          <Route path="/categories" element={<Categories />} />
-          <Route path="/transactions" element={<Transactions />} />
-          <Route path="/overview" element={<Overview />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up/email" element={<SignUpEmail />} />
+          <Route path="/sign-up/code" element={<SignUpCode />} />
+          <Route path="/sign-up/password" element={<SignUpPassword />} />
         </Routes>
-      </Layout>
+        <Routes>
+          <Route
+            path="/accounts"
+            element={
+              <Layout>
+                <Accounts />
+              </Layout>
+            }
+          />
+          <Route
+            path="/categories"
+            element={
+              <Layout>
+                <Categories />
+              </Layout>
+            }
+          />
+          <Route
+            path="/transactions"
+            element={
+              <Layout>
+                <Transactions />
+              </Layout>
+            }
+          />
+          <Route
+            path="/overview"
+            element={
+              <Layout>
+                <Overview />
+              </Layout>
+            }
+          />
+        </Routes>
+      </AppLayout>
     </>
   )
 }

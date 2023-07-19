@@ -3,15 +3,21 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { useMemo } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setIsSideBar } from "@entities/SideBar"
+import { useNavigate } from "react-router-dom"
 
 //todo decomposite by header profile and so on
 export const SideBar = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const isSideBar = useTypedSelector((state) => state.SideBar.isSideBarOpen)
 
   const CloseSideBar = () => {
     dispatch(setIsSideBar(false))
+  }
+
+  const handleSignInClick = () => {
+    navigate("/sign-in")
   }
 
   const SettingsSectionContent = useMemo(
@@ -31,7 +37,14 @@ export const SideBar = () => {
     [],
   )
   const ProfileSectionContent = useMemo(
-    () => [{ icon: Categories, title: "Sign in", subTitle: "" }],
+    () => [
+      {
+        icon: Categories,
+        title: "Sign in",
+        subTitle: "",
+        onClick: handleSignInClick,
+      },
+    ],
     [],
   )
 
@@ -55,23 +68,25 @@ export const SideBar = () => {
         <div className="profile">
           <div className="title">Profile</div>
           <div className="content">
-            {ProfileSectionContent.map(({ icon, subTitle, title }) => (
-              <div className="cell">
-                <img src={icon} alt="icon" />
-                <div className="text-info">
-                  <h3>{title}</h3>
-                  {subTitle && <h4>{subTitle}</h4>}
+            {ProfileSectionContent.map(
+              ({ icon, subTitle, title, onClick }, i) => (
+                <div onClick={onClick} key={i} className="cell">
+                  <img src={icon} alt="icon" />
+                  <div className="text-info">
+                    <h3>{title}</h3>
+                    {subTitle && <h4>{subTitle}</h4>}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ),
+            )}
           </div>
         </div>
         <div className="separator" />
         <div className="settings">
           <div className="title">Settings</div>
           <div className="content">
-            {SettingsSectionContent.map(({ icon, subTitle, title }) => (
-              <div className="cell">
+            {SettingsSectionContent.map(({ icon, subTitle, title }, i) => (
+              <div key={i} className="cell">
                 <img src={icon} alt="icon" />
                 <div className="text-info">
                   <h3>{title}</h3>
@@ -245,7 +260,7 @@ const OverLay = styled.div<{
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.68);
-  opacity: ${({ isSideBar }) => (isSideBar ? 1 : 0)};
+  opacity: ${({ isSideBar }) => (isSideBar ? "1" : "0")};
   pointer-events: ${({ isSideBar }) => (isSideBar ? "initial" : "none")};
   transition: 0.5s;
 `
