@@ -15,8 +15,8 @@ export class User extends BaseEntity implements IUser {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
-  userName: string
+  // @Column()
+  // userName: string
 
   @Column()
   email: string
@@ -24,10 +24,9 @@ export class User extends BaseEntity implements IUser {
   @Column()
   password: string
 
-  @Column()
-  avatar: string
+  // @Column()
+  // avatar: string
 
   @Column({ nullable: true })
   refreshToken: string
-
 }

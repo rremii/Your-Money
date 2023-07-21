@@ -1,8 +1,8 @@
 export interface IUser {
   id: number
-  userName: string
+  // userName: string
   email: string
   password: string
-  avatar: string
+  // avatar: string
   refreshToken: string
 }

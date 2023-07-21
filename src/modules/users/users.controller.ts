@@ -32,21 +32,21 @@ export class UsersController {
     return this.usersService.createUser(user)
   }
 
-  @Post("name")
-  @UseGuards(AccessTokenGuard)
-  @UsePipes(new ValidationPipe())
-  changeName(@Body() changeNameDto: ChangeNameDto): Promise<DefaultResponse> {
-    return this.usersService.changeName(changeNameDto)
-  }
+  // @Post("name")
+  // @UseGuards(AccessTokenGuard)
+  // @UsePipes(new ValidationPipe())
+  // changeName(@Body() changeNameDto: ChangeNameDto): Promise<DefaultResponse> {
+  //   return this.usersService.changeName(changeNameDto)
+  // }
 
-  @Post("avatar")
-  @UseGuards(AccessTokenGuard)
-  @UsePipes(new ValidationPipe())
-  changeAvatar(
-    @Body() changeAvatarDto: ChangeAvatarDto,
-  ): Promise<DefaultResponse> {
-    return this.usersService.changeAvatar(changeAvatarDto)
-  }
+  // @Post("avatar")
+  // @UseGuards(AccessTokenGuard)
+  // @UsePipes(new ValidationPipe())
+  // changeAvatar(
+  //   @Body() changeAvatarDto: ChangeAvatarDto,
+  // ): Promise<DefaultResponse> {
+  //   return this.usersService.changeAvatar(changeAvatarDto)
+  // }
 
   @Get()
   @UseGuards(AccessTokenGuard)
@@ -54,6 +54,4 @@ export class UsersController {
     const authToken = request.headers.authorization.split(" ").at(1)
     return this.usersService.getUser(authToken)
   }
-
-
 }

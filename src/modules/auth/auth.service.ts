@@ -9,6 +9,7 @@ import { LoginUserDto } from "./dto/login-user.dto"
 import * as bcrypt from "bcrypt"
 import { TokenService } from "../token/token.service"
 import { TokenResponse } from "./response/token.response"
+import { MailerService } from "@nestjs-modules/mailer"
 
 @Injectable()
 export class AuthService {
@@ -17,6 +18,7 @@ export class AuthService {
     private readonly usersRepository: Repository<User>,
     private readonly tokenService: TokenService,
     private readonly usersService: UsersService,
+    private readonly mailerService: MailerService,
   ) {}
 
   async registerUser(CreateUserDto: CreateUserDto): Promise<TokenResponse> {
@@ -50,5 +52,19 @@ export class AuthService {
       tokens.refreshToken,
     )
     return tokens
+  }
+
+  async sendConfirmCode(email: string) {
+    const code = "123"
+
+    await this.mailerService.sendMail({
+      to: email,
+      from: "remi mail sender",
+      subject: "confirm email",
+      text: "please confirm your email",
+      html: `<div>${code}</div>`,
+    })
+
+    return { code }
   }
 }

@@ -26,32 +26,32 @@ export class UsersService {
   async createUser(user: CreateUserDto): Promise<User> {
     const newUser = new User()
     newUser.email = user.email
-    newUser.userName = user.userName
+    // newUser.userName = user.userName
     newUser.password = await HashData(user.password)
-    newUser.avatar = user.avatar
+    // newUser.avatar = user.avatar
 
     await newUser.save()
 
     return newUser
   }
 
-  async changeName(changeNameDto: ChangeNameDto): Promise<DefaultResponse> {
-    const user = await this.usersRepository.findOneBy({ id: changeNameDto.id })
-    user.userName = changeNameDto.newName
+  // async changeName(changeNameDto: ChangeNameDto): Promise<DefaultResponse> {
+  //   const user = await this.usersRepository.findOneBy({ id: changeNameDto.id })
+  //   user.userName = changeNameDto.newName
+  //
+  //   await user.save()
+  //
+  //   return { message: "user name was updated" }
+  // }
 
-    await user.save()
-
-    return { message: "user name was updated" }
-  }
-
-  async changeAvatar(changeNameDto: ChangeAvatarDto): Promise<DefaultResponse> {
-    const user = await this.usersRepository.findOneBy({ id: changeNameDto.id })
-    user.avatar = changeNameDto.newAvatar
-
-    await user.save()
-
-    return { message: "user avatar was updated" }
-  }
+  // async changeAvatar(changeNameDto: ChangeAvatarDto): Promise<DefaultResponse> {
+  //   const user = await this.usersRepository.findOneBy({ id: changeNameDto.id })
+  //   user.avatar = changeNameDto.newAvatar
+  //
+  //   await user.save()
+  //
+  //   return { message: "user avatar was updated" }
+  // }
 
   async getUser(authToken: string): Promise<User> {
     const decodedUser = await this.tokenService.decodeToken(authToken)
@@ -61,6 +61,4 @@ export class UsersService {
 
     return user
   }
-
-
 }

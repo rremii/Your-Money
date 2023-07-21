@@ -1,3 +1,5 @@
+import * as process from "process"
+
 export default () => ({
   port: process.env.PORT,
   client_origin: process.env.CLIENT_ORIGIN,
@@ -14,4 +16,7 @@ export default () => ({
 
   access_expire_jwt: process.env.JWT_ACCESS_EXPIRE || 600,
   refresh_expire_jwt: process.env.JWT_REFRESH_EXPIRE || 6000,
+
+  smtp_email: process.env.SMTP_EMAIL,
+  smtp_password: process.env.SMTP_PASSWORD,
 })

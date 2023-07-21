@@ -13,7 +13,7 @@ export class TokenService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
     private readonly jwtService: JwtService,
-    private readonly configService: ConfigService, // private readonly usersService: UsersService,
+    private readonly configService: ConfigService, // private readonly usersService: MailService,
   ) {}
 
   async updateRefreshToken(userId: number, refreshToken: string) {
