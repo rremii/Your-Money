@@ -1,9 +1,5 @@
 import styled from "styled-components"
 import React from "react"
-import { ORSeparator } from "@shared/ui/ORSeparator.tsx"
-import { NoAccountLink } from "@shared/ui/NoAccountLink.tsx"
-import { SignInForm } from "@entities/Auth"
-import { GoogleAuth } from "@features/GoogleAuth/ui/GoogleAuth.tsx"
 import { SignUpEmailForm } from "@entities/Auth/ui/SignUpEmailForm.tsx"
 
 export const SignUpEmailMenu = () => {

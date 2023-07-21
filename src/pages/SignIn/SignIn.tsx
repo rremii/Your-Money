@@ -1,4 +1,3 @@
-import AppLayout from "../../app/layout/AppLayout.tsx"
 import styled from "styled-components"
 import React from "react"
 import { AuthHeader } from "@widgets/AuthHeader"

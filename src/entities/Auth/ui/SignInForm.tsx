@@ -16,14 +16,14 @@ const schema = yup
   .object()
   .shape({
     email: yup.string().email().required(),
-    password: yup.string().required(),
+    password: yup.string().required()
   })
   .required()
 
 export const SignInForm = () => {
   const { register, clearErrors, setError, formState, handleSubmit, reset } =
     useForm<FormFields>({
-      resolver: yupResolver(schema),
+      resolver: yupResolver(schema)
     })
   const { errors } = formState
 
@@ -47,7 +47,7 @@ export const SignInForm = () => {
           input={{
             type: "email",
             placeholder: "abc@gmail.com",
-            registerData: { ...register("email") },
+            registerData: { ...register("email") }
           }}
         />
         <FormField
@@ -56,7 +56,7 @@ export const SignInForm = () => {
           input={{
             type: "password",
             placeholder: "1234",
-            registerData: { ...register("password") },
+            registerData: { ...register("password") }
           }}
         />
         {errors.root && <ErrorMessage>{errors.root.message}</ErrorMessage>}

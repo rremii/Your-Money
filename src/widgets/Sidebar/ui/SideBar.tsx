@@ -27,14 +27,14 @@ export const SideBar = () => {
       {
         icon: Categories,
         title: "Default currency",
-        subTitle: "United States dollar",
+        subTitle: "United States dollar"
       },
       { icon: Categories, title: "Currency format", subTitle: "-$ 1,123.90" },
       { icon: Categories, title: "First Day of week", subTitle: "Sunday" },
       { icon: Categories, title: "First day of month", subTitle: "1" },
-      { icon: Categories, title: "Startup screen", subTitle: "Categories" },
+      { icon: Categories, title: "Startup screen", subTitle: "Categories" }
     ],
-    [],
+    []
   )
   const ProfileSectionContent = useMemo(
     () => [
@@ -42,10 +42,10 @@ export const SideBar = () => {
         icon: Categories,
         title: "Sign in",
         subTitle: "",
-        onClick: handleSignInClick,
-      },
+        onClick: handleSignInClick
+      }
     ],
-    [],
+    []
   )
 
   return (
@@ -77,7 +77,7 @@ export const SideBar = () => {
                     {subTitle && <h4>{subTitle}</h4>}
                   </div>
                 </div>
-              ),
+              )
             )}
           </div>
         </div>

@@ -8,7 +8,7 @@ export const AdaptiveValue = (
   startSize: number,
   minSize: number,
   widthFrom = wrapperWidth,
-  widthTo = minWidth,
+  widthTo = minWidth
 ) => {
   if (startSize === 0) startSize = 0.000001
 

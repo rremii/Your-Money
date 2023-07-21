@@ -1,14 +1,10 @@
-import {
-  combineReducers,
-  configureStore,
-  PreloadedState,
-} from "@reduxjs/toolkit"
+import { combineReducers, configureStore, PreloadedState } from "@reduxjs/toolkit"
 import { Api } from "../api/config/Api"
 import { SideBarReducer } from "@entities/SideBar"
 
 const rootReducer = combineReducers({
   SideBar: SideBarReducer,
-  [Api.reducerPath]: Api.reducer,
+  [Api.reducerPath]: Api.reducer
 })
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
@@ -17,7 +13,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
     preloadedState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(Api.middleware),
-    devTools: false,
+    devTools: false
   })
 }
 

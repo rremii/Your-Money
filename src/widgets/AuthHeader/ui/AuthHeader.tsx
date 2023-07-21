@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import Categories from "@shared/assets/LightTheme/categories.png"
-import { useNavigate, useNavigation } from "react-router-dom"
 
 interface props {
   children: React.ReactNode

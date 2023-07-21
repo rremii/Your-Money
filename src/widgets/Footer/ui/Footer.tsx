@@ -18,28 +18,28 @@ export const Footer = () => {
         src: Accounts,
         name: "Accounts",
         href: "/accounts",
-        srcActive: AccountsActive,
+        srcActive: AccountsActive
       },
       {
         src: Categories,
         name: "Categories",
         href: "/categories",
-        srcActive: CategoriesActive,
+        srcActive: CategoriesActive
       },
       {
         src: TransActions,
         name: "TransActions",
         href: "/transActions",
-        srcActive: TransActionsActive,
+        srcActive: TransActionsActive
       },
       {
         src: Overview,
         name: "Overview",
         href: "/overview",
-        srcActive: OverviewActive,
-      },
+        srcActive: OverviewActive
+      }
     ],
-    [],
+    []
   )
 
   return (

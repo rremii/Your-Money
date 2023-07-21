@@ -1,7 +1,5 @@
 import styled from "styled-components"
 import React from "react"
-import { NavLink } from "react-router-dom"
-import Google from "@shared/assets/LightTheme/google.svg"
 import { ORSeparator } from "@shared/ui/ORSeparator.tsx"
 import { NoAccountLink } from "@shared/ui/NoAccountLink.tsx"
 import { SignInForm } from "@entities/Auth"

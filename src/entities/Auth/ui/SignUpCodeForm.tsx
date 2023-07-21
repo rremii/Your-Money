@@ -1,7 +1,6 @@
 import { AuthForm } from "@shared/ui/AuthForm.tsx"
 import { FormField } from "@shared/ui/FormField.tsx"
-import { AuthSubmitBtn } from "@shared/ui/AuthSubmitBtn.tsx"
-import { Controller, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import styled from "styled-components"
@@ -16,7 +15,7 @@ interface FormFields {
 const schema = yup
   .object()
   .shape({
-    code: yup.string().length(6).required(),
+    code: yup.string().length(6).required()
   })
   .required()
 
@@ -29,9 +28,9 @@ export const SignUpCodeForm = () => {
     setError,
     handleSubmit,
     reset,
-    trigger,
+    trigger
   } = useForm<FormFields>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema)
   })
   const { errors } = formState
 
@@ -67,9 +66,9 @@ export const SignUpCodeForm = () => {
             placeholder: "",
             registerData: {
               ...register("code", {
-                onChange: OnValueChange,
-              }),
-            },
+                onChange: OnValueChange
+              })
+            }
           }}
         />
         {errors.code && <ErrorMessage>{errors.code.message}</ErrorMessage>}

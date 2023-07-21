@@ -5,7 +5,7 @@ interface initialStateType {
 }
 
 const initialState = {
-  isSideBarOpen: false,
+  isSideBarOpen: false
 } as initialStateType
 
 const SideBarSlice = createSlice({
@@ -14,8 +14,8 @@ const SideBarSlice = createSlice({
   reducers: {
     setIsSideBar(state, action: PayloadAction<boolean>) {
       state.isSideBarOpen = action.payload
-    },
-  },
+    }
+  }
 })
 export const { setIsSideBar } = SideBarSlice.actions
 export const SideBarReducer = SideBarSlice.reducer

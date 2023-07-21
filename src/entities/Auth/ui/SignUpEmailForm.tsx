@@ -16,7 +16,7 @@ interface FormFields {
 const schema = yup
   .object()
   .shape({
-    email: yup.string().email().required("Email is required"),
+    email: yup.string().email().required("Email is required")
   })
   .required()
 
@@ -24,7 +24,7 @@ export const SignUpEmailForm = () => {
   const navigate = useNavigate()
   const { register, formState, clearErrors, setError, handleSubmit, reset } =
     useForm<FormFields>({
-      resolver: yupResolver(schema),
+      resolver: yupResolver(schema)
     })
   const { errors } = formState
   const OnSubmit = (data: FormFields) => {
@@ -48,7 +48,7 @@ export const SignUpEmailForm = () => {
           input={{
             type: "email",
             placeholder: "abc@gmail.com",
-            registerData: { ...register("email") },
+            registerData: { ...register("email") }
           }}
         />
         {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}

@@ -17,7 +17,7 @@ const schema = yup
   .object()
   .shape({
     password: yup.string().required("field is required"),
-    confirmPassword: yup.string().required("field is required"),
+    confirmPassword: yup.string().required("field is required")
   })
   .required()
 
@@ -25,7 +25,7 @@ export const SignUpPasswordForm = () => {
   const navigate = useNavigate()
   const { register, formState, clearErrors, handleSubmit, reset, setError } =
     useForm<FormFields>({
-      resolver: yupResolver(schema),
+      resolver: yupResolver(schema)
     })
   const { errors } = formState
 
@@ -51,7 +51,7 @@ export const SignUpPasswordForm = () => {
           input={{
             type: "password",
             placeholder: "1234",
-            registerData: { ...register("password") },
+            registerData: { ...register("password") }
           }}
         />
         {errors.password && (
@@ -63,7 +63,7 @@ export const SignUpPasswordForm = () => {
           input={{
             type: "password",
             placeholder: "1234",
-            registerData: { ...register("confirmPassword") },
+            registerData: { ...register("confirmPassword") }
           }}
         />
         {errors.confirmPassword && (
