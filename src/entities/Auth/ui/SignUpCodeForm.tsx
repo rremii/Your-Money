@@ -7,6 +7,8 @@ import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
 import React from "react"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useVerifyCodeMutation } from "@entities/Auth/api/AuthApi.ts"
 
 interface FormFields {
   code: string
@@ -21,38 +23,42 @@ const schema = yup
 
 export const SignUpCodeForm = () => {
   const navigate = useNavigate()
+
+
+  const [verifyCode, res] = useVerifyCodeMutation()
+
+
   const {
     register,
     formState,
     clearErrors,
     setError,
     handleSubmit,
-    reset,
-    trigger
+    reset
   } = useForm<FormFields>({
     resolver: yupResolver(schema)
   })
   const { errors } = formState
 
-  const OnSubmit = (data: FormFields) => {
-    data
-    reset()
-    navigate("/sign-up/password")
-    // debugger
-    // if (true) {
-    //   setError("code", { message: "some api error" })
-    // todo fix
-    // const timer = setTimeout(() => {
-    //   clearErrors()
-    // }, 5000)
-    // } else {
-    // }
+
+  const OnSubmit = async ({ code }: FormFields) => {
+    if (code.length !== 6) return
+    await verifyCode(code).unwrap().then(() => {
+      navigate("/sign-up/password")
+    }).catch(error => {
+      reset()
+      setError("code", { message: error.message })
+      //todo fix
+      const timer = setTimeout(() => {
+        clearErrors()
+      }, 2000)
+    })
   }
 
-  const OnValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const OnValueChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const code = e.currentTarget.value
     if (code.length !== 6) return
-    OnSubmit({ code })
+    await OnSubmit({ code })
   }
 
   return (

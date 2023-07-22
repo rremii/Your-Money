@@ -6,8 +6,12 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
-import React from "react"
+import React, { useEffect } from "react"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
+import { useConfirmEmailMutation } from "@entities/Auth/api/AuthApi.ts"
+import * as timers from "timers"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { setEmail } from "@entities/Auth/model/AuthSlice.ts"
 
 interface FormFields {
   email: string
@@ -21,23 +25,30 @@ const schema = yup
   .required()
 
 export const SignUpEmailForm = () => {
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
   const { register, formState, clearErrors, setError, handleSubmit, reset } =
     useForm<FormFields>({
-      resolver: yupResolver(schema)
+      resolver: yupResolver(schema),
+      values: { email: "noruto2021@gmail.com" }
     })
   const { errors } = formState
-  const OnSubmit = (data: FormFields) => {
-    data
-    navigate("/sign-up/code")
-    // if (true) {
-    //   setError("email", { message: "some api error" })
-    // todo fix
-    // const timer = setTimeout(() => {
-    //   clearErrors()
-    // }, 5000)
-    // } else {
-    // }
+
+  const [confirmEmail] = useConfirmEmailMutation()
+
+
+  const OnSubmit = async ({ email }: FormFields) => {
+    await confirmEmail(email).unwrap().then(() => {
+      dispatch(setEmail(email))
+      navigate("/sign-up/code")
+    }).catch(error => {
+      setError("email", { message: error?.message })
+      //todo fix
+      setTimeout(() => {
+        clearErrors()
+      }, 2000)
+    })
   }
   return (
     <SignUpFormLayout>

@@ -15,14 +15,15 @@ import SignUpEmail from "./SignUp/SignUpEmail.tsx"
 import SignUpCode from "./SignUp/SignUpCode.tsx"
 import SignUpPassword from "./SignUp/SignUpPassword.tsx"
 import Layout from "../app/layout/Layout.tsx"
+import { useAuth } from "@entities/Auth/model/useAuth.ts"
 
 export const Routing = () => {
-  // const { isLoggedIn, isPending } = useIsAuth()
+  const { isLoggedIn, isPending } = useAuth()
   // useChangeTheme()
   const navigate = useNavigate()
 
   useEffect(() => {
-    navigate("/sign-up/code")
+    navigate("/categories")
   }, [])
 
   return (

@@ -38,12 +38,6 @@ export const Api = createApi({
   baseQuery: axiosBaseQuery({ baseUrl: API_URL }),
   endpoints: () => ({}),
   tagTypes: [
-    "User",
-    "Results",
-    "BestQuickMath",
-    "BestHardMath",
-    "BestInputMath",
-    "BestTrueFalseMath",
-    "BalanceFalseMath"
+    "User"
   ]
 })

@@ -6,6 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import styled from "styled-components"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
+import { useLoginMutation } from "@entities/Auth/api/AuthApi.ts"
+import { useNavigate } from "react-router-dom"
 
 interface FormFields {
   email: string
@@ -19,24 +21,34 @@ const schema = yup
     password: yup.string().required()
   })
   .required()
+type SetErrorFunc<T> = (name: T, message: string) => void
 
 export const SignInForm = () => {
+  const navigate = useNavigate()
+
+  const [login, res] = useLoginMutation()
+
+
   const { register, clearErrors, setError, formState, handleSubmit, reset } =
     useForm<FormFields>({
       resolver: yupResolver(schema)
     })
   const { errors } = formState
 
-  const OnSubmit = (data: FormFields) => {
-    data
-    debugger
-    // if (true) {
-    //   setError("root", { message: "Could not sign in" })
-    //   todo fix
-    // const timer = setTimeout(() => {
-    //   clearErrors()
-    // }, 5000)
-    // }
+
+  const SetError: SetErrorFunc<"email" | "password" | "root"> = (name, message: string) => {
+    reset()
+    setError(name, { message })
+    //todo fix
+    const timer = setTimeout(() => {
+      clearErrors()
+    }, 3000)
+  }
+  const OnSubmit = async (authData: FormFields) => {
+    await login(authData).unwrap().then((res) => {
+      localStorage.setItem("accessToken", res.accessToken)
+      navigate("/categories")
+    }).catch(error => SetError("root", error.message))
   }
   return (
     <SignInFormLayout>

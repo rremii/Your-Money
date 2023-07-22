@@ -1,9 +1,11 @@
 import { combineReducers, configureStore, PreloadedState } from "@reduxjs/toolkit"
 import { Api } from "../api/config/Api"
 import { SideBarReducer } from "@entities/SideBar"
+import { AuthReducer } from "@entities/Auth/model/AuthSlice.ts"
 
 const rootReducer = combineReducers({
   SideBar: SideBarReducer,
+  Auth: AuthReducer,
   [Api.reducerPath]: Api.reducer
 })
 
@@ -13,7 +15,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
     preloadedState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(Api.middleware),
-    devTools: false
+    devTools: true
   })
 }
 
