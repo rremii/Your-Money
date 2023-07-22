@@ -21,7 +21,9 @@ import { Request, Response } from "express"
 import { GetCookieExpTime } from "src/common/helpers/getCookieExpTime"
 import { AccessTokenGuard } from "../../guards/access-token.guard"
 import { ConfigService } from "@nestjs/config"
-import { ConfirmEmailDto } from "../users/dto/confirmEmail.dto"
+import { ConfirmEmailDto } from "./dto/confirm-email.dto"
+import { DefaultResponse } from "../../common/types/types"
+import { VerifyCodeDto } from "./dto/verify-code.dto"
 
 @Controller("auth")
 export class AuthController {
@@ -89,10 +91,14 @@ export class AuthController {
 
   @UsePipes(new ValidationPipe())
   @Post("confirm-email")
-  async confirmEmail(
-    @Body() email: ConfirmEmailDto,
-  ): Promise<{ code: string }> {
-    return this.authService.sendConfirmCode("noruto2021@gmail.com")
+  async confirmEmail(@Body() email: ConfirmEmailDto): Promise<DefaultResponse> {
+    return this.authService.sendConfirmCode(email)
+  }
+
+  @UsePipes(new ValidationPipe())
+  @Post("verify-code")
+  async verifyCode(@Body() code: VerifyCodeDto): Promise<DefaultResponse> {
+    return this.authService.verifyCode(code)
   }
 
   @UseGuards(AccessTokenGuard)

@@ -7,9 +7,12 @@ import { TokenService } from "../token/token.service"
 import { JwtModule, JwtService } from "@nestjs/jwt"
 import { AccessTokenStrategy } from "../../strategy/access-token.strategy"
 import { RefreshTokenStrategy } from "../../strategy/refresh-token.strategy"
+import { TypeOrmModule } from "@nestjs/typeorm"
+import { User } from "../users/entities/user.entity"
+import { Code } from "./entities/code.entity"
 
 @Module({
-  imports: [UsersModule, JwtModule],
+  imports: [UsersModule, TypeOrmModule.forFeature([Code]), JwtModule],
   controllers: [AuthController],
   providers: [
     AuthService,
@@ -18,7 +21,6 @@ import { RefreshTokenStrategy } from "../../strategy/refresh-token.strategy"
     UsersService,
     AccessTokenStrategy,
     RefreshTokenStrategy,
-
   ],
 })
 export class AuthModule {}
