@@ -9,6 +9,7 @@ import React from "react"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useVerifyCodeMutation } from "@entities/Auth/api/AuthApi.ts"
+import { useTimer } from "@shared/hooks/useTimer.ts"
 
 interface FormFields {
   code: string
@@ -25,9 +26,6 @@ export const SignUpCodeForm = () => {
   const navigate = useNavigate()
 
 
-  const [verifyCode, res] = useVerifyCodeMutation()
-
-
   const {
     register,
     formState,
@@ -41,6 +39,10 @@ export const SignUpCodeForm = () => {
   const { errors } = formState
 
 
+  const [verifyCode] = useVerifyCodeMutation()
+  const { Reset: ResetTimer } = useTimer(3, 3, clearErrors)
+
+
   const OnSubmit = async ({ code }: FormFields) => {
     if (code.length !== 6) return
     await verifyCode(code).unwrap().then(() => {
@@ -48,10 +50,7 @@ export const SignUpCodeForm = () => {
     }).catch(error => {
       reset()
       setError("code", { message: error.message })
-      //todo fix
-      const timer = setTimeout(() => {
-        clearErrors()
-      }, 2000)
+      ResetTimer()
     })
   }
 

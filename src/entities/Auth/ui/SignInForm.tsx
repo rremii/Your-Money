@@ -8,6 +8,7 @@ import styled from "styled-components"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { useLoginMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useNavigate } from "react-router-dom"
+import { useTimer } from "@shared/hooks/useTimer.ts"
 
 interface FormFields {
   email: string
@@ -21,12 +22,11 @@ const schema = yup
     password: yup.string().required()
   })
   .required()
-type SetErrorFunc<T> = (name: T, message: string) => void
 
 export const SignInForm = () => {
   const navigate = useNavigate()
 
-  const [login, res] = useLoginMutation()
+  const [login] = useLoginMutation()
 
 
   const { register, clearErrors, setError, formState, handleSubmit, reset } =
@@ -36,19 +36,19 @@ export const SignInForm = () => {
   const { errors } = formState
 
 
-  const SetError: SetErrorFunc<"email" | "password" | "root"> = (name, message: string) => {
+  const { Reset: ResetTimer } = useTimer(3, 3, clearErrors)
+
+
+  const SetError = (message: string) => {
     reset()
-    setError(name, { message })
-    //todo fix
-    const timer = setTimeout(() => {
-      clearErrors()
-    }, 3000)
+    setError("root", { message })
+    ResetTimer()
   }
   const OnSubmit = async (authData: FormFields) => {
     await login(authData).unwrap().then((res) => {
       localStorage.setItem("accessToken", res.accessToken)
       navigate("/categories")
-    }).catch(error => SetError("root", error.message))
+    }).catch(error => SetError(error.message))
   }
   return (
     <SignInFormLayout>

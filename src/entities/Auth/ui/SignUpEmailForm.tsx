@@ -12,6 +12,7 @@ import { useConfirmEmailMutation } from "@entities/Auth/api/AuthApi.ts"
 import * as timers from "timers"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setEmail } from "@entities/Auth/model/AuthSlice.ts"
+import { useTimer } from "@shared/hooks/useTimer.ts"
 
 interface FormFields {
   email: string
@@ -35,6 +36,8 @@ export const SignUpEmailForm = () => {
     })
   const { errors } = formState
 
+  const { Reset: ResetTimer } = useTimer(3, 3, clearErrors)
+
   const [confirmEmail] = useConfirmEmailMutation()
 
 
@@ -44,10 +47,7 @@ export const SignUpEmailForm = () => {
       navigate("/sign-up/code")
     }).catch(error => {
       setError("email", { message: error?.message })
-      //todo fix
-      setTimeout(() => {
-        clearErrors()
-      }, 2000)
+      ResetTimer()
     })
   }
   return (

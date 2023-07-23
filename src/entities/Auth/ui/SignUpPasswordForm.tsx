@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useRegisterMutation } from "@entities/Auth/api/AuthApi.ts"
+import { useTimer } from "@shared/hooks/useTimer.ts"
 
 interface FormFields {
   password: string
@@ -24,15 +25,12 @@ const schema = yup
   .required()
 
 
-type SetErrorFunc<T> = (name: T, message: string) => void
-
-
 export const SignUpPasswordForm = () => {
   const navigate = useNavigate()
 
   const email = useTypedSelector(state => state.Auth.email)
 
-  const [registerUser, res] = useRegisterMutation()
+  const [registerUser] = useRegisterMutation()
 
 
   const { register, formState, clearErrors, handleSubmit, reset, setError } =
@@ -41,22 +39,22 @@ export const SignUpPasswordForm = () => {
     })
   const { errors } = formState
 
-  const SetError: SetErrorFunc<"password" | "confirmPassword" | "root"> = (name, message: string) => {
+  const { Reset: ResetTimer } = useTimer(3, 3, clearErrors)
+
+
+  const SetError = (message: string) => {
     reset()
-    setError(name, { message })
-    //todo fix
-    const timer = setTimeout(() => {
-      clearErrors()
-    }, 3000)
+    setError("root", { message })
+    ResetTimer()
   }
 
   const OnSubmit = async ({ password, confirmPassword }: FormFields) => {
-    if (password !== confirmPassword) SetError("root", "Passwords are not equal")
+    if (password !== confirmPassword) SetError("Passwords are not equal")
     if (password === confirmPassword) {
       await registerUser({ password, email }).unwrap().then((res) => {
         localStorage.setItem("accessToken", res.accessToken)
         navigate("/categories")
-      }).catch(error => SetError("root", error.message))
+      }).catch(error => SetError(error.message))
     }
   }
   return (

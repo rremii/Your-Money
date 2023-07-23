@@ -23,7 +23,7 @@ export const AuthApi = Api.injectEndpoints({
 
     confirmEmail: build.mutation<DefaultResponse, string>({
       query: (email) => ({
-        url: "auth/confirm-email",
+        url: "confirm-code/send-code",
         method: "POST",
         data: { email }
       })
@@ -31,7 +31,7 @@ export const AuthApi = Api.injectEndpoints({
 
     verifyCode: build.mutation<DefaultResponse, string>({
       query: (code) => ({
-        url: "auth/verify-code",
+        url: "confirm-code/verify-code",
         method: "POST",
         data: { code }
       })
