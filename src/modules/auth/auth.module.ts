@@ -9,7 +9,7 @@ import { AccessTokenStrategy } from "../../strategy/access-token.strategy"
 import { RefreshTokenStrategy } from "../../strategy/refresh-token.strategy"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { User } from "../users/entities/user.entity"
-import { Code } from "./entities/code.entity"
+import { Code } from "../Code/entities/code.entity"
 
 @Module({
   imports: [UsersModule, TypeOrmModule.forFeature([Code]), JwtModule],

@@ -1,6 +1,6 @@
 import { ConfigService } from "@nestjs/config"
 import { User } from "../modules/users/entities/user.entity"
-import { Code } from "../modules/auth/entities/code.entity"
+import { Code } from "../modules/Code/entities/code.entity"
 
 export const getOrmConfig = async (config: ConfigService): Promise<any> => {
   return {

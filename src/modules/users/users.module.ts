@@ -9,22 +9,17 @@ import { JwtModule } from "@nestjs/jwt"
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([
-      User,
-    ]),
+    TypeOrmModule.forFeature([User]),
     JwtModule,
     TokenModule,
     // QuickMathModule,
   ],
   exports: [TypeOrmModule, UsersService],
-  providers: [
-    UsersService,
-    TokenService,
-  ],
+  providers: [UsersService, TokenService],
   controllers: [UsersController],
 })
 export class UsersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    // consumer.apply(LoggerMiddleware).forRoutes(UsersController)
+    // consumer.apply(LoggerMiddleware).forRoutes(CodeController)
   }
 }

@@ -12,6 +12,7 @@ import { getMailConfig } from "src/configurations/mail.config"
 import { getOrmConfig } from "../configurations/orm.config"
 import process from "process"
 import { PugAdapter } from "@nestjs-modules/mailer/dist/adapters/pug.adapter"
+import { CodeModule } from "./Code/code.module"
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { PugAdapter } from "@nestjs-modules/mailer/dist/adapters/pug.adapter"
     UsersModule,
     AuthModule,
     TokenModule,
+    CodeModule,
     MailerModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
