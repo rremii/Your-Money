@@ -2,18 +2,26 @@ import { useEffect, useState } from "react"
 
 type timerStateType = "initial" | "running" | "timeout" | "paused"
 
-export const useTimer = (initTime: number, timeGap: number, callback: () => void) => {
+interface props {
+  finalTime: number,
+  timeGap: number,
+  callback?: () => void,
+  isUnversed?: boolean
+}
 
-  const [time] = useState<number>(initTime)
+export const useTimer = ({ isUnversed, callback, timeGap, finalTime }: props) => {
+
+  const [time] = useState<number>(finalTime)
   const [currentTime, setCurrentTime] = useState<number>(0)
   const [timerState, setTimerState] = useState<timerStateType>("initial")
 
 
   useEffect(() => {
 
+    //finishing
     if (time === currentTime) {
       setTimerState("timeout")
-      callback()
+      if (callback) callback()
     }
 
     if (timerState !== "running") return
@@ -38,6 +46,6 @@ export const useTimer = (initTime: number, timeGap: number, callback: () => void
     setCurrentTime(0)
   }
 
-  return { Start, Stop, Reset, time: currentTime, timerState }
+  return { Start, Stop, Reset, time: isUnversed ? finalTime - currentTime : currentTime, timerState }
 
 }

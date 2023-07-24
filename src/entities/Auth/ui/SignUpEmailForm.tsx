@@ -29,19 +29,24 @@ export const SignUpEmailForm = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { register, formState, clearErrors, setError, handleSubmit, reset } =
+  const { register, setFocus, formState, clearErrors, setError, handleSubmit, reset } =
     useForm<FormFields>({
       resolver: yupResolver(schema),
       values: { email: "noruto2021@gmail.com" }
     })
   const { errors } = formState
+  useEffect(() => {
+    setFocus("email")
+  }, [setFocus])
 
-  const { Reset: ResetTimer } = useTimer(3, 3, clearErrors)
 
-  const [confirmEmail] = useConfirmEmailMutation()
+  const { Reset: ResetTimer } = useTimer({ timeGap: 3, finalTime: 3, callback: clearErrors })
+
+  const [confirmEmail, { isLoading }] = useConfirmEmailMutation()
 
 
   const OnSubmit = async ({ email }: FormFields) => {
+    if (isLoading) return
     await confirmEmail(email).unwrap().then(() => {
       dispatch(setEmail(email))
       navigate("/sign-up/code")

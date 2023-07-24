@@ -23,7 +23,7 @@ export const Routing = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    navigate("/categories")
+    navigate("/sign-up/email")
   }, [])
 
   return (

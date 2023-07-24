@@ -1,11 +1,13 @@
 import styled from "styled-components"
 import React from "react"
 import { SignUpCodeForm } from "@entities/Auth/ui/SignUpCodeForm.tsx"
+import { ResendAuthCode } from "@features/ResendAuthCode/ui/ResendAuthCode.tsx"
 
 export const SignUpCodeMenu = () => {
   return (
     <SignUpCodeLayout>
       <SignUpCodeForm />
+      <ResendAuthCode />
     </SignUpCodeLayout>
   )
 }

@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
-import React from "react"
+import React, { useEffect } from "react"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useVerifyCodeMutation } from "@entities/Auth/api/AuthApi.ts"
@@ -32,15 +32,17 @@ export const SignUpCodeForm = () => {
     clearErrors,
     setError,
     handleSubmit,
-    reset
+    reset, setFocus
   } = useForm<FormFields>({
     resolver: yupResolver(schema)
   })
   const { errors } = formState
-
+  useEffect(() => {
+    setFocus("code")
+  }, [setFocus])
 
   const [verifyCode] = useVerifyCodeMutation()
-  const { Reset: ResetTimer } = useTimer(3, 3, clearErrors)
+  const { Reset: ResetTimer } = useTimer({ finalTime: 3, timeGap: 3, callback: clearErrors })
 
 
   const OnSubmit = async ({ code }: FormFields) => {
