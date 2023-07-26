@@ -2,8 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  Param,
-  ParseIntPipe,
   Post,
   Req,
   UseGuards,
@@ -15,10 +13,6 @@ import { CreateUserDto } from "./dto/create-user.dto"
 import { User } from "./entities/user.entity"
 import { AccessTokenGuard } from "../../guards/access-token.guard"
 import { Request } from "express"
-import { ChangeNameDto } from "./dto/change-name.dto"
-import { DefaultResponse } from "../../common/types/types"
-import { ChangeAvatarDto } from "./dto/change-avatar.dto"
-import { GameResultsResponse } from "./response/gameResults.response"
 
 // import { AccessTokenGuard } from "../../guards/access-token.guard"
 
@@ -26,11 +20,11 @@ import { GameResultsResponse } from "./response/gameResults.response"
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @UsePipes(new ValidationPipe())
-  @Post()
-  createUser(@Body() user: CreateUserDto): Promise<User> {
-    return this.usersService.createUser(user)
-  }
+  // @UsePipes(new ValidationPipe())
+  // @Post()
+  // createUser(@Body() user: CreateUserDto): Promise<User> {
+  //   return this.usersService.createUser(user)
+  // }
 
   // @Post("name")
   // @UseGuards(AccessTokenGuard)

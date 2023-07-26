@@ -5,14 +5,13 @@ import { ConfigModule, ConfigService } from "@nestjs/config"
 import configurations from "../configurations"
 import { UsersModule } from "./users/users.module"
 import { AuthModule } from "./auth/auth.module"
-import { User } from "./users/entities/user.entity"
 import { TokenModule } from "./token/token.module"
 import { MailerModule } from "@nestjs-modules/mailer"
 import { getMailConfig } from "src/configurations/mail.config"
 import { getOrmConfig } from "../configurations/orm.config"
-import process from "process"
-import { PugAdapter } from "@nestjs-modules/mailer/dist/adapters/pug.adapter"
 import { CodeModule } from "./Code/code.module"
+import { PassportModule } from "@nestjs/passport"
+import { GoogleAuthModule } from "./googleAuth/googleAuth.module"
 
 @Module({
   imports: [
@@ -25,6 +24,8 @@ import { CodeModule } from "./Code/code.module"
     AuthModule,
     TokenModule,
     CodeModule,
+    PassportModule,
+    GoogleAuthModule,
     MailerModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -38,5 +39,5 @@ import { CodeModule } from "./Code/code.module"
   ],
 })
 export class AppModule {
-  constructor(private dataSource: DataSource) {}
+  constructor() {}
 }

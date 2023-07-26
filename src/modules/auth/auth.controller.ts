@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  HttpStatus,
   Post,
   Req,
   Res,
@@ -10,26 +11,26 @@ import {
   ValidationPipe,
 } from "@nestjs/common"
 import { CreateUserDto } from "../users/dto/create-user.dto"
-import { User } from "../users/entities/user.entity"
 import { AuthService } from "./auth.service"
 import { LoginUserDto } from "./dto/login-user.dto"
 import { AuthResponse } from "./response/auth.response"
-import { ApiResponse, ApiTags } from "@nestjs/swagger"
 import { TokenService } from "../token/token.service"
-import { JwtService } from "@nestjs/jwt"
 import { Request, Response } from "express"
-import { GetCookieExpTime } from "src/common/helpers/getCookieExpTime"
-import { AccessTokenGuard } from "../../guards/access-token.guard"
 import { ConfigService } from "@nestjs/config"
-import { ConfirmEmailDto } from "../Code/dto/confirm-email.dto"
-import { DefaultResponse } from "../../common/types/types"
-import { VerifyCodeDto } from "../Code/dto/verify-code.dto"
+import { GetCookieExpTime } from "../../common/helpers/getCookieExpTime"
+import { GoogleAuthGuard } from "../../guards/google-auth.guard"
+import { GoogleLoginDto } from "./dto/google-login.dto"
+import { Profile } from "passport-google-oauth20"
+import { AccessTokenGuard } from "../../guards/access-token.guard"
+import { RefreshTokenGuard } from "../../guards/refresh-token.guard"
 
 @Controller("auth")
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly tokenService: TokenService,
+
+    private readonly configService: ConfigService,
   ) {}
 
   @UsePipes(ValidationPipe)
@@ -51,7 +52,6 @@ export class AuthController {
     return { accessToken }
   }
 
-  // @UseGuards(RefreshTokenGuard)
   @Get("refresh")
   async refreshTokens(
     @Req() request: Request,
@@ -87,5 +87,39 @@ export class AuthController {
       maxAge: GetCookieExpTime(),
     })
     return { accessToken }
+  }
+
+  @Get("google/login")
+  @UseGuards(GoogleAuthGuard)
+  googleLogin() {
+    return {
+      msg: "google auth",
+    }
+  }
+
+  @Get("google/redirect")
+  @UseGuards(GoogleAuthGuard)
+  async googleRedirect(
+    @Req() loginReq: Request<GoogleLoginDto>,
+    @Res() response: Response,
+  ) {
+    const loginDto = loginReq.user as GoogleLoginDto
+
+    const { accessToken, refreshToken } = await this.authService.googleSignIn(
+      loginDto,
+    )
+    response.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      sameSite: "none",
+      secure: true,
+      maxAge: GetCookieExpTime(),
+    })
+    response.redirect(this.configService.get("client_origin"))
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Get("test")
+  test() {
+    return true
   }
 }

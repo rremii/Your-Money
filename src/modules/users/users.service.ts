@@ -6,10 +6,6 @@ import { CreateUserDto } from "./dto/create-user.dto"
 import { HashData } from "../../common/helpers/hashData"
 import { TokenService } from "../token/token.service"
 import { ApiError } from "../../common/constants/errors"
-import { ChangeNameDto } from "./dto/change-name.dto"
-import { DefaultResponse } from "../../common/types/types"
-import { ChangeAvatarDto } from "./dto/change-avatar.dto"
-import { GameResultsResponse } from "./response/gameResults.response"
 
 @Injectable()
 export class UsersService {
@@ -27,7 +23,7 @@ export class UsersService {
     const newUser = new User()
     newUser.email = user.email
     // newUser.userName = user.userName
-    newUser.password = await HashData(user.password)
+    if (user.password) newUser.password = await HashData(user.password)
     // newUser.avatar = user.avatar
 
     await newUser.save()

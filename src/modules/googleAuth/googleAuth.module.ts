@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common"
-import { AuthController } from "./auth.controller"
-import { AuthService } from "./auth.service"
+import { GoogleAuthController } from "./googleAuth.controller"
+import { GoogleAuthService } from "./googleAuth.service"
 import { UsersModule } from "../users/users.module"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { User } from "../users/entities/user.entity"
@@ -12,13 +12,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config"
 
 @Module({
   imports: [UsersModule, TokenModule, TypeOrmModule.forFeature([User])],
-  controllers: [AuthController],
-  providers: [
-    AuthService,
-    GoogleStrategy,
-    AccessTokenStrategy,
-    RefreshTokenStrategy,
-    ConfigService,
-  ],
+  controllers: [GoogleAuthController],
+  providers: [GoogleStrategy, GoogleAuthService, ConfigService],
 })
-export class AuthModule {}
+export class GoogleAuthModule {}

@@ -1,4 +1,5 @@
 import * as process from "process"
+import { registerAs } from "@nestjs/config"
 
 export default () => ({
   port: process.env.PORT,
@@ -14,9 +15,15 @@ export default () => ({
   access_secret_jwt: process.env.JWT_ACCESS_SECRET,
   refresh_secret_jwt: process.env.JWT_REFRESH_SECRET,
 
-  access_expire_jwt: process.env.JWT_ACCESS_EXPIRE || 600,
-  refresh_expire_jwt: process.env.JWT_REFRESH_EXPIRE || 6000,
+  access_expire_jwt: +process.env.JWT_ACCESS_EXPIRE || 600, //seconds
+  refresh_expire_jwt: +process.env.JWT_REFRESH_EXPIRE || 6000, //seconds
 
   smtp_email: process.env.SMTP_EMAIL,
   smtp_password: process.env.SMTP_PASSWORD,
+
+  auth_code_expire: +process.env.AUTH_CODE_EXPIRE || 60, //seconds
+
+  google_client_id: process.env.GOOGLE_CLIENT_ID,
+  google_client_secret: process.env.GOOGLE_CLIENT_SECRET,
+  google_callback_url: process.env.GOOGLE_CALLBACK_URL,
 })

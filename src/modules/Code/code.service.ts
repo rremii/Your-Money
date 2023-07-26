@@ -8,7 +8,9 @@ import { MailerService } from "@nestjs-modules/mailer"
 import { UsersService } from "../users/users.service"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Code } from "./entities/code.entity"
-import { Repository } from "typeorm"
+import { LessThan, MoreThan, Raw, Repository } from "typeorm"
+import { ConfigService } from "@nestjs/config"
+import { GetAuthCodeExpTime } from "../../common/helpers/getAuthCodeExpTime"
 
 @Injectable()
 export class CodeService {
@@ -17,6 +19,7 @@ export class CodeService {
     private readonly codeRepository: Repository<Code>,
     private readonly mailerService: MailerService,
     private readonly usersService: UsersService,
+    private readonly configService: ConfigService,
   ) {}
 
   async sendConfirmCode({ email }: ConfirmEmailDto): Promise<DefaultResponse> {
@@ -24,6 +27,7 @@ export class CodeService {
     if (existUser) throw new BadRequestException(ApiError.USER_EXIST)
 
     const code = uuid().slice(0, 6)
+
     await this.mailerService.sendMail({
       to: email,
       from: "remi mail sender",
@@ -34,7 +38,7 @@ export class CodeService {
 
     const newCode = this.codeRepository.create({
       code,
-      expTime: new Date(Date.now() + 1000 * 60 * 5),
+      expTime: new Date(Date.now() + GetAuthCodeExpTime()),
     })
 
     await newCode.save()
@@ -45,11 +49,27 @@ export class CodeService {
   async verifyCode({ code }: VerifyCodeDto) {
     const codeData = await this.codeRepository.findOneBy({ code })
 
-    if (!codeData || codeData.code !== code)
+    if (!codeData) throw new BadRequestException(ApiError.INVALID_CODE)
+
+    const currentTime = Date.now()
+    const codeExpTime = codeData.expTime.getTime()
+
+    if (currentTime > codeExpTime)
       throw new BadRequestException(ApiError.INVALID_CODE)
 
     await codeData.remove()
+    await this.deleteExpired()
 
     return { message: "code is correct" }
+  }
+
+  async deleteExpired() {
+    const expCods = await this.codeRepository.find({
+      where: {
+        expTime: LessThan(new Date()),
+      },
+    })
+
+    await this.codeRepository.remove(expCods)
   }
 }

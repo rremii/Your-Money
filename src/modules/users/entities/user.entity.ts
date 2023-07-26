@@ -2,8 +2,6 @@ import {
   BaseEntity,
   Column,
   Entity,
-  JoinColumn,
-  OneToOne,
   PrimaryGeneratedColumn,
   Unique,
 } from "typeorm"
@@ -21,7 +19,7 @@ export class User extends BaseEntity implements IUser {
   @Column()
   email: string
 
-  @Column()
+  @Column({ nullable: true })
   password: string
 
   // @Column()
