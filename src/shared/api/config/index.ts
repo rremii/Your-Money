@@ -16,6 +16,7 @@ export const $apiDefault = axios.create({
 
 $api.interceptors.request.use((config) => {
   if (config.headers !== null) {
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     config.headers.Authorization = `Bearer ${localStorage.getItem(
       "accessToken"
     )}`

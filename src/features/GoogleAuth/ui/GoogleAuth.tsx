@@ -1,18 +1,25 @@
 import styled from "styled-components"
 import Google from "@shared/assets/LightTheme/google.svg"
 import React from "react"
+import { NavLink } from "react-router-dom"
+
+export const GoogleAuthUrl = "http://localhost:5000/google/login"
 
 export const GoogleAuth = () => {
+
   return (
-    <GoogleAuthLayout>
+    <GoogleAuthLayout to={GoogleAuthUrl}>
       <img src={Google} alt="google" />
       Google
     </GoogleAuthLayout>
   )
 }
-const GoogleAuthLayout = styled.button`
+const GoogleAuthLayout = styled(NavLink)`
   width: 100%;
   height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--bg-1);
   box-shadow: 0px 0px 10px -3px rgba(0, 0, 0, 0.7);
   color: var(--txt-6);

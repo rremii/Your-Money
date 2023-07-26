@@ -39,7 +39,7 @@ export const SignUpPasswordForm = () => {
     })
   const { errors } = formState
 
-  const { Reset: ResetTimer } = useTimer(3, 3, clearErrors)
+  const { Reset: ResetTimer } = useTimer({ timeGap: 3, finalTime: 3, callback: clearErrors })
 
 
   const SetError = (message: string) => {

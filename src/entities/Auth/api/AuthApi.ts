@@ -41,9 +41,9 @@ export const AuthApi = Api.injectEndpoints({
       query: () => ({
         url: "auth/refresh",
         method: "GET"
+
       })
     })
-
 
   }),
   overrideExisting: false
