@@ -1,10 +1,8 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { refresh, useRefreshQuery } from "@entities/Auth/api/AuthApi.ts"
-import { Simulate } from "react-dom/test-utils"
+import { useRefreshQuery } from "@entities/Auth/api/AuthApi.ts"
 import { setAuthRejected, setAuthSuccess } from "@entities/Auth/model/AuthSlice.ts"
-import { AuthResponse } from "@entities/Auth/types.ts"
 
 
 export const useAuth = () => {

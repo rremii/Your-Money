@@ -25,12 +25,16 @@ export const AuthSlice = createSlice({
       state.isPending = false
       state.isLoggedIn = "success"
     },
+    setAuthInitial(state) {
+      state.isPending = true
+      state.isLoggedIn = "first loading"
+    },
     setEmail(state, action: PayloadAction<string>) {
       state.email = action.payload
     }
   }
 })
 
-export const { setAuthRejected, setAuthSuccess, setEmail } = AuthSlice.actions
+export const { setAuthRejected, setAuthInitial, setAuthSuccess, setEmail } = AuthSlice.actions
 
 export const AuthReducer = AuthSlice.reducer

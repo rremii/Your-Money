@@ -1,8 +1,5 @@
 import styled from "styled-components"
-import { useConfirmEmailMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { useEffect, useState } from "react"
-import { useTimer } from "@shared/hooks/useTimer.ts"
 import { useResendCode } from "@features/ResendAuthCode/model/useResendCode.tsx"
 
 

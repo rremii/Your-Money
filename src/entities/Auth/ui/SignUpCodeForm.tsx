@@ -7,7 +7,6 @@ import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
 import React, { useEffect } from "react"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useVerifyCodeMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useTimer } from "@shared/hooks/useTimer.ts"
 

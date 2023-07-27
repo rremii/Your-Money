@@ -34,8 +34,6 @@ export const Routing = () => {
           <Route path="/sign-up/email" element={<SignUpEmail />} />
           <Route path="/sign-up/code" element={<SignUpCode />} />
           <Route path="/sign-up/password" element={<SignUpPassword />} />
-        </Routes>
-        <Routes>
           <Route
             path="/accounts"
             element={

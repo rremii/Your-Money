@@ -36,6 +36,12 @@ export const AuthApi = Api.injectEndpoints({
         data: { code }
       })
     }),
+    signOut: build.mutation<DefaultResponse, void>({
+      query: () => ({
+        url: "auth/logout",
+        method: "DELETE"
+      })
+    }),
 
     refresh: build.query<AuthResponse, void>({
       query: () => ({
@@ -43,7 +49,9 @@ export const AuthApi = Api.injectEndpoints({
         method: "GET"
 
       })
+
     })
+
 
   }),
   overrideExisting: false
@@ -51,8 +59,10 @@ export const AuthApi = Api.injectEndpoints({
 export const { refresh } = AuthApi.endpoints
 export const {
   useRefreshQuery,
+
   useRegisterMutation,
   useLoginMutation,
   useConfirmEmailMutation,
-  useVerifyCodeMutation
+  useVerifyCodeMutation,
+  useSignOutMutation
 } = AuthApi

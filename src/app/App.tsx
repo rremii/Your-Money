@@ -4,6 +4,7 @@ import { Routing } from "../pages"
 import "./styles/style.scss"
 
 function App() {
+
   return <Routing />
 }
 

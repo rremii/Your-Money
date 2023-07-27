@@ -43,6 +43,6 @@ module.exports = {
     "@typescript-eslint/no-unsafe-argument": "warn",
     "@typescript-eslint/no-misused-promises": "warn",
     "no-constant-condition": "warn",
-
+    "@typescript-eslint/no-floating-promises": "off"
   }
 }

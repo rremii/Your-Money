@@ -9,6 +9,8 @@ import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { useLoginMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useNavigate } from "react-router-dom"
 import { useTimer } from "@shared/hooks/useTimer.ts"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { setAuthSuccess } from "@entities/Auth/model/AuthSlice.ts"
 
 interface FormFields {
   email: string
@@ -25,6 +27,7 @@ const schema = yup
 
 export const SignInForm = () => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const [login] = useLoginMutation()
 
@@ -36,7 +39,7 @@ export const SignInForm = () => {
   const { errors } = formState
 
 
-  const { Reset: ResetTimer } = useTimer(3, 3, clearErrors)
+  const { Reset: ResetTimer } = useTimer({ timeGap: 3, finalTime: 3, callback: clearErrors })
 
 
   const SetError = (message: string) => {
@@ -47,6 +50,7 @@ export const SignInForm = () => {
   const OnSubmit = async (authData: FormFields) => {
     await login(authData).unwrap().then((res) => {
       localStorage.setItem("accessToken", res.accessToken)
+      dispatch(setAuthSuccess())
       navigate("/categories")
     }).catch(error => SetError(error.message))
   }
