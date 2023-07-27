@@ -6,6 +6,7 @@ import { CreateUserDto } from "./dto/create-user.dto"
 import { HashData } from "../../common/helpers/hashData"
 import { TokenService } from "../token/token.service"
 import { ApiError } from "../../common/constants/errors"
+import { IUserInfo } from "./users.interface"
 
 @Injectable()
 export class UsersService {
@@ -49,10 +50,14 @@ export class UsersService {
   //   return { message: "user avatar was updated" }
   // }
 
-  async getUser(authToken: string): Promise<User> {
+  async getUser(authToken: string): Promise<IUserInfo> {
     const decodedUser = await this.tokenService.decodeToken(authToken)
 
-    const user = this.usersRepository.findOneBy({ id: decodedUser.id })
+    const user = this.usersRepository.findOne({
+      where: { id: decodedUser.id },
+      select: ["id", "email"],
+    })
+
     if (!user) throw new BadRequestException(ApiError.USER_NOT_FOUND)
 
     return user

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
   Post,
@@ -62,7 +63,6 @@ export class AuthController {
       await this.tokenService.refreshTokens(refreshToken)
     response.cookie("refreshToken", newRefreshToken, {
       httpOnly: true,
-      path: "auth/refresh",
       sameSite: "none",
       secure: true,
 
@@ -76,7 +76,7 @@ export class AuthController {
   async login(
     @Body() userLoginData: LoginUserDto,
     @Res({ passthrough: true }) response: Response,
-  ): Promise<AuthResponse> {
+  ) {
     const { accessToken, refreshToken } = await this.authService.loginUser(
       userLoginData,
     )
@@ -89,32 +89,19 @@ export class AuthController {
     return { accessToken }
   }
 
-  @Get("google/login")
-  @UseGuards(GoogleAuthGuard)
-  googleLogin() {
-    return {
-      msg: "google auth",
-    }
-  }
+  @Delete("logout")
+  async logout(@Req() request: Request, @Res() response: Response) {
+    const { refreshToken } = request.cookies
 
-  @Get("google/redirect")
-  @UseGuards(GoogleAuthGuard)
-  async googleRedirect(
-    @Req() loginReq: Request<GoogleLoginDto>,
-    @Res() response: Response,
-  ) {
-    const loginDto = loginReq.user as GoogleLoginDto
+    await this.authService.logoutUser(refreshToken)
 
-    const { accessToken, refreshToken } = await this.authService.googleSignIn(
-      loginDto,
-    )
-    response.cookie("refreshToken", refreshToken, {
+    response.clearCookie("refreshToken", {
       httpOnly: true,
       sameSite: "none",
       secure: true,
       maxAge: GetCookieExpTime(),
     })
-    response.redirect(this.configService.get("client_origin"))
+    response.json({ message: "you are logged out" })
   }
 
   @UseGuards(AccessTokenGuard)

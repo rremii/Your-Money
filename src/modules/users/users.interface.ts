@@ -6,3 +6,8 @@ export interface IUser {
   // avatar: string
   refreshToken: string
 }
+
+export interface IUserInfo {
+  id: number
+  email: string
+}

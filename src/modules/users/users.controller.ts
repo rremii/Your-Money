@@ -42,9 +42,9 @@ export class UsersController {
   //   return this.usersService.changeAvatar(changeAvatarDto)
   // }
 
-  @Get()
+  @Get("/me")
   @UseGuards(AccessTokenGuard)
-  getUser(@Req() request: Request): Promise<User> {
+  getUser(@Req() request: Request) {
     const authToken = request.headers.authorization.split(" ").at(1)
     return this.usersService.getUser(authToken)
   }

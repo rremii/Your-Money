@@ -9,9 +9,15 @@ import { GoogleStrategy } from "../../strategy/google.strategy"
 import { AccessTokenStrategy } from "../../strategy/access-token.strategy"
 import { RefreshTokenStrategy } from "../../strategy/refresh-token.strategy"
 import { ConfigModule, ConfigService } from "@nestjs/config"
+import { JwtModule } from "@nestjs/jwt"
 
 @Module({
-  imports: [UsersModule, TokenModule, TypeOrmModule.forFeature([User])],
+  imports: [
+    UsersModule,
+    JwtModule,
+    TokenModule,
+    TypeOrmModule.forFeature([User]),
+  ],
   controllers: [AuthController],
   providers: [
     AuthService,
