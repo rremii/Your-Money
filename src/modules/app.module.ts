@@ -12,6 +12,9 @@ import { getOrmConfig } from "../configurations/orm.config"
 import { CodeModule } from "./Code/code.module"
 import { PassportModule } from "@nestjs/passport"
 import { GoogleAuthModule } from "./googleAuth/googleAuth.module"
+import { MulterModule } from "@nestjs/platform-express"
+import { ServeStaticModule } from "@nestjs/serve-static"
+import { join } from "path"
 
 @Module({
   imports: [
@@ -26,6 +29,13 @@ import { GoogleAuthModule } from "./googleAuth/googleAuth.module"
     CodeModule,
     PassportModule,
     GoogleAuthModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, "../..", "uploads"),
+      serveStaticOptions: {
+        redirect: false,
+        index: false,
+      },
+    }),
     MailerModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

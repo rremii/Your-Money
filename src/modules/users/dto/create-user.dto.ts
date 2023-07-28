@@ -8,13 +8,11 @@ export class CreateUserDto {
   @IsString()
   password?: string
 
-  // @ApiProperty()
-  // @IsNotEmpty()
-  // @IsString()
-  // userName: string
+  @IsNotEmpty()
+  @IsString()
+  name: string
 
-  // @ApiProperty()
-  // @IsNotEmpty()
-  // @IsString()
-  // avatar: string
+  @IsNotEmpty()
+  @IsString()
+  avatar?: string
 }

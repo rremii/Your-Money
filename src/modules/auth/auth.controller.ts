@@ -2,12 +2,17 @@ import {
   Body,
   Controller,
   Delete,
+  FileTypeValidator,
   Get,
   HttpStatus,
+  MaxFileSizeValidator,
+  ParseFilePipe,
   Post,
   Req,
   Res,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common"
@@ -20,10 +25,12 @@ import { Request, Response } from "express"
 import { ConfigService } from "@nestjs/config"
 import { GetCookieExpTime } from "../../common/helpers/getCookieExpTime"
 import { GoogleAuthGuard } from "../../guards/google-auth.guard"
-import { GoogleLoginDto } from "./dto/google-login.dto"
 import { Profile } from "passport-google-oauth20"
 import { AccessTokenGuard } from "../../guards/access-token.guard"
 import { RefreshTokenGuard } from "../../guards/refresh-token.guard"
+import { FileInterceptor } from "@nestjs/platform-express"
+import { diskStorage } from "multer"
+import { FileUploadConfig } from "../../configurations/fileUpload.config"
 
 @Controller("auth")
 export class AuthController {
@@ -36,21 +43,32 @@ export class AuthController {
 
   @UsePipes(ValidationPipe)
   @Post("register")
+  @UseInterceptors(FileInterceptor("avatar", FileUploadConfig))
   async register(
-    @Body() userRegisterData: CreateUserDto,
-    @Res({ passthrough: true }) response: Response,
+    @Body() userInfo: Omit<CreateUserDto, "avatar">,
+    @UploadedFile()
+    avatar: Express.Multer.File,
   ): Promise<AuthResponse> {
-    const { accessToken, refreshToken } = await this.authService.registerUser(
-      userRegisterData,
-    )
-    response.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      sameSite: false,
-      secure: true,
-
-      maxAge: GetCookieExpTime(),
-    })
-    return { accessToken }
+    console.log(avatar)
+    console.log(userInfo)
+    // const name = userRegisterData.get("name")
+    // const email = userRegisterData.get("email")
+    // const password = userRegisterData.get("password")
+    // const avatar = userRegisterData.get("avatar")
+    // console.log(avatar, userInfo)
+    // const { accessToken, refreshToken } = await this.authService.registerUser({
+    //   email: "qwe@gmail.com",
+    //   password: "qwe",
+    //   name: "qwe",
+    // })
+    // response.cookie("refreshToken", "refreshToken", {
+    //   httpOnly: true,
+    //   sameSite: false,
+    //   secure: true,
+    //
+    //   maxAge: GetCookieExpTime(),
+    // })
+    return { accessToken: "" }
   }
 
   @Get("refresh")

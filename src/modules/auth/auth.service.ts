@@ -13,7 +13,6 @@ import { LoginUserDto } from "./dto/login-user.dto"
 import * as bcrypt from "bcrypt"
 import { TokenService } from "../token/token.service"
 import { TokenResponse } from "./response/token.response"
-import { GoogleLoginDto } from "./dto/google-login.dto"
 import { TokenPayload } from "../token/types"
 import { JwtService } from "@nestjs/jwt"
 

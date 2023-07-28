@@ -20,7 +20,7 @@ export class GoogleAuthService {
   ) {}
 
   async googleSignUp(email: string) {
-    const newUser = await this.usersService.createUser({ email })
+    const newUser = await this.usersService.createUser({ email, name: "qwe" })
     const tokens = await this.tokenService.getTokens(newUser)
     await this.tokenService.updateRefreshToken(newUser.id, tokens.refreshToken)
 

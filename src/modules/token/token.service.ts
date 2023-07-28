@@ -35,7 +35,6 @@ export class TokenService {
     if (!decodedUser) throw new ForbiddenException("Access Denied")
 
     const user = await this.usersRepository.findOneBy({ id: decodedUser.id })
-    console.log(user)
     if (!user || !user.refreshToken)
       throw new ForbiddenException("Access Denied")
 

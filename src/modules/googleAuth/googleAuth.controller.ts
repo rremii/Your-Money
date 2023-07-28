@@ -26,7 +26,7 @@ import { RefreshTokenGuard } from "../../guards/refresh-token.guard"
 @Controller("google")
 export class GoogleAuthController {
   constructor(
-    private readonly authService: GoogleAuthService,
+    private readonly googleAuthService: GoogleAuthService,
     private readonly tokenService: TokenService,
     private readonly configService: ConfigService,
   ) {}
@@ -45,9 +45,8 @@ export class GoogleAuthController {
   ) {
     const loginDto = loginReq.user as GoogleLoginDto
 
-    const { accessToken, refreshToken } = await this.authService.googleSignIn(
-      loginDto,
-    )
+    const { accessToken, refreshToken } =
+      await this.googleAuthService.googleSignIn(loginDto)
     response.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       sameSite: "none",
