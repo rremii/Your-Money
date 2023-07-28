@@ -10,6 +10,8 @@ import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useRegisterMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useTimer } from "@shared/hooks/useTimer.ts"
+import { ConvertURLtoFile } from "@shared/helpers/ConvertURLtoFile.ts"
+import { addAbortSignalListener } from "@reduxjs/toolkit/dist/listenerMiddleware/utils"
 
 interface FormFields {
   password: string
@@ -29,6 +31,8 @@ export const SignUpPasswordForm = () => {
   const navigate = useNavigate()
 
   const email = useTypedSelector(state => state.Auth.email)
+  const avatar = useTypedSelector(state => state.Auth.avatar)
+  const name = useTypedSelector(state => state.Auth.name)
 
   const [registerUser] = useRegisterMutation()
 
@@ -49,12 +53,24 @@ export const SignUpPasswordForm = () => {
   }
 
   const OnSubmit = async ({ password, confirmPassword }: FormFields) => {
-    if (password !== confirmPassword) SetError("Passwords are not equal")
     if (password === confirmPassword) {
-      await registerUser({ password, email }).unwrap().then((res) => {
+      const formData = new FormData()
+
+      if (avatar) {
+        const avatarImg = await ConvertURLtoFile(avatar)
+        formData.append("avatar", avatarImg)
+      }
+
+      formData.append("name", name)
+      formData.append("email", email)
+      formData.append("password", password)
+
+      await registerUser(formData).unwrap().then((res) => {
         localStorage.setItem("accessToken", res.accessToken)
         navigate("/categories")
       }).catch(error => SetError(error.message))
+    } else {
+      SetError("Passwords are not equal")
     }
   }
   return (

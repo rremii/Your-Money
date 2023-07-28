@@ -1,10 +1,12 @@
 import styled from "styled-components"
-import React from "react"
 import { Header } from "@widgets/Header"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { DateSubHeader } from "@widgets/Header/ui/DateSubHeader.tsx"
+import { useEffect, useState } from "react"
 
 const TransactionsPage = () => {
+
+
   return (
     <TransactionsLayout>
       <Header
@@ -20,6 +22,7 @@ const TransactionsLayout = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  
   flex-direction: column;
   //max-width: 450px;
   position: relative;

@@ -47,7 +47,7 @@ export const SignUpCodeForm = () => {
   const OnSubmit = async ({ code }: FormFields) => {
     if (code.length !== 6) return
     await verifyCode(code).unwrap().then(() => {
-      navigate("/sign-up/password")
+      navigate("/sign-up/info")
     }).catch(error => {
       reset()
       setError("code", { message: error.message })

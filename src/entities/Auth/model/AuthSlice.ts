@@ -4,12 +4,16 @@ interface initialState {
   isLoggedIn: "first loading" | "success" | "rejected"
   isPending: boolean
   email: string
+  avatar: string
+  name: string
 }
 
 const initialState = {
   email: "",
   isLoggedIn: "first loading",
-  isPending: true
+  isPending: true,
+  avatar: "",
+  name: ""
 } as initialState
 
 export const AuthSlice = createSlice({
@@ -31,10 +35,14 @@ export const AuthSlice = createSlice({
     },
     setEmail(state, action: PayloadAction<string>) {
       state.email = action.payload
+    },
+    setUserInfo(state, action: PayloadAction<{ name: string, avatar: string }>) {
+      state.name = action.payload.name
+      state.avatar = action.payload.avatar
     }
   }
 })
 
-export const { setAuthRejected, setAuthInitial, setAuthSuccess, setEmail } = AuthSlice.actions
+export const { setAuthRejected, setUserInfo, setAuthInitial, setAuthSuccess, setEmail } = AuthSlice.actions
 
 export const AuthReducer = AuthSlice.reducer

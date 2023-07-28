@@ -16,13 +16,15 @@ import SignUpCode from "./SignUp/SignUpCode.tsx"
 import SignUpPassword from "./SignUp/SignUpPassword.tsx"
 import Layout from "../app/layout/Layout.tsx"
 import { useAuth } from "@entities/Auth/model/useAuth.ts"
+import SignUpInfo from "./SignUp/SignUpInfo.tsx"
 
+//https://theoluwabukolatina.medium.com/file-upload-with-react-hooks-cloudinary-and-react-dropzone-5b6461c303ce
 export const Routing = () => {
   const { isLoggedIn, isPending } = useAuth()
   // useChangeTheme()
   const navigate = useNavigate()
-
   useEffect(() => {
+    // navigate("/sign-up/info")
     navigate("/categories")
   }, [])
 
@@ -33,6 +35,7 @@ export const Routing = () => {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up/email" element={<SignUpEmail />} />
           <Route path="/sign-up/code" element={<SignUpCode />} />
+          <Route path="/sign-up/info" element={<SignUpInfo />} />
           <Route path="/sign-up/password" element={<SignUpPassword />} />
           <Route
             path="/accounts"

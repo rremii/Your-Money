@@ -5,7 +5,7 @@ export const AuthApi = Api.injectEndpoints({
 
   endpoints: (build) => ({
 
-    register: build.mutation<AuthResponse, RegisterDto>({
+    register: build.mutation<AuthResponse, FormData>({
       query: (registerData) => ({
         url: "auth/register",
         method: "POST",
