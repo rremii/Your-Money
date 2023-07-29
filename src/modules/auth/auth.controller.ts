@@ -47,28 +47,23 @@ export class AuthController {
   async register(
     @Body() userInfo: Omit<CreateUserDto, "avatar">,
     @UploadedFile()
-    avatar: Express.Multer.File,
-  ): Promise<AuthResponse> {
-    console.log(avatar)
-    console.log(userInfo)
-    // const name = userRegisterData.get("name")
-    // const email = userRegisterData.get("email")
-    // const password = userRegisterData.get("password")
-    // const avatar = userRegisterData.get("avatar")
-    // console.log(avatar, userInfo)
-    // const { accessToken, refreshToken } = await this.authService.registerUser({
-    //   email: "qwe@gmail.com",
-    //   password: "qwe",
-    //   name: "qwe",
-    // })
-    // response.cookie("refreshToken", "refreshToken", {
-    //   httpOnly: true,
-    //   sameSite: false,
-    //   secure: true,
-    //
-    //   maxAge: GetCookieExpTime(),
-    // })
-    return { accessToken: "" }
+    avatarFile: Express.Multer.File,
+    @Res() response: Response,
+  ) {
+    const avatar =
+      this.configService.get("server_origin") + "/" + avatarFile.filename
+    const { accessToken, refreshToken } = await this.authService.registerUser({
+      ...userInfo,
+      avatar,
+    })
+    response.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      sameSite: false,
+      secure: true,
+
+      maxAge: GetCookieExpTime(),
+    })
+    response.json({ accessToken })
   }
 
   @Get("refresh")

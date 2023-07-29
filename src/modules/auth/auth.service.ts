@@ -30,7 +30,7 @@ export class AuthService {
     const existUser = await this.usersService.findUserByEmail(
       CreateUserDto.email,
     )
-    if (existUser) throw new BadRequestException(ApiError.USER_EXIST)
+    // if (existUser) throw new BadRequestException(ApiError.USER_EXIST)
 
     const newUser = await this.usersService.createUser(CreateUserDto)
     const tokens = await this.tokenService.getTokens(newUser)

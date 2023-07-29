@@ -22,10 +22,11 @@ export class UsersService {
 
   async createUser(user: CreateUserDto): Promise<User> {
     const newUser = new User()
+
     newUser.email = user.email
-    // newUser.userName = user.userName
+    newUser.name = user.name
     if (user.password) newUser.password = await HashData(user.password)
-    // newUser.avatar = user.avatar
+    if (user.avatar) newUser.avatar = user.avatar
 
     await newUser.save()
 
@@ -55,7 +56,7 @@ export class UsersService {
 
     const user = this.usersRepository.findOne({
       where: { id: decodedUser.id },
-      select: ["id", "email"],
+      select: ["id", "email", "avatar", "name"],
     })
 
     if (!user) throw new BadRequestException(ApiError.USER_NOT_FOUND)

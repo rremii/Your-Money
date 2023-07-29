@@ -7,8 +7,8 @@ import {
 } from "typeorm"
 import { IUser } from "../users.interface"
 
+// @Unique(["email"])
 @Entity()
-@Unique(["email"])
 export class User extends BaseEntity implements IUser {
   @PrimaryGeneratedColumn()
   id: number

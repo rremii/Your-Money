@@ -19,8 +19,8 @@ export class GoogleAuthService {
     private readonly usersService: UsersService,
   ) {}
 
-  async googleSignUp(email: string) {
-    const newUser = await this.usersService.createUser({ email, name: "qwe" })
+  async googleSignUp(createUserDto: CreateUserDto) {
+    const newUser = await this.usersService.createUser(createUserDto)
     const tokens = await this.tokenService.getTokens(newUser)
     await this.tokenService.updateRefreshToken(newUser.id, tokens.refreshToken)
 
@@ -29,7 +29,7 @@ export class GoogleAuthService {
   async googleSignIn(loginDto: GoogleLoginDto) {
     const existUser = await this.usersService.findUserByEmail(loginDto.email)
 
-    if (!existUser) return this.googleSignUp(loginDto.email)
+    if (!existUser) return this.googleSignUp(loginDto)
 
     const tokens = await this.tokenService.getTokens(existUser)
 

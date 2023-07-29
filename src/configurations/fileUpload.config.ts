@@ -23,7 +23,6 @@ export const FileUploadConfig: MulterOptions = {
     )
     // Check mime
     const mimetype = filetypes.test(file.mimetype)
-
     if (mimetype && extname) return cb(null, true)
     else return cb(new BadRequestException(ApiError.FILE_TYPE), false)
   },
