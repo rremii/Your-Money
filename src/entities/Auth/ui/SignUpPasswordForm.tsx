@@ -7,11 +7,12 @@ import * as yup from "yup"
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useRegisterMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useTimer } from "@shared/hooks/useTimer.ts"
 import { ConvertURLtoFile } from "@shared/helpers/ConvertURLtoFile.ts"
 import { addAbortSignalListener } from "@reduxjs/toolkit/dist/listenerMiddleware/utils"
+import { setAuthSuccess } from "@entities/Auth/model/AuthSlice.ts"
 
 interface FormFields {
   password: string
@@ -29,12 +30,13 @@ const schema = yup
 
 export const SignUpPasswordForm = () => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const email = useTypedSelector(state => state.Auth.email)
   const avatar = useTypedSelector(state => state.Auth.avatar)
   const name = useTypedSelector(state => state.Auth.name)
 
-  const [registerUser] = useRegisterMutation()
+  const [registerUser, { isLoading }] = useRegisterMutation()
 
 
   const { register, formState, clearErrors, handleSubmit, reset, setError } =
@@ -53,6 +55,7 @@ export const SignUpPasswordForm = () => {
   }
 
   const OnSubmit = async ({ password, confirmPassword }: FormFields) => {
+    if (isLoading) return
     if (password === confirmPassword) {
       const formData = new FormData()
 
@@ -67,6 +70,7 @@ export const SignUpPasswordForm = () => {
 
       await registerUser(formData).unwrap().then((res) => {
         localStorage.setItem("accessToken", res.accessToken)
+        dispatch(setAuthSuccess())
         navigate("/categories")
       }).catch(error => SetError(error.message))
     } else {
@@ -101,7 +105,7 @@ export const SignUpPasswordForm = () => {
           <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
         )}
         {errors.root && <ErrorMessage>{errors.root.message}</ErrorMessage>}
-        <AuthSubmitBtn>SUBMIT</AuthSubmitBtn>
+        <AuthSubmitBtn isLoading={isLoading}>SUBMIT</AuthSubmitBtn>
       </AuthForm>
     </SignUpFormLayout>
   )

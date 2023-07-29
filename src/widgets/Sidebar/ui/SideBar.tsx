@@ -16,6 +16,7 @@ import { ChangeCurrency } from "@features/ChangeCurrency"
 import { ChangeCurrencyFormat } from "@features/ChangeCurrencyFormat"
 import { ChangeFirstDayWeek } from "@features/ChangeFirstDayWeek"
 import { ChangeStartScreen } from "@features/ChangeStartScreen"
+import { useGetMeQuery } from "@entities/User/api/UserApi.ts"
 
 export const SideBar = () => {
   const dispatch = useAppDispatch()
@@ -23,13 +24,14 @@ export const SideBar = () => {
   const isSideBar = useTypedSelector((state) => state.SideBar.isSideBarOpen)
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
 
+
   const CloseSideBar = () => {
     dispatch(setIsSideBar(false))
   }
   return (
     <>
-      <OverLay onClick={CloseSideBar} isSideBar={isSideBar} />
-      <SideBarLayout isSideBar={isSideBar}>
+      <OverLay onClick={CloseSideBar} $isSideBar={isSideBar} />
+      <SideBarLayout $isSideBar={isSideBar}>
         <SideBarHeader />
         <SideBarSection>
           <div className="title">Profile</div>
@@ -60,13 +62,13 @@ export const SideBar = () => {
   )
 }
 const SideBarLayout = styled.div<{
-  isSideBar: boolean
+  $isSideBar?: boolean
 }>`
   position: absolute;
   background-color: var(--bg-1);
   z-index: 10;
   top: 0;
-  left: ${({ isSideBar }) => (isSideBar ? "0" : "-100%")};
+  left: ${({ $isSideBar }) => ($isSideBar ? "0" : "-100%")};
   width: 75%;
   min-width: 270px;
   height: 100%;
@@ -78,7 +80,7 @@ const SideBarLayout = styled.div<{
 
 `
 const OverLay = styled.div<{
-  isSideBar: boolean
+  $isSideBar?: boolean
 }>`
   position: absolute;
   z-index: 5;
@@ -87,7 +89,7 @@ const OverLay = styled.div<{
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.68);
-  opacity: ${({ isSideBar }) => (isSideBar ? "1" : "0")};
-  pointer-events: ${({ isSideBar }) => (isSideBar ? "initial" : "none")};
+  opacity: ${({ $isSideBar }) => ($isSideBar ? "1" : "0")};
+  pointer-events: ${({ $isSideBar }) => ($isSideBar ? "initial" : "none")};
   transition: 0.5s;
 `

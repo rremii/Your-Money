@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 
+const time = new Date().getHours() + ":" + new Date().getMinutes()
 export const SideBarHeader = () => {
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
 
@@ -17,17 +18,36 @@ export const SideBarHeader = () => {
   }, [getMe, isLoggedIn])
 
 
+  const GetSectionsData = () => {
+    if (isLoggedIn === "success") {
+      return {
+        avatar: userInfo?.avatar || Categories,
+        email: userInfo?.email,
+        name: userInfo?.name,
+        time: "Today, " + time
+      }
+    } else {
+      return {
+        avatar: Categories,
+        email: "Synchronization disabled...",
+        name: "SIGN IN",
+        time: "Synchronization..."
+      }
+    }
+  }
+
   return <HeaderLayout>
     <div className="avatar-box">
-      <img className="avatar" src={Categories} alt="avatar" />
+      <img className="avatar" src={GetSectionsData().avatar}
+           alt="avatar" />
       <div className="extra-info">
-        <div className="date">{isLoggedIn === "success" ? "Today, 10:03" : "Synchronization..."}</div>
+        <div className="date">{GetSectionsData().time}</div>
         <img src={Categories} alt="cloud" />
       </div>
     </div>
     <div className="user-info">
-      <h2 className="name">{isLoggedIn === "success" ? "Remi" : "SIGN IN"}</h2>
-      <h3 className="email">{isLoggedIn === "success" ? userInfo?.email : "Synchronization disabled..."}</h3>
+      <h2 className="name">{GetSectionsData().name}</h2>
+      <h3 className="email">{GetSectionsData().email}</h3>
     </div>
   </HeaderLayout>
 }
@@ -48,6 +68,7 @@ const HeaderLayout = styled.header`
     .avatar {
       width: 40px;
       height: 40px;
+      border-radius: 50%;
     }
 
     .extra-info {

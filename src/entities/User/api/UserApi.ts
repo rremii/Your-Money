@@ -58,5 +58,5 @@ export const UserApi = Api.injectEndpoints({
 })
 // export const { refresh } = AuthApi.endpoints
 export const {
-  useLazyGetMeQuery
+  useLazyGetMeQuery, useGetMeQuery
 } = UserApi
