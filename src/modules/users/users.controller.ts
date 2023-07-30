@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Put,
   Req,
   UseGuards,
   UsePipes,
@@ -13,6 +14,9 @@ import { CreateUserDto } from "./dto/create-user.dto"
 import { User } from "./entities/user.entity"
 import { AccessTokenGuard } from "../../guards/access-token.guard"
 import { Request } from "express"
+import { ChangePasswordDto } from "./dto/change-password.dto"
+import { ChangeNameDto } from "./dto/change-name.dto"
+import { DefaultResponse } from "../../common/types/types"
 
 // import { AccessTokenGuard } from "../../guards/access-token.guard"
 
@@ -26,12 +30,21 @@ export class UsersController {
   //   return this.usersService.createUser(user)
   // }
 
-  // @Post("name")
-  // @UseGuards(AccessTokenGuard)
-  // @UsePipes(new ValidationPipe())
-  // changeName(@Body() changeNameDto: ChangeNameDto): Promise<DefaultResponse> {
-  //   return this.usersService.changeName(changeNameDto)
-  // }
+  @Put("name")
+  @UseGuards(AccessTokenGuard)
+  @UsePipes(new ValidationPipe())
+  changeName(@Body() changeNameDto: ChangeNameDto): Promise<DefaultResponse> {
+    return this.usersService.changeName(changeNameDto)
+  }
+
+  @Put("password")
+  @UseGuards(AccessTokenGuard)
+  @UsePipes(new ValidationPipe())
+  changePassword(
+    @Body() changePasswordDto: ChangePasswordDto,
+  ): Promise<DefaultResponse> {
+    return this.usersService.changePassword(changePasswordDto)
+  }
 
   // @Post("avatar")
   // @UseGuards(AccessTokenGuard)

@@ -7,6 +7,9 @@ import { HashData } from "../../common/helpers/hashData"
 import { TokenService } from "../token/token.service"
 import { ApiError } from "../../common/constants/errors"
 import { IUserInfo } from "./users.interface"
+import { ChangePasswordDto } from "./dto/change-password.dto"
+import { DefaultResponse } from "../../common/types/types"
+import { ChangeNameDto } from "./dto/change-name.dto"
 
 @Injectable()
 export class UsersService {
@@ -33,14 +36,26 @@ export class UsersService {
     return newUser
   }
 
-  // async changeName(changeNameDto: ChangeNameDto): Promise<DefaultResponse> {
-  //   const user = await this.usersRepository.findOneBy({ id: changeNameDto.id })
-  //   user.userName = changeNameDto.newName
-  //
-  //   await user.save()
-  //
-  //   return { message: "user name was updated" }
-  // }
+  async changeName({ newName, id }: ChangeNameDto): Promise<DefaultResponse> {
+    const user = await this.usersRepository.findOneBy({ id })
+    user.name = newName
+
+    await user.save()
+
+    return { message: "user name was updated" }
+  }
+
+  async changePassword({
+    hashedPassword,
+    id,
+  }: ChangePasswordDto): Promise<DefaultResponse> {
+    const user = await this.usersRepository.findOneBy({ id })
+    user.password = hashedPassword
+
+    await user.save()
+
+    return { message: "user password was updated" }
+  }
 
   // async changeAvatar(changeNameDto: ChangeAvatarDto): Promise<DefaultResponse> {
   //   const user = await this.usersRepository.findOneBy({ id: changeNameDto.id })
