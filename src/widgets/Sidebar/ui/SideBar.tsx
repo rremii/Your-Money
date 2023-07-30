@@ -19,47 +19,37 @@ import { ChangeStartScreen } from "@features/ChangeStartScreen"
 import { useGetMeQuery } from "@entities/User/api/UserApi.ts"
 
 export const SideBar = () => {
-  const dispatch = useAppDispatch()
 
-  const isSideBar = useTypedSelector((state) => state.SideBar.isSideBarOpen)
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
+  const isSideBar = useTypedSelector((state) => state.SideBar.isSideBarOpen)
 
-
-  const CloseSideBar = () => {
-    dispatch(setIsSideBar(false))
-  }
-  return (
-    <>
-      <OverLay onClick={CloseSideBar} $isSideBar={isSideBar} />
-      <SideBarLayout $isSideBar={isSideBar}>
-        <SideBarHeader />
-        <SideBarSection>
-          <div className="title">Profile</div>
-          <div className="content">
-            {isLoggedIn === "success" ? <>
-                <ChangeName />
-                <ChangePassword />
-                <SignOut />
-              </> :
-              <SignIn />}
-          </div>
-        </SideBarSection>
-        <Separator />
-        <SideBarSection>
-          <div className="title">Settings</div>
-          <div className="content">
-            <ChangeLanguage />
-            <ChangeTheme />
-            <ChangeCurrency />
-            <ChangeCurrencyFormat />
-            <ChangeFirstDayWeek />
-            <ChangeFirstDayMonth />
-            <ChangeStartScreen />
-          </div>
-        </SideBarSection>
-      </SideBarLayout>
-    </>
-  )
+  return <SideBarLayout $isSideBar={isSideBar}>
+    <SideBarHeader />
+    <SideBarSection>
+      <div className="title">Profile</div>
+      <div className="content">
+        {isLoggedIn === "success" ? <>
+            <ChangeName />
+            <ChangePassword />
+            <SignOut />
+          </> :
+          <SignIn />}
+      </div>
+    </SideBarSection>
+    <Separator />
+    <SideBarSection>
+      <div className="title">Settings</div>
+      <div className="content">
+        <ChangeLanguage />
+        <ChangeTheme />
+        <ChangeCurrency />
+        <ChangeCurrencyFormat />
+        <ChangeFirstDayWeek />
+        <ChangeFirstDayMonth />
+        <ChangeStartScreen />
+      </div>
+    </SideBarSection>
+  </SideBarLayout>
 }
 const SideBarLayout = styled.div<{
   $isSideBar?: boolean
@@ -79,17 +69,4 @@ const SideBarLayout = styled.div<{
   transition: left 0.5s;
 
 `
-const OverLay = styled.div<{
-  $isSideBar?: boolean
-}>`
-  position: absolute;
-  z-index: 5;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.68);
-  opacity: ${({ $isSideBar }) => ($isSideBar ? "1" : "0")};
-  pointer-events: ${({ $isSideBar }) => ($isSideBar ? "initial" : "none")};
-  transition: 0.5s;
-`
+

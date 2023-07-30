@@ -1,17 +1,26 @@
 import styled from "styled-components"
 import React, { FC } from "react"
+import { SignOutMenu } from "@widgets/SignOutMenu/ui/SignOutMenu.tsx"
+import { SideBarOverlay } from "@features/Overlays/ui/SideBarOverlay.tsx"
+import { SideBarModalsOverlay } from "@features/Overlays/ui/SideBarModalsOverlay.tsx"
+import { PasswordMenu } from "@widgets/PasswordMenu/ui/PasswordMenu.tsx"
+import { NameMenu } from "@widgets/NameMenu/ui/NameMenu.tsx"
 
 interface Props {
   children: React.ReactNode
 }
 
 const AppLayout: FC<Props> = ({ children }) => {
+
   return (
     <LayoutStyles>
-      {/*<Header right={<div>right</div>} />*/}
-      {/*<SideBar />*/}
       {children}
-      {/*<Footer />*/}
+      <SideBarOverlay />
+      <SideBarModalsOverlay />
+
+      <SignOutMenu />
+      <PasswordMenu />
+      <NameMenu />
     </LayoutStyles>
   )
 }

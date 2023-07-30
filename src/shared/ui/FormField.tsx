@@ -15,7 +15,7 @@ export const FormField: FC<props> = ({ input, isError, label }) => {
   const { placeholder, type, registerData } = input
 
   return (
-    <FieldLayout>
+    <FieldLayout className="FormField">
       <label className={isError ? "error" : ""} htmlFor={label}>
         {label}
       </label>

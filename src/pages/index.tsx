@@ -17,6 +17,7 @@ import SignUpPassword from "./SignUp/SignUpPassword.tsx"
 import Layout from "../app/layout/Layout.tsx"
 import { useAuth } from "@entities/Auth/model/useAuth.ts"
 import SignUpInfo from "./SignUp/SignUpInfo.tsx"
+import { useGetMeQuery } from "@entities/User/api/UserApi.ts"
 
 //https://theoluwabukolatina.medium.com/file-upload-with-react-hooks-cloudinary-and-react-dropzone-5b6461c303ce
 export const Routing = () => {
@@ -27,6 +28,9 @@ export const Routing = () => {
     // navigate("/sign-up/info")
     navigate("/categories")
   }, [])
+
+  // const { data: userInfo } = useGetMeQuery()
+
 
   return (
     <>

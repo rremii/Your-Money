@@ -1,62 +1,47 @@
 import { Api } from "@shared/api/config/Api"
-import { IUserInfo } from "@entities/User/types.ts"
+import { ChangeName, ChangePassword, IUserInfo } from "@entities/User/types.ts"
+import { DefaultResponse } from "@entities/Auth/types.ts"
 
 export const UserApi = Api.injectEndpoints({
 
   endpoints: (build) => ({
-    //
-    // register: build.mutation<AuthResponse, RegisterDto>({
-    //   query: (registerData) => ({
-    //     url: "auth/register",
-    //     method: "POST",
-    //     data: registerData
-    //   })
-    //
-    // }),
-    // login: build.mutation<AuthResponse, LoginDto>({
-    //   query: (loginData) => ({
-    //     url: "auth/login",
-    //     method: "POST",
-    //     data: loginData
-    //   })
-    // }),
-    //
-    // confirmEmail: build.mutation<DefaultResponse, string>({
-    //   query: (email) => ({
-    //     url: "confirm-code/send-code",
-    //     method: "POST",
-    //     data: { email }
-    //   })
-    // }),
-    //
-    // verifyCode: build.mutation<DefaultResponse, string>({
-    //   query: (code) => ({
-    //     url: "confirm-code/verify-code",
-    //     method: "POST",
-    //     data: { code }
-    //   })
-    // }),
-    // signOut: build.mutation<DefaultResponse, void>({
-    //   query: () => ({
-    //     url: "auth/logout",
-    //     method: "DELETE"
-    //   })
-    // }),
 
     GetMe: build.query<IUserInfo, void>({
       query: () => ({
         url: "users/me",
         method: "GET"
-      })
+      }),
+      providesTags: ["User"]
+    }),
 
+    ChangeName: build.mutation<DefaultResponse, ChangeName>({
+      query: (data) => ({
+        url: "users/name",
+        method: "PUT",
+        data
+      }),
+      invalidatesTags: ["User"]
+    }),
 
+    ChangePassword: build.mutation<DefaultResponse, ChangePassword>({
+      query: (data) => ({
+        url: "users/password",
+        method: "PUT",
+        data
+      }),
+      invalidatesTags: ["User"]
     })
 
 
   }),
   overrideExisting: false
 })
-// export const { refresh } = AuthApi.endpoints
+export const { GetMe } = UserApi.endpoints
+
 export const {
-  useLazyGetMeQuery, useGetMeQuery
+  useLazyGetMeQuery,
+  useGetMeQuery,
+  useChangeNameMutation,
+  useChangePasswordMutation
+
 } = UserApi

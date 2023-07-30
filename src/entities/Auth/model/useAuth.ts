@@ -6,7 +6,6 @@ import { setAuthRejected, setAuthSuccess } from "@entities/Auth/model/AuthSlice.
 
 
 export const useAuth = () => {
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
