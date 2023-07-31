@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 import React, { useEffect } from "react"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { useVerifyCodeMutation } from "@entities/Auth/api/AuthApi.ts"
-import { useTimer } from "@shared/hooks/useTimer.ts"
+import { useTimer } from "@shared/hooks/useTimer.tsx"
 
 interface FormFields {
   code: string

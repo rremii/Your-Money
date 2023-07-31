@@ -6,6 +6,9 @@ import AppLayout from "../app/layout/AppLayout.tsx"
 // const Transactions = lazy(() => import("./Transactions/TransactionsPage.tsx"))
 // const Overview = lazy(() => import("./Overview/OverviewPage.tsx"))
 // const Accounts = lazy(() => import("./Accounts/AccountsPage.tsx"))
+
+
+//todo icons https://habr.com/ru/articles/276249/
 import Categories from "./Categories/CategoriesPage.tsx"
 import Transactions from "./Transactions/TransactionsPage.tsx"
 import Overview from "./Overview/OverviewPage.tsx"
@@ -18,8 +21,8 @@ import Layout from "../app/layout/Layout.tsx"
 import { useAuth } from "@entities/Auth/model/useAuth.ts"
 import SignUpInfo from "./SignUp/SignUpInfo.tsx"
 import { useGetMeQuery } from "@entities/User/api/UserApi.ts"
+import { useToast } from "@shared/hooks/useToast.tsx"
 
-//https://theoluwabukolatina.medium.com/file-upload-with-react-hooks-cloudinary-and-react-dropzone-5b6461c303ce
 export const Routing = () => {
   const { isLoggedIn, isPending } = useAuth()
   // useChangeTheme()
@@ -29,8 +32,13 @@ export const Routing = () => {
     navigate("/categories")
   }, [])
 
-  // const { data: userInfo } = useGetMeQuery()
 
+  const { ShowToast } = useToast(5000, 1000)
+
+  useEffect(() => {
+    if (isLoggedIn === "rejected")
+      ShowToast("Please login, the maximum amount of transactions is limited by 20 and synchronization is not available")
+  }, [isLoggedIn])
 
   return (
     <>

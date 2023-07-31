@@ -8,7 +8,7 @@ import styled from "styled-components"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { useLoginMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useNavigate } from "react-router-dom"
-import { useTimer } from "@shared/hooks/useTimer.ts"
+import { useTimer } from "@shared/hooks/useTimer.tsx"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setAuthSuccess } from "@entities/Auth/model/AuthSlice.ts"
 

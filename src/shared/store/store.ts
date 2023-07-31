@@ -2,10 +2,12 @@ import { combineReducers, configureStore, PreloadedState } from "@reduxjs/toolki
 import { Api } from "../api/config/Api"
 import { SideBarReducer } from "@entities/SideBar"
 import { AuthReducer } from "@entities/Auth/model/AuthSlice.ts"
+import { ToastReducer } from "@shared/store/globalSlices/ToastSlice.ts"
 
 const rootReducer = combineReducers({
   SideBar: SideBarReducer,
   Auth: AuthReducer,
+  Toast: ToastReducer,
   [Api.reducerPath]: Api.reducer
 })
 

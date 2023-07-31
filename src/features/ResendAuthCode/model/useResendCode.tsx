@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useConfirmEmailMutation } from "@entities/Auth/api/AuthApi.ts"
-import { useTimer } from "@shared/hooks/useTimer.ts"
+import { useTimer } from "@shared/hooks/useTimer.tsx"
 import { CodeResult } from "@features/ResendAuthCode/constants/CodeResult.ts"
 
 export const useResendCode = () => {

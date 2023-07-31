@@ -5,6 +5,7 @@ import { SideBarOverlay } from "@features/Overlays/ui/SideBarOverlay.tsx"
 import { SideBarModalsOverlay } from "@features/Overlays/ui/SideBarModalsOverlay.tsx"
 import { PasswordMenu } from "@widgets/PasswordMenu/ui/PasswordMenu.tsx"
 import { NameMenu } from "@widgets/NameMenu/ui/NameMenu.tsx"
+import { Toast } from "@shared/ui/Toast.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -15,12 +16,16 @@ const AppLayout: FC<Props> = ({ children }) => {
   return (
     <LayoutStyles>
       {children}
+      <Toast />
+
       <SideBarOverlay />
       <SideBarModalsOverlay />
 
       <SignOutMenu />
       <PasswordMenu />
       <NameMenu />
+
+
     </LayoutStyles>
   )
 }

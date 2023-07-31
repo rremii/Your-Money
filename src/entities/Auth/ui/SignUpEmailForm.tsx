@@ -11,7 +11,7 @@ import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { useConfirmEmailMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setEmail } from "@entities/Auth/model/AuthSlice.ts"
-import { useTimer } from "@shared/hooks/useTimer.ts"
+import { useTimer } from "@shared/hooks/useTimer.tsx"
 
 interface FormFields {
   email: string
