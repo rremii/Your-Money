@@ -18,7 +18,7 @@ export const DoughnutProps: IDoughnutProps = {
     }]
   },
   options: {
-    cutout: 85,
+    cutout: "90%",
     elements: {
       arc: {
         borderWidth: 0
