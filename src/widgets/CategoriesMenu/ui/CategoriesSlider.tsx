@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react"
 import { Doughnut } from "react-chartjs-2"
 import { DoughnutProps } from "@widgets/CategoriesMenu/constants/DoughnutConfig.ts"
 import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
+import { useInView } from "react-intersection-observer"
 
 
 export const CategoriesSlider = () => {
@@ -18,12 +19,13 @@ export const CategoriesSlider = () => {
     ref.current.scrollTo(sliderWidth / 2, 0)
   }, [ref])
 
+
   return <CategoriesLayout ref={ref}>
-    <CategoryMenu />
-    <CategoryMenu />
-    <CategoryMenu />
-    <CategoryMenu />
-    <CategoryMenu />
+    <CategoryMenu id={1} />
+    <CategoryMenu id={2} />
+    <CategoryMenu id={3} />
+    <CategoryMenu id={4} />
+    <CategoryMenu id={5} />
 
   </CategoriesLayout>
 }
@@ -34,7 +36,7 @@ const CategoriesLayout = styled.main`
   position: relative;
   display: flex;
   scroll-snap-stop: always;
-
+  //scroll-behavior: smooth;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
 `

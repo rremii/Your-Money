@@ -1,14 +1,38 @@
 import { Doughnut } from "react-chartjs-2"
 import { DoughnutProps } from "@widgets/CategoriesMenu/constants/DoughnutConfig.ts"
-import React from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 import FamilyIcon from "@shared/assets/LightTheme/family.png"
+import { TransCategories } from "@entities/Transaction/model/useGetTransactions.tsx"
+import { useInView } from "react-intersection-observer"
 
-export const CategoryMenu = () => {
 
+interface category {
+  title: TransCategories,
+  img: string,
+  quantity: number
+}
+
+interface CategoryMenuData {
+
+  timeStart: Date
+  timeEnd: Date
+  dateGap: string
+  categories: category[]
+}
+
+export const CategoryMenu = ({ id }: { id: number }) => {
+
+  const { ref: observeRef, inView } = useInView({
+    threshold: 0.5
+  })
+
+  useEffect(() => {
+    if (!inView) return
+    console.log(id)
+  }, [inView])
 
   const Categories = [
-    // { title: "Groceries", img: "family", quantity: "0" },
     { title: "Groceries", img: FamilyIcon, quantity: "0" },
     { title: "Groceries", img: FamilyIcon, quantity: "0" },
     { title: "Groceries", img: FamilyIcon, quantity: "0" },
@@ -20,8 +44,8 @@ export const CategoryMenu = () => {
   ]
 
 
-  return <CategoryLayout>
-    <div className="balance-graf">
+  return <CategoryLayout ref={observeRef}>
+    <div className="balance-graph">
       <Doughnut {...DoughnutProps} />
       <div className="balance">
         <div className="type">Expenses</div>
@@ -58,7 +82,7 @@ const CategoryLayout = styled.div`
   width: max-content;
   flex: 0 0 100%;
 
-  .balance-graf {
+  .balance-graph {
     position: relative;
     grid-row: 2/4;
     grid-column: 2/4;

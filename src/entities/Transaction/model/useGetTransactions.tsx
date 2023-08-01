@@ -1,9 +1,9 @@
-type Transcategories = "Health" | "Family" | "Gifts"
+export type TransCategories = "Health" | "Family" | "Gifts"
 
 
 interface ITransaction {
   id: number
-  category: Transcategories
+  category: TransCategories
   date: Date
   quantity: number
 
