@@ -25,7 +25,7 @@ const ToastShowZone = styled.div`
   overflow: hidden;
   width: 100vw;
   z-index: 5;
-
+  pointer-events: none;
 `
 const ToastLayout = styled.div<{
   $isShown?: boolean

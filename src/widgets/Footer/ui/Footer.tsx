@@ -51,6 +51,9 @@ export const Footer = () => {
   )
 }
 const FooterLayout = styled.footer`
+  z-index: 1;
+  box-shadow: 0 1px 5px 0 var(--shadow-1);
+  //border-top: var(--shadow-1) 1px solid;
   background-color: var(--bg-1);
   display: flex;
   align-items: center;
