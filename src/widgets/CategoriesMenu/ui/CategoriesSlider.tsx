@@ -33,8 +33,8 @@ const CategoriesLayout = styled.main`
   width: 100%;
   position: relative;
   display: flex;
-
   scroll-snap-stop: always;
+
   overflow-x: auto;
   scroll-snap-type: x mandatory;
 `

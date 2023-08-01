@@ -45,6 +45,7 @@ export const CategoryMenu = () => {
   </CategoryLayout>
 }
 const CategoryLayout = styled.div`
+  scroll-snap-stop: always;
   scroll-snap-align: center;
   padding: 40px 15px 15px;
   overflow-y: auto;
