@@ -5,9 +5,12 @@ import { Doughnut } from "react-chartjs-2"
 import { DoughnutProps } from "@widgets/CategoriesMenu/constants/DoughnutConfig.ts"
 import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 import { useInView } from "react-intersection-observer"
+import { useGetTransByMenu } from "@entities/Transaction/model/useGetTransByMenu.tsx"
 
 
 export const CategoriesSlider = () => {
+
+  useGetTransByMenu()
 
 
   const ref = useRef<HTMLDivElement>(null)
@@ -20,13 +23,13 @@ export const CategoriesSlider = () => {
   }, [ref])
 
 
-  return <CategoriesLayout ref={ref}>
-    <CategoryMenu id={1} />
-    <CategoryMenu id={2} />
-    <CategoryMenu id={3} />
-    <CategoryMenu id={4} />
-    <CategoryMenu id={5} />
+  const transactionMenusData = useGetTransByMenu()
 
+
+  return <CategoriesLayout ref={ref}>
+    {transactionMenusData.map((menuData) => (
+      <CategoryMenu key={menuData.menuId} {...menuData} />
+    ))}
   </CategoriesLayout>
 }
 const CategoriesLayout = styled.main`

@@ -1,47 +1,62 @@
 import { Doughnut } from "react-chartjs-2"
 import { DoughnutProps } from "@widgets/CategoriesMenu/constants/DoughnutConfig.ts"
-import React, { useEffect } from "react"
+import React, { FC, useEffect } from "react"
 import styled from "styled-components"
 import FamilyIcon from "@shared/assets/LightTheme/family.png"
-import { TransCategories } from "@entities/Transaction/model/useGetTransactions.tsx"
+import { ITransaction, TransCategories } from "@entities/Transaction/model/useGetTransactions.tsx"
 import { useInView } from "react-intersection-observer"
+import { CategoriesSlider } from "@widgets/CategoriesMenu/ui/CategoriesSlider.tsx"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { setDate, setIndex } from "@entities/Categories/model/CategoriesSlice.ts"
 
 
 interface category {
-  title: TransCategories,
+  name: TransCategories,
   img: string,
-  quantity: number
 }
 
-interface CategoryMenuData {
+export type TimeDirectionType = "backwards" | "forwards" | "initial"
 
-  timeStart: Date
-  timeEnd: Date
+export interface props {
+  menuId: number
+  // timeDirection: TimeDirectionType
+  dateFrom: Date
+  dateTo: Date
   dateGap: string
-  categories: category[]
+  transactions: ITransaction[]
 }
 
-export const CategoryMenu = ({ id }: { id: number }) => {
+export const CategoryMenu: FC<props> = ({ dateFrom, dateTo, menuId, dateGap, transactions }) => {
+  const dispatch = useAppDispatch()
+
+  // const index = useTypedSelector(state => state.Categories.index)
+
 
   const { ref: observeRef, inView } = useInView({
-    threshold: 0.5
+    threshold: 0.999
   })
 
   useEffect(() => {
     if (!inView) return
-    console.log(id)
+    dispatch(setDate(dateGap))
+    dispatch(setIndex(menuId))
   }, [inView])
 
-  const Categories = [
-    { title: "Groceries", img: FamilyIcon, quantity: "0" },
-    { title: "Groceries", img: FamilyIcon, quantity: "0" },
-    { title: "Groceries", img: FamilyIcon, quantity: "0" },
-    { title: "Groceries", img: FamilyIcon, quantity: "0" },
-    { title: "Groceries", img: FamilyIcon, quantity: "0" },
-    { title: "Groceries", img: FamilyIcon, quantity: "0" },
-    { title: "Groceries", img: FamilyIcon, quantity: "0" },
-    { title: "Groceries", img: FamilyIcon, quantity: "0" }
+
+  const categories: category[] = [
+    { name: "Family", img: FamilyIcon },
+    { name: "Health", img: FamilyIcon },
+    { name: "Gifts", img: FamilyIcon }
   ]
+
+  const filledCategories = categories.map(({ name, img }) => {
+    const categoryQuantity = transactions
+      .filter(({ category }) => category === name)
+      .reduce((accum, cur) => accum + cur.quantity, 0)
+    return {
+      name, img, quantity: categoryQuantity
+    }
+  })
 
 
   return <CategoryLayout ref={observeRef}>
@@ -53,10 +68,10 @@ export const CategoryMenu = ({ id }: { id: number }) => {
         <div className="sub income">Br <span>0</span></div>
       </div>
     </div>
-    {Categories.map(({ quantity, title, img }, i) => (
+    {filledCategories.map(({ quantity, name, img }, i) => (
       <div key={i} className="category">
         <h3 className="title">
-          {title}
+          {name}
         </h3>
         <div className="icon">
           <img src={img} alt="category icon" />

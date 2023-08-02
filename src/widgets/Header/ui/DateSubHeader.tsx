@@ -1,13 +1,16 @@
 import styled from "styled-components"
 import Categories from "@shared/assets/LightTheme/categories.png"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 export const DateSubHeader = () => {
+  const dateGap = useTypedSelector(state => state.Categories.dateGap)
+
   return (
     <SubHeaderLayout>
       <div className="arrow-left">{"<"}</div>
       <div className="date">
         <img src={Categories} alt="days" />
-        <span>9-15 July 2023</span>
+        <span>{dateGap}</span>
       </div>
       <div className="arrow-right">{">"}</div>
     </SubHeaderLayout>

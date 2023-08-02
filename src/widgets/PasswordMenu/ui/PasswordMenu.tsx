@@ -13,7 +13,7 @@ import * as yup from "yup"
 import { ConvertURLtoFile } from "@shared/helpers/ConvertURLtoFile.ts"
 import styled from "styled-components"
 import { GetMe, useChangePasswordMutation } from "@entities/User/api/UserApi.ts"
-import { HashData } from "@shared/helpers/hashData.ts"
+import { HashData } from "@shared/helpers/HashData.ts"
 
 
 interface FormFields {

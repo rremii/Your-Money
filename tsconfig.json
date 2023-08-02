@@ -36,7 +36,7 @@
     //    "@typescript-eslint/no-unsafe-return": false,
     //    "@typescript-eslint/no-unsafe-assignment": false,
     "noUnusedLocals": false,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true
   },
