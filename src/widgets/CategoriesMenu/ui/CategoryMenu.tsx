@@ -7,7 +7,7 @@ import { ITransaction, TransCategories } from "@entities/Transaction/model/useGe
 import { useInView } from "react-intersection-observer"
 import { CategoriesSlider } from "@widgets/CategoriesMenu/ui/CategoriesSlider.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setDate, setIndex } from "@entities/Categories/model/CategoriesSlice.ts"
+import { setDate, setIndex } from "@entities/Transaction/model/TransactionSlice.ts"
 
 
 interface category {
@@ -15,25 +15,27 @@ interface category {
   img: string,
 }
 
-export type TimeDirectionType = "backwards" | "forwards" | "initial"
+// export type TimeDirectionType = "backwards" | "forwards" | "initial"
 
 export interface props {
   menuId: number
-  // timeDirection: TimeDirectionType
-  dateFrom: Date
-  dateTo: Date
   dateGap: string
   transactions: ITransaction[]
 }
 
-export const CategoryMenu: FC<props> = ({ dateFrom, dateTo, menuId, dateGap, transactions }) => {
-  const dispatch = useAppDispatch()
+const categories: category[] = [
+  { name: "Family", img: FamilyIcon },
+  { name: "Health", img: FamilyIcon },
+  { name: "Gifts", img: FamilyIcon }
+]
 
-  // const index = useTypedSelector(state => state.Categories.index)
+
+export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactions }) => {
+  const dispatch = useAppDispatch()
 
 
   const { ref: observeRef, inView } = useInView({
-    threshold: 0.999
+    threshold: 0.5
   })
 
   useEffect(() => {
@@ -42,12 +44,6 @@ export const CategoryMenu: FC<props> = ({ dateFrom, dateTo, menuId, dateGap, tra
     dispatch(setIndex(menuId))
   }, [inView])
 
-
-  const categories: category[] = [
-    { name: "Family", img: FamilyIcon },
-    { name: "Health", img: FamilyIcon },
-    { name: "Gifts", img: FamilyIcon }
-  ]
 
   const filledCategories = categories.map(({ name, img }) => {
     const categoryQuantity = transactions
@@ -82,7 +78,7 @@ export const CategoryMenu: FC<props> = ({ dateFrom, dateTo, menuId, dateGap, tra
       </div>
     ))}
   </CategoryLayout>
-}
+})
 const CategoryLayout = styled.div`
   scroll-snap-stop: always;
   scroll-snap-align: center;

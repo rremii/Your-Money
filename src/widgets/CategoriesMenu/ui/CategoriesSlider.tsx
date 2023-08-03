@@ -6,12 +6,13 @@ import { DoughnutProps } from "@widgets/CategoriesMenu/constants/DoughnutConfig.
 import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 import { useInView } from "react-intersection-observer"
 import { useGetTransByMenu } from "@entities/Transaction/model/useGetTransByMenu.tsx"
+import useDebounce from "@shared/hooks/useDebounce.tsx"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { shiftTransMenuIdsLeft, shiftTransMenuIdsRight } from "@entities/Transaction/model/TransactionSlice.ts"
 
-
+//TODO крч делаешь что бы добовляла несколько штук когда к границам подходишь чекаешь через скрол и инер видс,так даешь штук 20 , получается когда к ним будешь подходить ничего не будет перерендероваться а ток у границы единажды
 export const CategoriesSlider = () => {
-
-  useGetTransByMenu()
-
+  const dispatch = useAppDispatch()
 
   const ref = useRef<HTMLDivElement>(null)
 
@@ -21,12 +22,36 @@ export const CategoriesSlider = () => {
 
     ref.current.scrollTo(sliderWidth / 2, 0)
   }, [ref])
+  // useEffect(() => {
+  //   if (!ref || !ref.current) return
+  //   const sliderWidth = ref.current.scrollWidth
+  //   const sliderWidth = ref.current.w
+  // debugger
+  // }, [ref])
+
+
+  const OnScroll = () => {
+    if (!ref || !ref.current) return
+    const scrollWidth = ref.current.scrollWidth
+    const width = ref.current.clientWidth
+    const curScroll = ref.current.scrollLeft
+
+    const scrollDif = (scrollWidth - curScroll)
+    if (scrollDif < width * 3) {
+      console.log("qwe")
+      dispatch(shiftTransMenuIdsRight())
+    }
+
+
+  }
+
+  const deboncedOnScroll = useDebounce(OnScroll, 100)
 
 
   const transactionMenusData = useGetTransByMenu()
 
 
-  return <CategoriesLayout ref={ref}>
+  return <CategoriesLayout onScroll={deboncedOnScroll} ref={ref}>
     {transactionMenusData.map((menuData) => (
       <CategoryMenu key={menuData.menuId} {...menuData} />
     ))}

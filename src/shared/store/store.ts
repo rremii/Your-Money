@@ -3,13 +3,13 @@ import { Api } from "../api/config/Api"
 import { SideBarReducer } from "@entities/SideBar"
 import { AuthReducer } from "@entities/Auth/model/AuthSlice.ts"
 import { ToastReducer } from "@shared/store/globalSlices/ToastSlice.ts"
-import { CategoriesReducer } from "@entities/Categories/model/CategoriesSlice.ts"
+import { TransactionReducer } from "@entities/Transaction/model/TransactionSlice.ts"
 
 const rootReducer = combineReducers({
   SideBar: SideBarReducer,
   Auth: AuthReducer,
   Toast: ToastReducer,
-  Categories: CategoriesReducer,
+  Transactions: TransactionReducer,
   [Api.reducerPath]: Api.reducer
 })
 

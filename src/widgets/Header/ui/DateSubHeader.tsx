@@ -3,7 +3,7 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 export const DateSubHeader = () => {
-  const dateGap = useTypedSelector(state => state.Categories.dateGap)
+  const dateGap = useTypedSelector(state => state.Transactions.dateGap)
 
   return (
     <SubHeaderLayout>
