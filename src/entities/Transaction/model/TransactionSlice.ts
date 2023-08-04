@@ -33,6 +33,11 @@ const TransactionSlice = createSlice({
       state.transMenuIds = newIds
     },
     shiftTransMenuIdsLeft(state) {
+      const transMenuIds = state.transMenuIds
+      const index = transMenuIds[0]
+      const newIds = [index - 2, index - 1, ...transMenuIds.slice(0, transMenuIds.length - 2)]
+      // debugger
+      state.transMenuIds = newIds
 
     }
   }

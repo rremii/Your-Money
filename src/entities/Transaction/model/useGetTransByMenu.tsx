@@ -1,6 +1,5 @@
 import { ITransaction, useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
 import TimeGap, { DayType } from "@shared/helpers/TimeGap.ts"
-import { TimeDirectionType } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useEffect, useState } from "react"
 
@@ -47,6 +46,7 @@ const GetTransMenuData = (allTransactions: ITransaction[], filter: DateFiler, me
 export const useGetTransByMenu = () => {
   const transMenuIds = useTypedSelector(state => state.Transactions.transMenuIds)
 
+  console.log(transMenuIds)
 
   const { transactions: allTransactions } = useGetTransactions()
   // const [transMenuIds, setMenuIds] = useState([-4, -3, -2, -1, 0, 1, 2, 3, 4])
