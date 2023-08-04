@@ -49,13 +49,13 @@ export const CategoriesSlider = () => {
 
   }
 
-  const deboncedOnScroll = useDebounce(OnScroll, 100)
+  // const deboncedOnScroll = useDebounce(OnScroll, 50)
 
 
   const transactionMenusData = useGetTransByMenu()
 
 
-  return <CategoriesLayout onScroll={deboncedOnScroll} ref={ref}>
+  return <CategoriesLayout ref={ref}>
     {transactionMenusData.map((menuData) => (
       <CategoryMenu key={menuData.menuId} {...menuData} />
     ))}
