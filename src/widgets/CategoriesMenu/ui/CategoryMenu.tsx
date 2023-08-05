@@ -36,7 +36,7 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
 
 
   const [observeRef, inView, entry] = useInView({
-    threshold: 0.999,
+    threshold: 0.99,
     triggerOnce: true
     // delay: 500
   })
@@ -54,7 +54,7 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
     if (!scrollWidth || !width || !curScroll) return
 
     const qwe = scrollWidth - curScroll
-    if (qwe < width * 3 && qwe > 460) {
+    if (qwe < width * 3 && qwe > 440) {
       console.log("qwe")
       dispatch(shiftTransMenuIdsRight())
     }

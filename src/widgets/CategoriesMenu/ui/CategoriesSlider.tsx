@@ -36,7 +36,7 @@ export const CategoriesSlider = () => {
     const width = ref.current.clientWidth
     const curScroll = ref.current.scrollLeft
 
-    if (scrollWidth - curScroll < width * 3) {
+    if (scrollWidth - curScroll < width) {
       console.log("qwe")
       dispatch(shiftTransMenuIdsRight())
     }
@@ -49,7 +49,7 @@ export const CategoriesSlider = () => {
 
   }
 
-  // const deboncedOnScroll = useDebounce(OnScroll, 50)
+  // const deboncedOnScroll = useDebounce(OnScroll, 75)
 
 
   const transactionMenusData = useGetTransByMenu()
