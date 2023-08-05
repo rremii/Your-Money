@@ -28,14 +28,14 @@ const TransactionSlice = createSlice({
     shiftTransMenuIdsRight(state) {
       const transMenuIds = state.transMenuIds
       const index = transMenuIds[transMenuIds.length - 1]
-      const newIds = [...transMenuIds.slice(1, transMenuIds.length - 1), index + 1, index + 2]
+      const newIds = [...transMenuIds.slice(2, transMenuIds.length - 1), index + 1, index + 2, index + 3]
       // debugger
       state.transMenuIds = newIds
     },
     shiftTransMenuIdsLeft(state) {
       const transMenuIds = state.transMenuIds
       const index = transMenuIds[0]
-      const newIds = [index - 2, index - 1, ...transMenuIds.slice(0, transMenuIds.length - 2)]
+      const newIds = [index - 3, index - 2, index - 1, ...transMenuIds.slice(0, transMenuIds.length - 3)]
       // debugger
       state.transMenuIds = newIds
 
