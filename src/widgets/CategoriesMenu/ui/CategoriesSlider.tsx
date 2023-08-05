@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import FamilyIcon from "@shared/assets/LightTheme/family.png"
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Doughnut } from "react-chartjs-2"
 import { DoughnutProps } from "@widgets/CategoriesMenu/constants/DoughnutConfig.ts"
 import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
@@ -9,8 +9,10 @@ import { useGetTransByMenu } from "@entities/Transaction/model/useGetTransByMenu
 import useDebounce from "@shared/hooks/useDebounce.tsx"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { shiftTransMenuIdsLeft, shiftTransMenuIdsRight } from "@entities/Transaction/model/TransactionSlice.ts"
+import { flatten } from "@reduxjs/toolkit/dist/query/utils"
+import { useTimer } from "@shared/hooks/useTimer.tsx"
+import { callback } from "chart.js/helpers"
 
-//TODO крч делаешь что бы добовляла несколько штук когда к границам подходишь чекаешь через скрол и инер видс,так даешь штук 20 , получается когда к ним будешь подходить ничего не будет перерендероваться а ток у границы единажды
 export const CategoriesSlider = () => {
   const dispatch = useAppDispatch()
 
@@ -22,12 +24,6 @@ export const CategoriesSlider = () => {
 
     ref.current.scrollTo(sliderWidth / 2, 0)
   }, [ref])
-  // useEffect(() => {
-  //   if (!ref || !ref.current) return
-  //   const sliderWidth = ref.current.scrollWidth
-  //   const sliderWidth = ref.current.w
-  // debugger
-  // }, [ref])
 
 
   const OnScroll = () => {
@@ -43,9 +39,10 @@ export const CategoriesSlider = () => {
     if (first || second) {
       console.log("qwe")
       dispatch(shiftTransMenuIdsRight())
+      // setAllowShift(false)
     }
 
-    if (curScroll < width * 2 + 10) {
+    if (curScroll < width * 2) {
       console.log("qwe")
       dispatch(shiftTransMenuIdsLeft())
     }
@@ -53,11 +50,10 @@ export const CategoriesSlider = () => {
 
   }
 
-  // const deboncedOnScroll = useDebounce(OnScroll, 75)
-
 
   const transactionMenusData = useGetTransByMenu()
 
+  console.log(transactionMenusData)
 
   return <CategoriesLayout onScroll={OnScroll} ref={ref}>
     {transactionMenusData.map((menuData) => (
