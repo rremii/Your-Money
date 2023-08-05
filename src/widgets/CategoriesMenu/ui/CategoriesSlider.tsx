@@ -42,7 +42,7 @@ export const CategoriesSlider = () => {
       // setAllowShift(false)
     }
 
-    if (curScroll === width * 0 || curScroll === width * 1) {
+    if (curScroll === width * 0) {
       console.log("qwe")
       dispatch(shiftTransMenuIdsLeft())
     }
