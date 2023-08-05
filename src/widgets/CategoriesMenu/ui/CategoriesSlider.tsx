@@ -35,8 +35,8 @@ export const CategoriesSlider = () => {
     const scrollWidth = ref.current.scrollWidth
     const width = ref.current.clientWidth
     const curScroll = ref.current.scrollLeft
-
-    if (scrollWidth - curScroll < width) {
+    const scrollDif = scrollWidth - curScroll
+    if (scrollDif < width * 2) {
       console.log("qwe")
       dispatch(shiftTransMenuIdsRight())
     }
@@ -55,7 +55,7 @@ export const CategoriesSlider = () => {
   const transactionMenusData = useGetTransByMenu()
 
 
-  return <CategoriesLayout ref={ref}>
+  return <CategoriesLayout onScroll={OnScroll} ref={ref}>
     {transactionMenusData.map((menuData) => (
       <CategoryMenu key={menuData.menuId} {...menuData} />
     ))}

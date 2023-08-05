@@ -36,8 +36,8 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
 
 
   const [observeRef, inView, entry] = useInView({
-    threshold: 0.99,
-    triggerOnce: true
+    threshold: 0
+    // triggerOnce: true
     // delay: 500
   })
 
@@ -48,16 +48,18 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
     dispatch(setDate(dateGap))
     dispatch(setIndex(menuId))
 
-    const scrollWidth = entry?.target.parentElement?.scrollWidth
-    const width = entry?.target.parentElement?.clientWidth
-    const curScroll = entry?.target.parentElement?.scrollLeft
-    if (!scrollWidth || !width || !curScroll) return
-
-    const qwe = scrollWidth - curScroll
-    if (qwe < width * 3 && qwe > 440) {
-      console.log("qwe")
-      dispatch(shiftTransMenuIdsRight())
-    }
+    // const scrollWidth = entry?.target.parentElement?.scrollWidth
+    // const width = entry?.target.parentElement?.clientWidth
+    // const curScroll = entry?.target.parentElement?.scrollLeft
+    // // debugger
+    // if (!scrollWidth || !width || !curScroll) return
+    //
+    // const qwe = scrollWidth - curScroll
+    // if (qwe < width * 3 && qwe > 440) {
+    //
+    //   console.log("qwe")
+    //   dispatch(shiftTransMenuIdsRight())
+    // }
 
   }, [inView])
 
