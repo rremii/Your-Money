@@ -51,7 +51,6 @@ export const CategoriesSlider = () => {
 
   const transactionMenusData = useGetTransByMenu()
 
-  console.log(transactionMenusData)
 
   return <CategoriesLayout onScroll={OnScroll} ref={ref}>
     {transactionMenusData.map((menuData) => (

@@ -45,6 +45,7 @@ const GetTransMenuData = (allTransactions: ITransaction[], filter: DateFiler, me
 
 export const useGetTransByMenu = () => {
   const transMenuIds = useTypedSelector(state => state.Transactions.transMenuIds)
+  console.log(transMenuIds)
 
 
   const { transactions: allTransactions } = useGetTransactions()
