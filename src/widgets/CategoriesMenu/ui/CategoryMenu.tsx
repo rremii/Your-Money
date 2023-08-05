@@ -36,7 +36,7 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
 
 
   const [observeRef, inView, entry] = useInView({
-    threshold: 0
+    threshold: 0.5
     // triggerOnce: true
     // delay: 500
   })

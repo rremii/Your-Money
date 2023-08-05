@@ -12,7 +12,7 @@ const initialState = {
   index: 0,
   dateFilter: "week",
   dateGap: "",
-  transMenuIds: [-4, -3, -2, -1, 0, 1, 2, 3, 4]
+  transMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
 } as initialState
 
 const TransactionSlice = createSlice({
