@@ -31,19 +31,16 @@ export const CategoriesSlider = () => {
     const scrollWidth = ref.current.scrollWidth
     const width = ref.current.clientWidth
     const curScroll = ref.current.scrollLeft
-    const scrollDif = scrollWidth - curScroll
+    const scrollDif = scrollWidth - curScroll - width
 
 
-    const first = scrollDif < width * 3 + 3 && scrollDif < width * 3 - 3
-    const second = scrollDif < width * 2 + 3 && scrollDif < width * 2 - 3
-    if (first || second) {
+    if (scrollDif > 10) {
       console.log("qwe")
       dispatch(shiftTransMenuIdsRight())
       ref.current.scrollTo(scrollWidth / 2, 0)
-      // setAllowShift(false)
     }
 
-    if (curScroll < 5) {
+    if (curScroll < 10) {
       console.log("qwe")
       dispatch(shiftTransMenuIdsLeft())
 
