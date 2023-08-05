@@ -35,14 +35,12 @@ export const CategoriesSlider = () => {
 
 
     if (scrollDif === 0) {
-      console.log("qwe")
-      dispatch(shiftTransMenuIdsRight())
-      ref.current.scrollTo(scrollWidth - width, 0)
+      dispatch(shiftTransMenuIdsRight({ shiftAmount: 2 }))
+      ref.current.scrollBy(width * 2, 0)
     }
 
     if (curScroll === 0) {
-      console.log("qwe")
-      dispatch(shiftTransMenuIdsLeft())
+      dispatch(shiftTransMenuIdsLeft({ shiftAmount: 2 }))
       ref.current.scrollTo(0, 0)
     }
 
@@ -53,7 +51,7 @@ export const CategoriesSlider = () => {
   const transactionMenusData = useGetTransByMenu()
 
 
-  return <CategoriesLayout onScroll={OnScroll} ref={ref}>
+  return <CategoriesLayout className="slider" onScroll={OnScroll} ref={ref}>
     {transactionMenusData.map((menuData) => (
       <CategoryMenu key={menuData.menuId} {...menuData} />
     ))}

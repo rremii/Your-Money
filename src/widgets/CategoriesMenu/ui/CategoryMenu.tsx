@@ -5,18 +5,14 @@ import styled from "styled-components"
 import FamilyIcon from "@shared/assets/LightTheme/family.png"
 import { ITransaction, TransCategories } from "@entities/Transaction/model/useGetTransactions.tsx"
 import { useInView } from "react-intersection-observer"
-import { CategoriesSlider } from "@widgets/CategoriesMenu/ui/CategoriesSlider.tsx"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setDate, setIndex, shiftTransMenuIdsRight } from "@entities/Transaction/model/TransactionSlice.ts"
-import { useTimer } from "@shared/hooks/useTimer.tsx"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { setDate, setIndex } from "@entities/Transaction/model/TransactionSlice.ts"
 
 
 interface category {
   name: TransCategories,
   img: string,
 }
-
-// export type TimeDirectionType = "backwards" | "forwards" | "initial"
 
 export interface props {
   menuId: number
@@ -35,32 +31,15 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
   const dispatch = useAppDispatch()
 
 
-  const [observeRef, inView, entry] = useInView({
+  const [observeRef, inView] = useInView({
     threshold: 0.5
-    // triggerOnce: true
-    // delay: 500
   })
 
-  // const { Reset, Start, timerState } = useTimer({ finalTime: 0.5, timeGap: 0.5 })
 
   useEffect(() => {
     if (!inView) return
     dispatch(setDate(dateGap))
     dispatch(setIndex(menuId))
-
-    // const scrollWidth = entry?.target.parentElement?.scrollWidth
-    // const width = entry?.target.parentElement?.clientWidth
-    // const curScroll = entry?.target.parentElement?.scrollLeft
-    // // debugger
-    // if (!scrollWidth || !width || !curScroll) return
-    //
-    // const qwe = scrollWidth - curScroll
-    // if (qwe < width * 3 && qwe > 440) {
-    //
-    //   console.log("qwe")
-    //   dispatch(shiftTransMenuIdsRight())
-    // }
-
   }, [inView])
 
 

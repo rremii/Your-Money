@@ -25,19 +25,32 @@ const TransactionSlice = createSlice({
     setDate(state, action: PayloadAction<string>) {
       state.dateGap = action.payload
     },
-    shiftTransMenuIdsRight(state) {
+    shiftTransMenuIdsRight(state, action: PayloadAction<{ shiftAmount: number }>) {
+      const { shiftAmount } = action.payload
       const transMenuIds = state.transMenuIds
       const index = transMenuIds[transMenuIds.length - 1]
-      const newIds = [...transMenuIds.slice(2, transMenuIds.length), index + 1, index + 2]
-      // debugger
-      state.transMenuIds = newIds
+
+      const newIds: number[] = []
+
+      for (let i = 1; i <= shiftAmount; i++) {
+        newIds.push(index + i)
+      }
+
+
+      state.transMenuIds = [...transMenuIds.slice(shiftAmount, transMenuIds.length), ...newIds]
     },
-    shiftTransMenuIdsLeft(state) {
+    shiftTransMenuIdsLeft(state, action: PayloadAction<{ shiftAmount: number }>) {
+      const { shiftAmount } = action.payload
       const transMenuIds = state.transMenuIds
       const index = transMenuIds[0]
-      const newIds = [index - 2, index - 1, ...transMenuIds.slice(0, transMenuIds.length - 2)]
-      // debugger
-      state.transMenuIds = newIds
+
+      const newIds: number[] = []
+
+      for (let i = shiftAmount; i > 0; i--) {
+        newIds.push(index - i)
+      }
+
+      state.transMenuIds = [...newIds, ...transMenuIds.slice(0, transMenuIds.length - shiftAmount)]
 
     }
   }

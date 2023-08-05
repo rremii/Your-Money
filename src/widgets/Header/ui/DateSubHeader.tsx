@@ -1,18 +1,40 @@
 import styled from "styled-components"
 import Categories from "@shared/assets/LightTheme/categories.png"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { shiftTransMenuIdsRight } from "@entities/Transaction/model/TransactionSlice.ts"
 
 export const DateSubHeader = () => {
+  const dispatch = useAppDispatch()
+
   const dateGap = useTypedSelector(state => state.Transactions.dateGap)
+
+
+  const ShiftDateRight = () => {
+    dispatch(shiftTransMenuIdsRight({ shiftAmount: 1 }))
+    const slider = document.querySelector(".slider")
+    if (!slider) return
+
+    const width = slider.clientWidth
+
+    slider.scrollBy(width, 0)
+  }
+
+  const ShiftDateLeft = () => {
+    dispatch(shiftTransMenuIdsRight({ shiftAmount: 1 }))
+    const slider = document.querySelector(".slider")
+    if (!slider) return
+
+    slider.scrollTo(0, 0)
+  }
 
   return (
     <SubHeaderLayout>
-      <div className="arrow-left">{"<"}</div>
+      <div onClick={ShiftDateLeft} className="arrow-left">{"<"}</div>
       <div className="date">
         <img src={Categories} alt="days" />
         <span>{dateGap}</span>
       </div>
-      <div className="arrow-right">{">"}</div>
+      <div onClick={ShiftDateRight} className="arrow-right">{">"}</div>
     </SubHeaderLayout>
   )
 }
