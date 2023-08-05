@@ -37,12 +37,13 @@ export const CategoriesSlider = () => {
     if (scrollDif === 0) {
       console.log("qwe")
       dispatch(shiftTransMenuIdsRight())
-      // ref.current.scrollTo(scrollWidth / 2, 0)
+      ref.current.scrollTo(scrollWidth - width, 0)
     }
 
     if (curScroll === 0) {
       console.log("qwe")
       dispatch(shiftTransMenuIdsLeft())
+      ref.current.scrollTo(0, 0)
     }
 
 
