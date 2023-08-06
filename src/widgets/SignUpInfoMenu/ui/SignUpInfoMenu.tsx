@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import React from "react"
-import { SignUpPasswordForm } from "@entities/Auth/ui/SignUpPasswordForm.tsx"
 import { SignUpInfoForm } from "@entities/Auth/ui/SignUpInfoForm.tsx"
 
 export const SignUpInfoMenu = () => {

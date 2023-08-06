@@ -1,5 +1,5 @@
 import { Api } from "@shared/api/config/Api"
-import { AuthResponse, DefaultResponse, LoginDto, RegisterDto } from "@entities/Auth/types"
+import { AuthResponse, DefaultResponse, LoginDto } from "@entities/Auth/types"
 
 export const AuthApi = Api.injectEndpoints({
 

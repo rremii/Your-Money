@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { clearMessage, hideToast, showToast } from "@shared/store/globalSlices/ToastSlice.ts"
-import { useTimer } from "@shared/hooks/useTimer.tsx"
 
 //todo switch toast to react context
 export const useToast = (duration: number, delay?: number) => {

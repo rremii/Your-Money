@@ -1,7 +1,6 @@
 import { ITransaction, useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
 import TimeGap, { DayType } from "@shared/helpers/TimeGap.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { useEffect, useState } from "react"
 
 export type DateFiler = "day" | "week" | "month" | "year"
 

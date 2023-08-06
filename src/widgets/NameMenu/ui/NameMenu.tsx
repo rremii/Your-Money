@@ -1,7 +1,5 @@
 import { SideBarModal } from "@shared/ui/SideBarModal.tsx"
 import React from "react"
-import { setIsSideBar } from "@entities/SideBar"
-import { setAuthInitial, setAuthSuccess } from "@entities/Auth/model/AuthSlice.ts"
 import { closeAllMenus } from "@entities/SideBar/model/SideBarSlice.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { FormField } from "@shared/ui/FormField.tsx"
@@ -11,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { useTimer } from "@shared/hooks/useTimer.tsx"
 import * as yup from "yup"
 import styled from "styled-components"
-import { GetMe, useChangeNameMutation, useGetMeQuery } from "@entities/User/api/UserApi.ts"
+import { GetMe, useChangeNameMutation } from "@entities/User/api/UserApi.ts"
 
 
 interface FormFields {

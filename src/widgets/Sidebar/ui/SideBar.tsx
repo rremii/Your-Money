@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import React from "react"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setIsSideBar } from "@entities/SideBar"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { SideBarSection } from "@shared/ui/SideBarSection.tsx"
 import { SideBarHeader } from "@widgets/Sidebar/ui/SideBarHeader.tsx"
 import { Separator } from "@shared/ui/Separator.tsx"
@@ -16,7 +15,6 @@ import { ChangeCurrency } from "@features/ChangeCurrency"
 import { ChangeCurrencyFormat } from "@features/ChangeCurrencyFormat"
 import { ChangeFirstDayWeek } from "@features/ChangeFirstDayWeek"
 import { ChangeStartScreen } from "@features/ChangeStartScreen"
-import { useGetMeQuery } from "@entities/User/api/UserApi.ts"
 
 export const SideBar = () => {
 

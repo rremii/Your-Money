@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import { AuthHeader } from "@widgets/AuthHeader"
 import React from "react"
-import { SignUpPasswordMenu } from "@widgets/SignUpPasswordMenu/ui/SignUpPasswordMenu.tsx"
 import { SignUpInfoMenu } from "@widgets/SignUpInfoMenu/ui/SignUpInfoMenu.tsx"
 
 const SignUpPassword = () => {

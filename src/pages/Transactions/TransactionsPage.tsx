@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Header } from "@widgets/Header"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { DateSubHeader } from "@widgets/Header/ui/DateSubHeader.tsx"
-import { useEffect, useState } from "react"
+import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
 
 const TransactionsPage = () => {
 
@@ -13,7 +13,7 @@ const TransactionsPage = () => {
         SubHeader={<DateSubHeader />}
         right={<img src={Categories} alt="" />}
       />
-      <main>transactions</main>
+      <TransactionsMenu />
     </TransactionsLayout>
   )
 }
@@ -22,7 +22,7 @@ const TransactionsLayout = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  
+
   flex-direction: column;
   //max-width: 450px;
   position: relative;

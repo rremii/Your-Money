@@ -11,7 +11,6 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useRegisterMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useTimer } from "@shared/hooks/useTimer.tsx"
 import { ConvertURLtoFile } from "@shared/helpers/ConvertURLtoFile.ts"
-import { addAbortSignalListener } from "@reduxjs/toolkit/dist/listenerMiddleware/utils"
 import { setAuthSuccess } from "@entities/Auth/model/AuthSlice.ts"
 
 interface FormFields {

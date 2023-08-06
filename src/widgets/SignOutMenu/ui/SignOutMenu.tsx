@@ -1,4 +1,3 @@
-import styled from "styled-components"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useNavigate } from "react-router-dom"
 import { useSignOutMutation } from "@entities/Auth/api/AuthApi.ts"
@@ -6,7 +5,6 @@ import { setIsSideBar } from "@entities/SideBar"
 import { setAuthInitial } from "@entities/Auth/model/AuthSlice.ts"
 import { closeAllMenus } from "@entities/SideBar/model/SideBarSlice.ts"
 import React from "react"
-import { FormField } from "@shared/ui/FormField.tsx"
 import { SideBarModal } from "@shared/ui/SideBarModal.tsx"
 
 export const SignOutMenu = () => {

@@ -1,7 +1,3 @@
-import { Api } from "@shared/api/config/Api"
-import { ChangeName, ChangePassword, IUserInfo } from "@entities/User/types.ts"
-import { DefaultResponse } from "@entities/Auth/types.ts"
-
 // export const TransactionApi = Api.injectEndpoints({
 
 // endpoints: (build) => ({

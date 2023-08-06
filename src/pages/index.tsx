@@ -6,8 +6,6 @@ import AppLayout from "../app/layout/AppLayout.tsx"
 // const Transactions = lazy(() => import("./Transactions/TransactionsPage.tsx"))
 // const Overview = lazy(() => import("./Overview/OverviewPage.tsx"))
 // const Accounts = lazy(() => import("./Accounts/AccountsPage.tsx"))
-
-
 //todo icons https://habr.com/ru/articles/276249/
 import Categories from "./Categories/CategoriesPage.tsx"
 import Transactions from "./Transactions/TransactionsPage.tsx"
@@ -20,7 +18,6 @@ import SignUpPassword from "./SignUp/SignUpPassword.tsx"
 import Layout from "../app/layout/Layout.tsx"
 import { useAuth } from "@entities/Auth/model/useAuth.ts"
 import SignUpInfo from "./SignUp/SignUpInfo.tsx"
-import { useGetMeQuery } from "@entities/User/api/UserApi.ts"
 import { useToast } from "@shared/hooks/useToast.tsx"
 
 export const Routing = () => {
