@@ -1,10 +1,8 @@
-import { ITransaction, useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
+import { ITransaction } from "@entities/Transaction/model/useGetTransactions.tsx"
 import TimeGap, { DayType } from "@shared/helpers/TimeGap.ts"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { DateFiler } from "@entities/Transaction/model/useGetTransByMenus.tsx"
 
-export type DateFiler = "day" | "week" | "month" | "year"
-
-const GetTransMenuData = (allTransactions: ITransaction[], filter: DateFiler, menuId: number, firstDay?: DayType) => {
+export const GetTransByDate = (allTransactions: ITransaction[], filter: DateFiler, menuId: number, firstDay?: DayType) => {
 
   switch (filter) {
     case "day": {
@@ -37,15 +35,4 @@ const GetTransMenuData = (allTransactions: ITransaction[], filter: DateFiler, me
       }
     }
   }
-}
-
-export const useGetTransByMenu = () => {
-  const transMenuIds = useTypedSelector(state => state.Transactions.transMenuIds)
-
-  const { transactions: allTransactions } = useGetTransactions()
-
-  return transMenuIds.map((menuId) => {
-    return GetTransMenuData(allTransactions, "week", menuId)
-  })
-
 }

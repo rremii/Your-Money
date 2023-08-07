@@ -26,7 +26,7 @@ export const Routing = () => {
   const navigate = useNavigate()
   useEffect(() => {
     // navigate("/sign-up/info")
-    navigate("/categories")
+    navigate("/transactions")
   }, [])
 
 

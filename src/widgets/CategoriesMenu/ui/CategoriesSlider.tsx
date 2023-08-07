@@ -1,9 +1,9 @@
 import styled from "styled-components"
 import React, { useEffect, useRef } from "react"
 import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
-import { useGetTransByMenu } from "@entities/Transaction/model/useGetTransByMenu.tsx"
+import { useGetTransByMenus } from "@entities/Transaction/model/useGetTransByMenus.tsx"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { shiftTransMenuIdsLeft, shiftTransMenuIdsRight } from "@entities/Transaction/model/TransactionSlice.ts"
+import { shiftTransMenuIdsLeft, shiftTransMenuIdsRight } from "@entities/DateSlider/model/DateSliderSlice.ts"
 
 export const CategoriesSlider = () => {
   const dispatch = useAppDispatch()
@@ -40,7 +40,7 @@ export const CategoriesSlider = () => {
   }
 
 
-  const transactionMenusData = useGetTransByMenu()
+  const transactionMenusData = useGetTransByMenus()
 
 
   return <CategoriesLayout className="slider" onScroll={OnScroll} ref={ref}>

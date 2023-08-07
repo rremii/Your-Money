@@ -3,27 +3,30 @@ import { DoughnutProps } from "@widgets/CategoriesMenu/constants/DoughnutConfig.
 import React, { FC, useEffect } from "react"
 import styled from "styled-components"
 import FamilyIcon from "@shared/assets/LightTheme/family.png"
+import HealthIcon from "@shared/assets/LightTheme/health.png"
+import GiftsIcon from "@shared/assets/LightTheme/gifts.png"
 import { ITransaction, TransCategories } from "@entities/Transaction/model/useGetTransactions.tsx"
 import { useInView } from "react-intersection-observer"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { setDate, setIndex } from "@entities/Transaction/model/TransactionSlice.ts"
+import { setDate, setIndex } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { GetCategoriesMenuData } from "@entities/Transaction/helpers/GetCategoriesMenuData.ts"
 
 
-interface category {
+export interface ICategory {
   name: TransCategories,
   img: string,
 }
 
-export interface props {
+interface props {
   menuId: number
   dateGap: string
   transactions: ITransaction[]
 }
 
-const categories: category[] = [
+const categories: ICategory[] = [
   { name: "Family", img: FamilyIcon },
-  { name: "Health", img: FamilyIcon },
-  { name: "Gifts", img: FamilyIcon }
+  { name: "Health", img: HealthIcon },
+  { name: "Gifts", img: GiftsIcon }
 ]
 
 
@@ -43,14 +46,7 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
   }, [inView])
 
 
-  const filledCategories = categories.map(({ name, img }) => {
-    const categoryQuantity = transactions
-      .filter(({ category }) => category === name)
-      .reduce((accum, cur) => accum + cur.quantity, 0)
-    return {
-      name, img, quantity: categoryQuantity
-    }
-  })
+  const filledCategories = GetCategoriesMenuData(categories, transactions)
 
 
   return <CategoryLayout ref={observeRef}>

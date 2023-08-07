@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { shiftTransMenuIdsRight } from "@entities/Transaction/model/TransactionSlice.ts"
+import { shiftTransMenuIdsRight } from "@entities/DateSlider/model/DateSliderSlice.ts"
 
 export const DateSubHeader = () => {
   const dispatch = useAppDispatch()

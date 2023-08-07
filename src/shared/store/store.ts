@@ -3,7 +3,7 @@ import { Api } from "../api/config/Api"
 import { SideBarReducer } from "@entities/SideBar"
 import { AuthReducer } from "@entities/Auth/model/AuthSlice.ts"
 import { ToastReducer } from "@shared/store/globalSlices/ToastSlice.ts"
-import { TransactionReducer } from "@entities/Transaction/model/TransactionSlice.ts"
+import { TransactionReducer } from "@entities/DateSlider/model/DateSliderSlice.ts"
 
 const rootReducer = combineReducers({
   SideBar: SideBarReducer,

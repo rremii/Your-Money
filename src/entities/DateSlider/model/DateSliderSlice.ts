@@ -1,22 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { DateFiler } from "@entities/Transaction/model/useGetTransByMenu.tsx"
+import { DateFiler } from "@entities/Transaction/model/useGetTransByMenus.tsx"
 
 interface initialState {
   index: number
   dateFilter: DateFiler
   dateGap: string
-  transMenuIds: number[]
+  DateMenuIds: number[]
 }
 
 const initialState = {
   index: 0,
   dateFilter: "week",
   dateGap: "",
-  transMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
+  DateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
 } as initialState
 
-const TransactionSlice = createSlice({
-  name: "TransactionSlice",
+const DateSliderSlice = createSlice({
+  name: "DateSliderSlice",
   initialState,
   reducers: {
     setIndex(state, action: PayloadAction<number>) {
@@ -27,7 +27,7 @@ const TransactionSlice = createSlice({
     },
     shiftTransMenuIdsRight(state, action: PayloadAction<{ shiftAmount: number }>) {
       const { shiftAmount } = action.payload
-      const transMenuIds = state.transMenuIds
+      const transMenuIds = state.DateMenuIds
       const index = transMenuIds[transMenuIds.length - 1]
 
       const newIds: number[] = []
@@ -37,11 +37,11 @@ const TransactionSlice = createSlice({
       }
 
 
-      state.transMenuIds = [...transMenuIds.slice(shiftAmount, transMenuIds.length), ...newIds]
+      state.DateMenuIds = [...transMenuIds.slice(shiftAmount, transMenuIds.length), ...newIds]
     },
     shiftTransMenuIdsLeft(state, action: PayloadAction<{ shiftAmount: number }>) {
       const { shiftAmount } = action.payload
-      const transMenuIds = state.transMenuIds
+      const transMenuIds = state.DateMenuIds
       const index = transMenuIds[0]
 
       const newIds: number[] = []
@@ -50,12 +50,12 @@ const TransactionSlice = createSlice({
         newIds.push(index - i)
       }
 
-      state.transMenuIds = [...newIds, ...transMenuIds.slice(0, transMenuIds.length - shiftAmount)]
+      state.DateMenuIds = [...newIds, ...transMenuIds.slice(0, transMenuIds.length - shiftAmount)]
 
     }
   }
 })
 
-export const TransactionReducer = TransactionSlice.reducer
-export const { setIndex, setDate, shiftTransMenuIdsLeft, shiftTransMenuIdsRight } = TransactionSlice.actions
+export const TransactionReducer = DateSliderSlice.reducer
+export const { setIndex, setDate, shiftTransMenuIdsLeft, shiftTransMenuIdsRight } = DateSliderSlice.actions
 
