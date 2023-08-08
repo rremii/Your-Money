@@ -14,7 +14,7 @@ export const useSlider = () => {
     if (!ref || !ref.current) return
     const sliderWidth = ref.current.scrollWidth
 
-    ref.current.scrollTo(sliderWidth / 2 - 450, 0)
+    ref.current.scrollTo(sliderWidth / 2 - 250, 0)
   }, [ref])
 
 

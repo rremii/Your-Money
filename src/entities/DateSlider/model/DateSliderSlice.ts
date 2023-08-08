@@ -5,14 +5,14 @@ interface initialState {
   index: number
   dateFilter: DateFiler
   dateGap: string
-  DateMenuIds: number[]
+  dateMenuIds: number[]
 }
 
 const initialState = {
   index: 0,
   dateFilter: "week",
   dateGap: "",
-  DateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
+  dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
 } as initialState
 
 const DateSliderSlice = createSlice({
@@ -27,7 +27,7 @@ const DateSliderSlice = createSlice({
     },
     shiftTransMenuIdsRight(state, action: PayloadAction<{ shiftAmount: number }>) {
       const { shiftAmount } = action.payload
-      const transMenuIds = state.DateMenuIds
+      const transMenuIds = state.dateMenuIds
       const index = transMenuIds[transMenuIds.length - 1]
 
       const newIds: number[] = []
@@ -37,11 +37,11 @@ const DateSliderSlice = createSlice({
       }
 
 
-      state.DateMenuIds = [...transMenuIds.slice(shiftAmount, transMenuIds.length), ...newIds]
+      state.dateMenuIds = [...transMenuIds.slice(shiftAmount, transMenuIds.length), ...newIds]
     },
     shiftTransMenuIdsLeft(state, action: PayloadAction<{ shiftAmount: number }>) {
       const { shiftAmount } = action.payload
-      const transMenuIds = state.DateMenuIds
+      const transMenuIds = state.dateMenuIds
       const index = transMenuIds[0]
 
       const newIds: number[] = []
@@ -50,7 +50,7 @@ const DateSliderSlice = createSlice({
         newIds.push(index - i)
       }
 
-      state.DateMenuIds = [...newIds, ...transMenuIds.slice(0, transMenuIds.length - shiftAmount)]
+      state.dateMenuIds = [...newIds, ...transMenuIds.slice(0, transMenuIds.length - shiftAmount)]
 
     }
   }

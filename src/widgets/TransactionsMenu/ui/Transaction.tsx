@@ -3,16 +3,17 @@ import Groceries from "@shared/assets/LightTheme/groceries.png"
 import Account from "@shared/assets/LightTheme/accounts.png"
 import React, { FC } from "react"
 import { ITransaction } from "@entities/Transaction/model/useGetTransactions.tsx"
+import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 
 interface props extends ITransaction {
 
 }
 
 export const Transaction: FC<props> = ({ date, id, quantity, category }) => {
-  
+
   return <TransactionLayout>
     <div className="icon">
-      <img src={`src/shared/assets/LightTheme/${category.toLowerCase()}.png`} alt="transaction icon" />
+      <img src={CategoriesIcons.get(category)} alt="transaction icon" />
     </div>
     <div className="info">
       <p className="category">{category}</p>

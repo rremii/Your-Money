@@ -10,11 +10,11 @@ import { useInView } from "react-intersection-observer"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setDate, setIndex } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { GetCategoriesMenuData } from "@entities/Transaction/helpers/GetCategoriesMenuData.ts"
+import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 
 
 export interface ICategory {
   name: TransCategories,
-  img: string,
 }
 
 interface props {
@@ -24,9 +24,14 @@ interface props {
 }
 
 const categories: ICategory[] = [
-  { name: "Family", img: FamilyIcon },
-  { name: "Health", img: HealthIcon },
-  { name: "Gifts", img: GiftsIcon }
+  { name: "Family" },
+  { name: "Gifts" },
+  { name: "Groceries" },
+  { name: "Health" },
+  { name: "Leisure" },
+  { name: "Shopping" },
+  { name: "Restaurant" },
+  { name: "Transport" }
 ]
 
 
@@ -58,13 +63,13 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
         <div className="sub income">Br <span>0</span></div>
       </div>
     </div>
-    {filledCategories.map(({ quantity, name, img }, i) => (
+    {filledCategories.map(({ quantity, name }, i) => (
       <div key={i} className="category">
         <h3 className="title">
           {name}
         </h3>
         <div className="icon">
-          <img src={img} alt="category icon" />
+          <img src={CategoriesIcons.get(name)} alt="category icon" />
         </div>
         <p className="quantity">
           Br {quantity}

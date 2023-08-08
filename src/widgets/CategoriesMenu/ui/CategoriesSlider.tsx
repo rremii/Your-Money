@@ -2,8 +2,6 @@ import styled from "styled-components"
 import React, { useEffect, useRef } from "react"
 import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 import { useGetTransByMenus } from "@entities/Transaction/model/useGetTransByMenus.tsx"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { shiftTransMenuIdsLeft, shiftTransMenuIdsRight } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
 
 export const CategoriesSlider = () => {

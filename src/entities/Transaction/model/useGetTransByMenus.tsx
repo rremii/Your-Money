@@ -7,12 +7,13 @@ export type DateFiler = "day" | "week" | "month" | "year"
 
 
 export const useGetTransByMenus = () => {
-  const DateMenuIds = useTypedSelector(state => state.Transactions.DateMenuIds)
+  const dateMenuIds = useTypedSelector(state => state.Transactions.dateMenuIds)
+  const dateFilter = useTypedSelector(state => state.Transactions.dateFilter)
 
   const { transactions: allTransactions } = useGetTransactions()
 
-  return DateMenuIds.map((menuId) => {
-    return GetTransByDate(allTransactions, "week", menuId)
+  return dateMenuIds.map((menuId) => {
+    return GetTransByDate(allTransactions, dateFilter, menuId)
   })
 
 }
