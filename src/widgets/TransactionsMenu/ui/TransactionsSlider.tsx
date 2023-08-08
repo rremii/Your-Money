@@ -3,18 +3,16 @@ import React, { useEffect } from "react"
 import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
 import { useGetTransByMenus } from "@entities/Transaction/model/useGetTransByMenus.tsx"
 import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
+import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
 
 export const TransactionsSlider = () => {
 
 
+  const { sliderRef, OnScroll } = useSlider()
+
   const transactionMenusData = useGetTransByMenus()
 
-  useEffect(() => {
-    console.log(transactionMenusData)
-    // debugger
-  }, [transactionMenusData])
-  return <SliderLayout>
-
+  return <SliderLayout ref={sliderRef} onScroll={OnScroll}>
     {transactionMenusData.map((menuData) => (
       <TransactionsMenu key={menuData.menuId} {...menuData} />
     ))}
