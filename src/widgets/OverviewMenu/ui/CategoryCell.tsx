@@ -21,7 +21,7 @@ export const CategoryCell = () => {
 const CellLayout = styled.div`
   box-shadow: 0px 2px 4px 0px var(--shadow-2);
   padding: 7px 15px;
-  height: 45px;
+  height: 52px;
   display: grid;
   grid-template-columns: min-content 1fr;
   grid-template-rows: repeat(2, min-content);
@@ -30,8 +30,8 @@ const CellLayout = styled.div`
   background-color: var(--bg-1);
 
   .icon {
-    width: 32px;
-    height: 32px;
+    width: 35px;
+    height: 35px;
     grid-row: span 2;
 
     img {
@@ -48,7 +48,7 @@ const CellLayout = styled.div`
     .name {
       color: var(--txt-5);
       font-family: Inter;
-      font-size: 14px;
+      font-size: 15px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
@@ -57,7 +57,7 @@ const CellLayout = styled.div`
     .quantity {
       color: var(--txt-2);
       font-family: Inter;
-      font-size: 16px;
+      font-size: 17px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
@@ -95,7 +95,7 @@ const CellLayout = styled.div`
       transform: translateY(-50%);
       color: var(--txt-11);
       font-family: Inter;
-      font-size: 11px;
+      font-size: 12px;
       font-style: normal;
       font-weight: 700;
       line-height: normal;

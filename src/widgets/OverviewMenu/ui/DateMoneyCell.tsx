@@ -18,7 +18,7 @@ const CellLayout = styled.div`
   .date {
     color: var(--txt-5);
     font-family: Inter;
-    font-size: 11px;
+    font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -27,7 +27,7 @@ const CellLayout = styled.div`
   .quantity {
     color: var(--txt-8);
     font-family: Inter;
-    font-size: 13px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;

@@ -3,23 +3,11 @@ import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import React from "react"
 import { DateMoneyCell } from "@widgets/OverviewMenu/ui/DateMoneyCell.tsx"
 import { CategoryCell } from "@widgets/OverviewMenu/ui/CategoryCell.tsx"
+import { BalanceBox } from "@widgets/OverviewMenu/ui/BalanceBox.tsx"
 
 export const OverviewMenu = () => {
   return <MenuLayout>
-    <div className="balance">
-      <h2>Balance</h2>
-      <p>-Br 100</p>
-    </div>
-    <div className="balance-info">
-      <div className="expense">
-        <h2>Expense</h2>
-        <p>-Br 100</p>
-      </div>
-      <div className="income">
-        <h2>Income</h2>
-        <p>Br 100</p>
-      </div>
-    </div>
+    <BalanceBox />
     <div className="overview-graph">
 
     </div>
@@ -27,7 +15,6 @@ export const OverviewMenu = () => {
       <DateMoneyCell />
       <DateMoneyCell />
       <DateMoneyCell />
-
     </div>
     <div className="categories-box">
       <CategoryCell />
@@ -36,8 +23,6 @@ export const OverviewMenu = () => {
       <CategoryCell />
       <CategoryCell />
     </div>
-
-
   </MenuLayout>
 }
 const MenuLayout = styled.div`
@@ -53,8 +38,6 @@ const MenuLayout = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-
-
   }
 
   .date-money-box {
@@ -73,89 +56,5 @@ const MenuLayout = styled.div`
     height: 145px;
   }
 
-  .balance {
-    background-color: var(--bg-1);
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 2px;
-    height: 57px;
-
-    h2 {
-      color: var(--txt-5);
-      font-family: Inter;
-      font-size: 11px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
-
-    p {
-      color: var(--txt-8);
-      font-family: Inter;
-      font-size: 17px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
-  }
-
-  .balance-info {
-    width: 100%;
-    display: flex;
-    height: 50px;
-
-    .expense, .income {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-
-      h2 {
-        font-family: Inter;
-        font-size: 11px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-      }
-
-      p {
-        font-family: Inter;
-        font-size: 17px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-      }
-    }
-
-    .expense {
-      width: 100%;
-      height: 100%;
-      background-color: var(--bg-6);
-
-      h2, p {
-        color: var(--txt-1);
-      }
-
-    }
-
-    .income {
-      width: 100%;
-      height: 100%;
-      background-color: var(--bg-7);
-
-      h2 {
-        color: var(--txt-5);
-      }
-
-      p {
-
-        color: var(--txt-10);
-      }
-
-    }
-  }
 
 `
