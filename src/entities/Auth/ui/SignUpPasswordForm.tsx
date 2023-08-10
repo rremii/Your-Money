@@ -12,19 +12,12 @@ import { useRegisterMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useTimer } from "@shared/hooks/useTimer.tsx"
 import { ConvertURLtoFile } from "@shared/helpers/ConvertURLtoFile.ts"
 import { setAuthSuccess } from "@entities/Auth/model/AuthSlice.ts"
+import { passwordFormSchema } from "@entities/Auth/constants/SignUpValidateSchemas.ts"
 
 interface FormFields {
   password: string
   confirmPassword: string
 }
-
-const schema = yup
-  .object()
-  .shape({
-    password: yup.string().required("field is required"),
-    confirmPassword: yup.string().required("field is required")
-  })
-  .required()
 
 
 export const SignUpPasswordForm = () => {
@@ -40,7 +33,7 @@ export const SignUpPasswordForm = () => {
 
   const { register, formState, clearErrors, handleSubmit, reset, setError } =
     useForm<FormFields>({
-      resolver: yupResolver(schema)
+      resolver: yupResolver(passwordFormSchema)
     })
   const { errors } = formState
 

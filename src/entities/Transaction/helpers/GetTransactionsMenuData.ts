@@ -1,5 +1,4 @@
-import { ITransaction } from "@entities/Transaction/model/useGetTransactions.tsx"
-import { GetTransByDate } from "@entities/Transaction/helpers/GetTransByDate.ts"
+import { ITransaction } from "@entities/Transaction/types.ts"
 
 export const GetTransactionsMenuData = (transactions: ITransaction[]) => {
 

@@ -1,10 +1,11 @@
 import styled from "styled-components"
-import React, { useEffect } from "react"
+import React from "react"
 import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
 import { useGetTransByMenus } from "@entities/Transaction/model/useGetTransByMenus.tsx"
-import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
 
+
+//todo add slider layout to shared and do same to others
 export const TransactionsSlider = () => {
 
 
@@ -12,7 +13,7 @@ export const TransactionsSlider = () => {
 
   const transactionMenusData = useGetTransByMenus()
 
-  return <SliderLayout ref={sliderRef} onScroll={OnScroll}>
+  return <SliderLayout id="slider" ref={sliderRef} onScroll={OnScroll}>
     {transactionMenusData.map((menuData) => (
       <TransactionsMenu key={menuData.menuId} {...menuData} />
     ))}

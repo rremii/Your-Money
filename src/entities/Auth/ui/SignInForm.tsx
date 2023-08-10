@@ -11,19 +11,13 @@ import { useNavigate } from "react-router-dom"
 import { useTimer } from "@shared/hooks/useTimer.tsx"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setAuthSuccess } from "@entities/Auth/model/AuthSlice.ts"
+import { signInSchema } from "@entities/Auth/constants/SignInValidateSchemas.ts"
 
 interface FormFields {
   email: string
   password: string
 }
 
-const schema = yup
-  .object()
-  .shape({
-    email: yup.string().email().required(),
-    password: yup.string().required()
-  })
-  .required()
 
 export const SignInForm = () => {
   const navigate = useNavigate()
@@ -34,7 +28,7 @@ export const SignInForm = () => {
 
   const { register, clearErrors, setError, formState, handleSubmit, reset } =
     useForm<FormFields>({
-      resolver: yupResolver(schema)
+      resolver: yupResolver(signInSchema)
     })
   const { errors } = formState
 

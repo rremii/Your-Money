@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import React, { FC } from "react"
-import { Months } from "@shared/helpers/TimeGap.ts"
 import { TransformDate } from "@entities/Transaction/helpers/TransformDate.ts"
 
 interface props {

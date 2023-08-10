@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import React, { useEffect, useRef } from "react"
+import React from "react"
 import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 import { useGetTransByMenus } from "@entities/Transaction/model/useGetTransByMenus.tsx"
 import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
@@ -12,7 +12,7 @@ export const CategoriesSlider = () => {
   const transactionMenusData = useGetTransByMenus()
 
 
-  return <CategoriesLayout className="slider" onScroll={OnScroll} ref={sliderRef}>
+  return <CategoriesLayout id="slider" onScroll={OnScroll} ref={sliderRef}>
     {transactionMenusData.map((menuData) => (
       <CategoryMenu key={menuData.menuId} {...menuData} />
     ))}

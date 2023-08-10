@@ -24,7 +24,6 @@ const schema = yup
   .required()
 
 
-//todo set auto focus to all fields necessary
 export const NameMenu = () => {
   const dispatch = useAppDispatch()
 

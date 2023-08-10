@@ -2,7 +2,6 @@ import styled from "styled-components"
 import { Header } from "@widgets/Header"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { DateSubHeader } from "@widgets/Header/ui/DateSubHeader.tsx"
-import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
 import { TransactionsSlider } from "@widgets/TransactionsMenu/ui/TransactionsSlider.tsx"
 
 const TransactionsPage = () => {

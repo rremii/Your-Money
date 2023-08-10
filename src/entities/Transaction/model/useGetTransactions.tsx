@@ -1,21 +1,4 @@
-export type TransCategories =
-  "Health"
-  | "Family"
-  | "Gifts"
-  | "Groceries"
-  | "Leisure"
-  | "Shopping"
-  | "Restaurant"
-  | "Transport"
-
-
-export interface ITransaction {
-  id: number
-  category: TransCategories
-  date: Date
-  quantity: number
-
-}
+import { ITransaction } from "@entities/Transaction/types.ts"
 
 export const useGetTransactions = () => {
 

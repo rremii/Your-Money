@@ -1,16 +1,12 @@
 import styled from "styled-components"
 import React, { FC, useEffect } from "react"
 import { TransactionHeader } from "@widgets/TransactionsMenu/ui/TransactionHeader.tsx"
-import Groceries from "@shared/assets/LightTheme/groceries.png"
-import Account from "@shared/assets/LightTheme/accounts.png"
-import { DateBox } from "@widgets/TransactionsMenu/ui/DateBox.tsx"
-import { Transaction } from "@widgets/TransactionsMenu/ui/Transaction.tsx"
 import { TransactionSectionByDate } from "@widgets/TransactionsMenu/ui/TransactionSectionByDate.tsx"
-import { ITransaction } from "@entities/Transaction/model/useGetTransactions.tsx"
 import { useInView } from "react-intersection-observer"
 import { setDate, setIndex } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { GetTransactionsMenuData } from "@entities/Transaction/helpers/GetTransactionsMenuData.ts"
+import { ITransaction } from "@entities/Transaction/types.ts"
 
 interface props {
   menuId: number
@@ -36,7 +32,6 @@ export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId }) =
 
   const transactionsMenuData = GetTransactionsMenuData(transactions)
 
-  // console.log(transactionsMenuData)
   return <TransactionsLayout ref={observeRef}>
     <TransactionHeader />
     {transactionsMenuData.sort((prev, cur) => prev.date < cur.date ? 1 : -1).map((sectionData) => (

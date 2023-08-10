@@ -9,17 +9,12 @@ import React, { useEffect } from "react"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { useVerifyCodeMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useTimer } from "@shared/hooks/useTimer.tsx"
+import { codeFormSchema } from "@entities/Auth/constants/SignUpValidateSchemas.ts"
 
 interface FormFields {
   code: string
 }
 
-const schema = yup
-  .object()
-  .shape({
-    code: yup.string().length(6).required()
-  })
-  .required()
 
 export const SignUpCodeForm = () => {
   const navigate = useNavigate()
@@ -33,9 +28,10 @@ export const SignUpCodeForm = () => {
     handleSubmit,
     reset, setFocus
   } = useForm<FormFields>({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(codeFormSchema)
   })
   const { errors } = formState
+
   useEffect(() => {
     setFocus("code")
   }, [setFocus])

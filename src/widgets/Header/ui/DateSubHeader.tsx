@@ -11,7 +11,7 @@ export const DateSubHeader = () => {
 
   const ShiftDateRight = () => {
     dispatch(shiftTransMenuIdsRight({ shiftAmount: 1 }))
-    const slider = document.querySelector(".slider")
+    const slider = document.querySelector("#slider")
     if (!slider) return
 
     const width = slider.clientWidth
@@ -21,10 +21,12 @@ export const DateSubHeader = () => {
 
   const ShiftDateLeft = () => {
     dispatch(shiftTransMenuIdsRight({ shiftAmount: 1 }))
-    const slider = document.querySelector(".slider")
+    const slider = document.querySelector("#slider")
     if (!slider) return
 
-    slider.scrollTo(0, 0)
+    const width = slider.clientWidth
+
+    slider.scrollBy(-width, 0)
   }
 
   return (

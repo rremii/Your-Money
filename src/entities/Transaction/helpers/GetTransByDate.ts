@@ -1,6 +1,6 @@
-import { ITransaction } from "@entities/Transaction/model/useGetTransactions.tsx"
 import TimeGap, { DayType } from "@shared/helpers/TimeGap.ts"
 import { DateFiler } from "@entities/Transaction/model/useGetTransByMenus.tsx"
+import { ITransaction } from "@entities/Transaction/types.ts"
 
 export const GetTransByDate = (allTransactions: ITransaction[], filter: DateFiler, menuId: number, firstDay?: DayType) => {
 

@@ -12,17 +12,12 @@ import { useConfirmEmailMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setEmail } from "@entities/Auth/model/AuthSlice.ts"
 import { useTimer } from "@shared/hooks/useTimer.tsx"
+import { emailFormSchema } from "@entities/Auth/constants/SignUpValidateSchemas.ts"
 
 interface FormFields {
   email: string
 }
 
-const schema = yup
-  .object()
-  .shape({
-    email: yup.string().email().required("Email is required")
-  })
-  .required()
 
 export const SignUpEmailForm = () => {
   const dispatch = useAppDispatch()
@@ -30,7 +25,7 @@ export const SignUpEmailForm = () => {
 
   const { register, setFocus, formState, clearErrors, setError, handleSubmit, reset } =
     useForm<FormFields>({
-      resolver: yupResolver(schema),
+      resolver: yupResolver(emailFormSchema),
       values: { email: "noruto2021@gmail.com" }
     })
   const { errors } = formState

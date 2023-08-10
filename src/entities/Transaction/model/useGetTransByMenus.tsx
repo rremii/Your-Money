@@ -1,5 +1,4 @@
-import { ITransaction, useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
-import TimeGap, { DayType } from "@shared/helpers/TimeGap.ts"
+import { useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { GetTransByDate } from "@entities/Transaction/helpers/GetTransByDate.ts"
 

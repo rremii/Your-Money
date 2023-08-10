@@ -1,5 +1,4 @@
 import styled from "styled-components"
-//TODO grab all the imports to constants and import from there
 import Categories from "@shared/assets/LightTheme/categories.png"
 import CategoriesActive from "@shared/assets/LightTheme/categories-active.png"
 import Accounts from "@shared/assets/LightTheme/accounts.png"

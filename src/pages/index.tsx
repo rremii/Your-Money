@@ -22,11 +22,13 @@ import { useToast } from "@shared/hooks/useToast.tsx"
 
 export const Routing = () => {
   const { isLoggedIn, isPending } = useAuth()
+
   // useChangeTheme()
+
   const navigate = useNavigate()
   useEffect(() => {
     // navigate("/sign-up/info")
-    navigate("/transactions")
+    navigate("/overview")
   }, [])
 
 

@@ -1,9 +1,8 @@
 import styled from "styled-components"
-import Groceries from "@shared/assets/LightTheme/groceries.png"
 import Account from "@shared/assets/LightTheme/accounts.png"
 import React, { FC } from "react"
-import { ITransaction } from "@entities/Transaction/model/useGetTransactions.tsx"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
+import { ITransaction } from "@entities/Transaction/types.ts"
 
 interface props extends ITransaction {
 

@@ -11,20 +11,11 @@ import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { setUserInfo } from "@entities/Auth/model/AuthSlice.ts"
 import { useImage } from "@shared/hooks/useImage.tsx"
+import { infoFormSchema } from "@entities/Auth/constants/SignUpValidateSchemas.ts"
 
 interface FormFields {
   name: string
 }
-
-//todo limit all fields by length && img size
-//todo move all the schemas to separated file
-const schema = yup
-  .object()
-  .shape({
-    name: yup.string().required("Name is required")
-  })
-  .required()
-
 
 export const SignUpInfoForm = () => {
   const dispatch = useAppDispatch()
@@ -32,7 +23,7 @@ export const SignUpInfoForm = () => {
 
   const { register, formState, handleSubmit } =
     useForm<FormFields>({
-      resolver: yupResolver(schema)
+      resolver: yupResolver(infoFormSchema)
     })
   const { errors } = formState
 

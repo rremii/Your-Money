@@ -6,7 +6,7 @@ import LeisureIcon from "@shared/assets/LightTheme/leisure.png"
 import ShoppingIcon from "@shared/assets/LightTheme/shopping.png"
 import RestaurantIcon from "@shared/assets/LightTheme/restaurant.png"
 import TransportIcon from "@shared/assets/LightTheme/transport.png"
-import { TransCategories } from "@entities/Transaction/model/useGetTransactions.tsx"
+import { TransCategories } from "@entities/Transaction/types.ts"
 
 
 export const CategoriesIcons = new Map<TransCategories, string>()
