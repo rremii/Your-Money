@@ -1,15 +1,30 @@
 import styled from "styled-components"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
-import React from "react"
+import React, { FC } from "react"
 import { DateMoneyCell } from "@widgets/OverviewMenu/ui/DateMoneyCell.tsx"
 import { CategoryCell } from "@widgets/OverviewMenu/ui/CategoryCell.tsx"
 import { BalanceBox } from "@widgets/OverviewMenu/ui/BalanceBox.tsx"
+import { Bar } from "react-chartjs-2"
+import { GetBarConfig } from "@entities/Transaction/helpers/GetBarConfig.ts"
+import { ITransaction } from "@entities/Transaction/types.ts"
+import { categories } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 
-export const OverviewMenu = () => {
+interface props {
+  menuId: number
+  dateGap: string
+  transactions: ITransaction[]
+}
+
+export const OverviewMenu: FC<props> = ({ transactions, dateGap, menuId }) => {
+
+
+  const barConfig = GetBarConfig(categories, transactions)
+
+
   return <MenuLayout>
     <BalanceBox />
     <div className="overview-graph">
-
+      <Bar {...barConfig} />
     </div>
     <div className="date-money-box">
       <DateMoneyCell />
@@ -53,7 +68,15 @@ const MenuLayout = styled.div`
   .overview-graph {
     width: 100%;
     background-color: var(--bg-1);
-    height: 145px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    canvas {
+      //height: 50px;
+      width: 90% !important;
+    }
   }
 
 

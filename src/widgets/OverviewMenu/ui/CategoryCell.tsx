@@ -57,7 +57,7 @@ const CellLayout = styled.div`
     .quantity {
       color: var(--txt-2);
       font-family: Inter;
-      font-size: 17px;
+      font-size: 15px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;

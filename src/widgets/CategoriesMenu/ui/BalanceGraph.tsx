@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Doughnut } from "react-chartjs-2"
 import React, { FC } from "react"
 import { ITransaction, TransCategories } from "@entities/Transaction/types.ts"
-import { GetDoughnutConfig } from "@entities/Transaction/helpers/GetDoughnutConfig.tsx"
+import { GetDoughnutConfig } from "@entities/Transaction/helpers/GetDoughnutConfig.ts"
 
 export interface ICategoryData {
   name: TransCategories

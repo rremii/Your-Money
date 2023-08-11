@@ -1,15 +1,19 @@
 import styled from "styled-components"
 import { OverviewMenu } from "@widgets/OverviewMenu/ui/OverviewMenu.tsx"
+import { useGetTransByMenus } from "@entities/Transaction/model/useGetTransByMenus.tsx"
+import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
+import React from "react"
 
 export const OverviewSlider = () => {
 
 
+  const transactionMenusData = useGetTransByMenus()
+
+
   return <SliderLayout id="slider">
-    <OverviewMenu />
-    <OverviewMenu />
-    <OverviewMenu />
-    <OverviewMenu />
-    <OverviewMenu />
+    {transactionMenusData.map((menuData) => (
+      <OverviewMenu key={menuData.menuId} {...menuData} />
+    ))}
   </SliderLayout>
 }
 const SliderLayout = styled.main`

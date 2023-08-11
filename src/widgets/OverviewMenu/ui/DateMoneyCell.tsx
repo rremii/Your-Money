@@ -12,8 +12,9 @@ const CellLayout = styled.div`
   justify-content: center;
   align-items: center;
   background-color: var(--bg-8);
-  height: 45px;
+  height: 46px;
   border: 1px solid var(--bg-2);
+  gap: 3px;
 
   .date {
     color: var(--txt-5);

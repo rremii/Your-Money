@@ -2,9 +2,13 @@ import React from "react"
 import { withProviders } from "./providers"
 import { Routing } from "../pages"
 import "./styles/style.scss"
-import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js"
+import { ArcElement, BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from "chart.js"
+import { Bar } from "react-chartjs-2"
 
-ChartJS.register(ArcElement, Tooltip, Legend)
+ChartJS.register(CategoryScale,
+  LinearScale,
+  BarElement,
+  ArcElement)
 
 function App() {
 

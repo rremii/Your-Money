@@ -15,7 +15,7 @@ interface props {
   transactions: ITransaction[]
 }
 
-const categories: ICategory[] = [
+export const categories: ICategory[] = [
   { name: "Family", color: "#A930FF" },
   { name: "Gifts", color: "#CF3648" },
   { name: "Groceries", color: "#32CFFF" },
