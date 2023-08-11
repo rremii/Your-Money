@@ -10,7 +10,7 @@ interface initialState {
 
 const initialState = {
   index: 0,
-  dateFilter: "week",
+  dateFilter: "year",
   dateGap: "",
   dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
 } as initialState

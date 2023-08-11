@@ -22,10 +22,7 @@ const options: ChartOptions<"bar"> = {
 
 
 export const GetBarConfig = (categories: ICategory[], transactions: ITransaction[]): IBarProps => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  if (!categories || !transactions || transactions.length === 0) { // @ts-ignore
-    return
-  }
+
 
   const yearLabels = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"]
 
@@ -60,7 +57,9 @@ export const GetBarConfig = (categories: ICategory[], transactions: ITransaction
 
     return { transactions: curMonthTransactions, name, color }
   })
-
+  // if (transactions.length !== 0) {
+  //   debugger
+  // }
 
   const data: ChartData<"bar"> = {
     labels: yearLabels,
