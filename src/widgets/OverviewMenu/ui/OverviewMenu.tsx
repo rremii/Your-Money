@@ -85,14 +85,14 @@ const MenuLayout = styled.div`
   .overview-graph {
     width: 100%;
     background-color: var(--bg-1);
-    //height: 240px;
+    //height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
 
     canvas {
       //height: 50px;
-      width: 100% !important;
+      width: 97% !important;
     }
   }
 

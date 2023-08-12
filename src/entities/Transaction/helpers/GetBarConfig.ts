@@ -11,18 +11,27 @@ interface IBarProps {
 const options: ChartOptions<"bar"> = {
   plugins: {},
   elements: {},
-
   responsive: true,
-
+  // maintainAspectRatio: false,
   scales: {
 
     x: {
-      // type: "linear",
-      // min: new Date("2019-01-01").valueOf(),
-      // max: new Date("2019-12-31").valueOf(),
+      ticks: {
+        maxRotation: 0
+      },
       stacked: true
     },
+
     y: {
+      ticks: {
+        align: "start",
+        labelOffset: 10,
+        padding: 0,
+        // stepSize: 20,
+        count: 5
+      },
+
+      grid: {},
       stacked: true
     }
   }
@@ -59,7 +68,7 @@ export const GetBarConfig = (categories: ICategory[], transactions: ITransaction
 
   const datePointsAmount = dayAmount
 
-  for (let i = 1; i <= dayAmount; i++) {
+  for (let i = 1; i <= datePointsAmount; i++) {
     monthLabels.push("" + i)
   }
 
@@ -98,13 +107,13 @@ export const GetBarConfig = (categories: ICategory[], transactions: ITransaction
 
 
   const data: ChartData<"bar"> = {
-    labels: [...monthLabels],
+    labels: monthLabels,
     datasets: transByDays.map(({ transactions, color, name }) => {
 
 
       return {
-        backgroundColor: color,
 
+        backgroundColor: color,
         data: transactions,
         animation: false
       }
