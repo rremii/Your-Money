@@ -21,6 +21,7 @@ const options: ChartOptions<"bar"> = {
       ticks: {
         autoSkip: false,
         maxRotation: 0
+
       },
       grid: {
         // display: false,
@@ -32,8 +33,14 @@ const options: ChartOptions<"bar"> = {
 
     y: {
       ticks: {
+        labelOffset: 10,
+        crossAlign: "near",
         stepSize: 20,
-        count: 4
+        count: 5,
+        callback: function(value, index, ticks) {
+          if (value === 0) return ""
+          return "$" + value
+        }
       },
 
       stacked: true
@@ -43,10 +50,8 @@ const options: ChartOptions<"bar"> = {
 
 const yearLabels = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"]
 // const monthLabels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"]
-// const monthLabels: string[] = []
-// const monthLabels = new Set<string>()
 
-const weekLabels = []
+const weekLabels = ["M"]
 
 
 const GetDatePointsAmount = (dateFrom: Date, dateTo: Date) => {
