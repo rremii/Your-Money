@@ -12,26 +12,30 @@ const options: ChartOptions<"bar"> = {
   plugins: {},
   elements: {},
   responsive: true,
-  // maintainAspectRatio: false,
+  maintainAspectRatio: false,
+
   scales: {
 
     x: {
+      stacked: true,
       ticks: {
-        maxRotation: 0
+        autoSkip: false,
+        maxRotation: 0,
+        count: 3
       },
-      stacked: true
+      grid: {
+        lineWidth: 0,
+        drawTicks: true,
+        tickWidth: 1
+      }
     },
 
     y: {
       ticks: {
-        align: "start",
-        labelOffset: 10,
-        padding: 0,
-        // stepSize: 20,
-        count: 5
+        stepSize: 20,
+        count: 3
       },
 
-      grid: {},
       stacked: true
     }
   }
@@ -69,8 +73,13 @@ export const GetBarConfig = (categories: ICategory[], transactions: ITransaction
   const datePointsAmount = dayAmount
 
   for (let i = 1; i <= datePointsAmount; i++) {
-    monthLabels.push("" + i)
+    if (i % 4 === 0 || i === 1 || i === datePointsAmount) {
+      monthLabels.push(i + "")
+    } else {
+      monthLabels.push("")
+    }
   }
+
 
   const curUnit: "month" | "year" = "month"
 
@@ -104,15 +113,14 @@ export const GetBarConfig = (categories: ICategory[], transactions: ITransaction
 
     return { transactions: curUnitTrans, name, color }
   })
-
-
+  // monthLabels[0] = monthLabels[0] + " aug"
+  // monthLabels[monthLabels.length - 1] = monthLabels[monthLabels.length - 1] + " aug"
   const data: ChartData<"bar"> = {
     labels: monthLabels,
     datasets: transByDays.map(({ transactions, color, name }) => {
 
 
       return {
-
         backgroundColor: color,
         data: transactions,
         animation: false
