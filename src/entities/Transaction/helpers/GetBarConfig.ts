@@ -23,7 +23,7 @@ const options: ChartOptions<"bar"> = {
         maxRotation: 0
       },
       grid: {
-        display: false,
+        // display: false,
         lineWidth: 0,
         drawTicks: true,
         tickWidth: 1
@@ -33,7 +33,7 @@ const options: ChartOptions<"bar"> = {
     y: {
       ticks: {
         stepSize: 20,
-        count: 5
+        count: 4
       },
 
       stacked: true
