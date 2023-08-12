@@ -20,10 +20,10 @@ const options: ChartOptions<"bar"> = {
       stacked: true,
       ticks: {
         autoSkip: false,
-        maxRotation: 0,
-        count: 3
+        maxRotation: 0
       },
       grid: {
+        display: false,
         lineWidth: 0,
         drawTicks: true,
         tickWidth: 1
@@ -33,7 +33,7 @@ const options: ChartOptions<"bar"> = {
     y: {
       ticks: {
         stepSize: 20,
-        count: 3
+        count: 5
       },
 
       stacked: true
