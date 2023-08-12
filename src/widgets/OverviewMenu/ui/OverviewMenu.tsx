@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
-import React, { FC } from "react"
+import React, { FC, useEffect } from "react"
 import { DateMoneyCell } from "@widgets/OverviewMenu/ui/DateMoneyCell.tsx"
 import { CategoryCell } from "@widgets/OverviewMenu/ui/CategoryCell.tsx"
 import { BalanceBox } from "@widgets/OverviewMenu/ui/BalanceBox.tsx"
@@ -8,20 +8,37 @@ import { Bar } from "react-chartjs-2"
 import { GetBarConfig } from "@entities/Transaction/helpers/GetBarConfig.ts"
 import { ITransaction } from "@entities/Transaction/types.ts"
 import { categories } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { useInView } from "react-intersection-observer"
+import { setDate, setIndex } from "@entities/DateSlider/model/DateSliderSlice.ts"
 
 interface props {
   menuId: number
   dateGap: string
+  dateTo: Date
+  dateFrom: Date
   transactions: ITransaction[]
 }
 
-export const OverviewMenu: FC<props> = ({ transactions, dateGap, menuId }) => {
+export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGap, menuId }) => {
+
+  const dispatch = useAppDispatch()
+
+  const [observeRef, inView] = useInView({
+    threshold: 0.5
+  })
 
 
-  const barConfig = GetBarConfig(categories, transactions)
+  useEffect(() => {
+    if (!inView) return
+    dispatch(setDate(dateGap))
+    dispatch(setIndex(menuId))
+  }, [inView])
+
+  const barConfig = GetBarConfig(categories, transactions, dateFrom, dateTo)
 
 
-  return <MenuLayout>
+  return <MenuLayout ref={observeRef}>
     <BalanceBox />
     <div className="overview-graph">
       <Bar {...barConfig} />
@@ -68,14 +85,14 @@ const MenuLayout = styled.div`
   .overview-graph {
     width: 100%;
     background-color: var(--bg-1);
-    height: 150px;
+    //height: 240px;
     display: flex;
     justify-content: center;
     align-items: center;
 
     canvas {
       //height: 50px;
-      width: 90% !important;
+      width: 100% !important;
     }
   }
 

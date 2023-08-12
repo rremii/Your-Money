@@ -3,14 +3,15 @@ import { OverviewMenu } from "@widgets/OverviewMenu/ui/OverviewMenu.tsx"
 import { useGetTransByMenus } from "@entities/Transaction/model/useGetTransByMenus.tsx"
 import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
 import React from "react"
+import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
 
 export const OverviewSlider = () => {
-
+  const { sliderRef, OnScroll } = useSlider()
 
   const transactionMenusData = useGetTransByMenus()
 
 
-  return <SliderLayout id="slider">
+  return <SliderLayout ref={sliderRef} onScroll={OnScroll} id="slider">
     {transactionMenusData.map((menuData) => (
       <OverviewMenu key={menuData.menuId} {...menuData} />
     ))}

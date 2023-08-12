@@ -44,6 +44,7 @@ module.exports = {
     "@typescript-eslint/no-misused-promises": "warn",
     "no-constant-condition": "warn",
     "@typescript-eslint/no-floating-promises": "off",
-    "@typescript-eslint/no-inferrable-types": "off"
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/ban-ts-comment": "warn"
   }
 }
