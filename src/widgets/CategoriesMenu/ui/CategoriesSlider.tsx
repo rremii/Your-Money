@@ -1,10 +1,12 @@
 import styled from "styled-components"
-import React from "react"
+import React, { memo } from "react"
 import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 import { useGetTransByMenus } from "@entities/Transaction/model/useGetTransByMenus.tsx"
 import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
 
-export const CategoriesSlider = () => {
+
+//todo add optimization to everywhere
+export const CategoriesSlider = memo(() => {
 
 
   const { sliderRef, OnScroll } = useSlider()
@@ -17,7 +19,7 @@ export const CategoriesSlider = () => {
       <CategoryMenu key={menuData.menuId} {...menuData} />
     ))}
   </CategoriesLayout>
-}
+})
 const CategoriesLayout = styled.main`
   background-color: var(--bg-1);
   height: 100%;

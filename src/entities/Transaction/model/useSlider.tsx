@@ -1,11 +1,9 @@
 import { useEffect, useRef } from "react"
 import { shiftTransMenuIdsLeft, shiftTransMenuIdsRight } from "@entities/DateSlider/model/DateSliderSlice.ts"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 
 export const useSlider = () => {
   const dispatch = useAppDispatch()
-
-  const index = useTypedSelector(state => state.Date.index)
 
   const ref = useRef<HTMLDivElement>(null)
 

@@ -1,9 +1,10 @@
 import { ITransaction } from "@entities/Transaction/types.ts"
+import { useMemo } from "react"
 
 export const useGetTransactions = () => {
 
 
-  const transactions: ITransaction[] = [
+  const transactions: ITransaction[] = useMemo(() => [
     { category: "Family", date: new Date(2022, 1, 1), id: 1, quantity: 10 },
     { category: "Health", date: new Date(2023, 5, 1), id: 2, quantity: 12 },
     { category: "Transport", date: new Date(2023, 6, 29), id: 3, quantity: 51 },
@@ -17,6 +18,6 @@ export const useGetTransactions = () => {
     { category: "Health", date: new Date(2023, 7, 7, 10), id: 11, quantity: 5 },
     { category: "Groceries", date: new Date(2023, 7, 8, 10), id: 12, quantity: 12 },
     { category: "Shopping", date: new Date(2023, 7, 8, 10), id: 13, quantity: 31 }
-  ]
+  ], [])
   return { transactions }
 }

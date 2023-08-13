@@ -1,12 +1,12 @@
 import styled from "styled-components"
-import React from "react"
+import React, { memo } from "react"
 import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
 import { useGetTransByMenus } from "@entities/Transaction/model/useGetTransByMenus.tsx"
 import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
 
 
 //todo add slider layout to shared and do same to others
-export const TransactionsSlider = () => {
+export const TransactionsSlider = memo(() => {
 
 
   const { sliderRef, OnScroll } = useSlider()
@@ -18,7 +18,7 @@ export const TransactionsSlider = () => {
       <TransactionsMenu key={menuData.menuId} {...menuData} />
     ))}
   </SliderLayout>
-}
+})
 const SliderLayout = styled.main`
   //background-color: var(--bg-1);
   height: 100%;

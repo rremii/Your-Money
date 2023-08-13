@@ -2,11 +2,12 @@ import styled from "styled-components"
 import { OverviewMenu } from "@widgets/OverviewMenu/ui/OverviewMenu.tsx"
 import { useGetTransByMenus } from "@entities/Transaction/model/useGetTransByMenus.tsx"
 import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
-import React from "react"
+import React, { memo } from "react"
 import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
 
-export const OverviewSlider = () => {
+export const OverviewSlider = memo(() => {
   const { sliderRef, OnScroll } = useSlider()
+
 
   const transactionMenusData = useGetTransByMenus()
 
@@ -16,7 +17,7 @@ export const OverviewSlider = () => {
       <OverviewMenu key={menuData.menuId} {...menuData} />
     ))}
   </SliderLayout>
-}
+})
 const SliderLayout = styled.main`
   //background-color: var(--bg-1);
   height: 100%;
