@@ -52,7 +52,7 @@ const DateBoxLayout = styled.div<{
     flex: 1 1 auto;
 
     .day {
-      color: ${({ $isToday }) => $isToday ? "var(--txt-4)" : "var(--txt-10)"};
+      color: ${({ $isToday }) => $isToday ? "var(--txt-4)" : "var(--txt-12)"};
       font-family: Inter;
       font-size: 10px;
       font-style: normal;

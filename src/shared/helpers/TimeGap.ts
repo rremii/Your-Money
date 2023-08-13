@@ -7,6 +7,23 @@ Days.set("Thu", 4)
 Days.set("Fri", 5)
 Days.set("Sat", 6)
 
+export const FullDays = new Map()
+FullDays.set("Sunday", 0)
+FullDays.set("Monday", 1)
+FullDays.set("Tuesday", 2)
+FullDays.set("Wednesday", 3)
+FullDays.set("Thursday", 4)
+FullDays.set("Friday", 5)
+FullDays.set("Saturday", 6)
+FullDays.set(0, "Sunday")
+FullDays.set(1, "Monday")
+FullDays.set(2, "Tuesday")
+FullDays.set(3, "Wednesday")
+FullDays.set(4, "Thursday")
+FullDays.set(5, "Friday")
+FullDays.set(6, "Saturday")
+
+
 export const Months = new Map<number, string>()
 Months.set(0, "January")
 Months.set(1, "February")
@@ -20,6 +37,8 @@ Months.set(8, "September")
 Months.set(9, "October")
 Months.set(10, "November")
 Months.set(11, "December")
+
+//todo fix
 
 export type DayType = "Sun" | "Mon" | "Tue" | "Wed" | "Thu" | "Fri" | "Sat"
 

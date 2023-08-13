@@ -5,7 +5,7 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 export const useSlider = () => {
   const dispatch = useAppDispatch()
 
-  const index = useTypedSelector(state => state.Transactions.index)
+  const index = useTypedSelector(state => state.Date.index)
 
   const ref = useRef<HTMLDivElement>(null)
 

@@ -1,16 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { DateFiler } from "@entities/Transaction/model/useGetTransByMenus.tsx"
+import { DayType } from "@shared/helpers/TimeGap.ts"
+import { DateFilter } from "@entities/Transaction/types.ts"
 
 interface initialState {
   index: number
-  dateFilter: DateFiler
+  dateFilter: DateFilter
   dateGap: string
   dateMenuIds: number[]
+  firstDay: DayType
 }
 
 const initialState = {
   index: 0,
-  dateFilter: "month",
+  dateFilter: "week",
+  firstDay: "Sun",
   dateGap: "",
   dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
 } as initialState
@@ -56,6 +59,6 @@ const DateSliderSlice = createSlice({
   }
 })
 
-export const TransactionReducer = DateSliderSlice.reducer
+export const DateReducer = DateSliderSlice.reducer
 export const { setIndex, setDate, shiftTransMenuIdsLeft, shiftTransMenuIdsRight } = DateSliderSlice.actions
 

@@ -21,3 +21,5 @@ export interface ITransaction {
   quantity: number
 
 }
+
+export type DateFilter = "day" | "week" | "month" | "year"

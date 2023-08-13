@@ -1,8 +1,7 @@
 import TimeGap, { DayType } from "@shared/helpers/TimeGap.ts"
-import { DateFiler } from "@entities/Transaction/model/useGetTransByMenus.tsx"
-import { ITransaction } from "@entities/Transaction/types.ts"
+import { DateFilter, ITransaction } from "@entities/Transaction/types.ts"
 
-export const GetTransByDate = (allTransactions: ITransaction[], filter: DateFiler, menuId: number, firstDay?: DayType) => {
+export const GetTransByDate = (allTransactions: ITransaction[], filter: DateFilter, menuId: number, firstDay?: DayType) => {
 
   switch (filter) {
     case "day": {

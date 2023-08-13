@@ -5,10 +5,10 @@ import { DateMoneyCell } from "@widgets/OverviewMenu/ui/DateMoneyCell.tsx"
 import { CategoryCell } from "@widgets/OverviewMenu/ui/CategoryCell.tsx"
 import { BalanceBox } from "@widgets/OverviewMenu/ui/BalanceBox.tsx"
 import { Bar } from "react-chartjs-2"
-import { GetBarConfig } from "@entities/Transaction/helpers/GetBarConfig.ts"
+import { GetBarConfig } from "@widgets/OverviewMenu/model/GetBarConfig.ts"
 import { ITransaction } from "@entities/Transaction/types.ts"
 import { categories } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useInView } from "react-intersection-observer"
 import { setDate, setIndex } from "@entities/DateSlider/model/DateSliderSlice.ts"
 
@@ -21,8 +21,11 @@ interface props {
 }
 
 export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGap, menuId }) => {
-
   const dispatch = useAppDispatch()
+
+
+  const dateFilter = useTypedSelector(state => state.Date.dateFilter)
+  const firstDay = useTypedSelector(state => state.Date.firstDay)
 
   const [observeRef, inView] = useInView({
     threshold: 0.5
@@ -35,7 +38,7 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
     dispatch(setIndex(menuId))
   }, [inView])
 
-  const barConfig = GetBarConfig(categories, transactions, dateFrom, dateTo)
+  const barConfig = GetBarConfig({ categories, transactions, dateFrom, dateTo, filter: dateFilter, firstDay })
 
 
   return <MenuLayout ref={observeRef}>
