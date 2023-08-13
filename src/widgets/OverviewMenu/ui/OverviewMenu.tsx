@@ -10,7 +10,7 @@ import { ITransaction } from "@entities/Transaction/types.ts"
 import { categories } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useInView } from "react-intersection-observer"
-import { setDate, setIndex } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { setDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
 
 interface props {
   menuId: number
@@ -35,7 +35,10 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
   useEffect(() => {
     if (!inView) return
     dispatch(setDate(dateGap))
-    dispatch(setIndex(menuId))
+
+    const curScroll = document.querySelector("#slider")?.scrollLeft
+    if (!curScroll) return
+    window.localStorage.setItem("scroll", curScroll.toString())
   }, [inView])
 
   const barConfig = GetBarConfig({ categories, transactions, dateFrom, dateTo, filter: dateFilter, firstDay })

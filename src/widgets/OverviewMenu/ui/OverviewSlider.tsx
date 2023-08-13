@@ -6,12 +6,14 @@ import React, { memo } from "react"
 import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
 
 export const OverviewSlider = memo(() => {
-  const { sliderRef, OnScroll } = useSlider()
 
+  const { sliderRef, OnScroll } = useSlider()
 
   const transactionMenusData = useGetTransByMenus()
 
+  console.log("qwe")
 
+  
   return <SliderLayout ref={sliderRef} onScroll={OnScroll} id="slider">
     {transactionMenusData.map((menuData) => (
       <OverviewMenu key={menuData.menuId} {...menuData} />

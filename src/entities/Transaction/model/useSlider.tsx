@@ -1,9 +1,14 @@
 import { useEffect, useRef } from "react"
-import { shiftTransMenuIdsLeft, shiftTransMenuIdsRight } from "@entities/DateSlider/model/DateSliderSlice.ts"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import {
+  setSliderScroll,
+  shiftTransMenuIdsLeft,
+  shiftTransMenuIdsRight
+} from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 export const useSlider = () => {
   const dispatch = useAppDispatch()
+
 
   const ref = useRef<HTMLDivElement>(null)
 
@@ -11,6 +16,9 @@ export const useSlider = () => {
   useEffect(() => {
     if (!ref || !ref.current) return
     const sliderWidth = ref.current.scrollWidth
+
+    const scrollLeft = window.localStorage.getItem("scroll")
+    if (scrollLeft) return ref.current.scrollTo(+scrollLeft, 0)
 
     ref.current.scrollTo(sliderWidth / 2 - 250, 0)
   }, [ref])
@@ -22,7 +30,6 @@ export const useSlider = () => {
     const width = ref.current.clientWidth
     const curScroll = ref.current.scrollLeft
     const scrollDif = scrollWidth - curScroll - width
-
 
     if (scrollDif === 0) {
       dispatch(shiftTransMenuIdsRight({ shiftAmount: 2 }))

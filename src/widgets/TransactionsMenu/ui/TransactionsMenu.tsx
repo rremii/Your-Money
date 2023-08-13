@@ -3,7 +3,7 @@ import React, { FC, useEffect } from "react"
 import { TransactionHeader } from "@widgets/TransactionsMenu/ui/TransactionHeader.tsx"
 import { TransactionSectionByDate } from "@widgets/TransactionsMenu/ui/TransactionSectionByDate.tsx"
 import { useInView } from "react-intersection-observer"
-import { setDate, setIndex } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { setDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { GetTransactionsMenuData } from "@entities/Transaction/helpers/GetTransactionsMenuData.ts"
 import { ITransaction } from "@entities/Transaction/types.ts"
@@ -26,7 +26,10 @@ export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId }) =
   useEffect(() => {
     if (!inView) return
     dispatch(setDate(dateGap))
-    dispatch(setIndex(menuId))
+
+    const curScroll = document.querySelector("#slider")?.scrollLeft
+    if (!curScroll) return
+    window.localStorage.setItem("scroll", curScroll.toString())
   }, [inView])
 
 

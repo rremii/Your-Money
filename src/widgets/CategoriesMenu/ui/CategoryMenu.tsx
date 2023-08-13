@@ -2,7 +2,7 @@ import React, { FC, useEffect } from "react"
 import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { setDate, setIndex } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { setDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { GetCategoriesMenuData } from "@entities/Transaction/helpers/GetCategoriesMenuData.ts"
 import { ICategory, ITransaction } from "@entities/Transaction/types.ts"
 import { Category } from "@widgets/CategoriesMenu/ui/Category.tsx"
@@ -39,7 +39,10 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
   useEffect(() => {
     if (!inView) return
     dispatch(setDate(dateGap))
-    dispatch(setIndex(menuId))
+
+    const curScroll = document.querySelector("#slider")?.scrollLeft
+    if (!curScroll) return
+    window.localStorage.setItem("scroll", curScroll.toString())
   }, [inView])
 
 
