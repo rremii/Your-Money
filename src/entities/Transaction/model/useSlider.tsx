@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react"
 import {
-  setSliderScroll,
   shiftTransMenuIdsLeft,
   shiftTransMenuIdsRight
 } from "@entities/DateSlider/model/DateSliderSlice.ts"
@@ -34,11 +33,13 @@ export const useSlider = () => {
     if (scrollDif === 0) {
       dispatch(shiftTransMenuIdsRight({ shiftAmount: 2 }))
       ref.current.scrollBy(width * 2, 0)
+      window.localStorage.setItem("scroll", String(curScroll - width * 2))
     }
 
     if (curScroll === 0) {
       dispatch(shiftTransMenuIdsLeft({ shiftAmount: 2 }))
       ref.current.scrollTo(0, 0)
+      window.localStorage.setItem("scroll", String(width * 2))
     }
   }
 

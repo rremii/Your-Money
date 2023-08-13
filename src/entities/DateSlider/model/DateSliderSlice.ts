@@ -11,20 +11,17 @@ interface initialState {
 }
 
 const initialState = {
-  sliderScroll: 0,
   dateFilter: "month",
   firstDay: "Sun",
   dateGap: "",
   dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
 } as initialState
 
+//todo these is a bug with same scroll on dif pages is not always accurate
 const DateSliderSlice = createSlice({
   name: "DateSliderSlice",
   initialState,
   reducers: {
-    setSliderScroll(state, action: PayloadAction<number>) {
-      state.sliderScroll = action.payload
-    },
     setDate(state, action: PayloadAction<string>) {
       state.dateGap = action.payload
     },
@@ -60,5 +57,5 @@ const DateSliderSlice = createSlice({
 })
 
 export const DateReducer = DateSliderSlice.reducer
-export const { setSliderScroll, setDate, shiftTransMenuIdsLeft, shiftTransMenuIdsRight } = DateSliderSlice.actions
+export const { setDate, shiftTransMenuIdsLeft, shiftTransMenuIdsRight } = DateSliderSlice.actions
 
