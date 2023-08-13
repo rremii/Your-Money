@@ -12,7 +12,7 @@ interface initialState {
 
 const initialState = {
   sliderScroll: 0,
-  dateFilter: "week",
+  dateFilter: "month",
   firstDay: "Sun",
   dateGap: "",
   dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
