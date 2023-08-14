@@ -107,10 +107,11 @@ class TimeGap {
 
   GetYearGap(index: number) {
     const now = new Date()
-    const dateFrom = new Date(now.getFullYear() + index, 0, 0)
-    const dateTo = new Date(now.getFullYear() + index + 1, 0, 0)
 
-    const year = dateTo.getFullYear()
+    const dateFrom = new Date(now.getFullYear() + index, 0, 1)
+    const dateTo = new Date(now.getFullYear() + index + 1, 0, 1)
+
+    const year = dateFrom.getFullYear()
 
     const dateGap = `Year ${year}`
 

@@ -13,7 +13,6 @@ export const OverviewSlider = memo(() => {
 
   console.log("qwe")
 
-  
   return <SliderLayout ref={sliderRef} onScroll={OnScroll} id="slider">
     {transactionMenusData.map((menuData) => (
       <OverviewMenu key={menuData.menuId} {...menuData} />

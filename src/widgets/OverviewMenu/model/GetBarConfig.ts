@@ -25,17 +25,17 @@ export const GetBarConfig = ({ categories, dateTo, dateFrom, filter, transaction
   const options = GetConfigOptions("Br")
 
 
-  const datePointsAmount = GetDatePointsAmount(dateFrom, dateTo)
+  const datePointsAmount = GetDatePointsAmount(dateFrom, dateTo, filter)
 
   const labels = GetLabels(dateFrom, dateTo, datePointsAmount, filter, firstDay)
 
   const transByCategories = GetTransByCategories(categories, transactions)
-  const transByDays = GetTransByDateUnitWithinCategory(transByCategories, dateFrom, dateTo, datePointsAmount, filter)
 
+  const transByDateUnits = GetTransByDateUnitWithinCategory(transByCategories, dateFrom, dateTo, datePointsAmount, filter)
 
   const data: ChartData<"bar"> = {
     labels,
-    datasets: transByDays.map(({ transactions, color, name }) => {
+    datasets: transByDateUnits.map(({ transactions, color, name }) => {
       return {
         backgroundColor: color,
         data: transactions,

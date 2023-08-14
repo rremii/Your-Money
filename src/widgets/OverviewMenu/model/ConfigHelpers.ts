@@ -44,12 +44,23 @@ export const GetConfigOptions = (currency: string = "$"): ChartOptions<"bar"> =>
     }
   }
 }
-export const GetDatePointsAmount = (dateFrom: Date, dateTo: Date) => {
+export const GetDatePointsAmount = (dateFrom: Date, dateTo: Date, filter: DateFilter) => {
+  let divUnit = (1000 * 60 * 60 * 24) // day
+
+
+  if (filter === "allTime") {
+    divUnit = (1000 * 60 * 60 * 24 * 365) //year
+  }
+  if (filter === "year") {
+    divUnit = (1000 * 60 * 60 * 24 * 30) //month
+  }
+
   const dif = dateTo.getTime() - dateFrom.getTime()
+  const datePoints = Math.round(dif / divUnit)
 
-  const dayAmount = dif / (1000 * 60 * 60 * 24)
+  return datePoints
 
-  return dayAmount
+
 }
 
 export const GetTransByCategories = (categories: ICategory[], transactions: ITransaction[]) => {
@@ -75,7 +86,7 @@ export const GetTransByDateUnitWithinCategory = (transByCategories: tranByCatego
 
     for (let dateUnitIndex = 0; dateUnitIndex < datePointsAmount; dateUnitIndex++) {
 
-      const year = dateTo.getFullYear()
+      const year = dateFrom.getFullYear()
       const month = dateFrom.getMonth()
       const date = dateFrom.getDate()
 
@@ -92,21 +103,24 @@ export const GetTransByDateUnitWithinCategory = (transByCategories: tranByCatego
           nextUnitDate = new Date(year, month, date + dateUnitIndex + 1)
           break
         case "month":
-          curDate = new Date(year, month, dateUnitIndex)
-          nextUnitDate = new Date(year, month, dateUnitIndex + 1)
+          curDate = new Date(year, month, dateUnitIndex + 1)
+          nextUnitDate = new Date(year, month, dateUnitIndex + 2)
           break
         case "year":
-          curDate = new Date(year, dateUnitIndex, 0)
-          nextUnitDate = new Date(year, dateUnitIndex + 1, 0)
+          curDate = new Date(year, dateUnitIndex, 1)
+          nextUnitDate = new Date(year, dateUnitIndex + 1, 1)
           break
+        case "allTime":
+          curDate = new Date(year + dateUnitIndex, 0, 1)
+          nextUnitDate = new Date(year + dateUnitIndex + 1, 0, 1)
       }
 
 
-      const transQuantity = transactions.filter(({ date }) => date > curDate && date < nextUnitDate).reduce((acc, cur) => acc + cur.quantity, 0)
-
-
+      const transQuantity = transactions.filter(({ date }) => date >= curDate && date < nextUnitDate).reduce((acc, cur) => acc + cur.quantity, 0)
+      
       curUnitTrans.push(transQuantity)
     }
+
 
     return { transactions: curUnitTrans, name, color }
   })
@@ -146,6 +160,15 @@ export const GetLabels = (dateFrom: Date, dateTo: Date, datePointsAmount: number
     }
     case "year":
       labels = yearLabels
+      break
+    case "allTime": {
+      const yearFrom = dateFrom.getFullYear()
+
+      for (let curYear = yearFrom; curYear < yearFrom + datePointsAmount; curYear++) {
+        labels.push(String(curYear))
+      }
+
+    }
   }
 
 

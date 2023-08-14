@@ -22,4 +22,4 @@ export interface ITransaction {
 
 }
 
-export type DateFilter = "day" | "week" | "month" | "year"
+export type DateFilter = "day" | "week" | "month" | "year" | "allTime"

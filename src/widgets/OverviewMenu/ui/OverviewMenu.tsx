@@ -41,6 +41,7 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
     window.localStorage.setItem("scroll", curScroll.toString())
   }, [inView])
 
+
   const barConfig = GetBarConfig({ categories, transactions, dateFrom, dateTo, filter: dateFilter, firstDay })
 
 

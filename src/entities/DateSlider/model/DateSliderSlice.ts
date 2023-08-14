@@ -15,9 +15,9 @@ const initialState = {
   firstDay: "Sun",
   dateGap: "",
   dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
+  // dateMenuIds: [0]
 } as initialState
 
-//todo these is a bug with same scroll on dif pages is not always accurate
 const DateSliderSlice = createSlice({
   name: "DateSliderSlice",
   initialState,
