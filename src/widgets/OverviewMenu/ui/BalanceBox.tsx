@@ -1,20 +1,26 @@
 import styled from "styled-components"
-import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
-import React from "react"
+import React, { FC } from "react"
 
-export const BalanceBox = () => {
+interface props {
+  expense: number
+  income: number
+}
+
+export const BalanceBox: FC<props> = ({ income, expense }) => {
+
+  const balance = income - expense
   return <BalanceLayout>
     <div className="balance">
       <h2>Balance</h2>
-      <p>-Br 100</p>
+      <p>-Br {balance}</p>
     </div>
     <div className="expense">
       <h2>Expense</h2>
-      <p>-Br 100</p>
+      <p>-Br {expense}</p>
     </div>
     <div className="income">
       <h2>Income</h2>
-      <p>Br 100</p>
+      <p>Br {income}</p>
     </div>
   </BalanceLayout>
 }

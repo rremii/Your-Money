@@ -1,10 +1,12 @@
 import { ChartData, ChartOptions } from "chart.js"
 import { DateFilter, ICategory, ITransaction } from "@entities/Transaction/types.ts"
 import {
-  GetConfigOptions, GetDatePointsAmount,
+  GetConfigOptions,
+  GetDatePointsAmount,
   GetLabels,
-  GetTransByCategories, GetTransByDateUnitWithinCategory
-} from "@widgets/OverviewMenu/model/ConfigHelpers.ts"
+  GetTransByCategories,
+  GetTransByDateUnitWithinCategory
+} from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 import { DayType } from "@shared/helpers/TimeGap.ts"
 
 interface IBarProps {

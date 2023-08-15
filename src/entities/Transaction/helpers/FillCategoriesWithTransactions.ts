@@ -1,6 +1,6 @@
 import { ICategory, ITransaction } from "@entities/Transaction/types.ts"
 
-export const GetCategoriesMenuData = (categories: ICategory[], transactions: ITransaction[]) => {
+export const FillCategoriesWithTransactions = (categories: ICategory[], transactions: ITransaction[]) => {
   return categories.map(({ name, color }) => {
     const categoryQuantity = transactions
       .filter(({ category }) => category === name)

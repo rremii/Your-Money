@@ -1,5 +1,4 @@
 import { ChartData, ChartOptions } from "chart.js"
-import { ITransaction } from "@entities/Transaction/types.ts"
 import { ICategoryData } from "@widgets/CategoriesMenu/ui/BalanceGraph.tsx"
 
 interface IDoughnutProps {

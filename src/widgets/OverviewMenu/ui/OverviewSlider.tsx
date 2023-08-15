@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import { OverviewMenu } from "@widgets/OverviewMenu/ui/OverviewMenu.tsx"
 import { useGetTransByMenus } from "@entities/Transaction/model/useGetTransByMenus.tsx"
-import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
 import React, { memo } from "react"
 import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
 

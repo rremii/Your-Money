@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
-import { GetCategoriesMenuData } from "@entities/Transaction/helpers/GetCategoriesMenuData.ts"
+import { FillCategoriesWithTransactions } from "@entities/Transaction/helpers/FillCategoriesWithTransactions.ts"
 import { ICategory, ITransaction } from "@entities/Transaction/types.ts"
 import { Category } from "@widgets/CategoriesMenu/ui/Category.tsx"
 import { BalanceGraph } from "@widgets/CategoriesMenu/ui/BalanceGraph.tsx"
@@ -46,7 +46,7 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
   }, [inView])
 
 
-  const filledCategories = GetCategoriesMenuData(categories, transactions)
+  const filledCategories = FillCategoriesWithTransactions(categories, transactions)
 
 
   return <CategoryLayout ref={observeRef}>

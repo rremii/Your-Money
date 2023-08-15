@@ -1,7 +1,6 @@
 import { useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { GetTransByDate } from "@entities/Transaction/helpers/GetTransByDate.ts"
-import { all } from "axios"
 import { useMemo } from "react"
 
 

@@ -1,6 +1,5 @@
 import styled from "styled-components"
-import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
-import React, { FC, memo, useEffect } from "react"
+import React, { FC, useEffect } from "react"
 import { DateMoneyCell } from "@widgets/OverviewMenu/ui/DateMoneyCell.tsx"
 import { CategoryCell } from "@widgets/OverviewMenu/ui/CategoryCell.tsx"
 import { BalanceBox } from "@widgets/OverviewMenu/ui/BalanceBox.tsx"
@@ -11,6 +10,8 @@ import { categories } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useInView } from "react-intersection-observer"
 import { setDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
+import { FillCategoriesWithTransactions } from "@entities/Transaction/helpers/FillCategoriesWithTransactions.ts"
 
 interface props {
   menuId: number
@@ -42,11 +43,22 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
   }, [inView])
 
 
+  const allTransactionsSum = SumAllTransactions(transactions)
+
+
   const barConfig = GetBarConfig({ categories, transactions, dateFrom, dateTo, filter: dateFilter, firstDay })
 
 
+
+
+
+
+
+
+  const filledCategories = FillCategoriesWithTransactions(categories, transactions)
+
   return <MenuLayout ref={observeRef}>
-    <BalanceBox />
+    <BalanceBox expense={allTransactionsSum} income={0} />
     <div className="overview-graph">
       <Bar {...barConfig} />
     </div>
@@ -56,11 +68,10 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
       <DateMoneyCell />
     </div>
     <div className="categories-box">
-      <CategoryCell />
-      <CategoryCell />
-      <CategoryCell />
-      <CategoryCell />
-      <CategoryCell />
+      {filledCategories.map(({ name, quantity, color }, index) => (
+        <CategoryCell key={index} currency={"Br"} color={color} name={name} quantity={quantity || 0}
+                      percent={quantity / allTransactionsSum || 0} />
+      ))}
     </div>
   </MenuLayout>
 }

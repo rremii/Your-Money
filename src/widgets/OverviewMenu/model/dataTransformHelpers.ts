@@ -117,7 +117,7 @@ export const GetTransByDateUnitWithinCategory = (transByCategories: tranByCatego
 
 
       const transQuantity = transactions.filter(({ date }) => date >= curDate && date < nextUnitDate).reduce((acc, cur) => acc + cur.quantity, 0)
-      
+
       curUnitTrans.push(transQuantity)
     }
 
@@ -173,4 +173,9 @@ export const GetLabels = (dateFrom: Date, dateTo: Date, datePointsAmount: number
 
 
   return labels
+}
+
+
+export const SumAllTransactions = (transactions: ITransaction[]) => {
+  return transactions.reduce((acc, cur) => acc + cur.quantity, 0)
 }

@@ -1,24 +1,38 @@
 import styled from "styled-components"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
-import React from "react"
+import React, { FC } from "react"
+import { TransCategories } from "@entities/Transaction/types.ts"
 
-export const CategoryCell = () => {
-  return <CellLayout>
+interface props {
+  name: TransCategories
+  quantity: number
+  percent: number
+  color: string
+  currency: string
+}
+
+
+export const CategoryCell: FC<props> = ({ currency, percent, quantity, name, color }) => {
+
+  return <CellLayout $color={color} $percent={percent * 100}>
     <div className="icon">
-      <img src={CategoriesIcons.get("Health")} alt="icon" />
+      <img src={CategoriesIcons.get(name)} alt="icon" />
     </div>
     <div className="text-info">
-      <h2 className="name">Health</h2>
-      <p className="quantity">Br 15</p>
+      <h2 className="name">{name}</h2>
+      <p className="quantity">{currency} {quantity}</p>
     </div>
     <div className="percent-bar">
       <div className="bar" />
       <div className="filled-bar" />
-      <div className="percent">15%</div>
+      <div className="percent">{Math.round(percent * 100)}%</div>
     </div>
   </CellLayout>
 }
-const CellLayout = styled.div`
+const CellLayout = styled.div<{
+  $color?: string
+  $percent?: number
+}>`
   box-shadow: 0px 2px 4px 0px var(--shadow-2);
   padding: 7px 15px;
   height: 52px;
@@ -66,34 +80,31 @@ const CellLayout = styled.div`
 
   .percent-bar {
     position: relative;
-    background-color: red;
     height: 5px;
+    display: flex;
+    align-items: center;
 
     .bar {
-
+      position: absolute;
+      left: 0;
+      top: 0;
       background-color: var(--bg-10);
       height: 5px;
       width: 100%;
     }
 
     .filled-bar {
-      position: absolute;
+      z-index: 1;
       height: 5px;
-      background-color: var(--bg-9);
-      left: 0;
-      top: 0;
-      width: 15%;
-
+      background-color: ${({ $color }) => $color || "var(--bg-9)"};
+      width: ${({ $percent }) => $percent + "%"};
     }
 
     .percent {
+      z-index: 1;
       padding: 0 7px;
       background-color: var(--bg-1);
-      position: absolute;
-      top: 50%;
-      left: 15%;
-      transform: translateY(-50%);
-      color: var(--txt-11);
+      color: ${({ $percent, $color }) => $percent === 0 ? "var(--txt-12)" : $color};
       font-family: Inter;
       font-size: 12px;
       font-style: normal;
