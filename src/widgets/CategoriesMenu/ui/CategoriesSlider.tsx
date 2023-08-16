@@ -1,7 +1,5 @@
 import styled from "styled-components"
 import React, { memo } from "react"
-import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
-import { useGetTransByMenus } from "@entities/Transaction/model/useGetTransByMenus.tsx"
 import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
 
 
@@ -11,13 +9,13 @@ export const CategoriesSlider = memo(() => {
 
   const { sliderRef, OnScroll } = useSlider()
 
-  const transactionMenusData = useGetTransByMenus()
+  // const transactionMenusData = useGetTransByMenus()
 
 
   return <CategoriesLayout id="slider" onScroll={OnScroll} ref={sliderRef}>
-    {transactionMenusData.map((menuData) => (
-      <CategoryMenu key={menuData.menuId} {...menuData} />
-    ))}
+    {/*{transactionMenusData.map((menuData) => (*/}
+    {/*  <CategoryMenu key={menuData.menuId} {...menuData} />*/}
+    {/*))}*/}
   </CategoriesLayout>
 })
 const CategoriesLayout = styled.main`

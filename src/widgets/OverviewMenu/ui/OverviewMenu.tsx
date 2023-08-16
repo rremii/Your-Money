@@ -12,6 +12,7 @@ import { useInView } from "react-intersection-observer"
 import { setDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 import { FillCategoriesWithTransactions } from "@entities/Transaction/helpers/FillCategoriesWithTransactions.ts"
+import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
 
 interface props {
   menuId: number
@@ -22,25 +23,11 @@ interface props {
 }
 
 export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGap, menuId }) => {
-  const dispatch = useAppDispatch()
-
-
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)
 
-  const [observeRef, inView] = useInView({
-    threshold: 0.5
-  })
 
-
-  useEffect(() => {
-    if (!inView) return
-    dispatch(setDate(dateGap))
-
-    const curScroll = document.querySelector("#slider")?.scrollLeft
-    if (!curScroll) return
-    window.localStorage.setItem("scroll", curScroll.toString())
-  }, [inView])
+  const { observeRef } = useOnMenuSlide(dateGap)
 
 
   const allTransactionsSum = SumAllTransactions(transactions)
@@ -49,13 +36,8 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
   const barConfig = GetBarConfig({ categories, transactions, dateFrom, dateTo, filter: dateFilter, firstDay })
 
 
-
-
-
-
-
-
   const filledCategories = FillCategoriesWithTransactions(categories, transactions)
+
 
   return <MenuLayout ref={observeRef}>
     <BalanceBox expense={allTransactionsSum} income={0} />
@@ -68,7 +50,11 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
       <DateMoneyCell />
     </div>
     <div className="categories-box">
-      {filledCategories.map(({ name, quantity, color }, index) => (
+      {filledCategories.sort((prev, cur) => prev.quantity < cur.quantity ? 1 : -1).map(({
+                                                                                          name,
+                                                                                          quantity,
+                                                                                          color
+                                                                                        }, index) => (
         <CategoryCell key={index} currency={"Br"} color={color} name={name} quantity={quantity || 0}
                       percent={quantity / allTransactionsSum || 0} />
       ))}

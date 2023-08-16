@@ -1,14 +1,25 @@
 import styled from "styled-components"
 import { OverviewMenu } from "@widgets/OverviewMenu/ui/OverviewMenu.tsx"
-import { useGetTransByMenus } from "@entities/Transaction/model/useGetTransByMenus.tsx"
+import { GetTransByMenus } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import React, { memo } from "react"
 import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
 
 export const OverviewSlider = memo(() => {
+  const dateMenuIds = useTypedSelector(state => state.Date.dateMenuIds)
+  const dateFilter = useTypedSelector(state => state.Date.dateFilter)
+  const firstDay = useTypedSelector(state => state.Date.firstDay)
+
+  const { transactions } = useGetTransactions()
+
 
   const { sliderRef, OnScroll } = useSlider()
 
-  const transactionMenusData = useGetTransByMenus()
+
+  const transactionMenusData = GetTransByMenus({
+    transactions, dateFilter, dateMenuIds, firstDay
+  })
 
   console.log("qwe")
 
