@@ -1,6 +1,8 @@
 import styled from "styled-components"
 
 export const DateMoneyCell = () => {
+
+
   return <CellLayout>
     <h3 className="date">Day (avg.)</h3>
     <p className="quantity">-Br 20</p>
@@ -8,6 +10,7 @@ export const DateMoneyCell = () => {
 }
 const CellLayout = styled.div`
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;

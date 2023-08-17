@@ -15,6 +15,7 @@ export const useOnMenuSlide = (dateGap: string) => {
   useEffect(() => {
     if (!inView) return
     dispatch(setDate(dateGap))
+    
 
     const curScroll = document.querySelector("#slider")?.scrollLeft
     if (!curScroll) return
