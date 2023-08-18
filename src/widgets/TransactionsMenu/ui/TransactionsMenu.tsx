@@ -7,6 +7,7 @@ import { setDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { GetTransactionsMenuData } from "@entities/Transaction/helpers/GetTransactionsMenuData.ts"
 import { ITransaction } from "@entities/Transaction/types.ts"
+import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
 
 interface props {
   menuId: number
@@ -16,22 +17,8 @@ interface props {
 
 
 export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId }) => {
-  const dispatch = useAppDispatch()
 
-  const [observeRef, inView] = useInView({
-    threshold: 0.5
-  })
-
-
-  useEffect(() => {
-    if (!inView) return
-    dispatch(setDate(dateGap))
-
-    const curScroll = document.querySelector("#slider")?.scrollLeft
-    if (!curScroll) return
-    window.localStorage.setItem("scroll", curScroll.toString())
-  }, [inView])
-
+  const { observeRef } = useOnMenuSlide(dateGap, menuId)
 
   const transactionsMenuData = GetTransactionsMenuData(transactions)
 

@@ -7,6 +7,7 @@ import { FillCategoriesWithTransactions } from "@entities/Transaction/helpers/Fi
 import { ICategory, ITransaction } from "@entities/Transaction/types.ts"
 import { Category } from "@widgets/CategoriesMenu/ui/Category.tsx"
 import { BalanceGraph } from "@widgets/CategoriesMenu/ui/BalanceGraph.tsx"
+import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
 
 
 interface props {
@@ -28,26 +29,10 @@ export const categories: ICategory[] = [
 
 
 export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactions }) => {
-  const dispatch = useAppDispatch()
 
-
-  const [observeRef, inView] = useInView({
-    threshold: 0.5
-  })
-
-
-  useEffect(() => {
-    if (!inView) return
-    dispatch(setDate(dateGap))
-
-    const curScroll = document.querySelector("#slider")?.scrollLeft
-    if (!curScroll) return
-    window.localStorage.setItem("scroll", curScroll.toString())
-  }, [inView])
-
+  const { observeRef } = useOnMenuSlide(dateGap, menuId)
 
   const filledCategories = FillCategoriesWithTransactions(categories, transactions)
-
 
   return <CategoryLayout ref={observeRef}>
     <BalanceGraph categories={filledCategories} />

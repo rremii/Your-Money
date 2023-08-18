@@ -28,13 +28,8 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
 
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
 
-
   const allTransactionsSum = SumAllTransactions(transactions)
-
-
   const barConfig = GetBarConfig({ categories, transactions, dateFrom, dateTo, filter: dateFilter, firstDay })
-
-
   const filledCategories = FillCategoriesWithTransactions(categories, transactions)
 
 
