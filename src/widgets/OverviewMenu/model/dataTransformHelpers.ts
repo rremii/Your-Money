@@ -5,19 +5,14 @@ import { Days, DayType, FullDays } from "@shared/helpers/TimeGap.ts"
 export const GetConfigOptions = (currency: string = "$"): ChartOptions<"bar"> => {
 
   return {
-    plugins: {},
-    elements: {},
     responsive: true,
     maintainAspectRatio: false,
-
     scales: {
-
       x: {
         stacked: true,
         ticks: {
           autoSkip: false,
           maxRotation: 0
-
         },
         grid: {
           // display: false,
@@ -26,7 +21,6 @@ export const GetConfigOptions = (currency: string = "$"): ChartOptions<"bar"> =>
           tickWidth: 1
         }
       },
-
       y: {
         ticks: {
           labelOffset: 10,
@@ -116,7 +110,9 @@ export const GetTransByDateUnitWithinCategory = (transByCategories: tranByCatego
       }
 
 
-      const transQuantity = transactions.filter(({ date }) => date >= curDate && date < nextUnitDate).reduce((acc, cur) => acc + cur.quantity, 0)
+      const transQuantity = transactions
+        .filter(({ date }) => date >= curDate && date < nextUnitDate)
+        .reduce((acc, cur) => acc + cur.quantity, 0)
 
       curUnitTrans.push(transQuantity)
     }

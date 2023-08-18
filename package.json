@@ -18,6 +18,7 @@
     "bcryptjs": "^2.4.3",
     "chart.js": "^4.3.2",
     "chartjs-plugin-datalabels": "^2.2.0",
+    "chartjs-plugin-sort": "^0.1.1",
     "compose-function": "^3.0.3",
     "node-sass": "^9.0.0",
     "prettier": "^3.0.0",

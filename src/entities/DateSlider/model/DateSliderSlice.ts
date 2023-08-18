@@ -3,25 +3,29 @@ import { DayType } from "@shared/helpers/TimeGap.ts"
 import { DateFilter } from "@entities/Transaction/types.ts"
 
 interface initialState {
-  sliderScroll: number
   dateFilter: DateFilter
   dateGap: string
   dateMenuIds: number[]
+  curMenuId: number
   firstDay: DayType
 }
 
 const initialState = {
-  dateFilter: "day",
+  dateFilter: "year",
   firstDay: "Sun",
   dateGap: "",
-  dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
+  dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5],
   // dateMenuIds: [0]
+  curMenuId: 0
 } as initialState
 
 const DateSliderSlice = createSlice({
   name: "DateSliderSlice",
   initialState,
   reducers: {
+    setCurMenuId(state, action: PayloadAction<number>) {
+      state.curMenuId = action.payload
+    },
     setDate(state, action: PayloadAction<string>) {
       state.dateGap = action.payload
     },
@@ -57,5 +61,5 @@ const DateSliderSlice = createSlice({
 })
 
 export const DateReducer = DateSliderSlice.reducer
-export const { setDate, shiftTransMenuIdsLeft, shiftTransMenuIdsRight } = DateSliderSlice.actions
+export const { setCurMenuId, setDate, shiftTransMenuIdsLeft, shiftTransMenuIdsRight } = DateSliderSlice.actions
 

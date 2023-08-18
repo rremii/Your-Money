@@ -26,7 +26,7 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
   const firstDay = useTypedSelector(state => state.Date.firstDay)
 
 
-  const { observeRef } = useOnMenuSlide(dateGap)
+  const { observeRef } = useOnMenuSlide(dateGap, menuId)
 
 
   const allTransactionsSum = SumAllTransactions(transactions)
@@ -49,14 +49,12 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
       ))}
     </div>
     <div className="categories-box">
-      {filledCategories.sort((prev, cur) => prev.quantity < cur.quantity ? 1 : -1).map(({
-                                                                                          name,
-                                                                                          quantity,
-                                                                                          color
-                                                                                        }, index) => (
-        <CategoryCell key={index} currency={"Br"} color={color} name={name} quantity={quantity || 0}
-                      percent={quantity / allTransactionsSum || 0} />
-      ))}
+      {filledCategories
+        .sort((prev, cur) => prev.quantity < cur.quantity ? 1 : -1)
+        .map(({ name, quantity, color }, index) => (
+          <CategoryCell key={index} currency={"Br"} color={color} name={name} quantity={quantity || 0}
+                        percent={quantity / allTransactionsSum || 0} />
+        ))}
     </div>
   </MenuLayout>
 }

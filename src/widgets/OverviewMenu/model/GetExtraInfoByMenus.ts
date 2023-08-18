@@ -4,6 +4,7 @@ import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
 import { DayType, timeGap } from "@shared/helpers/TimeGap.ts"
 import { transByDate } from "@entities/Transaction/helpers/TransByDate.ts"
 import { dateGapDayIn } from "@entities/Transaction/helpers/DateGapDayIn.ts"
+import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 
 export interface IExtraInfo {
@@ -23,21 +24,146 @@ export const GetExtraInfoByMenus = ({ dateFilter, firstDay, allTransactions, dat
   return dateMenuIds.map((menuId) => {
     switch (dateFilter) {
       case "allTime": {
+        const { transactions } = transByDate.byAllTime(allTransactions, menuId)
+        const allTimeQuantity = transactions.reduce((acc, cur) => acc + cur.quantity, 0)
+
+
+        const transDays = new Set()
+        const transMonths = new Set()
+        const transYears = new Set()
+
+        transactions.forEach(({ date }) => {
+          const { dateGap: dayStr } = timeGap.GetDayGap(0, date)
+          transDays.add(dayStr)
+
+          const { dateGap: monthStr } = timeGap.GetMonthGap(0, date)
+          transMonths.add(monthStr)
+
+          const { dateGap: yearStr } = timeGap.GetYearGap(0, date)
+          transYears.add(yearStr)
+        })
+
+        const dayAvgQuantity = RoundDecimal(allTimeQuantity / transDays.size) || 0
+        const monthAvgQuantity = RoundDecimal(allTimeQuantity / transMonths.size) || 0
+        const yearAvgQuantity = RoundDecimal(allTimeQuantity / transYears.size) || 0
+
+        return [{
+          title: "day (avg.)",
+          quantity: dayAvgQuantity
+        }, {
+          title: "month (avg.)",
+          quantity: monthAvgQuantity
+        }, {
+          title: "year (avg.)",
+          quantity: yearAvgQuantity
+        }]
+
       }
         break
       case "year": {
+        const { transactions } = transByDate.byYear(allTransactions, menuId)
+        const yearQuantity = transactions.reduce((acc, cur) => acc + cur.quantity, 0)
+
+
+        const transDays = new Set()
+        const transWeeks = new Set()
+        const transMonths = new Set()
+
+        transactions.forEach(({ date }) => {
+          const { dateGap: dayStr } = timeGap.GetDayGap(0, date)
+          transDays.add(dayStr)
+
+          const { dateGap: weekStr } = timeGap.GetWeekGap(firstDay, 0, date)
+          transWeeks.add(weekStr)
+
+          const { dateGap: monthStr } = timeGap.GetMonthGap(0, date)
+          transMonths.add(monthStr)
+        })
+
+        const dayAvgQuantity = RoundDecimal(yearQuantity / transDays.size) || 0
+        const weekAvgQuantity = RoundDecimal(yearQuantity / transWeeks.size) || 0
+        const monthAvgQuantity = RoundDecimal(yearQuantity / transMonths.size) || 0
+
+        return [{
+          title: "day (avg.)",
+          quantity: dayAvgQuantity
+        }, {
+          title: "week (avg.)",
+          quantity: weekAvgQuantity
+        }, {
+          title: "month (avg.)",
+          quantity: monthAvgQuantity
+        }]
       }
         break
       case "month": {
+        const { transactions } = transByDate.byMonth(allTransactions, menuId)
+
+        const monthQuantity = transactions.reduce((acc, cur) => acc + cur.quantity, 0)
+
+
+        const transDays = new Set()
+        const transWeeks = new Set()
+
+        transactions.forEach(({ date }) => {
+          const { dateGap: dayStr } = timeGap.GetDayGap(0, date)
+          transDays.add(dayStr)
+
+          const { dateGap: weekStr } = timeGap.GetWeekGap(firstDay, 0, date)
+          transWeeks.add(weekStr)
+        })
+
+        const dayAvgQuantity = RoundDecimal(monthQuantity / transDays.size) || 0
+        const weekAvgQuantity = RoundDecimal(monthQuantity / transWeeks.size) || 0
+
+
+        return [{
+          title: "day (avg.)",
+          quantity: dayAvgQuantity
+        }, {
+          title: "week (avg.)",
+          quantity: weekAvgQuantity
+        }, {
+          title: "month",
+          quantity: monthQuantity
+        }]
+
       }
         break
       case "week": {
+        const { transactions } = transByDate.byWeek(allTransactions, menuId, firstDay)
 
+        const weekQuantity = transactions.reduce((acc, cur) => acc + cur.quantity, 0)
+
+
+        const weekdays = transactions.reduce((acc, cur) => {
+          if (cur.date.getDay() > 5) return 0 //weekends
+          return acc + cur.quantity
+        }, 0)
+
+
+        const transDays = new Set()
+        transactions.forEach(({ date }) => {
+          const { dateGap: dayStr } = timeGap.GetDayGap(0, date)
+          transDays.add(dayStr)
+        })
+
+        const dayAvgQuantity = RoundDecimal(weekQuantity / transDays.size) || 0
+
+        return [{
+          title: "day (avg.)",
+          quantity: dayAvgQuantity
+        }, {
+          title: "weekdays",
+          quantity: weekdays
+        }, {
+          title: "week",
+          quantity: weekQuantity
+        }]
       }
         break
       case "day": {
         const { dateTo, dateFrom, transactions: dayTransactions } = transByDate.byDay(allTransactions, menuId)
-
         const week = timeGap.GetWeekGap(firstDay, 0, dateTo)
         const month = timeGap.GetMonthGap(0, dateFrom)
 

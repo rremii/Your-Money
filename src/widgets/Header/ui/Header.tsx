@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { FC } from "react"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setIsSideBar } from "@entities/SideBar"
 
 interface props {
@@ -12,12 +12,18 @@ interface props {
 
 export const Header: FC<props> = ({ right, SubHeader }) => {
   const dispatch = useAppDispatch()
+
+
+  const curMenuId = useTypedSelector(state => state.Date.curMenuId)
+  // const dateGap = useTypedSelector(state => state.Date.dateGap)
+
+
   const OpenSideBar = () => {
     dispatch(setIsSideBar(true))
   }
 
   return (
-    <HeaderLayout>
+    <HeaderLayout $isActive={curMenuId === 0}>
       <div onClick={OpenSideBar} className="burger left">
         <span />
         <span />
@@ -32,10 +38,13 @@ export const Header: FC<props> = ({ right, SubHeader }) => {
     </HeaderLayout>
   )
 }
-const HeaderLayout = styled.header`
+const HeaderLayout = styled.header<{
+  $isActive?: boolean
+}>`
   //height: 70px !important;
-  background-color: var(--bg-3);
+  background-color: ${({ $isActive }) => $isActive ? "var(--bg-3)" : "var(--bg-11)"};
   display: grid;
+  transition: .5s;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 65px min-content;
   padding: 0 17px;

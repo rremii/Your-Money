@@ -32,8 +32,14 @@ export const GetBarConfig = ({ categories, dateTo, dateFrom, filter, transaction
   const labels = GetLabels(dateFrom, dateTo, datePointsAmount, filter, firstDay)
 
   const transByCategories = GetTransByCategories(categories, transactions)
-
   const transByDateUnits = GetTransByDateUnitWithinCategory(transByCategories, dateFrom, dateTo, datePointsAmount, filter)
+
+
+  // const sortedTransactions = transByDateUnits.sort((prev, cur) => {
+  //   const prevCategoryQuantity = prev.transactions.reduce((acc, cur) => acc + cur, 0)
+  //   const curCategoryQuantity = cur.transactions.reduce((acc, cur) => acc + cur, 0)
+  //   return prevCategoryQuantity < curCategoryQuantity ? 1 : -1
+  // })
 
   const data: ChartData<"bar"> = {
     labels,
@@ -41,8 +47,11 @@ export const GetBarConfig = ({ categories, dateTo, dateFrom, filter, transaction
       return {
         backgroundColor: color,
         data: transactions,
-        animation: false
+        animation: false,
+        maxBarThickness: 100
+
       }
+
     })
   }
 
