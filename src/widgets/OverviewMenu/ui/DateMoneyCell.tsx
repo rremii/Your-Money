@@ -1,11 +1,17 @@
 import styled from "styled-components"
+import { FC } from "react"
 
-export const DateMoneyCell = () => {
+interface props {
+  title: string
+  quantity: number
+}
+
+export const DateMoneyCell: FC<props> = ({ quantity, title }) => {
 
 
   return <CellLayout>
-    <h3 className="date">Day (avg.)</h3>
-    <p className="quantity">-Br 20</p>
+    <h3 className="date">{title}</h3>
+    <p className="quantity">-Br {quantity}</p>
   </CellLayout>
 }
 const CellLayout = styled.div`

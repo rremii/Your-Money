@@ -43,8 +43,10 @@ Months.set(11, "December")
 export type DayType = "Sun" | "Mon" | "Tue" | "Wed" | "Thu" | "Fri" | "Sat"
 
 class TimeGap {
-  private GetWeekDaysGap(startDay: DayType) {
-    const curDay = new Date().getDay()
+  private GetWeekDaysGap(startDay: DayType, initDate?: Date) {
+    if (!initDate) initDate = new Date()
+
+    const curDay = initDate.getDay()
 
     const dayGap = curDay - Days.get(startDay)
 
@@ -53,13 +55,13 @@ class TimeGap {
     return dayGap
   }
 
-  GetWeeKGap(firstDay: DayType, index: number) {
-    const dayGap = this.GetWeekDaysGap(firstDay)
+  GetWeekGap(firstDay: DayType, index: number, initDate?: Date) {
+    const dayGap = this.GetWeekDaysGap(firstDay, initDate)
 
-    const now = new Date()
+    if (!initDate) initDate = new Date()
 
-    const dateFrom = new Date(now.getFullYear(), now.getMonth(), now.getDate() - dayGap + 7 * index)
-    const dateTo = new Date(now.getFullYear(), now.getMonth(), now.getDate() - dayGap + 7 * (index + 1))
+    const dateFrom = new Date(initDate.getFullYear(), initDate.getMonth(), initDate.getDate() - dayGap + 7 * index)
+    const dateTo = new Date(initDate.getFullYear(), initDate.getMonth(), initDate.getDate() - dayGap + 7 * (index + 1))
 
     const monthFrom = Months.get(dateFrom.getMonth()) || ""
     const monthTo = Months.get(dateTo.getMonth()) || ""
@@ -71,15 +73,16 @@ class TimeGap {
     return { dateFrom, dateTo, dateGap }
   }
 
-  GetDayGap(index: number) {
-    const now = new Date()
+  GetDayGap(index: number, initDate?: Date) {
+    if (!initDate) initDate = new Date()
 
-    const dateFrom = new Date(now.getFullYear(), now.getMonth(), now.getDate() + index)
-    const dateTo = new Date(now.getFullYear(), now.getMonth(), now.getDate() + index + 1)
+
+    const dateFrom = new Date(initDate.getFullYear(), initDate.getMonth(), initDate.getDate() + index)
+    const dateTo = new Date(initDate.getFullYear(), initDate.getMonth(), initDate.getDate() + index + 1)
 
     const day = dateTo.toUTCString().slice(0, 3)
     const date = dateFrom.getDate()
-    const month = Months.get(dateTo.getMonth()) || ""
+    const month = Months.get(dateFrom.getMonth()) || ""
     const year = dateTo.getFullYear()
 
 
@@ -88,14 +91,15 @@ class TimeGap {
     return { dateFrom, dateTo, dateGap }
   }
 
-  GetMonthGap(index: number) {
-    const now = new Date()
+  GetMonthGap(index: number, initDate?: Date) {
+    if (!initDate) initDate = new Date()
 
-    const dateFromMonth = now.getMonth() + index
-    const dateToMonth = now.getMonth() + index + 1
 
-    const dateFrom = new Date(now.getFullYear(), dateFromMonth)
-    const dateTo = new Date(now.getFullYear(), dateToMonth)
+    const dateFromMonth = initDate.getMonth() + index
+    const dateToMonth = initDate.getMonth() + index + 1
+
+    const dateFrom = new Date(initDate.getFullYear(), dateFromMonth)
+    const dateTo = new Date(initDate.getFullYear(), dateToMonth)
 
     const month = Months.get(dateFrom.getMonth()) || ""
     const year = dateFrom.getFullYear()
@@ -105,11 +109,11 @@ class TimeGap {
     return { dateFrom, dateTo, dateGap }
   }
 
-  GetYearGap(index: number) {
-    const now = new Date()
+  GetYearGap(index: number, initDate?: Date) {
+    if (!initDate) initDate = new Date()
 
-    const dateFrom = new Date(now.getFullYear() + index, 0, 1)
-    const dateTo = new Date(now.getFullYear() + index + 1, 0, 1)
+    const dateFrom = new Date(initDate.getFullYear() + index, 0, 1)
+    const dateTo = new Date(initDate.getFullYear() + index + 1, 0, 1)
 
     const year = dateFrom.getFullYear()
 
@@ -119,5 +123,5 @@ class TimeGap {
   }
 }
 
-export default new TimeGap()
+export const timeGap = new TimeGap()
 

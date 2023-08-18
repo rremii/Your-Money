@@ -5,27 +5,32 @@ import React, { memo } from "react"
 import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
+import { GetExtraInfoByMenus } from "@widgets/OverviewMenu/model/GetExtraInfoByMenus.ts"
 
 export const OverviewSlider = memo(() => {
   const dateMenuIds = useTypedSelector(state => state.Date.dateMenuIds)
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)
 
-  const { transactions } = useGetTransactions()
+  const { allTransactions } = useGetTransactions()
 
 
   const { sliderRef, OnScroll } = useSlider()
 
 
-  const transactionMenusData = GetTransByMenus({
-    transactions, dateFilter, dateMenuIds, firstDay
+  const transByMenus = GetTransByMenus({
+    allTransactions, dateFilter, dateMenuIds, firstDay
+  })
+
+  const menusExtraInfo = GetExtraInfoByMenus({
+    allTransactions, dateFilter, dateMenuIds, firstDay
   })
 
   console.log("qwe")
 
   return <SliderLayout ref={sliderRef} onScroll={OnScroll} id="slider">
-    {transactionMenusData.map((menuData) => (
-      <OverviewMenu key={menuData.menuId} {...menuData} />
+    {transByMenus.map((menuData, index) => (
+      <OverviewMenu key={menuData.menuId} extInfo={menusExtraInfo[index]}  {...menuData} />
     ))}
   </SliderLayout>
 })

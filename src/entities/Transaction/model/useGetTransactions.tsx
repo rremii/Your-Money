@@ -23,5 +23,5 @@ export const useGetTransactions = () => {
     { category: "Shopping", date: new Date(2023, 7, 31, 0), id: 16, quantity: 60 },
     { category: "Restaurant", date: new Date(2023, 8, 1, 0), id: 17, quantity: 60 }
   ], [])
-  return { transactions }
+  return { allTransactions: transactions }
 }

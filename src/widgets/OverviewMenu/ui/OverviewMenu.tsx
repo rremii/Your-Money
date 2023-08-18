@@ -13,16 +13,15 @@ import { setDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 import { FillCategoriesWithTransactions } from "@entities/Transaction/helpers/FillCategoriesWithTransactions.ts"
 import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
+import { ITransByMenu } from "@entities/Transaction/model/GetTransByMenus.tsx"
+import { IExtraInfo } from "@widgets/OverviewMenu/model/GetExtraInfoByMenus.ts"
 
-interface props {
-  menuId: number
-  dateGap: string
-  dateTo: Date
-  dateFrom: Date
-  transactions: ITransaction[]
+
+interface props extends ITransByMenu {
+  extInfo: IExtraInfo[]
 }
 
-export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGap, menuId }) => {
+export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGap, extInfo, menuId }) => {
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)
 
@@ -45,9 +44,9 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
       <Bar {...barConfig} />
     </div>
     <div className="date-money-box">
-      <DateMoneyCell />
-      <DateMoneyCell />
-      <DateMoneyCell />
+      {extInfo.map((extData, index) => (
+        <DateMoneyCell key={index} {...extData} />
+      ))}
     </div>
     <div className="categories-box">
       {filledCategories.sort((prev, cur) => prev.quantity < cur.quantity ? 1 : -1).map(({

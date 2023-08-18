@@ -1,22 +1,44 @@
-import { useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { GetTransByDate } from "@entities/Transaction/helpers/GetTransByDate.ts"
-import { useMemo } from "react"
 import { DateFilter, ITransaction } from "@entities/Transaction/types.ts"
 import { DayType } from "@shared/helpers/TimeGap.ts"
+import { transByDate } from "@entities/Transaction/helpers/TransByDate.ts"
 
 
 interface props {
   dateMenuIds: number[]
-  transactions: ITransaction[]
+  allTransactions: ITransaction[]
   dateFilter: DateFilter
   firstDay: DayType
 }
 
-export const GetTransByMenus = ({ dateMenuIds, transactions, dateFilter, firstDay }: props) => {
+export interface ITransByMenu {
+  transactions: ITransaction[],
+  dateGap: string,
+  dateTo: Date,
+  dateFrom: Date,
+  menuId: number
+}
+
+export const GetTransByMenus = ({ dateMenuIds, allTransactions, dateFilter, firstDay }: props): ITransByMenu[] => {
 
   return dateMenuIds.map((menuId) => {
-    return GetTransByDate(transactions, dateFilter, menuId, firstDay)
+    switch (dateFilter) {
+
+      case "day":
+        return transByDate.byDay(allTransactions, menuId)
+
+      case "week":
+        return transByDate.byWeek(allTransactions, menuId, firstDay)
+
+      case "month":
+        return transByDate.byMonth(allTransactions, menuId)
+
+      case "year":
+        return transByDate.byYear(allTransactions, menuId)
+
+      case "allTime":
+        return transByDate.byAllTime(allTransactions, menuId)
+
+    }
   })
 
 }
