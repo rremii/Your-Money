@@ -1,21 +1,31 @@
 import styled from "styled-components"
 import React, { memo } from "react"
 import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
+import { useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
+import { GetTransByMenus } from "@entities/Transaction/model/GetTransByMenus.tsx"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 
 
 //todo add optimization to everywhere
 export const CategoriesSlider = memo(() => {
+  const dateMenuIds = useTypedSelector(state => state.Date.dateMenuIds)
+  const dateFilter = useTypedSelector(state => state.Date.dateFilter)
+  const firstDay = useTypedSelector(state => state.Date.firstDay)
 
+
+  const { allTransactions } = useGetTransactions()
 
   const { sliderRef, OnScroll } = useSlider()
 
-  // const transactionMenusData = useGetTransByMenus()
-
+  const transByMenus = GetTransByMenus({
+    allTransactions, dateFilter, dateMenuIds, firstDay
+  })
 
   return <CategoriesLayout id="slider" onScroll={OnScroll} ref={sliderRef}>
-    {/*{transactionMenusData.map((menuData) => (*/}
-    {/*  <CategoryMenu key={menuData.menuId} {...menuData} />*/}
-    {/*))}*/}
+    {transByMenus.map((menuData) => (
+      <CategoryMenu key={menuData.menuId} {...menuData} />
+    ))}
   </CategoriesLayout>
 })
 const CategoriesLayout = styled.main`

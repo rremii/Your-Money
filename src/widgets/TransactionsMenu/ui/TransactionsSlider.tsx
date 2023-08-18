@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import React, { memo } from "react"
 import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
-import { useGetTransByMenus } from "@entities/Transaction/model/GetTransByMenus.tsx"
+import { GetTransByMenus } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
 import { useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
@@ -13,17 +13,19 @@ export const TransactionsSlider = memo(() => {
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)
 
-  const { transactions: allTransactions } = useGetTransactions()
-
+  const { allTransactions } = useGetTransactions()
 
   const { sliderRef, OnScroll } = useSlider()
 
-  // const transactionMenusData = useGetTransByMenus(allTransactions)
+  const transByMenus = GetTransByMenus({
+    allTransactions, dateFilter, dateMenuIds, firstDay
+  })
+
 
   return <SliderLayout id="slider" ref={sliderRef} onScroll={OnScroll}>
-    {/*{transactionMenusData.map((menuData) => (*/}
-    {/*  <TransactionsMenu key={menuData.menuId} {...menuData} />*/}
-    {/*))}*/}
+    {transByMenus.map((menuData) => (
+      <TransactionsMenu key={menuData.menuId} {...menuData} />
+    ))}
   </SliderLayout>
 })
 const SliderLayout = styled.main`
