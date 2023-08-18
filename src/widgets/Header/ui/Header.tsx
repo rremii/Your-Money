@@ -44,7 +44,7 @@ const HeaderLayout = styled.header<{
   //height: 70px !important;
   background-color: ${({ $isActive }) => $isActive ? "var(--bg-3)" : "var(--bg-11)"};
   display: grid;
-  transition: .5s;
+  transition: 1s;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 65px min-content;
   padding: 0 17px;
