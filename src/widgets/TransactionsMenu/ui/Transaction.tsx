@@ -2,7 +2,7 @@ import styled from "styled-components"
 import Account from "@shared/assets/LightTheme/accounts.png"
 import React, { FC } from "react"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
-import { ITransaction } from "@entities/Transaction/types.ts"
+import { ITransaction, TransactionType } from "@entities/Transaction/types.ts"
 
 interface props extends ITransaction {
 
@@ -28,7 +28,7 @@ export const Transaction: FC<props> = ({ date, id, quantity, category, type }) =
   </TransactionLayout>
 }
 const TransactionLayout = styled.div<{
-  $type?: Pick<ITransaction, "type">
+  $type?: TransactionType
 }>`
 
   display: flex;

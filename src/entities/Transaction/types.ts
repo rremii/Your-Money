@@ -3,12 +3,15 @@ export interface ICategory {
   color: string
 }
 
+
+export type TransactionType = "income" | "expense"
+
 export interface ITransaction {
   id: number
   category: string
   date: Date
   quantity: number
-  type: "income" | "expense"
+  type: TransactionType
 }
 
 export type DateFilter = "day" | "week" | "month" | "year" | "allTime"

@@ -5,7 +5,6 @@ import { TransactionSectionByDate } from "@widgets/TransactionsMenu/ui/Transacti
 import { GetTransactionsMenuData } from "@entities/Transaction/helpers/GetTransactionsMenuData.ts"
 import { ITransaction } from "@entities/Transaction/types.ts"
 import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
-import { FilterTransByType } from "@entities/Transaction/helpers/FilterTransByType.ts"
 
 interface props {
   menuId: number
