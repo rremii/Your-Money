@@ -1,5 +1,5 @@
 import { ChartOptions } from "chart.js"
-import { DateFilter, ICategory, ITransaction, TransCategories } from "@entities/Transaction/types.ts"
+import { DateFilter, ICategory, ITransaction } from "@entities/Transaction/types.ts"
 import { Days, DayType, FullDays } from "@shared/helpers/TimeGap.ts"
 
 export const GetConfigOptions = (currency: string = "$"): ChartOptions<"bar"> => {
@@ -67,7 +67,7 @@ export const GetTransByCategories = (categories: ICategory[], transactions: ITra
 }
 
 interface tranByCategories {
-  name: TransCategories
+  name: string
   color: string
   transactions: ITransaction[]
 }
@@ -173,5 +173,8 @@ export const GetLabels = (dateFrom: Date, dateTo: Date, datePointsAmount: number
 
 
 export const SumAllTransactions = (transactions: ITransaction[]) => {
-  return transactions.reduce((acc, cur) => acc + cur.quantity, 0)
+  return transactions.reduce((acc, cur) => {
+    if (cur.type === "income") return acc + cur.quantity
+    if (cur.type === "expense") return acc - cur.quantity
+  }, 0)
 }

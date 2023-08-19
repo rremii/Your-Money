@@ -2,6 +2,7 @@ import { DateBox } from "@widgets/TransactionsMenu/ui/DateBox.tsx"
 import { Transaction } from "@widgets/TransactionsMenu/ui/Transaction.tsx"
 import React, { FC } from "react"
 import { ITransaction } from "@entities/Transaction/types.ts"
+import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 
 interface props {
   date: Date;
@@ -10,13 +11,15 @@ interface props {
 
 export const TransactionSectionByDate: FC<props> = ({ date, transactions }) => {
 
+  const sectionBalance = SumAllTransactions(transactions)
+
   let dateBalance = 0
   transactions.forEach(({ quantity }) => {
     dateBalance -= quantity
   })
 
   return <>
-    <DateBox date={date} dateBalance={dateBalance} />
+    <DateBox date={date} dateBalance={sectionBalance} />
     {transactions.map((transactionData) => (
       <Transaction key={transactionData.id} {...transactionData} />
     ))}

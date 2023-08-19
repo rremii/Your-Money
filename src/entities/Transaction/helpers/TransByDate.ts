@@ -1,4 +1,4 @@
-import { DateFilter, ITransaction } from "@entities/Transaction/types.ts"
+import { ITransaction } from "@entities/Transaction/types.ts"
 import { DayType, timeGap } from "@shared/helpers/TimeGap.ts"
 
 

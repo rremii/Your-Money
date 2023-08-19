@@ -8,23 +8,29 @@ interface props {
 
 export const BalanceBox: FC<props> = ({ income, expense }) => {
 
-  const balance = income - expense
-  return <BalanceLayout>
+  const balance = income + expense
+
+  let balanceSign = ""
+  if (balance > 0) balanceSign = "+"
+  if (balance < 0) balanceSign = "-"
+  return <BalanceLayout $balance={balance}>
     <div className="balance">
       <h2>Balance</h2>
-      <p>-Br {balance}</p>
+      <p>{balanceSign}Br {Math.abs(balance)}</p>
     </div>
     <div className="expense">
       <h2>Expense</h2>
-      <p>-Br {expense}</p>
+      <p>{expense ? "-" : ""}Br {Math.abs(expense)}</p>
     </div>
     <div className="income">
       <h2>Income</h2>
-      <p>Br {income}</p>
+      <p>{income ? "+" : ""}Br {income}</p>
     </div>
   </BalanceLayout>
 }
-const BalanceLayout = styled.div`
+const BalanceLayout = styled.div<{
+  $balance?: number
+}>`
   display: grid;
   grid-template-rows: 55px 50px;
   grid-template-columns: 1fr 1fr;
@@ -50,7 +56,12 @@ const BalanceLayout = styled.div`
     }
 
     p {
-      color: var(--txt-8);
+      color: ${({ $balance }) => {
+        let color = "var(--txt-6)"
+        if ($balance > 0) color = "var(--txt-10)"
+        if ($balance < 0) color = "var(--txt-8)"
+        return color
+      }};
       font-family: Inter;
       font-size: 17px;
       font-style: normal;

@@ -1,20 +1,18 @@
 import styled from "styled-components"
-import React, { FC, useEffect } from "react"
+import React, { FC } from "react"
 import { DateMoneyCell } from "@widgets/OverviewMenu/ui/DateMoneyCell.tsx"
 import { CategoryCell } from "@widgets/OverviewMenu/ui/CategoryCell.tsx"
 import { BalanceBox } from "@widgets/OverviewMenu/ui/BalanceBox.tsx"
 import { Bar } from "react-chartjs-2"
 import { GetBarConfig } from "@widgets/OverviewMenu/model/GetBarConfig.ts"
-import { ITransaction } from "@entities/Transaction/types.ts"
-import { categories } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { useInView } from "react-intersection-observer"
-import { setDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { expCategories } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 import { FillCategoriesWithTransactions } from "@entities/Transaction/helpers/FillCategoriesWithTransactions.ts"
 import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
 import { ITransByMenu } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import { IExtraInfo } from "@widgets/OverviewMenu/model/GetExtraInfoByMenus.ts"
+import { FilterTransByType } from "@entities/Transaction/helpers/FilterTransByType.ts"
 
 
 interface props extends ITransByMenu {
@@ -25,16 +23,27 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)
 
+  const { expTransactions, incTransactions } = FilterTransByType(transactions)
 
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
 
-  const allTransactionsSum = SumAllTransactions(transactions)
-  const barConfig = GetBarConfig({ categories, transactions, dateFrom, dateTo, filter: dateFilter, firstDay })
-  const filledCategories = FillCategoriesWithTransactions(categories, transactions)
+  const expTransQuantity = SumAllTransactions(expTransactions)
+  const incTransQuantity = SumAllTransactions(incTransactions)
+
+
+  const barConfig = GetBarConfig({
+    categories,
+    transactions: expTransactions,
+    dateFrom,
+    dateTo,
+    filter: dateFilter,
+    firstDay
+  })
+  const filledCategories = FillCategoriesWithTransactions(expCategories, expTransactions)
 
 
   return <MenuLayout ref={observeRef}>
-    <BalanceBox expense={allTransactionsSum} income={0} />
+    <BalanceBox expense={expTransQuantity} income={incTransQuantity} />
     <div className="overview-graph">
       <Bar {...barConfig} />
     </div>
@@ -48,7 +57,7 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
         .sort((prev, cur) => prev.quantity < cur.quantity ? 1 : -1)
         .map(({ name, quantity, color }, index) => (
           <CategoryCell key={index} currency={"Br"} color={color} name={name} quantity={quantity || 0}
-                        percent={quantity / allTransactionsSum || 0} />
+                        percent={Math.abs(quantity / expTransQuantity) || 0} />
         ))}
     </div>
   </MenuLayout>

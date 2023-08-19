@@ -1,13 +1,11 @@
 import styled from "styled-components"
-import React, { FC, useEffect } from "react"
+import React, { FC } from "react"
 import { TransactionHeader } from "@widgets/TransactionsMenu/ui/TransactionHeader.tsx"
 import { TransactionSectionByDate } from "@widgets/TransactionsMenu/ui/TransactionSectionByDate.tsx"
-import { useInView } from "react-intersection-observer"
-import { setDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { GetTransactionsMenuData } from "@entities/Transaction/helpers/GetTransactionsMenuData.ts"
 import { ITransaction } from "@entities/Transaction/types.ts"
 import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
+import { FilterTransByType } from "@entities/Transaction/helpers/FilterTransByType.ts"
 
 interface props {
   menuId: number
@@ -17,6 +15,8 @@ interface props {
 
 
 export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId }) => {
+
+  // const { incTransactions, expTransactions } = FilterTransByType(transactions)
 
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
 

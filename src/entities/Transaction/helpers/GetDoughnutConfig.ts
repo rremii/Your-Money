@@ -24,7 +24,6 @@ export const GetDoughnutConfig = (categories: ICategoryData[]): IDoughnutProps =
   }
 
 
-  // debugger
   return {
     data: {
       datasets: [{
@@ -34,6 +33,7 @@ export const GetDoughnutConfig = (categories: ICategoryData[]): IDoughnutProps =
     },
 
     options: {
+      
       cutout: "90%",
       elements: {
         arc: {

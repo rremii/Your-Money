@@ -1,10 +1,9 @@
 import styled from "styled-components"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import React, { FC } from "react"
-import { TransCategories } from "@entities/Transaction/types.ts"
 
 interface props {
-  name: TransCategories
+  name: string
   quantity: number
   percent: number
   color: string
@@ -13,6 +12,7 @@ interface props {
 
 
 export const CategoryCell: FC<props> = ({ currency, percent, quantity, name, color }) => {
+
 
   return <CellLayout $color={color} $percent={percent * 100}>
     <div className="icon">

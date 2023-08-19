@@ -12,19 +12,23 @@ export const DateBox: FC<props> = ({ date: curDate, dateBalance }) => {
 
   const { isToday, month, year, date, day } = TransformDate(curDate)
 
-  return <DateBoxLayout $isToday={isToday}>
+
+  console.log(dateBalance)
+
+  return <DateBoxLayout $balance={dateBalance} $isToday={isToday}>
     <p className="date">{date.toUpperCase()}</p>
     <div className="other-info">
       <p className="day">{day.toUpperCase()}</p>
       <p className="month-year">{month?.toUpperCase()} {year}</p>
     </div>
     <div className="quantity">
-      {dateBalance < 0 ? "-" : ""}Br {Math.abs(dateBalance)}
+      {dateBalance < 0 ? "-" : "+"}Br {Math.abs(dateBalance)}
     </div>
   </DateBoxLayout>
 }
 const DateBoxLayout = styled.div<{
   $isToday?: boolean
+  $balance?: number
 }>`
   display: flex;
   align-items: center;
@@ -71,7 +75,7 @@ const DateBoxLayout = styled.div<{
   }
 
   .quantity {
-    color: var(--txt-8);
+    color: ${({ $balance }) => $balance < 0 ? "var(--txt-8)" : "var(--txt-10)"};
     text-align: center;
     font-family: Inter;
     font-size: 15px;

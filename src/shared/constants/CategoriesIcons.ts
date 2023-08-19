@@ -6,10 +6,10 @@ import LeisureIcon from "@shared/assets/LightTheme/leisure.png"
 import ShoppingIcon from "@shared/assets/LightTheme/shopping.png"
 import RestaurantIcon from "@shared/assets/LightTheme/restaurant.png"
 import TransportIcon from "@shared/assets/LightTheme/transport.png"
-import { TransCategories } from "@entities/Transaction/types.ts"
 
+import Categories from "@shared/assets/LightTheme/categories.png"
 
-export const CategoriesIcons = new Map<TransCategories, string>()
+export const CategoriesIcons = new Map<string, string>()
 CategoriesIcons.set("Family", FamilyIcon)
 CategoriesIcons.set("Gifts", GiftsIcon)
 CategoriesIcons.set("Groceries", GroceriesIcon)
@@ -18,3 +18,5 @@ CategoriesIcons.set("Leisure", LeisureIcon)
 CategoriesIcons.set("Shopping", ShoppingIcon)
 CategoriesIcons.set("Restaurant", RestaurantIcon)
 CategoriesIcons.set("Transport", TransportIcon)
+
+CategoriesIcons.set("Salary", Categories)

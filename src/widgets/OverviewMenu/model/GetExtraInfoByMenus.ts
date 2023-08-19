@@ -1,9 +1,7 @@
 import { DateFilter, ITransaction } from "@entities/Transaction/types.ts"
-import { ITransByMenu } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
 import { DayType, timeGap } from "@shared/helpers/TimeGap.ts"
 import { transByDate } from "@entities/Transaction/helpers/TransByDate.ts"
-import { dateGapDayIn } from "@entities/Transaction/helpers/DateGapDayIn.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 
@@ -21,10 +19,13 @@ interface props {
 }
 
 export const GetExtraInfoByMenus = ({ dateFilter, firstDay, allTransactions, dateMenuIds }: props): IExtraInfo[][] => {
+
+  const expenseTransaction = allTransactions.filter((trans) => trans.type === "expense")
+
   return dateMenuIds.map((menuId) => {
     switch (dateFilter) {
       case "allTime": {
-        const { transactions } = transByDate.byAllTime(allTransactions, menuId)
+        const { transactions } = transByDate.byAllTime(expenseTransaction, menuId)
         const allTimeQuantity = transactions.reduce((acc, cur) => acc + cur.quantity, 0)
 
 
@@ -61,7 +62,7 @@ export const GetExtraInfoByMenus = ({ dateFilter, firstDay, allTransactions, dat
       }
         break
       case "year": {
-        const { transactions } = transByDate.byYear(allTransactions, menuId)
+        const { transactions } = transByDate.byYear(expenseTransaction, menuId)
         const yearQuantity = transactions.reduce((acc, cur) => acc + cur.quantity, 0)
 
 
@@ -97,7 +98,7 @@ export const GetExtraInfoByMenus = ({ dateFilter, firstDay, allTransactions, dat
       }
         break
       case "month": {
-        const { transactions } = transByDate.byMonth(allTransactions, menuId)
+        const { transactions } = transByDate.byMonth(expenseTransaction, menuId)
 
         const monthQuantity = transactions.reduce((acc, cur) => acc + cur.quantity, 0)
 
@@ -131,7 +132,7 @@ export const GetExtraInfoByMenus = ({ dateFilter, firstDay, allTransactions, dat
       }
         break
       case "week": {
-        const { transactions } = transByDate.byWeek(allTransactions, menuId, firstDay)
+        const { transactions } = transByDate.byWeek(expenseTransaction, menuId, firstDay)
 
         const weekQuantity = transactions.reduce((acc, cur) => acc + cur.quantity, 0)
 

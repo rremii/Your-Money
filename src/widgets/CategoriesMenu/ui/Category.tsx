@@ -1,17 +1,17 @@
 import styled from "styled-components"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import React, { FC } from "react"
-import { TransCategories } from "@entities/Transaction/types.ts"
 
 
 interface props {
-  name: TransCategories
+  name: string
   quantity: number
   color: string
 }
 
 export const Category: FC<props> = ({ color, quantity, name }) => {
-  return <CategoryLayout>
+
+  return <CategoryLayout $color={quantity && color}>
     <h3 className="title">
       {name}
     </h3>
@@ -23,7 +23,9 @@ export const Category: FC<props> = ({ color, quantity, name }) => {
     </p>
   </CategoryLayout>
 }
-const CategoryLayout = styled.div`
+const CategoryLayout = styled.div<{
+  $color?: string
+}>`
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -42,10 +44,15 @@ const CategoryLayout = styled.div`
   .icon {
     width: 45px;
     height: 45px;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .quantity {
-    color: var(--txt-2);
+    color: ${({ $color }) => $color ? $color : "var(--txt-2)"};
     font-family: Inter;
     font-size: 11px;
     font-style: normal;

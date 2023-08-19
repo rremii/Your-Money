@@ -1,13 +1,12 @@
-import React, { FC, useEffect } from "react"
+import React, { FC, useState } from "react"
 import styled from "styled-components"
-import { useInView } from "react-intersection-observer"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { setDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { FillCategoriesWithTransactions } from "@entities/Transaction/helpers/FillCategoriesWithTransactions.ts"
 import { ICategory, ITransaction } from "@entities/Transaction/types.ts"
 import { Category } from "@widgets/CategoriesMenu/ui/Category.tsx"
 import { BalanceGraph } from "@widgets/CategoriesMenu/ui/BalanceGraph.tsx"
 import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
+import { FilterTransByType } from "@entities/Transaction/helpers/FilterTransByType.ts"
+import { useMenuType } from "@widgets/CategoriesMenu/model/useMenuType.tsx"
 
 
 interface props {
@@ -16,7 +15,7 @@ interface props {
   transactions: ITransaction[]
 }
 
-export const categories: ICategory[] = [
+export const expCategories: ICategory[] = [
   { name: "Family", color: "#A930FF" },
   { name: "Gifts", color: "#CF3648" },
   { name: "Groceries", color: "#32CFFF" },
@@ -27,16 +26,32 @@ export const categories: ICategory[] = [
   { name: "Transport", color: "#AF8A6D" }
 ]
 
+export const incCategories: ICategory[] = [
+  { name: "Salary", color: "green" }
+]
+
 
 export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactions }) => {
 
+  const { SwitchMenuType, menuType } = useMenuType()
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
 
-  const filledCategories = FillCategoriesWithTransactions(categories, transactions)
+  const { incTransactions, expTransactions } = FilterTransByType(transactions)
+
+
+  const expFilledCategories = FillCategoriesWithTransactions(expCategories, expTransactions)
+  const incFilledCategories = FillCategoriesWithTransactions(incCategories, incTransactions)
 
   return <CategoryLayout ref={observeRef}>
-    <BalanceGraph categories={filledCategories} />
-    {filledCategories.map((categoryData, i) => (
+    <BalanceGraph OnClick={SwitchMenuType}
+                  menuType={menuType}
+                  incTransactions={incTransactions}
+                  expTransactions={expTransactions}
+                  categories={menuType === "income" ? incFilledCategories : expFilledCategories} />
+    {menuType === "income" && incFilledCategories.map((categoryData, i) => (
+      <Category key={i} {...categoryData} />
+    ))}
+    {menuType === "expense" && expFilledCategories.map((categoryData, i) => (
       <Category key={i} {...categoryData} />
     ))}
   </CategoryLayout>
