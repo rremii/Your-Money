@@ -4,12 +4,14 @@ import { SideBarReducer } from "@entities/SideBar"
 import { AuthReducer } from "@entities/Auth/model/AuthSlice.ts"
 import { ToastReducer } from "@shared/store/globalSlices/ToastSlice.ts"
 import { DateReducer } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { AccountReducer } from "@entities/Account/model/AccountSlice.ts"
 
 const rootReducer = combineReducers({
   SideBar: SideBarReducer,
   Auth: AuthReducer,
   Toast: ToastReducer,
   Date: DateReducer,
+  Account: AccountReducer,
   [Api.reducerPath]: Api.reducer
 })
 

@@ -8,7 +8,7 @@ interface props extends ITransaction {
 
 }
 
-export const Transaction: FC<props> = ({ date, id, quantity, category, type }) => {
+export const Transaction: FC<props> = ({ date, id, quantity, category, type, account }) => {
 
 
   return <TransactionLayout $type={type}>
@@ -19,7 +19,7 @@ export const Transaction: FC<props> = ({ date, id, quantity, category, type }) =
       <p className="category">{category}</p>
       <div className="account-info">
         <img src={Account} alt="account type" />
-        <p>Card</p>
+        <p>{account}</p>
       </div>
     </div>
     <div className="quantity">

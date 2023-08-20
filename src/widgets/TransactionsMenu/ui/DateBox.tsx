@@ -75,7 +75,7 @@ const DateBoxLayout = styled.div<{
   }
 
   .quantity {
-    color: ${({ $balance }) => $balance < 0 ? "var(--txt-8)" : "var(--txt-10)"};
+    color: ${({ $balance }) => $balance && $balance < 0 ? "var(--txt-8)" : "var(--txt-10)"};
     text-align: center;
     font-family: Inter;
     font-size: 15px;

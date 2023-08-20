@@ -6,12 +6,15 @@ import { SideBarModalsOverlay } from "@features/Overlays/ui/SideBarModalsOverlay
 import { PasswordMenu } from "@widgets/PasswordMenu/ui/PasswordMenu.tsx"
 import { NameMenu } from "@widgets/NameMenu/ui/NameMenu.tsx"
 import { Toast } from "@shared/ui/Toast.tsx"
+import { useAccount } from "@entities/Transaction/model/useAccount.tsx"
 
 interface Props {
   children: React.ReactNode
 }
 
 const AppLayout: FC<Props> = ({ children }) => {
+  useAccount()
+
 
   return (
     <LayoutStyles>

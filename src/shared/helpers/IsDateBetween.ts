@@ -1,6 +1,6 @@
 type IncludeOption = "left" | "right" | "both"
 
-export const IsDateBetween = (leftBorder: Date, date: Date, rightBorder: Date, include?: IncludeOption): Boolean => {
+export const IsDateBetween = (leftBorder: Date, date: Date, rightBorder: Date, include?: IncludeOption): boolean => {
   switch (include) {
 
     case "left": {

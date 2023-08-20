@@ -1,16 +1,18 @@
 import styled from "styled-components"
 import React from "react"
 import { Header } from "@widgets/Header"
-import { InfoSubHeader } from "@widgets/Header/ui/InfoSubHeader.tsx"
+import { AccountsSubHeader } from "@widgets/Header/ui/AccountsSubHeader.tsx"
+import Categories from "@shared/assets/LightTheme/categories.png"
+import { AccountsMenu } from "@widgets/AccountsMenu/ui/AccountsMenu.tsx"
 
 const AccountsPage = () => {
   return (
     <AccountsLayout>
       <Header
-        SubHeader={<InfoSubHeader>ACCOUNTS</InfoSubHeader>}
-        right={<div>ri</div>}
+        SubHeader={<AccountsSubHeader />}
+        right={<img src={Categories} alt="" />}
       />
-      <main>Accounts</main>
+      <AccountsMenu />
     </AccountsLayout>
   )
 }
@@ -18,14 +20,12 @@ export default AccountsPage
 const AccountsLayout = styled.div`
   width: 100%;
   height: 100%;
+  //flex: 1 1 auto;
+  max-height: calc(100vh - 55px);
   display: flex;
   flex-direction: column;
-  //max-width: 450px;
   position: relative;
   font-size: 30px;
-  background-color: var(--bg-2);
-  //overflow-x: hidden;
-  main {
-    flex: 1 1 auto;
-  }
+  background-color: var(--bg-1);
+
 `

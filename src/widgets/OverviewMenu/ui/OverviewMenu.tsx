@@ -32,7 +32,7 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
 
 
   const barConfig = GetBarConfig({
-    categories,
+    categories: expCategories,
     transactions: expTransactions,
     dateFrom,
     dateTo,

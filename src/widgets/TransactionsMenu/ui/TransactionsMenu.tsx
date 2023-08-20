@@ -10,19 +10,21 @@ interface props {
   menuId: number
   dateGap: string
   transactions: ITransaction[]
+  dateFrom: Date
+  dateTo: Date
+
 }
 
 
-export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId }) => {
+export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId, dateTo, dateFrom }) => {
 
-  // const { incTransactions, expTransactions } = FilterTransByType(transactions)
 
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
 
   const transactionsMenuData = GetTransactionsMenuData(transactions)
 
   return <TransactionsLayout ref={observeRef}>
-    <TransactionHeader />
+    <TransactionHeader dateFrom={dateFrom} dateTo={dateTo} />
     {transactionsMenuData.sort((prev, cur) => prev.date < cur.date ? 1 : -1).map((sectionData) => (
       <TransactionSectionByDate key={sectionData.date.getDate()} {...sectionData} />
     ))}

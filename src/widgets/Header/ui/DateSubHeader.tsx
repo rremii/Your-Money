@@ -44,7 +44,7 @@ const SubHeaderLayout = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 7px 10px;
+  padding: 0 34px 10px;
 
   .arrow-left,
   .arrow-right {

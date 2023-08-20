@@ -55,7 +55,7 @@ const HeaderLayout = styled.header`
   padding-left: 20px;
   width: 100%;
   flex: 0 0 135px;
-  background-color: var(--bg-3);
+  background-color: var(--account-color);
   padding-top: 35px;
   padding-right: 15px;
 

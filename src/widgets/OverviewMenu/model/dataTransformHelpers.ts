@@ -172,9 +172,9 @@ export const GetLabels = (dateFrom: Date, dateTo: Date, datePointsAmount: number
 }
 
 
-export const SumAllTransactions = (transactions: ITransaction[]) => {
+export const SumAllTransactions = (transactions: ITransaction[]): number => {
   return transactions.reduce((acc, cur) => {
     if (cur.type === "income") return acc + cur.quantity
-    if (cur.type === "expense") return acc - cur.quantity
+    else return acc - cur.quantity
   }, 0)
 }

@@ -20,7 +20,7 @@ export const TransactionSectionByDate: FC<props> = ({ date, transactions }) => {
 
   return <>
     <DateBox date={date} dateBalance={sectionBalance} />
-    {transactions.map((transactionData) => (
+    {transactions.sort((prev, cur) => prev.date < cur.date ? 1 : -1).map((transactionData) => (
       <Transaction key={transactionData.id} {...transactionData} />
     ))}
   </>
