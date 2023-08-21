@@ -9,7 +9,9 @@ interface props {
   transactions: ITransaction[];
 }
 
-export const TransactionSectionByDate: FC<props> = ({ date, transactions }) => {
+export const TransactionSectionByDate: FC<props> = React.memo(({ date, transactions }) => {
+
+  console.log("qwe")
 
   const sectionBalance = SumAllTransactions(transactions)
 
@@ -24,4 +26,4 @@ export const TransactionSectionByDate: FC<props> = ({ date, transactions }) => {
       <Transaction key={transactionData.id} {...transactionData} />
     ))}
   </>
-}
+})

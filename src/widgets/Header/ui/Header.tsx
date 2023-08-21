@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import { FC } from "react"
+import React, { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setIsSideBar } from "@entities/SideBar"
-import { getCurBalance } from "@entities/Account/model/AccountSlice.ts"
+import { getCurBalance, getIsMenuIdZero } from "@entities/Account/model/AccountSlice.ts"
 
 interface props {
   right?: React.ReactNode
@@ -11,18 +11,19 @@ interface props {
   SubHeader?: React.ReactNode
 }
 
-export const Header: FC<props> = ({ right, SubHeader }) => {
+export const Header: FC<props> = React.memo(({ right, SubHeader }) => {
   const dispatch = useAppDispatch()
 
-  const curMenuId = useTypedSelector(state => state.Date.curMenuId)
+  const isMenuIdZero = useTypedSelector(getIsMenuIdZero)
   const balance = useTypedSelector(getCurBalance)
+
 
   const OpenSideBar = () => {
     dispatch(setIsSideBar(true))
   }
 
   return (
-    <HeaderLayout $isActive={curMenuId === 0}>
+    <HeaderLayout $isActive={isMenuIdZero}>
       <div className="top-header">
         <div onClick={OpenSideBar} className="burger left">
           <span />
@@ -38,7 +39,7 @@ export const Header: FC<props> = ({ right, SubHeader }) => {
       <div className="sub-header">{SubHeader}</div>
     </HeaderLayout>
   )
-}
+})
 const HeaderLayout = styled.header<{
   $isActive?: boolean
 }>`

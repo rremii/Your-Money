@@ -1,19 +1,19 @@
 import styled from "styled-components"
-import { FC } from "react"
+import React, { FC } from "react"
 
 interface props {
   title: string
   quantity: number
 }
 
-export const DateMoneyCell: FC<props> = ({ quantity, title }) => {
+export const DateMoneyCell: FC<props> = React.memo(({ quantity, title }) => {
 
 
   return <CellLayout>
     <h3 className="date">{title}</h3>
     <p className="quantity">-Br {quantity}</p>
   </CellLayout>
-}
+})
 const CellLayout = styled.div`
   display: flex;
   flex: 1 1 auto;

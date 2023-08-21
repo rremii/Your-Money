@@ -11,7 +11,7 @@ interface props {
 }
 
 
-export const CategoryCell: FC<props> = ({ currency, percent, quantity, name, color }) => {
+export const CategoryCell: FC<props> = React.memo(({ currency, percent, quantity, name, color }) => {
 
 
   return <CellLayout $color={color} $percent={percent * 100}>
@@ -28,7 +28,7 @@ export const CategoryCell: FC<props> = ({ currency, percent, quantity, name, col
       <div className="percent">{Math.round(percent * 100)}%</div>
     </div>
   </CellLayout>
-}
+})
 const CellLayout = styled.div<{
   $color?: string
   $percent?: number

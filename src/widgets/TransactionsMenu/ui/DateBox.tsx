@@ -13,8 +13,6 @@ export const DateBox: FC<props> = ({ date: curDate, dateBalance }) => {
   const { isToday, month, year, date, day } = TransformDate(curDate)
 
 
-  console.log(dateBalance)
-
   return <DateBoxLayout $balance={dateBalance} $isToday={isToday}>
     <p className="date">{date.toUpperCase()}</p>
     <div className="other-info">

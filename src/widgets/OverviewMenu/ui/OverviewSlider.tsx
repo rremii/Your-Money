@@ -26,7 +26,7 @@ export const OverviewSlider = memo(() => {
     allTransactions, dateFilter, dateMenuIds, firstDay
   })
 
-  console.log("qwe")
+  // console.log("qwe")
 
   return <SliderLayout ref={sliderRef} onScroll={OnScroll} id="slider">
     {transByMenus.map((menuData, index) => (

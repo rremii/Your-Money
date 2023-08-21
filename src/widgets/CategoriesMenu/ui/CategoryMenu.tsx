@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, useMemo } from "react"
 import styled from "styled-components"
 import { FillCategoriesWithTransactions } from "@entities/Transaction/helpers/FillCategoriesWithTransactions.ts"
 import { ICategory, ITransaction } from "@entities/Transaction/types.ts"
@@ -34,20 +34,25 @@ export const incCategories: ICategory[] = [
 export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactions }) => {
 
   const { SwitchMenuType, menuType } = useMenuType()
+
+
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
 
-  const { incTransactions, expTransactions } = FilterTransByType(transactions)
+  const { incTransactions, expTransactions } = useMemo(() => FilterTransByType(transactions), [transactions])
 
 
-  const expFilledCategories = FillCategoriesWithTransactions(expCategories, expTransactions)
-  const incFilledCategories = FillCategoriesWithTransactions(incCategories, incTransactions)
+  const expFilledCategories = useMemo(() => FillCategoriesWithTransactions(expCategories, expTransactions), [expTransactions])
+  const incFilledCategories = useMemo(() => FillCategoriesWithTransactions(incCategories, incTransactions), [incTransactions])
 
   return <CategoryLayout ref={observeRef}>
-    <BalanceGraph OnClick={SwitchMenuType}
-                  menuType={menuType}
-                  incTransactions={incTransactions}
-                  expTransactions={expTransactions}
-                  categories={menuType === "income" ? incFilledCategories : expFilledCategories} />
+    <BalanceGraph
+      menuType={menuType}
+      OnClick={SwitchMenuType}
+      expTransactions={expTransactions}
+      incTransactions={incTransactions}
+      categories={menuType === "expense" ? expFilledCategories : incFilledCategories}
+    />
+
     {menuType === "income" && incFilledCategories.map((categoryData, i) => (
       <Category key={i} {...categoryData} />
     ))}

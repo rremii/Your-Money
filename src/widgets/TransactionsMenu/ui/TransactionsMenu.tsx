@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import React, { FC } from "react"
+import React, { FC, useMemo } from "react"
 import { TransactionHeader } from "@widgets/TransactionsMenu/ui/TransactionHeader.tsx"
 import { TransactionSectionByDate } from "@widgets/TransactionsMenu/ui/TransactionSectionByDate.tsx"
 import { GetTransactionsMenuData } from "@entities/Transaction/helpers/GetTransactionsMenuData.ts"
@@ -12,7 +12,6 @@ interface props {
   transactions: ITransaction[]
   dateFrom: Date
   dateTo: Date
-
 }
 
 
@@ -21,7 +20,8 @@ export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId, dat
 
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
 
-  const transactionsMenuData = GetTransactionsMenuData(transactions)
+  const transactionsMenuData = useMemo(() => GetTransactionsMenuData(transactions), [transactions])
+
 
   return <TransactionsLayout ref={observeRef}>
     <TransactionHeader dateFrom={dateFrom} dateTo={dateTo} />

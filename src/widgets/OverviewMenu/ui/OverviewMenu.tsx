@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import React, { FC } from "react"
+import React, { FC, useMemo } from "react"
 import { DateMoneyCell } from "@widgets/OverviewMenu/ui/DateMoneyCell.tsx"
 import { CategoryCell } from "@widgets/OverviewMenu/ui/CategoryCell.tsx"
 import { BalanceBox } from "@widgets/OverviewMenu/ui/BalanceBox.tsx"
@@ -13,6 +13,7 @@ import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
 import { ITransByMenu } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import { IExtraInfo } from "@widgets/OverviewMenu/model/GetExtraInfoByMenus.ts"
 import { FilterTransByType } from "@entities/Transaction/helpers/FilterTransByType.ts"
+import { OverviewGraph } from "@widgets/OverviewMenu/ui/OverviewGraph.tsx"
 
 
 interface props extends ITransByMenu {
@@ -20,10 +21,11 @@ interface props extends ITransByMenu {
 }
 
 export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGap, extInfo, menuId }) => {
+
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)
 
-  const { expTransactions, incTransactions } = FilterTransByType(transactions)
+  const { expTransactions, incTransactions } = useMemo(() => FilterTransByType(transactions), [transactions])
 
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
 
@@ -31,22 +33,21 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
   const incTransQuantity = SumAllTransactions(incTransactions)
 
 
-  const barConfig = GetBarConfig({
+  const barConfig = useMemo(() => GetBarConfig({
     categories: expCategories,
     transactions: expTransactions,
     dateFrom,
     dateTo,
     filter: dateFilter,
     firstDay
-  })
+  }), [dateFilter, dateFrom, dateTo, expTransactions, firstDay])
+
   const filledCategories = FillCategoriesWithTransactions(expCategories, expTransactions)
 
 
   return <MenuLayout ref={observeRef}>
     <BalanceBox expense={expTransQuantity} income={incTransQuantity} />
-    <div className="overview-graph">
-      <Bar {...barConfig} />
-    </div>
+    <OverviewGraph {...barConfig} />
     <div className="date-money-box">
       {extInfo.map((extData, index) => (
         <DateMoneyCell key={index} {...extData} />
@@ -89,19 +90,7 @@ const MenuLayout = styled.div`
   }
 
 
-  .overview-graph {
-    width: 100%;
-    background-color: var(--bg-1);
-    //height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    canvas {
-      //height: 50px;
-      width: 97% !important;
-    }
-  }
 
 
 `

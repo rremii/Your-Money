@@ -1,15 +1,18 @@
 import styled from "styled-components"
 import { AllAccountsInfo } from "@widgets/AccountsMenu/ui/AllAccountsInfo.tsx"
 import { Account } from "@widgets/AccountsMenu/ui/Account.tsx"
-import { Accounts } from "@entities/Transaction/constants/Accounts.ts"
+import React from "react"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 
 export const AccountsMenu = () => {
 
+  const allAccounts = useTypedSelector(state => state.Account.allAccounts)
+  console.log("qwe")
 
   return <AccountsMenuLayout>
     <AllAccountsInfo />
-    {Accounts.map(({ name, balance, icon }) => (
+    {allAccounts.map(({ name, balance, icon }) => (
       <Account key={name} quantity={balance} name={name} icon={icon} />
     ))}
   </AccountsMenuLayout>

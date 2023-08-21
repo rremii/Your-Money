@@ -22,6 +22,7 @@ export const CategoriesSlider = memo(() => {
     allTransactions, dateFilter, dateMenuIds, firstDay
   })
 
+
   return <CategoriesLayout id="slider" onScroll={OnScroll} ref={sliderRef}>
     {transByMenus.map((menuData) => (
       <CategoryMenu key={menuData.menuId} {...menuData} />

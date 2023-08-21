@@ -16,18 +16,23 @@ interface props {
   incTransactions: ITransaction[]
   expTransactions: ITransaction[]
   menuType: TransactionType
-  OnClick: () => void
+  OnClick?: () => void
 }
 
-export const BalanceGraph: FC<props> = ({ categories, incTransactions, expTransactions, menuType, OnClick }) => {
+export const BalanceGraph: FC<props> = React.memo(({
+                                                     categories,
+                                                     incTransactions,
+                                                     expTransactions,
+                                                     menuType,
+                                                     OnClick
+                                                   }) => {
 
   const incTransactionsSum = SumAllTransactions(incTransactions)
   const expTransactionsSum = SumAllTransactions(expTransactions)
 
   const doughnutConfig = GetDoughnutConfig(categories)
 
-
-  return <GraphLayout onClick={OnClick}>
+  return <GraphLayout onClick={undefined}>
     <Doughnut {...doughnutConfig} />
     <div className="balance">
       <div className="type">{menuType === "expense" ? "Expense" : "Income"}</div>
@@ -40,7 +45,7 @@ export const BalanceGraph: FC<props> = ({ categories, incTransactions, expTransa
       </div>
     </div>
   </GraphLayout>
-}
+})
 const GraphLayout = styled.div`
   position: relative;
   grid-row: 2/4;

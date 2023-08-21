@@ -9,9 +9,9 @@ interface props {
   color: string
 }
 
-export const Category: FC<props> = ({ color, quantity, name }) => {
+export const Category: FC<props> = React.memo(({ color, quantity, name }) => {
 
-  return <CategoryLayout $color={quantity && color}>
+  return <CategoryLayout $color={quantity ? color : ""}>
     <h3 className="title">
       {name}
     </h3>
@@ -22,7 +22,7 @@ export const Category: FC<props> = ({ color, quantity, name }) => {
       Br {quantity}
     </p>
   </CategoryLayout>
-}
+})
 const CategoryLayout = styled.div<{
   $color?: string
 }>`

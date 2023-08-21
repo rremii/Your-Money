@@ -23,5 +23,5 @@ export const useOnMenuSlide = (dateGap: string, menuId: number) => {
   }, [inView])
 
 
-  return { observeRef, inView }
+  return { observeRef }
 }

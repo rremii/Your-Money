@@ -1,15 +1,12 @@
-import { useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useRefreshQuery } from "@entities/Auth/api/AuthApi.ts"
 import { setAuthRejected, setAuthSuccess } from "@entities/Auth/model/AuthSlice.ts"
 
 
+//todo bring it to context
 export const useAuth = () => {
   const dispatch = useAppDispatch()
-
-  const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
-  const isPending = useTypedSelector((state) => state.Auth.isPending)
-
 
   const { data, isError } = useRefreshQuery()
 
@@ -24,5 +21,4 @@ export const useAuth = () => {
   }, [data, isError])
 
 
-  return { isPending, isLoggedIn }
 }

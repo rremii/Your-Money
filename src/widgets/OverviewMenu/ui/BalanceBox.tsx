@@ -6,7 +6,8 @@ interface props {
   income: number
 }
 
-export const BalanceBox: FC<props> = ({ income, expense }) => {
+export const BalanceBox: FC<props> = React.memo(({ income, expense }) => {
+
 
   const balance = income + expense
 
@@ -27,7 +28,7 @@ export const BalanceBox: FC<props> = ({ income, expense }) => {
       <p>{income ? "+" : ""}Br {income}</p>
     </div>
   </BalanceLayout>
-}
+})
 const BalanceLayout = styled.div<{
   $balance?: number
 }>`
@@ -58,8 +59,8 @@ const BalanceLayout = styled.div<{
     p {
       color: ${({ $balance }) => {
         let color = "var(--txt-6)"
-        if ($balance > 0) color = "var(--txt-10)"
-        if ($balance < 0) color = "var(--txt-8)"
+        if ($balance && $balance > 0) color = "var(--txt-10)"
+        if ($balance && $balance < 0) color = "var(--txt-8)"
         return color
       }};
       font-family: Inter;

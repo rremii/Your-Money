@@ -42,12 +42,23 @@ const AccountSlice = createSlice({
 export const AccountReducer = AccountSlice.reducer
 export const { setCurAccount, setAllAccounts, changeAccount } = AccountSlice.actions
 
+export const getCurAccName = (state: RootState) => state.Account.curAccName
+export const getCurAccBalance = (state: RootState) => state.Account.curAccBalance
+export const getAllAccounts = (state: RootState) => state.Account.allAccounts
+export const getCurAccHistory = (state: RootState) => state.Account.curAccHistory
+
+
 export const getCurBalance = createSelector(
-  (state: RootState) => state.Account.curAccName,
-  (state: RootState) => state.Account.curAccBalance,
-  (state: RootState) => state.Account.allAccounts,
+  getCurAccName,
+  getCurAccBalance,
+  getAllAccounts,
   (curName, curBalance, allAccounts) => {
     if (curName !== "All") return curBalance
     else return allAccounts.reduce((acc, cur) => acc + cur.balance, 0)
   }
+)
+//todo wrong slice
+export const getIsMenuIdZero = createSelector(
+  (state: RootState) => state.Date.curMenuId,
+  (menuId) => menuId === 0
 )
