@@ -1,4 +1,4 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { DayType } from "@shared/helpers/TimeGap.ts"
 import { DateFilter } from "@entities/Transaction/types.ts"
 

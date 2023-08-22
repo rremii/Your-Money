@@ -1,8 +1,7 @@
 import styled from "styled-components"
 import React, { FC } from "react"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setIsSideBar } from "@entities/SideBar"
-import { getCurBalance, getIsMenuIdZero } from "@entities/Account/model/AccountSlice.ts"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { getIsMenuIdZero } from "@entities/Account/model/AccountSlice.ts"
 import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
 
 interface props {

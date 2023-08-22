@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import AccountIcon from "@shared/assets/LightTheme/accounts.png"
 import { FC } from "react"
 
 //todo check seo

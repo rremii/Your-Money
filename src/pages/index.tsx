@@ -16,35 +16,14 @@ import SignUpEmail from "./SignUp/SignUpEmail.tsx"
 import SignUpCode from "./SignUp/SignUpCode.tsx"
 import SignUpPassword from "./SignUp/SignUpPassword.tsx"
 import Layout from "../app/layout/Layout.tsx"
-import { useAuth } from "@entities/Auth/model/useAuth.ts"
 import SignUpInfo from "./SignUp/SignUpInfo.tsx"
-import { useToast } from "@shared/hooks/useToast.tsx"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { usePreloader } from "@shared/hooks/usePreloader.tsx"
 
 export const Routing = () => {
 
-
-  // useAuth()
-
   // useChangeTheme()
 
-
-  // const { ShowToast } = useToast(5000, 1000)
-
-  // useEffect(() => {
-  //   if (isLoggedIn === "rejected")
-  //     ShowToast("Please login, the maximum amount of transactions is limited by 20 and synchronization is not available")
-  // }, [isLoggedIn])
-
-  const navigate = useNavigate()
-  const location = useLocation()
-
-  // todo make provider
-  useEffect(() => {
-    // navigate("/sign-up/info")
-    if (location.pathname !== "/accounts") navigate("/accounts")
-  }, [])
-
+  usePreloader()
 
   return (
     <>

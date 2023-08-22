@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from "react"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useEffect } from "react"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { useRefreshQuery } from "@entities/Auth/api/AuthApi.ts"
 import { setAuthRejected, setAuthSuccess } from "@entities/Auth/model/AuthSlice.ts"
 

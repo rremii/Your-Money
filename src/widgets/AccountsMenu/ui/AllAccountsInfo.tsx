@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { Accounts } from "@entities/Transaction/constants/Accounts.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { getCurBalance } from "@entities/Account/model/AccountSlice.ts"
 

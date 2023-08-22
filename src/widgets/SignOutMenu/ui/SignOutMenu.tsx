@@ -1,5 +1,5 @@
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { redirect, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useSignOutMutation } from "@entities/Auth/api/AuthApi.ts"
 import { setIsSideBar } from "@entities/SideBar"
 import { setAuthInitial } from "@entities/Auth/model/AuthSlice.ts"
@@ -9,7 +9,7 @@ import { SideBarModal } from "@shared/ui/SideBarModal.tsx"
 
 export const SignOutMenu = React.memo(() => {
   const dispatch = useAppDispatch()
-
+  const navigate = useNavigate()
 
   const isSignOut = useTypedSelector(state => state.SideBar.isSignOutMenu)
 
@@ -20,7 +20,7 @@ export const SignOutMenu = React.memo(() => {
     dispatch(setIsSideBar(false))
     dispatch(setAuthInitial())
     localStorage.removeItem("accessToken")
-    redirect("/sign-in")
+    navigate("/sign-in")
     dispatch(closeAllMenus())
   }
 
