@@ -1,12 +1,14 @@
 import styled from "styled-components"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { useLazyGetMeQuery } from "@entities/User/api/UserApi.ts"
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 
 const time = new Date().getHours() + ":" + new Date().getMinutes()
-export const SideBarHeader = () => {
+
+
+export const SideBarHeader = React.memo(() => {
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
 
 
@@ -50,7 +52,7 @@ export const SideBarHeader = () => {
       <h3 className="email">{GetSectionsData().email}</h3>
     </div>
   </HeaderLayout>
-}
+})
 const HeaderLayout = styled.header`
   padding-left: 20px;
   width: 100%;

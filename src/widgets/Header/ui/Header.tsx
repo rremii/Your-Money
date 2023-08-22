@@ -3,6 +3,7 @@ import React, { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setIsSideBar } from "@entities/SideBar"
 import { getCurBalance, getIsMenuIdZero } from "@entities/Account/model/AccountSlice.ts"
+import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
 
 interface props {
   right?: React.ReactNode
@@ -11,35 +12,18 @@ interface props {
   SubHeader?: React.ReactNode
 }
 
-export const Header: FC<props> = React.memo(({ right, SubHeader }) => {
-  const dispatch = useAppDispatch()
+export const Header: FC<props> = ({ right, SubHeader }) => {
 
   const isMenuIdZero = useTypedSelector(getIsMenuIdZero)
-  const balance = useTypedSelector(getCurBalance)
 
-
-  const OpenSideBar = () => {
-    dispatch(setIsSideBar(true))
-  }
 
   return (
     <HeaderLayout $isActive={isMenuIdZero}>
-      <div className="top-header">
-        <div onClick={OpenSideBar} className="burger left">
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="info center">
-          <p>All accounts</p>
-          <p>Br {balance}</p>
-        </div>
-        <div className="right">{right}</div>
-      </div>
-      <div className="sub-header">{SubHeader}</div>
+      <TopHeader right={right} />
+      {SubHeader}
     </HeaderLayout>
   )
-})
+}
 const HeaderLayout = styled.header<{
   $isActive?: boolean
 }>`
@@ -48,61 +32,6 @@ const HeaderLayout = styled.header<{
 
   box-shadow: 0px 2px 4px 0px var(--shadow-3);
   z-index: 1;
-
-  .top-header {
-    padding: 0 17px;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 65px;
-    align-items: center;
-    display: grid;
-
-    .burger {
-      display: flex;
-      flex-direction: column;
-      width: 18px;
-      gap: 3px;
-      cursor: pointer;
-
-      span {
-        width: 100%;
-        height: 2px;
-        background-color: var(--bg-1);
-      }
-    }
-
-    .info {
-      justify-self: center;
-
-      p:nth-child(1) {
-        color: var(--txt-1);
-        font-family: Inter;
-        font-size: 15px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-      }
-
-      p:nth-child(2) {
-        color: var(--txt-1);
-        font-family: Inter;
-        font-size: 17px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-      }
-    }
-
-    .right {
-      width: 20px;
-      height: 20px;
-      justify-self: right;
-    }
-
-    .right * {
-      width: 100%;
-      height: 100%;
-    }
-  }
 
 
 `

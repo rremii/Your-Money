@@ -16,7 +16,8 @@ import { ChangeCurrencyFormat } from "@features/ChangeCurrencyFormat"
 import { ChangeFirstDayWeek } from "@features/ChangeFirstDayWeek"
 import { ChangeStartScreen } from "@features/ChangeStartScreen"
 
-export const SideBar = () => {
+export const SideBar = React.memo(() => {
+
 
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
   const isSideBar = useTypedSelector((state) => state.SideBar.isSideBarOpen)
@@ -48,7 +49,7 @@ export const SideBar = () => {
       </div>
     </SideBarSection>
   </SideBarLayout>
-}
+})
 const SideBarLayout = styled.div<{
   $isSideBar?: boolean
 }>`

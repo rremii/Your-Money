@@ -7,10 +7,10 @@ import TransActions from "@shared/assets/LightTheme/transactions.png"
 import TransActionsActive from "@shared/assets/LightTheme/transactions-active.png"
 import Overview from "@shared/assets/LightTheme/overview.png"
 import OverviewActive from "@shared/assets/LightTheme/overview-active.png"
-import { useMemo } from "react"
+import React, { useMemo } from "react"
 import { Link } from "@widgets/Footer/ui/Link.tsx"
 
-export const Footer = () => {
+export const Footer = React.memo(() => {
   const NavLinks = useMemo(
     () => [
       {
@@ -48,7 +48,7 @@ export const Footer = () => {
       ))}
     </FooterLayout>
   )
-}
+})
 const FooterLayout = styled.footer`
   z-index: 1;
   box-shadow: 0 1px 5px 0 var(--shadow-1);

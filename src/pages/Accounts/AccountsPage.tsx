@@ -6,6 +6,8 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { AccountsMenu } from "@widgets/AccountsMenu/ui/AccountsMenu.tsx"
 
 const AccountsPage = () => {
+
+
   return (
     <AccountsLayout>
       <Header

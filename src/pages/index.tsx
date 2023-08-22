@@ -45,6 +45,7 @@ export const Routing = () => {
     if (location.pathname !== "/accounts") navigate("/accounts")
   }, [])
 
+
   return (
     <>
       <AppLayout>

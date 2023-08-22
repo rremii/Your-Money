@@ -24,7 +24,7 @@ const schema = yup
   .required()
 
 
-export const NameMenu = () => {
+export const NameMenu = React.memo(() => {
   const dispatch = useAppDispatch()
 
 
@@ -88,7 +88,7 @@ export const NameMenu = () => {
       </div>
     </form>
   </NameLayout>
-}
+})
 const NameLayout = styled(SideBarModal)`
   .btn-section {
     margin-top: 20px;

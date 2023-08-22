@@ -3,7 +3,7 @@ import { Overlay } from "@shared/ui/Overlay.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeAllMenus } from "@entities/SideBar/model/SideBarSlice.ts"
 
-export const SideBarModalsOverlay = () => {
+export const SideBarModalsOverlay = React.memo(() => {
   const dispatch = useAppDispatch()
 
   const isModalOverLay = useTypedSelector((state) => state.SideBar.isModalOverLay)
@@ -13,4 +13,4 @@ export const SideBarModalsOverlay = () => {
   }
 
   return <Overlay onClick={CloseAllModals} $isActive={isModalOverLay} $zIndex={15} />
-}
+})

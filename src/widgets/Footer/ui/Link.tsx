@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { NavLink } from "react-router-dom"
-import { FC } from "react"
+import React, { FC } from "react"
 
 interface props {
   href: string
@@ -10,6 +10,7 @@ interface props {
 }
 
 export const Link: FC<props> = ({ src, srcActive, name, href }) => {
+
   return (
     <LinkLayout to={href} className="link">
       <div className="icon">

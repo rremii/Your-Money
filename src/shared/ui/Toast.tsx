@@ -2,10 +2,11 @@ import styled from "styled-components"
 import React from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
-export const Toast: React.FC = () => {
+export const Toast: React.FC = React.memo(() => {
 
   const isShown = useTypedSelector(state => state.Toast.isShown)
   const message = useTypedSelector(state => state.Toast.message)
+
 
   return (
     <ToastShowZone>
@@ -14,7 +15,7 @@ export const Toast: React.FC = () => {
       </ToastLayout>
     </ToastShowZone>
   )
-}
+})
 const ToastShowZone = styled.div`
 
   position: fixed;

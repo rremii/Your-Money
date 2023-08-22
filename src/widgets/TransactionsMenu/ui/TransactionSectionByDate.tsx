@@ -11,7 +11,6 @@ interface props {
 
 export const TransactionSectionByDate: FC<props> = React.memo(({ date, transactions }) => {
 
-  console.log("qwe")
 
   const sectionBalance = SumAllTransactions(transactions)
 

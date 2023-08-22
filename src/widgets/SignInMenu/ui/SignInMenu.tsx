@@ -6,6 +6,8 @@ import { SignInForm } from "@entities/Auth"
 import { GoogleAuth } from "@features/GoogleAuth/ui/GoogleAuth.tsx"
 
 export const SignInMenu = () => {
+
+  console.log("qwe")
   return (
     <SignInMenuLayout>
       <SignInForm />

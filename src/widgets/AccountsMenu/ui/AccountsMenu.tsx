@@ -8,7 +8,6 @@ import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 export const AccountsMenu = () => {
 
   const allAccounts = useTypedSelector(state => state.Account.allAccounts)
-  console.log("qwe")
 
   return <AccountsMenuLayout>
     <AllAccountsInfo />

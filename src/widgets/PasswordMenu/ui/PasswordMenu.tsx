@@ -27,8 +27,9 @@ const schema = yup
   })
   .required()
 
-export const PasswordMenu = () => {
+export const PasswordMenu = React.memo(() => {
   const dispatch = useAppDispatch()
+
 
   const isPasswordMenu = useTypedSelector(state => state.SideBar.isPasswordMenu)
 
@@ -108,7 +109,7 @@ export const PasswordMenu = () => {
       </div>
     </form>
   </PasswordLayout>
-}
+})
 const PasswordLayout = styled(SideBarModal)`
   .btn-section {
     margin-top: 20px;
