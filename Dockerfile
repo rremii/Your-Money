@@ -10,6 +10,6 @@ COPY . .
 
 RUN yarn build
 
-EXPOSE 3000/tcp
+EXPOSE 5000/tcp
 
 CMD [ "node", "dist/main.js" ]

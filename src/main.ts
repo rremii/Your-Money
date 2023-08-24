@@ -17,7 +17,7 @@ async function bootstrap() {
     credentials: true,
   })
   // app.use(s(path.join(__dirname , "../uploads")))
-  await app.listen(+configService.get("port"))
+  await app.listen(+configService.get("port") || 5000)
 }
 
 bootstrap()
