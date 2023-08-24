@@ -4,11 +4,11 @@ WORKDIR /usr/src/app
 
 COPY package*.json  ./
 
-RUN npm ci
+RUN yarn
 
 COPY . .
 
-RUN npm run build
+RUN yarn build
 
 EXPOSE 3000/tcp
 
