@@ -38,4 +38,4 @@ lerna-debug.log*
 helpToImplement.txt
 
 .vercel
-.development.env
+*.env
