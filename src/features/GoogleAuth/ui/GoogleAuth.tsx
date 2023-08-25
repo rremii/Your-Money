@@ -2,8 +2,10 @@ import styled from "styled-components"
 import Google from "@shared/assets/LightTheme/google.svg"
 import React from "react"
 import { NavLink } from "react-router-dom"
+import { API_URL } from "@shared/api/config"
 
-export const GoogleAuthUrl = "http://localhost:5000/google/login"
+
+export const GoogleAuthUrl = API_URL + "/google/login"
 
 export const GoogleAuth = () => {
 
