@@ -5,15 +5,10 @@ WORKDIR /app
 
 COPY package*.json ./
 
-
 RUN yarn
-
-#RUN yarn build
-
-#COPY ./dist .
 
 COPY . .
 
-EXPOSE 8000
+EXPOSE 5173
 
 CMD [ "yarn", "dev" ]

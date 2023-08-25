@@ -1,7 +1,6 @@
 import axios from "axios"
 
 export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/"
-//https://test-noruto2021.b4a.run/users/me
 
 export const $api = axios.create({
   withCredentials: true,
