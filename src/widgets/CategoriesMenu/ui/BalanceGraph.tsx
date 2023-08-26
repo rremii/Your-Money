@@ -32,7 +32,7 @@ export const BalanceGraph: FC<props> = React.memo(({
 
   const doughnutConfig = GetDoughnutConfig(categories)
 
-  return <GraphLayout onClick={undefined}>
+  return <GraphLayout onClick={OnClick}>
     <Doughnut {...doughnutConfig} />
     <div className="balance">
       <div className="type">{menuType === "expense" ? "Expense" : "Income"}</div>

@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom"
 import { API_URL } from "@shared/api/config"
 
 
-export const GoogleAuthUrl = API_URL + "/google/login"
+export const GoogleAuthUrl = API_URL + "google/login"
 
 export const GoogleAuth = () => {
 

@@ -3,13 +3,14 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { useLazyGetMeQuery } from "@entities/User/api/UserApi.ts"
 import React, { useEffect } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { getIsMenuIdZero } from "@entities/Account/model/AccountSlice.ts"
 
 
-const time = new Date().getHours() + ":" + new Date().getMinutes()
-
+const time = new Date().getHours() + ":" + new Date().getMinutes().toString().padStart(2, "0")
 
 export const SideBarHeader = React.memo(() => {
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
+  const isMenuIdZero = useTypedSelector(getIsMenuIdZero)
 
 
   const [getMe, { data: userInfo }] = useLazyGetMeQuery()
@@ -38,7 +39,7 @@ export const SideBarHeader = React.memo(() => {
     }
   }
 
-  return <HeaderLayout>
+  return <HeaderLayout $isActive={isMenuIdZero}>
     <div className="avatar-box">
       <img className="avatar" src={GetSectionsData().avatar}
            alt="avatar" />
@@ -53,11 +54,13 @@ export const SideBarHeader = React.memo(() => {
     </div>
   </HeaderLayout>
 })
-const HeaderLayout = styled.header`
+const HeaderLayout = styled.header<{
+  $isActive?: boolean
+}>`
   padding-left: 20px;
   width: 100%;
   flex: 0 0 135px;
-  background-color: var(--account-color);
+  background-color: ${({ $isActive }) => $isActive ? "var(--account-color)" : "var(--bg-11)"};
   padding-top: 35px;
   padding-right: 15px;
 
