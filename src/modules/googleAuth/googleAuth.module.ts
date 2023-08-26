@@ -13,6 +13,6 @@ import { ConfigModule, ConfigService } from "@nestjs/config"
 @Module({
   imports: [UsersModule, TokenModule, TypeOrmModule.forFeature([User])],
   controllers: [GoogleAuthController],
-  providers: [GoogleStrategy, GoogleAuthService, ConfigService],
+  providers: [GoogleStrategy, GoogleAuthService],
 })
 export class GoogleAuthModule {}
