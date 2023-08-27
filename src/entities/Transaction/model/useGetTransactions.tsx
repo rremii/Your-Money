@@ -24,9 +24,33 @@ export const useGetTransactions = () => {
     // { category: "Salary", date: new Date(2023, 7, 8, 11), id: 15, quantity: 60, type: "income" },
     // { category: "Salary", date: new Date(2023, 7, 31, 0), id: 16, quantity: 60, type: "income" },
     // { category: "Restaurant", date: new Date(2023, 8, 1, 0), id: 17, quantity: 60, type: "expense" },
-    { category: "Restaurant", date: new Date(2023, 7, 18, 1), id: 17, quantity: 60, type: "expense", account: "Cash" },
-    { category: "Salary", date: new Date(2023, 7, 20, 10), id: 18, quantity: 120, type: "income", account: "Cash" },
-    { category: "Family", date: new Date(2023, 7, 19, 0), id: 19, quantity: 45, type: "expense", account: "Card" }
+    {
+      category: "Restaurant",
+      date: new Date(2023, 7, 18, 1),
+      id: 17,
+      quantity: 60,
+      type: "expense",
+      account: "Cash",
+      title: "Qwe"
+    },
+    {
+      category: "Salary",
+      date: new Date(2023, 7, 20, 10),
+      id: 18,
+      quantity: 120,
+      type: "income",
+      account: "Cash",
+      title: "Qwe"
+    },
+    {
+      category: "Family",
+      date: new Date(2023, 7, 19, 0),
+      id: 19,
+      quantity: 45,
+      type: "expense",
+      account: "Card",
+      title: "Qwe"
+    }
   ], [])
 
   let allTransactions = transactions

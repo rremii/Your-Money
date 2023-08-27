@@ -13,6 +13,7 @@ export interface ITransaction {
   quantity: number
   type: TransactionType
   account: string
+  title?: string
 }
 
 export type DateFilter = "day" | "week" | "month" | "year" | "allTime"

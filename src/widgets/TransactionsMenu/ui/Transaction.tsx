@@ -8,7 +8,7 @@ interface props extends ITransaction {
 
 }
 
-export const Transaction: FC<props> = ({ date, id, quantity, category, type, account }) => {
+export const Transaction: FC<props> = ({ date, id, title, quantity, category, type, account }) => {
 
 
   return <TransactionLayout $type={type}>
@@ -21,6 +21,7 @@ export const Transaction: FC<props> = ({ date, id, quantity, category, type, acc
         <img src={Account} alt="account type" />
         <p>{account}</p>
       </div>
+      <p className="title">{title ? title : ""}</p>
     </div>
     <div className="quantity">
       {type === "income" ? "+" : "-"}Br {quantity}
@@ -36,7 +37,7 @@ const TransactionLayout = styled.div<{
   justify-content: space-between;
   padding: 10px 13px;
   gap: 12px;
-  height: 60px;
+  min-height: 60px;
   background-color: var(--txt-1);
   box-shadow: 0px 2px 4px 0px var(--shadow-2);
   margin-bottom: 1px;
@@ -50,6 +51,15 @@ const TransactionLayout = styled.div<{
 
   .info {
     flex: 1 1 auto;
+
+    .title {
+      color: var(--txt-12);
+      font-family: Inter;
+      font-size: 13px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
 
     .category {
       color: var(--txt-5);
@@ -65,6 +75,7 @@ const TransactionLayout = styled.div<{
       display: flex;
       gap: 5px;
       align-items: baseline;
+      margin-bottom: 3px;
 
       img {
         width: 13px;

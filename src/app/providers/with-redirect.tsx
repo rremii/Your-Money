@@ -1,5 +1,5 @@
-import React, { FC, Suspense, useEffect } from "react"
-import { BrowserRouter, Navigate, useLocation, useNavigate } from "react-router-dom"
+import React, { FC, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 export const withRedirect = (Component: FC) => () => {
   const navigate = useNavigate()

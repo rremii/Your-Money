@@ -1,5 +1,5 @@
-import React, { useEffect } from "react"
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
+import React from "react"
+import { Route, Routes } from "react-router-dom"
 import AppLayout from "../app/layout/AppLayout.tsx"
 
 // const Categories = lazy(() => import("./Categories/CategoriesPage.tsx"))
