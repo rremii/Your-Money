@@ -33,7 +33,7 @@ export const GetDoughnutConfig = (categories: ICategoryData[]): IDoughnutProps =
     },
 
     options: {
-      
+
       cutout: "90%",
       elements: {
         arc: {

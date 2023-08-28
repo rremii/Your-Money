@@ -8,7 +8,7 @@ interface props extends ITransaction {
 
 }
 
-export const Transaction: FC<props> = ({ date, id, title, quantity, category, type, account }) => {
+export const Transaction: FC<props> = ({ title, quantity, category, type, account }) => {
 
 
   return <TransactionLayout $type={type}>
