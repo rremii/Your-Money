@@ -7,7 +7,6 @@ import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 
 
-//todo add optimization to everywhere
 export const CategoriesSlider = memo(() => {
   const dateMenuIds = useTypedSelector(state => state.Date.dateMenuIds)
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
