@@ -15,6 +15,8 @@ import { GoogleAuthModule } from "./googleAuth/googleAuth.module"
 import { MulterModule } from "@nestjs/platform-express"
 import { ServeStaticModule } from "@nestjs/serve-static"
 import { join } from "path"
+import { AccountModule } from "./account/account.module"
+import { CategoryModule } from "./category/category.module"
 
 @Module({
   imports: [
@@ -23,12 +25,14 @@ import { join } from "path"
       load: [configurations],
       envFilePath: [".development.env", ".env", ".production.env"],
     }),
+    AccountModule,
     UsersModule,
     AuthModule,
     TokenModule,
     CodeModule,
     PassportModule,
     GoogleAuthModule,
+    CategoryModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "../..", "uploads"),
       serveStaticOptions: {
