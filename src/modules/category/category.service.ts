@@ -6,6 +6,8 @@ import { Between, LessThan, MoreThan, Repository } from "typeorm"
 import { ApiError } from "../../common/constants/errors"
 import { Category } from "./entities/category.entity"
 import { GetCategoriesDto } from "./dto/get-categories.dto"
+import { defaultAccounts } from "../account/constants/defaultAccounts"
+import { defaultCategories } from "./constants/defaultCategories"
 
 @Injectable()
 export class CategoryService {
@@ -15,6 +17,17 @@ export class CategoryService {
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
   ) {}
+
+  async createDefaultCategories(user: User) {
+    return await Promise.all(
+      defaultCategories.map(async (categoryData) => {
+        const category = this.categoryRepository.create(categoryData)
+        category.user = user
+
+        return await category.save()
+      }),
+    )
+  }
 
   async createCategory({
     userId,

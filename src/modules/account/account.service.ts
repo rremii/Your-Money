@@ -8,6 +8,9 @@ import { ApiError } from "../../common/constants/errors"
 import { CreateTransactionDto } from "./dto/create-transaction.dto"
 import { Transaction } from "./entities/transaction.entity"
 import { GetTransactionsDto } from "./dto/get-transactions.dto"
+import { defaultAccounts } from "./constants/defaultAccounts"
+import { sample } from "rxjs"
+import { GetAccountsDto } from "./dto/get-accounts.dto"
 
 @Injectable()
 export class AccountService {
@@ -19,6 +22,27 @@ export class AccountService {
     @InjectRepository(Transaction)
     private readonly transactionRepository: Repository<Transaction>,
   ) {}
+
+  async getAccounts({ userId }: GetAccountsDto) {
+    return await this.accountRepository.find({
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+    })
+  }
+
+  async createDefaultAccounts(user: User) {
+    return await Promise.all(
+      defaultAccounts.map(async (accountData) => {
+        const account = this.accountRepository.create(accountData)
+        account.user = user
+
+        return await account.save()
+      }),
+    )
+  }
 
   async createAccount({
     userId,

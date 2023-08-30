@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   UseGuards,
   UsePipes,
@@ -16,6 +17,7 @@ import { Account } from "./entities/account.entity"
 import { CreateTransactionDto } from "./dto/create-transaction.dto"
 import { Transaction } from "./entities/transaction.entity"
 import { GetTransactionsDto } from "./dto/get-transactions.dto"
+import { GetAccountsDto } from "./dto/get-accounts.dto"
 
 @Controller("account")
 export class AccountController {
@@ -46,5 +48,13 @@ export class AccountController {
     @Body() getTransactionsDto: GetTransactionsDto,
   ): Promise<Transaction[]> {
     return this.accountService.getTransByDateGap(getTransactionsDto)
+  }
+
+  // @UsePipes(new ValidationPipe())
+  @Get("")
+  async getAccounts(
+    @Param() getAccountsDto: GetAccountsDto,
+  ): Promise<Account[]> {
+    return this.accountService.getAccounts(getAccountsDto)
   }
 }

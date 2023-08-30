@@ -10,6 +10,8 @@ import { IUserInfo } from "./users.interface"
 import { ChangePasswordDto } from "./dto/change-password.dto"
 import { DefaultResponse } from "../../common/types/types"
 import { ChangeNameDto } from "./dto/change-name.dto"
+import { AccountService } from "../account/account.service"
+import { CategoryService } from "../category/category.service"
 
 @Injectable()
 export class UsersService {
@@ -17,6 +19,8 @@ export class UsersService {
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
     private readonly tokenService: TokenService,
+    private readonly accountService: AccountService,
+    private readonly categoryService: CategoryService,
   ) {}
 
   async findUserByEmail(email: string): Promise<User> {
@@ -31,9 +35,12 @@ export class UsersService {
     if (user.password) newUser.password = await HashData(user.password)
     if (user.avatar) newUser.avatar = user.avatar
 
-    await newUser.save()
+    const createdUser = await newUser.save()
 
-    return newUser
+    await this.accountService.createDefaultAccounts(createdUser)
+    await this.categoryService.createDefaultCategories(createdUser)
+
+    return createdUser
   }
 
   async changeName({ newName, id }: ChangeNameDto): Promise<DefaultResponse> {
