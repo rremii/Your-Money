@@ -4,7 +4,7 @@ import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 export const useGetTransactions = () => {
 
-  const curAccName = useTypedSelector(state => state.Account.curAccName)
+  const curAccId = useTypedSelector(state => state.Account.curAccId)
 
   const transactions: ITransaction[] = useMemo(() => [
     // { category: "Family", date: new Date(2022, 11, 31), id: 1, quantity: 10, type: "expense" },
@@ -24,39 +24,40 @@ export const useGetTransactions = () => {
     // { category: "Salary", date: new Date(2023, 7, 8, 11), id: 15, quantity: 60, type: "income" },
     // { category: "Salary", date: new Date(2023, 7, 31, 0), id: 16, quantity: 60, type: "income" },
     // { category: "Restaurant", date: new Date(2023, 8, 1, 0), id: 17, quantity: 60, type: "expense" },
-    {
-      category: "Restaurant",
-      date: new Date(2023, 7, 18, 1),
-      id: 17,
-      quantity: 60,
-      type: "expense",
-      account: "Cash",
-      title: "Qwe"
-    },
-    {
-      category: "Salary",
-      date: new Date(2023, 7, 20, 10),
-      id: 18,
-      quantity: 120,
-      type: "income",
-      account: "Cash",
-      title: "Qwe"
-    },
-    {
-      category: "Family",
-      date: new Date(2023, 7, 19, 0),
-      id: 19,
-      quantity: 45,
-      type: "expense",
-      account: "Card",
-      title: "Qwe"
-    }
+    // {
+    //   category: "Restaurant",
+    //   date: new Date(2023, 7, 18, 1),
+    //   id: 17,
+    //   quantity: 60,
+    //   type: "expense",
+    //   account: "Cash",
+    //   title: "Qwe"
+    // },
+    // {
+    //   category: "Salary",
+    //   date: new Date(2023, 7, 20, 10),
+    //   id: 18,
+    //   quantity: 120,
+    //   type: "income",
+    //   account: "Cash",
+    //   title: "Qwe"
+    // },
+    // {
+    //   category: "Family",
+    //   date: new Date(2023, 7, 19, 0),
+    //   id: 19,
+    //   quantity: 45,
+    //   type: "expense",
+    //   account: "Card",
+    //   title: "Qwe",
+    //
+    // }
   ], [])
 
   let allTransactions = transactions
 
-  if (curAccName !== "All")
-    allTransactions = transactions.filter(({ account }) => account === curAccName)
+  if (typeof curAccId !== "number")
+    allTransactions = transactions.filter(({ accountId }) => accountId === curAccId)
 
   return { allTransactions }
 }

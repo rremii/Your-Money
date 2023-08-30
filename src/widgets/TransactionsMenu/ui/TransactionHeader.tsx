@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { GetAccBalanceByTimeGap } from "@widgets/TransactionsMenu/model/GetAccBalanceByTimeGap.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import React, { FC } from "react"
-import { getAllAccounts, getCurAccHistory } from "@entities/Account/model/AccountSlice.ts"
+import { getAllAccounts } from "@entities/Account/model/AccountSlice.ts"
 
 
 interface props {
@@ -14,18 +14,17 @@ interface props {
 export const TransactionHeader: FC<props> = React.memo(({ dateFrom, dateTo }) => {
 
   const allAccounts = useTypedSelector(getAllAccounts)
-  const curAccHistory = useTypedSelector(getCurAccHistory)
 
-  const { startBalance, endBalance } = GetAccBalanceByTimeGap({ allAccounts, curAccHistory, dateTo, dateFrom })
+  // const { startBalance, endBalance } = GetAccBalanceByTimeGap({ allAccounts, curAccHistory, dateTo, dateFrom })
 
   return <TransactionsHeaderLayout>
     <div className="balance-cell">
       <h2>Starting balance</h2>
-      <p>-Br {startBalance}</p>
+      <p>-Br {0}</p>
     </div>
     <div className="balance-cell">
       <h2>Ending balance</h2>
-      <p>-Br {endBalance}</p>
+      <p>-Br {0}</p>
     </div>
   </TransactionsHeaderLayout>
 })

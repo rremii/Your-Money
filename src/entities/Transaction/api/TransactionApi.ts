@@ -1,43 +1,46 @@
-// export const TransactionApi = Api.injectEndpoints({
+import { Api } from "@shared/api/config/Api.ts"
+import { IAccount } from "@entities/Transaction/constants/Accounts.ts"
 
-// endpoints: (build) => ({
+export const TransactionApi = Api.injectEndpoints({
 
-// GetMe: build.query<IUserInfo, void>({
-//   query: () => ({
-//     url: "users/me",
-//     method: "GET"
-//   }),
-//   providesTags: ["User"]
-// }),
-//
-// ChangeName: build.mutation<DefaultResponse, ChangeName>({
-//   query: (data) => ({
-//     url: "users/name",
-//     method: "PUT",
-//     data
-//   }),
-//   invalidatesTags: ["User"]
-// }),
-//
-// ChangePassword: build.mutation<DefaultResponse, ChangePassword>({
-//   query: (data) => ({
-//     url: "users/password",
-//     method: "PUT",
-//     data
-//   }),
-//   invalidatesTags: ["User"]
-// })
-//
+  endpoints: (build) => ({
 
-// }),
-// overrideExisting: false
-// })
+    GetAccounts: build.query<IAccount[], number | undefined>({
+      query: (userId) => ({
+        url: "account",
+        method: "GET",
+        params: { userId }
+      }),
+      providesTags: ["Accounts"]
+    })
+
+
+    //
+    // ChangeName: build.mutation<DefaultResponse, ChangeName>({
+    //   query: (data) => ({
+    //     url: "users/name",
+    //     method: "PUT",
+    //     data
+    //   }),
+    //   invalidatesTags: ["User"]
+    // }),
+    //
+    // ChangePassword: build.mutation<DefaultResponse, ChangePassword>({
+    //   query: (data) => ({
+    //     url: "users/password",
+    //     method: "PUT",
+    //     data
+    //   }),
+    //   invalidatesTags: ["User"]
+    // })
+    //
+
+  }),
+  overrideExisting: false
+})
 // export const {} = TransactionApi.endpoints
 
-// export const {
-// useLazyGetMeQuery,
-// useGetMeQuery,
-// useChangeNameMutation,
-// useChangePasswordMutation
-
-// } = TransactionApi
+export const {
+  useLazyGetAccountsQuery,
+  useGetAccountsQuery
+} = TransactionApi

@@ -12,7 +12,8 @@ export interface ITransaction {
   date: Date
   quantity: number
   type: TransactionType
-  account: string
+  accountBalance: number
+  accountId: number
   title?: string
 }
 

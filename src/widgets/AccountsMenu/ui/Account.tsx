@@ -2,7 +2,6 @@ import styled from "styled-components"
 import { FC } from "react"
 
 //todo check seo
-
 interface props {
   icon: string
   name: string
