@@ -15,20 +15,20 @@ interface props {
   transactions: ITransaction[]
 }
 
-export const expCategories: ICategory[] = [
-  { name: "Family", color: "#A930FF" },
-  { name: "Gifts", color: "#CF3648" },
-  { name: "Groceries", color: "#32CFFF" },
-  { name: "Health", color: "#46A33D" },
-  { name: "Leisure", color: "#A33D6E" },
-  { name: "Shopping", color: "#7B7475" },
-  { name: "Restaurant", color: "#316CFF" },
-  { name: "Transport", color: "#AF8A6D" }
-]
-
-export const incCategories: ICategory[] = [
-  { name: "Salary", color: "green" }
-]
+// export const expCategories: ICategory[] = [
+//   { name: "Family", color: "#A930FF" },
+//   { name: "Gifts", color: "#CF3648" },
+//   { name: "Groceries", color: "#32CFFF" },
+//   { name: "Health", color: "#46A33D" },
+//   { name: "Leisure", color: "#A33D6E" },
+//   { name: "Shopping", color: "#7B7475" },
+//   { name: "Restaurant", color: "#316CFF" },
+//   { name: "Transport", color: "#AF8A6D" }
+// ]
+//
+// export const incCategories: ICategory[] = [
+//   { name: "Salary", color: "green" }
+// ]
 
 
 export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactions }) => {
@@ -41,8 +41,8 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
   const { incTransactions, expTransactions } = useMemo(() => FilterTransByType(transactions), [transactions])
 
 
-  const expFilledCategories = useMemo(() => FillCategoriesWithTransactions(expCategories, expTransactions), [expTransactions])
-  const incFilledCategories = useMemo(() => FillCategoriesWithTransactions(incCategories, incTransactions), [incTransactions])
+  // const expFilledCategories = useMemo(() => FillCategoriesWithTransactions(expCategories, expTransactions), [expTransactions])
+  // const incFilledCategories = useMemo(() => FillCategoriesWithTransactions(incCategories, incTransactions), [incTransactions])
 
   return <CategoryLayout ref={observeRef}>
     <BalanceGraph
@@ -53,12 +53,12 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
       categories={menuType === "expense" ? expFilledCategories : incFilledCategories}
     />
 
-    {menuType === "income" && incFilledCategories.map((categoryData, i) => (
-      <Category key={i} {...categoryData} />
-    ))}
-    {menuType === "expense" && expFilledCategories.map((categoryData, i) => (
-      <Category key={i} {...categoryData} />
-    ))}
+    {/*{menuType === "income" && incFilledCategories.map((categoryData, i) => (*/}
+    {/*  <Category key={i} {...categoryData} />*/}
+    {/*))}*/}
+    {/*{menuType === "expense" && expFilledCategories.map((categoryData, i) => (*/}
+    {/*  <Category key={i} {...categoryData} />*/}
+    {/*))}*/}
   </CategoryLayout>
 })
 const CategoryLayout = styled.div`

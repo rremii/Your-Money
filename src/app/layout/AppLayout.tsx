@@ -6,7 +6,7 @@ import { SideBarModalsOverlay } from "@features/Overlays/ui/SideBarModalsOverlay
 import { PasswordMenu } from "@widgets/PasswordMenu/ui/PasswordMenu.tsx"
 import { NameMenu } from "@widgets/NameMenu/ui/NameMenu.tsx"
 import { Toast } from "@shared/ui/Toast.tsx"
-import { useAccount } from "@entities/Transaction/model/useAccount.tsx"
+import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe, useLazyGetMeQuery } from "@entities/User/api/UserApi.ts"
 
 interface Props {

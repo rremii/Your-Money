@@ -1,7 +1,7 @@
 import { Api } from "@shared/api/config/Api.ts"
-import { IAccount } from "@entities/Transaction/constants/Accounts.ts"
+import { IAccount } from "@entities/Account/constants/Accounts.ts"
 
-export const TransactionApi = Api.injectEndpoints({
+export const AccountsApi = Api.injectEndpoints({
 
   endpoints: (build) => ({
 
@@ -43,4 +43,4 @@ export const TransactionApi = Api.injectEndpoints({
 export const {
   useLazyGetAccountsQuery,
   useGetAccountsQuery
-} = TransactionApi
+} = AccountsApi

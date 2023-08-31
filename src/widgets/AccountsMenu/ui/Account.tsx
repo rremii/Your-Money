@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { FC } from "react"
+import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
 
 //todo check seo
 interface props {
@@ -11,10 +12,10 @@ interface props {
 
 export const Account: FC<props> = ({ name, quantity, icon }) => {
 
-
+  // debugger
   return <AccountLayout className="Account">
     <div className="icon">
-      <img src={icon} alt="account icon" />
+      <img src={AccountsIcons.get(icon)} alt="account icon" />
     </div>
     <div className="accounts-info">
       <p className="name">{name}</p>

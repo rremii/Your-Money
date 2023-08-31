@@ -8,15 +8,16 @@ import RestaurantIcon from "@shared/assets/LightTheme/restaurant.png"
 import TransportIcon from "@shared/assets/LightTheme/transport.png"
 
 import Categories from "@shared/assets/LightTheme/categories.png"
+import { expCategories } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 
 export const CategoriesIcons = new Map<string, string>()
-CategoriesIcons.set("Family", FamilyIcon)
-CategoriesIcons.set("Gifts", GiftsIcon)
-CategoriesIcons.set("Groceries", GroceriesIcon)
-CategoriesIcons.set("Health", HealthIcon)
-CategoriesIcons.set("Leisure", LeisureIcon)
-CategoriesIcons.set("Shopping", ShoppingIcon)
-CategoriesIcons.set("Restaurant", RestaurantIcon)
-CategoriesIcons.set("Transport", TransportIcon)
+CategoriesIcons.set("family", FamilyIcon)
+CategoriesIcons.set("gifts", GiftsIcon)
+CategoriesIcons.set("groceries", GroceriesIcon)
+CategoriesIcons.set("health", HealthIcon)
+CategoriesIcons.set("leisure", LeisureIcon)
+CategoriesIcons.set("shopping", ShoppingIcon)
+CategoriesIcons.set("restaurant", RestaurantIcon)
+CategoriesIcons.set("transport", TransportIcon)
 
-CategoriesIcons.set("Salary", Categories)
+CategoriesIcons.set("salary", Categories)

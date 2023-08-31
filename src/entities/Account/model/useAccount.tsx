@@ -1,9 +1,10 @@
 import { useEffect } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { Accounts, IAccount } from "@entities/Transaction/constants/Accounts.ts"
+import { Accounts, IAccount } from "@entities/Account/constants/Accounts.ts"
 import { changeAccountId, setAllAccounts, setCurAccount } from "@entities/Account/model/AccountSlice.ts"
-import { useGetAccountsQuery, useLazyGetAccountsQuery } from "@entities/Transaction/api/TransactionApi.ts"
+import { useGetAccountsQuery, useLazyGetAccountsQuery } from "@entities/Account/api/AccountsApi.ts"
 
+//todo
 export const useAccount = (userId?: number) => {
   const dispatch = useAppDispatch()
 
@@ -35,6 +36,6 @@ export const useAccount = (userId?: number) => {
 
     dispatch(setCurAccount(curAcc))
     document.documentElement.style.setProperty("--account-color", curAcc.color)
-  }, [curAccId, allAccounts])
+  }, [curAccId])
 
 }
