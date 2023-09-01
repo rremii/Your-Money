@@ -42,5 +42,5 @@ export const CategoriesApi = Api.injectEndpoints({
 // export const {} = TransactionApi.endpoints
 
 export const {
-  useGetCategories
+  useGetCategoriesQuery
 } = CategoriesApi

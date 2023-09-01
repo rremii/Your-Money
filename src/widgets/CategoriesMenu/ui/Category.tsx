@@ -1,22 +1,20 @@
 import styled from "styled-components"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import React, { FC } from "react"
+import { ICategory } from "@entities/Transaction/types.ts"
 
 
-interface props {
-  name: string
-  quantity: number
-  color: string
+interface props extends ICategory {
 }
 
-export const Category: FC<props> = React.memo(({ color, quantity, name }) => {
+export const Category: FC<props> = React.memo(({ color, quantity, icon, name }) => {
 
   return <CategoryLayout $color={quantity ? color : ""}>
     <h3 className="title">
       {name}
     </h3>
     <div className="icon">
-      <img src={CategoriesIcons.get(name)} alt="category icon" />
+      <img src={CategoriesIcons.get(icon)} alt="category icon" />
     </div>
     <p className="quantity">
       Br {quantity}

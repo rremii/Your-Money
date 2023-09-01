@@ -1,12 +1,14 @@
 import { ICategory, ITransaction } from "@entities/Transaction/types.ts"
 
 export const FillCategoriesWithTransactions = (categories: ICategory[], transactions: ITransaction[]) => {
-  return categories.map(({ name, color }) => {
+
+  return categories?.map((categoryData) => {
     const categoryQuantity = transactions
-      .filter(({ category }) => category === name)
+      .filter(({ category }) => category === categoryData.name)
       .reduce((accum, cur) => accum + cur.quantity, 0)
     return {
-      name, color, quantity: categoryQuantity
+      ...categoryData, quantity: categoryQuantity
     }
   })
+
 }

@@ -9,7 +9,6 @@ export const withAuth = (Component: FC) => () => {
 
   const { ShowToast } = useToast(5000, 1000)
   const { data, isLoading, isError, isUninitialized } = useRefreshQuery()
-
   useEffect(() => {
 
     if (!localStorage.getItem("accessToken")) dispatch(setAuthRejected())

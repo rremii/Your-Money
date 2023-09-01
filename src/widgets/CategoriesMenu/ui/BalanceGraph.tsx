@@ -26,7 +26,6 @@ export const BalanceGraph: FC<props> = React.memo(({
                                                      menuType,
                                                      OnClick
                                                    }) => {
-
   const incTransactionsSum = SumAllTransactions(incTransactions)
   const expTransactionsSum = SumAllTransactions(expTransactions)
 

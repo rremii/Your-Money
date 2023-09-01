@@ -13,12 +13,12 @@ export const GetDoughnutConfig = (categories: ICategoryData[]): IDoughnutProps =
   let backgroundColor: string[] = []
 
 
-  categories.forEach(({ quantity, color }) => {
+  categories?.forEach(({ quantity, color }) => {
     data.push(quantity)
     backgroundColor.push(color)
   })
 
-  if (data.reduce((acc, cur) => acc + cur) === 0) {
+  if (data.reduce((acc, cur) => acc + cur, 0) === 0) {
     data = [1]
     backgroundColor = ["rgba(98,98,98,0.47)"]
   }
