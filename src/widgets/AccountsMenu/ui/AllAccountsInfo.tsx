@@ -1,11 +1,10 @@
 import styled from "styled-components"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { getCurBalance } from "@entities/Account/model/AccountSlice.ts"
 
 export const AllAccountsInfo = () => {
 
 
-  const balance = useTypedSelector(getCurBalance)
+  const balance = useTypedSelector(state => state.Account.curAccBalance)
 
 
   return <AccountsInfoLayout>

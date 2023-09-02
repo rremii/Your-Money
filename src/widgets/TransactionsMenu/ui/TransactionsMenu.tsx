@@ -14,7 +14,6 @@ interface props {
   dateTo: Date
 }
 
-
 export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId, dateTo, dateFrom }) => {
 
 
@@ -25,7 +24,7 @@ export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId, dat
 
   return <TransactionsLayout ref={observeRef}>
     <TransactionHeader dateFrom={dateFrom} dateTo={dateTo} />
-    {transactionsMenuData.sort((prev, cur) => prev.date < cur.date ? 1 : -1).map((sectionData) => (
+    {transactionsMenuData.map((sectionData) => (
       <TransactionSectionByDate key={sectionData.date.getDate()} {...sectionData} />
     ))}
   </TransactionsLayout>

@@ -3,15 +3,19 @@ import { AllAccountsInfo } from "@widgets/AccountsMenu/ui/AllAccountsInfo.tsx"
 import { Account } from "@widgets/AccountsMenu/ui/Account.tsx"
 import React from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useAccount } from "@entities/Account/model/useAccount.tsx"
+import { GetMe } from "@entities/User/api/UserApi.ts"
 
 
 export const AccountsMenu = () => {
 
-  const allAccounts = useTypedSelector(state => state.Account.allAccounts)
+
+  const { data: user } = GetMe.useQueryState()
+  const { allAccounts } = useAccount(user?.id)
 
   return <AccountsMenuLayout>
     <AllAccountsInfo />
-    {allAccounts.map(({ name, balance, icon }) => (
+    {allAccounts?.map(({ name, balance, icon }) => (
       <Account key={name} quantity={balance} name={name} icon={icon} />
     ))}
   </AccountsMenuLayout>

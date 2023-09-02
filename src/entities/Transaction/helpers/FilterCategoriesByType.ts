@@ -2,8 +2,8 @@ import { ICategory, ITransaction } from "@entities/Transaction/types.ts"
 
 export const FilterCategoriesByType = (categories?: ICategory[]) => {
 
-  const expCategories: ITransaction[] = []
-  const incCategories: ITransaction[] = []
+  const expCategories: ICategory[] = []
+  const incCategories: ICategory[] = []
 
   categories?.forEach((category) => {
     if (category.type === "expense") expCategories.push(category)

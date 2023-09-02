@@ -13,13 +13,7 @@ import { GetMe, UserApi } from "@entities/User/api/UserApi.ts"
 import { FilterCategoriesByType } from "@entities/Transaction/helpers/FilterCategoriesByType.ts"
 
 
-interface props {
-  menuId: number
-  dateGap: string
-  transactions: ITransaction[]
-}
-
-export const expCategories: ICategory[] = [
+export const expCategories = [
   { name: "Family", color: "#A930FF" },
   { name: "Gifts", color: "#CF3648" },
   { name: "Groceries", color: "#32CFFF" },
@@ -28,23 +22,29 @@ export const expCategories: ICategory[] = [
   { name: "Shopping", color: "#7B7475" },
   { name: "Restaurant", color: "#316CFF" },
   { name: "Transport", color: "#AF8A6D" }
-]
+] as ICategory[]
 
-export const incCategories: ICategory[] = [
+export const incCategories = [
   { name: "Salary", color: "green" }
-]
+] as ICategory[]
 
+interface props {
+  menuId: number
+  dateGap: string
+  transactions: ITransaction[]
+}
 
 export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactions }) => {
 
   const { SwitchMenuType, menuType } = useMenuType()
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
-  const { incTransactions, expTransactions } = useMemo(() => FilterTransByType(transactions), [transactions])
 
+  const { incTransactions, expTransactions } = useMemo(() => FilterTransByType(transactions), [transactions])
 
   const { data: user } = GetMe.useQueryState()
   const { allCategories } = useCategory(user?.id)
   const { expCategories, incCategories } = useMemo(() => FilterCategoriesByType(allCategories), [allCategories])
+
   const expFilledCategories = useMemo(() => FillCategoriesWithTransactions(expCategories, expTransactions), [expTransactions])
   const incFilledCategories = useMemo(() => FillCategoriesWithTransactions(incCategories, incTransactions), [incTransactions])
 

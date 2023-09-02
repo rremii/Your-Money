@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { getCurBalance } from "@entities/Account/model/AccountSlice.ts"
 import { setIsSideBar } from "@entities/SideBar"
 
 
@@ -13,7 +12,7 @@ export const TopHeader: FC<props> = ({ right }) => {
   const dispatch = useAppDispatch()
 
 
-  const balance = useTypedSelector(getCurBalance)
+  const balance = useTypedSelector(state => state.Account.curAccBalance)
 
 
   const OpenSideBar = () => {

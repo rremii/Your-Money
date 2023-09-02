@@ -24,13 +24,14 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)
 
-  const { expTransactions, incTransactions } = useMemo(() => FilterTransByType(transactions), [transactions])
-
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
+
+
+  const { expTransactions, incTransactions } = useMemo(() => FilterTransByType(transactions), [transactions])
+  const filledCategories = FillCategoriesWithTransactions(expCategories, expTransactions)
 
   const expTransQuantity = SumAllTransactions(expTransactions)
   const incTransQuantity = SumAllTransactions(incTransactions)
-
 
   const barConfig = useMemo(() => GetBarConfig({
     categories: expCategories,
@@ -40,9 +41,6 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
     filter: dateFilter,
     firstDay
   }), [dateFilter, dateFrom, dateTo, expTransactions, firstDay])
-
-  const filledCategories = FillCategoriesWithTransactions(expCategories, expTransactions)
-
 
   return <MenuLayout ref={observeRef}>
     <BalanceBox expense={expTransQuantity} income={incTransQuantity} />

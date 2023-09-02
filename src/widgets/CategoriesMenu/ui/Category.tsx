@@ -5,6 +5,7 @@ import { ICategory } from "@entities/Transaction/types.ts"
 
 
 interface props extends ICategory {
+  quantity: number,
 }
 
 export const Category: FC<props> = React.memo(({ color, quantity, icon, name }) => {

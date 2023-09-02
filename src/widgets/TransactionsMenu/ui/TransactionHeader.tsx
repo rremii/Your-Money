@@ -1,8 +1,6 @@
 import styled from "styled-components"
-import { GetAccBalanceByTimeGap } from "@widgets/TransactionsMenu/model/GetAccBalanceByTimeGap.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import React, { FC } from "react"
-import { getAllAccounts } from "@entities/Account/model/AccountSlice.ts"
 
 
 interface props {
@@ -13,7 +11,7 @@ interface props {
 
 export const TransactionHeader: FC<props> = React.memo(({ dateFrom, dateTo }) => {
 
-  const allAccounts = useTypedSelector(getAllAccounts)
+  const allAccounts = useTypedSelector(state => state.Account.curAccBalance)
 
   // const { startBalance, endBalance } = GetAccBalanceByTimeGap({ allAccounts, curAccHistory, dateTo, dateFrom })
 
