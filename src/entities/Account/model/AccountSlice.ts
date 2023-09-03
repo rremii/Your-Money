@@ -50,6 +50,6 @@ export const getCurAccBalance = (state: RootState) => state.Account.curAccBalanc
 // )
 //todo wrong slice
 export const getIsMenuIdZero = createSelector(
-  (state: RootState) => state.Date.curMenuId,
+  (state: RootState) => state.Date.curMenu.id,
   (menuId) => menuId === 0
 )

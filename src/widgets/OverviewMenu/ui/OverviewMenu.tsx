@@ -4,7 +4,6 @@ import { DateMoneyCell } from "@widgets/OverviewMenu/ui/DateMoneyCell.tsx"
 import { CategoryCell } from "@widgets/OverviewMenu/ui/CategoryCell.tsx"
 import { BalanceBox } from "@widgets/OverviewMenu/ui/BalanceBox.tsx"
 import { GetBarConfig } from "@widgets/OverviewMenu/model/GetBarConfig.ts"
-import { expCategories } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 import { FillCategoriesWithTransactions } from "@entities/Transaction/helpers/FillCategoriesWithTransactions.ts"
@@ -13,6 +12,9 @@ import { ITransByMenu } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import { IExtraInfo } from "@widgets/OverviewMenu/model/GetExtraInfoByMenus.ts"
 import { FilterTransByType } from "@entities/Transaction/helpers/FilterTransByType.ts"
 import { OverviewGraph } from "@widgets/OverviewMenu/ui/OverviewGraph.tsx"
+import { useCategory } from "@entities/Category/model/useCategory.tsx"
+import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
+import { GetMe } from "@entities/User/api/UserApi.ts"
 
 
 interface props extends ITransByMenu {
@@ -26,8 +28,12 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
 
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
 
+  const { data: user } = GetMe.useQueryState()
+  const { allCategories } = useCategory(user?.id)
 
+  const { expCategories } = FilterCategoriesByType(allCategories)
   const { expTransactions, incTransactions } = useMemo(() => FilterTransByType(transactions), [transactions])
+
   const filledCategories = FillCategoriesWithTransactions(expCategories, expTransactions)
 
   const expTransQuantity = SumAllTransactions(expTransactions)
@@ -53,8 +59,8 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
     <div className="categories-box">
       {filledCategories
         .sort((prev, cur) => prev.quantity < cur.quantity ? 1 : -1)
-        .map(({ name, quantity, color }, index) => (
-          <CategoryCell key={index} currency={"Br"} color={color} name={name} quantity={quantity || 0}
+        .map(({ name, quantity, color, icon }, index) => (
+          <CategoryCell icon={icon} key={index} currency={"Br"} color={color} name={name} quantity={quantity || 0}
                         percent={Math.abs(quantity / expTransQuantity) || 0} />
         ))}
     </div>

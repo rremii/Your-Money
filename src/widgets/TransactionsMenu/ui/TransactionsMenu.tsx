@@ -2,7 +2,7 @@ import styled from "styled-components"
 import React, { FC, useMemo } from "react"
 import { TransactionHeader } from "@widgets/TransactionsMenu/ui/TransactionHeader.tsx"
 import { TransactionSectionByDate } from "@widgets/TransactionsMenu/ui/TransactionSectionByDate.tsx"
-import { GetTransactionsMenuData } from "@entities/Transaction/helpers/GetTransactionsMenuData.ts"
+import { GetTransactionsMenuData } from "@widgets/TransactionsMenu/model/GetTransactionsMenuData.ts"
 import { ITransaction } from "@entities/Transaction/types.ts"
 import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
 
@@ -19,8 +19,8 @@ export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId, dat
 
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
 
-  const transactionsMenuData = useMemo(() => GetTransactionsMenuData(transactions), [transactions])
 
+  const transactionsMenuData = useMemo(() => GetTransactionsMenuData(transactions), [transactions])
 
   return <TransactionsLayout ref={observeRef}>
     <TransactionHeader dateFrom={dateFrom} dateTo={dateTo} />

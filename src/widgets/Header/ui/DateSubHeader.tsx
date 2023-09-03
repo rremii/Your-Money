@@ -6,7 +6,7 @@ import { shiftTransMenuIdsRight } from "@entities/DateSlider/model/DateSliderSli
 export const DateSubHeader = () => {
   const dispatch = useAppDispatch()
 
-  const dateGap = useTypedSelector(state => state.Date.dateGap)
+  const dateGap = useTypedSelector(state => state.Date.curMenu.dateGap)
 
 
   const ShiftDateRight = () => {

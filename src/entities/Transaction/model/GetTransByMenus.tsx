@@ -19,6 +19,7 @@ export interface ITransByMenu {
 }
 
 export const GetTransByMenus = ({ dateMenuIds, allTransactions, dateFilter, firstDay }: props): ITransByMenu[] => {
+  console.log(allTransactions)
 
   return dateMenuIds.map((menuId) => {
     switch (dateFilter) {

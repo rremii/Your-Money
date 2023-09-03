@@ -1,6 +1,6 @@
 import { useInView } from "react-intersection-observer"
 import { useEffect } from "react"
-import { setCurMenuId, setDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { setCurMenu } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 
 export const useOnMenuSlide = (dateGap: string, menuId: number) => {
@@ -14,8 +14,7 @@ export const useOnMenuSlide = (dateGap: string, menuId: number) => {
 
   useEffect(() => {
     if (!inView) return
-    dispatch(setDate(dateGap))
-    dispatch(setCurMenuId(menuId))
+    dispatch(setCurMenu({ dateGap, id: menuId }))
 
     const curScroll = document.querySelector("#slider")?.scrollLeft
     if (!curScroll) return

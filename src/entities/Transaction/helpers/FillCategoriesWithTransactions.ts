@@ -4,7 +4,7 @@ export const FillCategoriesWithTransactions = (categories: ICategory[], transact
 
   return categories?.map((categoryData) => {
     const categoryQuantity = transactions
-      .filter(({ category }) => category === categoryData.name)
+      .filter(({ categoryId }) => categoryId === categoryData.id)
       .reduce((accum, cur) => accum + cur.quantity, 0)
     return {
       ...categoryData, quantity: categoryQuantity

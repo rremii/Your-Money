@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import React, { FC } from "react"
-import { TransformDate } from "@entities/Transaction/helpers/TransformDate.ts"
+import { TransformDate } from "@widgets/TransactionsMenu/model/TransformDate.ts"
 
 interface props {
   date: Date

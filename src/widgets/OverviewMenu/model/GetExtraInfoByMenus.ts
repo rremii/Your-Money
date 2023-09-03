@@ -33,7 +33,8 @@ export const GetExtraInfoByMenus = ({ dateFilter, firstDay, allTransactions, dat
         const transMonths = new Set()
         const transYears = new Set()
 
-        transactions.forEach(({ date }) => {
+        transactions.forEach((transaction) => {
+          const date = new Date(transaction.date)
           const { dateGap: dayStr } = timeGap.GetDayGap(0, date)
           transDays.add(dayStr)
 
@@ -70,7 +71,9 @@ export const GetExtraInfoByMenus = ({ dateFilter, firstDay, allTransactions, dat
         const transWeeks = new Set()
         const transMonths = new Set()
 
-        transactions.forEach(({ date }) => {
+        transactions.forEach((transaction) => {
+          const date = new Date(transaction.date)
+
           const { dateGap: dayStr } = timeGap.GetDayGap(0, date)
           transDays.add(dayStr)
 
@@ -106,7 +109,9 @@ export const GetExtraInfoByMenus = ({ dateFilter, firstDay, allTransactions, dat
         const transDays = new Set()
         const transWeeks = new Set()
 
-        transactions.forEach(({ date }) => {
+        transactions.forEach((transaction) => {
+          const date = new Date(transaction.date)
+
           const { dateGap: dayStr } = timeGap.GetDayGap(0, date)
           transDays.add(dayStr)
 
@@ -138,13 +143,15 @@ export const GetExtraInfoByMenus = ({ dateFilter, firstDay, allTransactions, dat
 
 
         const weekdays = transactions.reduce((acc, cur) => {
-          if (cur.date.getDay() > 5) return 0 //weekends
+          const date = new Date(cur.date)
+          if (date.getDay() > 5) return 0 //weekends
           return acc + cur.quantity
         }, 0)
 
 
         const transDays = new Set()
-        transactions.forEach(({ date }) => {
+        transactions.forEach((transaction) => {
+          const date = new Date(transaction.date)
           const { dateGap: dayStr } = timeGap.GetDayGap(0, date)
           transDays.add(dayStr)
         })
@@ -168,15 +175,16 @@ export const GetExtraInfoByMenus = ({ dateFilter, firstDay, allTransactions, dat
         const week = timeGap.GetWeekGap(firstDay, 0, dateTo)
         const month = timeGap.GetMonthGap(0, dateFrom)
 
+
         const dayQuantity = dayTransactions
           .reduce((acc, cur) => acc + cur.quantity, 0)
 
         const weekQuantity = allTransactions
-          .filter(({ date }) => IsDateBetween(week.dateFrom, date, week.dateTo, "left"))
+          .filter(({ date }) => IsDateBetween(week.dateFrom, new Date(date), week.dateTo, "left"))
           .reduce((acc, cur) => acc + cur.quantity, 0)
 
         const monthQuantity = allTransactions
-          .filter(({ date }) => IsDateBetween(month.dateFrom, date, month.dateTo, "left"))
+          .filter(({ date }) => IsDateBetween(month.dateFrom, new Date(date), month.dateTo, "left"))
           .reduce((acc, cur) => acc + cur.quantity, 0)
 
         return [{

@@ -5,7 +5,6 @@ import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 export const useSlider = () => {
   const dispatch = useAppDispatch()
 
-
   const ref = useRef<HTMLDivElement>(null)
 
 

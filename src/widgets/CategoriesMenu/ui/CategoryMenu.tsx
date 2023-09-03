@@ -10,7 +10,7 @@ import { useMenuType } from "@widgets/CategoriesMenu/model/useMenuType.tsx"
 import { useGetCategoriesQuery } from "@entities/Category/api/CategoriesApi.ts"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe, UserApi } from "@entities/User/api/UserApi.ts"
-import { FilterCategoriesByType } from "@entities/Transaction/helpers/FilterCategoriesByType.ts"
+import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
 
 
 export const expCategories = [

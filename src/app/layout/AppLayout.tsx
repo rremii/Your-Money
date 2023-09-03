@@ -8,6 +8,7 @@ import { NameMenu } from "@widgets/NameMenu/ui/NameMenu.tsx"
 import { Toast } from "@shared/ui/Toast.tsx"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe, useLazyGetMeQuery } from "@entities/User/api/UserApi.ts"
+import { useAllTransDateGap } from "@entities/DateSlider/model/useAllTransDateGap.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -16,9 +17,8 @@ interface Props {
 const AppLayout: FC<Props> = ({ children }) => {
 
   const { data: user } = GetMe.useQueryState()
-
   useAccount(user?.id)
-
+  useAllTransDateGap()
 
   return (
     <LayoutStyles>

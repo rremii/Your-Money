@@ -3,6 +3,8 @@ import Account from "@shared/assets/LightTheme/accounts.png"
 import React, { FC } from "react"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import { ITransaction, TransactionType } from "@entities/Transaction/types.ts"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useAccount } from "@entities/Account/model/useAccount.tsx"
 
 interface props extends ITransaction {
 
@@ -13,13 +15,13 @@ export const Transaction: FC<props> = ({ title, quantity, category, type, accoun
 
   return <TransactionLayout $type={type}>
     <div className="icon">
-      <img src={CategoriesIcons.get(category)} alt="transaction icon" />
+      <img src={CategoriesIcons.get(category.icon)} alt="transaction icon" />
     </div>
     <div className="info">
-      <p className="category">{category}</p>
+      <p className="category">{category.name}</p>
       <div className="account-info">
         <img src={Account} alt="account type" />
-        <p>{account}</p>
+        <p>{account.name}</p>
       </div>
       <p className="title">{title ? title : ""}</p>
     </div>

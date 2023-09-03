@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Doughnut } from "react-chartjs-2"
 import React, { FC } from "react"
-import { GetDoughnutConfig } from "@entities/Transaction/helpers/GetDoughnutConfig.ts"
+import { GetDoughnutConfig } from "@widgets/CategoriesMenu/model/GetDoughnutConfig.ts"
 import { ITransaction, TransactionType } from "@entities/Transaction/types.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 

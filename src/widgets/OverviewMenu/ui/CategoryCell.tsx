@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import React, { FC } from "react"
+import { ICategory } from "@entities/Transaction/types.ts"
 
 interface props {
   name: string
@@ -8,15 +9,14 @@ interface props {
   percent: number
   color: string
   currency: string
+  icon: string
 }
 
 
-export const CategoryCell: FC<props> = React.memo(({ currency, percent, quantity, name, color }) => {
-
-
+export const CategoryCell: FC<props> = React.memo(({ currency, icon, percent, quantity, name, color }) => {
   return <CellLayout $color={color} $percent={percent * 100}>
     <div className="icon">
-      <img src={CategoriesIcons.get(name)} alt="icon" />
+      <img src={CategoriesIcons.get(icon)} alt="icon" />
     </div>
     <div className="text-info">
       <h2 className="name">{name}</h2>

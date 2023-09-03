@@ -3,30 +3,42 @@ import { DayType } from "@shared/helpers/TimeGap.ts"
 import { DateFilter } from "@entities/Transaction/types.ts"
 
 interface initialState {
+  allTransDateGap: {
+    dateFrom: string
+    dateTo: string
+  }
+  curMenu: {
+    dateGap: string
+    id: number
+  }
   dateFilter: DateFilter
-  dateGap: string
   dateMenuIds: number[]
-  curMenuId: number
   firstDay: DayType
 }
 
 const initialState = {
-  dateFilter: "week",
+  curMenu: {
+    dateGap: "",
+    id: 0
+  },
+  allTransDateGap: {
+    dateFrom: "",
+    dateTo: ""
+  },
+  dateFilter: "day",
   firstDay: "Sun",
-  dateGap: "",
-  dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5],
-  curMenuId: 0
+  dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
 } as initialState
 
 const DateSliderSlice = createSlice({
   name: "DateSliderSlice",
   initialState,
   reducers: {
-    setCurMenuId(state, action: PayloadAction<number>) {
-      state.curMenuId = action.payload
+    setCurMenu(state, action: PayloadAction<{ dateGap: string, id: number }>) {
+      state.curMenu = action.payload
     },
-    setDate(state, action: PayloadAction<string>) {
-      state.dateGap = action.payload
+    setAllTransDateGap(state, action: PayloadAction<{ dateFrom: string, dateTo: string }>) {
+      state.allTransDateGap = action.payload
     },
     shiftTransMenuIdsRight(state, action: PayloadAction<{ shiftAmount: number }>) {
       const { shiftAmount } = action.payload
@@ -60,5 +72,5 @@ const DateSliderSlice = createSlice({
 })
 
 export const DateReducer = DateSliderSlice.reducer
-export const { setCurMenuId, setDate, shiftTransMenuIdsLeft, shiftTransMenuIdsRight } = DateSliderSlice.actions
+export const { setAllTransDateGap, setCurMenu, shiftTransMenuIdsLeft, shiftTransMenuIdsRight } = DateSliderSlice.actions
 

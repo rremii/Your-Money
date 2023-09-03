@@ -1,10 +1,11 @@
 import styled from "styled-components"
 import React, { memo } from "react"
-import { useSlider } from "@entities/Transaction/model/useSlider.tsx"
+import { useSlider } from "@entities/DateSlider/model/useSlider.tsx"
 import { useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
 import { GetTransByMenus } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
+import { GetMe } from "@entities/User/api/UserApi.ts"
 
 
 export const CategoriesSlider = memo(() => {
@@ -12,8 +13,8 @@ export const CategoriesSlider = memo(() => {
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)
 
-
-  const { allTransactions } = useGetTransactions()
+  const { data: user } = GetMe.useQueryState()
+  const { allTransactions } = useGetTransactions(user?.id)
 
   const { sliderRef, OnScroll } = useSlider()
 
