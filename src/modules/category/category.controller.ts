@@ -2,13 +2,11 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
-  UseGuards,
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common"
-import { VerifyCodeDto } from "../Code/dto/verify-code.dto"
-import { DefaultResponse } from "../../common/types/types"
 import { CategoryService } from "./category.service"
 import { CreateCategoryDto } from "./dto/create-category.dto"
 import { Category } from "./entities/category.entity"
@@ -28,10 +26,10 @@ export class CategoryController {
     return this.categoryService.createCategory(createAccountDto)
   }
 
-  @UsePipes(new ValidationPipe())
+  // @UsePipes(new ValidationPipe())
   @Get("")
   async getCategories(
-    @Body() getTransactionsDto: GetCategoriesDto,
+    @Param() getTransactionsDto: GetCategoriesDto,
   ): Promise<Category[]> {
     return this.categoryService.getCategories(getTransactionsDto)
   }

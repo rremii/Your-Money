@@ -1,27 +1,11 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpStatus,
-  Post,
-  Req,
-  Res,
-  UseGuards,
-  UsePipes,
-  ValidationPipe,
-} from "@nestjs/common"
-import { CreateUserDto } from "../users/dto/create-user.dto"
+import { Controller, Get, Req, Res, UseGuards } from "@nestjs/common"
 import { GoogleAuthService } from "./googleAuth.service"
-import { AuthResponse } from "./response/auth.response"
 import { TokenService } from "../token/token.service"
 import { Request, Response } from "express"
 import { ConfigService } from "@nestjs/config"
 import { GetCookieExpTime } from "../../common/helpers/getCookieExpTime"
 import { GoogleAuthGuard } from "../../guards/google-auth.guard"
 import { GoogleLoginDto } from "./dto/google-login.dto"
-import { Profile } from "passport-google-oauth20"
-import { AccessTokenGuard } from "../../guards/access-token.guard"
-import { RefreshTokenGuard } from "../../guards/refresh-token.guard"
 
 @Controller("google")
 export class GoogleAuthController {

@@ -2,11 +2,7 @@ import {
   Body,
   Controller,
   Delete,
-  FileTypeValidator,
   Get,
-  HttpStatus,
-  MaxFileSizeValidator,
-  ParseFilePipe,
   Post,
   Req,
   Res,
@@ -19,17 +15,12 @@ import {
 import { CreateUserDto } from "../users/dto/create-user.dto"
 import { AuthService } from "./auth.service"
 import { LoginUserDto } from "./dto/login-user.dto"
-import { AuthResponse } from "./response/auth.response"
 import { TokenService } from "../token/token.service"
 import { Request, Response } from "express"
 import { ConfigService } from "@nestjs/config"
 import { GetCookieExpTime } from "../../common/helpers/getCookieExpTime"
-import { GoogleAuthGuard } from "../../guards/google-auth.guard"
-import { Profile } from "passport-google-oauth20"
 import { AccessTokenGuard } from "../../guards/access-token.guard"
-import { RefreshTokenGuard } from "../../guards/refresh-token.guard"
 import { FileInterceptor } from "@nestjs/platform-express"
-import { diskStorage } from "multer"
 import { FileUploadConfig } from "../../configurations/fileUpload.config"
 
 @Controller("auth")
@@ -50,8 +41,9 @@ export class AuthController {
     avatarFile: Express.Multer.File,
     @Res() response: Response,
   ) {
-    const avatar =
-      this.configService.get("server_origin") + "/" + avatarFile.filename
+    const avatar = avatarFile
+      ? this.configService.get("server_origin") + "/" + avatarFile?.filename
+      : null
     const { accessToken, refreshToken } = await this.authService.registerUser({
       ...userInfo,
       avatar,

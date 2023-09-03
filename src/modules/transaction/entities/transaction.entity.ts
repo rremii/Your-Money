@@ -5,20 +5,17 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
-  Unique,
 } from "typeorm"
-import { IAccount, ITransaction, TransactionType } from "../account.interface"
-import { Account } from "./account.entity"
+import { Account } from "../../account/entities/account.entity"
+import { ITransaction, TransactionType } from "../transaction.interface"
+import { Category } from "../../category/entities/category.entity"
+import { User } from "../../users/entities/user.entity"
 
 @Entity()
 export class Transaction extends BaseEntity implements ITransaction {
   @PrimaryGeneratedColumn()
   id: number
-
-  @Column()
-  category: string
 
   @CreateDateColumn()
   date: Date
@@ -35,10 +32,27 @@ export class Transaction extends BaseEntity implements ITransaction {
   @Column({ nullable: true })
   title?: string
 
+  // @Column()
+  // categoryIcon: string
+
   @Column()
   accountId: number
+
+  @Column()
+  categoryId: number
+
+  @Column()
+  userId: number
 
   @ManyToOne(() => Account, (account) => account.transactions)
   @JoinColumn({ name: "accountId" })
   account: Account
+
+  @ManyToOne(() => Category, (category) => category.transactions)
+  @JoinColumn({ name: "categoryId" })
+  category: Category
+
+  @ManyToOne(() => User, (user) => user.transaction)
+  @JoinColumn({ name: "userId" })
+  user: User
 }

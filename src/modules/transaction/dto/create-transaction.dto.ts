@@ -1,15 +1,22 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator"
-import { CreateDateColumn } from "typeorm"
-import { TransactionType } from "../account.interface"
+import { TransactionType } from "../transaction.interface"
 
 export class CreateTransactionDto {
   @IsNumber()
   @IsNotEmpty()
   accountId: number
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  category: string
+  userId: number
+
+  @IsNumber()
+  @IsNotEmpty()
+  categoryId: number
+
+  // @IsString()
+  // @IsNotEmpty()
+  // categoryIcon: string
 
   @IsNumber()
   @IsNotEmpty()

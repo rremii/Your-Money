@@ -2,15 +2,13 @@ import {
   BaseEntity,
   Column,
   Entity,
-  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  Unique,
 } from "typeorm"
 import { IAccount } from "../account.interface"
-import { Transaction } from "./transaction.entity"
 import { User } from "../../users/entities/user.entity"
+import { Transaction } from "../../transaction/entities/transaction.entity"
 
 // @Unique(["email"])
 @Entity()

@@ -1,6 +1,5 @@
 import { Module } from "@nestjs/common"
 import { TypeOrmModule } from "@nestjs/typeorm"
-import { DataSource } from "typeorm"
 import { ConfigModule, ConfigService } from "@nestjs/config"
 import configurations from "../configurations"
 import { UsersModule } from "./users/users.module"
@@ -12,11 +11,11 @@ import { getOrmConfig } from "../configurations/orm.config"
 import { CodeModule } from "./Code/code.module"
 import { PassportModule } from "@nestjs/passport"
 import { GoogleAuthModule } from "./googleAuth/googleAuth.module"
-import { MulterModule } from "@nestjs/platform-express"
 import { ServeStaticModule } from "@nestjs/serve-static"
 import { join } from "path"
 import { AccountModule } from "./account/account.module"
 import { CategoryModule } from "./category/category.module"
+import { TransactionModule } from "./transaction/transaction.module"
 
 @Module({
   imports: [
@@ -30,6 +29,7 @@ import { CategoryModule } from "./category/category.module"
     AuthModule,
     TokenModule,
     CodeModule,
+    TransactionModule,
     PassportModule,
     GoogleAuthModule,
     CategoryModule,

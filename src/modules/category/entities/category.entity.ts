@@ -9,9 +9,11 @@ import {
   Unique,
 } from "typeorm"
 import { User } from "../../users/entities/user.entity"
-import { IAccount } from "../../account/account.interface"
-import { ICategory } from "../category.interface"
+import { CategoryType, ICategory } from "../category.interface"
+import { Account } from "../../account/entities/account.entity"
+import { Transaction } from "../../transaction/entities/transaction.entity"
 
+@Unique(["name"])
 @Entity()
 export class Category extends BaseEntity implements ICategory {
   @PrimaryGeneratedColumn()
@@ -29,7 +31,13 @@ export class Category extends BaseEntity implements ICategory {
   @Column()
   icon: string
 
+  @Column()
+  type: CategoryType
+
   @ManyToOne(() => User, (user) => user.categories)
   @JoinColumn({ name: "userId" })
   user: User
+
+  @OneToMany(() => Transaction, (transaction) => transaction.category)
+  transactions: Transaction[]
 }

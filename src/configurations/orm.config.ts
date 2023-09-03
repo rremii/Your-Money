@@ -1,9 +1,9 @@
 import { ConfigService } from "@nestjs/config"
 import { User } from "../modules/users/entities/user.entity"
 import { Code } from "../modules/Code/entities/code.entity"
-import { Transaction } from "../modules/account/entities/transaction.entity"
 import { Account } from "src/modules/account/entities/account.entity"
 import { Category } from "../modules/category/entities/category.entity"
+import { Transaction } from "../modules/transaction/entities/transaction.entity"
 
 export const getOrmConfig = async (config: ConfigService): Promise<any> => {
   return {

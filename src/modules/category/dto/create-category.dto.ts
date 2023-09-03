@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { CategoryType } from "../category.interface"
 
 export class CreateCategoryDto {
   @IsNotEmpty()
@@ -16,4 +17,8 @@ export class CreateCategoryDto {
   @IsString()
   @IsNotEmpty()
   icon: string
+
+  @IsString()
+  @IsNotEmpty()
+  type: CategoryType
 }

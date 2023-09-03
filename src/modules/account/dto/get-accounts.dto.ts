@@ -1,6 +1,4 @@
-import { IsDate, IsNotEmpty, IsNumber, IsString } from "class-validator"
-import { CreateDateColumn } from "typeorm"
-import { TransactionType } from "../account.interface"
+import { IsNotEmpty, IsNumber } from "class-validator"
 
 export class GetAccountsDto {
   @IsNotEmpty()

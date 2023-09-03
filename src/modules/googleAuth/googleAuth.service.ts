@@ -1,13 +1,10 @@
-import { BadRequestException, Injectable } from "@nestjs/common"
+import { Injectable } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { User } from "../users/entities/user.entity"
 import { Repository } from "typeorm"
 import { CreateUserDto } from "../users/dto/create-user.dto"
-import { ApiError } from "../../common/constants/errors"
 import { UsersService } from "../users/users.service"
-import * as bcrypt from "bcrypt"
 import { TokenService } from "../token/token.service"
-import { TokenResponse } from "./response/token.response"
 import { GoogleLoginDto } from "./dto/google-login.dto"
 
 @Injectable()

@@ -3,14 +3,11 @@ import { CreateAccountDto } from "./dto/create-account.dto"
 import { Account } from "./entities/account.entity"
 import { InjectRepository } from "@nestjs/typeorm"
 import { User } from "../users/entities/user.entity"
-import { Between, LessThan, MoreThan, Repository } from "typeorm"
+import { Repository } from "typeorm"
 import { ApiError } from "../../common/constants/errors"
-import { CreateTransactionDto } from "./dto/create-transaction.dto"
-import { Transaction } from "./entities/transaction.entity"
-import { GetTransactionsDto } from "./dto/get-transactions.dto"
 import { defaultAccounts } from "./constants/defaultAccounts"
-import { sample } from "rxjs"
 import { GetAccountsDto } from "./dto/get-accounts.dto"
+import { Transaction } from "../transaction/entities/transaction.entity"
 
 @Injectable()
 export class AccountService {
@@ -62,46 +59,5 @@ export class AccountService {
     await account.save()
 
     return account
-  }
-
-  async createTransaction({
-    accountId,
-    quantity,
-    type,
-    title,
-    category,
-  }: CreateTransactionDto): Promise<Transaction> {
-    const account = await this.accountRepository.findOneBy({ id: accountId })
-    if (!account) throw new BadRequestException(ApiError.ACCOUNT_NOT_FOUND)
-
-    let newAccountBalance: number = account.balance
-    if (type === "income") newAccountBalance += quantity
-    if (type === "expense") newAccountBalance -= quantity
-
-    const transaction = new Transaction()
-    transaction.account = account
-    transaction.category = category
-    transaction.type = type
-    transaction.quantity = quantity
-    transaction.title = title
-    transaction.accountBalance = newAccountBalance
-
-    account.balance = newAccountBalance
-
-    await account.save()
-    await transaction.save()
-
-    return transaction
-  }
-
-  async getTransByDateGap({ dateTo, dateFrom }: GetTransactionsDto) {
-    return await this.transactionRepository.find({
-      order: {
-        date: "ASC",
-      },
-      where: {
-        date: Between(new Date(dateFrom), new Date(dateTo)),
-      },
-    })
   }
 }

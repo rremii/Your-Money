@@ -2,17 +2,15 @@ import {
   BaseEntity,
   Column,
   Entity,
-  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
   Unique,
 } from "typeorm"
 import { IUser } from "../users.interface"
-import { Transaction } from "../../account/entities/transaction.entity"
 import { Account } from "../../account/entities/account.entity"
 import { Category } from "../../category/entities/category.entity"
+import { Transaction } from "../../transaction/entities/transaction.entity"
 
-@Unique(["email"])
 @Entity()
 export class User extends BaseEntity implements IUser {
   @PrimaryGeneratedColumn()
@@ -38,4 +36,7 @@ export class User extends BaseEntity implements IUser {
 
   @OneToMany(() => Category, (category) => category.user)
   categories: Category[]
+
+  @OneToMany(() => Category, (category) => category.user)
+  transaction: Transaction[]
 }

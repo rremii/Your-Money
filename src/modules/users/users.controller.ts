@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  Post,
   Put,
   Req,
   UseGuards,
@@ -10,8 +9,6 @@ import {
   ValidationPipe,
 } from "@nestjs/common"
 import { UsersService } from "./users.service"
-import { CreateUserDto } from "./dto/create-user.dto"
-import { User } from "./entities/user.entity"
 import { AccessTokenGuard } from "../../guards/access-token.guard"
 import { Request } from "express"
 import { ChangePasswordDto } from "./dto/change-password.dto"
