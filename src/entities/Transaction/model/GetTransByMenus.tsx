@@ -1,6 +1,7 @@
 import { DateFilter, ITransaction } from "@entities/Transaction/types.ts"
 import { DayType } from "@shared/helpers/TimeGap.ts"
 import { transByDate } from "@entities/Transaction/helpers/TransByDate.ts"
+import { all } from "axios"
 
 
 interface props {
@@ -19,7 +20,6 @@ export interface ITransByMenu {
 }
 
 export const GetTransByMenus = ({ dateMenuIds, allTransactions, dateFilter, firstDay }: props): ITransByMenu[] => {
-  console.log(allTransactions)
 
   return dateMenuIds.map((menuId) => {
     switch (dateFilter) {

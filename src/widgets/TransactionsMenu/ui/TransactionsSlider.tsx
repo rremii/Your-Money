@@ -1,11 +1,10 @@
 import styled from "styled-components"
-import React, { memo } from "react"
+import React, { memo, useEffect, useMemo } from "react"
 import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
 import { GetTransByMenus } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import { useSlider } from "@entities/DateSlider/model/useSlider.tsx"
 import { useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { GetMe } from "@entities/User/api/UserApi.ts"
 
 
 //todo add slider layout to shared and do same to others
@@ -14,8 +13,8 @@ export const TransactionsSlider = memo(() => {
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)
 
-  const { data: user } = GetMe.useQueryState()
-  const { allTransactions } = useGetTransactions(user?.id)
+
+  const { allTransactions } = useGetTransactions()
 
   const { sliderRef, OnScroll } = useSlider()
 

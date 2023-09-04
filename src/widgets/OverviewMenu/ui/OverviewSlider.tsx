@@ -8,6 +8,8 @@ import { useGetTransactions } from "@entities/Transaction/model/useGetTransactio
 import { GetExtraInfoByMenus } from "@widgets/OverviewMenu/model/GetExtraInfoByMenus.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 
+
+//todo try to move trans by ids and menu ext data to store
 export const OverviewSlider = memo(() => {
   const dateMenuIds = useTypedSelector(state => state.Date.dateMenuIds)
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
@@ -29,7 +31,6 @@ export const OverviewSlider = memo(() => {
     allTransactions, dateFilter, dateMenuIds, firstDay
   })
 
-  // console.log("qwe")
 
   return <SliderLayout ref={sliderRef} onScroll={OnScroll} id="slider">
     {transByMenus.map((menuData, index) => (
