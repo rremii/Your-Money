@@ -1,6 +1,10 @@
 import styled from "styled-components"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import React from "react"
+import { NotesInput } from "@widgets/CreateTransMenu/ui/NotesInput.tsx"
+import { ResultQuantity } from "@widgets/CreateTransMenu/ui/ResultQuantity.tsx"
+import { InfoCell } from "@widgets/CreateTransMenu/ui/InfoCell.tsx"
+import { Calculator } from "@widgets/CreateTransMenu/ui/Calculator.tsx"
 
 export const CreateTransMenu = () => {
 
@@ -10,7 +14,13 @@ export const CreateTransMenu = () => {
     }} $isActive={true} $zIndex={5}
              $color={"rgba(0, 0, 0, 0.78)"} />
     <CreateMenuLayout>
-      qwe
+      <div className="category-account-info">
+        <InfoCell />
+        <InfoCell />
+      </div>
+      <ResultQuantity />
+      <NotesInput />
+      <Calculator />
     </CreateMenuLayout>
   </>
 }
@@ -21,4 +31,8 @@ const CreateMenuLayout = styled.div`
   width: 100%;
   max-width: 450px;
   bottom: 0;
+
+  .category-account-info {
+
+  }
 `
