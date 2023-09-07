@@ -1,4 +1,4 @@
-import { CalculatorBtn } from "@widgets/CreateTransMenu/ui/CalculatorBtn.tsx"
+import { CalculatorBtn } from "@shared/ui/CalculatorBtn.tsx"
 import React, { FC } from "react"
 
 
@@ -9,6 +9,6 @@ interface props {
 
 export const OperationBtn: FC<props> = ({ OnClick, children }) => {
 
-  return <CalculatorBtn borderColor={"var(--bg-13)"} OnClick={OnClick}
-                        bgColor={"var(--bg-14)"}>{children}</CalculatorBtn>
+  return <CalculatorBtn $borderColor={"var(--bg-13)"} onClick={OnClick}
+                        $bgColor={"var(--bg-14)"}>{children}</CalculatorBtn>
 }

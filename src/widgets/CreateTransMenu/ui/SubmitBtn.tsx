@@ -1,4 +1,4 @@
-import { CalculatorBtn } from "@widgets/CreateTransMenu/ui/CalculatorBtn.tsx"
+import { CalculatorBtn } from "@shared/ui/CalculatorBtn.tsx"
 import React, { FC } from "react"
 import styled from "styled-components"
 
@@ -11,12 +11,15 @@ interface props {
 
 export const SubmitBtn: FC<props> = ({ bgColor, OnClick, children }) => {
 
-  return <CalculatorBtn borderColor={"transparent"} OnClick={OnClick} bgColor={bgColor}>
+  return <SubmitBtnLayout $borderColor={"transparent"} onClick={OnClick}
+                          $bgColor={bgColor}>
     <IconLayout>{children}</IconLayout>
-  </CalculatorBtn>
+  </SubmitBtnLayout>
 }
-
+const SubmitBtnLayout = styled(CalculatorBtn)`
+  grid-row: span 2;
+`
 const IconLayout = styled.span`
   color: white;
-
+  grid-row: 3 /5;
 `

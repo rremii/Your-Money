@@ -6,6 +6,8 @@ import { ResultQuantity } from "@widgets/CreateTransMenu/ui/ResultQuantity.tsx"
 import { InfoCell } from "@widgets/CreateTransMenu/ui/InfoCell.tsx"
 import { Calculator } from "@widgets/CreateTransMenu/ui/Calculator.tsx"
 
+import Categories from "@shared/assets/LightTheme/categories.png"
+
 export const CreateTransMenu = () => {
 
 
@@ -15,8 +17,8 @@ export const CreateTransMenu = () => {
              $color={"rgba(0, 0, 0, 0.78)"} />
     <CreateMenuLayout>
       <div className="category-account-info">
-        <InfoCell />
-        <InfoCell />
+        <InfoCell icon={Categories} color={"#5C6AC0"} content={"Card"} iconRadius={"5px"} title={"From account"} />
+        <InfoCell icon={Categories} color={"#795547"} content={"Shopping"} iconRadius={"50%"} title={"To category"} />
       </div>
       <ResultQuantity />
       <NotesInput />
@@ -29,10 +31,13 @@ const CreateMenuLayout = styled.div`
   z-index: 50;
   background-color: red;
   width: 100%;
-  max-width: 450px;
   bottom: 0;
+  max-width: 370px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
 
   .category-account-info {
-
+    display: flex;
   }
 `
