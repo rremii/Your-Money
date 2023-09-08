@@ -2,7 +2,6 @@ import styled from "styled-components"
 import { AllAccountsInfo } from "@widgets/AccountsMenu/ui/AllAccountsInfo.tsx"
 import { Account } from "@widgets/AccountsMenu/ui/Account.tsx"
 import React from "react"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 

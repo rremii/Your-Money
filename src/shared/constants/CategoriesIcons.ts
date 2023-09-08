@@ -8,7 +8,6 @@ import RestaurantIcon from "@shared/assets/LightTheme/restaurant.png"
 import TransportIcon from "@shared/assets/LightTheme/transport.png"
 
 import Categories from "@shared/assets/LightTheme/categories.png"
-import { expCategories } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 
 export const CategoriesIcons = new Map<string, string>()
 CategoriesIcons.set("family", FamilyIcon)

@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import React, { FC } from "react"
-import { ICategory } from "@entities/Transaction/types.ts"
 
 interface props {
   name: string

@@ -19,7 +19,6 @@ import Layout from "../app/layout/Layout.tsx"
 import SignUpInfo from "./SignUp/SignUpInfo.tsx"
 import { usePreloader } from "@shared/hooks/usePreloader.tsx"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 
 export const Routing = () => {

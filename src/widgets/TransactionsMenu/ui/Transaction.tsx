@@ -3,8 +3,6 @@ import Account from "@shared/assets/LightTheme/accounts.png"
 import React, { FC } from "react"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import { ITransaction, TransactionType } from "@entities/Transaction/types.ts"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { useAccount } from "@entities/Account/model/useAccount.tsx"
 
 interface props extends ITransaction {
 

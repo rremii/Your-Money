@@ -7,9 +7,8 @@ import { BalanceGraph } from "@widgets/CategoriesMenu/ui/BalanceGraph.tsx"
 import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
 import { FilterTransByType } from "@entities/Transaction/helpers/FilterTransByType.ts"
 import { useMenuType } from "@widgets/CategoriesMenu/model/useMenuType.tsx"
-import { useGetCategoriesQuery } from "@entities/Category/api/CategoriesApi.ts"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
-import { GetMe, UserApi } from "@entities/User/api/UserApi.ts"
+import { GetMe } from "@entities/User/api/UserApi.ts"
 import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
 
 

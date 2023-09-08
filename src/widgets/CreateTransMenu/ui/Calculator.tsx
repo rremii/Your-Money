@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { CalculatorBtn } from "@shared/ui/CalculatorBtn.tsx"
 import { OperationBtn } from "@widgets/CreateTransMenu/ui/OperationBtn.tsx"
 import { DigitBtn } from "@widgets/CreateTransMenu/ui/DigitBtn.tsx"
 import { SubmitBtn } from "@widgets/CreateTransMenu/ui/SubmitBtn.tsx"

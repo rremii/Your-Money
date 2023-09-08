@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import React, { memo, useEffect, useMemo } from "react"
+import React, { memo } from "react"
 import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
 import { GetTransByMenus } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import { useSlider } from "@entities/DateSlider/model/useSlider.tsx"
