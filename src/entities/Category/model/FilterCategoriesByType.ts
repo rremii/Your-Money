@@ -1,4 +1,4 @@
-import { ICategory, ITransaction } from "@entities/Transaction/types.ts"
+import { ICategory } from "@entities/Transaction/types.ts"
 
 export const FilterCategoriesByType = (categories?: ICategory[]) => {
 

@@ -2,7 +2,6 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useEffect } from "react"
 import { setAllTransDateGap } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { timeGap } from "@shared/helpers/TimeGap.ts"
-import { transByDate } from "@entities/Transaction/helpers/TransByDate.ts"
 
 export const useAllTransDateGap = () => {
   const dispatch = useAppDispatch()

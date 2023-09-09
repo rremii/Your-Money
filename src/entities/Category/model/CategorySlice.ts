@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { IAccount } from "@entities/Account/constants/Accounts.ts"
 import { ICategory } from "@entities/Transaction/types.ts"
 
 //todo fix types in entities

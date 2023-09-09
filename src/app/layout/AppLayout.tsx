@@ -9,7 +9,7 @@ import { Toast } from "@shared/ui/Toast.tsx"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAllTransDateGap } from "@entities/DateSlider/model/useAllTransDateGap.tsx"
-import { CreateTransMenu } from "@widgets/CreateTransMenu/ui/CreateTransMenu.tsx"
+import { CurTransMenu } from "@widgets/CurTransMenu/ui/CurTransMenu.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -26,7 +26,7 @@ const AppLayout: FC<Props> = ({ children }) => {
       {children}
       <Toast />
 
-      <CreateTransMenu />
+      <CurTransMenu />
 
       <SideBarOverlay />
       <SideBarModalsOverlay />

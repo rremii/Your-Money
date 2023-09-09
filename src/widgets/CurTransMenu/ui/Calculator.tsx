@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import { OperationBtn } from "@widgets/CreateTransMenu/ui/OperationBtn.tsx"
-import { DigitBtn } from "@widgets/CreateTransMenu/ui/DigitBtn.tsx"
-import { SubmitBtn } from "@widgets/CreateTransMenu/ui/SubmitBtn.tsx"
 import React from "react"
+import { OperationBtn } from "@widgets/CurTransMenu/ui/OperationBtn.tsx"
+import { DigitBtn } from "@widgets/CurTransMenu/ui/DigitBtn.tsx"
+import { SubmitBtn } from "@widgets/CurTransMenu/ui/SubmitBtn.tsx"
 
 interface ICalculatorBtn {
   OnClick: () => void,
@@ -42,18 +42,18 @@ export const Calculator = () => {
 
   return <CalculatorLayout>
     <div className="left-grid">
-      {leftColumnBtns.map(({ children, OnClick }) => (
-        <OperationBtn OnClick={OnClick}>{children}</OperationBtn>
+      {leftColumnBtns.map(({ children, OnClick }, index) => (
+        <OperationBtn key={index} OnClick={OnClick}>{children}</OperationBtn>
       ))}
     </div>
     <div className="middle-grid">
-      {midleBtns.map(({ children, OnClick }) => (
-        <DigitBtn OnClick={OnClick}>{children}</DigitBtn>
+      {midleBtns.map(({ children, OnClick }, index) => (
+        <DigitBtn key={index} OnClick={OnClick}>{children}</DigitBtn>
       ))}
     </div>
     <div className="right-grid">
-      {rightBtns.map(({ children, OnClick }) => (
-        <OperationBtn OnClick={OnClick}>{children}</OperationBtn>
+      {rightBtns.map(({ children, OnClick }, index) => (
+        <OperationBtn key={index} OnClick={OnClick}>{children}</OperationBtn>
       ))}
       <SubmitBtn bgColor={"#795547"} OnClick={() => undefined}>Ok</SubmitBtn>
     </div>

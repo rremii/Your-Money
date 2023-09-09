@@ -24,12 +24,12 @@ export interface ITransaction {
   quantity: number
   type: TransactionType
   accountBalance: number
-  categoryIcon: string
   categoryId: number
   accountId: number
   title?: string
   account: {
     name: string
+    icon: string
   }
   category: {
     icon: string

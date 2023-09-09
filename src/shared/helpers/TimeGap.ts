@@ -24,7 +24,7 @@ FullDays.set(5, "Friday")
 FullDays.set(6, "Saturday")
 
 
-export const Months = new Map<number, string>()
+export const Months = new Map<number | string, string | number>()
 Months.set(0, "January")
 Months.set(1, "February")
 Months.set(2, "March")
@@ -37,6 +37,18 @@ Months.set(8, "September")
 Months.set(9, "October")
 Months.set(10, "November")
 Months.set(11, "December")
+Months.set("January", 0)
+Months.set("February", 1)
+Months.set("March", 2)
+Months.set("April", 3)
+Months.set("May", 4)
+Months.set("June", 5)
+Months.set("July", 6)
+Months.set("August", 7)
+Months.set("September", 8)
+Months.set("October", 9)
+Months.set("November", 10)
+Months.set("December", 11)
 
 //todo fix
 
@@ -63,8 +75,8 @@ class TimeGap {
     const dateFrom = new Date(initDate.getFullYear(), initDate.getMonth(), initDate.getDate() - dayGap + 7 * index)
     const dateTo = new Date(initDate.getFullYear(), initDate.getMonth(), initDate.getDate() - dayGap + 7 * (index + 1))
 
-    const monthFrom = Months.get(dateFrom.getMonth()) || ""
-    const monthTo = Months.get(dateTo.getMonth()) || ""
+    const monthFrom = Months.get(dateFrom.getMonth()) as string
+    const monthTo = Months.get(dateTo.getMonth()) as string
 
     const dateFromStr = dateFrom.getDate() + " " + monthFrom.slice(0, 3)
     const dateToStr = dateTo.getDate() + " " + monthTo.slice(0, 3)

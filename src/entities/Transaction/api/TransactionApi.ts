@@ -1,6 +1,5 @@
 import { Api } from "@shared/api/config/Api.ts"
-import { IAccount } from "@entities/Account/constants/Accounts.ts"
-import { CreateTransactionDto, ICategory, ITransaction } from "@entities/Transaction/types.ts"
+import { CreateTransactionDto, ITransaction } from "@entities/Transaction/types.ts"
 
 export const TransactionApi = Api.injectEndpoints({
 

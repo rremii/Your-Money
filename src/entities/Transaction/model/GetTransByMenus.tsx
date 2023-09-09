@@ -1,7 +1,6 @@
 import { DateFilter, ITransaction } from "@entities/Transaction/types.ts"
 import { DayType } from "@shared/helpers/TimeGap.ts"
 import { transByDate } from "@entities/Transaction/helpers/TransByDate.ts"
-import { all } from "axios"
 
 
 interface props {

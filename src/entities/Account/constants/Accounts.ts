@@ -1,6 +1,3 @@
-import AccountsIcon from "@shared/assets/LightTheme/accounts.png"
-
-
 export interface IAccount {
   id: number | null
   name: string
