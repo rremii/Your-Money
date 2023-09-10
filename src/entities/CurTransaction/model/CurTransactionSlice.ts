@@ -20,10 +20,12 @@ interface initialState {
   account: {
     name: string
     icon: string
+    color: string
   }
   category: {
     icon: string
     name: string
+    color: string
   }
 }
 
@@ -40,11 +42,13 @@ const initialState: initialState = {
   accountId: null,
   account: {
     name: "",
-    icon: ""
+    icon: "",
+    color: ""
   },
   category: {
     name: "",
-    icon: ""
+    icon: "",
+    color: ""
   }
 }
 
@@ -55,6 +59,9 @@ const CurTransactionSlice = createSlice({
     setEditMenu(state, action: PayloadAction<{ isOpen: boolean, menuType: IEditMenuType }>) {
       state.isEditMenu = action.payload.isOpen
       state.editMenuType = action.payload.menuType
+    },
+    clearCurTransaction(state) {
+      state.id = null
     },
     setCurTransaction(state, action: PayloadAction<ITransaction>) {
       state.id = action.payload.id
@@ -75,6 +82,7 @@ const CurTransactionSlice = createSlice({
       account: {
         name: string
         icon: string
+        color: string
       }
     }>) {
       state.accountId = action.payload.accountId
@@ -85,6 +93,7 @@ const CurTransactionSlice = createSlice({
       category: {
         icon: string
         name: string
+        color: string
       }
     }>) {
       state.categoryId = action.payload.categoryId
@@ -111,5 +120,6 @@ export const {
   setDateStr,
   setType,
   setTitle,
-  setCategory
+  setCategory,
+  clearCurTransaction
 } = CurTransactionSlice.actions

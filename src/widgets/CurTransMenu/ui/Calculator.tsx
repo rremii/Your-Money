@@ -1,15 +1,20 @@
 import styled from "styled-components"
-import React from "react"
+import React, { FC } from "react"
 import { OperationBtn } from "@widgets/CurTransMenu/ui/OperationBtn.tsx"
 import { DigitBtn } from "@widgets/CurTransMenu/ui/DigitBtn.tsx"
 import { SubmitBtn } from "@widgets/CurTransMenu/ui/SubmitBtn.tsx"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 interface ICalculatorBtn {
   OnClick: () => void,
   children: React.ReactNode | string,
 }
 
-export const Calculator = () => {
+interface props {
+  color: string
+}
+
+export const Calculator: FC<props> = ({ color }) => {
 
 
 //todo optimize
@@ -55,7 +60,7 @@ export const Calculator = () => {
       {rightBtns.map(({ children, OnClick }, index) => (
         <OperationBtn key={index} OnClick={OnClick}>{children}</OperationBtn>
       ))}
-      <SubmitBtn bgColor={"#795547"} OnClick={() => undefined}>Ok</SubmitBtn>
+      <SubmitBtn bgColor={color} OnClick={() => undefined}>Ok</SubmitBtn>
     </div>
   </CalculatorLayout>
 }

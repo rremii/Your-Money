@@ -6,7 +6,7 @@ interface props {
   title: string
   content: string
   color: string
-  icon: string
+  icon?: string
   iconRadius: string
 }
 
@@ -50,8 +50,8 @@ const CellLayout = styled.div<{
     transform: translateY(-50%);
 
     .icon {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
     }
 
 

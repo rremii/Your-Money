@@ -12,21 +12,6 @@ import { GetMe } from "@entities/User/api/UserApi.ts"
 import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
 
 
-export const expCategories = [
-  { name: "Family", color: "#A930FF" },
-  { name: "Gifts", color: "#CF3648" },
-  { name: "Groceries", color: "#32CFFF" },
-  { name: "Health", color: "#46A33D" },
-  { name: "Leisure", color: "#A33D6E" },
-  { name: "Shopping", color: "#7B7475" },
-  { name: "Restaurant", color: "#316CFF" },
-  { name: "Transport", color: "#AF8A6D" }
-] as ICategory[]
-
-export const incCategories = [
-  { name: "Salary", color: "green" }
-] as ICategory[]
-
 interface props {
   menuId: number
   dateGap: string

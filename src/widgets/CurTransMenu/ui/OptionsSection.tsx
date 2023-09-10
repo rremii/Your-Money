@@ -1,10 +1,15 @@
 import styled from "styled-components"
 import Category from "@shared/assets/LightTheme/categories.png"
+import { FC } from "react"
 
-export const OptionsSection = () => {
+interface props {
+  color: string
+}
+
+export const OptionsSection: FC<props> = ({ color }) => {
 
 
-  return <OptionsLayout $color={"rgb(207,211,236)"}>
+  return <OptionsLayout $color={color}>
     <div className="option delete">
       <div className="icon">
         <img src={Category} alt="delete" />

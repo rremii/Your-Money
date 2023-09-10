@@ -1,9 +1,20 @@
 import styled from "styled-components"
+import { TransactionType } from "@entities/Transaction/types.ts"
+import { FC } from "react"
 
-export const ResultQuantity = () => {
-  return <QuantityLayout $color="#795547">
-    <p className="type">Expense</p>
-    <p className="quantity">$ 0</p>
+
+interface props {
+  quantity: number
+  type: TransactionType
+  color: string
+}
+
+export const ResultQuantity: FC<props> = ({ quantity, type, color }) => {
+
+
+  return <QuantityLayout $color={color}>
+    <p className="type">{type}</p>
+    <p className="quantity">$ {quantity}</p>
   </QuantityLayout>
 }
 const QuantityLayout = styled.div<{

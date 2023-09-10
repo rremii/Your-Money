@@ -30,10 +30,12 @@ export interface ITransaction {
   account: {
     name: string
     icon: string
+    color: string
   }
   category: {
     icon: string
     name: string
+    color: string
   }
 }
 

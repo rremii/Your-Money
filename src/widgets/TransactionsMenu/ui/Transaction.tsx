@@ -3,15 +3,31 @@ import Account from "@shared/assets/LightTheme/accounts.png"
 import React, { FC } from "react"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import { ITransaction, TransactionType } from "@entities/Transaction/types.ts"
+import {
+  clearCurTransaction,
+  setCurTransaction,
+  setEditMenu
+} from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 
 interface props extends ITransaction {
 
 }
 
-export const Transaction: FC<props> = ({ title, quantity, category, type, account }) => {
+export const Transaction: FC<props> = (transaction) => {
+  const { account, quantity, category, type, title } = transaction
 
+  const dispatch = useAppDispatch()
 
-  return <TransactionLayout $type={type}>
+  const OnClick = () => {
+    dispatch(setEditMenu({
+      isOpen: true,
+      menuType: "overview"
+    }))
+    dispatch(setCurTransaction(transaction))
+  }
+
+  return <TransactionLayout onClick={OnClick} $type={type}>
     <div className="icon">
       <img src={CategoriesIcons.get(category.icon)} alt="transaction icon" />
     </div>
@@ -32,6 +48,7 @@ const TransactionLayout = styled.div<{
   $type?: TransactionType
 }>`
 
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
