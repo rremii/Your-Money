@@ -3,7 +3,7 @@ export interface ICategory {
   name: string,
   color: string
   icon: string
-  type: string
+  type: TransactionType
   userId: number
 }
 
@@ -11,7 +11,6 @@ export interface ICategory {
 export interface CreateTransactionDto {
   dateFrom: string
   dateTo: string
-  accountId: number
   userId?: number
 }
 

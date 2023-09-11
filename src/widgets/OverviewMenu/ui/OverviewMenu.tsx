@@ -48,7 +48,6 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
     firstDay
   }), [dateFilter, dateFrom, dateTo, expTransactions, firstDay])
 
-
   return <MenuLayout ref={observeRef}>
     <BalanceBox expense={expTransQuantity} income={incTransQuantity} />
     <OverviewGraph {...barConfig} />

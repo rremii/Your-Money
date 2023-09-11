@@ -3,7 +3,7 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { useLazyGetMeQuery } from "@entities/User/api/UserApi.ts"
 import React, { useEffect } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { getIsMenuIdZero } from "@entities/Account/model/AccountSlice.ts"
+import { getIsMenuIdZero } from "@entities/Account/model/CurAccountSlice.ts"
 
 
 const time = new Date().getHours() + ":" + new Date().getMinutes().toString().padStart(2, "0")

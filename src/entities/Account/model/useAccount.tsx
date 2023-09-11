@@ -1,25 +1,23 @@
 import { useEffect } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { IAccount } from "@entities/Account/constants/Accounts.ts"
-import { changeAccountId, setCurAccount } from "@entities/Account/model/AccountSlice.ts"
+import { setCurAccount, setCurAccountId } from "@entities/Account/model/CurAccountSlice.ts"
 import { useGetAccountsQuery } from "@entities/Account/api/AccountsApi.ts"
 
 //todo
 export const useAccount = (userId?: number) => {
   const dispatch = useAppDispatch()
 
-  const curAccId = useTypedSelector(state => state.Account.curAccId)
-  // const allAccounts = useTypedSelector(state => state.Account.allAccounts)
+  const curAccId = useTypedSelector(state => state.CurAccount.id)
 
 
   const { data: allAccounts } = useGetAccountsQuery(userId, {
     skip: !userId
   })
-  // debugger
+
+
   useEffect(() => {
-    // if (!allAccounts) return
-    // dispatch(setAllAccounts(allAccounts))
-    dispatch(changeAccountId(1))
+    dispatch(setCurAccountId(null))
   }, [allAccounts])
 
   useEffect(() => {
@@ -30,17 +28,17 @@ export const useAccount = (userId?: number) => {
     if (typeof curAccId === "number") {
       curAcc = allAccounts.find(({ id }) => id === curAccId) as IAccount
     } else {
+      curAcc.id = null
       curAcc.balance = allAccounts.reduce((acc, cur) => acc + cur.balance, 0)
       curAcc.color = "#5C6AC0"
+      curAcc.name = "all"
+      curAcc.icon = ""
     }
 
 
-    // if (typeof curId === "number") return curBalance
-    // else return allAccounts.reduce((acc, cur) => acc + cur.balance, 0)
-
     dispatch(setCurAccount(curAcc))
     document.documentElement.style.setProperty("--account-color", curAcc.color)
-  }, [curAccId])
+  }, [curAccId, allAccounts])
 
 
   return {

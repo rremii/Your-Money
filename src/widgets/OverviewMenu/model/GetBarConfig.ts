@@ -49,9 +49,7 @@ export const GetBarConfig = ({ categories, dateTo, dateFrom, filter, transaction
         data: transactions,
         animation: false,
         maxBarThickness: 100
-
       }
-
     })
   }
 

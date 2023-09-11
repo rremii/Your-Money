@@ -11,7 +11,7 @@ interface props {
 
 export const TransactionHeader: FC<props> = React.memo(({ dateFrom, dateTo }) => {
 
-  const allAccounts = useTypedSelector(state => state.Account.curAccBalance)
+  // const allAccounts = useTypedSelector(state => state.Cur)
 
   // const { startBalance, endBalance } = GetAccBalanceByTimeGap({ allAccounts, curAccHistory, dateTo, dateFrom })
 

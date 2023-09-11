@@ -4,12 +4,10 @@ import { RootState } from "@shared/store/store.ts"
 import { ITransaction, TransactionType } from "@entities/Transaction/types.ts"
 import { isObject } from "chart.js/helpers"
 
-type IEditMenuType = "overview" | "edit"
+type IEditMenuType = "overview" | "edit" | "create"
 
-interface initialState {
-  isEditMenu: boolean
-  editMenuType: IEditMenuType
 
+interface IEditTrans {
   id: number | null
   dateStr: string
   quantity: number
@@ -27,6 +25,13 @@ interface initialState {
     name: string
     color: string
   }
+}
+
+interface initialState extends IEditTrans {
+  isEditMenu: boolean
+  editMenuType: IEditMenuType
+
+
 }
 
 const initialState: initialState = {
@@ -60,10 +65,11 @@ const CurTransactionSlice = createSlice({
       state.isEditMenu = action.payload.isOpen
       state.editMenuType = action.payload.menuType
     },
-    clearCurTransaction(state) {
-      state.id = null
+    setMenuType(state, action: PayloadAction<IEditMenuType>) {
+      state.editMenuType = action.payload
     },
-    setCurTransaction(state, action: PayloadAction<ITransaction>) {
+
+    setCurTransaction(state, action: PayloadAction<IEditTrans>) {
       state.id = action.payload.id
       state.title = action.payload.title
       state.type = action.payload.type
@@ -72,8 +78,20 @@ const CurTransactionSlice = createSlice({
       state.quantity = action.payload.quantity
       state.accountId = action.payload.accountId
       state.categoryId = action.payload.categoryId
-      state.dateStr = action.payload.date
+      state.dateStr = action.payload.dateStr
     },
+    resetCurTransaction(state) {
+      state.id = null
+      state.title = ""
+      state.type = "expense"
+      state.account = { name: "", color: "", icon: "" }
+      state.category = { name: "", color: "", icon: "" }
+      state.quantity = 0
+      state.accountId = null
+      state.categoryId = null
+      state.dateStr = new Date().toUTCString()
+    },
+
     setTitle(state, action: PayloadAction<string>) {
       state.title = action.payload
     },
@@ -121,5 +139,6 @@ export const {
   setType,
   setTitle,
   setCategory,
-  clearCurTransaction
+  resetCurTransaction,
+  setMenuType
 } = CurTransactionSlice.actions

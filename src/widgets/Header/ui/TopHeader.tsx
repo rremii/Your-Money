@@ -12,7 +12,7 @@ export const TopHeader: FC<props> = ({ right }) => {
   const dispatch = useAppDispatch()
 
 
-  const balance = useTypedSelector(state => state.Account.curAccBalance)
+  const balance = useTypedSelector(state => state.CurAccount.balance)
 
 
   const OpenSideBar = () => {

@@ -40,7 +40,10 @@ export const AccountsApi = Api.injectEndpoints({
 })
 // export const {} = TransactionApi.endpoints
 
+export const { GetAccounts } = AccountsApi.endpoints
+
 export const {
   useLazyGetAccountsQuery,
   useGetAccountsQuery
 } = AccountsApi
+

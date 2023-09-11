@@ -1,6 +1,7 @@
 import { ChartOptions } from "chart.js"
 import { DateFilter, ICategory, ITransaction } from "@entities/Transaction/types.ts"
 import { Days, DayType, FullDays } from "@shared/helpers/TimeGap.ts"
+import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
 
 export const GetConfigOptions = (currency: string = "$"): ChartOptions<"bar"> => {
 
@@ -59,7 +60,7 @@ export const GetDatePointsAmount = (dateFrom: Date, dateTo: Date, filter: DateFi
 
 export const GetTransByCategories = (categories: ICategory[], transactions: ITransaction[]) => {
   return categories.map(({ name, color }) => {
-    const categoryTransactions = transactions.filter(({ category }) => category === name)
+    const categoryTransactions = transactions.filter(({ category }) => category.name === name)
     return {
       name, color, transactions: categoryTransactions
     }
@@ -111,7 +112,7 @@ export const GetTransByDateUnitWithinCategory = (transByCategories: tranByCatego
 
 
       const transQuantity = transactions
-        .filter(({ date }) => date >= curDate && date < nextUnitDate)
+        .filter(({ date }) => IsDateBetween(curDate, new Date(date), nextUnitDate, "left"))
         .reduce((acc, cur) => acc + cur.quantity, 0)
 
       curUnitTrans.push(transQuantity)

@@ -16,9 +16,11 @@ interface props {
   menuId: number
   dateGap: string
   transactions: ITransaction[]
+  dateTo: Date,
+  dateFrom: Date,
 }
 
-export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactions }) => {
+export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactions, dateTo, dateFrom }) => {
 
   const { SwitchMenuType, menuType } = useMenuType()
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
@@ -43,10 +45,10 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
     />
 
     {menuType === "income" && incFilledCategories.map((categoryData, i) => (
-      <Category key={i} {...categoryData} />
+      <Category key={i} dateTo={dateTo} {...categoryData} />
     ))}
     {menuType === "expense" && expFilledCategories.map((categoryData, i) => (
-      <Category key={i} {...categoryData} />
+      <Category key={i} dateTo={dateTo} {...categoryData} />
     ))}
   </CategoryLayout>
 })

@@ -37,7 +37,6 @@ export const CurTransMenu = React.memo(() => {
     }))
   }
 
-  console.log("qwe")
 
   return <>
     <Overlay onClick={CloseMenu}
@@ -54,7 +53,7 @@ export const CurTransMenu = React.memo(() => {
       </div>
       <ResultQuantity color={category.color} type={type} quantity={quantity} />
       <Notes content={title} />
-      {menuType === "edit" && <Calculator color={category.color} />}
+      {menuType !== "overview" && <Calculator color={category.color} />}
       <TransDate dateStr={dateStr} />
       {menuType === "overview" && <OptionsSection color={category.color} />}
     </MenuLayout>

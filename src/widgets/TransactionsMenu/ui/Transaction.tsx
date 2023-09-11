@@ -4,7 +4,7 @@ import React, { FC } from "react"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import { ITransaction, TransactionType } from "@entities/Transaction/types.ts"
 import {
-  clearCurTransaction,
+  
   setCurTransaction,
   setEditMenu
 } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
@@ -15,7 +15,7 @@ interface props extends ITransaction {
 }
 
 export const Transaction: FC<props> = (transaction) => {
-  const { account, quantity, category, type, title } = transaction
+  const { account, quantity, category, type, title, accountId, categoryId, id, date } = transaction
 
   const dispatch = useAppDispatch()
 
@@ -24,7 +24,17 @@ export const Transaction: FC<props> = (transaction) => {
       isOpen: true,
       menuType: "overview"
     }))
-    dispatch(setCurTransaction(transaction))
+    dispatch(setCurTransaction({
+      id,
+      categoryId,
+      accountId,
+      title,
+      dateStr: date,
+      quantity,
+      type,
+      category,
+      account
+    }))
   }
 
   return <TransactionLayout onClick={OnClick} $type={type}>

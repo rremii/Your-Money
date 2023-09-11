@@ -5,21 +5,21 @@ import { GetMe } from "@entities/User/api/UserApi.ts"
 
 export const useGetTransactions = (userId?: number) => {
 
-  const curAccId = useTypedSelector(state => state.Account.curAccId)
+  const curAccId = useTypedSelector(state => state.CurAccount.id)
   const allTransDateGap = useTypedSelector(state => state.Date.allTransDateGap)
 
+  //todo fix
   const { data: user } = GetMe.useQueryState()
 
   const { data: transactions } = useGetTransactionsByDateGapQuery({
     ...allTransDateGap,
-    accountId: curAccId || 0,
     userId: user?.id
   }, {
-    skip: !curAccId || !user?.id
+    skip: !user?.id
   })
 
   let allTransactions = transactions || [] as ITransaction[]
-  if (typeof curAccId !== "number")
+  if (typeof curAccId === "number")
     allTransactions = transactions?.filter(({ accountId }) => accountId === curAccId) || []
 
   return {

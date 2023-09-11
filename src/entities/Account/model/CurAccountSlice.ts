@@ -3,39 +3,41 @@ import { IAccount } from "@entities/Account/constants/Accounts.ts"
 import { RootState } from "@shared/store/store.ts"
 
 interface initialState {
-
-  // allAccounts: IAccount[]
-  curAccBalance: number
-  curAccId: number | null
+  id: number | null
+  name: string
+  color: string
+  balance: number
+  icon: string
 }
 
 const initialState: initialState = {
-  // allAccounts: [],
-  curAccBalance: 0,
-  curAccId: null
+  balance: 0,
+  id: null,
+  icon: "",
+  color: "",
+  name: ""
 }
 
-const AccountSlice = createSlice({
-  name: "AccountSlice",
+const CurAccountSlice = createSlice({
+  name: "CurAccountSlice",
   initialState,
   reducers: {
     setCurAccount(state, action: PayloadAction<IAccount>) {
-      state.curAccBalance = action.payload.balance
+      const { name, color, icon, balance } = action.payload
+      state.name = name
+      state.balance = balance
+      state.icon = icon
+      state.color = color
     },
-    // setAllAccounts(state, action: PayloadAction<IAccount[]>) {
-    //   state.allAccounts = action.payload
-    // },
-    changeAccountId(state, action: PayloadAction<number | null>) {
-      state.curAccId = action.payload
+    setCurAccountId(state, action: PayloadAction<number | null>) {
+      state.id = action.payload
     }
   }
 })
 
-export const AccountReducer = AccountSlice.reducer
-export const { setCurAccount, changeAccountId } = AccountSlice.actions
+export const CurAccountReducer = CurAccountSlice.reducer
+export const { setCurAccount, setCurAccountId } = CurAccountSlice.actions
 
-export const getCurAccId = (state: RootState) => state.Account.curAccId
-export const getCurAccBalance = (state: RootState) => state.Account.curAccBalance
 // export const getAllAccounts = (state: RootState) => state.Account.allAccounts
 
 
