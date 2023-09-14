@@ -10,6 +10,8 @@ import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAllTransDateGap } from "@entities/DateSlider/model/useAllTransDateGap.tsx"
 import { CurTransMenu } from "@widgets/CurTransMenu/ui/CurTransMenu.tsx"
+import { ChooseCategoryMenu } from "@widgets/ChooseCategoryMenu/ui/ChooseCategoryMenu.tsx"
+import { ChooseAccountMenu } from "@widgets/ChooseAccountMenu/ui/ChooseAccountMenu.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -27,6 +29,8 @@ const AppLayout: FC<Props> = ({ children }) => {
       <Toast />
 
       <CurTransMenu />
+      <ChooseCategoryMenu />
+      <ChooseAccountMenu />
 
       <SideBarOverlay />
       <SideBarModalsOverlay />

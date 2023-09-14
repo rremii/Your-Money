@@ -15,7 +15,7 @@ export const useAccount = (userId?: number) => {
     skip: !userId
   })
 
-
+//todo create allAccountSlice
   useEffect(() => {
     dispatch(setCurAccountId(null))
   }, [allAccounts])

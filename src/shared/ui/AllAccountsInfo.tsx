@@ -1,10 +1,13 @@
 import styled from "styled-components"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { FC } from "react"
 
-export const AllAccountsInfo = () => {
+interface props {
+  balance: number
+}
 
 
-  const balance = useTypedSelector(state => state.Account.curAccBalance)
+export const AllAccountsInfo: FC<props> = ({ balance }) => {
 
 
   return <AccountsInfoLayout>

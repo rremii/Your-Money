@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import { FC } from "react"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { setChooseCategoryMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 
 
 interface props {
@@ -8,12 +10,13 @@ interface props {
   color: string
   icon?: string
   iconRadius: string
+  OnClick: () => void
 }
 
-export const InfoCell: FC<props> = ({ icon, iconRadius, color, content, title }) => {
+export const InfoCell: FC<props> = ({ icon, iconRadius, color, content, title, OnClick }) => {
 
 
-  return <CellLayout $color={color} $iconRadius={iconRadius}>
+  return <CellLayout onClick={OnClick} $color={color} $iconRadius={iconRadius}>
     <div className="icon-box">
       <img className="icon" src={icon} alt="icon" />
     </div>
@@ -34,6 +37,8 @@ const CellLayout = styled.div<{
   background-color: ${({ $color }) => $color || "var(--bg-3)"};
   flex: 1 1 auto;
   position: relative;
+
+  cursor: pointer;
 
   .icon-box {
     //display: none;

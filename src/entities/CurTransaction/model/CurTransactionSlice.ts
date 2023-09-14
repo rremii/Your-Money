@@ -31,12 +31,17 @@ interface initialState extends IEditTrans {
   isEditMenu: boolean
   editMenuType: IEditMenuType
 
+  isChooseAccountMenu: boolean
+  isChooseCategoryMenu: boolean
 
 }
 
 const initialState: initialState = {
   isEditMenu: false,
   editMenuType: "overview",
+
+  isChooseCategoryMenu: false,
+  isChooseAccountMenu: false,
 
   id: null,
   dateStr: new Date().toUTCString(),
@@ -61,6 +66,14 @@ const CurTransactionSlice = createSlice({
   name: "CurTransactionSlice",
   initialState,
   reducers: {
+
+
+    setChooseCategoryMenu(state, action: PayloadAction<boolean>) {
+      state.isChooseCategoryMenu = action.payload
+    },
+    setChooseAccountMenu(state, action: PayloadAction<boolean>) {
+      state.isChooseAccountMenu = action.payload
+    },
     setEditMenu(state, action: PayloadAction<{ isOpen: boolean, menuType: IEditMenuType }>) {
       state.isEditMenu = action.payload.isOpen
       state.editMenuType = action.payload.menuType
@@ -140,5 +153,7 @@ export const {
   setTitle,
   setCategory,
   resetCurTransaction,
-  setMenuType
+  setMenuType,
+  setChooseCategoryMenu,
+  setChooseAccountMenu
 } = CurTransactionSlice.actions
