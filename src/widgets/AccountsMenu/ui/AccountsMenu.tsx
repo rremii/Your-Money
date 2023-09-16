@@ -8,14 +8,14 @@ import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 
 export const AccountsMenu = () => {
-  const curBalance = useTypedSelector(state => state.CurAccount.balance)
+  const allBalance = useTypedSelector(state => state.AllAccount.balance)
 
 
   const { data: user } = GetMe.useQueryState()
   const { allAccounts } = useAccount(user?.id)
 
   return <AccountsMenuLayout>
-    <AllAccountsInfo balance={curBalance} />
+    <AllAccountsInfo balance={allBalance} />
 
     {allAccounts?.map(({ name, balance, icon }) => (
       <Account key={name} quantity={balance} name={name} icon={icon} />

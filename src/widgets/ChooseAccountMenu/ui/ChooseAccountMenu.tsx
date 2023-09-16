@@ -16,7 +16,7 @@ export const ChooseAccountMenu = React.memo(() => {
   const dispatch = useAppDispatch()
 
   const isOpen = useTypedSelector(state => state.CurTransaction.isChooseAccountMenu)
-  const curBalance = useTypedSelector(state => state.CurAccount.balance)
+  const allBalance = useTypedSelector(state => state.AllAccount.balance)
 
 
   const { data: user } = GetMe.useQueryState()
@@ -33,7 +33,7 @@ export const ChooseAccountMenu = React.memo(() => {
              $color={"rgba(0, 0, 0, 0.5 )"} />
     <AccountMenuLayout $isActive={isOpen}>
       <ChooseMenuHeader content={"from account"} />
-      <AllAccountsInfo balance={curBalance} />
+      <AllAccountsInfo balance={allBalance} />
       {allAccounts?.map((account) => (
         <ChooseAccount {...account} />
       ))}

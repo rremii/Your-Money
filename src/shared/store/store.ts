@@ -7,6 +7,7 @@ import { DateReducer } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { CurAccountReducer } from "@entities/Account/model/CurAccountSlice.ts"
 import { CategoryReducer } from "@entities/Category/model/CategorySlice.ts"
 import { CurTransactionReducer } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { AllAccountReducer } from "@entities/Account/model/AllAccountSlice.ts"
 
 const rootReducer = combineReducers({
   SideBar: SideBarReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   CurAccount: CurAccountReducer,
   Category: CategoryReducer,
   CurTransaction: CurTransactionReducer,
+  AllAccount: AllAccountReducer,
   [Api.reducerPath]: Api.reducer
 })
 
