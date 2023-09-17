@@ -6,7 +6,7 @@ interface props {
 }
 
 export const ErrorMessage: FC<props> = ({ children }) => {
-  return <ErrorLayout>{children}</ErrorLayout>
+  return <ErrorLayout className="ErrorMessage">{children}</ErrorLayout>
 }
 const ErrorLayout = styled.div`
   color: var(--error-1);

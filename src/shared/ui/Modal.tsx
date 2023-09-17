@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const SideBarModal = styled.div<{
+export const Modal = styled.div<{
   $isOpen?: boolean
 }>`
   padding: 25px 22px;

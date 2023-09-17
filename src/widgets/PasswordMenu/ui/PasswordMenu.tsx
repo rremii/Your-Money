@@ -1,4 +1,4 @@
-import { SideBarModal } from "@shared/ui/SideBarModal.tsx"
+import { Modal } from "@shared/ui/Modal.tsx"
 import React from "react"
 import { closeAllMenus } from "@entities/SideBar/model/SideBarSlice.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
@@ -110,7 +110,7 @@ export const PasswordMenu = React.memo(() => {
     </form>
   </PasswordLayout>
 })
-const PasswordLayout = styled(SideBarModal)`
+const PasswordLayout = styled(Modal)`
   .btn-section {
     margin-top: 20px;
   }

@@ -1,4 +1,4 @@
-import { SideBarModal } from "@shared/ui/SideBarModal.tsx"
+import { Modal } from "@shared/ui/Modal.tsx"
 import React from "react"
 import { closeAllMenus } from "@entities/SideBar/model/SideBarSlice.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
@@ -89,7 +89,7 @@ export const NameMenu = React.memo(() => {
     </form>
   </NameLayout>
 })
-const NameLayout = styled(SideBarModal)`
+const NameLayout = styled(Modal)`
   .btn-section {
     margin-top: 20px;
   }

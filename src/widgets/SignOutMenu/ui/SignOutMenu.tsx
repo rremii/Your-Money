@@ -5,7 +5,7 @@ import { setIsSideBar } from "@entities/SideBar"
 import { setAuthInitial } from "@entities/Auth/model/AuthSlice.ts"
 import { closeAllMenus } from "@entities/SideBar/model/SideBarSlice.ts"
 import React from "react"
-import { SideBarModal } from "@shared/ui/SideBarModal.tsx"
+import { Modal } from "@shared/ui/Modal.tsx"
 
 export const SignOutMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -28,7 +28,7 @@ export const SignOutMenu = React.memo(() => {
     dispatch(closeAllMenus())
   }
 
-  return <SideBarModal $isOpen={isSignOut}>
+  return <Modal $isOpen={isSignOut}>
     <h2 className="title">Sign out?</h2>
     <p className="content">Data synchronization and other features
       will be disabled in offline.</p>
@@ -36,6 +36,6 @@ export const SignOutMenu = React.memo(() => {
       <button className="gray" onClick={CloseMenu}>CANCEL</button>
       <button className="red" onClick={SignOut}>SIGN OUT</button>
     </div>
-  </SideBarModal>
+  </Modal>
 })
 

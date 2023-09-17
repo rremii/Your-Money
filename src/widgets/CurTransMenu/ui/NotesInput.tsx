@@ -1,13 +1,20 @@
 import styled from "styled-components"
 import { FC } from "react"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { setChangeTitleMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 
 interface props {
   content?: string
 }
 
 export const Notes: FC<props> = ({ content }) => {
+  const dispatch = useAppDispatch()
 
-  return <InputLayout>
+  const OpenEditMenu = () => {
+    dispatch(setChangeTitleMenu(true))
+  }
+
+  return <InputLayout onClick={OpenEditMenu}>
     {content || "Notes ..."}
   </InputLayout>
 }
