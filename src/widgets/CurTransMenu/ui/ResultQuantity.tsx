@@ -4,7 +4,7 @@ import { FC } from "react"
 
 
 interface props {
-  quantity: number
+  quantity: number | string
   type: TransactionType
   color: string
 }

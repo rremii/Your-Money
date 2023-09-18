@@ -27,7 +27,20 @@ interface IEditTrans {
   }
 }
 
+export type MathOperatorType = "mul" | "sub" | "div" | "sum" | null
+
+
+export const MathOperatorSign = new Map()
+MathOperatorSign.set("div", "÷")
+MathOperatorSign.set("sub", "-")
+MathOperatorSign.set("sum", "+")
+MathOperatorSign.set("mul", "×")
+
 interface initialState extends IEditTrans {
+  operator: MathOperatorType
+  numberStr1: string
+  numberStr2: string
+
   isEditMenu: boolean
   editMenuType: IEditMenuType
 
@@ -38,6 +51,10 @@ interface initialState extends IEditTrans {
 }
 
 const initialState: initialState = {
+  numberStr1: "",
+  numberStr2: "",
+  operator: null,
+
   isEditMenu: false,
   editMenuType: "overview",
 
@@ -68,8 +85,23 @@ const CurTransactionSlice = createSlice({
   name: "CurTransactionSlice",
   initialState,
   reducers: {
+    addToNum(state, action: PayloadAction<number>) {
+      const operator = state.operator
+      const num1 = state.numberStr1
+      const num2 = state.numberStr2
 
+      if (!operator) {
+        const joinedNum = num1 + String(action.payload)
+        state.numberStr1 = joinedNum
+      } else {
+        const joinedNum = num2 + String(action.payload)
+        state.numberStr2 = joinedNum
+      }
 
+    },
+    setOperator(state, action: PayloadAction<MathOperatorType>) {
+      state.operator = action.payload
+    },
     setChooseCategoryMenu(state, action: PayloadAction<boolean>) {
       state.isChooseCategoryMenu = action.payload
     },
@@ -160,5 +192,5 @@ export const {
   resetCurTransaction,
   setMenuType,
   setChooseCategoryMenu,
-  setChooseAccountMenu
+  setChooseAccountMenu, addToNum, setOperator
 } = CurTransactionSlice.actions
