@@ -4,7 +4,12 @@ import { OperationBtn } from "@widgets/CurTransMenu/ui/OperationBtn.tsx"
 import { DigitBtn } from "@widgets/CurTransMenu/ui/DigitBtn.tsx"
 import { SubmitBtn } from "@widgets/CurTransMenu/ui/SubmitBtn.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { addToNum, MathOperatorType, setOperator } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import {
+  addToNum,
+  calcCalculatorQuantity,
+  MathOperatorType,
+  setOperator
+} from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 
 interface ICalculatorBtn {
   OnClick: () => void,
@@ -18,6 +23,18 @@ interface props {
 
 export const Calculator: FC<props> = ({ color }) => {
   const dispatch = useAppDispatch()
+
+  const operator = useTypedSelector(state => state.CurTransaction.operator)
+
+
+  const CalcQuantity = () => {
+    dispatch(calcCalculatorQuantity())
+  }
+
+  const OnResultClick = () => {
+
+
+  }
 
   const AddToNum = (num: number) => {
     dispatch(addToNum(num))
@@ -71,7 +88,9 @@ export const Calculator: FC<props> = ({ color }) => {
       {rightBtns.map(({ children, OnClick }, index) => (
         <OperationBtn key={index} OnClick={OnClick}>{children}</OperationBtn>
       ))}
-      <SubmitBtn bgColor={color} OnClick={() => undefined}>Ok</SubmitBtn>
+      {operator ?
+        <SubmitBtn bgColor={color} OnClick={CalcQuantity}>=</SubmitBtn> :
+        <SubmitBtn bgColor={color} OnClick={OnResultClick}>Ok</SubmitBtn>}
     </div>
   </CalculatorLayout>
 }

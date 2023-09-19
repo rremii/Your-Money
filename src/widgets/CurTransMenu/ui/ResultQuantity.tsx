@@ -1,20 +1,35 @@
 import styled from "styled-components"
 import { TransactionType } from "@entities/Transaction/types.ts"
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
+import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { MathOperatorSign } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 
 interface props {
-  quantity: number | string
+  // quantity: number | string
   type: TransactionType
   color: string
 }
 
-export const ResultQuantity: FC<props> = ({ quantity, type, color }) => {
+export const ResultQuantity: FC<props> = ({ type, color }) => {
 
+
+  const quantity = useTypedSelector(state => state.CurTransaction.quantity)
+
+  const numberStr1 = useTypedSelector(state => state.CurTransaction.numberStr1)
+  const numberStr2 = useTypedSelector(state => state.CurTransaction.numberStr2)
+  const operator = useTypedSelector(state => state.CurTransaction.operator)
+
+
+  let quantityStr: string
+  if (!numberStr1) quantityStr = "" + quantity
+  else
+    quantityStr = operator ? numberStr1 + " " + MathOperatorSign.get(operator) + " " + numberStr2 : numberStr1
 
   return <QuantityLayout $color={color}>
     <p className="type">{type}</p>
-    <p className="quantity">$ {quantity}</p>
+    <p className="quantity">$ {quantityStr || "0"}</p>
   </QuantityLayout>
 }
 const QuantityLayout = styled.div<{

@@ -3,6 +3,7 @@ import { IAccount } from "@entities/Account/constants/Accounts.ts"
 import { RootState } from "@shared/store/store.ts"
 import { ITransaction, TransactionType } from "@entities/Transaction/types.ts"
 import { isObject } from "chart.js/helpers"
+import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 type IEditMenuType = "overview" | "edit" | "create"
 
@@ -29,6 +30,23 @@ interface IEditTrans {
 
 export type MathOperatorType = "mul" | "sub" | "div" | "sum" | null
 
+
+export const CalcMathOperation = (arg: number[], operator: MathOperatorType) => {
+
+  switch (operator) {
+    case "mul":
+      return RoundDecimal(arg.reduce((acc, cur) => acc * cur, 1))
+    case "div":
+      return RoundDecimal(arg.reduce((acc, cur) => acc / cur))
+    case "sub":
+      return RoundDecimal(arg.reduce((acc, cur) => acc - cur))
+    case "sum":
+      return RoundDecimal(arg.reduce((acc, cur) => acc + cur, 0))
+    default:
+      return arg[0]
+  }
+
+}
 
 export const MathOperatorSign = new Map()
 MathOperatorSign.set("div", "÷")
@@ -86,6 +104,7 @@ const CurTransactionSlice = createSlice({
   initialState,
   reducers: {
     addToNum(state, action: PayloadAction<number>) {
+
       const operator = state.operator
       const num1 = state.numberStr1
       const num2 = state.numberStr2
@@ -100,7 +119,27 @@ const CurTransactionSlice = createSlice({
 
     },
     setOperator(state, action: PayloadAction<MathOperatorType>) {
+      const operator = state.operator
+      const num1 = +state.numberStr1
+      const num2 = +state.numberStr2
+
+      if (operator) {
+        state.numberStr1 = String(CalcMathOperation([num1, num2], operator))
+        state.numberStr2 = ""
+      }
       state.operator = action.payload
+
+    },
+    calcCalculatorQuantity(state) {
+      const operator = state.operator
+      const num1 = +state.numberStr1
+      const num2 = +state.numberStr2
+
+      state.quantity = CalcMathOperation([num1, num2], operator)
+      state.numberStr2 = ""
+      state.numberStr1 = ""
+      state.operator = null
+
     },
     setChooseCategoryMenu(state, action: PayloadAction<boolean>) {
       state.isChooseCategoryMenu = action.payload
@@ -192,5 +231,5 @@ export const {
   resetCurTransaction,
   setMenuType,
   setChooseCategoryMenu,
-  setChooseAccountMenu, addToNum, setOperator
+  setChooseAccountMenu, addToNum, setOperator, calcCalculatorQuantity
 } = CurTransactionSlice.actions

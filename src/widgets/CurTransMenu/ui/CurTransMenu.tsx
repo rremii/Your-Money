@@ -33,11 +33,6 @@ export const CurTransMenu = React.memo(() => {
 
   const type = useTypedSelector(state => state.CurTransaction.type)
   const account = useTypedSelector(state => state.CurTransaction.account)
-  const quantity = useTypedSelector(state => state.CurTransaction.quantity)
-
-  const numberStr1 = useTypedSelector(state => state.CurTransaction.numberStr1)
-  const numberStr2 = useTypedSelector(state => state.CurTransaction.numberStr2)
-  const operator = useTypedSelector(state => state.CurTransaction.operator)
 
   const title = useTypedSelector(state => state.CurTransaction.title)
   const dateStr = useTypedSelector(state => state.CurTransaction.dateStr)
@@ -73,10 +68,6 @@ export const CurTransMenu = React.memo(() => {
   }
 
 
-  let quantityStr: string
-  if (quantity) quantityStr = "" + quantity
-  else quantityStr = operator ? numberStr1 + " " + MathOperatorSign.get(operator) + " " + numberStr2 : numberStr1
-
   return <>
     <Overlay onClick={CloseMenu}
              $isActive={isMenuOpen} $zIndex={5}
@@ -97,7 +88,7 @@ export const CurTransMenu = React.memo(() => {
                   title={"To category"} />
       </div>
 
-      <ResultQuantity color={category.color} type={type} quantity={quantityStr} />
+      <ResultQuantity color={category.color} type={type} />
 
       <Notes content={title} />
 
