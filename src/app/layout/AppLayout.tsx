@@ -13,6 +13,7 @@ import { CurTransMenu } from "@widgets/CurTransMenu/ui/CurTransMenu.tsx"
 import { ChooseCategoryMenu } from "@widgets/ChooseCategoryMenu/ui/ChooseCategoryMenu.tsx"
 import { ChooseAccountMenu } from "@widgets/ChooseAccountMenu/ui/ChooseAccountMenu.tsx"
 import { TitleMenu } from "@widgets/TitleMenu/ui/TitleMenu.tsx"
+import { DateMenu } from "@widgets/DateMenu/ui/DateMenu.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -33,6 +34,7 @@ const AppLayout: FC<Props> = ({ children }) => {
       <ChooseCategoryMenu />
       <ChooseAccountMenu />
       <TitleMenu />
+      <DateMenu />
 
       <SideBarOverlay />
       <SideBarModalsOverlay />

@@ -7,7 +7,7 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import {
   addToNum,
   calcCalculatorQuantity,
-  MathOperatorType,
+  MathOperatorType, setChangeDateMenu,
   setOperator
 } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 
@@ -27,6 +27,9 @@ export const Calculator: FC<props> = ({ color }) => {
   const operator = useTypedSelector(state => state.CurTransaction.operator)
 
 
+  const OpenDateMenu = () => {
+    dispatch(setChangeDateMenu(true))
+  }
   const CalcQuantity = () => {
     dispatch(calcCalculatorQuantity())
   }
@@ -69,7 +72,7 @@ export const Calculator: FC<props> = ({ color }) => {
 
   const rightBtns: ICalculatorBtn[] = [
     { OnClick: () => undefined, children: "del" },
-    { OnClick: () => undefined, children: "date" }
+    { OnClick: OpenDateMenu, children: "date" }
   ]
 
 
