@@ -7,11 +7,13 @@ interface props {
   subTitle?: string
   isActive?: boolean
   color?: string
+  OnClick?: () => void
 }
 
-export const PickDateBtn: FC<props> = ({ title, subTitle, img, isActive, color }) => {
+export const PickDateBtn: FC<props> = ({ title, subTitle, img, isActive, color, OnClick }) => {
 
-  return <PickDateBtnLayout $isActive={isActive} $color={color} className="PickDateBtn">
+
+  return <PickDateBtnLayout onClick={OnClick} $isActive={isActive} $color={color} className="PickDateBtn">
     <img src={img} alt="icon" />
     <h2 className="title">{title}</h2>
     <p className="sub-title">{subTitle}</p>
@@ -25,7 +27,7 @@ const PickDateBtnLayout = styled.button<{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //gap: 5px;
+  //gap: 3px;
   padding: 10px;
   border: ${({ $isActive }) => $isActive && "none"} !important;
   border-collapse: collapse;
@@ -34,6 +36,7 @@ const PickDateBtnLayout = styled.button<{
   img {
     width: 25px;
     height: 25px;
+    margin-bottom: 5px;
   }
 
   .title {
@@ -42,8 +45,9 @@ const PickDateBtnLayout = styled.button<{
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
-    margin-bottom: 0;
+    line-height: 1;
+    margin-bottom: 3px;
+
   }
 
   .sub-title {
@@ -52,7 +56,7 @@ const PickDateBtnLayout = styled.button<{
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
+    line-height: 1;
   }
 
 `

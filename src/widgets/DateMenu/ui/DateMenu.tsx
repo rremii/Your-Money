@@ -6,6 +6,9 @@ import { setChangeDateMenu, setChangeTitleMenu } from "@entities/CurTransaction/
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { PickDateBtn } from "@widgets/DateMenu/ui/PickDateBtn.tsx"
 import Category from "@shared/assets/LightTheme/categories.png"
+import { SetDateToday } from "@widgets/DateMenu/ui/SetDateToday.tsx"
+import { SetDateYesterday } from "@widgets/DateMenu/ui/SetDateYesterday.tsx"
+import { OpenCalendar } from "@widgets/DateMenu/ui/OpenCalendar.tsx"
 
 
 export const DateMenu = () => {
@@ -16,14 +19,16 @@ export const DateMenu = () => {
   const CloseMenu = () => {
     dispatch(setChangeDateMenu(false))
   }
+
+
   return <>
-    <Overlay onClick={(CloseMenu)}
-             $isActive={true} $zIndex={50}
+    <Overlay onClick={CloseMenu}
+             $isActive={isMenuOpen} $zIndex={50}
              $color={"rgba(0, 0, 0, 0.5 )"} />
-    <DateLayout $isOpen={true}>
-      <PickDateBtn title={"Select day"} img={Category} />
-      <PickDateBtn title={"Yesterday"} img={Category} subTitle={"September 19"} />
-      <PickDateBtn color={"red"} isActive={true} title={"Today"} img={Category} subTitle={"September 20"} />
+    <DateLayout $isOpen={isMenuOpen}>
+      <OpenCalendar />
+      <SetDateYesterday />
+      <SetDateToday />
     </DateLayout>
   </>
 }
@@ -40,6 +45,15 @@ const DateLayout = styled(Modal)`
     grid-column: span 2;
     border-bottom: 1px solid var(--bg-10);
   }
+
+  .PickDateBtn:nth-child(2) {
+    border-right: 1px solid var(--bg-10);
+  }
+
+  .PickDateBtn:last-child {
+    border-left: 1px solid var(--bg-10);
+  }
+
 
 
 `
