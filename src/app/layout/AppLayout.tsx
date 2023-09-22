@@ -14,7 +14,7 @@ import { ChooseCategoryMenu } from "@widgets/ChooseCategoryMenu/ui/ChooseCategor
 import { ChooseAccountMenu } from "@widgets/ChooseAccountMenu/ui/ChooseAccountMenu.tsx"
 import { TitleMenu } from "@widgets/TitleMenu/ui/TitleMenu.tsx"
 import { DateMenu } from "@widgets/DateMenu/ui/DateMenu.tsx"
-import { Calendar } from "@widgets/DateMenu/ui/Calendar.tsx"
+import { Calendar, CalendarMenu } from "@widgets/CalendarMenu/ui/CalendarMenu.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -36,7 +36,7 @@ const AppLayout: FC<Props> = ({ children }) => {
       <ChooseAccountMenu />
       <TitleMenu />
       <DateMenu />
-      <Calendar />
+      <CalendarMenu />
 
       <SideBarOverlay />
       <SideBarModalsOverlay />
