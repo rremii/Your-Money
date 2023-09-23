@@ -3,16 +3,9 @@ import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import React, { FC } from "react"
 import { ICategory } from "@entities/Transaction/types.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import {
-  setAccount,
-  setCategory,
-  setCurTransaction,
-  setEditMenu
-} from "@entities/CurTransaction/model/CurTransactionSlice.ts"
-import { GetAccounts } from "@entities/Account/api/AccountsApi.ts"
+import { setCurTransaction, setEditMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
-import { GetMe, useGetMeQuery } from "@entities/User/api/UserApi.ts"
-import { IAccount } from "@entities/Account/constants/Accounts.ts"
+import { GetMe } from "@entities/User/api/UserApi.ts"
 
 
 interface props extends ICategory {

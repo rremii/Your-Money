@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import { FC } from "react"
 import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 
 //todo check seo
 interface props {

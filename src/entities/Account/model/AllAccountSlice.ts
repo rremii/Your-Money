@@ -1,6 +1,5 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { IAccount } from "@entities/Account/constants/Accounts.ts"
-import { RootState } from "@shared/store/store.ts"
 
 interface initialState {
   id: null

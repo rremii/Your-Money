@@ -7,7 +7,8 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import {
   addToNum,
   calcCalculatorQuantity,
-  MathOperatorType, setChangeDateMenu,
+  MathOperatorType,
+  setChangeDateMenu,
   setOperator
 } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 

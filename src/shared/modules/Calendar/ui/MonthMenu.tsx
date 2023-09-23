@@ -1,8 +1,35 @@
 import styled from "styled-components"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { FC, useEffect } from "react"
+import { Months } from "@shared/helpers/TimeGap.ts"
+import { DatesEqualUpToDays } from "@shared/helpers/DatesEqualUpToDays.ts"
+import { setCurDateStr, setCurTransaction } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { GetMonthDays } from "@shared/modules/Calendar/model/GetMonthDays.ts"
+import { setCurCalendarDate } from "@shared/modules/Calendar/model/CalendarSlice.ts"
 
-export const MonthMenu = () => {
+
+interface props {
+  dateStr: string
+}
+
+export const MonthMenu: FC<props> = ({ dateStr }) => {
+  const dispatch = useAppDispatch()
+
+  const chosenDateStr = useTypedSelector(state => state.Calendar.chosenDateStr)
+
+  const { days, weekDayShift } = GetMonthDays(dateStr)
+
+
+  const OnDayClick = (date: Date) => {
+    dispatch(setCurCalendarDate(date.toUTCString()))
+  }
+
+  const date = new Date(dateStr)
+  const month = Months.get(date.getMonth())
+  const year = date.getFullYear()
+
   return <MonthContentLayout>
-    <div className="date">September 2023</div>
+    <div className="date">{month} {year}</div>
     <ul className="week-days-box">
       <li className="week-day">S</li>
       <li className="week-day">M</li>
@@ -12,19 +39,12 @@ export const MonthMenu = () => {
       <li className="week-day">F</li>
       <li className="week-day">S</li>
     </ul>
-    <DaysBox $daysShift={0}>
+    <DaysBox $daysShift={weekDayShift}>
       <div className="days-shift" />
-      <div className="day ">1</div>
-      <div className="day">2</div>
-      <div className="day">3</div>
-      <div className="day">3</div>
-      <div className="day active">3</div>
-      <div className="day">3</div>
-      <div className="day">3</div>
-      <div className="day">3</div>
-      <div className="day">3</div>
-      <div className="day">3</div>
-      <div className="day">3</div>
+      {days.map((day) => {
+        const isActive = DatesEqualUpToDays(day, chosenDateStr)
+        return <div onClick={() => OnDayClick(day)} className={`day ${isActive ? "active" : ""}`}>{day.getDate()}</div>
+      })}
     </DaysBox>
 
   </MonthContentLayout>
@@ -38,9 +58,11 @@ const MonthContentLayout = styled.div`
   scroll-snap-stop: always;
   scroll-snap-align: center;
 
+  height: min-content;
+
   .week-days-box {
     gap: 7px;
-
+    padding: 0 3px;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -48,6 +70,8 @@ const MonthContentLayout = styled.div`
     margin-bottom: 5px;
 
     .week-day {
+      width: 30px;
+      text-align: center;
       color: var(--txt-6);
       font-family: Inter;
       font-size: 11px;
@@ -90,6 +114,7 @@ const DaysBox = styled.div<{
   }
 
   .day {
+    cursor: pointer;
     color: var(--txt-5);
     font-family: Inter;
     font-size: 11px;

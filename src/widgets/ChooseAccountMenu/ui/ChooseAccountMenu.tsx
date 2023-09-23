@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import React, { useEffect } from "react"
+import React from "react"
 import { ChooseMenuLayout } from "@shared/ui/ChooseMenuLayout.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { ChooseMenuHeader } from "@shared/ui/ChooseMenuHeader.tsx"
@@ -7,9 +7,7 @@ import { AllAccountsInfo } from "@shared/ui/AllAccountsInfo.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
-import { Account } from "@shared/ui/Account.tsx"
-import { setAccount, setChooseAccountMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
-import { IAccount } from "@entities/Account/constants/Accounts.ts"
+import { setChooseAccountMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { ChooseAccount } from "@widgets/ChooseAccountMenu/ui/ChooseAccount.tsx"
 
 export const ChooseAccountMenu = React.memo(() => {

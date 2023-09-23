@@ -20,11 +20,11 @@ export const SignUpInfoForm = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { register, formState, handleSubmit } =
+  //todo make that everywhere
+  const { register, formState: { errors }, handleSubmit } =
     useForm<FormFields>({
       resolver: yupResolver(infoFormSchema)
     })
-  const { errors } = formState
 
 
   const { SetImage, curImage: curAvatar, imgRef } = useImage()

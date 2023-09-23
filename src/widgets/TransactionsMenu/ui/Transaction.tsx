@@ -3,11 +3,7 @@ import Account from "@shared/assets/LightTheme/accounts.png"
 import React, { FC } from "react"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import { ITransaction, TransactionType } from "@entities/Transaction/types.ts"
-import {
-  
-  setCurTransaction,
-  setEditMenu
-} from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { setCurTransaction, setEditMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 
 interface props extends ITransaction {

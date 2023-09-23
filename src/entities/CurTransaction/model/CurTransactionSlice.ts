@@ -1,8 +1,5 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { IAccount } from "@entities/Account/constants/Accounts.ts"
-import { RootState } from "@shared/store/store.ts"
-import { ITransaction, TransactionType } from "@entities/Transaction/types.ts"
-import { isObject } from "chart.js/helpers"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { TransactionType } from "@entities/Transaction/types.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 type IEditMenuType = "overview" | "edit" | "create"
@@ -217,7 +214,7 @@ const CurTransactionSlice = createSlice({
     setType(state, action: PayloadAction<TransactionType>) {
       state.type = action.payload
     },
-    setDateStr(state, action: PayloadAction<string>) {
+    setCurDateStr(state, action: PayloadAction<string>) {
       state.dateStr = action.payload
     }
   }
@@ -229,7 +226,7 @@ export const {
   setEditMenu,
   setAccount,
   setQuantity, setChangeTitleMenu,
-  setDateStr,
+  setCurDateStr,
   setType,
   setTitle,
   setCategory,

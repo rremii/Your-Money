@@ -7,10 +7,8 @@ import { Notes } from "@widgets/CurTransMenu/ui/NotesInput.tsx"
 import { TransDate } from "@widgets/CurTransMenu/ui/TransDate.tsx"
 import { OptionsSection } from "@widgets/CurTransMenu/ui/OptionsSection.tsx"
 import { Calculator } from "@widgets/CurTransMenu/ui/Calculator.tsx"
-import Categories from "@shared/assets/LightTheme/categories.png"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import {
-  MathOperatorSign,
   setAccount,
   setChooseAccountMenu,
   setChooseCategoryMenu,
@@ -20,8 +18,6 @@ import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
-import { setCurAccount } from "@entities/Account/model/CurAccountSlice.ts"
-import { IAccount } from "@entities/Account/constants/Accounts.ts"
 
 export const CurTransMenu = React.memo(() => {
   const dispatch = useAppDispatch()

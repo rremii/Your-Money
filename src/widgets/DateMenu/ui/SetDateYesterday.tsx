@@ -2,8 +2,7 @@ import { PickDateBtn } from "@widgets/DateMenu/ui/PickDateBtn.tsx"
 import Category from "@shared/assets/LightTheme/categories.png"
 import React from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { FullDays, Months, timeGap } from "@shared/helpers/TimeGap.ts"
-import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
+import { Months, timeGap } from "@shared/helpers/TimeGap.ts"
 import { IsYesterday } from "@shared/helpers/IsYesterday.ts"
 
 

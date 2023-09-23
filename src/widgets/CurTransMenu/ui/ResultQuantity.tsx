@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import { TransactionType } from "@entities/Transaction/types.ts"
-import { FC, useEffect, useState } from "react"
-import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { FC } from "react"
 import { MathOperatorSign } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 

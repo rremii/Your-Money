@@ -3,7 +3,6 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { IAccount } from "@entities/Account/constants/Accounts.ts"
 import { setCurAccount, setCurAccountId } from "@entities/Account/model/CurAccountSlice.ts"
 import { useGetAccountsQuery } from "@entities/Account/api/AccountsApi.ts"
-import { all } from "axios"
 import { setAllAccountBalance } from "@entities/Account/model/AllAccountSlice.ts"
 
 //todo

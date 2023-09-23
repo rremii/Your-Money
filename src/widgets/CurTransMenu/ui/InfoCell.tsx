@@ -1,7 +1,5 @@
 import styled from "styled-components"
 import { FC } from "react"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { setChooseCategoryMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 
 
 interface props {

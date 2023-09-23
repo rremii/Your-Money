@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import React, { FC } from "react"
 
 
