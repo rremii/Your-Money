@@ -1,14 +1,18 @@
 import React, { FC } from "react"
-import { Actions } from "@shared/modules/Calendar/types.ts"
+import { Actions, CalendarType } from "@shared/modules/Calendar/types.ts"
 
 interface initialState {
   menusDatesStr: string[]
   chosenDateStr: string
+  color: string
+  type: CalendarType
 }
 
 export const initialState = {
   menusDatesStr: [],
-  chosenDateStr: ""
+  chosenDateStr: "",
+  color: "rgb(63,81,181)",
+  type: "month"
 } as initialState
 
 export const CalendarContext = React.createContext(initialState)
@@ -35,6 +39,18 @@ export const CalendarCtxReducer = (state: initialState, action: Actions): initia
       return {
         ...state,
         chosenDateStr: action.payload
+      }
+    }
+    case "SET_CALENDAR_COLOR": {
+      return {
+        ...state,
+        color: action.payload
+      }
+    }
+    case "SET_CALENDAR_TYPE": {
+      return {
+        ...state,
+        type: action.payload
       }
     }
     default: {

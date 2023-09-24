@@ -5,13 +5,14 @@ import { Overlay } from "@shared/ui/Overlay.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setCalendar } from "@shared/modules/Calendar/model/CalendarSlice.ts"
 import { Calendar } from "@shared/modules/Calendar"
-import { setCurDateStr } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { setChangeDateMenu, setCurDateStr } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 
 export const CalendarMenu = () => {
   const dispatch = useAppDispatch()
 
   const isOpen = useTypedSelector(state => state.Calendar.isCalendarOpen)
   const initialDate = useTypedSelector(state => state.CurTransaction.dateStr)
+  const categoryColor = useTypedSelector(state => state.CurTransaction.category.color)
 
   const [chosenDate, setChosenDate] = useState<string>(initialDate)
 
@@ -26,14 +27,15 @@ export const CalendarMenu = () => {
   const OnSubmit = () => {
     dispatch(setCurDateStr(chosenDate))
     dispatch(setCalendar(false))
+    dispatch(setChangeDateMenu(false))
   }
 
   return <>
     <Overlay onClick={CloseCalendar}
              $isActive={isOpen} $zIndex={50}
              $color={"rgba(0, 0, 0, 0.5 )"} />
-    <CalendarMenuLayout $isOpen={isOpen}>
-      <Calendar OnChange={OnChosenDateChange} initialDate={initialDate} />
+    <CalendarMenuLayout $color={categoryColor} $isOpen={isOpen}>
+      <Calendar color={categoryColor} OnChange={OnChosenDateChange} initialDate={initialDate} />
       <div className="btn-box">
         <button onClick={CloseCalendar} className="cancel">CANCEL</button>
         <button onClick={OnSubmit} className="submit">OK</button>
@@ -41,7 +43,9 @@ export const CalendarMenu = () => {
     </CalendarMenuLayout>
   </>
 }
-const CalendarMenuLayout = styled(Modal)`
+const CalendarMenuLayout = styled(Modal)<{
+  $color?: string
+}>`
   z-index: 50;
   padding: 0;
 
@@ -56,7 +60,7 @@ const CalendarMenuLayout = styled(Modal)`
 
 
     .cancel, .submit {
-      color: #4D5586;
+      color: ${({ $color }) => $color ? $color : "#4D5586"};
       font-family: Inter;
       font-size: 12px;
       font-style: normal;

@@ -11,4 +11,5 @@ import React from "react"
 export const Calendar = CalendarProvider<{
   initialDate: string
   OnChange: (chosenDateStr: string) => void
+  color: string
 }>(CalendarComponent)

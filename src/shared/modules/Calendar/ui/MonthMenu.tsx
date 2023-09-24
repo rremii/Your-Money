@@ -15,7 +15,7 @@ interface props {
 
 export const MonthMenu: FC<props> = ({ dateStr }) => {
 
-  const { chosenDateStr } = useContext(CalendarContext)
+  const { chosenDateStr, color } = useContext(CalendarContext)
 
 
   const { days, weekDayShift } = GetMonthDays(dateStr)
@@ -40,7 +40,7 @@ export const MonthMenu: FC<props> = ({ dateStr }) => {
       <li className="week-day">F</li>
       <li className="week-day">S</li>
     </ul>
-    <DaysBox $daysShift={weekDayShift}>
+    <DaysBox $color={color} $daysShift={weekDayShift}>
       <div className="days-shift" />
       {days.map((day) => {
         const isActive = DatesEqualUpToDays(day, chosenDateStr)
@@ -52,14 +52,13 @@ export const MonthMenu: FC<props> = ({ dateStr }) => {
 }
 
 const MonthContentLayout = styled.div`
-
+  height: 260px;
   flex: 0 0 320px;
   padding: 0 20px;
 
   scroll-snap-stop: always;
   scroll-snap-align: center;
 
-  height: min-content;
 
   .week-days-box {
     gap: 7px;
@@ -101,6 +100,7 @@ const MonthContentLayout = styled.div`
 `
 const DaysBox = styled.div<{
   $daysShift?: number
+  $color?: string
 }>`
 
   width: 100%;
@@ -131,7 +131,7 @@ const DaysBox = styled.div<{
   }
 
   .active {
-    background-color: rgb(63, 81, 181);
+    background-color: ${({ $color }) => $color ? $color : "rgb(63, 81, 181)"};
     color: var(--txt-1);
   }
 `

@@ -4,18 +4,20 @@ import { Header } from "@shared/modules/Calendar/ui/Header.tsx"
 import { MonthSlider } from "@shared/modules/Calendar/ui/MonthSlider.tsx"
 import { CalendarProvider } from "@shared/modules/Calendar/model/Provider.tsx"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
-import { setCurCalendarDate, updateMenuDates } from "@shared/modules/Calendar/model/Actions.ts"
+import { setCalendarColor, setCurCalendarDate, updateMenuDates } from "@shared/modules/Calendar/model/Actions.ts"
+import { YearSlider } from "@shared/modules/Calendar/ui/YearSlider.tsx"
 
 
 interface props {
   initialDate: string
+  color: string
   OnChange: (chosenDateStr: string) => void
 }
 
 
-const Calendar: FC<props> = ({ initialDate, OnChange }) => {
+const Calendar: FC<props> = ({ initialDate, OnChange, color }) => {
 
-  const { chosenDateStr } = useContext(CalendarContext)
+  const { chosenDateStr, type } = useContext(CalendarContext)
 
   useEffect(() => {
     OnChange(chosenDateStr)
@@ -24,14 +26,15 @@ const Calendar: FC<props> = ({ initialDate, OnChange }) => {
   useEffect(() => {
     updateMenuDates({ initialDate })
     setCurCalendarDate(initialDate)
-  }, [initialDate])
+    setCalendarColor(color)
+  }, [initialDate, color])
 
   return <CalendarLayout>
     <Header />
-    <MonthSlider />
+    {type === "month" ? <MonthSlider /> : <YearSlider />}
   </CalendarLayout>
 }
 export default Calendar
 const CalendarLayout = styled.div`
-
+  position: relative;
 `
