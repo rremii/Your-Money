@@ -102,7 +102,23 @@ const CurTransactionSlice = createSlice({
   name: "CurTransactionSlice",
   initialState,
   reducers: {
-    addToNum(state, action: PayloadAction<number>) {
+    removeLastNumber(state) {
+      const operator = state.operator
+      const quantityStr = String(state.quantity)
+      const num1 = state.numberStr1
+      const num2 = state.numberStr2
+
+      if (num2)
+        state.numberStr2 = num2.slice(0, -1)
+      else if (operator)
+        state.operator = null
+      else if (num1)
+        state.numberStr1 = num1.slice(0, -1)
+      else if (quantityStr)
+        state.quantity = +quantityStr.slice(0, -1)
+      else state.quantity = 0
+    },
+    addToNum(state, action: PayloadAction<number | string>) {
 
       const operator = state.operator
       const num1 = state.numberStr1
@@ -119,9 +135,11 @@ const CurTransactionSlice = createSlice({
     },
     setOperator(state, action: PayloadAction<MathOperatorType>) {
       const operator = state.operator
+      const quantity = state.quantity
       const num1 = +state.numberStr1
       const num2 = +state.numberStr2
-
+      if (!num1)
+        state.numberStr1 = String(quantity)
       if (operator) {
         state.numberStr1 = String(CalcMathOperation([num1, num2], operator))
         state.numberStr2 = ""
@@ -138,7 +156,6 @@ const CurTransactionSlice = createSlice({
       state.numberStr2 = ""
       state.numberStr1 = ""
       state.operator = null
-
     },
     setChangeDateMenu(state, action: PayloadAction<boolean>) {
       state.isChangeDateMenu = action.payload
@@ -233,5 +250,5 @@ export const {
   resetCurTransaction,
   setMenuType,
   setChooseCategoryMenu,
-  setChooseAccountMenu, addToNum, setOperator, calcCalculatorQuantity, setChangeDateMenu
+  setChooseAccountMenu, addToNum, setOperator, calcCalculatorQuantity, setChangeDateMenu, removeLastNumber
 } = CurTransactionSlice.actions

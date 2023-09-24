@@ -1,11 +1,12 @@
 import styled from "styled-components"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { FC, useEffect } from "react"
+import { FC, useContext, useEffect } from "react"
 import { Months } from "@shared/helpers/TimeGap.ts"
 import { DatesEqualUpToDays } from "@shared/helpers/DatesEqualUpToDays.ts"
 import { setCurDateStr, setCurTransaction } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { GetMonthDays } from "@shared/modules/Calendar/model/GetMonthDays.ts"
-import { setCurCalendarDate } from "@shared/modules/Calendar/model/CalendarSlice.ts"
+import { setCurCalendarDate } from "@shared/modules/Calendar/model/Actions.ts"
+import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
 
 
 interface props {
@@ -13,15 +14,15 @@ interface props {
 }
 
 export const MonthMenu: FC<props> = ({ dateStr }) => {
-  const dispatch = useAppDispatch()
 
-  const chosenDateStr = useTypedSelector(state => state.Calendar.chosenDateStr)
+  const { chosenDateStr } = useContext(CalendarContext)
+
 
   const { days, weekDayShift } = GetMonthDays(dateStr)
 
 
   const OnDayClick = (date: Date) => {
-    dispatch(setCurCalendarDate(date.toUTCString()))
+    setCurCalendarDate(date.toUTCString())
   }
 
   const date = new Date(dateStr)

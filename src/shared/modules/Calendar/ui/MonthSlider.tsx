@@ -1,32 +1,24 @@
 import styled from "styled-components"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { FC, useEffect } from "react"
+import { FC, useContext, useEffect } from "react"
 import { useCalendarSlider } from "@shared/modules/Calendar/model/useCalendarSlider.tsx"
 import { setCurCalendarDate, updateMenuDates } from "@shared/modules/Calendar/model/CalendarSlice.ts"
 import { MonthMenu } from "@shared/modules/Calendar/ui/MonthMenu.tsx"
 import { setCurDateStr } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
 
 interface props {
-  initialDate: string
 }
 
-export const MonthSlider: FC<props> = ({ initialDate }) => {
-  const dispatch = useAppDispatch()
-
-  const menusDates = useTypedSelector(state => state.Calendar.menusDatesStr)
-
-  const { sliderRef, OnScroll } = useCalendarSlider({ menusDates })
+export const MonthSlider: FC<props> = () => {
+  const { menusDatesStr } = useContext(CalendarContext)
 
 
-  useEffect(() => {
-
-    dispatch(updateMenuDates({ initialDate }))
-    dispatch(setCurCalendarDate(initialDate))
-  }, [initialDate])
+  const { sliderRef, OnScroll } = useCalendarSlider({ menusDates: menusDatesStr })
 
 
   return <SliderLayout onScroll={OnScroll} ref={sliderRef}>
-    {menusDates.map((date) => (
+    {menusDatesStr.map((date) => (
       <MonthMenu dateStr={date} />
     ))}
   </SliderLayout>

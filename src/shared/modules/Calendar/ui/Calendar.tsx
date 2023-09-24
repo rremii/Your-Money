@@ -1,28 +1,34 @@
 import styled from "styled-components"
-import React, { FC, useContext } from "react"
+import React, { FC, useContext, useEffect } from "react"
 import { Header } from "@shared/modules/Calendar/ui/Header.tsx"
 import { MonthSlider } from "@shared/modules/Calendar/ui/MonthSlider.tsx"
 import { CalendarProvider } from "@shared/modules/Calendar/model/Provider.tsx"
-import compose from "compose-function"
-import { withRouter } from "../../../../app/providers/with-router.tsx"
-import { withStore } from "../../../../app/providers/with-store.tsx"
-import { withRedirect } from "../../../../app/providers/with-redirect.tsx"
-import { withAuth } from "../../../../app/providers/with-auth.tsx"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
+import { setCurCalendarDate, updateMenuDates } from "@shared/modules/Calendar/model/Actions.ts"
 
 
 interface props {
   initialDate: string
+  OnChange: (chosenDateStr: string) => void
 }
 
 
-const Calendar: FC<props> = ({ initialDate }) => {
+const Calendar: FC<props> = ({ initialDate, OnChange }) => {
 
-  // const {} = useContext(CalendarContext)
+  const { chosenDateStr } = useContext(CalendarContext)
+
+  useEffect(() => {
+    OnChange(chosenDateStr)
+  }, [chosenDateStr])
+
+  useEffect(() => {
+    updateMenuDates({ initialDate })
+    setCurCalendarDate(initialDate)
+  }, [initialDate])
 
   return <CalendarLayout>
     <Header />
-    <MonthSlider initialDate={initialDate} />
+    <MonthSlider />
   </CalendarLayout>
 }
 export default Calendar

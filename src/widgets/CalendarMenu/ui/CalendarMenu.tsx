@@ -1,10 +1,11 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
-import React from "react"
+import React, { useState } from "react"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setCalendar } from "@shared/modules/Calendar/model/CalendarSlice.ts"
-import { Calendar } from "@shared/modules/Calendar/ui/Calendar.tsx"
+import { Calendar } from "@shared/modules/Calendar"
+import { setCurDateStr } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 
 export const CalendarMenu = () => {
   const dispatch = useAppDispatch()
@@ -12,7 +13,18 @@ export const CalendarMenu = () => {
   const isOpen = useTypedSelector(state => state.Calendar.isCalendarOpen)
   const initialDate = useTypedSelector(state => state.CurTransaction.dateStr)
 
+  const [chosenDate, setChosenDate] = useState<string>(initialDate)
+
+
   const CloseCalendar = () => {
+    dispatch(setCalendar(false))
+  }
+
+  const OnChosenDateChange = (dateStr: string) => {
+    setChosenDate(dateStr)
+  }
+  const OnSubmit = () => {
+    dispatch(setCurDateStr(chosenDate))
     dispatch(setCalendar(false))
   }
 
@@ -21,10 +33,10 @@ export const CalendarMenu = () => {
              $isActive={isOpen} $zIndex={50}
              $color={"rgba(0, 0, 0, 0.5 )"} />
     <CalendarMenuLayout $isOpen={isOpen}>
-      <Calendar initialDate={initialDate} />
+      <Calendar OnChange={OnChosenDateChange} initialDate={initialDate} />
       <div className="btn-box">
-        <button className="cancel">CANCEL</button>
-        <button className="submit">OK</button>
+        <button onClick={CloseCalendar} className="cancel">CANCEL</button>
+        <button onClick={OnSubmit} className="submit">OK</button>
       </div>
     </CalendarMenuLayout>
   </>
