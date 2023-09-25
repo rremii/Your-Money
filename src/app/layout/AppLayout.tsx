@@ -14,7 +14,8 @@ import { ChooseCategoryMenu } from "@widgets/ChooseCategoryMenu/ui/ChooseCategor
 import { ChooseAccountMenu } from "@widgets/ChooseAccountMenu/ui/ChooseAccountMenu.tsx"
 import { TitleMenu } from "@widgets/TitleMenu/ui/TitleMenu.tsx"
 import { DateMenu } from "@widgets/DateMenu/ui/DateMenu.tsx"
-import { Calendar, CalendarMenu } from "@widgets/CalendarMenu/ui/CalendarMenu.tsx"
+import { CalendarMenu } from "@widgets/CalendarMenu/ui/CalendarMenu.tsx"
+import { ChooseCategorySlideMenu } from "@widgets/ChooseCategorySlideMenu/ui/ChooseCategorySlideMenu.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -33,6 +34,7 @@ const AppLayout: FC<Props> = ({ children }) => {
 
       <CurTransMenu />
       <ChooseCategoryMenu />
+      <ChooseCategorySlideMenu />
       <ChooseAccountMenu />
       <TitleMenu />
       <DateMenu />
@@ -55,6 +57,7 @@ const LayoutStyles = styled.div`
   flex-direction: column;
   height: 100vh;
   max-width: 450px;
+  width: 100%;
   position: relative;
   overflow: hidden;
   margin: 0 auto;

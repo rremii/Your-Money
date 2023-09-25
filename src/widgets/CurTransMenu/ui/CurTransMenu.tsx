@@ -12,7 +12,7 @@ import {
   setAccount,
   setChooseAccountMenu,
   setChooseCategoryMenu,
-  setEditMenu
+  setEditMenu, setMenuType
 } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
@@ -58,11 +58,14 @@ export const CurTransMenu = React.memo(() => {
 
   const OpenChooseCategoryMenu = () => {
     dispatch(setChooseCategoryMenu(true))
+    if (menuType === "overview")
+      dispatch(setMenuType("edit"))
   }
   const OpenChooseAccountMenu = () => {
     dispatch(setChooseAccountMenu(true))
+    if (menuType === "overview")
+      dispatch(setMenuType("edit"))
   }
-
 
   return <>
     <Overlay onClick={CloseMenu}

@@ -122,4 +122,5 @@ const CalculatorLayout = styled.div`
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, 62px);
   }
+
 `

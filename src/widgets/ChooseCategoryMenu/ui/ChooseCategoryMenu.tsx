@@ -30,6 +30,7 @@ export const ChooseCategoryMenu = React.memo(() => {
 
     <ChooseMenuLayout $isActive={isOpen}>
       <ChooseMenuHeader content={type} />
+
       <CategoriesBox>
         {allCategories?.filter((category) => category.type === type)
           .map((category, index) => {

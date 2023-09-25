@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import { TransactionType } from "@entities/Transaction/types.ts"
 import { FC } from "react"
-import { MathOperatorSign } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { MathOperatorSign, setMenuType } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 
 interface props {
@@ -12,10 +12,11 @@ interface props {
 }
 
 export const ResultQuantity: FC<props> = ({ type, color }) => {
+  const dispatch = useAppDispatch()
 
+  const menuType = useTypedSelector(state => state.CurTransaction.editMenuType)
 
   const quantity = useTypedSelector(state => state.CurTransaction.quantity)
-
   const numberStr1 = useTypedSelector(state => state.CurTransaction.numberStr1)
   const numberStr2 = useTypedSelector(state => state.CurTransaction.numberStr2)
   const operator = useTypedSelector(state => state.CurTransaction.operator)
@@ -26,7 +27,12 @@ export const ResultQuantity: FC<props> = ({ type, color }) => {
   else
     quantityStr = operator ? numberStr1 + " " + MathOperatorSign.get(operator) + " " + numberStr2 : numberStr1
 
-  return <QuantityLayout $color={color}>
+  const OnClick = () => {
+    if (menuType === "overview")
+      dispatch(setMenuType("edit"))
+  }
+
+  return <QuantityLayout onClick={OnClick} $color={color}>
     <p className="type">{type}</p>
     <p className="quantity">$ {quantityStr || "0"}</p>
   </QuantityLayout>
@@ -34,7 +40,7 @@ export const ResultQuantity: FC<props> = ({ type, color }) => {
 const QuantityLayout = styled.div<{
   $color?: string
 }>`
-
+  cursor: pointer;
   background-color: var(--bg-1);
   height: 75px;
   display: flex;

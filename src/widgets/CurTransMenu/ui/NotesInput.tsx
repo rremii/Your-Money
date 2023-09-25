@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { FC } from "react"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { setChangeTitleMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { setChangeTitleMenu, setMenuType } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 
 interface props {
   content?: string
@@ -10,8 +10,13 @@ interface props {
 export const Notes: FC<props> = ({ content }) => {
   const dispatch = useAppDispatch()
 
+  const menuType = useTypedSelector(state => state.CurTransaction.editMenuType)
+
+
   const OpenEditMenu = () => {
     dispatch(setChangeTitleMenu(true))
+    if (menuType === "overview")
+      dispatch(setMenuType("edit"))
   }
 
   return <InputLayout onClick={OpenEditMenu}>

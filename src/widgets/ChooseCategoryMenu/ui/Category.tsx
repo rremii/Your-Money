@@ -7,7 +7,7 @@ import { ICategory } from "@entities/Transaction/types.ts"
 
 
 interface props extends ICategory {
-  isActive: boolean
+  isActive?: boolean
 }
 
 export const Category: FC<props> = ({ icon, name, color, isActive, id }) => {

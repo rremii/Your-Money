@@ -1,12 +1,23 @@
 import styled from "styled-components"
 import Category from "@shared/assets/LightTheme/categories.png"
 import { FC } from "react"
+import { setChangeDateMenu, setMenuType } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 
 interface props {
   color: string
 }
 
 export const OptionsSection: FC<props> = ({ color }) => {
+  const dispatch = useAppDispatch()
+
+  const OnDuplicateClick = () => {
+    dispatch(setMenuType("create"))
+  }
+  const OnDateClick = () => {
+    dispatch(setMenuType("edit"))
+    dispatch(setChangeDateMenu(true))
+  }
 
 
   return <OptionsLayout $color={color}>
@@ -16,13 +27,13 @@ export const OptionsSection: FC<props> = ({ color }) => {
       </div>
       <p>Delete</p>
     </div>
-    <div className="option date">
+    <div onClick={OnDateClick} className="option date">
       <div className="icon">
         <img src={Category} alt="date" />
       </div>
       <p>Date</p>
     </div>
-    <div className="option duplicate">
+    <div onClick={OnDuplicateClick} className="option duplicate">
       <div className="icon">
         <img src={Category} alt="duplicate" />
       </div>
@@ -39,6 +50,7 @@ const OptionsLayout = styled.div<{
   display: flex;
   align-items: center;
   justify-content: space-around;
+  transition: 0.5s;
 
   .option {
     cursor: pointer;
