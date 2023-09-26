@@ -1,15 +1,55 @@
 import styled from "styled-components"
 import { CategorySliderMenu } from "@widgets/ChooseCategorySlideMenu/ui/CategorySliderMenu.tsx"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
+import { useCategory } from "@entities/Category/model/useCategory.tsx"
+import { GetMe } from "@entities/User/api/UserApi.ts"
+import { FC, useEffect, useRef } from "react"
+import { setAccount, setType } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import useDebounce from "@shared/hooks/useDebounce.tsx"
+import { useAccount } from "@entities/Account/model/useAccount.tsx"
 
-export const ChooseCategorySlider = () => {
+interface props {
+  onScroll: (scroll: number) => void
+}
 
-  const allCategories = useTypedSelector(state => state.Category.allCategories)
+export const ChooseCategorySlider: FC<props> = ({ onScroll }) => {
+  const dispatch = useAppDispatch()
+
+  const { data: user } = GetMe.useQueryState()
+  const { allCategories } = useCategory(user?.id)
 
   const { incCategories, expCategories } = FilterCategoriesByType(allCategories)
 
-  return <CategorySliderLayout>
+  const sliderRef = useRef<HTMLDivElement>(null)
+
+
+  const curAccId = useTypedSelector(state => state.CurAccount.id)
+
+
+  useEffect(() => {
+    OnScroll()
+  }, [])
+
+  const OnScroll = () => {
+    if (!sliderRef || !sliderRef.current) return
+    const width = sliderRef.current.clientWidth
+    const curScroll = sliderRef.current.scrollLeft
+
+    const scrollPercent = Math.round(curScroll / width) * 100
+
+    if (scrollPercent > 50) {
+      dispatch(setType("expense"))
+      onScroll(scrollPercent)
+    }
+    if (scrollPercent <= 50) {
+      onScroll(scrollPercent)
+      dispatch(setType("income"))
+    }
+  }
+
+
+  return <CategorySliderLayout onScroll={OnScroll} ref={sliderRef}>
     <CategorySliderMenu categories={incCategories} />
     <CategorySliderMenu categories={expCategories} />
   </CategorySliderLayout>

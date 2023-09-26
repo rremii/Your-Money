@@ -9,6 +9,7 @@ interface props {
 
 export const CategorySlideHeader: FC<props> = ({ activeType, scrollPercent }) => {
 
+
   return <SlideHeaderLayout $scrollPercent={scrollPercent}>
     <div className="cell">
       <p className={`type ${activeType === "income" ? "active" : ""}`}>INCOME</p>
@@ -28,6 +29,7 @@ const SlideHeaderLayout = styled.header<{
   display: flex;
   height: 50px;
   position: relative;
+  box-shadow: 0 0 5px 0 var(--shadow-3);
 
   .slider {
     content: '';
@@ -38,10 +40,13 @@ const SlideHeaderLayout = styled.header<{
     display: flex;
 
     .pushing-bar {
+      transition: 0.7s width;
+
       width: ${({ $scrollPercent }) => ($scrollPercent || 0) / 2}%;
     }
 
     .bar {
+
       flex: 0 0 50%;
       background-color: var(--bg-11);
       height: 3px;

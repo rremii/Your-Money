@@ -7,7 +7,12 @@ import { ChooseMenuLayout } from "@shared/ui/ChooseMenuLayout.tsx"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setChooseCategoryMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import {
+  setCategory,
+  setChooseCategoryMenu,
+  setChooseCategorySlideMenu
+} from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { ICategory } from "@entities/Transaction/types.ts"
 
 export const ChooseCategoryMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -23,6 +28,17 @@ export const ChooseCategoryMenu = React.memo(() => {
     dispatch(setChooseCategoryMenu(false))
   }
 
+
+  const SetCategory = ({ color, name, icon, id }: ICategory) => {
+    dispatch(setCategory({
+      categoryId: id,
+      category: {
+        name, icon, color
+      }
+    }))
+    dispatch(setChooseCategoryMenu(false))
+  }
+
   return <>
     <Overlay onClick={CloseMenu}
              $isActive={isOpen} $zIndex={50}
@@ -34,7 +50,8 @@ export const ChooseCategoryMenu = React.memo(() => {
       <CategoriesBox>
         {allCategories?.filter((category) => category.type === type)
           .map((category, index) => {
-            return <Category key={index} {...category} isActive={chosenCategoryName === category.name} />
+            return <Category OnClick={SetCategory} key={index} {...category}
+                             isActive={chosenCategoryName === category.name} />
           })}
       </CategoriesBox>
     </ChooseMenuLayout>

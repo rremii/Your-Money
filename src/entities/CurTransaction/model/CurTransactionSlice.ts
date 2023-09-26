@@ -16,7 +16,8 @@ interface IEditTrans {
   account: {
     name: string
     icon: string
-    color: string
+    color: string,
+    balance: number
   }
   category: {
     icon: string
@@ -61,19 +62,21 @@ interface initialState extends IEditTrans {
 
   isChooseAccountMenu: boolean
   isChooseCategoryMenu: boolean
+  isChooseCategorySlideMenu: boolean
   isChangeTitleMenu: boolean
   isChangeDateMenu: boolean
 
 }
 
 const initialState: initialState = {
-  numberStr1: "",
+  numberStr1: "0",
   numberStr2: "",
   operator: null,
 
   isEditMenu: false,
   editMenuType: "overview",
 
+  isChooseCategorySlideMenu: false,
   isChooseCategoryMenu: false,
   isChooseAccountMenu: false,
   isChangeTitleMenu: false,
@@ -89,7 +92,8 @@ const initialState: initialState = {
   account: {
     name: "",
     icon: "",
-    color: ""
+    color: "",
+    balance: 0
   },
   category: {
     name: "",
@@ -124,6 +128,13 @@ const CurTransactionSlice = createSlice({
       const num1 = state.numberStr1
       const num2 = state.numberStr2
 
+      if (action.payload === ".") {
+        if (!operator) {
+          if (num1.includes(".") || !num1) return
+        } else {
+          if (num2.includes(".") || !num2) return
+        }
+      }
       if (!operator) {
         const joinedNum = num1 + String(action.payload)
         state.numberStr1 = joinedNum
@@ -163,6 +174,9 @@ const CurTransactionSlice = createSlice({
     setChooseCategoryMenu(state, action: PayloadAction<boolean>) {
       state.isChooseCategoryMenu = action.payload
     },
+    setChooseCategorySlideMenu(state, action: PayloadAction<boolean>) {
+      state.isChooseCategorySlideMenu = action.payload
+    },
     setChangeTitleMenu(state, action: PayloadAction<boolean>) {
       state.isChangeTitleMenu = action.payload
     },
@@ -192,7 +206,7 @@ const CurTransactionSlice = createSlice({
       state.id = null
       state.title = ""
       state.type = "expense"
-      state.account = { name: "", color: "", icon: "" }
+      state.account = { name: "", color: "", icon: "", balance: 0 }
       state.category = { name: "", color: "", icon: "" }
       state.quantity = 0
       state.accountId = null
@@ -209,6 +223,7 @@ const CurTransactionSlice = createSlice({
         name: string
         icon: string
         color: string
+        balance: number
       }
     }>) {
       state.accountId = action.payload.accountId
@@ -242,7 +257,8 @@ export const {
   setCurTransaction,
   setEditMenu,
   setAccount,
-  setQuantity, setChangeTitleMenu,
+  setQuantity,
+  setChangeTitleMenu,
   setCurDateStr,
   setType,
   setTitle,
@@ -250,5 +266,11 @@ export const {
   resetCurTransaction,
   setMenuType,
   setChooseCategoryMenu,
-  setChooseAccountMenu, addToNum, setOperator, calcCalculatorQuantity, setChangeDateMenu, removeLastNumber
+  setChooseAccountMenu,
+  addToNum,
+  setOperator,
+  calcCalculatorQuantity,
+  setChangeDateMenu,
+  removeLastNumber,
+  setChooseCategorySlideMenu
 } = CurTransactionSlice.actions

@@ -3,6 +3,8 @@ import { Header } from "@widgets/Header"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { DateSubHeader } from "@widgets/Header/ui/DateSubHeader.tsx"
 import { TransactionsSlider } from "@widgets/TransactionsMenu/ui/TransactionsSlider.tsx"
+import { StartCreatingTrans } from "@features/StartCreatingTrans/ui/StartCreatingTrans.tsx"
+import React from "react"
 
 const TransactionsPage = () => {
 
@@ -14,6 +16,7 @@ const TransactionsPage = () => {
         right={<img src={Categories} alt="" />}
       />
       <TransactionsSlider />
+      <StartCreatingTrans />
     </TransactionsLayout>
   )
 }

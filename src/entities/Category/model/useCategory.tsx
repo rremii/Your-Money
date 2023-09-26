@@ -9,7 +9,7 @@ export const useCategory = (userId?: number) => {
 
 
   return {
-    allCategories
+    allCategories: allCategories || []
   }
 
 }

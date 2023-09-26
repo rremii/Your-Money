@@ -5,6 +5,7 @@ import { GetTransByMenus } from "@entities/Transaction/model/GetTransByMenus.tsx
 import { useSlider } from "@entities/DateSlider/model/useSlider.tsx"
 import { useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { StartCreatingTrans } from "@features/StartCreatingTrans/ui/StartCreatingTrans.tsx"
 
 
 //todo add slider layout to shared and do same to others
