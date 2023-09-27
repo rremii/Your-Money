@@ -6,9 +6,10 @@ import { ToastReducer } from "@shared/store/globalSlices/ToastSlice.ts"
 import { DateReducer } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { CurAccountReducer } from "@entities/Account/model/CurAccountSlice.ts"
 import { CategoryReducer } from "@entities/Category/model/CategorySlice.ts"
-import { CurTransactionReducer } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { AllAccountReducer } from "@entities/Account/model/AllAccountSlice.ts"
 import { CalendarReducer } from "@shared/modules/Calendar/model/CalendarSlice.ts"
+import { EditCreateTransactionReducer } from "@entities/EditTransaction/model"
+
 
 const rootReducer = combineReducers({
   SideBar: SideBarReducer,
@@ -17,7 +18,7 @@ const rootReducer = combineReducers({
   Date: DateReducer,
   CurAccount: CurAccountReducer,
   Category: CategoryReducer,
-  CurTransaction: CurTransactionReducer,
+  EditCreateTransaction: EditCreateTransactionReducer,
   AllAccount: AllAccountReducer,
   Calendar: CalendarReducer,
   [Api.reducerPath]: Api.reducer

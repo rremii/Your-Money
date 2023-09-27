@@ -2,8 +2,15 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { TransactionType } from "@entities/Transaction/types.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
-type IEditMenuType = "overview" | "edit" | "create"
 
+// //
+// interface editDto {
+//   id: number
+//   dateStr: string
+//   quantity: number
+//   type: TransactionType
+//
+// }
 
 interface IEditTrans {
   id: number | null
@@ -13,17 +20,6 @@ interface IEditTrans {
   categoryId: number | null
   accountId: number | null
   title?: string
-  account: {
-    name: string
-    icon: string
-    color: string,
-    balance: number
-  }
-  category: {
-    icon: string
-    name: string
-    color: string
-  }
 }
 
 export type MathOperatorType = "mul" | "sub" | "div" | "sum" | null
@@ -53,34 +49,11 @@ MathOperatorSign.set("sum", "+")
 MathOperatorSign.set("mul", "×")
 
 interface initialState extends IEditTrans {
-  operator: MathOperatorType
-  numberStr1: string
-  numberStr2: string
 
-  isEditMenu: boolean
-  editMenuType: IEditMenuType
-
-  isChooseAccountMenu: boolean
-  isChooseCategoryMenu: boolean
-  isChooseCategorySlideMenu: boolean
-  isChangeTitleMenu: boolean
-  isChangeDateMenu: boolean
 
 }
 
 const initialState: initialState = {
-  numberStr1: "0",
-  numberStr2: "",
-  operator: null,
-
-  isEditMenu: false,
-  editMenuType: "overview",
-
-  isChooseCategorySlideMenu: false,
-  isChooseCategoryMenu: false,
-  isChooseAccountMenu: false,
-  isChangeTitleMenu: false,
-  isChangeDateMenu: false,
 
   id: null,
   dateStr: new Date().toUTCString(),
@@ -88,86 +61,15 @@ const initialState: initialState = {
   title: "",
   type: "expense",
   categoryId: null,
-  accountId: null,
-  account: {
-    name: "",
-    icon: "",
-    color: "",
-    balance: 0
-  },
-  category: {
-    name: "",
-    icon: "",
-    color: ""
-  }
+  accountId: null
+
 }
 
-const CurTransactionSlice = createSlice({
-  name: "CurTransactionSlice",
+const TransactionSlice = createSlice({
+  name: "TransactionSlice",
   initialState,
   reducers: {
-    removeLastNumber(state) {
-      const operator = state.operator
-      const quantityStr = String(state.quantity)
-      const num1 = state.numberStr1
-      const num2 = state.numberStr2
 
-      if (num2)
-        state.numberStr2 = num2.slice(0, -1)
-      else if (operator)
-        state.operator = null
-      else if (num1)
-        state.numberStr1 = num1.slice(0, -1)
-      else if (quantityStr)
-        state.quantity = +quantityStr.slice(0, -1)
-      else state.quantity = 0
-    },
-    addToNum(state, action: PayloadAction<number | string>) {
-
-      const operator = state.operator
-      const num1 = state.numberStr1
-      const num2 = state.numberStr2
-
-      if (action.payload === ".") {
-        if (!operator) {
-          if (num1.includes(".") || !num1) return
-        } else {
-          if (num2.includes(".") || !num2) return
-        }
-      }
-      if (!operator) {
-        const joinedNum = num1 + String(action.payload)
-        state.numberStr1 = joinedNum
-      } else {
-        const joinedNum = num2 + String(action.payload)
-        state.numberStr2 = joinedNum
-      }
-
-    },
-    setOperator(state, action: PayloadAction<MathOperatorType>) {
-      const operator = state.operator
-      const quantity = state.quantity
-      const num1 = +state.numberStr1
-      const num2 = +state.numberStr2
-      if (!num1)
-        state.numberStr1 = String(quantity)
-      if (operator) {
-        state.numberStr1 = String(CalcMathOperation([num1, num2], operator))
-        state.numberStr2 = ""
-      }
-      state.operator = action.payload
-
-    },
-    calcCalculatorQuantity(state) {
-      const operator = state.operator
-      const num1 = +state.numberStr1
-      const num2 = +state.numberStr2
-
-      state.quantity = CalcMathOperation([num1, num2], operator)
-      state.numberStr2 = ""
-      state.numberStr1 = ""
-      state.operator = null
-    },
     setChangeDateMenu(state, action: PayloadAction<boolean>) {
       state.isChangeDateMenu = action.payload
     },
@@ -252,7 +154,7 @@ const CurTransactionSlice = createSlice({
   }
 })
 
-export const CurTransactionReducer = CurTransactionSlice.reducer
+export const TransactionReducer = TransactionSlice.reducer
 export const {
   setCurTransaction,
   setEditMenu,
@@ -273,4 +175,4 @@ export const {
   setChangeDateMenu,
   removeLastNumber,
   setChooseCategorySlideMenu
-} = CurTransactionSlice.actions
+} = TransactionSlice.actions

@@ -6,6 +6,7 @@ interface initialStateType {
   isModalOverLay: boolean
 
   isNameMenu: boolean
+
   isSignOutMenu: boolean
   isPasswordMenu: boolean
 }
