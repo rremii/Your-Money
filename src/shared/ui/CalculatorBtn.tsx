@@ -9,12 +9,7 @@ interface props {
   OnClick: () => void
 }
 
-// export const CalculatorBtn: FC<props> = ({ children, borderColor, bgColor, OnClick }) => {
-//
-//   return <CalculatorCellLayout $borderColor={borderColor} $bgColor={bgColor} onClick={OnClick}>
-//     {children}
-//   </CalculatorCellLayout>
-// }
+
 export const CalculatorBtn = styled.div<{
   $borderColor?: string
   $bgColor?: string

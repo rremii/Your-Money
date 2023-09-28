@@ -12,8 +12,8 @@ export const OpenCalendar = () => {
   const dispatch = useAppDispatch()
 
 
-  const color = useTypedSelector(state => state.CurTransaction.category.color)
-  const dateStr = useTypedSelector(state => state.CurTransaction.dateStr)
+  const color = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.color)
+  const dateStr = useTypedSelector(state => state.EditCreateTransaction.Transaction.dateStr)
 
 
   const OpenCalendar = () => {

@@ -6,17 +6,11 @@ import { Actions } from "@shared/modules/Calendar/types.ts"
 export let dispatchCalendar: React.Dispatch<Actions>
 
 
-interface props {
-  children: React.ReactNode
-}
-
-// export type HOC<T> = (Component: FC<T>) => (props: T) => React.ReactNode
-
 export function CalendarProvider<T>(Component: FC<any>): FC<T> {
 
 
   return (props): React.ReactNode => {
-    
+
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [calendarState, dispatch] = useReducer(CalendarCtxReducer, initialState)
 

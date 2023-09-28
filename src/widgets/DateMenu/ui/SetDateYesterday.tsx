@@ -4,14 +4,15 @@ import React from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { Months, timeGap } from "@shared/helpers/TimeGap.ts"
 import { IsYesterday } from "@shared/helpers/IsYesterday.ts"
-import { setChangeDateMenu, setCurDateStr } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
+import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
 
 
 export const SetDateYesterday = () => {
   const dispatch = useAppDispatch()
 
-  const color = useTypedSelector(state => state.CurTransaction.category.color)
-  const dateStr = useTypedSelector(state => state.CurTransaction.dateStr)
+  const color = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.color)
+  const dateStr = useTypedSelector(state => state.EditCreateTransaction.Transaction.dateStr)
 
 
   const isActive = IsYesterday(dateStr)
@@ -25,7 +26,7 @@ export const SetDateYesterday = () => {
   const SetDateYesterday = () => {
     const now = new Date()
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1)
-    dispatch(setCurDateStr(today.toUTCString()))
+    dispatch(setEditTransDateStr(today.toUTCString()))
     dispatch(setChangeDateMenu(false))
   }
 

@@ -1,12 +1,12 @@
 import styled from "styled-components"
 import { TransactionType } from "@entities/Transaction/types.ts"
 import { FC } from "react"
-import { MathOperatorSign, setMenuType } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { MathOperatorSign } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
+import { setEditCreateMenuType } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
 
 
 interface props {
-  // quantity: number | string
   type: TransactionType
   color: string
 }
@@ -14,12 +14,12 @@ interface props {
 export const ResultQuantity: FC<props> = ({ type, color }) => {
   const dispatch = useAppDispatch()
 
-  const menuType = useTypedSelector(state => state.CurTransaction.editMenuType)
+  const menuType = useTypedSelector(state => state.Modals.EditCreateTransMenu.menuType)
 
-  const quantity = useTypedSelector(state => state.CurTransaction.quantity)
-  const numberStr1 = useTypedSelector(state => state.CurTransaction.numberStr1)
-  const numberStr2 = useTypedSelector(state => state.CurTransaction.numberStr2)
-  const operator = useTypedSelector(state => state.CurTransaction.operator)
+  const quantity = useTypedSelector(state => state.EditCreateTransaction.Calculator.quantity)
+  const numberStr1 = useTypedSelector(state => state.EditCreateTransaction.Calculator.numberStr1)
+  const numberStr2 = useTypedSelector(state => state.EditCreateTransaction.Calculator.numberStr2)
+  const operator = useTypedSelector(state => state.EditCreateTransaction.Calculator.operator)
 
 
   let quantityStr: string
@@ -29,7 +29,7 @@ export const ResultQuantity: FC<props> = ({ type, color }) => {
 
   const OnClick = () => {
     if (menuType === "overview")
-      dispatch(setMenuType("edit"))
+      dispatch(setEditCreateMenuType("edit"))
   }
 
   return <QuantityLayout onClick={OnClick} $color={color}>

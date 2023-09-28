@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { setChooseCategorySlideMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { setChooseCategorySlideMenu } from "@entities/Modals/model/ChooseCategorySlideMenuSlice.ts"
 
 export const StartCreatingTrans = () => {
   const dispatch = useAppDispatch()

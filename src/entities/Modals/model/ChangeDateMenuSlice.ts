@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface initialState {
   isOpen: boolean
@@ -11,8 +11,12 @@ const initialState: initialState = {
 const ChangeDateMenuSlice = createSlice({
   name: "ChangeDateMenuSlice",
   initialState,
-  reducers: {}
+  reducers: {
+    setChangeDateMenu(state, action: PayloadAction<boolean>) {
+      state.isOpen = action.payload
+    }
+  }
 })
 
 export const ChangeDateMenuReducer = ChangeDateMenuSlice.reducer
-export const {} = ChangeDateMenuSlice.actions
+export const { setChangeDateMenu } = ChangeDateMenuSlice.actions

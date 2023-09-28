@@ -1,16 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface initialState {
-
+  isOpen: boolean
 }
 
-const initialState: initialState = {}
+const initialState: initialState = {
+  isOpen: false
+}
 
 const ChooseAccountMenuSlice = createSlice({
   name: "ChooseAccountMenuSlice",
   initialState,
-  reducers: {}
+  reducers: {
+    setChooseAccountMenu(state, action: PayloadAction<boolean>) {
+      state.isOpen = action.payload
+    }
+  }
 })
 
 export const ChooseAccountMenuReducer = ChooseAccountMenuSlice.reducer
-export const {} = ChooseAccountMenuSlice.actions
+export const { setChooseAccountMenu } = ChooseAccountMenuSlice.actions

@@ -1,8 +1,9 @@
 import styled from "styled-components"
 import Category from "@shared/assets/LightTheme/categories.png"
 import { FC } from "react"
-import { setChangeDateMenu, setMenuType } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { setEditCreateMenuType } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
+import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
 
 interface props {
   color: string
@@ -12,10 +13,10 @@ export const OptionsSection: FC<props> = ({ color }) => {
   const dispatch = useAppDispatch()
 
   const OnDuplicateClick = () => {
-    dispatch(setMenuType("create"))
+    dispatch(setEditCreateMenuType("create"))
   }
   const OnDateClick = () => {
-    dispatch(setMenuType("edit"))
+    dispatch(setEditCreateMenuType("edit"))
     dispatch(setChangeDateMenu(true))
   }
 

@@ -7,8 +7,9 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import { setChangeTitleMenu, setTitle } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
+import { setChangeTitleMenu } from "@entities/Modals/model/ChangeTitleMenuClice.ts"
+import { setEditTransTitle } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 
 interface FormFields {
   title: string | undefined
@@ -24,22 +25,21 @@ const schema = yup
 export const TitleMenu = () => {
   const dispatch = useAppDispatch()
 
-  const initTitle = useTypedSelector(state => state.CurTransaction.title)
-  const isMenuOpen = useTypedSelector(state => state.CurTransaction.isChangeTitleMenu)
+  const initTitle = useTypedSelector(state => state.EditCreateTransaction.Transaction.title)
+  const isMenuOpen = useTypedSelector(state => state.Modals.ChangeTitleMenu.isOpen)
 
 
-  const { register, formState, handleSubmit, reset } =
+  const { register, formState: { errors }, handleSubmit, reset } =
     useForm<FormFields>({
       resolver: yupResolver(schema),
       values: {
         title: initTitle || ""
       }
     })
-  const { errors } = formState
 
 
   const ChangeTitle = ({ title }: FormFields) => {
-    dispatch(setTitle(title || ""))
+    dispatch(setEditTransTitle(title || ""))
     dispatch(setChangeTitleMenu(false))
     reset()
   }

@@ -1,10 +1,13 @@
 import { combineReducers } from "@reduxjs/toolkit"
-import { TransactionReducer } from "@entities/EditTransaction/model/TransactionSlice.ts"
-import { ChosenCategoryReducer } from "@entities/EditTransaction/model/ChosenCategory.ts"
-import { ChosenAccountReducer } from "@entities/EditTransaction/model/ChosenAccount.ts"
+import { TransactionReducer } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
+import { ChosenCategoryReducer } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
+import { ChosenAccountReducer } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
+import { Calculator } from "@features/Calculator/ui/Calculator.tsx"
+import { CalculatorReducer } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 
 export const EditCreateTransactionReducer = combineReducers({
   Transaction: TransactionReducer,
   ChosenCategory: ChosenCategoryReducer,
-  ChosenAccount: ChosenAccountReducer
+  ChosenAccount: ChosenAccountReducer,
+  Calculator: CalculatorReducer
 })

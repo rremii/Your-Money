@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 type IEditCreateMenuType = "overview" | "edit" | "create"
 
@@ -15,8 +15,15 @@ const initialState: initialState = {
 const EditCreateTransMenuSlice = createSlice({
   name: "EditCreateTransMenuSlice",
   initialState,
-  reducers: {}
+  reducers: {
+    setEditCreateTransMenu(state, action: PayloadAction<boolean>) {
+      state.isOpen = action.payload
+    },
+    setEditCreateMenuType(state, action: PayloadAction<IEditCreateMenuType>) {
+      state.menuType = action.payload
+    }
+  }
 })
 
 export const EditCreateTransMenuReducer = EditCreateTransMenuSlice.reducer
-export const {} = EditCreateTransMenuSlice.actions
+export const { setEditCreateTransMenu, setEditCreateMenuType } = EditCreateTransMenuSlice.actions

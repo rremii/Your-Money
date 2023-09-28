@@ -7,13 +7,13 @@ import { AllAccountsInfo } from "@shared/ui/AllAccountsInfo.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
-import { setChooseAccountMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { ChooseAccount } from "@widgets/ChooseAccountMenu/ui/ChooseAccount.tsx"
+import { setChooseAccountMenu } from "@entities/Modals/model/ChooseAccountMenuClice.ts"
 
 export const ChooseAccountMenu = React.memo(() => {
   const dispatch = useAppDispatch()
 
-  const isOpen = useTypedSelector(state => state.CurTransaction.isChooseAccountMenu)
+  const isOpen = useTypedSelector(state => state.Modals.ChooseAccountMenu.isOpen)
   const allBalance = useTypedSelector(state => state.AllAccount.balance)
 
 

@@ -1,38 +1,37 @@
 import styled from "styled-components"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import React, { useEffect } from "react"
-import { InfoCell } from "@widgets/CurTransMenu/ui/InfoCell.tsx"
-import { ResultQuantity } from "@widgets/CurTransMenu/ui/ResultQuantity.tsx"
-import { Notes } from "@widgets/CurTransMenu/ui/NotesInput.tsx"
-import { TransDate } from "@widgets/CurTransMenu/ui/TransDate.tsx"
-import { OptionsSection } from "@widgets/CurTransMenu/ui/OptionsSection.tsx"
-import { Calculator } from "@widgets/CurTransMenu/ui/Calculator.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import {
-  setAccount,
-  setChooseAccountMenu,
-  setChooseCategoryMenu,
-  setEditMenu, setMenuType
-} from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
+import { Calculator } from "@features/Calculator/ui/Calculator.tsx"
+import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
+import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
+import { setChooseCategoryMenu } from "@entities/Modals/model/ChooseCategoryMenuSlice.ts"
+import { setChooseAccountMenu } from "@entities/Modals/model/ChooseAccountMenuClice.ts"
+import { InfoCell } from "@shared/ui/InfoCell.tsx"
+import { ResultQuantity } from "@widgets/EditCreateTransMenu/ui/ResultQuantity.tsx"
+import { Notes } from "@widgets/EditCreateTransMenu/ui/NotesInput.tsx"
+import { TransDate } from "@shared/ui/TransDate.tsx"
+import { OptionsSection } from "@widgets/EditCreateTransMenu/ui/OptionsSection.tsx"
 
-export const CurTransMenu = React.memo(() => {
+export const EditCreateTransMenu = React.memo(() => {
   const dispatch = useAppDispatch()
 
-  const isMenuOpen = useTypedSelector(state => state.CurTransaction.isEditMenu)
-  const menuType = useTypedSelector(state => state.CurTransaction.editMenuType)
+  const isMenuOpen = useTypedSelector(state => state.Modals.EditCreateTransMenu.isOpen)
+  const menuType = useTypedSelector(state => state.Modals.EditCreateTransMenu.menuType)
 
   const curAccId = useTypedSelector(state => state.CurAccount.id)
 
-  const type = useTypedSelector(state => state.CurTransaction.type)
-  const account = useTypedSelector(state => state.CurTransaction.account)
+  const type = useTypedSelector(state => state.EditCreateTransaction.Transaction.type)
+  const account = useTypedSelector(state => state.EditCreateTransaction.ChosenAccount)
 
-  const title = useTypedSelector(state => state.CurTransaction.title)
-  const dateStr = useTypedSelector(state => state.CurTransaction.dateStr)
-  const category = useTypedSelector(state => state.CurTransaction.category)
+  const title = useTypedSelector(state => state.EditCreateTransaction.Transaction.title)
+  const dateStr = useTypedSelector(state => state.EditCreateTransaction.Transaction.dateStr)
+  const category = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory)
 
 
   const { data: user } = GetMe.useQueryState()
@@ -43,28 +42,23 @@ export const CurTransMenu = React.memo(() => {
     const curAccount = curAccId ? allAccounts.find(({ id }) => id === curAccId) : allAccounts[0]
 
     if (!curAccount) return
-    dispatch(setAccount({
-      accountId: curAccount.id,
-      account: curAccount
-    }))
+    dispatch(setAccount(curAccount))
   }, [allAccounts])
 
   const CloseMenu = () => {
-    dispatch(setEditMenu({
-      isOpen: false,
-      menuType
-    }))
+    dispatch(setEditCreateTransMenu(false))
+    dispatch(setEditCreateMenuType(menuType))
   }
 
   const OpenChooseCategoryMenu = () => {
     dispatch(setChooseCategoryMenu(true))
     if (menuType === "overview")
-      dispatch(setMenuType("edit"))
+      dispatch(setEditCreateMenuType("edit"))
   }
   const OpenChooseAccountMenu = () => {
     dispatch(setChooseAccountMenu(true))
     if (menuType === "overview")
-      dispatch(setMenuType("edit"))
+      dispatch(setEditCreateMenuType("edit"))
   }
 
   return <>

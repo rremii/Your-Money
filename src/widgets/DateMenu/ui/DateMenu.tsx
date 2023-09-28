@@ -2,17 +2,17 @@ import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import React from "react"
-import { setChangeDateMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { SetDateToday } from "@widgets/DateMenu/ui/SetDateToday.tsx"
 import { SetDateYesterday } from "@widgets/DateMenu/ui/SetDateYesterday.tsx"
 import { OpenCalendar } from "@widgets/DateMenu/ui/OpenCalendar.tsx"
+import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
 
 
 export const DateMenu = () => {
   const dispatch = useAppDispatch()
 
-  const isMenuOpen = useTypedSelector(state => state.CurTransaction.isChangeDateMenu)
+  const isMenuOpen = useTypedSelector(state => state.Modals.ChangeDateMenu.isOpen)
 
   const CloseMenu = () => {
     dispatch(setChangeDateMenu(false))

@@ -7,12 +7,10 @@ import { ChooseMenuLayout } from "@shared/ui/ChooseMenuLayout.tsx"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import {
-  setCategory,
-  setChooseCategoryMenu,
-  setChooseCategorySlideMenu
-} from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+
 import { ICategory } from "@entities/Transaction/types.ts"
+import { setChooseCategoryMenu } from "@entities/Modals/model/ChooseCategoryMenuSlice.ts"
+import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
 
 export const ChooseCategoryMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -20,9 +18,9 @@ export const ChooseCategoryMenu = React.memo(() => {
   const { data: user } = GetMe.useQueryState()
   const { allCategories } = useCategory(user?.id)
 
-  const isOpen = useTypedSelector(state => state.CurTransaction.isChooseCategoryMenu)
-  const type = useTypedSelector(state => state.CurTransaction.type)
-  const chosenCategoryName = useTypedSelector(state => state.CurTransaction.category.name)
+  const isOpen = useTypedSelector(state => state.Modals.ChooseCategoryMenu.isOpen)
+  const type = useTypedSelector(state => state.EditCreateTransaction.Transaction.type)
+  const chosenCategoryName = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.name)
 
   const CloseMenu = () => {
     dispatch(setChooseCategoryMenu(false))
@@ -31,10 +29,7 @@ export const ChooseCategoryMenu = React.memo(() => {
 
   const SetCategory = ({ color, name, icon, id }: ICategory) => {
     dispatch(setCategory({
-      categoryId: id,
-      category: {
-        name, icon, color
-      }
+      id, name, icon, color
     }))
     dispatch(setChooseCategoryMenu(false))
   }

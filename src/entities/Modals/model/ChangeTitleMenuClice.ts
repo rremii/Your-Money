@@ -1,16 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface initialState {
-
+  isOpen: boolean
 }
 
-const initialState: initialState = {}
+const initialState: initialState = {
+  isOpen: false
+}
 
 const ChangeTitleMenuSlice = createSlice({
   name: "ChangeTitleMenuSlice",
   initialState,
-  reducers: {}
+  reducers: {
+    setChangeTitleMenu(state, action: PayloadAction<boolean>) {
+      state.isOpen = action.payload
+    }
+  }
 })
 
 export const ChangeTitleMenuReducer = ChangeTitleMenuSlice.reducer
-export const {} = ChangeTitleMenuSlice.actions
+export const { setChangeTitleMenu } = ChangeTitleMenuSlice.actions

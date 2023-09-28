@@ -4,14 +4,15 @@ import { PickDateBtn } from "@widgets/DateMenu/ui/PickDateBtn.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { Months } from "@shared/helpers/TimeGap.ts"
 import { IsToday } from "@shared/helpers/IsToday.ts"
-import { setChangeDateMenu, setCurDateStr } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
+import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
 
 
 export const SetDateToday = () => {
   const dispatch = useAppDispatch()
 
-  const color = useTypedSelector(state => state.CurTransaction.category.color)
-  const dateStr = useTypedSelector(state => state.CurTransaction.dateStr)
+  const color = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.color)
+  const dateStr = useTypedSelector(state => state.EditCreateTransaction.Transaction.dateStr)
 
   const isActive = IsToday(dateStr)
 
@@ -23,7 +24,7 @@ export const SetDateToday = () => {
 
   const SetDateToday = () => {
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-    dispatch(setCurDateStr(today.toUTCString()))
+    dispatch(setEditTransDateStr(today.toUTCString()))
     dispatch(setChangeDateMenu(false))
   }
 

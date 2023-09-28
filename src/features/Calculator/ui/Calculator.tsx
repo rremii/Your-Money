@@ -1,16 +1,17 @@
 import styled from "styled-components"
 import React, { FC } from "react"
-import { OperationBtn } from "@widgets/CurTransMenu/ui/OperationBtn.tsx"
-import { DigitBtn } from "@widgets/CurTransMenu/ui/DigitBtn.tsx"
-import { SubmitBtn } from "@widgets/CurTransMenu/ui/SubmitBtn.tsx"
+
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
 import {
   addToNum,
-  calcCalculatorQuantity,
-  MathOperatorType, removeLastNumber,
-  setChangeDateMenu,
-  setOperator
-} from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+  calcCalculatorQuantity, MathOperatorType,
+  removeLastNumber, setOperator
+} from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
+import { OperationBtn } from "@features/Calculator/ui/OperationBtn.tsx"
+import { DigitBtn } from "@features/Calculator/ui/DigitBtn.tsx"
+import { SubmitBtn } from "@features/Calculator/ui/SubmitBtn.tsx"
+
 
 interface ICalculatorBtn {
   OnClick: () => void,
@@ -25,7 +26,7 @@ interface props {
 export const Calculator: FC<props> = ({ color }) => {
   const dispatch = useAppDispatch()
 
-  const operator = useTypedSelector(state => state.CurTransaction.operator)
+  const operator = useTypedSelector(state => state.EditCreateTransaction.Calculator.operator)
 
 
   const OpenDateMenu = () => {

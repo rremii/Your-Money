@@ -5,14 +5,15 @@ import { Overlay } from "@shared/ui/Overlay.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setCalendar } from "@shared/modules/Calendar/model/CalendarSlice.ts"
 import { Calendar } from "@shared/modules/Calendar"
-import { setChangeDateMenu, setCurDateStr } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
+import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
+import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
 
 export const CalendarMenu = () => {
   const dispatch = useAppDispatch()
 
-  const isOpen = useTypedSelector(state => state.Calendar.isCalendarOpen)
-  const initialDate = useTypedSelector(state => state.CurTransaction.dateStr)
-  const categoryColor = useTypedSelector(state => state.CurTransaction.category.color)
+  const isOpen = useTypedSelector(state => state.Modals.CalendarMenu.isOpen)
+  const initialDate = useTypedSelector(state => state.EditCreateTransaction.Transaction.dateStr)
+  const categoryColor = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.color)
 
   const [chosenDate, setChosenDate] = useState<string>(initialDate)
 
@@ -25,7 +26,7 @@ export const CalendarMenu = () => {
     setChosenDate(dateStr)
   }
   const OnSubmit = () => {
-    dispatch(setCurDateStr(chosenDate))
+    dispatch(setEditTransDateStr(chosenDate))
     dispatch(setCalendar(false))
     dispatch(setChangeDateMenu(false))
   }

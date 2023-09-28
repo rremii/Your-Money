@@ -9,13 +9,13 @@ import { Toast } from "@shared/ui/Toast.tsx"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAllTransDateGap } from "@entities/DateSlider/model/useAllTransDateGap.tsx"
-import { CurTransMenu } from "@widgets/CurTransMenu/ui/CurTransMenu.tsx"
 import { ChooseCategoryMenu } from "@widgets/ChooseCategoryMenu/ui/ChooseCategoryMenu.tsx"
 import { ChooseAccountMenu } from "@widgets/ChooseAccountMenu/ui/ChooseAccountMenu.tsx"
 import { TitleMenu } from "@widgets/TitleMenu/ui/TitleMenu.tsx"
 import { DateMenu } from "@widgets/DateMenu/ui/DateMenu.tsx"
 import { CalendarMenu } from "@widgets/CalendarMenu/ui/CalendarMenu.tsx"
 import { ChooseCategorySlideMenu } from "@widgets/ChooseCategorySlideMenu/ui/ChooseCategorySlideMenu.tsx"
+import { EditCreateTransMenu } from "@widgets/EditCreateTransMenu/ui/EditCreateTransMenu.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -32,7 +32,7 @@ const AppLayout: FC<Props> = ({ children }) => {
       {children}
       <Toast />
 
-      <CurTransMenu />
+      <EditCreateTransMenu />
       <ChooseCategoryMenu />
       <ChooseCategorySlideMenu />
       <ChooseAccountMenu />
