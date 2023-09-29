@@ -1,16 +1,16 @@
 import styled from "styled-components"
 import React, { FC } from "react"
+import { ITransaction } from "@entities/Transaction/types.ts"
 
 
 interface props {
   dateFrom: Date
   dateTo: Date
-
+  transactions: ITransaction[]
 }
 
 export const TransactionHeader: FC<props> = React.memo(({ dateFrom, dateTo }) => {
 
-  // const allAccounts = useTypedSelector(state => state.Cur)
 
   // const { startBalance, endBalance } = GetAccBalanceByTimeGap({ allAccounts, curAccHistory, dateTo, dateFrom })
 

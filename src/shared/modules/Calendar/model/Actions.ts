@@ -1,9 +1,10 @@
 import { dispatchCalendar } from "@shared/modules/Calendar/model/Provider.tsx"
 import {
+  CalendarType,
   setCalendarColorType,
+  setCalendarTypeType,
   setCurCalendarDateType,
-  updateMenuDatesType,
-  CalendarType, setCalendarTypeType
+  updateMenuDatesType
 } from "@shared/modules/Calendar/types.ts"
 
 

@@ -1,17 +1,12 @@
 import styled from "styled-components"
-import { ICategory, TransactionType } from "@entities/Transaction/types.ts"
-import { FC, useEffect } from "react"
+import { ICategory } from "@entities/Transaction/types.ts"
+import { FC } from "react"
 import { Category } from "@widgets/ChooseCategoryMenu/ui/Category.tsx"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import {
-  setAccount,
-  setCategory,
-  setChooseCategoryMenu,
-  setChooseCategorySlideMenu, setEditMenu
-} from "@entities/CurTransaction/model/CurTransactionSlice.ts"
-import { setCurMenu } from "@entities/DateSlider/model/DateSliderSlice.ts"
-import { GetMe } from "@entities/User/api/UserApi.ts"
-import { useAccount } from "@entities/Account/model/useAccount.tsx"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
+import { setChooseCategorySlideMenu } from "@entities/Modals/model/ChooseCategorySlideMenuSlice.ts"
+import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
+
 
 interface props {
   categories: ICategory[]
@@ -21,15 +16,12 @@ export const CategorySliderMenu: FC<props> = ({ categories }) => {
   const dispatch = useAppDispatch()
 
 
-  const SetCategory = ({ color, name, icon, id }: ICategory) => {
-    dispatch(setCategory({
-      categoryId: id,
-      category: {
-        name, icon, color
-      }
-    }))
+  const SetCategory = (category: ICategory) => {
+    dispatch(setCategory(category))
     dispatch(setChooseCategorySlideMenu(false))
-    dispatch(setEditMenu({ menuType: "create", isOpen: true }))
+
+    dispatch(setEditCreateMenuType("create"))
+    dispatch(setEditCreateTransMenu(true))
   }
 
   return <CategorySliderMenuLayout>

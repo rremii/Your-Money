@@ -5,9 +5,7 @@ import { FilterCategoriesByType } from "@entities/Category/model/FilterCategorie
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { FC, useEffect, useRef } from "react"
-import { setAccount, setType } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
-import useDebounce from "@shared/hooks/useDebounce.tsx"
-import { useAccount } from "@entities/Account/model/useAccount.tsx"
+import { setEditTransType } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 
 interface props {
   onScroll: (scroll: number) => void
@@ -24,9 +22,6 @@ export const ChooseCategorySlider: FC<props> = ({ onScroll }) => {
   const sliderRef = useRef<HTMLDivElement>(null)
 
 
-  const curAccId = useTypedSelector(state => state.CurAccount.id)
-
-
   useEffect(() => {
     OnScroll()
   }, [])
@@ -39,12 +34,12 @@ export const ChooseCategorySlider: FC<props> = ({ onScroll }) => {
     const scrollPercent = Math.round(curScroll / width) * 100
 
     if (scrollPercent > 50) {
-      dispatch(setType("expense"))
+      dispatch(setEditTransType("expense"))
       onScroll(scrollPercent)
     }
     if (scrollPercent <= 50) {
       onScroll(scrollPercent)
-      dispatch(setType("income"))
+      dispatch(setEditTransType("income"))
     }
   }
 

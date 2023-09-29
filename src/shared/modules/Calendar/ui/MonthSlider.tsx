@@ -1,10 +1,7 @@
 import styled from "styled-components"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { FC, useContext, useEffect } from "react"
+import { FC, useContext } from "react"
 import { useCalendarSlider } from "@shared/modules/Calendar/model/useCalendarSlider.tsx"
-import { setCurCalendarDate, updateMenuDates } from "@shared/modules/Calendar/model/CalendarSlice.ts"
 import { MonthMenu } from "@shared/modules/Calendar/ui/MonthMenu.tsx"
-import { setCurDateStr } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
 
 interface props {

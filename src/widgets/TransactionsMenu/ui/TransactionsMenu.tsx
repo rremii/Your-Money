@@ -23,7 +23,7 @@ export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId, dat
   const transactionsMenuData = useMemo(() => GetTransactionsMenuData(transactions), [transactions])
 
   return <TransactionsLayout ref={observeRef}>
-    <TransactionHeader dateFrom={dateFrom} dateTo={dateTo} />
+    <TransactionHeader transactions={transactions} dateFrom={dateFrom} dateTo={dateTo} />
     {transactionsMenuData.map((sectionData) => (
       <TransactionSectionByDate key={sectionData.date.getDate()} {...sectionData} />
     ))}

@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React from "react"
 import { Actions, CalendarType } from "@shared/modules/Calendar/types.ts"
 
 interface initialState {

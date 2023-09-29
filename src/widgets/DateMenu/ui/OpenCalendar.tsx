@@ -5,7 +5,7 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { IsYesterday } from "@shared/helpers/IsYesterday.ts"
 import { IsToday } from "@shared/helpers/IsToday.ts"
 import { Months } from "@shared/helpers/TimeGap.ts"
-import { setCalendar } from "@shared/modules/Calendar/model/CalendarSlice.ts"
+import { setCalendarMenu } from "@entities/Modals/model/CalendarMenuSlice.ts"
 
 
 export const OpenCalendar = () => {
@@ -17,7 +17,7 @@ export const OpenCalendar = () => {
 
 
   const OpenCalendar = () => {
-    dispatch(setCalendar(true))
+    dispatch(setCalendarMenu(true))
   }
 
   const date = new Date(dateStr)

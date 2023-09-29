@@ -25,17 +25,8 @@ export interface ITransaction {
   accountBalance: number
   categoryId: number
   accountId: number
+  userId: number
   title?: string
-  account: {
-    name: string
-    icon: string
-    color: string
-  }
-  category: {
-    icon: string
-    name: string
-    color: string
-  }
 }
 
 

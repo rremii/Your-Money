@@ -3,10 +3,10 @@ import { Modal } from "@shared/ui/Modal.tsx"
 import React, { useState } from "react"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setCalendar } from "@shared/modules/Calendar/model/CalendarSlice.ts"
 import { Calendar } from "@shared/modules/Calendar"
 import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
+import { setCalendarMenu } from "@entities/Modals/model/CalendarMenuSlice.ts"
 
 export const CalendarMenu = () => {
   const dispatch = useAppDispatch()
@@ -19,7 +19,7 @@ export const CalendarMenu = () => {
 
 
   const CloseCalendar = () => {
-    dispatch(setCalendar(false))
+    dispatch(setCalendarMenu(false))
   }
 
   const OnChosenDateChange = (dateStr: string) => {
@@ -27,7 +27,7 @@ export const CalendarMenu = () => {
   }
   const OnSubmit = () => {
     dispatch(setEditTransDateStr(chosenDate))
-    dispatch(setCalendar(false))
+    dispatch(setCalendarMenu(false))
     dispatch(setChangeDateMenu(false))
   }
 

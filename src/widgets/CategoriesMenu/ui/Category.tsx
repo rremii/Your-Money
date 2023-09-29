@@ -3,9 +3,13 @@ import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import React, { FC } from "react"
 import { ICategory } from "@entities/Transaction/types.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setCurTransaction, setEditMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
+import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
+import { setEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
+import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
+import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
+import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 
 
 interface props extends ICategory {
@@ -20,32 +24,28 @@ export const Category: FC<props> = React.memo(({ color, quantity, icon, name, id
 
 
   const { data: user } = GetMe.useQueryState()
-  const { allAccounts } = useAccount(user?.id)
+  const { getAccountById } = useAccount(user?.id)
 
   const OnClick = () => {
-    if (!allAccounts) return
 
-    dispatch(setEditMenu({
-      isOpen: true,
-      menuType: "create"
-    }))
+    dispatch(setEditCreateMenuType("create"))
+    dispatch(setEditCreateTransMenu(true))
 
 
-    const account = allAccounts.find((account) => account.id === curAccId) || allAccounts[0]
-    const category = { name, color, icon }
+    const account = getAccountById(curAccId)
+    const category = { name, color, icon, id }
     const date = new Date(dateTo.getFullYear(), dateTo.getMonth(), dateTo.getDate(), dateTo.getHours() - 1)
 
-    dispatch(setCurTransaction({
+    dispatch(setEditTransaction({
       id: null,
-      categoryId: id,
-      accountId: curAccId,
       title: "",
       dateStr: date.toUTCString(),
-      quantity: 0,
-      type,
-      category,
-      account
+      type
     }))
+    dispatch(setEditTransQuantity(quantity))
+    dispatch(setCategory(category))
+    if (account)
+      dispatch(setAccount(account))
 
   }
 

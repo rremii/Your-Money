@@ -7,8 +7,6 @@ interface initialState {
   id: number | null
   dateStr: string
   type: TransactionType
-  categoryId: number | null
-  accountId: number | null
   title?: string
 }
 
@@ -17,9 +15,7 @@ const initialState: initialState = {
   id: null,
   dateStr: new Date().toUTCString(),
   title: "",
-  type: "expense",
-  categoryId: null,
-  accountId: null
+  type: "expense"
 
 }
 
@@ -31,16 +27,12 @@ const TransactionSlice = createSlice({
       state.id = action.payload.id
       state.title = action.payload.title
       state.type = action.payload.type
-      state.accountId = action.payload.accountId
-      state.categoryId = action.payload.categoryId
       state.dateStr = action.payload.dateStr
     },
     resetEditTransaction(state) {
       state.id = null
       state.title = ""
       state.type = "expense"
-      state.accountId = null
-      state.categoryId = null
       state.dateStr = new Date().toUTCString()
     },
 

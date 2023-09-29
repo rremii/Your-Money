@@ -3,34 +3,48 @@ import Account from "@shared/assets/LightTheme/accounts.png"
 import React, { FC } from "react"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import { ITransaction, TransactionType } from "@entities/Transaction/types.ts"
-import { setCurTransaction, setEditMenu } from "@entities/CurTransaction/model/CurTransactionSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { setEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
+import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
+import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
+import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
+import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
+import { useAccount } from "@entities/Account/model/useAccount.tsx"
+import { useCategory } from "@entities/Category/model/useCategory.tsx"
+import { find } from "styled-components/test-utils"
 
 interface props extends ITransaction {
 
 }
 
 export const Transaction: FC<props> = (transaction) => {
-  const { account, quantity, category, type, title, accountId, categoryId, id, date } = transaction
+  const { quantity, type, title, accountId, categoryId, id, date, userId } = transaction
 
   const dispatch = useAppDispatch()
 
+
+  const { getAccountById } = useAccount(userId)
+  const { getCategoryById } = useCategory(userId)
+  const account = getAccountById(accountId)
+  const category = getCategoryById(categoryId)
+
+
   const OnClick = () => {
-    dispatch(setEditMenu({
-      isOpen: true,
-      menuType: "overview"
-    }))
-    dispatch(setCurTransaction({
-      id,
-      categoryId,
-      accountId,
-      title,
+    dispatch(setEditCreateMenuType("overview"))
+    dispatch(setEditCreateTransMenu(true))
+
+
+    dispatch(setEditTransaction({
+      id: id,
+      title: title,
       dateStr: date,
-      quantity,
-      type,
-      category,
-      account
+      type
     }))
+    dispatch(setEditTransQuantity(quantity))
+    dispatch(setCategory(category))
+    if (account)
+      dispatch(setAccount(account))
+
   }
 
   return <TransactionLayout onClick={OnClick} $type={type}>
@@ -41,7 +55,7 @@ export const Transaction: FC<props> = (transaction) => {
       <p className="category">{category.name}</p>
       <div className="account-info">
         <img src={Account} alt="account type" />
-        <p>{account.name}</p>
+        <p>{account?.name}</p>
       </div>
       <p className="title">{title ? title : ""}</p>
     </div>

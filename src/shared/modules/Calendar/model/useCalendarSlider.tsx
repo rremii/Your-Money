@@ -1,14 +1,12 @@
 import { useEffect, useRef } from "react"
-import { shiftTransMenuIdsLeft, shiftTransMenuIdsRight } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { updateMenuDates } from "@shared/modules/Calendar/model/CalendarSlice.ts"
+import { updateMenuDates } from "@shared/modules/Calendar/model/Actions.ts"
 
 interface props {
   menusDates: string[]
 }
 
 export const useCalendarSlider = ({ menusDates }: props) => {
-  const dispatch = useAppDispatch()
 
   const ref = useRef<HTMLDivElement>(null)
 
@@ -31,13 +29,12 @@ export const useCalendarSlider = ({ menusDates }: props) => {
 
     if (scrollDif === 0) {
       const initialDate = menusDates[menusDates.length - 1]
-      dispatch(updateMenuDates({ initialDate }))
-
+      updateMenuDates({ initialDate })
     }
 
     if (curScroll === 0) {
       const initialDate = menusDates[0]
-      dispatch(updateMenuDates({ initialDate }))
+      updateMenuDates({ initialDate })
     }
   }
 
