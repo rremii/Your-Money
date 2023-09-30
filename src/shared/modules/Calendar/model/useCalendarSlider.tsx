@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { updateMenuDates } from "@shared/modules/Calendar/model/Actions.ts"
 
 interface props {

@@ -7,7 +7,6 @@ import { DateReducer } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { CurAccountReducer } from "@entities/Account/model/CurAccountSlice.ts"
 import { CategoryReducer } from "@entities/Category/model/CategorySlice.ts"
 import { AllAccountReducer } from "@entities/Account/model/AllAccountSlice.ts"
-import { CalendarReducer } from "@shared/modules/Calendar/model/CalendarSlice.ts"
 import { EditCreateTransactionReducer } from "@entities/EditCreateTransaction/model"
 import { ModalsReducer } from "@entities/Modals/model"
 

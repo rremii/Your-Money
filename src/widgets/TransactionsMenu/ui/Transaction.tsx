@@ -11,7 +11,6 @@ import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.
 import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
-import { find } from "styled-components/test-utils"
 
 interface props extends ITransaction {
 
