@@ -4,9 +4,9 @@ export interface ITransaction {
   date: Date
   quantity: number
   type: TransactionType
-  accountBalance: number
+  // accountBalance: number
   // categoryIcon: string
-  userId: number
+  // userId: number
   categoryId: number
   accountId: number
   title?: string

@@ -6,9 +6,13 @@ import { TransactionService } from "./transaction.service"
 import { User } from "../users/entities/user.entity"
 import { Account } from "../account/entities/account.entity"
 import { Category } from "../category/entities/category.entity"
+import { AccountHistoryModule } from "../accountHistory/accountHistory.module"
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Account, Transaction, Category])],
+  imports: [
+    TypeOrmModule.forFeature([User, Account, Transaction, Category]),
+    AccountHistoryModule,
+  ],
   controllers: [TransactionController],
   providers: [TransactionService],
   exports: [TransactionService],

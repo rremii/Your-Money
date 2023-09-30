@@ -16,6 +16,7 @@ import { join } from "path"
 import { AccountModule } from "./account/account.module"
 import { CategoryModule } from "./category/category.module"
 import { TransactionModule } from "./transaction/transaction.module"
+import { AccountHistoryModule } from "./accountHistory/accountHistory.module"
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { TransactionModule } from "./transaction/transaction.module"
     PassportModule,
     GoogleAuthModule,
     CategoryModule,
+    AccountHistoryModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "../..", "uploads"),
       serveStaticOptions: {

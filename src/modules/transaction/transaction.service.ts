@@ -8,6 +8,8 @@ import { User } from "../users/entities/user.entity"
 import { Account } from "../account/entities/account.entity"
 import { ApiError } from "../../common/constants/errors"
 import { Category } from "../category/entities/category.entity"
+import { AccountHistoryService } from "../accountHistory/accountHistory.service"
+import { use } from "passport"
 
 @Injectable()
 export class TransactionService {
@@ -20,6 +22,7 @@ export class TransactionService {
     private readonly transactionRepository: Repository<Transaction>,
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
+    private readonly accountHistoryService: AccountHistoryService,
   ) {}
 
   async createTransaction({
@@ -58,9 +61,16 @@ export class TransactionService {
     transaction.type = type
     transaction.quantity = quantity
     transaction.title = title
-    transaction.accountBalance = newAccountBalance
+    // transaction.accountBalance = newAccountBalance
 
     accountEntity.balance = newAccountBalance
+
+    await this.accountHistoryService.createHistoryPoint(
+      transaction,
+      accountEntity,
+      userEntity,
+      newAccountBalance,
+    )
 
     await accountEntity.save()
     await transaction.save()

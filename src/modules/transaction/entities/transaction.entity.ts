@@ -5,12 +5,14 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm"
 import { Account } from "../../account/entities/account.entity"
 import { ITransaction, TransactionType } from "../transaction.interface"
 import { Category } from "../../category/entities/category.entity"
 import { User } from "../../users/entities/user.entity"
+import { AccountHistoryPoint } from "../../accountHistory/entities/accountHistoryPoint.entity"
 
 @Entity()
 export class Transaction extends BaseEntity implements ITransaction {
@@ -26,23 +28,17 @@ export class Transaction extends BaseEntity implements ITransaction {
   @Column()
   type: TransactionType
 
-  @Column()
-  accountBalance: number
+  // @Column()
+  // accountBalance: number
 
   @Column({ nullable: true })
   title?: string
-
-  // @Column()
-  // categoryIcon: string
 
   @Column()
   accountId: number
 
   @Column()
   categoryId: number
-
-  @Column()
-  userId: number
 
   @ManyToOne(() => Account, (account) => account.transactions)
   @JoinColumn({ name: "accountId" })
@@ -53,6 +49,11 @@ export class Transaction extends BaseEntity implements ITransaction {
   category: Category
 
   @ManyToOne(() => User, (user) => user.transaction)
-  @JoinColumn({ name: "userId" })
   user: User
+
+  @OneToOne(
+    () => AccountHistoryPoint,
+    (AccountHistoryPoint) => AccountHistoryPoint.transaction,
+  )
+  accountHistoryPoint: AccountHistoryPoint
 }
