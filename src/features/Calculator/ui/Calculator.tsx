@@ -5,8 +5,10 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
 import {
   addToNum,
-  calcCalculatorQuantity, MathOperatorType,
-  removeLastNumber, setOperator
+  calcCalculatorQuantity,
+  MathOperatorType,
+  removeLastNumber,
+  setOperator
 } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { OperationBtn } from "@features/Calculator/ui/OperationBtn.tsx"
 import { DigitBtn } from "@features/Calculator/ui/DigitBtn.tsx"

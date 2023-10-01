@@ -4,8 +4,6 @@ import { IAccount } from "@entities/Account/constants/Accounts.ts"
 import { setCurAccount, setCurAccountId } from "@entities/Account/model/CurAccountSlice.ts"
 import { useGetAccountsQuery } from "@entities/Account/api/AccountsApi.ts"
 import { setAllAccountBalance } from "@entities/Account/model/AllAccountSlice.ts"
-import { ICategory } from "@entities/Transaction/types.ts"
-import { all } from "axios"
 
 //todo
 export const useAccount = (userId?: number) => {
