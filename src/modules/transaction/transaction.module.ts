@@ -7,6 +7,7 @@ import { User } from "../users/entities/user.entity"
 import { Account } from "../account/entities/account.entity"
 import { Category } from "../category/entities/category.entity"
 import { AccountHistoryModule } from "../accountHistory/accountHistory.module"
+import { AccountHistoryPoint } from "../accountHistory/entities/accountHistoryPoint.entity"
 
 @Module({
   imports: [

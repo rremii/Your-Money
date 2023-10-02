@@ -1,22 +1,10 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator"
 import { TransactionType } from "../transaction.interface"
 
-export class CreateTransactionDto {
+export class EditTransactionDto {
   @IsNumber()
   @IsNotEmpty()
-  accountId: number
-
-  @IsNumber()
-  @IsNotEmpty()
-  userId: number
-
-  @IsNumber()
-  @IsNotEmpty()
-  categoryId: number
-
-  @IsString()
-  @IsNotEmpty()
-  date: string
+  id: number
 
   @IsNumber()
   @IsNotEmpty()
@@ -25,6 +13,10 @@ export class CreateTransactionDto {
   @IsString()
   @IsNotEmpty()
   type: TransactionType
+
+  @IsString()
+  @IsNotEmpty()
+  date: string
 
   title: string
 }

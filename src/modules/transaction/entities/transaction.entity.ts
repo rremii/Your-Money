@@ -13,13 +13,20 @@ import { ITransaction, TransactionType } from "../transaction.interface"
 import { Category } from "../../category/entities/category.entity"
 import { User } from "../../users/entities/user.entity"
 import { AccountHistoryPoint } from "../../accountHistory/entities/accountHistoryPoint.entity"
+import { getTimestamptz } from "../../../common/helpers/getTimestamptz"
 
 @Entity()
 export class Transaction extends BaseEntity implements ITransaction {
   @PrimaryGeneratedColumn()
   id: number
 
-  @CreateDateColumn()
+  @Column({
+    type: "timestamptz",
+    transformer: {
+      to: (date: Date) => new Date(getTimestamptz(date)),
+      from: (date: string) => new Date(date),
+    },
+  })
   date: Date
 
   @Column()
@@ -55,5 +62,6 @@ export class Transaction extends BaseEntity implements ITransaction {
     () => AccountHistoryPoint,
     (AccountHistoryPoint) => AccountHistoryPoint.transaction,
   )
+  @JoinColumn()
   accountHistoryPoint: AccountHistoryPoint
 }
