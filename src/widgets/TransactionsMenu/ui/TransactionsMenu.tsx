@@ -33,7 +33,6 @@ const TransactionsLayout = styled.div`
   scroll-snap-stop: always;
   scroll-snap-align: center;
   overflow-y: auto;
-  //background-color: var(--bg-1);
   height: 100%;
   width: max-content;
   flex: 0 0 100%;
