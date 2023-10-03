@@ -22,12 +22,12 @@ export class Transaction extends BaseEntity implements ITransaction {
 
   @Column({
     type: "timestamptz",
-    transformer: {
-      to: (date: Date) => new Date(getTimestamptz(date)),
-      from: (date: string) => new Date(date),
-    },
+    // transformer: {
+    //   to: (date: Date) => new Date(getTimestamptz(date)),
+    //   from: (date: string) => new Date(date),
+    // },
   })
-  date: Date
+  date: string
 
   @Column()
   quantity: number

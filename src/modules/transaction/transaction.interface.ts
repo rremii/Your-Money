@@ -1,7 +1,7 @@
 export type TransactionType = "income" | "expense"
 export interface ITransaction {
   id: number
-  date: Date
+  date: string
   quantity: number
   type: TransactionType
   // accountBalance: number

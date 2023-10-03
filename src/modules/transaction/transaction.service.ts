@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from "@nestjs/common"
 import { CreateTransactionDto } from "./dto/create-transaction.dto"
 import { Transaction } from "./entities/transaction.entity"
 import { GetTransactionsDto } from "./dto/get-transactions.dto"
-import { Between, Repository } from "typeorm"
+import { Between, MoreThan, Repository } from "typeorm"
 import { InjectRepository } from "@nestjs/typeorm"
 import { User } from "../users/entities/user.entity"
 import { Account } from "../account/entities/account.entity"
@@ -60,7 +60,7 @@ export class TransactionService {
     transaction.account = accountEntity
     transaction.user = userEntity
     transaction.category = categoryEntity
-    transaction.date = new Date(date)
+    transaction.date = date
     transaction.type = type
     transaction.quantity = quantity
     transaction.title = title
@@ -75,7 +75,6 @@ export class TransactionService {
       transaction,
       accountEntity,
       userEntity,
-      newAccountBalance,
       date,
     )
 
@@ -98,10 +97,10 @@ export class TransactionService {
     if (!transaction)
       throw new BadRequestException(ApiError.TRANSACTION_NOT_FOUND)
 
-    if (new Date(date) !== transaction.date)
+    if (date !== transaction.date)
       await this.accountHistoryService.changeHistoryPointDate(
         transaction.id,
-        new Date(date),
+        date,
         transaction.date,
         type,
         transaction.quantity,
@@ -115,7 +114,7 @@ export class TransactionService {
       )
 
     transaction.type = type
-    transaction.date = new Date(date)
+    transaction.date = date
     transaction.title = title ? title : ""
     transaction.type = type
     transaction.quantity = quantity
@@ -157,39 +156,14 @@ export class TransactionService {
   //todo
   //todo select special
   async getTransByDateGap({ dateTo, dateFrom, userId }: GetTransactionsDto) {
-    console.log(userId)
-    console.log(dateTo)
-    console.log(dateFrom)
     // return await this.transactionRepository.query(`
     //     SELECT * FROM transaction
-    //         JOIN "public"."user" ON "transaction"."userId" = "user"."id"
-    //             WHERE "public"."user"."id" = ${userId}
+    //        INNER JOIN "public"."user" ON "transaction"."userId" = "user"."id"
+    //             WHERE "public"."user"."id" = ${userId} AND "transaction"."date" BETWEEN '${dateFrom}' and '${dateTo}'
     // `)
-
-    // return await this.transactionRepository.find({
-    // relations: {
-    //   account: true,
-    //   category: true,
-
-    //   accountHistoryPoint: true,
-    // },
-    //   order: {
-    //     date: "ASC",
-    //   },
-    //   where: {
-    //     date: Between(new Date(dateFrom), new Date(dateTo)),
-    //     user: {
-    //       id: userId,
-    //     },
-    //   },
-    // })
 
     if (!dateTo || !dateFrom)
       return await this.transactionRepository.find({
-        // relations: {
-        //   account: true,
-        //   category: true,
-        // },
         order: {
           date: "ASC",
         },
@@ -201,16 +175,11 @@ export class TransactionService {
       })
     else
       return await this.transactionRepository.find({
-        // relations: {
-        //   account: true,
-        //   category: true,
-        //   accountHistoryPoint: true,
-        // },
         order: {
           date: "ASC",
         },
         where: {
-          date: Between(new Date(dateFrom), new Date(dateTo)),
+          date: Between(dateFrom, dateTo),
           user: {
             id: userId,
           },

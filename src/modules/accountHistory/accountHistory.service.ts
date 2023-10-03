@@ -5,6 +5,7 @@ import {
   LessThan,
   LessThanOrEqual,
   MoreThan,
+  MoreThanOrEqual,
   Repository,
 } from "typeorm"
 import { AccountHistoryPoint } from "./entities/accountHistoryPoint.entity"
@@ -25,22 +26,34 @@ export class AccountHistoryService {
     transaction: Transaction,
     account: Account,
     user: User,
-    balance: number,
     date: string,
   ) {
+    const type = transaction.type
+    let accBalanceDifference =
+      type === "expense" ? -transaction.quantity : +transaction.quantity
+
     //todo add pipe to convert str date to date
     const historyPoint = new AccountHistoryPoint()
     historyPoint.account = account
     historyPoint.user = user
     historyPoint.transaction = transaction
-    historyPoint.balance = balance
-    historyPoint.date = new Date(date)
+    historyPoint.date = date
 
-    const type = transaction.type
-    let accBalanceDifference =
-      type === "income" ? -transaction.quantity : +transaction.quantity
+    const prevHistoryPoint = await this.accountHistoryRepository.findOne({
+      order: {
+        date: "DESC",
+      },
+      where: {
+        date: LessThan(date),
+      },
+    })
+    console.log(prevHistoryPoint)
+    console.log(accBalanceDifference)
+    if (prevHistoryPoint)
+      historyPoint.balance = prevHistoryPoint.balance + accBalanceDifference
+    else historyPoint.balance = accBalanceDifference
 
-    await this.updateHistoryGapBalance(accBalanceDifference, new Date(date))
+    await this.updateHistoryGapBalance(accBalanceDifference, date)
 
     return await historyPoint.save()
 
@@ -70,8 +83,8 @@ export class AccountHistoryService {
   }
   private async updateHistoryGapBalance(
     balanceDiff: number,
-    dateFrom: Date,
-    dateTo?: Date,
+    dateFrom: string,
+    dateTo?: string,
   ) {
     const compareDateFunc = dateTo
       ? Between(dateFrom, dateTo)
@@ -126,8 +139,8 @@ export class AccountHistoryService {
   }
   async changeHistoryPointDate(
     transactionId: number,
-    newDate: Date,
-    oldDate: Date,
+    newDate: string,
+    oldDate: string,
     type: TransactionType,
     quantity: number,
   ) {
@@ -157,7 +170,7 @@ export class AccountHistoryService {
     if (dateTo && dateFrom) {
       const history = await this.accountHistoryRepository.find({
         where: {
-          date: Between(new Date(dateFrom), new Date(dateTo)),
+          date: Between(dateFrom, dateTo),
           user: {
             id: userId,
           },
@@ -167,7 +180,7 @@ export class AccountHistoryService {
       const historyBorderLeft = await this.accountHistoryRepository.find({
         take: 1,
         where: {
-          date: LessThan(new Date(dateFrom)),
+          date: LessThan(dateFrom),
           user: {
             id: userId,
           },
@@ -176,7 +189,7 @@ export class AccountHistoryService {
       const historyBorderRight = await this.accountHistoryRepository.find({
         take: 1,
         where: {
-          date: MoreThan(new Date(dateTo)),
+          date: MoreThan(dateTo),
           user: {
             id: userId,
           },

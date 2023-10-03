@@ -28,12 +28,12 @@ export class AccountHistoryPoint
 
   @CreateDateColumn({
     type: "timestamptz",
-    transformer: {
-      to: (date: Date) => getTimestamptz(new Date(date)),
-      from: (date: string) => new Date(date),
-    },
+    // transformer: {
+    // to: (date: Date) => getTimestamptz(new Date(date)),
+    // from: (date: string) => new Date(date),
+    // },
   })
-  date: Date
+  date: string
 
   @Column({ default: 0 })
   balance: number
