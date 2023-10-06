@@ -130,6 +130,7 @@ const TransactionLayout = styled.div<{
   }
 
   .quantity {
+    
     align-self: flex-start;
     color: ${({ $type }) => $type === "expense" ? "var(--txt-8)" : "var(--txt-10)"};
     font-family: Inter, sans-serif;
