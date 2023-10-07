@@ -86,4 +86,8 @@ export class UsersService {
 
     return user
   }
+
+  async getUserById(id: number) {
+    return await this.usersRepository.findOneBy({ id })
+  }
 }

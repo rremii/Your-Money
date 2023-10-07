@@ -30,6 +30,10 @@ export class AccountService {
     })
   }
 
+  async getAccountById(id: number) {
+    return this.accountRepository.findOneBy({ id })
+  }
+
   async createDefaultAccounts(user: User) {
     return await Promise.all(
       defaultAccounts.map(async (accountData) => {

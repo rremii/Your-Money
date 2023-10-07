@@ -59,6 +59,10 @@ export class CategoryService {
     return category
   }
 
+  async getCategoryById(id: number) {
+    return await this.categoryRepository.findOneBy({ id })
+  }
+
   async getCategories({ userId }: GetCategoriesDto) {
     return await this.categoryRepository.find({
       where: {

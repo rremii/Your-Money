@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common"
@@ -17,8 +18,10 @@ export class AccountHistoryController {
 
   @Get("")
   async getAccountHistoryByDateGap(
-    @Param() getAccountHistoryDto: GetAccountHistoryDto,
+    @Query() getAccountHistoryDto: GetAccountHistoryDto,
   ) {
+    console.log(getAccountHistoryDto)
+
     return this.accountHistoryService.getHistoryByDateGap(getAccountHistoryDto)
   }
 }

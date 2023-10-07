@@ -12,20 +12,49 @@ import { AccountHistoryService } from "../accountHistory/accountHistory.service"
 import { use } from "passport"
 import { EditTransactionDto } from "./dto/edit-transaction.dto"
 import { DeleteTransactionsDto } from "./dto/delete-transactions.dto"
+import { AccountService } from "../account/account.service"
+import { CategoryService } from "../category/category.service"
+import { UsersService } from "../users/users.service"
 
 @Injectable()
 export class TransactionService {
   constructor(
-    @InjectRepository(User)
-    private readonly usersRepository: Repository<User>,
-    @InjectRepository(Account)
-    private readonly accountRepository: Repository<Account>,
+    // @InjectRepository(User)
+    // private readonly usersRepository: Repository<User>,
+    // @InjectRepository(Account)
+    // private readonly accountRepository: Repository<Account>,
+    // @InjectRepository(Category)
+    // private readonly categoryRepository: Repository<Category>,
     @InjectRepository(Transaction)
     private readonly transactionRepository: Repository<Transaction>,
-    @InjectRepository(Category)
-    private readonly categoryRepository: Repository<Category>,
+
     private readonly accountHistoryService: AccountHistoryService,
+    private readonly accountService: AccountService,
+    private readonly categoryService: CategoryService,
+    private readonly usersService: UsersService,
   ) {}
+
+  private async getFreeDate(dateStr: string) {
+    const date = new Date(dateStr)
+
+    const dateBorder = new Date(date.getTime() + 1000).toISOString()
+
+    const latestPoint = await this.transactionRepository.findOne({
+      order: {
+        date: "DESC",
+      },
+      where: {
+        date: Between(dateStr, dateBorder),
+      },
+    })
+    console.log(latestPoint + "--- latest")
+    console.log(dateStr, dateBorder)
+    if (!latestPoint) return dateStr
+
+    const freeDateMs = new Date(latestPoint.date).getTime() + 10
+
+    return new Date(freeDateMs).toISOString()
+  }
 
   async createTransaction({
     userId,
@@ -36,15 +65,11 @@ export class TransactionService {
     categoryId,
     date,
   }: CreateTransactionDto): Promise<Transaction> {
-    const accountEntity = await this.accountRepository.findOneBy({
-      id: accountId,
-    })
-    const categoryEntity = await this.categoryRepository.findOneBy({
-      id: categoryId,
-    })
-    const userEntity = await this.usersRepository.findOneBy({
-      id: userId,
-    })
+    const accountEntity = await this.accountService.getAccountById(accountId)
+    const categoryEntity = await this.categoryService.getCategoryById(
+      categoryId,
+    )
+    const userEntity = await this.usersService.getUserById(userId)
 
     if (!accountEntity)
       throw new BadRequestException(ApiError.ACCOUNT_NOT_FOUND)
@@ -56,15 +81,16 @@ export class TransactionService {
     if (type === "income") newAccountBalance += quantity
     if (type === "expense") newAccountBalance -= quantity
 
+    const freeDate = await this.getFreeDate(date)
+
     const transaction = new Transaction()
     transaction.account = accountEntity
     transaction.user = userEntity
     transaction.category = categoryEntity
-    transaction.date = date
+    transaction.date = freeDate
     transaction.type = type
     transaction.quantity = quantity
     transaction.title = title
-    // transaction.accountBalance = newAccountBalance
 
     accountEntity.balance = newAccountBalance
 
@@ -75,20 +101,51 @@ export class TransactionService {
       transaction,
       accountEntity,
       userEntity,
-      date,
+      freeDate,
     )
 
     return transaction
   }
 
+  private async changeTransactionDate(
+    transaction: Transaction,
+    newDate: string,
+  ) {
+    const freeDate = await this.getFreeDate(newDate)
+    await this.accountHistoryService.changeHistoryPointDate(
+      transaction.id,
+      freeDate,
+      transaction.date,
+      transaction.type,
+      transaction.quantity,
+    )
+    transaction.date = freeDate
+    return transaction
+  }
+  private async changeTransactionQuantity(
+    transaction: Transaction,
+    newQuantity: number,
+  ) {
+    await this.accountHistoryService.changeHistoryPointBalance(
+      transaction.id,
+      transaction.quantity,
+      newQuantity,
+      transaction.type,
+    )
+    transaction.quantity = newQuantity
+    return transaction
+  }
+
+  //todo change account and category
   async editTransaction({
     quantity,
     id,
-    type,
     title,
     date,
+    categoryId,
+    accountId,
   }: EditTransactionDto) {
-    const transaction = await this.transactionRepository.findOne({
+    let transaction = await this.transactionRepository.findOne({
       relations: {
         accountHistoryPoint: true,
       },
@@ -98,26 +155,16 @@ export class TransactionService {
       throw new BadRequestException(ApiError.TRANSACTION_NOT_FOUND)
 
     if (date !== transaction.date)
-      await this.accountHistoryService.changeHistoryPointDate(
-        transaction.id,
-        date,
-        transaction.date,
-        type,
-        transaction.quantity,
-      )
-
+      transaction = await this.changeTransactionDate(transaction, date)
     if (transaction.quantity !== quantity)
-      await this.accountHistoryService.changeHistoryPointBalance(
-        transaction.id,
-        transaction.quantity,
-        quantity,
+      transaction = await this.changeTransactionQuantity(transaction, quantity)
+    if (transaction.accountId !== accountId)
+      transaction.account = await this.accountService.getAccountById(accountId)
+    if (transaction.categoryId !== categoryId)
+      transaction.category = await this.categoryService.getCategoryById(
+        categoryId,
       )
-
-    transaction.type = type
-    transaction.date = date
     transaction.title = title ? title : ""
-    transaction.type = type
-    transaction.quantity = quantity
 
     return await transaction.save()
   }
@@ -133,7 +180,6 @@ export class TransactionService {
       throw new BadRequestException(ApiError.TRANSACTION_NOT_FOUND)
     await transaction.remove()
 
-    // console.log(transaction)
     //todo do same to account
     await this.accountHistoryService.deleteHistoryPoint(
       transaction,

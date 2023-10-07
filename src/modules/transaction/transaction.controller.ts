@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
   UsePipes,
   ValidationPipe,
@@ -28,7 +29,7 @@ export class TransactionController {
     return this.transactionService.createTransaction(createTransactionDto)
   }
   @UsePipes(new ValidationPipe())
-  @Post("")
+  @Put("")
   async editTransaction(
     @Body() editTransactionDto: EditTransactionDto,
   ): Promise<Transaction> {

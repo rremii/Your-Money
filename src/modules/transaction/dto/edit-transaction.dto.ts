@@ -8,11 +8,19 @@ export class EditTransactionDto {
 
   @IsNumber()
   @IsNotEmpty()
+  accountId: number
+
+  @IsNumber()
+  @IsNotEmpty()
+  categoryId: number
+
+  @IsNumber()
+  @IsNotEmpty()
   quantity: number
 
-  @IsString()
-  @IsNotEmpty()
-  type: TransactionType
+  // @IsString()
+  // @IsNotEmpty()
+  // type: TransactionType
 
   @IsString()
   @IsNotEmpty()
