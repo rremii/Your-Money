@@ -8,7 +8,7 @@ export interface ICategory {
 }
 
 //todo add dtos
-export interface CreateTransactionDto {
+export interface GetTransactionDto {
   dateFrom: string
   dateTo: string
   userId?: number
@@ -31,3 +31,13 @@ export interface ITransaction {
 
 
 export type DateFilter = "day" | "week" | "month" | "year" | "allTime"
+
+export interface CreateTransDto {
+  accountId: number
+  userId: number
+  categoryId: number
+  date: string
+  quantity: number
+  type: TransactionType
+  title?: string
+}

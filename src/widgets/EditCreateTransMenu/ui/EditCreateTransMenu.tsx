@@ -17,12 +17,18 @@ import { ResultQuantity } from "@widgets/EditCreateTransMenu/ui/ResultQuantity.t
 import { Notes } from "@widgets/EditCreateTransMenu/ui/NotesInput.tsx"
 import { TransDate } from "@shared/ui/TransDate.tsx"
 import { OptionsSection } from "@widgets/EditCreateTransMenu/ui/OptionsSection.tsx"
+import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
+import {
+  useCreateTransactionMutation,
+  useLazyGetTransactionsByDateGapQuery
+} from "@entities/Transaction/api/TransactionApi.ts"
 
 export const EditCreateTransMenu = React.memo(() => {
   const dispatch = useAppDispatch()
 
   const isMenuOpen = useTypedSelector(state => state.Modals.EditCreateTransMenu.isOpen)
   const menuType = useTypedSelector(state => state.Modals.EditCreateTransMenu.menuType)
+  const allTransDateGap = useTypedSelector(state => state.Date.allTransDateGap)
 
   const curAccId = useTypedSelector(state => state.CurAccount.id)
 
@@ -30,6 +36,7 @@ export const EditCreateTransMenu = React.memo(() => {
   const account = useTypedSelector(state => state.EditCreateTransaction.ChosenAccount)
 
   const title = useTypedSelector(state => state.EditCreateTransaction.Transaction.title)
+  const quantity = useTypedSelector(state => state.EditCreateTransaction.Calculator.quantity)
   const dateStr = useTypedSelector(state => state.EditCreateTransaction.Transaction.dateStr)
   const category = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory)
 
@@ -59,6 +66,22 @@ export const EditCreateTransMenu = React.memo(() => {
     dispatch(setChooseAccountMenu(true))
     if (menuType === "overview")
       dispatch(setEditCreateMenuType("edit"))
+  }
+
+  const [createTransaction, { isLoading }] = useCreateTransactionMutation()
+  const [getTransactions] = useLazyGetTransactionsByDateGapQuery()
+
+  const CreateTransaction = async () => {
+    if (!user?.id || !account.id || !category.id) return
+
+    await createTransaction({
+      type, title, accountId: account.id, categoryId: category.id, quantity, userId: user.id, date: dateStr
+    })
+
+
+    if (IsDateBetween(allTransDateGap.dateFrom, dateStr, allTransDateGap.dateTo, "both"))
+      await getTransactions({ userId: user.id, dateFrom: allTransDateGap.dateFrom, dateTo: allTransDateGap.dateTo })
+
   }
 
   return <>

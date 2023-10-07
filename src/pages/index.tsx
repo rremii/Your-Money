@@ -20,6 +20,7 @@ import SignUpInfo from "./SignUp/SignUpInfo.tsx"
 import { usePreloader } from "@shared/hooks/usePreloader.tsx"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
+import { useAccount } from "@entities/Account/model/useAccount.tsx"
 
 export const Routing = () => {
 
@@ -28,6 +29,8 @@ export const Routing = () => {
 
   usePreloader()
   useCategory(user?.id)
+  useAccount(user?.id)
+
   return (
     <>
       <AppLayout>

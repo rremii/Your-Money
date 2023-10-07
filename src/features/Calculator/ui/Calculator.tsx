@@ -13,6 +13,7 @@ import {
 import { OperationBtn } from "@features/Calculator/ui/OperationBtn.tsx"
 import { DigitBtn } from "@features/Calculator/ui/DigitBtn.tsx"
 import { SubmitBtn } from "@features/Calculator/ui/SubmitBtn.tsx"
+import { useCreateTransactionMutation } from "@entities/Transaction/api/TransactionApi.ts"
 
 
 interface ICalculatorBtn {

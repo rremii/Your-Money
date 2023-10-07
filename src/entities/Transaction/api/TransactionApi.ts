@@ -1,29 +1,40 @@
 import { Api } from "@shared/api/config/Api.ts"
-import { CreateTransactionDto, ITransaction } from "@entities/Transaction/types.ts"
+import { GetTransactionDto, ITransaction } from "@entities/Transaction/types.ts"
+import { DefaultResponse } from "@entities/Auth/types.ts"
+import { CreateTransDto } from "@entities/Transaction/types.ts"
 
+//todo create historyAccountPoint module
 export const TransactionApi = Api.injectEndpoints({
 
   endpoints: (build) => ({
 
-    GetTransactionsByDateGap: build.query<ITransaction[], CreateTransactionDto>({
+    GetTransactionsByDateGap: build.query<ITransaction[], GetTransactionDto>({
       query: (transactionDto) => ({
         url: "transaction",
         method: "GET",
         params: transactionDto
       }),
       providesTags: ["Transactions"]
-    })
+    }),
 
-
-    //
-    // ChangeName: build.mutation<DefaultResponse, ChangeName>({
-    //   query: (data) => ({
-    //     url: "users/name",
-    //     method: "PUT",
-    //     data
+    // GetTransactionsByDateGap: build.query<ITransaction[], GetTransactionDto>({
+    //   query: (transactionDto) => ({
+    //     url: "transaction",
+    //     method: "GET",
+    //     params: transactionDto
     //   }),
-    //   invalidatesTags: ["User"]
+    //   providesTags: ["Transactions"]
     // }),
+
+
+    createTransaction: build.mutation<DefaultResponse, CreateTransDto>({
+      query: (data) => ({
+        url: "transaction",
+        method: "POST",
+        data
+      }),
+      invalidatesTags: ["User"]
+    })
     //
     // ChangePassword: build.mutation<DefaultResponse, ChangePassword>({
     //   query: (data) => ({
@@ -41,5 +52,7 @@ export const TransactionApi = Api.injectEndpoints({
 // export const {} = TransactionApi.endpoints
 
 export const {
-  useGetTransactionsByDateGapQuery
+  useGetTransactionsByDateGapQuery,
+  useCreateTransactionMutation,
+  useLazyGetTransactionsByDateGapQuery
 } = TransactionApi
