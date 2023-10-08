@@ -11,19 +11,21 @@ import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.
 import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
+import { GetMe } from "@entities/User/api/UserApi.ts"
 
 interface props extends ITransaction {
 
 }
 
 export const Transaction: FC<props> = (transaction) => {
-  const { quantity, type, title, accountId, categoryId, id, date, userId } = transaction
+  const { quantity, type, title, accountId, categoryId, id, date } = transaction
 
   const dispatch = useAppDispatch()
 
 
-  const { getAccountById } = useAccount(userId)
-  const { getCategoryById } = useCategory(userId)
+  const { data: user } = GetMe.useQueryState()
+  const { getAccountById } = useAccount(user?.id)
+  const { getCategoryById } = useCategory(user?.id)
   const account = getAccountById(accountId)
   const category = getCategoryById(categoryId)
 
@@ -48,10 +50,10 @@ export const Transaction: FC<props> = (transaction) => {
 
   return <TransactionLayout onClick={OnClick} $type={type}>
     <div className="icon">
-      <img src={CategoriesIcons.get(category.icon)} alt="transaction icon" />
+      <img src={CategoriesIcons.get(category && category.icon)} alt="transaction icon" />
     </div>
     <div className="info">
-      <p className="category">{category.name}</p>
+      <p className="category">{category && category.name}</p>
       <div className="account-info">
         <img src={Account} alt="account type" />
         <p>{account?.name}</p>
@@ -130,7 +132,7 @@ const TransactionLayout = styled.div<{
   }
 
   .quantity {
-    
+
     align-self: flex-start;
     color: ${({ $type }) => $type === "expense" ? "var(--txt-8)" : "var(--txt-10)"};
     font-family: Inter, sans-serif;

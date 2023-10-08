@@ -58,11 +58,10 @@ const CalculatorSlice = createSlice({
         state.numberStr2 = num2.slice(0, -1)
       else if (operator)
         state.operator = null
-      else if (num1)
+      else if (num1) {
         state.numberStr1 = num1.slice(0, -1)
-      else if (quantityStr)
         state.quantity = +quantityStr.slice(0, -1)
-      else state.quantity = 0
+      } else state.quantity = 0
     },
     addToNum(state, action: PayloadAction<number | string>) {
 
@@ -80,6 +79,7 @@ const CalculatorSlice = createSlice({
       if (!operator) {
         const joinedNum = num1 + String(action.payload)
         state.numberStr1 = joinedNum
+        state.quantity = +joinedNum
       } else {
         const joinedNum = num2 + String(action.payload)
         state.numberStr2 = joinedNum

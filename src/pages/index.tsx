@@ -21,6 +21,7 @@ import { usePreloader } from "@shared/hooks/usePreloader.tsx"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
+import { useAccountHistoryPoints } from "@entities/AccountHistoryPoint/model/useAccountHistoryPoints.ts"
 
 export const Routing = () => {
 
@@ -30,6 +31,7 @@ export const Routing = () => {
   usePreloader()
   useCategory(user?.id)
   useAccount(user?.id)
+  useAccountHistoryPoints(user?.id)
 
   return (
     <>

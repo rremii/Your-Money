@@ -7,9 +7,10 @@ interface props {
   children: React.ReactNode
   OnClick: () => void
   bgColor: string
+  isLoading?: boolean
 }
 
-export const SubmitBtn: FC<props> = ({ bgColor, OnClick, children }) => {
+export const SubmitBtn: FC<props> = ({ bgColor, OnClick, children, isLoading }) => {
 
   return <SubmitBtnLayout $borderColor={"transparent"} onClick={OnClick}
                           $bgColor={bgColor}>

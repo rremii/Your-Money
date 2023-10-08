@@ -4,24 +4,26 @@ import { ITransaction } from "@entities/Transaction/types.ts"
 
 
 interface props {
-  dateFrom: Date
-  dateTo: Date
-  transactions: ITransaction[]
+  startBalance: number
+  endBalance: number
 }
 
-export const TransactionHeader: FC<props> = React.memo(({ dateFrom, dateTo }) => {
+const GetNumberSignStyle = (num: number) => {
+  if (num > 0) return "positive"
+  if (num < 0) return "negative"
+  return "zero"
+}
 
-
-  // const { startBalance, endBalance } = GetAccBalanceByTimeGap({ allAccounts, curAccHistory, dateTo, dateFrom })
+export const TransactionHeader: FC<props> = React.memo(({ startBalance, endBalance }) => {
 
   return <TransactionsHeaderLayout>
     <div className="balance-cell">
       <h2>Starting balance</h2>
-      <p>-Br {0}</p>
+      <p className={GetNumberSignStyle(startBalance)}>{startBalance < 0 ? "-" : ""}Br {startBalance}</p>
     </div>
     <div className="balance-cell">
       <h2>Ending balance</h2>
-      <p>-Br {0}</p>
+      <p className={GetNumberSignStyle(endBalance)}>{endBalance < 0 ? "-" : ""}Br {endBalance}</p>
     </div>
   </TransactionsHeaderLayout>
 })
@@ -50,6 +52,19 @@ const TransactionsHeaderLayout = styled.header`
     background-color: var(--bg-5);
   }
 
+
+  .zero {
+    color: var(var(--txt-2));
+  }
+
+  .negative {
+    color: var(--txt-8);
+  }
+
+  .positive {
+    color: var(--txt-10);
+  }
+
   .balance-cell {
 
     h2 {
@@ -61,13 +76,15 @@ const TransactionsHeaderLayout = styled.header`
       line-height: normal;
     }
 
+
     p {
-      color: var(--txt-8);
       font-family: Inter;
       font-size: 15px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
     }
+
+
   }
 `

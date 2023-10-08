@@ -8,14 +8,12 @@ export const useGetTransactions = (userId?: number) => {
   const curAccId = useTypedSelector(state => state.CurAccount.id)
   const allTransDateGap = useTypedSelector(state => state.Date.allTransDateGap)
 
-  //todo fix
-  const { data: user } = GetMe.useQueryState()
 
   const { data: transactions } = useGetTransactionsByDateGapQuery({
     ...allTransDateGap,
-    userId: user?.id
+    userId
   }, {
-    skip: !user?.id
+    skip: !userId
   })
 
   let allTransactions = transactions || [] as ITransaction[]

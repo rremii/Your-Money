@@ -5,25 +5,20 @@ import { TransactionSectionByDate } from "@widgets/TransactionsMenu/ui/Transacti
 import { GetTransactionsMenuData } from "@widgets/TransactionsMenu/model/GetTransactionsMenuData.ts"
 import { ITransaction } from "@entities/Transaction/types.ts"
 import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
+import { MenuWithHistory } from "@widgets/TransactionsMenu/model/AddHistoryPointsToMenus.ts"
 
-interface props {
-  menuId: number
-  dateGap: string
-  transactions: ITransaction[]
-  dateFrom: Date
-  dateTo: Date
+interface props extends MenuWithHistory {
+
 }
 
-export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId, dateTo, dateFrom }) => {
-
+export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId, startBalance, endBalance }) => {
 
   const { observeRef } = useOnMenuSlide(dateGap, menuId)
-
 
   const transactionsMenuData = useMemo(() => GetTransactionsMenuData(transactions), [transactions])
 
   return <TransactionsLayout ref={observeRef}>
-    <TransactionHeader transactions={transactions} dateFrom={dateFrom} dateTo={dateTo} />
+    <TransactionHeader startBalance={startBalance} endBalance={endBalance} />
     {transactionsMenuData.map((sectionData) => (
       <TransactionSectionByDate key={sectionData.date.getDate()} {...sectionData} />
     ))}

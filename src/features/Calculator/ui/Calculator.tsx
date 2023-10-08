@@ -23,10 +23,12 @@ interface ICalculatorBtn {
 
 interface props {
   color: string
+  OnSubmit: () => void
+  isLoading: boolean
 }
 
 
-export const Calculator: FC<props> = ({ color }) => {
+export const Calculator: FC<props> = ({ color, OnSubmit, isLoading }) => {
   const dispatch = useAppDispatch()
 
   const operator = useTypedSelector(state => state.EditCreateTransaction.Calculator.operator)
@@ -39,10 +41,6 @@ export const Calculator: FC<props> = ({ color }) => {
     dispatch(calcCalculatorQuantity())
   }
 
-  const OnResultClick = () => {
-
-
-  }
 
   const RemoveLastNum = () => {
     dispatch(removeLastNumber())
@@ -101,7 +99,7 @@ export const Calculator: FC<props> = ({ color }) => {
       ))}
       {operator ?
         <SubmitBtn bgColor={color} OnClick={CalcQuantity}>=</SubmitBtn> :
-        <SubmitBtn bgColor={color} OnClick={OnResultClick}>Ok</SubmitBtn>}
+        <SubmitBtn bgColor={color} isLoading={isLoading} OnClick={OnSubmit}>Ok</SubmitBtn>}
     </div>
   </CalculatorLayout>
 }

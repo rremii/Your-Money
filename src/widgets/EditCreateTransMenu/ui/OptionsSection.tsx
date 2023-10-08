@@ -1,9 +1,10 @@
 import styled from "styled-components"
 import Category from "@shared/assets/LightTheme/categories.png"
 import { FC } from "react"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { setEditCreateMenuType } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
 import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
+import { useDeleteTransactionMutation } from "@entities/Transaction/api/TransactionApi.ts"
 
 interface props {
   color: string
@@ -12,6 +13,11 @@ interface props {
 export const OptionsSection: FC<props> = ({ color }) => {
   const dispatch = useAppDispatch()
 
+
+  const transId = useTypedSelector(state => state.EditCreateTransaction.Transaction.id)
+
+  const [deleteTrans, { isLoading }] = useDeleteTransactionMutation()
+
   const OnDuplicateClick = () => {
     dispatch(setEditCreateMenuType("create"))
   }
@@ -19,10 +25,17 @@ export const OptionsSection: FC<props> = ({ color }) => {
     dispatch(setEditCreateMenuType("edit"))
     dispatch(setChangeDateMenu(true))
   }
+  const OnDeleteClick = async () => {
+    if (!transId) return
+
+    await deleteTrans(transId)
+
+    dispatch(setEditCreateTransMenu(false))
+  }
 
 
   return <OptionsLayout $color={color}>
-    <div className="option delete">
+    <div onClick={OnDeleteClick} className="option delete">
       <div className="icon">
         <img src={Category} alt="delete" />
       </div>

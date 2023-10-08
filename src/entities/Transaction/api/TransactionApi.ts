@@ -17,34 +17,22 @@ export const TransactionApi = Api.injectEndpoints({
       providesTags: ["Transactions"]
     }),
 
-    // GetTransactionsByDateGap: build.query<ITransaction[], GetTransactionDto>({
-    //   query: (transactionDto) => ({
-    //     url: "transaction",
-    //     method: "GET",
-    //     params: transactionDto
-    //   }),
-    //   providesTags: ["Transactions"]
-    // }),
-
-
     createTransaction: build.mutation<DefaultResponse, CreateTransDto>({
       query: (data) => ({
         url: "transaction",
         method: "POST",
         data
       }),
-      invalidatesTags: ["User"]
+      invalidatesTags: ["Transactions"]
+    }),
+    deleteTransaction: build.mutation<DefaultResponse, number>({
+      query: (id) => ({
+        url: "transaction/" + id,
+        method: "DELETE"
+      }),
+      invalidatesTags: ["Transactions", "HistoryPoints"]
     })
-    //
-    // ChangePassword: build.mutation<DefaultResponse, ChangePassword>({
-    //   query: (data) => ({
-    //     url: "users/password",
-    //     method: "PUT",
-    //     data
-    //   }),
-    //   invalidatesTags: ["User"]
-    // })
-    //
+
 
   }),
   overrideExisting: false
@@ -54,5 +42,6 @@ export const TransactionApi = Api.injectEndpoints({
 export const {
   useGetTransactionsByDateGapQuery,
   useCreateTransactionMutation,
-  useLazyGetTransactionsByDateGapQuery
+  useLazyGetTransactionsByDateGapQuery,
+  useDeleteTransactionMutation
 } = TransactionApi
