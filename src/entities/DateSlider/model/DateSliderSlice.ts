@@ -10,6 +10,7 @@ interface initialState {
   curMenu: {
     dateGap: string
     id: number
+    dateFrom: string
   }
   dateFilter: DateFilter
   dateMenuIds: number[]
@@ -34,7 +35,7 @@ const DateSliderSlice = createSlice({
   name: "DateSliderSlice",
   initialState,
   reducers: {
-    setCurMenu(state, action: PayloadAction<{ dateGap: string, id: number }>) {
+    setCurMenu(state, action: PayloadAction<{ dateGap: string, id: number, dateFrom: string }>) {
       state.curMenu = action.payload
     },
     setAllTransDateGap(state, action: PayloadAction<{ dateFrom: string, dateTo: string }>) {

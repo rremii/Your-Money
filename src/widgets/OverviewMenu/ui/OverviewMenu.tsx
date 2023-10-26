@@ -26,7 +26,7 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)
 
-  const { observeRef } = useOnMenuSlide(dateGap, menuId)
+  const { observeRef } = useOnMenuSlide(dateGap, menuId, dateFrom)
 
   const { data: user } = GetMe.useQueryState()
   const { allCategories } = useCategory(user?.id)

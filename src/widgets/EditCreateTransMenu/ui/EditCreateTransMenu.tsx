@@ -50,7 +50,9 @@ export const EditCreateTransMenu = React.memo(() => {
 
     if (!curAccount) return
     dispatch(setAccount(curAccount))
+
   }, [allAccounts])
+
 
   const CloseMenu = () => {
     dispatch(setEditCreateTransMenu(false))
@@ -73,7 +75,6 @@ export const EditCreateTransMenu = React.memo(() => {
   const [getAccountHistory] = useLazyGetHistoryPointsByDateGapQuery()
 
   const CreateTransaction = async () => {
-    // debugger
     if (!user?.id || !account.id || !category.id) return
 
     await createTransaction({

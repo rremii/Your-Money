@@ -59,8 +59,9 @@ export const GetDatePointsAmount = (dateFrom: Date, dateTo: Date, filter: DateFi
 }
 
 export const GetTransByCategories = (categories: ICategory[], transactions: ITransaction[]) => {
-  return categories.map(({ name, color }) => {
-    const categoryTransactions = transactions.filter(({ category }) => category.name === name)
+
+  return categories.map(({ name, color, id }) => {
+    const categoryTransactions = transactions.filter(({ categoryId }) => categoryId === id)
     return {
       name, color, transactions: categoryTransactions
     }

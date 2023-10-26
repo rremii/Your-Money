@@ -21,11 +21,12 @@ export const AddHistoryPointsToMenus = (menus: ITransByMenu[], {
 
     let historyPoint: IAccountHistoryPoint | undefined
     for (let i = history.length; i > 0; i--) {
-      if (new Date(history[i - 1].date) <= menuDate) {
+      if (new Date(history[i - 1].date) < menuDate) {
         historyPoint = history[i - 1]
         break
       }
     }
+    // debugger
     return historyPoint?.balance || historyBorderLeft?.balance || 0
   }
 
@@ -34,7 +35,6 @@ export const AddHistoryPointsToMenus = (menus: ITransByMenu[], {
 
     const startBalance = GetPrevPoint(dateFrom)
     const endBalance = GetPrevPoint(dateTo)
-
 
     return {
       ...menuData, dateFrom, dateTo,

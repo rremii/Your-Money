@@ -23,7 +23,7 @@ interface props {
 export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactions, dateTo, dateFrom }) => {
 
   const { SwitchMenuType, menuType } = useMenuType()
-  const { observeRef } = useOnMenuSlide(dateGap, menuId)
+  const { observeRef } = useOnMenuSlide(dateGap, menuId, dateFrom)
 
   const { incTransactions, expTransactions } = useMemo(() => FilterTransByType(transactions), [transactions])
 
@@ -34,7 +34,6 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
   const expFilledCategories = useMemo(() => FillCategoriesWithTransactions(expCategories, expTransactions), [expTransactions])
   const incFilledCategories = useMemo(() => FillCategoriesWithTransactions(incCategories, incTransactions), [incTransactions])
 
-  // debugger
   return <CategoryLayout ref={observeRef}>
     <BalanceGraph
       menuType={menuType}

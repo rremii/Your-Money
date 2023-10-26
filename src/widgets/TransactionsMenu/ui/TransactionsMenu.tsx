@@ -11,9 +11,9 @@ interface props extends MenuWithHistory {
 
 }
 
-export const TransactionsMenu: FC<props> = ({ transactions, dateGap, menuId, startBalance, endBalance }) => {
+export const TransactionsMenu: FC<props> = ({ transactions, dateGap, dateFrom, menuId, startBalance, endBalance }) => {
 
-  const { observeRef } = useOnMenuSlide(dateGap, menuId)
+  const { observeRef } = useOnMenuSlide(dateGap, menuId, dateFrom)
 
   const transactionsMenuData = useMemo(() => GetTransactionsMenuData(transactions), [transactions])
 
