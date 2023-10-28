@@ -19,12 +19,13 @@ import { TransDate } from "@shared/ui/TransDate.tsx"
 import { OptionsSection } from "@widgets/EditCreateTransMenu/ui/OptionsSection.tsx"
 import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
 import {
-  useCreateTransactionMutation,
+  useCreateTransactionMutation, useEditTransactionMutation,
   useLazyGetTransactionsByDateGapQuery
 } from "@entities/Transaction/api/TransactionApi.ts"
 import { resetEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { resetChosenCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
 import { useLazyGetHistoryPointsByDateGapQuery } from "@entities/AccountHistoryPoint/api/AccountHistoryPointApi.ts"
+import { resetTransCalculator } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 
 export const EditCreateTransMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -34,6 +35,7 @@ export const EditCreateTransMenu = React.memo(() => {
   const allTransDateGap = useTypedSelector(state => state.Date.allTransDateGap)
   const curAccId = useTypedSelector(state => state.CurAccount.id)
   const type = useTypedSelector(state => state.EditCreateTransaction.Transaction.type)
+  const transactionId = useTypedSelector(state => state.EditCreateTransaction.Transaction.id)
   const account = useTypedSelector(state => state.EditCreateTransaction.ChosenAccount)
   const title = useTypedSelector(state => state.EditCreateTransaction.Transaction.title)
   const quantity = useTypedSelector(state => state.EditCreateTransaction.Calculator.quantity)
@@ -57,6 +59,9 @@ export const EditCreateTransMenu = React.memo(() => {
   const CloseMenu = () => {
     dispatch(setEditCreateTransMenu(false))
     dispatch(setEditCreateMenuType(menuType))
+    dispatch(resetEditTransaction())
+    dispatch(resetTransCalculator())
+
   }
 
   const OpenChooseCategoryMenu = () => {
@@ -70,9 +75,11 @@ export const EditCreateTransMenu = React.memo(() => {
       dispatch(setEditCreateMenuType("edit"))
   }
 
-  const [createTransaction, { isLoading }] = useCreateTransactionMutation()
-  const [getTransactions] = useLazyGetTransactionsByDateGapQuery()
-  const [getAccountHistory] = useLazyGetHistoryPointsByDateGapQuery()
+  const [createTransaction, { isLoading: isCreating }] = useCreateTransactionMutation()
+  const [editTransaction, { isLoading: isEditting }] = useEditTransactionMutation()
+
+  // const [getTransactions] = useLazyGetTransactionsByDateGapQuery()
+  // const [getAccountHistory] = useLazyGetHistoryPointsByDateGapQuery()
 
   const CreateTransaction = async () => {
     if (!user?.id || !account.id || !category.id) return
@@ -82,18 +89,37 @@ export const EditCreateTransMenu = React.memo(() => {
     })
 
 
-    if (IsDateBetween(allTransDateGap.dateFrom, dateStr, allTransDateGap.dateTo, "both")) {
-      //todo change to trigger func from rtk
-      await getTransactions({ userId: user.id, dateFrom: allTransDateGap.dateFrom, dateTo: allTransDateGap.dateTo })
-      await getAccountHistory({ userId: user.id, dateFrom: allTransDateGap.dateFrom, dateTo: allTransDateGap.dateTo })
-    }
+    // if (IsDateBetween(allTransDateGap.dateFrom, dateStr, allTransDateGap.dateTo, "both")) {
+    //   //todo change to trigger func from rtk
+    //   await getTransactions({ userId: user.id, dateFrom: allTransDateGap.dateFrom, dateTo: allTransDateGap.dateTo })
+    //   await getAccountHistory({ userId: user.id, dateFrom: allTransDateGap.dateFrom, dateTo: allTransDateGap.dateTo })
+    // }
 
-    dispatch(resetEditTransaction())
-    dispatch(setEditCreateTransMenu(false))
+    CloseMenu()
+  }
+
+  const EditTransaction = async () => {
+    if (!transactionId || !account.id || !category.id) return
+
+    await editTransaction({
+      id: transactionId,
+      accountId: account.id,
+      categoryId: category.id,
+      type,
+      title,
+      quantity,
+      date: dateStr
+    })
+
+    CloseMenu()
+
   }
 
   const OnSubmit = async () => {
-    await CreateTransaction()
+    if (menuType === "create")
+      await CreateTransaction()
+    if (menuType === "edit")
+      await EditTransaction()
   }
 
   return <>
@@ -120,7 +146,8 @@ export const EditCreateTransMenu = React.memo(() => {
 
       <Notes content={title} />
 
-      {menuType !== "overview" && <Calculator isLoading={isLoading} OnSubmit={OnSubmit} color={category.color} />}
+      {menuType !== "overview" &&
+        <Calculator isLoading={isEditting || isCreating} OnSubmit={OnSubmit} color={category.color} />}
       <TransDate dateStr={dateStr} />
       {menuType === "overview" && <OptionsSection color={category.color} />}
     </MenuLayout>

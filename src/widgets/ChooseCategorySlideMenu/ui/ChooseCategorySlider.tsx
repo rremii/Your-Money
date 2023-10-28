@@ -34,12 +34,12 @@ export const ChooseCategorySlider: FC<props> = ({ onScroll }) => {
     const scrollPercent = Math.round(curScroll / width) * 100
 
     if (scrollPercent > 50) {
-      dispatch(setEditTransType("expense"))
+      // dispatch(setEditTransType("expense"))
       onScroll(scrollPercent)
     }
     if (scrollPercent <= 50) {
       onScroll(scrollPercent)
-      dispatch(setEditTransType("income"))
+      // dispatch(setEditTransType("income"))
     }
   }
 

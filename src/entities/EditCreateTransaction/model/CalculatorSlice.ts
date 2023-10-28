@@ -112,6 +112,12 @@ const CalculatorSlice = createSlice({
     },
     setEditTransQuantity(state, action: PayloadAction<number>) {
       state.quantity = action.payload
+    },
+    resetTransCalculator(state) {
+      state.quantity = 0
+      state.numberStr2 = ""
+      state.numberStr1 = ""
+      state.operator = null
     }
 
   }
@@ -123,5 +129,6 @@ export const {
   calcCalculatorQuantity,
   setEditTransQuantity,
   setOperator,
+  resetTransCalculator,
   addToNum
 } = CalculatorSlice.actions

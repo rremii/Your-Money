@@ -1,5 +1,5 @@
 import { Api } from "@shared/api/config/Api.ts"
-import { GetTransactionDto, ITransaction } from "@entities/Transaction/types.ts"
+import { EditTransDto, GetTransactionDto, ITransaction } from "@entities/Transaction/types.ts"
 import { DefaultResponse } from "@entities/Auth/types.ts"
 import { CreateTransDto } from "@entities/Transaction/types.ts"
 
@@ -23,8 +23,19 @@ export const TransactionApi = Api.injectEndpoints({
         method: "POST",
         data
       }),
-      invalidatesTags: ["Transactions"]
+      invalidatesTags: ["Transactions", "HistoryPoints"]
     }),
+
+    editTransaction: build.mutation<DefaultResponse, EditTransDto>({
+      query: (data) => ({
+        url: "transaction",
+        method: "PUT",
+        data
+      }),
+      invalidatesTags: ["Transactions", "HistoryPoints"]
+    }),
+
+
     deleteTransaction: build.mutation<DefaultResponse, number>({
       query: (id) => ({
         url: "transaction/" + id,
@@ -42,6 +53,7 @@ export const TransactionApi = Api.injectEndpoints({
 export const {
   useGetTransactionsByDateGapQuery,
   useCreateTransactionMutation,
+  useEditTransactionMutation,
   useLazyGetTransactionsByDateGapQuery,
   useDeleteTransactionMutation
 } = TransactionApi

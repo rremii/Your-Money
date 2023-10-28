@@ -26,7 +26,7 @@ export const AddHistoryPointsToMenus = (menus: ITransByMenu[], {
         break
       }
     }
-    // debugger
+
     return historyPoint?.balance || historyBorderLeft?.balance || 0
   }
 

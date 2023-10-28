@@ -6,6 +6,7 @@ import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
 import { setChooseCategorySlideMenu } from "@entities/Modals/model/ChooseCategorySlideMenuSlice.ts"
 import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
+import { setEditTransType } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 
 
 interface props {
@@ -18,6 +19,7 @@ export const CategorySliderMenu: FC<props> = ({ categories }) => {
 
   const SetCategory = (category: ICategory) => {
     dispatch(setCategory(category))
+    dispatch(setEditTransType(category.type))
     dispatch(setChooseCategorySlideMenu(false))
 
     dispatch(setEditCreateMenuType("create"))

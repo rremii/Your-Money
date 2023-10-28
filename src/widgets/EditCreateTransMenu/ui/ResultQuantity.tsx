@@ -23,7 +23,7 @@ export const ResultQuantity: FC<props> = ({ type, color }) => {
 
 
   let quantityStr: string
-  if (!numberStr1) quantityStr = "" + quantity
+  if (!numberStr1 || menuType === "overview") quantityStr = "" + quantity
   else
     quantityStr = operator ? numberStr1 + " " + MathOperatorSign.get(operator) + " " + numberStr2 : numberStr1
 

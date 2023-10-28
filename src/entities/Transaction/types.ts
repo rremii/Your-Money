@@ -39,3 +39,14 @@ export interface CreateTransDto {
   type: TransactionType
   title?: string
 }
+
+export interface EditTransDto {
+  id: number
+  accountId: number
+  categoryId: number
+  quantity: number
+  type: TransactionType
+  title?: string
+  date: string
+}
+

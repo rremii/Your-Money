@@ -21,10 +21,12 @@ export const OptionsSection: FC<props> = ({ color }) => {
   const OnDuplicateClick = () => {
     dispatch(setEditCreateMenuType("create"))
   }
+
   const OnDateClick = () => {
     dispatch(setEditCreateMenuType("edit"))
     dispatch(setChangeDateMenu(true))
   }
+
   const OnDeleteClick = async () => {
     if (!transId) return
 
