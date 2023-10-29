@@ -20,8 +20,6 @@ export class AccountHistoryController {
   async getAccountHistoryByDateGap(
     @Query() getAccountHistoryDto: GetAccountHistoryDto,
   ) {
-    console.log(getAccountHistoryDto)
-
     return this.accountHistoryService.getHistoryByDateGap(getAccountHistoryDto)
   }
 }

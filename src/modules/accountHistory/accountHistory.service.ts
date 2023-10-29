@@ -228,6 +228,9 @@ export class AccountHistoryService {
   }: GetAccountHistoryDto) {
     if (dateTo && dateFrom) {
       const history = await this.accountHistoryRepository.find({
+        order: {
+          date: "ASC",
+        },
         where: {
           date: Between(dateFrom, dateTo),
           user: {
@@ -262,6 +265,9 @@ export class AccountHistoryService {
       }
     } else {
       return await this.accountHistoryRepository.find({
+        order: {
+          date: "ASC",
+        },
         where: {
           user: {
             id: userId,

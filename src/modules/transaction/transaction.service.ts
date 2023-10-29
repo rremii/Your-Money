@@ -154,10 +154,16 @@ export class TransactionService {
     if (!transaction)
       throw new BadRequestException(ApiError.TRANSACTION_NOT_FOUND)
 
-    if (date !== transaction.date)
+    if (date !== transaction.date) {
       transaction = await this.changeTransactionDate(transaction, date)
-    if (transaction.quantity !== quantity)
+      // await transaction.save()
+      console.log("date edit")
+    }
+    if (transaction.quantity !== quantity) {
       transaction = await this.changeTransactionQuantity(transaction, quantity)
+      // await transaction.save()
+      console.log("quantity edit")
+    }
     if (transaction.accountId !== accountId)
       transaction.account = await this.accountService.getAccountById(accountId)
     if (transaction.categoryId !== categoryId)
