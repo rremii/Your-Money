@@ -5,9 +5,7 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
 import { setChooseAccountMenu } from "@entities/Modals/model/ChooseAccountMenuClice.ts"
 
-interface props extends IAccount {
-
-}
+type props = IAccount
 
 export const ChooseAccount: FC<props> = (account) => {
   const { name, color, icon, id, balance } = account

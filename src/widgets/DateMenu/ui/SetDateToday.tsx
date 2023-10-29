@@ -2,10 +2,10 @@ import Category from "@shared/assets/LightTheme/categories.png"
 import React from "react"
 import { PickDateBtn } from "@widgets/DateMenu/ui/PickDateBtn.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { Months } from "@shared/helpers/TimeGap.ts"
 import { IsToday } from "@shared/helpers/IsToday.ts"
 import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
+import { Months } from "@shared/constants/Months.ts"
 
 
 export const SetDateToday = () => {

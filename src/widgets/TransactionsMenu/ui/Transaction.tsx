@@ -13,9 +13,7 @@ import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 
-interface props extends ITransaction {
-
-}
+type props = ITransaction
 
 export const Transaction: FC<props> = (transaction) => {
   const { quantity, type, title, accountId, categoryId, id, date } = transaction

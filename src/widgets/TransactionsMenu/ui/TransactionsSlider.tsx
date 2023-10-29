@@ -28,9 +28,6 @@ export const TransactionsSlider = memo(() => {
 
   const menusWithHistory = AddHistoryPointsToMenus(transByMenus, historyPointsData)
 
-  // useEffect(() => {
-  //   menusWithHistory
-  // }, [historyPointsData.history])
 
   return <SliderLayout id="slider" ref={sliderRef} onScroll={OnScroll}>
     {menusWithHistory.map((menuData) => (

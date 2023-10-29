@@ -1,10 +1,10 @@
 import styled from "styled-components"
 import { FC, useContext } from "react"
-import { Months } from "@shared/helpers/TimeGap.ts"
 import { DatesEqualUpToDays } from "@shared/helpers/DatesEqualUpToDays.ts"
 import { GetMonthDays } from "@shared/modules/Calendar/model/GetMonthDays.ts"
 import { setCurCalendarDate } from "@shared/modules/Calendar/model/Actions.ts"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
+import { Months } from "@shared/constants/Months.ts"
 
 
 interface props {

@@ -1,8 +1,7 @@
 import { ITransByMenu } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import { GetHistoryPointsResponse, IAccountHistoryPoint } from "@entities/AccountHistoryPoint/types.ts"
 
-interface HistoryData extends GetHistoryPointsResponse {
-}
+type HistoryData = GetHistoryPointsResponse
 
 export interface MenuWithHistory extends ITransByMenu {
   startBalance: number

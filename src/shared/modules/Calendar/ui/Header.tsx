@@ -1,9 +1,10 @@
 import styled from "styled-components"
 import { useContext } from "react"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
-import { Days, Months } from "@shared/helpers/TimeGap.ts"
 import { CalendarType } from "@shared/modules/Calendar/types.ts"
 import { setCalendarType } from "@shared/modules/Calendar/model/Actions.ts"
+import { Days } from "@shared/constants/Days.ts"
+import { Months } from "@shared/constants/Months.ts"
 
 export const Header = () => {
 

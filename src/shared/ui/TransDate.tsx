@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import React, { FC } from "react"
-import { FullDays, Months } from "@shared/helpers/TimeGap.ts"
+import { FullDays } from "@shared/constants/Days.ts"
+import { Months } from "@shared/constants/Months.ts"
 
 interface props {
   dateStr: string

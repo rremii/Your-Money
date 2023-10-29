@@ -4,8 +4,8 @@ import React from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { IsYesterday } from "@shared/helpers/IsYesterday.ts"
 import { IsToday } from "@shared/helpers/IsToday.ts"
-import { Months } from "@shared/helpers/TimeGap.ts"
 import { setCalendarMenu } from "@entities/Modals/model/CalendarMenuSlice.ts"
+import { Months } from "@shared/constants/Months.ts"
 
 
 export const OpenCalendar = () => {

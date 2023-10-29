@@ -6,9 +6,7 @@ import { GetTransactionsMenuData } from "@widgets/TransactionsMenu/model/GetTran
 import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
 import { MenuWithHistory } from "@widgets/TransactionsMenu/model/AddHistoryPointsToMenus.ts"
 
-interface props extends MenuWithHistory {
-
-}
+type props = MenuWithHistory
 
 export const TransactionsMenu: FC<props> = ({ transactions, dateGap, dateFrom, menuId, startBalance, endBalance }) => {
 
