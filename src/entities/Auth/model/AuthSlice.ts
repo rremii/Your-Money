@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
+export type loggedInType = "first loading" | "success" | "rejected"
+
 interface initialState {
-  isLoggedIn: "first loading" | "success" | "rejected"
+  isLoggedIn: loggedInType
   isPending: boolean
   email: string
   avatar: string

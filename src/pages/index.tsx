@@ -22,13 +22,16 @@ import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { useAccountHistoryPoints } from "@entities/AccountHistoryPoint/model/useAccountHistoryPoints.ts"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 export const Routing = () => {
 
   // useChangeTheme()
   const { data: user } = GetMe.useQueryState()
 
-  usePreloader()
+  const isLoggedIn = useTypedSelector(state => state.Auth.isLoggedIn)
+
+  usePreloader(isLoggedIn)
   useCategory(user?.id)
   useAccount(user?.id)
   useAccountHistoryPoints(user?.id)
