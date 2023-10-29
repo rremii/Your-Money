@@ -5,7 +5,7 @@ export const TransformDate = (curDate: Date) => {
 
   const date = curDate.getDate().toString().padStart(2, "0")
   let day = FullDays.get(curDate.getDay()) as string
-  const month = Months.get(curDate.getMonth())
+  const month = Months.get(curDate.getMonth()) as string
   const year = curDate.getFullYear().toString()
 
 

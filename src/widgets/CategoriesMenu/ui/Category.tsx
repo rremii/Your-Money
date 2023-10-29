@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import React, { FC } from "react"
-import { ICategory } from "@entities/Transaction/types.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
@@ -10,6 +9,7 @@ import { setEditTransaction } from "@entities/EditCreateTransaction/model/Transa
 import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
 import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
+import { ICategory } from "@entities/Category/type.ts"
 
 
 interface props extends ICategory {

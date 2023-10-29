@@ -1,5 +1,5 @@
 import { Api } from "@shared/api/config/Api.ts"
-import { IAccount } from "@entities/Account/constants/Accounts.ts"
+import { IAccount } from "@entities/Account/types.ts"
 
 export const AccountsApi = Api.injectEndpoints({
 

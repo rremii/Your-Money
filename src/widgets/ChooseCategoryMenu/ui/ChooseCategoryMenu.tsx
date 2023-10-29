@@ -8,9 +8,9 @@ import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
-import { ICategory } from "@entities/Transaction/types.ts"
 import { setChooseCategoryMenu } from "@entities/Modals/model/ChooseCategoryMenuSlice.ts"
 import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
+import { ICategory } from "@entities/Category/type.ts"
 
 export const ChooseCategoryMenu = React.memo(() => {
   const dispatch = useAppDispatch()

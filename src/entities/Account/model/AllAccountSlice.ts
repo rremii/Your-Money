@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { IAccount } from "@entities/Account/constants/Accounts.ts"
+import { IAccount } from "@entities/Account/types.ts"
 
 interface initialState {
   id: null

@@ -1,7 +1,7 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { DayType } from "@shared/helpers/TimeGap.ts"
 import { DateFilter } from "@entities/Transaction/types.ts"
 import { RootState } from "@shared/store/store.ts"
+import { DayType } from "@shared/constants/Days.ts"
 
 interface initialState {
   allTransDateGap: {

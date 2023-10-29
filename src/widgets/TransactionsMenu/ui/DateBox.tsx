@@ -17,7 +17,7 @@ export const DateBox: FC<props> = ({ date: curDate, dateBalance }) => {
     <p className="date">{date.toUpperCase()}</p>
     <div className="other-info">
       <p className="day">{day.toUpperCase()}</p>
-      <p className="month-year">{month?.toUpperCase()} {year}</p>
+      <p className="month-year">{month && month.toUpperCase()} {year}</p>
     </div>
     <div className="quantity">
       {dateBalance < 0 ? "-" : "+"}Br {Math.abs(dateBalance)}

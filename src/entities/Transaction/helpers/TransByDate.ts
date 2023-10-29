@@ -1,6 +1,7 @@
 import { ITransaction } from "@entities/Transaction/types.ts"
-import { DayType, timeGap } from "@shared/helpers/TimeGap.ts"
+import { timeGap } from "@shared/helpers/TimeGap.ts"
 import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
+import { DayType } from "@shared/constants/Days.ts"
 
 
 class TransByDate {

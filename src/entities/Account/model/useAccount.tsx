@@ -1,9 +1,9 @@
 import { useEffect } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { IAccount } from "@entities/Account/constants/Accounts.ts"
 import { setCurAccount, setCurAccountId } from "@entities/Account/model/CurAccountSlice.ts"
 import { useGetAccountsQuery } from "@entities/Account/api/AccountsApi.ts"
 import { setAllAccountBalance } from "@entities/Account/model/AllAccountSlice.ts"
+import { IAccount } from "@entities/Account/types.ts"
 
 export const useAccount = (userId?: number) => {
   const dispatch = useAppDispatch()

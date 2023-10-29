@@ -1,11 +1,13 @@
 import { Account } from "@shared/ui/Account.tsx"
-import { IAccount } from "@entities/Account/constants/Accounts.ts"
 import React, { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
 import { setChooseAccountMenu } from "@entities/Modals/model/ChooseAccountMenuClice.ts"
+import { IAccount } from "@entities/Account/types.ts"
 
-type props = IAccount
+
+interface props extends IAccount {
+}
 
 export const ChooseAccount: FC<props> = (account) => {
   const { name, color, icon, id, balance } = account
