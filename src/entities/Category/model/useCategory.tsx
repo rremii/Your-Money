@@ -1,7 +1,6 @@
 import { useGetCategoriesQuery } from "@entities/Category/api/CategoriesApi.ts"
-import { ICategory } from "@entities/Transaction/types.ts"
+import { ICategory } from "@entities/Category/type.ts"
 
-//todo
 export const useCategory = (userId?: number) => {
 
   const { data: allCategories } = useGetCategoriesQuery(userId, {

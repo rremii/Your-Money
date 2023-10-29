@@ -8,7 +8,7 @@ import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { Calculator } from "@features/Calculator/ui/Calculator.tsx"
-import { resetChosenAccount, setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
+import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
 import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
 import { setChooseCategoryMenu } from "@entities/Modals/model/ChooseCategoryMenuSlice.ts"
 import { setChooseAccountMenu } from "@entities/Modals/model/ChooseAccountMenuClice.ts"
@@ -17,14 +17,8 @@ import { ResultQuantity } from "@widgets/EditCreateTransMenu/ui/ResultQuantity.t
 import { Notes } from "@widgets/EditCreateTransMenu/ui/NotesInput.tsx"
 import { TransDate } from "@shared/ui/TransDate.tsx"
 import { OptionsSection } from "@widgets/EditCreateTransMenu/ui/OptionsSection.tsx"
-import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
-import {
-  useCreateTransactionMutation, useEditTransactionMutation,
-  useLazyGetTransactionsByDateGapQuery
-} from "@entities/Transaction/api/TransactionApi.ts"
+import { useCreateTransactionMutation, useEditTransactionMutation } from "@entities/Transaction/api/TransactionApi.ts"
 import { resetEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
-import { resetChosenCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
-import { useLazyGetHistoryPointsByDateGapQuery } from "@entities/AccountHistoryPoint/api/AccountHistoryPointApi.ts"
 import { resetTransCalculator } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 
 export const EditCreateTransMenu = React.memo(() => {
@@ -32,7 +26,6 @@ export const EditCreateTransMenu = React.memo(() => {
 
   const isMenuOpen = useTypedSelector(state => state.Modals.EditCreateTransMenu.isOpen)
   const menuType = useTypedSelector(state => state.Modals.EditCreateTransMenu.menuType)
-  const allTransDateGap = useTypedSelector(state => state.Date.allTransDateGap)
   const curAccId = useTypedSelector(state => state.CurAccount.id)
   const type = useTypedSelector(state => state.EditCreateTransaction.Transaction.type)
   const transactionId = useTypedSelector(state => state.EditCreateTransaction.Transaction.id)
@@ -61,7 +54,6 @@ export const EditCreateTransMenu = React.memo(() => {
     dispatch(setEditCreateMenuType(menuType))
     dispatch(resetEditTransaction())
     dispatch(resetTransCalculator())
-
   }
 
   const OpenChooseCategoryMenu = () => {
@@ -78,8 +70,6 @@ export const EditCreateTransMenu = React.memo(() => {
   const [createTransaction, { isLoading: isCreating }] = useCreateTransactionMutation()
   const [editTransaction, { isLoading: isEditting }] = useEditTransactionMutation()
 
-  // const [getTransactions] = useLazyGetTransactionsByDateGapQuery()
-  // const [getAccountHistory] = useLazyGetHistoryPointsByDateGapQuery()
 
   const CreateTransaction = async () => {
     if (!user?.id || !account.id || !category.id) return
@@ -87,13 +77,6 @@ export const EditCreateTransMenu = React.memo(() => {
     await createTransaction({
       type, title, accountId: account.id, categoryId: category.id, quantity, userId: user.id, date: dateStr
     })
-
-
-    // if (IsDateBetween(allTransDateGap.dateFrom, dateStr, allTransDateGap.dateTo, "both")) {
-    //   //todo change to trigger func from rtk
-    //   await getTransactions({ userId: user.id, dateFrom: allTransDateGap.dateFrom, dateTo: allTransDateGap.dateTo })
-    //   await getAccountHistory({ userId: user.id, dateFrom: allTransDateGap.dateFrom, dateTo: allTransDateGap.dateTo })
-    // }
 
     CloseMenu()
   }

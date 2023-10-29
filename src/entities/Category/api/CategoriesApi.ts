@@ -1,5 +1,5 @@
 import { Api } from "@shared/api/config/Api.ts"
-import { ICategory } from "@entities/Transaction/types.ts"
+import { ICategory } from "@entities/Category/type.ts"
 
 export const CategoriesApi = Api.injectEndpoints({
 
@@ -15,30 +15,9 @@ export const CategoriesApi = Api.injectEndpoints({
     })
 
 
-    //
-    // ChangeName: build.mutation<DefaultResponse, ChangeName>({
-    //   query: (data) => ({
-    //     url: "users/name",
-    //     method: "PUT",
-    //     data
-    //   }),
-    //   invalidatesTags: ["User"]
-    // }),
-    //
-    // ChangePassword: build.mutation<DefaultResponse, ChangePassword>({
-    //   query: (data) => ({
-    //     url: "users/password",
-    //     method: "PUT",
-    //     data
-    //   }),
-    //   invalidatesTags: ["User"]
-    // })
-    //
-
   }),
   overrideExisting: false
 })
-// export const {} = TransactionApi.endpoints
 
 export const {
   useGetCategoriesQuery

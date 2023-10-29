@@ -20,9 +20,9 @@ const axiosBaseQuery =
     async ({ url, method, data, params, withInterceptors = true }) => {
       try {
         let result
-        if (withInterceptors)
+        if (withInterceptors) {
           result = await $api({ url: baseUrl + url, method, data, params })
-        else
+        } else
           result = await $apiDefault({ url: baseUrl + url, method, data, params })
         return { data: result.data }
       } catch (axiosError) {

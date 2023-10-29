@@ -26,7 +26,8 @@ export const withAuth = (Component: FC) => () => {
 
   const isFinished = !isUninitialized && !isLoading
   return <>
-    {isFinished && <Component />}
+    {/*{isFinished && <Component />}*/}
+    {<Component />}
   </>
 
 }

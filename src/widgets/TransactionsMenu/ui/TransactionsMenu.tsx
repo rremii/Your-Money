@@ -3,7 +3,6 @@ import React, { FC, useMemo } from "react"
 import { TransactionHeader } from "@widgets/TransactionsMenu/ui/TransactionHeader.tsx"
 import { TransactionSectionByDate } from "@widgets/TransactionsMenu/ui/TransactionSectionByDate.tsx"
 import { GetTransactionsMenuData } from "@widgets/TransactionsMenu/model/GetTransactionsMenuData.ts"
-import { ITransaction } from "@entities/Transaction/types.ts"
 import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
 import { MenuWithHistory } from "@widgets/TransactionsMenu/model/AddHistoryPointsToMenus.ts"
 

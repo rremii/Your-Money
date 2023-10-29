@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import React, { FC } from "react"
-import { ITransaction } from "@entities/Transaction/types.ts"
 
 
 interface props {

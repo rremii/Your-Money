@@ -15,35 +15,12 @@ export const AccountsApi = Api.injectEndpoints({
     })
 
 
-    //
-    // ChangeName: build.mutation<DefaultResponse, ChangeName>({
-    //   query: (data) => ({
-    //     url: "users/name",
-    //     method: "PUT",
-    //     data
-    //   }),
-    //   invalidatesTags: ["User"]
-    // }),
-    //
-    // ChangePassword: build.mutation<DefaultResponse, ChangePassword>({
-    //   query: (data) => ({
-    //     url: "users/password",
-    //     method: "PUT",
-    //     data
-    //   }),
-    //   invalidatesTags: ["User"]
-    // })
-    //
-
   }),
   overrideExisting: false
 })
-// export const {} = TransactionApi.endpoints
 
-export const { GetAccounts } = AccountsApi.endpoints
 
 export const {
-  useLazyGetAccountsQuery,
   useGetAccountsQuery
 } = AccountsApi
 

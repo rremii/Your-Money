@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { DayType } from "@shared/helpers/TimeGap.ts"
 import { DateFilter } from "@entities/Transaction/types.ts"
+import { RootState } from "@shared/store/store.ts"
 
 interface initialState {
   allTransDateGap: {
@@ -75,3 +76,7 @@ const DateSliderSlice = createSlice({
 export const DateReducer = DateSliderSlice.reducer
 export const { setAllTransDateGap, setCurMenu, shiftTransMenuIdsLeft, shiftTransMenuIdsRight } = DateSliderSlice.actions
 
+export const getIsMenuIdZero = createSelector(
+  (state: RootState) => state.Date.curMenu.id,
+  (menuId) => menuId === 0
+)

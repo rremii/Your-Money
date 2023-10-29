@@ -3,7 +3,6 @@ import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
 
 export const GetTransactionsMenuData = (transactions: ITransaction[]) => {
 
-  //todo
   const allDates = new Set<string>()
 
   transactions.forEach(({ date }) => {

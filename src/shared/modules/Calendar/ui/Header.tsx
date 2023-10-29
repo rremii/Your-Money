@@ -23,10 +23,10 @@ export const Header = () => {
   return <HeaderLayout $color={color}>
     <p
       onClick={() => SetCalendarType("year")}
-      className={`sub-title ${type === "year" ? "active" : ""}`}>{year}</p>
+      className={`sub-title ${type === "year" ? "active" : ""}`}>{year || ""}</p>
     <p
       onClick={() => SetCalendarType("month")}
-      className={`title ${type === "month" ? "active" : ""}`}>{day}, {month?.slice(0, 3)} {dateDay}</p>
+      className={`title ${type === "month" ? "active" : ""}`}>{day || ""}, {month?.slice(0, 3)} {dateDay}</p>
   </HeaderLayout>
 }
 const HeaderLayout = styled.header<{

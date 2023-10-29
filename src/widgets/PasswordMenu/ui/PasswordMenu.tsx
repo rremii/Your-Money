@@ -38,11 +38,10 @@ export const PasswordMenu = React.memo(() => {
   const [changePassword, { isLoading }] = useChangePasswordMutation()
 
 
-  const { register, formState, clearErrors, handleSubmit, reset, setError } =
+  const { register, formState: { errors }, clearErrors, handleSubmit, reset, setError } =
     useForm<FormFields>({
       resolver: yupResolver(schema)
     })
-  const { errors } = formState
   const { Reset: ResetTimer } = useTimer({ timeGap: 3, finalTime: 3, callback: clearErrors })
 
 

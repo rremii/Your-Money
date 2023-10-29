@@ -2,14 +2,6 @@ import styled from "styled-components"
 import React from "react"
 
 
-interface props {
-  bgColor: string
-  borderColor: string
-  children: React.ReactNode
-  OnClick: () => void
-}
-
-
 export const CalculatorBtn = styled.div<{
   $borderColor?: string
   $bgColor?: string

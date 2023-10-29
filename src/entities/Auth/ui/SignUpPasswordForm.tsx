@@ -30,11 +30,11 @@ export const SignUpPasswordForm = () => {
   const [registerUser, { isLoading }] = useRegisterMutation()
 
 
-  const { register, formState, clearErrors, handleSubmit, reset, setError } =
+  const { register, formState: { errors }, clearErrors, handleSubmit, reset, setError } =
     useForm<FormFields>({
       resolver: yupResolver(passwordFormSchema)
     })
-  const { errors } = formState
+
 
   const { Reset: ResetTimer } = useTimer({ timeGap: 3, finalTime: 3, callback: clearErrors })
 

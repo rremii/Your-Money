@@ -33,14 +33,14 @@ export const NameMenu = React.memo(() => {
   const { data: user } = GetMe.useQueryState()
   const [changeName, { isLoading }] = useChangeNameMutation()
 
-  const { register, formState, clearErrors, handleSubmit, reset, setError } =
+  const { register, formState: { errors }, clearErrors, handleSubmit, reset, setError } =
     useForm<FormFields>({
       resolver: yupResolver(schema),
       values: {
         name: user ? user.name : ""
       }
     })
-  const { errors } = formState
+
   const { Reset: ResetTimer } = useTimer({ timeGap: 3, finalTime: 3, callback: clearErrors })
 
 

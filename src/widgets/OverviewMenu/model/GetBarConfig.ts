@@ -1,5 +1,5 @@
 import { ChartData, ChartOptions } from "chart.js"
-import { DateFilter, ICategory, ITransaction } from "@entities/Transaction/types.ts"
+import { DateFilter, ITransaction } from "@entities/Transaction/types.ts"
 import {
   GetConfigOptions,
   GetDatePointsAmount,
@@ -7,7 +7,8 @@ import {
   GetTransByCategories,
   GetTransByDateUnitWithinCategory
 } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
-import { DayType } from "@shared/helpers/TimeGap.ts"
+import { ICategory } from "@entities/Category/type.ts"
+import { DayType } from "@shared/constants/Days.ts"
 
 interface IBarProps {
   options?: ChartOptions<"bar">;
@@ -34,12 +35,6 @@ export const GetBarConfig = ({ categories, dateTo, dateFrom, filter, transaction
   const transByCategories = GetTransByCategories(categories, transactions)
   const transByDateUnits = GetTransByDateUnitWithinCategory(transByCategories, dateFrom, dateTo, datePointsAmount, filter)
 
-
-  // const sortedTransactions = transByDateUnits.sort((prev, cur) => {
-  //   const prevCategoryQuantity = prev.transactions.reduce((acc, cur) => acc + cur, 0)
-  //   const curCategoryQuantity = cur.transactions.reduce((acc, cur) => acc + cur, 0)
-  //   return prevCategoryQuantity < curCategoryQuantity ? 1 : -1
-  // })
 
   const data: ChartData<"bar"> = {
     labels,

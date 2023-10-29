@@ -10,7 +10,6 @@ export interface MenuWithHistory extends ITransByMenu {
 }
 
 
-//todo check if i need order right
 export const AddHistoryPointsToMenus = (menus: ITransByMenu[], {
   history,
   historyBorderRight,

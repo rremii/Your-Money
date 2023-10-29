@@ -5,12 +5,12 @@ export interface IUserInfo {
   avatar?: string
 }
 
-export interface ChangeName {
+export interface ChangeNameDto {
   id: number
   newName: string
 }
 
-export interface ChangePassword {
+export interface ChangePasswordDto {
   id: number
   hashedPassword: string
 }

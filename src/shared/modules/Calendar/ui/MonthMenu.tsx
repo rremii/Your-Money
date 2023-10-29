@@ -42,7 +42,12 @@ export const MonthMenu: FC<props> = ({ dateStr }) => {
       <div className="days-shift" />
       {days.map((day) => {
         const isActive = DatesEqualUpToDays(day, chosenDateStr)
-        return <div onClick={() => OnDayClick(day)} className={`day ${isActive ? "active" : ""}`}>{day.getDate()}</div>
+        return <div
+          key={day.toUTCString()}
+          onClick={() => OnDayClick(day)}
+          className={`day ${isActive ? "active" : ""}`}>
+          {day.getDate()}
+        </div>
       })}
     </DaysBox>
 

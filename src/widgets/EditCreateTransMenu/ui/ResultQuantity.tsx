@@ -2,8 +2,8 @@ import styled from "styled-components"
 import { TransactionType } from "@entities/Transaction/types.ts"
 import { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { MathOperatorSign } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { setEditCreateMenuType } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
+import { MathOperatorSign } from "@entities/EditCreateTransaction/helpers/CalcMathOperation.ts"
 
 
 interface props {

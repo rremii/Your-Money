@@ -5,7 +5,6 @@ import { setCurAccount, setCurAccountId } from "@entities/Account/model/CurAccou
 import { useGetAccountsQuery } from "@entities/Account/api/AccountsApi.ts"
 import { setAllAccountBalance } from "@entities/Account/model/AllAccountSlice.ts"
 
-//todo
 export const useAccount = (userId?: number) => {
   const dispatch = useAppDispatch()
 

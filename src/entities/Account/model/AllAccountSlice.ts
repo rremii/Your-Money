@@ -36,17 +36,5 @@ const AllAccountSlice = createSlice({
 export const AllAccountReducer = AllAccountSlice.reducer
 export const { setAllAccountBalance } = AllAccountSlice.actions
 
-// export const getAllAccounts = (state: RootState) => state.Account.allAccounts
 
-
-// export const getCurBalance = createSelector(
-//   getCurAccId,
-//   getCurAccBalance,
-//   getAllAccounts,
-//   (curId, curBalance, allAccounts) => {
-//     if (typeof curId === "number") return curBalance
-//     else return allAccounts.reduce((acc, cur) => acc + cur.balance, 0)
-//   }
-// )
-//todo wrong slice
 

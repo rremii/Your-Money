@@ -1,4 +1,5 @@
-import { FullDays, Months } from "@shared/helpers/TimeGap.ts"
+import { FullDays } from "@shared/constants/Days.ts"
+import { Months } from "@shared/constants/Months.ts"
 
 export const TransformDate = (curDate: Date) => {
 

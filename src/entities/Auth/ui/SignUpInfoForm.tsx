@@ -20,7 +20,6 @@ export const SignUpInfoForm = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  //todo make that everywhere
   const { register, formState: { errors }, handleSubmit } =
     useForm<FormFields>({
       resolver: yupResolver(infoFormSchema)

@@ -2,24 +2,12 @@ import styled from "styled-components"
 import React, { FC } from "react"
 
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
-import {
-  addToNum,
-  calcCalculatorQuantity,
-  MathOperatorType,
-  removeLastNumber,
-  setOperator
-} from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
+import { calcCalculatorQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { OperationBtn } from "@features/Calculator/ui/OperationBtn.tsx"
 import { DigitBtn } from "@features/Calculator/ui/DigitBtn.tsx"
 import { SubmitBtn } from "@features/Calculator/ui/SubmitBtn.tsx"
-import { useCreateTransactionMutation } from "@entities/Transaction/api/TransactionApi.ts"
+import { useGetCalculatorGridBtns } from "@features/Calculator/model/useGetCalculatorGridBtns.tsx"
 
-
-interface ICalculatorBtn {
-  OnClick: () => void,
-  children: React.ReactNode | string,
-}
 
 interface props {
   color: string
@@ -31,56 +19,14 @@ interface props {
 export const Calculator: FC<props> = ({ color, OnSubmit, isLoading }) => {
   const dispatch = useAppDispatch()
 
+
   const operator = useTypedSelector(state => state.EditCreateTransaction.Calculator.operator)
 
-
-  const OpenDateMenu = () => {
-    dispatch(setChangeDateMenu(true))
-  }
   const CalcQuantity = () => {
     dispatch(calcCalculatorQuantity())
   }
 
-
-  const RemoveLastNum = () => {
-    dispatch(removeLastNumber())
-  }
-  const AddToNum = (num: number | string) => {
-    dispatch(addToNum(num))
-  }
-
-  const SetOperator = (operator: MathOperatorType) => {
-    dispatch(setOperator(operator))
-  }
-
-
-//todo optimize
-  const leftColumnBtns: ICalculatorBtn[] = [
-    { OnClick: () => SetOperator("div"), children: "÷" },
-    { OnClick: () => SetOperator("mul"), children: "×" },
-    { OnClick: () => SetOperator("sub"), children: "-" },
-    { OnClick: () => SetOperator("sum"), children: "+" }
-  ]
-  const midleBtns: ICalculatorBtn[] = [
-    { OnClick: () => AddToNum(7), children: "7" },
-    { OnClick: () => AddToNum(8), children: "8" },
-    { OnClick: () => AddToNum(9), children: "9" },
-    { OnClick: () => AddToNum(4), children: "4" },
-    { OnClick: () => AddToNum(5), children: "5" },
-    { OnClick: () => AddToNum(6), children: "6" },
-    { OnClick: () => AddToNum(1), children: "1" },
-    { OnClick: () => AddToNum(2), children: "2" },
-    { OnClick: () => AddToNum(3), children: "3" },
-    { OnClick: () => AddToNum(0), children: "$" },
-    { OnClick: () => AddToNum(0), children: "0" },
-    { OnClick: () => AddToNum("."), children: "." }
-  ]
-
-  const rightBtns: ICalculatorBtn[] = [
-    { OnClick: RemoveLastNum, children: "del" },
-    { OnClick: OpenDateMenu, children: "date" }
-  ]
-
+  const { middleBtns, rightBtns, leftColumnBtns } = useGetCalculatorGridBtns()
 
   return <CalculatorLayout>
     <div className="left-grid">
@@ -89,7 +35,7 @@ export const Calculator: FC<props> = ({ color, OnSubmit, isLoading }) => {
       ))}
     </div>
     <div className="middle-grid">
-      {midleBtns.map(({ children, OnClick }, index) => (
+      {middleBtns.map(({ children, OnClick }, index) => (
         <DigitBtn key={index} OnClick={OnClick}>{children}</DigitBtn>
       ))}
     </div>

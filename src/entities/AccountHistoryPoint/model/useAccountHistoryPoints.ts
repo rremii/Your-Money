@@ -1,5 +1,3 @@
-import { useGetCategoriesQuery } from "@entities/Category/api/CategoriesApi.ts"
-import { ICategory } from "@entities/Transaction/types.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useGetHistoryPointsByDateGapQuery } from "@entities/AccountHistoryPoint/api/AccountHistoryPointApi.ts"
 

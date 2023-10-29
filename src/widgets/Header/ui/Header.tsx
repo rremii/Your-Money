@@ -1,8 +1,8 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { getIsMenuIdZero } from "@entities/Account/model/CurAccountSlice.ts"
 import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
+import { getIsMenuIdZero } from "@entities/DateSlider/model/DateSliderSlice.ts"
 
 interface props {
   right?: React.ReactNode

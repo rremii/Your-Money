@@ -2,7 +2,6 @@ import { useInView } from "react-intersection-observer"
 import { useEffect } from "react"
 import { setCurMenu } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { date } from "yup"
 
 export const useOnMenuSlide = (dateGap: string, menuId: number, dateFrom: Date) => {
   const dispatch = useAppDispatch()

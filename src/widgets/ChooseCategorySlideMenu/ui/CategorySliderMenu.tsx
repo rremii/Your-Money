@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { ICategory } from "@entities/Transaction/types.ts"
 import { FC } from "react"
 import { Category } from "@widgets/ChooseCategoryMenu/ui/Category.tsx"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
@@ -7,6 +6,7 @@ import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategor
 import { setChooseCategorySlideMenu } from "@entities/Modals/model/ChooseCategorySlideMenuSlice.ts"
 import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
 import { setEditTransType } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
+import { ICategory } from "@entities/Category/type.ts"
 
 
 interface props {
@@ -28,7 +28,7 @@ export const CategorySliderMenu: FC<props> = ({ categories }) => {
 
   return <CategorySliderMenuLayout>
     {categories.map((category) => (
-      <Category OnClick={SetCategory} {...category} />
+      <Category key={category.id} OnClick={SetCategory} {...category} />
     ))}
   </CategorySliderMenuLayout>
 }

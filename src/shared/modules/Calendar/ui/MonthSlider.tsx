@@ -13,10 +13,9 @@ export const MonthSlider: FC<props> = () => {
 
   const { sliderRef, OnScroll } = useCalendarSlider({ menusDates: menusDatesStr })
 
-
   return <SliderLayout onScroll={OnScroll} ref={sliderRef}>
     {menusDatesStr.map((date) => (
-      <MonthMenu dateStr={date} />
+      <MonthMenu key={date} dateStr={date} />
     ))}
   </SliderLayout>
 }

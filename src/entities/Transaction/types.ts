@@ -1,13 +1,3 @@
-export interface ICategory {
-  id: number
-  name: string,
-  color: string
-  icon: string
-  type: TransactionType
-  userId: number
-}
-
-//todo add dtos
 export interface GetTransactionDto {
   dateFrom: string
   dateTo: string

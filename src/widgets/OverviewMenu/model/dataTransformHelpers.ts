@@ -1,7 +1,8 @@
 import { ChartOptions } from "chart.js"
-import { DateFilter, ICategory, ITransaction } from "@entities/Transaction/types.ts"
-import { Days, DayType, FullDays } from "@shared/helpers/TimeGap.ts"
+import { DateFilter, ITransaction } from "@entities/Transaction/types.ts"
 import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
+import { ICategory } from "@entities/Category/type.ts"
+import { Days, DayType, FullDays } from "@shared/constants/Days.ts"
 
 export const GetConfigOptions = (currency: string = "$"): ChartOptions<"bar"> => {
 

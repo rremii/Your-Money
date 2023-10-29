@@ -1,7 +1,6 @@
 import { ITransaction } from "@entities/Transaction/types.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useGetTransactionsByDateGapQuery } from "@entities/Transaction/api/TransactionApi.ts"
-import { GetMe } from "@entities/User/api/UserApi.ts"
 
 export const useGetTransactions = (userId?: number) => {
 

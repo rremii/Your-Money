@@ -1,8 +1,9 @@
 import { DateFilter, ITransaction } from "@entities/Transaction/types.ts"
 import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
-import { DayType, timeGap } from "@shared/helpers/TimeGap.ts"
+import { timeGap } from "@shared/helpers/TimeGap.ts"
 import { transByDate } from "@entities/Transaction/helpers/TransByDate.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { DayType } from "@shared/constants/Days.ts"
 
 
 export interface IExtraInfo {

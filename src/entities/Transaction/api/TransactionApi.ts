@@ -1,9 +1,7 @@
 import { Api } from "@shared/api/config/Api.ts"
-import { EditTransDto, GetTransactionDto, ITransaction } from "@entities/Transaction/types.ts"
+import { CreateTransDto, EditTransDto, GetTransactionDto, ITransaction } from "@entities/Transaction/types.ts"
 import { DefaultResponse } from "@entities/Auth/types.ts"
-import { CreateTransDto } from "@entities/Transaction/types.ts"
 
-//todo create historyAccountPoint module
 export const TransactionApi = Api.injectEndpoints({
 
   endpoints: (build) => ({

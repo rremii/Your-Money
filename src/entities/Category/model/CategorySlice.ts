@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ICategory } from "@entities/Transaction/types.ts"
+import { ICategory } from "@entities/Category/type.ts"
 
-//todo fix types in entities
 interface initialState {
   allCategories: ICategory[]
 }

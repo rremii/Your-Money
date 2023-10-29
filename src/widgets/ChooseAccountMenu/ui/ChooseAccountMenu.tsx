@@ -33,7 +33,7 @@ export const ChooseAccountMenu = React.memo(() => {
       <ChooseMenuHeader content={"from account"} />
       <AllAccountsInfo balance={allBalance} />
       {allAccounts?.map((account) => (
-        <ChooseAccount {...account} />
+        <ChooseAccount key={account?.id} {...account} />
       ))}
     </AccountMenuLayout>
   </>

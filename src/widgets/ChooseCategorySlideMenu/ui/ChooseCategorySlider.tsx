@@ -5,7 +5,6 @@ import { FilterCategoriesByType } from "@entities/Category/model/FilterCategorie
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { FC, useEffect, useRef } from "react"
-import { setEditTransType } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 
 interface props {
   onScroll: (scroll: number) => void
