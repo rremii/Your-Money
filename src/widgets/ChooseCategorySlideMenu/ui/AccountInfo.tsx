@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
-import { FC } from "react"
+import { FC, memo } from "react"
 
 interface props {
   name: string
@@ -9,7 +9,7 @@ interface props {
   color: string
 }
 
-export const AccountInfo: FC<props> = ({ balance, name, icon, color }) => {
+export const AccountInfo: FC<props> = memo(({ balance, name, icon, color }) => {
   return <AccountInfoLayout $color={color}>
     <div className="name-box">
       <img src={AccountsIcons.get(icon)} alt="account icon" className="icon" />
@@ -20,7 +20,7 @@ export const AccountInfo: FC<props> = ({ balance, name, icon, color }) => {
       <div className="balance">-$ {balance}</div>
     </div>
   </AccountInfoLayout>
-}
+})
 const AccountInfoLayout = styled.div<{
   $color?: string
 }>`

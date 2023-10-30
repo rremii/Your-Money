@@ -6,6 +6,7 @@ import { GetTransByMenus } from "@entities/Transaction/model/GetTransByMenus.tsx
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
+import { SliderLayout } from "@shared/ui/Slider.tsx"
 
 
 export const CategoriesSlider = memo(() => {
@@ -29,15 +30,7 @@ export const CategoriesSlider = memo(() => {
     ))}
   </CategoriesLayout>
 })
-const CategoriesLayout = styled.main`
+const CategoriesLayout = styled(SliderLayout)`
   background-color: var(--bg-1);
-  height: 100%;
-  width: 100%;
-  position: relative;
-  display: flex;
-  scroll-snap-stop: always;
-  //scroll-behavior: smooth;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
 `
 

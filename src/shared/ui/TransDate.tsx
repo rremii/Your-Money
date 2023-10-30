@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import React, { FC } from "react"
+import React, { FC, memo } from "react"
 import { FullDays } from "@shared/constants/Days.ts"
 import { Months } from "@shared/constants/Months.ts"
 
@@ -7,7 +7,7 @@ interface props {
   dateStr: string
 }
 
-export const TransDate: FC<props> = ({ dateStr }) => {
+export const TransDate: FC<props> = memo(({ dateStr }) => {
 
   const transDate = new Date(dateStr)
 
@@ -21,8 +21,7 @@ export const TransDate: FC<props> = ({ dateStr }) => {
   return <TransDateLayout>
     {resDate}
   </TransDateLayout>
-
-}
+})
 const TransDateLayout = styled.p`
   display: flex;
   align-items: center;

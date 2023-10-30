@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
-import React, { useState } from "react"
+import React, { memo, useCallback, useState } from "react"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { Calendar } from "@shared/modules/Calendar"
@@ -8,12 +8,13 @@ import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/Trans
 import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
 import { setCalendarMenu } from "@entities/Modals/model/CalendarMenuSlice.ts"
 
-export const CalendarMenu = () => {
+export const CalendarMenu = memo(() => {
   const dispatch = useAppDispatch()
 
   const isOpen = useTypedSelector(state => state.Modals.CalendarMenu.isOpen)
   const initialDate = useTypedSelector(state => state.EditCreateTransaction.Transaction.dateStr)
   const categoryColor = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.color)
+
 
   const [chosenDate, setChosenDate] = useState<string>(initialDate)
 
@@ -22,9 +23,9 @@ export const CalendarMenu = () => {
     dispatch(setCalendarMenu(false))
   }
 
-  const OnChosenDateChange = (dateStr: string) => {
+  const OnChosenDateChange = useCallback((dateStr: string) => {
     setChosenDate(dateStr)
-  }
+  }, [])
   const OnSubmit = () => {
     dispatch(setEditTransDateStr(chosenDate))
     dispatch(setCalendarMenu(false))
@@ -43,7 +44,7 @@ export const CalendarMenu = () => {
       </div>
     </CalendarMenuLayout>
   </>
-}
+})
 const CalendarMenuLayout = styled(Modal)<{
   $color?: string
 }>`

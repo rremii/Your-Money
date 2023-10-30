@@ -62,7 +62,7 @@ export const GetExtraInfoByMenus = ({ dateFilter, firstDay, allTransactions, dat
         }]
 
       }
-        break
+
       case "year": {
         const { transactions } = transByDate.byYear(expenseTransaction, menuId)
         const yearQuantity = transactions.reduce((acc, cur) => acc + cur.quantity, 0)

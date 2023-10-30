@@ -1,5 +1,5 @@
 import { CalculatorBtn } from "@shared/ui/CalculatorBtn.tsx"
-import React, { FC } from "react"
+import React, { FC, memo } from "react"
 
 
 interface props {
@@ -7,8 +7,8 @@ interface props {
   OnClick: () => void
 }
 
-export const OperationBtn: FC<props> = ({ OnClick, children }) => {
+export const OperationBtn: FC<props> = memo(({ OnClick, children }) => {
 
   return <CalculatorBtn $borderColor={"var(--bg-13)"} onClick={OnClick}
                         $bgColor={"var(--bg-14)"}>{children}</CalculatorBtn>
-}
+})

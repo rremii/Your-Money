@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { FC } from "react"
+import { FC, memo } from "react"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import { ICategory } from "@entities/Category/type.ts"
 
@@ -9,7 +9,7 @@ interface props extends ICategory {
   OnClick: (category: ICategory) => void
 }
 
-export const Category: FC<props> = ({ OnClick, isActive, ...category }) => {
+export const Category: FC<props> = memo(({ OnClick, isActive, ...category }) => {
   const { name, icon, color } = category
 
   return <CategoryLayout className="Category" onClick={() => OnClick(category)} $color={color}
@@ -17,7 +17,7 @@ export const Category: FC<props> = ({ OnClick, isActive, ...category }) => {
     <p className="name">{name}</p>
     <img className="icon" src={CategoriesIcons.get(icon)} alt={"category icon"} />
   </CategoryLayout>
-}
+})
 const CategoryLayout = styled.div<{
   $isActive?: boolean
   $color?: string

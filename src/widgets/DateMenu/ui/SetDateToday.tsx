@@ -1,6 +1,6 @@
 import Category from "@shared/assets/LightTheme/categories.png"
 import React from "react"
-import { PickDateBtn } from "@widgets/DateMenu/ui/PickDateBtn.tsx"
+import { PickDateBtn } from "@shared/ui/PickDateBtn.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { IsToday } from "@shared/helpers/IsToday.ts"
 import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"

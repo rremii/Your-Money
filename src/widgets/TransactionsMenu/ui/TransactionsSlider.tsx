@@ -8,6 +8,7 @@ import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useAccountHistoryPoints } from "@entities/AccountHistoryPoint/model/useAccountHistoryPoints.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { AddHistoryPointsToMenus } from "@widgets/TransactionsMenu/model/AddHistoryPointsToMenus.ts"
+import { SliderLayout } from "@shared/ui/Slider.tsx"
 
 
 //todo add slider layout to shared and do same to others
@@ -35,14 +36,3 @@ export const TransactionsSlider = memo(() => {
     ))}
   </SliderLayout>
 })
-const SliderLayout = styled.main`
-  height: 100%;
-  width: 100%;
-  position: relative;
-  display: flex;
-  scroll-snap-stop: always;
-  //scroll-behavior: smooth;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-
-`

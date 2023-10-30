@@ -1,5 +1,5 @@
 import { CalculatorBtn } from "@shared/ui/CalculatorBtn.tsx"
-import React, { FC } from "react"
+import React, { FC, memo } from "react"
 import styled from "styled-components"
 
 
@@ -8,12 +8,12 @@ interface props {
   OnClick: () => void
 }
 
-export const DigitBtn: FC<props> = ({ OnClick, children }) => {
+export const DigitBtn: FC<props> = memo(({ OnClick, children }) => {
 
   return <CalculatorBtn $borderColor={"var(--bg-14)"} onClick={OnClick} $bgColor={"var(--bg-1)"}>
     <DigitLayout>{children}</DigitLayout>
   </CalculatorBtn>
-}
+})
 
 const DigitLayout = styled.span`
   font-family: Inter;

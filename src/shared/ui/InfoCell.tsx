@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { FC } from "react"
+import { FC, memo } from "react"
 
 
 interface props {
@@ -11,7 +11,7 @@ interface props {
   OnClick: () => void
 }
 
-export const InfoCell: FC<props> = ({ icon, iconRadius, color, content, title, OnClick }) => {
+export const InfoCell: FC<props> = memo(({ icon, iconRadius, color, content, title, OnClick }) => {
 
 
   return <CellLayout onClick={OnClick} $color={color} $iconRadius={iconRadius}>
@@ -21,7 +21,7 @@ export const InfoCell: FC<props> = ({ icon, iconRadius, color, content, title, O
     <h2 className="title">{title}</h2>
     <p className="content">{content}</p>
   </CellLayout>
-}
+})
 const CellLayout = styled.div<{
   $color?: string
   $iconRadius?: string

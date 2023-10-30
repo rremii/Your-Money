@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import React, { FC } from "react"
+import React, { FC, memo, useCallback, useMemo } from "react"
 
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { calcCalculatorQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
@@ -16,15 +16,15 @@ interface props {
 }
 
 
-export const Calculator: FC<props> = ({ color, OnSubmit, isLoading }) => {
+export const Calculator: FC<props> = memo(({ color, OnSubmit, isLoading }) => {
   const dispatch = useAppDispatch()
 
 
   const operator = useTypedSelector(state => state.EditCreateTransaction.Calculator.operator)
 
-  const CalcQuantity = () => {
+  const CalcQuantity = useCallback(() => {
     dispatch(calcCalculatorQuantity())
-  }
+  }, [])
 
   const { middleBtns, rightBtns, leftColumnBtns } = useGetCalculatorGridBtns()
 
@@ -48,7 +48,7 @@ export const Calculator: FC<props> = ({ color, OnSubmit, isLoading }) => {
         <SubmitBtn bgColor={color} isLoading={isLoading} OnClick={OnSubmit}>Ok</SubmitBtn>}
     </div>
   </CalculatorLayout>
-}
+})
 const CalculatorLayout = styled.div`
   background-color: var(--bg-1);
   display: grid;

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import React, { useEffect } from "react"
+import React, { useCallback, useEffect } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
@@ -56,23 +56,24 @@ export const EditCreateTransMenu = React.memo(() => {
     dispatch(resetTransCalculator())
   }
 
-  const OpenChooseCategoryMenu = () => {
+  const OpenChooseCategoryMenu = useCallback(() => {
     dispatch(setChooseCategoryMenu(true))
     if (menuType === "overview")
       dispatch(setEditCreateMenuType("edit"))
-  }
-  const OpenChooseAccountMenu = () => {
+  }, [menuType])
+
+  const OpenChooseAccountMenu = useCallback(() => {
     dispatch(setChooseAccountMenu(true))
     if (menuType === "overview")
       dispatch(setEditCreateMenuType("edit"))
-  }
+  }, [menuType])
 
   const [createTransaction, { isLoading: isCreating }] = useCreateTransactionMutation()
   const [editTransaction, { isLoading: isEditting }] = useEditTransactionMutation()
 
 
   const CreateTransaction = async () => {
-    if (!user?.id || !account.id || !category.id) return
+    if (!user?.id || !account.id || !category.id || !quantity) return
 
     await createTransaction({
       type, title, accountId: account.id, categoryId: category.id, quantity, userId: user.id, date: dateStr
@@ -82,8 +83,7 @@ export const EditCreateTransMenu = React.memo(() => {
   }
 
   const EditTransaction = async () => {
-    if (!transactionId || !account.id || !category.id) return
-
+    if (!transactionId || !account.id || !category.id || !quantity) return
     await editTransaction({
       id: transactionId,
       accountId: account.id,
@@ -93,9 +93,7 @@ export const EditCreateTransMenu = React.memo(() => {
       quantity,
       date: dateStr
     })
-
     CloseMenu()
-
   }
 
   const OnSubmit = async () => {

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { FC, useContext } from "react"
+import { FC, memo, useContext } from "react"
 import { DatesEqualUpToDays } from "@shared/helpers/DatesEqualUpToDays.ts"
 import { GetMonthDays } from "@shared/modules/Calendar/model/GetMonthDays.ts"
 import { setCurCalendarDate } from "@shared/modules/Calendar/model/Actions.ts"
@@ -11,8 +11,7 @@ interface props {
   dateStr: string
 }
 
-export const MonthMenu: FC<props> = ({ dateStr }) => {
-
+export const MonthMenu: FC<props> = memo(({ dateStr }) => {
   const { chosenDateStr, color } = useContext(CalendarContext)
 
 
@@ -52,7 +51,7 @@ export const MonthMenu: FC<props> = ({ dateStr }) => {
     </DaysBox>
 
   </MonthContentLayout>
-}
+})
 
 const MonthContentLayout = styled.div`
   height: 260px;

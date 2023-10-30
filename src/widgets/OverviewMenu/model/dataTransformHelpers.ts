@@ -40,6 +40,7 @@ export const GetConfigOptions = (currency: string = "$"): ChartOptions<"bar"> =>
     }
   }
 }
+
 export const GetDatePointsAmount = (dateFrom: Date, dateTo: Date, filter: DateFilter) => {
   let divUnit = (1000 * 60 * 60 * 24) // day
 

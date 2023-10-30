@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { FC, useContext } from "react"
+import { FC, memo, useContext } from "react"
 import { useCalendarSlider } from "@shared/modules/Calendar/model/useCalendarSlider.tsx"
 import { MonthMenu } from "@shared/modules/Calendar/ui/MonthMenu.tsx"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
@@ -7,7 +7,7 @@ import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
 interface props {
 }
 
-export const MonthSlider: FC<props> = () => {
+export const MonthSlider: FC<props> = memo(() => {
   const { menusDatesStr } = useContext(CalendarContext)
 
 
@@ -18,7 +18,7 @@ export const MonthSlider: FC<props> = () => {
       <MonthMenu key={date} dateStr={date} />
     ))}
   </SliderLayout>
-}
+})
 const SliderLayout = styled.div`
   display: flex;
   scroll-snap-stop: always;

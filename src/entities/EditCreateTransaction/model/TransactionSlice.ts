@@ -32,7 +32,7 @@ const TransactionSlice = createSlice({
       state.id = null
       state.title = ""
       state.type = "expense"
-      state.dateStr = new Date().toUTCString()
+      // state.dateStr = new Date().toUTCString()
     },
 
     setEditTransTitle(state, action: PayloadAction<string>) {

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import React, { FC, useContext, useEffect } from "react"
+import React, { FC, memo, useContext, useEffect } from "react"
 import { Header } from "@shared/modules/Calendar/ui/Header.tsx"
 import { MonthSlider } from "@shared/modules/Calendar/ui/MonthSlider.tsx"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
@@ -13,8 +13,8 @@ interface props {
   OnChange: (chosenDateStr: string) => void
 }
 
-
-const Calendar: FC<props> = ({ initialDate, OnChange, color }) => {
+//todo create a calendar box
+const Calendar: FC<props> = memo(({ initialDate, OnChange, color }) => {
 
   const { chosenDateStr, type } = useContext(CalendarContext)
 
@@ -32,7 +32,7 @@ const Calendar: FC<props> = ({ initialDate, OnChange, color }) => {
     <Header />
     {type === "month" ? <MonthSlider /> : <YearSlider />}
   </CalendarLayout>
-}
+})
 export default Calendar
 const CalendarLayout = styled.div`
   position: relative;

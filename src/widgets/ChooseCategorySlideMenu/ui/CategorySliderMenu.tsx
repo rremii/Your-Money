@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { FC } from "react"
+import { FC, useCallback } from "react"
 import { Category } from "@widgets/ChooseCategoryMenu/ui/Category.tsx"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
@@ -17,14 +17,14 @@ export const CategorySliderMenu: FC<props> = ({ categories }) => {
   const dispatch = useAppDispatch()
 
 
-  const SetCategory = (category: ICategory) => {
+  const SetCategory = useCallback((category: ICategory) => {
     dispatch(setCategory(category))
     dispatch(setEditTransType(category.type))
     dispatch(setChooseCategorySlideMenu(false))
 
     dispatch(setEditCreateMenuType("create"))
     dispatch(setEditCreateTransMenu(true))
-  }
+  }, [])
 
   return <CategorySliderMenuLayout>
     {categories.map((category) => (

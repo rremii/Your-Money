@@ -7,6 +7,7 @@ import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useGetTransactions } from "@entities/Transaction/model/useGetTransactions.tsx"
 import { GetExtraInfoByMenus } from "@widgets/OverviewMenu/model/GetExtraInfoByMenus.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
+import { SliderLayout } from "@shared/ui/Slider.tsx"
 
 
 //todo try to move trans by ids and menu ext data to store
@@ -38,15 +39,4 @@ export const OverviewSlider = memo(() => {
     ))}
   </SliderLayout>
 })
-const SliderLayout = styled.main`
-  //background-color: var(--bg-1);
-  height: 100%;
-  width: 100%;
-  position: relative;
-  display: flex;
-  scroll-snap-stop: always;
-  //scroll-behavior: smooth;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
 
-`

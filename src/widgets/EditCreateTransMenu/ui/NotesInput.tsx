@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { FC } from "react"
+import { FC, memo } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setChangeTitleMenu } from "@entities/Modals/model/ChangeTitleMenuClice.ts"
 import { setEditCreateMenuType } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
@@ -8,11 +8,10 @@ interface props {
   content?: string
 }
 
-export const Notes: FC<props> = ({ content }) => {
+export const Notes: FC<props> = memo(({ content }) => {
   const dispatch = useAppDispatch()
 
   const menuType = useTypedSelector(state => state.Modals.EditCreateTransMenu.menuType)
-
 
   const OpenEditMenu = () => {
     dispatch(setChangeTitleMenu(true))
@@ -23,7 +22,7 @@ export const Notes: FC<props> = ({ content }) => {
   return <InputLayout onClick={OpenEditMenu}>
     {content || "Notes ..."}
   </InputLayout>
-}
+})
 const InputLayout = styled.div`
   height: 53px;
   width: 100%;
