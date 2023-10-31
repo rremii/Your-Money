@@ -7,7 +7,7 @@ export interface GetHistoryPointsDto {
 export interface GetHistoryPointsResponse {
   history: IAccountHistoryPoint[]
   historyBorderRight: IAccountHistoryPoint | null
-  historyBorderLeft: IAccountHistoryPoint | null
+  historyBorderLeft: IAccountHistoryPoint[]
 }
 
 export interface IAccountHistoryPoint {

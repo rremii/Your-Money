@@ -11,11 +11,12 @@ import { AddHistoryPointsToMenus } from "@widgets/TransactionsMenu/model/AddHist
 import { SliderLayout } from "@shared/ui/Slider.tsx"
 
 
-//todo add slider layout to shared and do same to others
 export const TransactionsSlider = memo(() => {
   const dateMenuIds = useTypedSelector(state => state.Date.dateMenuIds)
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)
+  const curAccountId = useTypedSelector(state => state.CurAccount.id)
+
 
   const { data: user } = GetMe.useQueryState()
   const { allTransactions } = useGetTransactions(user?.id)
@@ -27,7 +28,7 @@ export const TransactionsSlider = memo(() => {
     allTransactions, dateFilter, dateMenuIds, firstDay
   })
 
-  const menusWithHistory = AddHistoryPointsToMenus(transByMenus, historyPointsData)
+  const menusWithHistory = AddHistoryPointsToMenus(transByMenus, historyPointsData, curAccountId)
 
 
   return <SliderLayout id="slider" ref={sliderRef} onScroll={OnScroll}>
