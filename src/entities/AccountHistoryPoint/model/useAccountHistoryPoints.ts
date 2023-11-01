@@ -17,19 +17,14 @@ export const useAccountHistoryPoints = (userId?: number) => {
   })
 
   let history = allHistoryPointsData?.history || []
-  let historyBorderLeft = allHistoryPointsData?.historyBorderLeft || []
 
-  useEffect(() => {
-    if (curAccountId) {
-      history = allHistoryPointsData?.history?.filter(({ id }) => id === curAccountId) || []
-      historyBorderLeft = allHistoryPointsData?.historyBorderLeft?.filter(({ id }) => id === curAccountId) || []
-    }
-  }, [curAccountId])
+  if (curAccountId) {
+    history = allHistoryPointsData?.history?.filter(({ accountId }) => accountId === curAccountId) || []
+  }
+
 
   return {
-    historyBorderLeft,
-    historyBorderRight: allHistoryPointsData?.historyBorderRight || null,
-    history: history
+    history
   }
 
 }

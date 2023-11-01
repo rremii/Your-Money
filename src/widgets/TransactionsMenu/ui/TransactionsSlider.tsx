@@ -20,7 +20,7 @@ export const TransactionsSlider = memo(() => {
 
   const { data: user } = GetMe.useQueryState()
   const { allTransactions } = useGetTransactions(user?.id)
-  const historyPointsData = useAccountHistoryPoints(user?.id)
+  const { history } = useAccountHistoryPoints(user?.id)
 
   const { sliderRef, OnScroll } = useSlider()
 
@@ -28,7 +28,7 @@ export const TransactionsSlider = memo(() => {
     allTransactions, dateFilter, dateMenuIds, firstDay
   })
 
-  const menusWithHistory = AddHistoryPointsToMenus(transByMenus, historyPointsData, curAccountId)
+  const menusWithHistory = AddHistoryPointsToMenus(transByMenus, history, curAccountId)
 
 
   return <SliderLayout id="slider" ref={sliderRef} onScroll={OnScroll}>

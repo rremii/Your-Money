@@ -1,7 +1,7 @@
 import { ITransByMenu } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import { GetHistoryPointsResponse, IAccountHistoryPoint } from "@entities/AccountHistoryPoint/types.ts"
 
-type HistoryData = GetHistoryPointsResponse
+// type HistoryData = GetHistoryPointsResponse
 
 export interface MenuWithHistory extends ITransByMenu {
   startBalance: number
@@ -9,11 +9,8 @@ export interface MenuWithHistory extends ITransByMenu {
 }
 
 
-export const AddHistoryPointsToMenus = (menus: ITransByMenu[], {
-  history,
-  historyBorderRight,
-  historyBorderLeft
-}: HistoryData, curAccountId: number | null): MenuWithHistory[] => {
+export const AddHistoryPointsToMenus = (menus: ITransByMenu[],
+                                        history: IAccountHistoryPoint[], curAccountId: number | null): MenuWithHistory[] => {
 
 
   const GetAllAccountPrevPoint = (menuDate: Date, initHistoryPoints: IAccountHistoryPoint[]): number => {
@@ -26,6 +23,7 @@ export const AddHistoryPointsToMenus = (menus: ITransByMenu[], {
       const curHistoryPoint = initHistoryPoints[i - 1]
       if (new Date(curHistoryPoint.date) < menuDate && !accountsIdsHistoryPoints.has(curHistoryPoint.accountId)) {
         historyPoints.push(curHistoryPoint)
+        accountsIdsHistoryPoints.add(curHistoryPoint.accountId)
       }
     }
 
@@ -40,6 +38,7 @@ export const AddHistoryPointsToMenus = (menus: ITransByMenu[], {
       const curHistoryPoint = initHistoryPoints[i - 1]
       if (new Date(curHistoryPoint.date) < menuDate) {
         historyPointBalance = curHistoryPoint.balance
+        break
       }
     }
 
@@ -50,23 +49,21 @@ export const AddHistoryPointsToMenus = (menus: ITransByMenu[], {
   return menus.map(({ dateFrom, dateTo, ...menuData }) => {
 
 
-    let endBalance = 0
-    let startBalance = 0
+    let endBalance = null
+    let startBalance = null
 
     if (!curAccountId) {
       endBalance = GetAllAccountPrevPoint(dateTo, history)
       startBalance = GetAllAccountPrevPoint(dateFrom, history)
-      if (!startBalance) startBalance = GetAllAccountPrevPoint(dateFrom, historyBorderLeft)
     } else {
       endBalance = GetAccountPrevPoint(dateTo, history)
       startBalance = GetAccountPrevPoint(dateFrom, history)
-      if (!startBalance) startBalance = GetAllAccountPrevPoint(dateFrom, historyBorderLeft)
     }
 
     return {
       ...menuData, dateFrom, dateTo,
       startBalance,
-      endBalance: endBalance || startBalance
+      endBalance: endBalance
     }
   })
 
