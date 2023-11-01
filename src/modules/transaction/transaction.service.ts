@@ -136,41 +136,59 @@ export class TransactionService {
     return transaction
   }
 
+  //todo get rid of user-transaction relation
+  private async changeTransactionAccount(
+    transaction: EditTransactionDto,
+    userId: number,
+  ) {
+    const removedTransaction = await this.deleteTransactionById({
+      id: transaction.id,
+    })
+    console.log(removedTransaction, transaction, userId)
+    return await this.createTransaction({
+      ...removedTransaction,
+      ...transaction,
+      userId,
+    })
+  }
+
   //todo change account and category
-  async editTransaction({
-    quantity,
-    id,
-    title,
-    date,
-    categoryId,
-    accountId,
-  }: EditTransactionDto) {
+  async editTransaction(editTransactionDto: EditTransactionDto) {
+    const { id, title, categoryId, accountId, quantity, date } =
+      editTransactionDto
+
     let transaction = await this.transactionRepository.findOne({
       relations: {
         accountHistoryPoint: true,
+        user: true,
       },
       where: { id },
     })
     if (!transaction)
       throw new BadRequestException(ApiError.TRANSACTION_NOT_FOUND)
 
-    if (date !== transaction.date) {
-      transaction = await this.changeTransactionDate(transaction, date)
-      // await transaction.save()
-      console.log("date edit")
+    transaction.title = title ? title : ""
+
+    if (transaction.accountId !== accountId) {
+      transaction = await this.changeTransactionAccount(
+        editTransactionDto,
+        transaction.user.id,
+      )
+      // transaction.account = await this.accountService.getAccountById(accountId)
+    } else {
+      if (date !== transaction.date)
+        transaction = await this.changeTransactionDate(transaction, date)
+
+      if (transaction.quantity !== quantity)
+        transaction = await this.changeTransactionQuantity(
+          transaction,
+          quantity,
+        )
     }
-    if (transaction.quantity !== quantity) {
-      transaction = await this.changeTransactionQuantity(transaction, quantity)
-      // await transaction.save()
-      console.log("quantity edit")
-    }
-    if (transaction.accountId !== accountId)
-      transaction.account = await this.accountService.getAccountById(accountId)
     if (transaction.categoryId !== categoryId)
       transaction.category = await this.categoryService.getCategoryById(
         categoryId,
       )
-    transaction.title = title ? title : ""
 
     return await transaction.save()
   }
@@ -184,7 +202,7 @@ export class TransactionService {
     })
     if (!transaction)
       throw new BadRequestException(ApiError.TRANSACTION_NOT_FOUND)
-    await transaction.remove()
+    const removedTransaction = await transaction.remove()
 
     //todo do same to account
     await this.accountHistoryService.deleteHistoryPoint(
@@ -203,6 +221,8 @@ export class TransactionService {
     account.balance += accBalanceDifference
     await account.save()
     //
+
+    return removedTransaction
   }
 
   //todo

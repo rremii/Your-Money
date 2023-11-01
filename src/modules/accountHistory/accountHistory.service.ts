@@ -33,6 +33,8 @@ export class AccountHistoryService {
   constructor(
     @InjectRepository(AccountHistoryPoint)
     private readonly accountHistoryRepository: Repository<AccountHistoryPoint>,
+    @InjectRepository(Account)
+    private readonly accountRepository: Repository<Account>,
   ) {}
 
   private async getPrevHistoryPoint({
@@ -85,11 +87,7 @@ export class AccountHistoryService {
       ? prevHistoryPoint.balance + accBalanceDifference
       : accBalanceDifference
 
-    await this.updateHistoryGapBalance(
-      historyPoint.accountId,
-      accBalanceDifference,
-      date,
-    )
+    await this.updateHistoryGapBalance(account.id, accBalanceDifference, date)
 
     return await historyPoint.save()
 
@@ -146,6 +144,8 @@ export class AccountHistoryService {
       balance: historyPoint.balance + balanceDiff,
     }))
 
+    console.log(accountId)
+    console.log(historyPoints)
     await this.accountHistoryRepository.save(updatedHistoryPoints)
 
     return historyPoints
@@ -227,6 +227,26 @@ export class AccountHistoryService {
     userId,
   }: GetAccountHistoryDto) {
     if (dateTo && dateFrom) {
+      const accountIds = await this.accountRepository.find({
+        where: {
+          user: { id: userId },
+        },
+        select: ["id"],
+      })
+
+      const historyBorderLeft: AccountHistoryPoint[] = []
+      await Promise.all(
+        accountIds.map(async ({ id }) => {
+          const historyPoint = await this.getPrevHistoryPoint({
+            date: dateFrom,
+            userId,
+            accountId: id,
+            cmpDateFunc: LessThan,
+          })
+          if (historyPoint) historyBorderLeft.push(historyPoint)
+        }),
+      )
+
       const history = await this.accountHistoryRepository.find({
         order: {
           date: "ASC",
@@ -239,29 +259,10 @@ export class AccountHistoryService {
         },
       })
 
-      const historyBorderLeft = await this.getPrevHistoryPoint({
-        date: dateFrom,
-        userId,
-        cmpDateFunc: LessThan,
-      })
-
-      const historyBorderRight = await this.accountHistoryRepository.findOne({
-        where: {
-          date: MoreThan(dateTo),
-          user: {
-            id: userId,
-          },
-        },
-      })
-
-      console.log(historyBorderRight)
-      console.log(historyBorderLeft)
-      console.log(history)
-
       return {
-        history,
-        historyBorderRight,
-        historyBorderLeft,
+        history: [...historyBorderLeft, ...history],
+        // historyBorderRight,
+        // historyBorderLeft,
       }
     } else {
       return await this.accountHistoryRepository.find({
