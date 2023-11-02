@@ -1,4 +1,3 @@
-import styled from "styled-components"
 import { OverviewMenu } from "@widgets/OverviewMenu/ui/OverviewMenu.tsx"
 import { GetTransByMenus } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import React, { memo } from "react"
