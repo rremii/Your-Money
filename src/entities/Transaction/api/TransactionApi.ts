@@ -5,7 +5,6 @@ import { DefaultResponse } from "@entities/Auth/types.ts"
 export const TransactionApi = Api.injectEndpoints({
 
   endpoints: (build) => ({
-
     GetTransactionsByDateGap: build.query<ITransaction[], GetTransactionDto>({
       query: (transactionDto) => ({
         url: "transaction",

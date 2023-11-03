@@ -1,5 +1,5 @@
 import { ITransByMenu } from "@entities/Transaction/model/GetTransByMenus.tsx"
-import { GetHistoryPointsResponse, IAccountHistoryPoint } from "@entities/AccountHistoryPoint/types.ts"
+import { IAccountHistoryPoint } from "@entities/AccountHistoryPoint/types.ts"
 
 // type HistoryData = GetHistoryPointsResponse
 

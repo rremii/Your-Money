@@ -1,7 +1,5 @@
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useGetHistoryPointsByDateGapQuery } from "@entities/AccountHistoryPoint/api/AccountHistoryPointApi.ts"
-import { useEffect } from "react"
-import { IAccountHistoryPoint } from "@entities/AccountHistoryPoint/types.ts"
 
 export const useAccountHistoryPoints = (userId?: number) => {
 

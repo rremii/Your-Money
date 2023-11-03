@@ -50,8 +50,12 @@ export const useAccount = (userId?: number) => {
       return allAccounts?.at(0) || null
   }
 
+  const getAccountIds = () => {
+    return allAccounts?.map(({ id }) => id) || []
+  }
+
 
   return {
-    allAccounts, getAccountById
+    allAccounts, getAccountById, getAccountIds
   }
 }

@@ -20,6 +20,8 @@ export interface ITransaction {
 
 export type DateFilter = "day" | "week" | "month" | "year" | "allTime"
 
+
+//todo start changin from here 
 export interface CreateTransDto {
   accountId: number
   userId: number
