@@ -8,6 +8,7 @@ import { useAccountHistoryPoints } from "@entities/AccountHistoryPoint/model/use
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { AddHistoryPointsToMenus } from "@widgets/TransactionsMenu/model/AddHistoryPointsToMenus.ts"
 import { SliderLayout } from "@shared/ui/Slider.tsx"
+import { useAccount } from "@entities/Account/model/useAccount.tsx"
 
 
 export const TransactionsSlider = memo(() => {
@@ -18,8 +19,9 @@ export const TransactionsSlider = memo(() => {
 
 
   const { data: user } = GetMe.useQueryState()
-  const { allTransactions } = useGetTransactions(user?.id)
-  const { history } = useAccountHistoryPoints(user?.id)
+  const { accountIds } = useAccount(user?.id)
+  const { allTransactions } = useGetTransactions(accountIds)
+  const { history } = useAccountHistoryPoints(accountIds)
 
   const { sliderRef, OnScroll } = useSlider()
 

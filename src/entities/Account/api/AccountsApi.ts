@@ -1,11 +1,11 @@
 import { Api } from "@shared/api/config/Api.ts"
-import { IAccount } from "@entities/Account/types.ts"
+import { AccountResponse, IAccount } from "@entities/Account/types.ts"
 
 export const AccountsApi = Api.injectEndpoints({
 
   endpoints: (build) => ({
 
-    GetAccounts: build.query<IAccount[], number | undefined>({
+    GetAccounts: build.query<AccountResponse[], number | undefined>({
       query: (userId) => ({
         url: "account",
         method: "GET",
@@ -19,6 +19,7 @@ export const AccountsApi = Api.injectEndpoints({
   overrideExisting: false
 })
 
+export const { GetAccounts } = AccountsApi.endpoints
 
 export const {
   useGetAccountsQuery

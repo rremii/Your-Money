@@ -1,17 +1,18 @@
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useGetHistoryPointsByDateGapQuery } from "@entities/AccountHistoryPoint/api/AccountHistoryPointApi.ts"
 
-export const useAccountHistoryPoints = (userId?: number) => {
+export const useAccountHistoryPoints = (accountIds: number[]) => {
 
   const { dateTo, dateFrom } = useTypedSelector(state => state.Date.allTransDateGap)
   const curAccountId = useTypedSelector(state => state.CurAccount.id)
 
+
   const { data: allHistoryPointsData } = useGetHistoryPointsByDateGapQuery({
-    userId,
+    accountIds,
     dateTo: dateTo,
     dateFrom: dateFrom
   }, {
-    skip: !userId
+    skip: !accountIds?.length
   })
 
   let history = allHistoryPointsData?.history || []

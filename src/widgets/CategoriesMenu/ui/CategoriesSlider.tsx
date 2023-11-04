@@ -7,6 +7,8 @@ import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { SliderLayout } from "@shared/ui/Slider.tsx"
+import { useAccount } from "@entities/Account/model/useAccount.tsx"
+import { useAccountHistoryPoints } from "@entities/AccountHistoryPoint/model/useAccountHistoryPoints.ts"
 
 
 export const CategoriesSlider = memo(() => {
@@ -15,7 +17,9 @@ export const CategoriesSlider = memo(() => {
   const firstDay = useTypedSelector(state => state.Date.firstDay)
 
   const { data: user } = GetMe.useQueryState()
-  const { allTransactions } = useGetTransactions(user?.id)
+  const { accountIds } = useAccount(user?.id)
+  const { allTransactions } = useGetTransactions(accountIds)
+
 
   const { sliderRef, OnScroll } = useSlider()
 

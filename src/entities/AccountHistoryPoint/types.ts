@@ -1,13 +1,11 @@
 export interface GetHistoryPointsDto {
-  userId: number
+  accountIds: number[]
   dateFrom: string
   dateTo: string
 }
 
 export interface GetHistoryPointsResponse {
   history: IAccountHistoryPoint[]
-  // historyBorderRight: IAccountHistoryPoint | null
-  // historyBorderLeft: IAccountHistoryPoint[]
 }
 
 export interface IAccountHistoryPoint {

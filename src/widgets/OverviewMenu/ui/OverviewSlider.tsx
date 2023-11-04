@@ -7,6 +7,7 @@ import { useGetTransactions } from "@entities/Transaction/model/useGetTransactio
 import { GetExtraInfoByMenus } from "@widgets/OverviewMenu/model/GetExtraInfoByMenus.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { SliderLayout } from "@shared/ui/Slider.tsx"
+import { useAccount } from "@entities/Account/model/useAccount.tsx"
 
 
 //todo try to move trans by ids and menu ext data to store
@@ -17,7 +18,8 @@ export const OverviewSlider = memo(() => {
 
 
   const { data: user } = GetMe.useQueryState()
-  const { allTransactions } = useGetTransactions(user?.id)
+  const { accountIds } = useAccount(user?.id)
+  const { allTransactions } = useGetTransactions(accountIds)
 
 
   const { sliderRef, OnScroll } = useSlider()

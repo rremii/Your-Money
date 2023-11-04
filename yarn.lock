@@ -1541,6 +1541,11 @@
   resolved "https://registry.npmjs.org/@types/minimist/-/minimist-1.2.2.tgz"
   integrity sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==
 
+"@types/money@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@types/money/-/money-0.2.2.tgz#cdf320ae59cf6d19a3905ce02a72a59ba4574db7"
+  integrity sha512-1t7swZcXV8Rdn1dMBXd+hGhXxztc4n/jbYYUJgPB/qKxYpEEGgwVtEuSOpwVO1YKiNsmoOIftfYyYbrzmeJe7A==
+
 "@types/node@*":
   version "20.4.5"
   resolved "https://registry.npmjs.org/@types/node/-/node-20.4.5.tgz"
@@ -4314,6 +4319,11 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+
+money@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/money/-/money-0.2.0.tgz#7eada2df1009df935fa18d4fb1d620ddacce02c2"
+  integrity sha512-0AblpmOvf7yXW9Or4iBHvms38blV74pwjF/G3qI2PDbcAowQEYgEJPqvnuGBYTuWXtZQSrN5g49RqyezdKhwGg==
 
 ms@2.0.0:
   version "2.0.0"

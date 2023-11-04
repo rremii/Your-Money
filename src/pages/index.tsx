@@ -2,6 +2,7 @@ import React from "react"
 import { Route, Routes } from "react-router-dom"
 import AppLayout from "../app/layout/AppLayout.tsx"
 
+
 // const Categories = lazy(() => import("./Categories/CategoriesPage.tsx"))
 // const Transactions = lazy(() => import("./Transactions/TransactionsPage.tsx"))
 // const Overview = lazy(() => import("./Overview/OverviewPage.tsx"))
@@ -23,6 +24,11 @@ import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { useAccountHistoryPoints } from "@entities/AccountHistoryPoint/model/useAccountHistoryPoints.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import * as fx from "money"
+import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConverter.ts"
+
+//todo where to store ui logic
+//what about portals and modals
 
 export const Routing = () => {
 
@@ -33,8 +39,12 @@ export const Routing = () => {
 
   usePreloader(isLoggedIn)
   useCategory(user?.id)
-  useAccount(user?.id)
-  useAccountHistoryPoints(user?.id)
+  const { accountIds } = useAccount(user?.id)
+  useAccountHistoryPoints(accountIds)
+
+  // const { convertCurrency } = useCurrencyConverter()
+
+  // console.log(convertCurrency(1, "USD", "BYN"))
 
   return (
     <>

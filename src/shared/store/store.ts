@@ -9,6 +9,7 @@ import { CategoryReducer } from "@entities/Category/model/CategorySlice.ts"
 import { AllAccountReducer } from "@entities/Account/model/AllAccountSlice.ts"
 import { EditCreateTransactionReducer } from "@entities/EditCreateTransaction/model"
 import { ModalsReducer } from "@entities/Modals/model"
+// import { CurrencyReducer } from "@entities/Currency/model/CurrencySlice.ts"
 
 
 const rootReducer = combineReducers({
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   EditCreateTransaction: EditCreateTransactionReducer,
   AllAccount: AllAccountReducer,
   // Calendar: CalendarReducer,
+  // Currency: CurrencyReducer,
   Modals: ModalsReducer,
   [Api.reducerPath]: Api.reducer
 })

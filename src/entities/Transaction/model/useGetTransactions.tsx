@@ -2,7 +2,7 @@ import { ITransaction } from "@entities/Transaction/types.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useGetTransactionsByDateGapQuery } from "@entities/Transaction/api/TransactionApi.ts"
 
-export const useGetTransactions = (userId?: number) => {
+export const useGetTransactions = (accountIds: number[]) => {
 
   const curAccId = useTypedSelector(state => state.CurAccount.id)
   const allTransDateGap = useTypedSelector(state => state.Date.allTransDateGap)
@@ -10,9 +10,9 @@ export const useGetTransactions = (userId?: number) => {
 
   const { data: transactions } = useGetTransactionsByDateGapQuery({
     ...allTransDateGap,
-    userId
+    accountIds
   }, {
-    skip: !userId
+    skip: !accountIds.length
   })
 
   let allTransactions = transactions || [] as ITransaction[]

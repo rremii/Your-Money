@@ -1,12 +1,12 @@
 import { Api } from "@shared/api/config/Api.ts"
 import { GetTransactionDto } from "@entities/Transaction/types.ts"
-import { GetHistoryPointsResponse } from "@entities/AccountHistoryPoint/types.ts"
+import { GetHistoryPointsDto, GetHistoryPointsResponse } from "@entities/AccountHistoryPoint/types.ts"
 
 export const TransactionApi = Api.injectEndpoints({
 
   endpoints: (build) => ({
 
-    GetHistoryPointsByDateGap: build.query<GetHistoryPointsResponse, GetTransactionDto>({
+    GetHistoryPointsByDateGap: build.query<GetHistoryPointsResponse, GetHistoryPointsDto>({
       query: (historyPointsDto) => ({
         url: "account-history",
         method: "GET",
