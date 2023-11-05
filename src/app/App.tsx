@@ -11,7 +11,7 @@ ChartJS.register(CategoryScale,
 
 function App() {
 
-
+//todo check https://nx-dev-git-feat-cypress-10-nrwl.vercel.app/module-federation/micro-frontend-architecture
   return <Routing />
 }
 
