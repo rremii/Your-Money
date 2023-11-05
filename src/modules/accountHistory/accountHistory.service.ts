@@ -4,6 +4,7 @@ import {
   And,
   Between,
   FindOperator,
+  In,
   LessThan,
   LessThanOrEqual,
   MoreThan,
@@ -63,7 +64,7 @@ export class AccountHistoryService {
   async createHistoryPoint(
     transaction: Transaction,
     account: Account,
-    user: User,
+    // user: User,
     date: string,
   ) {
     const type = transaction.type
@@ -80,7 +81,7 @@ export class AccountHistoryService {
 
     const historyPoint = new AccountHistoryPoint()
     historyPoint.account = account
-    historyPoint.user = user
+    // historyPoint.user = user
     historyPoint.transaction = transaction
     historyPoint.date = date
     historyPoint.balance = prevHistoryPoint
@@ -224,22 +225,22 @@ export class AccountHistoryService {
   async getHistoryByDateGap({
     dateTo,
     dateFrom,
-    userId,
+    accountIds,
   }: GetAccountHistoryDto) {
     if (dateTo && dateFrom) {
-      const accountIds = await this.accountRepository.find({
-        where: {
-          user: { id: userId },
-        },
-        select: ["id"],
-      })
+      // const accountIds = await this.accountRepository.find({
+      //   where: {
+      //     user: { id: userId },
+      //   },
+      //   select: ["id"],
+      // })
 
       const historyBorderLeft: AccountHistoryPoint[] = []
       await Promise.all(
-        accountIds.map(async ({ id }) => {
+        accountIds.map(async (id) => {
           const historyPoint = await this.getPrevHistoryPoint({
             date: dateFrom,
-            userId,
+            // userId,
             accountId: id,
             cmpDateFunc: LessThan,
           })
@@ -253,9 +254,10 @@ export class AccountHistoryService {
         },
         where: {
           date: Between(dateFrom, dateTo),
-          user: {
-            id: userId,
-          },
+          accountId: In(accountIds),
+          // user: {
+          //   id: userId,
+          // },
         },
       })
 
@@ -270,9 +272,11 @@ export class AccountHistoryService {
           date: "ASC",
         },
         where: {
-          user: {
-            id: userId,
-          },
+          accountId: In(accountIds),
+
+          // user: {
+          //   id: userId,
+          // },
         },
       })
     }

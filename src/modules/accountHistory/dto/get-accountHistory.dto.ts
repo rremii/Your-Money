@@ -1,9 +1,8 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { IsArray, IsNotEmpty, IsNumber, IsString } from "class-validator"
 
 export class GetAccountHistoryDto {
-  @IsNotEmpty()
-  @IsNumber()
-  userId: number
+  @IsArray()
+  accountIds: number[]
 
   @IsString()
   dateFrom: string

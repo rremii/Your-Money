@@ -44,6 +44,6 @@ export class User extends BaseEntity implements IUser {
   @OneToMany(() => Category, (category) => category.user)
   categories: Category[]
 
-  @OneToMany(() => Category, (category) => category.user)
-  transaction: Transaction[]
+  // @OneToMany(() => Category, (category) => category.user)
+  // transaction: Transaction[]
 }

@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from "@nestjs/common"
 import { CreateTransactionDto } from "./dto/create-transaction.dto"
 import { Transaction } from "./entities/transaction.entity"
 import { GetTransactionsDto } from "./dto/get-transactions.dto"
-import { Between, MoreThan, Repository } from "typeorm"
+import { Between, In, MoreThan, Repository } from "typeorm"
 import { InjectRepository } from "@nestjs/typeorm"
 import { User } from "../users/entities/user.entity"
 import { Account } from "../account/entities/account.entity"
@@ -57,7 +57,7 @@ export class TransactionService {
   }
 
   async createTransaction({
-    userId,
+    // userId,
     accountId,
     quantity,
     type,
@@ -69,13 +69,13 @@ export class TransactionService {
     const categoryEntity = await this.categoryService.getCategoryById(
       categoryId,
     )
-    const userEntity = await this.usersService.getUserById(userId)
+    // const userEntity = await this.usersService.getUserById(userId)
 
     if (!accountEntity)
       throw new BadRequestException(ApiError.ACCOUNT_NOT_FOUND)
     if (!categoryEntity)
       throw new BadRequestException(ApiError.CATEGORY_NOT_FOUND)
-    if (!userEntity) throw new BadRequestException(ApiError.USER_NOT_FOUND)
+    // if (!userEntity) throw new BadRequestException(ApiError.USER_NOT_FOUND)
 
     let newAccountBalance: number = accountEntity.balance
     if (type === "income") newAccountBalance += quantity
@@ -85,7 +85,7 @@ export class TransactionService {
 
     const transaction = new Transaction()
     transaction.account = accountEntity
-    transaction.user = userEntity
+    // transaction.user = userEntity
     transaction.category = categoryEntity
     transaction.date = freeDate
     transaction.type = type
@@ -100,7 +100,7 @@ export class TransactionService {
     await this.accountHistoryService.createHistoryPoint(
       transaction,
       accountEntity,
-      userEntity,
+      // userEntity,
       freeDate,
     )
 
@@ -139,16 +139,16 @@ export class TransactionService {
   //todo get rid of user-transaction relation
   private async changeTransactionAccount(
     transaction: EditTransactionDto,
-    userId: number,
+    // userId: number,
   ) {
     const removedTransaction = await this.deleteTransactionById({
       id: transaction.id,
     })
-    console.log(removedTransaction, transaction, userId)
+
     return await this.createTransaction({
       ...removedTransaction,
       ...transaction,
-      userId,
+      // userId,
     })
   }
 
@@ -160,7 +160,7 @@ export class TransactionService {
     let transaction = await this.transactionRepository.findOne({
       relations: {
         accountHistoryPoint: true,
-        user: true,
+        // user: true,
       },
       where: { id },
     })
@@ -172,9 +172,8 @@ export class TransactionService {
     if (transaction.accountId !== accountId) {
       transaction = await this.changeTransactionAccount(
         editTransactionDto,
-        transaction.user.id,
+        // transaction.user.id,
       )
-      // transaction.account = await this.accountService.getAccountById(accountId)
     } else {
       if (date !== transaction.date)
         transaction = await this.changeTransactionDate(transaction, date)
@@ -227,7 +226,11 @@ export class TransactionService {
 
   //todo
   //todo select special
-  async getTransByDateGap({ dateTo, dateFrom, userId }: GetTransactionsDto) {
+  async getTransByDateGap({
+    dateTo,
+    dateFrom,
+    accountIds,
+  }: GetTransactionsDto) {
     // return await this.transactionRepository.query(`
     //     SELECT * FROM transaction
     //        INNER JOIN "public"."user" ON "transaction"."userId" = "user"."id"
@@ -240,9 +243,10 @@ export class TransactionService {
           date: "ASC",
         },
         where: {
-          user: {
-            id: userId,
-          },
+          accountId: In(accountIds),
+          // user: {
+          //   id: userId,
+          // },
         },
       })
     else
@@ -252,9 +256,10 @@ export class TransactionService {
         },
         where: {
           date: Between(dateFrom, dateTo),
-          user: {
-            id: userId,
-          },
+          accountId: In(accountIds),
+          // user: {
+          //   id: userId,
+          // },
         },
       })
   }

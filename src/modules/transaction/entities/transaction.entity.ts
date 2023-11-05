@@ -55,8 +55,8 @@ export class Transaction extends BaseEntity implements ITransaction {
   @JoinColumn({ name: "categoryId" })
   category: Category
 
-  @ManyToOne(() => User, (user) => user.transaction)
-  user: User
+  // @ManyToOne(() => User, (user) => user.transaction)
+  // user: User
 
   @OneToOne(
     () => AccountHistoryPoint,
