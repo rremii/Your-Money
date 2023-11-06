@@ -1,3 +1,5 @@
+import { Currency } from "@entities/Account/types.ts"
+
 export interface GetTransactionDto {
   dateFrom: string
   dateTo: string
@@ -10,12 +12,30 @@ export type TransactionType = "income" | "expense"
 export interface ITransaction {
   id: number
   date: string
-  quantity: number
   type: TransactionType
   categoryId: number
   accountId: number
   title?: string
+  quantity: number
+  // account: {
+  //   currency: Currency
+  // }
 }
+
+export interface IConvertedTransaction extends ITransaction {
+  convertedQuantity: number
+}
+
+
+//todo delete money lib
+
+// interface ITransactionWithCurrency extends ITransaction {
+//   account: {
+//     currency: Currency
+//   }
+// }
+
+export type GetTransactionResponse = ITransaction[]
 
 
 export type DateFilter = "day" | "week" | "month" | "year" | "allTime"

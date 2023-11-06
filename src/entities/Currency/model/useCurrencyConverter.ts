@@ -4,14 +4,16 @@ import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useTimer } from "@shared/hooks/useTimer.tsx"
 
+
+//todo move to shared
 export const useCurrencyConverter = () => {
 
 
   const { data } = useFetchCurrencyQuery()
 
 
-  const convertCurrency = (quantity: number, currencyFrom: string, currencyTo: string) => {
-    if (!data) return
+  const convertCurrency = (quantity: number, currencyFrom: string, currencyTo: string): number => {
+    if (!data) return 0
     const { base, rates } = data
 
     if (currencyFrom.toUpperCase() === base.toUpperCase()) {

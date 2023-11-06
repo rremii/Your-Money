@@ -18,8 +18,9 @@ export const OverviewSlider = memo(() => {
 
 
   const { data: user } = GetMe.useQueryState()
-  const { accountIds } = useAccount(user?.id)
-  const { allTransactions } = useGetTransactions(accountIds)
+  const { accountIds, getAccountById } = useAccount(user?.id)
+  // const { allTransactions } = useGetTransactions(accountIds)
+  const { allTransactions } = useGetTransactions(accountIds, getAccountById)
 
 
   const { sliderRef, OnScroll } = useSlider()

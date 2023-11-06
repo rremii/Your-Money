@@ -1,5 +1,6 @@
 import { ITransByMenu } from "@entities/Transaction/model/GetTransByMenus.tsx"
-import { IAccountHistoryPoint } from "@entities/AccountHistoryPoint/types.ts"
+import { IAccountHistoryPoint, IConvertedHistoryPoint } from "@entities/AccountHistoryPoint/types.ts"
+import { Currency } from "@entities/Account/types.ts"
 
 // type HistoryData = GetHistoryPointsResponse
 
@@ -9,11 +10,14 @@ export interface MenuWithHistory extends ITransByMenu {
 }
 
 
-export const AddHistoryPointsToMenus = (menus: ITransByMenu[],
-                                        history: IAccountHistoryPoint[], curAccountId: number | null): MenuWithHistory[] => {
+export const AddHistoryPointsToMenus = (
+  menus: ITransByMenu[],
+  history: IConvertedHistoryPoint[],
+  curAccountId: number | null
+): MenuWithHistory[] => {
 
 
-  const GetAllAccountPrevPoint = (menuDate: Date, initHistoryPoints: IAccountHistoryPoint[]): number => {
+  const GetAllAccountPrevPoint = (menuDate: Date, initHistoryPoints: IConvertedHistoryPoint[]): number => {
 
     const accountsIdsHistoryPoints = new Set()
 
@@ -27,17 +31,17 @@ export const AddHistoryPointsToMenus = (menus: ITransByMenu[],
       }
     }
 
-    return historyPoints.reduce((acc, prev) => acc + prev.balance, 0) || 0
+    return historyPoints.reduce((acc, prev) => acc + prev.convertedBalance, 0) || 0
   }
 
-  const GetAccountPrevPoint = (menuDate: Date, initHistoryPoints: IAccountHistoryPoint[]): number => {
+  const GetAccountPrevPoint = (menuDate: Date, initHistoryPoints: IConvertedHistoryPoint[]): number => {
 
     let historyPointBalance = 0
 
     for (let i = initHistoryPoints.length; i > 0; i--) {
       const curHistoryPoint = initHistoryPoints[i - 1]
       if (new Date(curHistoryPoint.date) < menuDate) {
-        historyPointBalance = curHistoryPoint.balance
+        historyPointBalance = curHistoryPoint.convertedBalance
         break
       }
     }

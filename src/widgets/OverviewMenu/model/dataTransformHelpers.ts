@@ -1,5 +1,5 @@
 import { ChartOptions } from "chart.js"
-import { DateFilter, ITransaction } from "@entities/Transaction/types.ts"
+import { DateFilter, IConvertedTransaction, ITransaction } from "@entities/Transaction/types.ts"
 import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
 import { ICategory } from "@entities/Category/type.ts"
 import { Days, DayType, FullDays } from "@shared/constants/Days.ts"
@@ -176,9 +176,10 @@ export const GetLabels = (dateFrom: Date, dateTo: Date, datePointsAmount: number
 }
 
 
-export const SumAllTransactions = (transactions: ITransaction[]): number => {
+export const SumAllTransactions = (transactions: IConvertedTransaction[]): number => {
   return transactions.reduce((acc, cur) => {
-    if (cur.type === "income") return acc + cur.quantity
-    else return acc - cur.quantity
+
+    if (cur.type === "income") return acc + cur.convertedQuantity
+    else return acc - cur.convertedQuantity
   }, 0)
 }

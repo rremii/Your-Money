@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { IAccount } from "@entities/Account/types.ts"
+import { Currency, IAccount } from "@entities/Account/types.ts"
 
 interface initialState {
   id: null
@@ -7,6 +7,7 @@ interface initialState {
   color: string
   balance: number
   icon: string
+  currency: Currency
 }
 
 const initialState: initialState = {
@@ -14,18 +15,20 @@ const initialState: initialState = {
   balance: 0,
   color: "#5C6AC0",
   name: "all",
-  icon: ""
+  icon: "",
+  currency: Currency.UnitedStatesDollar
 }
 
 const AllAccountSlice = createSlice({
   name: "AllAccountSlice",
   initialState,
   reducers: {
-    setAllAccount(state, action: PayloadAction<Pick<IAccount, "name" | "balance" | "color">>) {
-      const { name, color, balance } = action.payload
+    setAllAccount(state, action: PayloadAction<Pick<IAccount, "name" | "balance" | "color" | "currency">>) {
+      const { name, color, balance, currency } = action.payload
       state.name = name
       state.balance = balance
       state.color = color
+      state.currency = currency
     },
     setAllAccountBalance(state, action: PayloadAction<number>) {
       state.balance = action.payload

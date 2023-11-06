@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { TransformDate } from "@widgets/TransactionsMenu/model/TransformDate.ts"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 interface props {
   date: Date
@@ -9,6 +10,8 @@ interface props {
 
 
 export const DateBox: FC<props> = ({ date: curDate, dateBalance }) => {
+
+  const curCurrencySign = useTypedSelector(state => state.SideBar.curCurrencySign)
 
   const { isToday, month, year, date, day } = TransformDate(curDate)
 
@@ -20,7 +23,7 @@ export const DateBox: FC<props> = ({ date: curDate, dateBalance }) => {
       <p className="month-year">{month && month.toUpperCase()} {year}</p>
     </div>
     <div className="quantity">
-      {dateBalance < 0 ? "-" : "+"}Br {Math.abs(dateBalance)}
+      {dateBalance < 0 ? "-" : "+"}{curCurrencySign} {Math.abs(dateBalance)}
     </div>
   </DateBoxLayout>
 }

@@ -11,7 +11,7 @@ const axiosBaseQuery = (): BaseQueryFn<
     params?: AxiosRequestConfig["params"]
     withInterceptors?: boolean //use default axios, instead of custom with interceptors
     baseUrl?: string,
-    withCredentials: boolean
+    withCredentials?: boolean
   },
   unknown,
   ApiError

@@ -1,17 +1,17 @@
-import { DateFilter, ITransaction } from "@entities/Transaction/types.ts"
+import { DateFilter, IConvertedTransaction, ITransaction } from "@entities/Transaction/types.ts"
 import { transByDate } from "@entities/Transaction/helpers/TransByDate.ts"
 import { DayType } from "@shared/constants/Days.ts"
 
 
 interface props {
   dateMenuIds: number[]
-  allTransactions: ITransaction[]
+  allTransactions: IConvertedTransaction[]
   dateFilter: DateFilter
   firstDay: DayType
 }
 
 export interface ITransByMenu {
-  transactions: ITransaction[],
+  transactions: IConvertedTransaction[],
   dateGap: string,
   dateTo: Date,
   dateFrom: Date,

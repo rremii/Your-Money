@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import React, { FC } from "react"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 
 interface props {
@@ -15,14 +16,16 @@ const GetNumberSignStyle = (num: number) => {
 
 export const TransactionHeader: FC<props> = React.memo(({ startBalance, endBalance }) => {
 
+  const curCurrencySign = useTypedSelector(state => state.SideBar.curCurrencySign)
+
   return <TransactionsHeaderLayout>
     <div className="balance-cell">
       <h2>Starting balance</h2>
-      <p className={GetNumberSignStyle(startBalance)}>{startBalance < 0 ? "-" : ""}Br {startBalance}</p>
+      <p className={GetNumberSignStyle(startBalance)}>{startBalance < 0 ? "-" : ""}{curCurrencySign} {startBalance}</p>
     </div>
     <div className="balance-cell">
       <h2>Ending balance</h2>
-      <p className={GetNumberSignStyle(endBalance)}>{endBalance < 0 ? "-" : ""}Br {endBalance}</p>
+      <p className={GetNumberSignStyle(endBalance)}>{endBalance < 0 ? "-" : ""}{curCurrencySign} {endBalance}</p>
     </div>
   </TransactionsHeaderLayout>
 })

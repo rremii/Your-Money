@@ -1,11 +1,17 @@
 import { Api } from "@shared/api/config/Api.ts"
-import { CreateTransDto, EditTransDto, GetTransactionDto, ITransaction } from "@entities/Transaction/types.ts"
+import {
+  CreateTransDto,
+  EditTransDto,
+  GetTransactionDto,
+  GetTransactionResponse,
+  ITransaction
+} from "@entities/Transaction/types.ts"
 import { DefaultResponse } from "@entities/Auth/types.ts"
 
 export const TransactionApi = Api.injectEndpoints({
 
   endpoints: (build) => ({
-    GetTransactionsByDateGap: build.query<ITransaction[], GetTransactionDto>({
+    GetTransactionsByDateGap: build.query<GetTransactionResponse, GetTransactionDto>({
       query: (transactionDto) => ({
         url: "transaction",
         method: "GET",

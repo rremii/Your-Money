@@ -1,3 +1,5 @@
+import { Currency } from "@entities/Account/types.ts"
+
 export interface GetHistoryPointsDto {
   accountIds: number[]
   dateFrom: string
@@ -13,5 +15,18 @@ export interface IAccountHistoryPoint {
   balance: number
   accountId: number
   date: string
+  // account: {
+  //   currency: Currency
+  // }
 }
+
+export interface IConvertedHistoryPoint extends IAccountHistoryPoint {
+  convertedBalance: number
+}
+
+// interface IHistoryPointWithCurrency extends IAccountHistoryPoint {
+//   account: {
+//     currency: Currency
+//   }
+// }
 

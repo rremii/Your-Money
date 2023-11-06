@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { Currency } from "@entities/Account/types.ts"
 
 interface initialStateType {
   isSideBarOpen: boolean
@@ -9,6 +10,9 @@ interface initialStateType {
 
   isSignOutMenu: boolean
   isPasswordMenu: boolean
+
+  curCurrency: Currency
+  curCurrencySign: string
 }
 
 
@@ -26,7 +30,12 @@ const initialState = {
 
   isNameMenu: false,
   isSignOutMenu: false,
-  isPasswordMenu: false
+  isPasswordMenu: false,
+
+  //todo get it to config slice
+
+  curCurrency: Currency.BelarusianRuble,
+  curCurrencySign: "Br"
 } as initialStateType
 
 const SideBarSlice = createSlice({

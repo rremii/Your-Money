@@ -30,7 +30,7 @@ export const useAccount = (userId?: number) => {
   useEffect(() => {
     if (allAccounts?.length === 0 || !allAccounts) return
 
-    let curAcc
+    let curAcc: IAccount
     if (typeof curAccId === "number") {
       curAcc = allAccounts.find(({ id }) => id === curAccId) as IAccount
     } else {
