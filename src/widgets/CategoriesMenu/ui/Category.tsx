@@ -4,12 +4,12 @@ import React, { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
-import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
 import { setEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
 import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { ICategory } from "@entities/Category/type.ts"
+import { openMenu, setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
 
 
 interface props extends ICategory {
@@ -29,7 +29,7 @@ export const Category: FC<props> = React.memo(({ color, quantity, icon, name, id
   const OnClick = () => {
 
     dispatch(setEditCreateMenuType("create"))
-    dispatch(setEditCreateTransMenu(true))
+    dispatch(openMenu("editCreateTransMenu"))
 
 
     const account = getAccountById(curAccId)

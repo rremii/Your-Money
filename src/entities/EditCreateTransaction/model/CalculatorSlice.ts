@@ -44,11 +44,13 @@ const CalculatorSlice = createSlice({
       const num2 = state.numberStr2
 
       if (action.payload === ".") {
+
         if (!operator) {
-          if (num1.includes(".") || !num1) return
+          if (num1.includes(".")) return
         } else {
           if (num2.includes(".") || !num2) return
         }
+
       }
       if (!operator) {
         const joinedNum = num1 + String(action.payload)

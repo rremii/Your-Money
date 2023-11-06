@@ -4,8 +4,8 @@ import { PickDateBtn } from "@shared/ui/PickDateBtn.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { IsToday } from "@shared/helpers/IsToday.ts"
 import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
-import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
 import { Months } from "@shared/constants/Months.ts"
+import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 
 export const SetDateToday = () => {
@@ -25,7 +25,7 @@ export const SetDateToday = () => {
   const SetDateToday = () => {
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
     dispatch(setEditTransDateStr(today.toUTCString()))
-    dispatch(setChangeDateMenu(false))
+    dispatch(closeMenu("dateMenu"))
   }
 
   return <PickDateBtn OnClick={SetDateToday} isActive={isActive} color={color} title="Today" img={Category}

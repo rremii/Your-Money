@@ -2,8 +2,8 @@ import { SideBarBtn } from "@shared/ui/SideBarBtn.tsx"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { Menus, openMenu } from "@entities/SideBar/model/SideBarSlice.ts"
 import React from "react"
+import { openMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 export const ChangeName = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -13,7 +13,7 @@ export const ChangeName = React.memo(() => {
 
 
   const handleClick = () => {
-    dispatch(openMenu(Menus.name))
+    dispatch(openMenu("nameMenu"))
   }
 
   return <SideBarBtn onClick={handleClick} title="Name" subTitle={userInfo?.name} icon={Categories} />

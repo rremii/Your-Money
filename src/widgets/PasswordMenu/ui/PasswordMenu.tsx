@@ -1,6 +1,5 @@
 import { Modal } from "@shared/ui/Modal.tsx"
 import React from "react"
-import { closeAllMenus } from "@entities/SideBar/model/SideBarSlice.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { FormField } from "@shared/ui/FormField.tsx"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
@@ -11,6 +10,8 @@ import * as yup from "yup"
 import styled from "styled-components"
 import { GetMe, useChangePasswordMutation } from "@entities/User/api/UserApi.ts"
 import { HashData } from "@shared/helpers/HashData.ts"
+import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { Overlay } from "@shared/ui/Overlay.tsx"
 
 
 interface FormFields {
@@ -31,7 +32,7 @@ export const PasswordMenu = React.memo(() => {
   const dispatch = useAppDispatch()
 
 
-  const isPasswordMenu = useTypedSelector(state => state.SideBar.isPasswordMenu)
+  const isPasswordMenu = useTypedSelector(state => state.Modals.passwordMenu.isOpen)
 
 
   const { data: user } = GetMe.useQueryState()
@@ -66,48 +67,51 @@ export const PasswordMenu = React.memo(() => {
   }
 
   const CloseMenu = () => {
-    dispatch(closeAllMenus())
+    dispatch(closeMenu("passwordMenu"))
     reset()
   }
 
-  return <PasswordLayout $isOpen={isPasswordMenu}>
-    <h2 className="title">Change password</h2>
-    <form onSubmit={handleSubmit(ChangePassword)}>
-      <div className="fields">
+  return <>
+    <Overlay $isActive={isPasswordMenu} onClick={CloseMenu} $zIndex={15} />
+    <PasswordLayout $isOpen={isPasswordMenu}>
+      <h2 className="title">Change password</h2>
+      <form onSubmit={handleSubmit(ChangePassword)}>
+        <div className="fields">
 
-        <FormField
-          isError={Boolean(errors.root) || Boolean(errors.password)}
-          label=""
-          input={{
-            type: "password",
-            placeholder: "Password",
-            registerData: { ...register("password") }
-          }}
-        />
-        {errors.password && (
-          <ErrorMessage>{errors.password.message}</ErrorMessage>
-        )}
-        <FormField
-          isError={Boolean(errors.root || Boolean(errors.confirmPassword))}
-          label=""
-          input={{
-            type: "password",
-            placeholder: "Confirm password",
-            registerData: { ...register("confirmPassword") }
-          }}
-        />
-        {errors.confirmPassword && (
-          <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
-        )}
-        {errors.root && <ErrorMessage>{errors.root.message}</ErrorMessage>}
-      </div>
+          <FormField
+            isError={Boolean(errors.root) || Boolean(errors.password)}
+            label=""
+            input={{
+              type: "password",
+              placeholder: "Password",
+              registerData: { ...register("password") }
+            }}
+          />
+          {errors.password && (
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
+          )}
+          <FormField
+            isError={Boolean(errors.root || Boolean(errors.confirmPassword))}
+            label=""
+            input={{
+              type: "password",
+              placeholder: "Confirm password",
+              registerData: { ...register("confirmPassword") }
+            }}
+          />
+          {errors.confirmPassword && (
+            <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
+          )}
+          {errors.root && <ErrorMessage>{errors.root.message}</ErrorMessage>}
+        </div>
 
-      <div className="btn-section">
-        <button className="gray" type="button" onClick={CloseMenu}>CANCEL</button>
-        <button className="red" type="submit">CHANGE PASSWORD</button>
-      </div>
-    </form>
-  </PasswordLayout>
+        <div className="btn-section">
+          <button className="gray" type="button" onClick={CloseMenu}>CANCEL</button>
+          <button className="red" type="submit">CHANGE PASSWORD</button>
+        </div>
+      </form>
+    </PasswordLayout>
+  </>
 })
 const PasswordLayout = styled(Modal)`
   .btn-section {

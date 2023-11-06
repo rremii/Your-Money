@@ -4,8 +4,8 @@ import React from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { IsYesterday } from "@shared/helpers/IsYesterday.ts"
 import { IsToday } from "@shared/helpers/IsToday.ts"
-import { setCalendarMenu } from "@entities/Modals/model/CalendarMenuSlice.ts"
 import { Months } from "@shared/constants/Months.ts"
+import { openMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 
 export const OpenCalendar = () => {
@@ -17,7 +17,7 @@ export const OpenCalendar = () => {
 
 
   const OpenCalendar = () => {
-    dispatch(setCalendarMenu(true))
+    dispatch(openMenu("calendarMenu"))
   }
 
   const date = new Date(dateStr)

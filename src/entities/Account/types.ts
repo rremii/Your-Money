@@ -27,5 +27,5 @@ export enum Currency {
   SwissFranc = "CHF",
   UnitedStatesDollar = "USD",
   BelarusianRuble = "BYN",
-  DefaultCurrency = Currency.UnitedStatesDollar
+  DefaultCurrency = Currency.BelarusianRuble
 }

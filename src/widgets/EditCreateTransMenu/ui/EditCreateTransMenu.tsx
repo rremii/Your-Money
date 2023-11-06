@@ -9,9 +9,6 @@ import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { Calculator } from "@features/Calculator/ui/Calculator.tsx"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
-import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
-import { setChooseCategoryMenu } from "@entities/Modals/model/ChooseCategoryMenuSlice.ts"
-import { setChooseAccountMenu } from "@entities/Modals/model/ChooseAccountMenuClice.ts"
 import { InfoCell } from "@shared/ui/InfoCell.tsx"
 import { ResultQuantity } from "@widgets/EditCreateTransMenu/ui/ResultQuantity.tsx"
 import { Notes } from "@widgets/EditCreateTransMenu/ui/NotesInput.tsx"
@@ -20,12 +17,13 @@ import { OptionsSection } from "@widgets/EditCreateTransMenu/ui/OptionsSection.t
 import { useCreateTransactionMutation, useEditTransactionMutation } from "@entities/Transaction/api/TransactionApi.ts"
 import { resetEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { resetTransCalculator } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
+import { closeMenu, openMenu, setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
 
 export const EditCreateTransMenu = React.memo(() => {
   const dispatch = useAppDispatch()
 
-  const isMenuOpen = useTypedSelector(state => state.Modals.EditCreateTransMenu.isOpen)
-  const menuType = useTypedSelector(state => state.Modals.EditCreateTransMenu.menuType)
+  const isMenuOpen = useTypedSelector(state => state.Modals.editCreateTransMenu.isOpen)
+  const menuType = useTypedSelector(state => state.Modals.editCreateTransMenu.menuType)
   const curAccId = useTypedSelector(state => state.CurAccount.id)
   const type = useTypedSelector(state => state.EditCreateTransaction.Transaction.type)
   const transactionId = useTypedSelector(state => state.EditCreateTransaction.Transaction.id)
@@ -50,33 +48,33 @@ export const EditCreateTransMenu = React.memo(() => {
 
 
   const CloseMenu = () => {
-    dispatch(setEditCreateTransMenu(false))
+    dispatch(closeMenu("editCreateTransMenu"))
     dispatch(setEditCreateMenuType(menuType))
     dispatch(resetEditTransaction())
     dispatch(resetTransCalculator())
   }
 
   const OpenChooseCategoryMenu = useCallback(() => {
-    dispatch(setChooseCategoryMenu(true))
+    dispatch(openMenu("chooseCategoryMenu"))
     if (menuType === "overview")
       dispatch(setEditCreateMenuType("edit"))
   }, [menuType])
 
   const OpenChooseAccountMenu = useCallback(() => {
-    dispatch(setChooseAccountMenu(true))
+    dispatch(openMenu("chooseAccountMenu"))
     if (menuType === "overview")
       dispatch(setEditCreateMenuType("edit"))
   }, [menuType])
 
   const [createTransaction, { isLoading: isCreating }] = useCreateTransactionMutation()
-  const [editTransaction, { isLoading: isEditting }] = useEditTransactionMutation()
+  const [editTransaction, { isLoading: isEditing }] = useEditTransactionMutation()
 
 
   const CreateTransaction = async () => {
     if (!user?.id || !account.id || !category.id || !quantity) return
 
     await createTransaction({
-      type, title, accountId: account.id, categoryId: category.id, quantity, userId: user.id, date: dateStr
+      type, title, accountId: account.id, categoryId: category.id, quantity, date: dateStr
     })
 
     CloseMenu()
@@ -128,7 +126,7 @@ export const EditCreateTransMenu = React.memo(() => {
       <Notes content={title} />
 
       {menuType !== "overview" &&
-        <Calculator isLoading={isEditting || isCreating} OnSubmit={OnSubmit} color={category.color} />}
+        <Calculator isLoading={isEditing || isCreating} OnSubmit={OnSubmit} color={category.color} />}
       <TransDate dateStr={dateStr} />
       {menuType === "overview" && <OptionsSection color={category.color} />}
     </MenuLayout>

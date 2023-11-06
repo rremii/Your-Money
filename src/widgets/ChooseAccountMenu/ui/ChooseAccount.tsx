@@ -2,8 +2,8 @@ import { Account } from "@shared/ui/Account.tsx"
 import React, { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
-import { setChooseAccountMenu } from "@entities/Modals/model/ChooseAccountMenuClice.ts"
 import { IAccount } from "@entities/Account/types.ts"
+import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 
 interface props extends IAccount {
@@ -20,7 +20,7 @@ export const ChooseAccount: FC<props> = (account) => {
 
   const SetAccount = (account: IAccount) => {
     dispatch(setAccount(account))
-    dispatch(setChooseAccountMenu(false))
+    dispatch(closeMenu("chooseAccountMenu"))
   }
 
   const isActive = curName === name

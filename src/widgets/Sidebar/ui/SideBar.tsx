@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import React from "react"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { SideBarSection } from "@shared/ui/SideBarSection.tsx"
 import { SideBarHeader } from "@widgets/Sidebar/ui/SideBarHeader.tsx"
 import { Separator } from "@shared/ui/Separator.tsx"
@@ -15,40 +15,49 @@ import { ChangeCurrency } from "@features/ChangeCurrency"
 import { ChangeCurrencyFormat } from "@features/ChangeCurrencyFormat"
 import { ChangeFirstDayWeek } from "@features/ChangeFirstDayWeek"
 import { ChangeStartScreen } from "@features/ChangeStartScreen"
+import { Overlay } from "@shared/ui/Overlay.tsx"
+import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 export const SideBar = React.memo(() => {
-
+  const dispatch = useAppDispatch()
 
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
-  const isSideBar = useTypedSelector((state) => state.SideBar.isSideBarOpen)
+  const isSideBar = useTypedSelector((state) => state.Modals.sideBar.isOpen)
 
-  return <SideBarLayout $isSideBar={isSideBar}>
-    <SideBarHeader />
-    <SideBarSection>
-      <div className="title">Profile</div>
-      <div className="content">
-        {isLoggedIn === "success" ? <>
-            <ChangeName />
-            <ChangePassword />
-            <SignOut />
-          </> :
-          <SignIn />}
-      </div>
-    </SideBarSection>
-    <Separator />
-    <SideBarSection>
-      <div className="title">Settings</div>
-      <div className="content">
-        <ChangeLanguage />
-        <ChangeTheme />
-        <ChangeCurrency />
-        <ChangeCurrencyFormat />
-        <ChangeFirstDayWeek />
-        <ChangeFirstDayMonth />
-        <ChangeStartScreen />
-      </div>
-    </SideBarSection>
-  </SideBarLayout>
+  const CloseSideBar = () => {
+    dispatch(closeMenu("sideBar"))
+  }
+
+  return <>
+    <Overlay $isActive={isSideBar} $zIndex={5} onClick={CloseSideBar} />
+    <SideBarLayout $isSideBar={isSideBar}>
+      <SideBarHeader />
+      <SideBarSection>
+        <div className="title">Profile</div>
+        <div className="content">
+          {isLoggedIn === "success" ? <>
+              <ChangeName />
+              <ChangePassword />
+              <SignOut />
+            </> :
+            <SignIn />}
+        </div>
+      </SideBarSection>
+      <Separator />
+      <SideBarSection>
+        <div className="title">Settings</div>
+        <div className="content">
+          <ChangeLanguage />
+          <ChangeTheme />
+          <ChangeCurrency />
+          <ChangeCurrencyFormat />
+          <ChangeFirstDayWeek />
+          <ChangeFirstDayMonth />
+          <ChangeStartScreen />
+        </div>
+      </SideBarSection>
+    </SideBarLayout>
+  </>
 })
 const SideBarLayout = styled.div<{
   $isSideBar?: boolean

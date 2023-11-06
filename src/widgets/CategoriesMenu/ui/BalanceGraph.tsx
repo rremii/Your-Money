@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Doughnut } from "react-chartjs-2"
 import React, { FC } from "react"
 import { GetDoughnutConfig } from "@widgets/CategoriesMenu/model/GetDoughnutConfig.ts"
-import { ITransaction, TransactionType } from "@entities/Transaction/types.ts"
+import { IConvertedTransaction, ITransaction, TransactionType } from "@entities/Transaction/types.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 
 export interface ICategoryData {
@@ -13,8 +13,8 @@ export interface ICategoryData {
 
 interface props {
   categories: ICategoryData[]
-  incTransactions: ITransaction[]
-  expTransactions: ITransaction[]
+  incTransactions: IConvertedTransaction[]
+  expTransactions: IConvertedTransaction[]
   menuType: TransactionType
   OnClick?: () => void
 }

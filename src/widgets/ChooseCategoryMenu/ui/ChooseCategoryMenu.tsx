@@ -8,9 +8,9 @@ import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
-import { setChooseCategoryMenu } from "@entities/Modals/model/ChooseCategoryMenuSlice.ts"
 import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
 import { ICategory } from "@entities/Category/type.ts"
+import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 export const ChooseCategoryMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -18,12 +18,12 @@ export const ChooseCategoryMenu = React.memo(() => {
   const { data: user } = GetMe.useQueryState()
   const { allCategories } = useCategory(user?.id)
 
-  const isOpen = useTypedSelector(state => state.Modals.ChooseCategoryMenu.isOpen)
+  const isOpen = useTypedSelector(state => state.Modals.chooseCategoryMenu.isOpen)
   const type = useTypedSelector(state => state.EditCreateTransaction.Transaction.type)
   const chosenCategoryName = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.name)
 
   const CloseMenu = () => {
-    dispatch(setChooseCategoryMenu(false))
+    dispatch(closeMenu("chooseCategoryMenu"))
   }
 
 
@@ -31,7 +31,7 @@ export const ChooseCategoryMenu = React.memo(() => {
     dispatch(setCategory({
       id, name, icon, color
     }))
-    dispatch(setChooseCategoryMenu(false))
+    CloseMenu()
   }
 
   return <>

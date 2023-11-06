@@ -2,8 +2,9 @@ import styled from "styled-components"
 import { TransactionType } from "@entities/Transaction/types.ts"
 import { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setEditCreateMenuType } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
 import { MathOperatorSign } from "@entities/EditCreateTransaction/helpers/CalcMathOperation.ts"
+import { setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
+import { number } from "yup"
 
 
 interface props {
@@ -14,18 +15,25 @@ interface props {
 export const ResultQuantity: FC<props> = ({ type, color }) => {
   const dispatch = useAppDispatch()
 
-  const menuType = useTypedSelector(state => state.Modals.EditCreateTransMenu.menuType)
+  const menuType = useTypedSelector(state => state.Modals.editCreateTransMenu.menuType)
 
   const quantity = useTypedSelector(state => state.EditCreateTransaction.Calculator.quantity)
-  const numberStr1 = useTypedSelector(state => state.EditCreateTransaction.Calculator.numberStr1)
-  const numberStr2 = useTypedSelector(state => state.EditCreateTransaction.Calculator.numberStr2)
+  let numberStr1 = useTypedSelector(state => state.EditCreateTransaction.Calculator.numberStr1)
+  let numberStr2 = useTypedSelector(state => state.EditCreateTransaction.Calculator.numberStr2)
   const operator = useTypedSelector(state => state.EditCreateTransaction.Calculator.operator)
 
 
+  if (numberStr1.startsWith(".")) numberStr1 = "0" + numberStr1
+  if (numberStr2.startsWith(".")) numberStr2 = "0" + numberStr2
+
   let quantityStr: string
   if (!numberStr1 || menuType === "overview") quantityStr = "" + quantity
-  else
-    quantityStr = operator ? numberStr1 + " " + MathOperatorSign.get(operator) + " " + numberStr2 : numberStr1
+  else {
+    if (operator)
+      quantityStr = numberStr1 + " " + MathOperatorSign.get(operator) + " " + numberStr2
+    else quantityStr = numberStr1
+  }
+
 
   const OnClick = () => {
     if (menuType === "overview")

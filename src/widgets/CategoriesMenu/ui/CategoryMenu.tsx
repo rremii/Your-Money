@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from "react"
 import styled from "styled-components"
 import { FillCategoriesWithTransactions } from "@entities/Transaction/helpers/FillCategoriesWithTransactions.ts"
-import { ITransaction } from "@entities/Transaction/types.ts"
+import { IConvertedTransaction, ITransaction } from "@entities/Transaction/types.ts"
 import { Category } from "@widgets/CategoriesMenu/ui/Category.tsx"
 import { BalanceGraph } from "@widgets/CategoriesMenu/ui/BalanceGraph.tsx"
 import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
@@ -15,7 +15,7 @@ import { FilterCategoriesByType } from "@entities/Category/model/FilterCategorie
 interface props {
   menuId: number
   dateGap: string
-  transactions: ITransaction[]
+  transactions: IConvertedTransaction[]
   dateTo: Date,
   dateFrom: Date,
 }

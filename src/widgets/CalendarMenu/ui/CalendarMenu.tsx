@@ -5,13 +5,12 @@ import { Overlay } from "@shared/ui/Overlay.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { Calendar } from "@shared/modules/Calendar"
 import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
-import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
-import { setCalendarMenu } from "@entities/Modals/model/CalendarMenuSlice.ts"
+import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 export const CalendarMenu = memo(() => {
   const dispatch = useAppDispatch()
 
-  const isOpen = useTypedSelector(state => state.Modals.CalendarMenu.isOpen)
+  const isOpen = useTypedSelector(state => state.Modals.calendarMenu.isOpen)
   const initialDate = useTypedSelector(state => state.EditCreateTransaction.Transaction.dateStr)
   const categoryColor = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.color)
 
@@ -20,7 +19,7 @@ export const CalendarMenu = memo(() => {
 
 
   const CloseCalendar = () => {
-    dispatch(setCalendarMenu(false))
+    dispatch(closeMenu("calendarMenu"))
   }
 
   const OnChosenDateChange = useCallback((dateStr: string) => {
@@ -28,8 +27,8 @@ export const CalendarMenu = memo(() => {
   }, [])
   const OnSubmit = () => {
     dispatch(setEditTransDateStr(chosenDate))
-    dispatch(setCalendarMenu(false))
-    dispatch(setChangeDateMenu(false))
+    dispatch(closeMenu("calendarMenu"))
+    dispatch(closeMenu("dateMenu"))
   }
 
   return <>

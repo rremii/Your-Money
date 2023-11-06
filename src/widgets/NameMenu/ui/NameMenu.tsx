@@ -1,6 +1,5 @@
 import { Modal } from "@shared/ui/Modal.tsx"
 import React from "react"
-import { closeAllMenus } from "@entities/SideBar/model/SideBarSlice.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { FormField } from "@shared/ui/FormField.tsx"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
@@ -10,6 +9,8 @@ import { useTimer } from "@shared/hooks/useTimer.tsx"
 import * as yup from "yup"
 import styled from "styled-components"
 import { GetMe, useChangeNameMutation } from "@entities/User/api/UserApi.ts"
+import { Overlay } from "@shared/ui/Overlay.tsx"
+import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 
 interface FormFields {
@@ -28,7 +29,7 @@ export const NameMenu = React.memo(() => {
   const dispatch = useAppDispatch()
 
 
-  const isNameMenu = useTypedSelector(state => state.SideBar.isNameMenu)
+  const isNameMenu = useTypedSelector(state => state.Modals.nameMenu.isOpen)
 
   const { data: user } = GetMe.useQueryState()
   const [changeName, { isLoading }] = useChangeNameMutation()
@@ -58,36 +59,39 @@ export const NameMenu = React.memo(() => {
   }
 
   const CloseMenu = () => {
-    dispatch(closeAllMenus())
+    dispatch(closeMenu("nameMenu"))
     reset()
   }
 
-  return <NameLayout $isOpen={isNameMenu}>
-    <h2 className="title">Change name</h2>
-    <form onSubmit={handleSubmit(ChangeName)}>
-      <div className="fields">
+  return <>
+    <Overlay $isActive={isNameMenu} onClick={CloseMenu} $zIndex={15} />
+    <NameLayout $isOpen={isNameMenu}>
+      <h2 className="title">Change name</h2>
+      <form onSubmit={handleSubmit(ChangeName)}>
+        <div className="fields">
 
-        <FormField
-          isError={Boolean(errors.root) || Boolean(errors.name)}
-          label=""
-          input={{
-            type: "text",
-            placeholder: "Name",
-            registerData: { ...register("name") }
-          }}
-        />
-        {errors.name && (
-          <ErrorMessage>{errors.name.message}</ErrorMessage>
-        )}
+          <FormField
+            isError={Boolean(errors.root) || Boolean(errors.name)}
+            label=""
+            input={{
+              type: "text",
+              placeholder: "Name",
+              registerData: { ...register("name") }
+            }}
+          />
+          {errors.name && (
+            <ErrorMessage>{errors.name.message}</ErrorMessage>
+          )}
 
-      </div>
+        </div>
 
-      <div className="btn-section">
-        <button className="gray" type="button" onClick={CloseMenu}>CANCEL</button>
-        <button className="red" type="submit">CHANGE</button>
-      </div>
-    </form>
-  </NameLayout>
+        <div className="btn-section">
+          <button className="gray" type="button" onClick={CloseMenu}>CANCEL</button>
+          <button className="red" type="submit">CHANGE</button>
+        </div>
+      </form>
+    </NameLayout>
+  </>
 })
 const NameLayout = styled(Modal)`
   .btn-section {

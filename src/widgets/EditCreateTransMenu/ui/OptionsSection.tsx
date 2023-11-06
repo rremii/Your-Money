@@ -2,9 +2,8 @@ import styled from "styled-components"
 import Category from "@shared/assets/LightTheme/categories.png"
 import { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
-import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
 import { useDeleteTransactionMutation } from "@entities/Transaction/api/TransactionApi.ts"
+import { closeMenu, openMenu, setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
 
 interface props {
   color: string
@@ -24,7 +23,7 @@ export const OptionsSection: FC<props> = ({ color }) => {
 
   const OnDateClick = () => {
     dispatch(setEditCreateMenuType("edit"))
-    dispatch(setChangeDateMenu(true))
+    dispatch(openMenu("dateMenu"))
   }
 
   const OnDeleteClick = async () => {
@@ -32,7 +31,7 @@ export const OptionsSection: FC<props> = ({ color }) => {
 
     await deleteTrans(transId)
 
-    dispatch(setEditCreateTransMenu(false))
+    dispatch(closeMenu("editCreateTransMenu"))
   }
 
 

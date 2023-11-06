@@ -1,9 +1,9 @@
-import { ITransaction } from "@entities/Transaction/types.ts"
+import { IConvertedTransaction, ITransaction } from "@entities/Transaction/types.ts"
 
-export const FilterTransByType = (transactions: ITransaction[]) => {
+export const FilterTransByType = (transactions: IConvertedTransaction[]) => {
 
-  const expTransactions: ITransaction[] = []
-  const incTransactions: ITransaction[] = []
+  const expTransactions: IConvertedTransaction[] = []
+  const incTransactions: IConvertedTransaction[] = []
 
   transactions.forEach((transaction) => {
     if (transaction.type === "expense") expTransactions.push(transaction)

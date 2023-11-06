@@ -1,8 +1,8 @@
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
 import { addToNum, removeLastNumber, setOperator } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { MathOperatorType } from "@entities/EditCreateTransaction/helpers/CalcMathOperation.ts"
 import React, { useCallback, useMemo } from "react"
+import { openMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 interface ICalculatorBtn {
   OnClick: () => void,
@@ -14,7 +14,7 @@ export const useGetCalculatorGridBtns = () => {
 
 
   const OpenDateMenu = useCallback(() => {
-    dispatch(setChangeDateMenu(true))
+    dispatch(openMenu("dateMenu"))
   }, [])
 
 

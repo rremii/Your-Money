@@ -11,7 +11,7 @@ interface props {
 
 export const DateBox: FC<props> = ({ date: curDate, dateBalance }) => {
 
-  const curCurrencySign = useTypedSelector(state => state.SideBar.curCurrencySign)
+  const curCurrencySign = useTypedSelector(state => state.Settings.curCurrencySign)
 
   const { isToday, month, year, date, day } = TransformDate(curDate)
 

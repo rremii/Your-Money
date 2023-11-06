@@ -8,8 +8,8 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import { setChangeTitleMenu } from "@entities/Modals/model/ChangeTitleMenuClice.ts"
 import { setEditTransTitle } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
+import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 interface FormFields {
   title: string | undefined
@@ -26,7 +26,7 @@ export const TitleMenu = () => {
   const dispatch = useAppDispatch()
 
   const initTitle = useTypedSelector(state => state.EditCreateTransaction.Transaction.title)
-  const isMenuOpen = useTypedSelector(state => state.Modals.ChangeTitleMenu.isOpen)
+  const isMenuOpen = useTypedSelector(state => state.Modals.titleMenu.isOpen)
 
 
   const { register, formState: { errors }, handleSubmit, reset } =
@@ -40,12 +40,12 @@ export const TitleMenu = () => {
 
   const ChangeTitle = ({ title }: FormFields) => {
     dispatch(setEditTransTitle(title || ""))
-    dispatch(setChangeTitleMenu(false))
+    dispatch(closeMenu("titleMenu"))
     reset()
   }
 
   const CloseMenu = () => {
-    dispatch(setChangeTitleMenu(false))
+    dispatch(closeMenu("titleMenu"))
     reset()
   }
 

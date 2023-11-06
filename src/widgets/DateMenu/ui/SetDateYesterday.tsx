@@ -5,8 +5,8 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { timeGap } from "@shared/helpers/TimeGap.ts"
 import { IsYesterday } from "@shared/helpers/IsYesterday.ts"
 import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
-import { setChangeDateMenu } from "@entities/Modals/model/ChangeDateMenuSlice.ts"
 import { Months } from "@shared/constants/Months.ts"
+import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 
 export const SetDateYesterday = () => {
@@ -28,7 +28,7 @@ export const SetDateYesterday = () => {
     const now = new Date()
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1)
     dispatch(setEditTransDateStr(today.toUTCString()))
-    dispatch(setChangeDateMenu(false))
+    dispatch(closeMenu("dateMenu"))
   }
 
   return <PickDateBtn OnClick={SetDateYesterday} isActive={isActive} color={color} title="Yesterday" img={Category}

@@ -21,7 +21,7 @@ export const CalcMathOperation = (arg: number[], operator: MathOperatorType) => 
 }
 
 //todo change to icons
-export const MathOperatorSign = new Map()
+export const MathOperatorSign = new Map<string, string>()
 MathOperatorSign.set("div", "÷")
 MathOperatorSign.set("sub", "-")
 MathOperatorSign.set("sum", "+")

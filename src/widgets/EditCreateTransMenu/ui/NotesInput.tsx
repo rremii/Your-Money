@@ -1,8 +1,7 @@
 import styled from "styled-components"
 import { FC, memo } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setChangeTitleMenu } from "@entities/Modals/model/ChangeTitleMenuClice.ts"
-import { setEditCreateMenuType } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
+import { openMenu, setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
 
 interface props {
   content?: string
@@ -11,10 +10,10 @@ interface props {
 export const Notes: FC<props> = memo(({ content }) => {
   const dispatch = useAppDispatch()
 
-  const menuType = useTypedSelector(state => state.Modals.EditCreateTransMenu.menuType)
+  const menuType = useTypedSelector(state => state.Modals.editCreateTransMenu.menuType)
 
   const OpenEditMenu = () => {
-    dispatch(setChangeTitleMenu(true))
+    dispatch(openMenu("titleMenu"))
     if (menuType === "overview")
       dispatch(setEditCreateMenuType("edit"))
   }

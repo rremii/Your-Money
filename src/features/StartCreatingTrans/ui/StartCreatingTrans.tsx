@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setChooseCategorySlideMenu } from "@entities/Modals/model/ChooseCategorySlideMenuSlice.ts"
 import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
+import { openMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 export const StartCreatingTrans = () => {
   const dispatch = useAppDispatch()
@@ -9,7 +9,7 @@ export const StartCreatingTrans = () => {
   const curMenuDate = useTypedSelector(state => state.Date.curMenu.dateFrom)
 
   const OnClick = () => {
-    dispatch(setChooseCategorySlideMenu(true))
+    dispatch(openMenu("chooseCategorySlideMenu"))
     dispatch(setEditTransDateStr(curMenuDate))
   }
 

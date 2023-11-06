@@ -1,8 +1,6 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { SignOutMenu } from "@widgets/SignOutMenu/ui/SignOutMenu.tsx"
-import { SideBarOverlay } from "@features/Overlays/ui/SideBarOverlay.tsx"
-import { SideBarModalsOverlay } from "@features/Overlays/ui/SideBarModalsOverlay.tsx"
 import { PasswordMenu } from "@widgets/PasswordMenu/ui/PasswordMenu.tsx"
 import { NameMenu } from "@widgets/NameMenu/ui/NameMenu.tsx"
 import { Toast } from "@shared/ui/Toast.tsx"
@@ -40,8 +38,6 @@ const AppLayout: FC<Props> = ({ children }) => {
       <DateMenu />
       <CalendarMenu />
 
-      <SideBarOverlay />
-      <SideBarModalsOverlay />
 
       <SignOutMenu />
       <PasswordMenu />

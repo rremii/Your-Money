@@ -16,7 +16,7 @@ const GetNumberSignStyle = (num: number) => {
 
 export const TransactionHeader: FC<props> = React.memo(({ startBalance, endBalance }) => {
 
-  const curCurrencySign = useTypedSelector(state => state.SideBar.curCurrencySign)
+  const curCurrencySign = useTypedSelector(state => state.Settings.curCurrencySign)
 
   return <TransactionsHeaderLayout>
     <div className="balance-cell">

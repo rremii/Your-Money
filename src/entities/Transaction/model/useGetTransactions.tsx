@@ -7,33 +7,8 @@ import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { Currency, IAccount } from "@entities/Account/types.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { number } from "yup"
-
-
-const FilterTransactionByAccId = (transactions: ITransaction[], curAccId: number | null) => {
-  let allTransactions = transactions || []
-
-  if (typeof curAccId === "number")
-    allTransactions = transactions?.filter(({ accountId }) => accountId === curAccId) || []
-
-  return allTransactions
-}
-const AddConvertedQuantityToTrans = (
-  transactions: ITransaction[],
-  getAccountCurrency: (accountId: number) => Currency,
-  convertCurrency: (num: number, currency1: Currency, currency2: Currency) => number,
-  curCurrency: Currency
-) => {
-
-  return transactions?.map(({ quantity, accountId, ...transaction }) => {
-    const accountCurrency = getAccountCurrency(accountId)
-    return {
-      ...transaction,
-      quantity, accountId,
-      convertedQuantity: RoundDecimal(convertCurrency(quantity, accountCurrency, curCurrency), 2)
-    }
-  })
-
-}
+import { AddConvertedQuantityToTrans } from "@entities/Transaction/model/AddConvertedQuantityToTrans.ts"
+import { FilterTransactionByAccId } from "@entities/Transaction/model/FilterTransactionByAccId.ts"
 
 
 export const useGetTransactions = (
@@ -43,7 +18,7 @@ export const useGetTransactions = (
 
   const curAccId = useTypedSelector(state => state.CurAccount.id)
   const allTransDateGap = useTypedSelector(state => state.Date.allTransDateGap)
-  const curCurrency = useTypedSelector(state => state.SideBar.curCurrency)
+  const curCurrency = useTypedSelector(state => state.Settings.curCurrency)
 
 
   const { data: transactions } = useGetTransactionsByDateGapQuery({

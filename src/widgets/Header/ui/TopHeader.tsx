@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setIsSideBar } from "@entities/SideBar"
+import { openMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 
 interface props {
@@ -16,7 +16,7 @@ export const TopHeader: FC<props> = ({ right }) => {
 
 
   const OpenSideBar = () => {
-    dispatch(setIsSideBar(true))
+    dispatch(openMenu("sideBar"))
   }
 
 

@@ -2,17 +2,18 @@ import styled from "styled-components"
 import Account from "@shared/assets/LightTheme/accounts.png"
 import React, { FC } from "react"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
-import { IConvertedTransaction, ITransaction, TransactionType } from "@entities/Transaction/types.ts"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { IConvertedTransaction, TransactionType } from "@entities/Transaction/types.ts"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
-import { setEditCreateMenuType, setEditCreateTransMenu } from "@entities/Modals/model/EditCreateTransMenuSlice.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
-import { DefaultCurrencySigns } from "@entities/Account/constants/CurrencySigns.ts"
+import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
+import { Currency } from "@entities/Account/types.ts"
+import { openMenu, setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
 
 type props = IConvertedTransaction
 
@@ -32,7 +33,7 @@ export const Transaction: FC<props> = (transaction) => {
 
   const OnClick = () => {
     dispatch(setEditCreateMenuType("overview"))
-    dispatch(setEditCreateTransMenu(true))
+    dispatch(openMenu("editCreateTransMenu"))
 
 
     dispatch(setEditTransaction({
@@ -60,7 +61,7 @@ export const Transaction: FC<props> = (transaction) => {
       <p className="title">{title ? title : ""}</p>
     </div>
     <div className="quantity">
-      {type === "income" ? "+" : "-"}{DefaultCurrencySigns.get(account?.currency)} {quantity}
+      {type === "income" ? "+" : "-"}{DefaultCurrencySigns.get(account?.currency || Currency.DefaultCurrency)} {quantity}
     </div>
   </TransactionLayout>
 }
