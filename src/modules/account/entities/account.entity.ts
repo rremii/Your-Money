@@ -6,7 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm"
-import { IAccount } from "../account.interface"
+import { Currency, IAccount } from "../account.interface"
 import { User } from "../../users/entities/user.entity"
 import { Transaction } from "../../transaction/entities/transaction.entity"
 import { AccountHistoryPoint } from "../../accountHistory/entities/accountHistoryPoint.entity"
@@ -23,7 +23,10 @@ export class Account extends BaseEntity implements IAccount {
   @Column()
   color: string
 
-  @Column({ default: 0 })
+  @Column()
+  currency: Currency
+
+  @Column({ default: 0, type: "float" })
   balance: number
 
   @Column()

@@ -248,6 +248,14 @@ export class TransactionService {
           //   id: userId,
           // },
         },
+        select: {
+          account: {
+            currency: true,
+          },
+        },
+        relations: {
+          account: true,
+        },
       })
     else
       return await this.transactionRepository.find({
@@ -257,9 +265,14 @@ export class TransactionService {
         where: {
           date: Between(dateFrom, dateTo),
           accountId: In(accountIds),
-          // user: {
-          //   id: userId,
-          // },
+        },
+        select: {
+          account: {
+            currency: true,
+          },
+        },
+        relations: {
+          account: true,
         },
       })
   }

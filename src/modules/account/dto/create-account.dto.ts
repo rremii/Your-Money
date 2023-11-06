@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { IsEnum, IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { Currency } from "../account.interface"
 
 export class CreateAccountDto {
   @IsNotEmpty()
@@ -16,4 +17,8 @@ export class CreateAccountDto {
   @IsString()
   @IsNotEmpty()
   icon: string
+
+  @IsNotEmpty()
+  @IsEnum(Currency)
+  currency: Currency
 }

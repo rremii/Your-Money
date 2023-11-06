@@ -35,7 +35,7 @@ export class AccountHistoryPoint
   })
   date: string
 
-  @Column({ default: 0 })
+  @Column({ default: 0, type: "float" })
   balance: number
 
   @Column()

@@ -228,13 +228,6 @@ export class AccountHistoryService {
     accountIds,
   }: GetAccountHistoryDto) {
     if (dateTo && dateFrom) {
-      // const accountIds = await this.accountRepository.find({
-      //   where: {
-      //     user: { id: userId },
-      //   },
-      //   select: ["id"],
-      // })
-
       const historyBorderLeft: AccountHistoryPoint[] = []
       await Promise.all(
         accountIds.map(async (id) => {
@@ -255,16 +248,19 @@ export class AccountHistoryService {
         where: {
           date: Between(dateFrom, dateTo),
           accountId: In(accountIds),
-          // user: {
-          //   id: userId,
-          // },
+        },
+        select: {
+          account: {
+            currency: true,
+          },
+        },
+        relations: {
+          account: true,
         },
       })
 
       return {
         history: [...historyBorderLeft, ...history],
-        // historyBorderRight,
-        // historyBorderLeft,
       }
     } else {
       return await this.accountHistoryRepository.find({
@@ -273,10 +269,14 @@ export class AccountHistoryService {
         },
         where: {
           accountId: In(accountIds),
-
-          // user: {
-          //   id: userId,
-          // },
+        },
+        select: {
+          account: {
+            currency: true,
+          },
+        },
+        relations: {
+          account: true,
         },
       })
     }

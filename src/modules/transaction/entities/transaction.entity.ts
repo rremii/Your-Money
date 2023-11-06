@@ -14,6 +14,7 @@ import { Category } from "../../category/entities/category.entity"
 import { User } from "../../users/entities/user.entity"
 import { AccountHistoryPoint } from "../../accountHistory/entities/accountHistoryPoint.entity"
 import { getTimestamptz } from "../../../common/helpers/getTimestamptz"
+import { Currency } from "../../account/account.interface"
 
 @Entity()
 export class Transaction extends BaseEntity implements ITransaction {
@@ -22,21 +23,14 @@ export class Transaction extends BaseEntity implements ITransaction {
 
   @Column({
     type: "timestamptz",
-    // transformer: {
-    //   to: (date: Date) => new Date(getTimestamptz(date)),
-    //   from: (date: string) => new Date(date),
-    // },
   })
   date: string
 
-  @Column()
+  @Column({ type: "float" })
   quantity: number
 
   @Column()
   type: TransactionType
-
-  // @Column()
-  // accountBalance: number
 
   @Column({ nullable: true })
   title?: string

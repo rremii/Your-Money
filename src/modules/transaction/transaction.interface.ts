@@ -1,3 +1,5 @@
+import { Currency } from "../account/account.interface"
+
 export type TransactionType = "income" | "expense"
 export interface ITransaction {
   id: number

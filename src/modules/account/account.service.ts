@@ -50,6 +50,7 @@ export class AccountService {
     color,
     name,
     icon,
+    currency,
   }: CreateAccountDto): Promise<Account> {
     const user = await this.usersRepository.findOneBy({ id: userId })
     if (!user) throw new BadRequestException(ApiError.USER_NOT_FOUND)
@@ -58,6 +59,7 @@ export class AccountService {
     account.name = name
     account.icon = icon
     account.color = color
+    account.currency = currency
     account.user = user
 
     await account.save()
