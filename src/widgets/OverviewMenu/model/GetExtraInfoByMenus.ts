@@ -172,7 +172,7 @@ export const GetExtraInfoByMenus = ({ dateFilter, firstDay, allTransactions, dat
       }
         break
       case "day": {
-        const { dateTo, dateFrom, transactions: dayTransactions } = transByDate.byDay(allTransactions, menuId)
+        const { dateTo, dateFrom, transactions: dayTransactions } = transByDate.byDay(expenseTransaction, menuId)
         const week = timeGap.GetWeekGap(firstDay, 0, dateTo)
         const month = timeGap.GetMonthGap(0, dateFrom)
 
