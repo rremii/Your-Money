@@ -2,6 +2,7 @@ import styled from "styled-components"
 import React, { FC } from "react"
 import { TransformDate } from "@widgets/TransactionsMenu/model/TransformDate.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 interface props {
   date: Date
@@ -23,7 +24,7 @@ export const DateBox: FC<props> = ({ date: curDate, dateBalance }) => {
       <p className="month-year">{month && month.toUpperCase()} {year}</p>
     </div>
     <div className="quantity">
-      {dateBalance < 0 ? "-" : "+"}{curCurrencySign} {Math.abs(dateBalance)}
+      {dateBalance < 0 ? "-" : "+"}{curCurrencySign} {RoundDecimal(Math.abs(dateBalance))}
     </div>
   </DateBoxLayout>
 }

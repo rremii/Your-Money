@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { Currency } from "@entities/Account/types.ts"
 
 interface initialState {
   id: number | null
@@ -6,6 +7,7 @@ interface initialState {
   icon: string
   color: string,
   balance: number
+  currency: Currency
 }
 
 const initialState: initialState = {
@@ -13,7 +15,8 @@ const initialState: initialState = {
   balance: 0,
   color: "",
   icon: "",
-  name: ""
+  name: "",
+  currency: Currency.DefaultCurrency
 }
 
 const ChosenAccount = createSlice({
@@ -26,6 +29,7 @@ const ChosenAccount = createSlice({
       state.balance = action.payload.balance
       state.color = action.payload.color
       state.icon = action.payload.icon
+      state.currency = action.payload.currency
     },
     resetChosenAccount(state) {
       state.id = null

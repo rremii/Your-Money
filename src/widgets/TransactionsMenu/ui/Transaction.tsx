@@ -4,7 +4,7 @@ import React, { FC } from "react"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import { IConvertedTransaction, TransactionType } from "@entities/Transaction/types.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { setEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
+import { setEditCurrency, setEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
@@ -44,8 +44,10 @@ export const Transaction: FC<props> = (transaction) => {
     }))
     dispatch(setEditTransQuantity(quantity))
     dispatch(setCategory(category))
-    if (account)
+    if (account) {
+      dispatch(setEditCurrency(account.currency))
       dispatch(setAccount(account))
+    }
   }
 
   return <TransactionLayout onClick={OnClick} $type={type}>

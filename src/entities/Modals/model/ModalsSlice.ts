@@ -36,7 +36,10 @@ interface initialState {
   }
   signOutMenu: {
     isOpen: boolean
-  }
+  },
+  editCreateCurrencyMenu: {
+    isOpen: boolean
+  },
 
 }
 
@@ -63,6 +66,8 @@ const initialState: initialState = {
   }, passwordMenu: {
     isOpen: false
   }, signOutMenu: {
+    isOpen: false
+  }, editCreateCurrencyMenu: {
     isOpen: false
   }
 }

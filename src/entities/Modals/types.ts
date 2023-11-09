@@ -13,3 +13,4 @@ export type Menus =
   | "sideBar"
   | "titleMenu"
   | "signOutMenu"
+  | "editCreateCurrencyMenu"

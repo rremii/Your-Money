@@ -10,6 +10,7 @@ import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.
 import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { ICategory } from "@entities/Category/type.ts"
 import { openMenu, setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
+import { Currency } from "@entities/Account/types.ts"
 
 
 interface props extends ICategory {

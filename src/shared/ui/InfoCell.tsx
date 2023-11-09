@@ -33,7 +33,8 @@ const CellLayout = styled.div<{
   flex-direction: column;
   padding: 0 16px;
   background-color: ${({ $color }) => $color || "var(--bg-3)"};
-  flex: 1 1 auto;
+  //flex: 1 1 auto;
+  width: 100%;
   position: relative;
 
   cursor: pointer;

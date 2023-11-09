@@ -1,9 +1,13 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import { Currency } from "@entities/Account/types.ts"
-import React from "react"
+import React, { useState } from "react"
+import { CurrencyModalHeader } from "@features/CurrencyModal/ui/CurrencyModalHeader.tsx"
+import { CurrencyCell } from "@features/CurrencyModal/ui/CurrencyCell.tsx"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { setEditCurrency } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
+import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 interface ICurrencyCell {
   fullName: string
@@ -11,35 +15,54 @@ interface ICurrencyCell {
 }
 
 export const CurrencyModal = () => {
+  const dispatch = useAppDispatch()
+
+  const currency = useTypedSelector(state => state.EditCreateTransaction.Transaction.currency)
+  const isOpen = useTypedSelector(state => state.Modals.editCreateCurrencyMenu.isOpen)
+
+  const [chosenCurrency, setCurrency] = useState<Currency>(currency)
+
+  const SetChosenCurrency = (currency: Currency) => {
+    setCurrency(currency)
+  }
+  const OnSubmit = () => {
+    dispatch(setEditCurrency(chosenCurrency))
+    CloseModal()
+  }
+  const CloseModal = () => {
+    dispatch(closeMenu("editCreateCurrencyMenu"))
+  }
 
   const MainCurrencies: ICurrencyCell[] = [
+
     { fullName: "Australian dollar", shortName: Currency.AustralianDollar },
-    { fullName: "Australian dollar", shortName: Currency.AustralianDollar },
-    { fullName: "Australian dollar", shortName: Currency.AustralianDollar },
-    { fullName: "Australian dollar", shortName: Currency.AustralianDollar },
-    { fullName: "Australian dollar", shortName: Currency.AustralianDollar },
-    { fullName: "Australian dollar", shortName: Currency.AustralianDollar },
-    { fullName: "Australian dollar", shortName: Currency.AustralianDollar }
- 
+    { fullName: "British pound", shortName: Currency.BritishPound },
+    { fullName: "Canadian dollar", shortName: Currency.CanadianDollar },
+    { fullName: "Chinese yuan", shortName: Currency.ChineseYuan },
+    { fullName: "Euro", shortName: Currency.Euro },
+    { fullName: "Japanese yen", shortName: Currency.JapaneseYen },
+    { fullName: "Russian ruble", shortName: Currency.RussianRuble },
+    { fullName: "Swiss franc", shortName: Currency.SwissFranc },
+    { fullName: "UnitedStates dollar", shortName: Currency.UnitedStatesDollar },
+    { fullName: "Belarusian ruble", shortName: Currency.BelarusianRuble }
   ]
 
   return <>
-    <Overlay $zIndex={55} $isActive={true} />
-    <CurrencyModalLayout $isOpen={true}>
-      <header>Currency</header>
+    <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
+    <CurrencyModalLayout $isOpen={isOpen}>
+      <CurrencyModalHeader>Currency</CurrencyModalHeader>
       <p className="subTitle">Main currencies</p>
       <div className="currencies-box">
         {MainCurrencies.map(({ fullName, shortName }) => (
-          <div className="currency">
-            <div className="radio" />
-            <p className="name">{fullName}</p>
-            <p className="sign">{DefaultCurrencySigns.get(shortName)}</p>
-          </div>)
-        )}
+          <CurrencyCell OnClick={() => SetChosenCurrency(shortName)}
+                        fullName={fullName}
+                        shortName={shortName}
+                        isActive={chosenCurrency === shortName} />
+        ))}
       </div>
       <div className="btn-section">
-        <button className="gray" type="button">CANCEL</button>
-        <button className="gray" type="submit">Done</button>
+        <button className="gray" onClick={CloseModal} type="button">Cancel</button>
+        <button className="gray" onClick={OnSubmit} type="submit">Done</button>
       </div>
     </CurrencyModalLayout>
   </>
@@ -49,16 +72,6 @@ const CurrencyModalLayout = styled(Modal)`
   max-width: 360px;
   padding: 20px 22px;
 
-  header {
-    color: var(--txt-5);
-    font-family: Inter;
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0.17px;
-    margin-bottom: 20px;
-  }
 
   .subTitle {
     color: var(--txt-3);
@@ -85,39 +98,8 @@ const CurrencyModalLayout = styled(Modal)`
     max-height: 350px;
     overflow-y: auto;
 
-    .currency {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
+    border-bottom: 1px solid var(--bg-11);
 
-      .radio {
-        width: 19px;
-        height: 19px;
-        margin-right: 13px;
-        border-radius: 50%;
-        border: #808080 solid 2.5px;
-      }
-
-      .name {
-        color: var(--txt-5);
-        font-family: Inter;
-        font-size: 15px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-      }
-
-      .sign {
-        flex: 1 1 auto;
-        text-align: right;
-        color: var(--txt-6);
-        font-family: Inter;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-      }
-    }
+    padding-bottom: 20px;
   }
 `

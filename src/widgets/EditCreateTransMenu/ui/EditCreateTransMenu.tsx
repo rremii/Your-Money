@@ -18,6 +18,8 @@ import { useCreateTransactionMutation, useEditTransactionMutation } from "@entit
 import { resetEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { resetTransCalculator } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { closeMenu, openMenu, setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
+import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConverter.ts"
+import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 export const EditCreateTransMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -32,10 +34,13 @@ export const EditCreateTransMenu = React.memo(() => {
   const quantity = useTypedSelector(state => state.EditCreateTransaction.Calculator.quantity)
   const dateStr = useTypedSelector(state => state.EditCreateTransaction.Transaction.dateStr)
   const category = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory)
+  const currency = useTypedSelector(state => state.EditCreateTransaction.Transaction.currency)
 
 
+  const { convertCurrency } = useCurrencyConverter()
   const { data: user } = GetMe.useQueryState()
   const { allAccounts } = useAccount(user?.id)
+
 
   useEffect(() => {
     if (!allAccounts?.length) return
@@ -74,10 +79,16 @@ export const EditCreateTransMenu = React.memo(() => {
     if (!user?.id || !account.id || !category.id || !quantity) return
 
     await createTransaction({
-      type, title, accountId: account.id, categoryId: category.id, quantity, date: dateStr
+      type, title, accountId: account.id, categoryId: category.id, quantity: GetConvertedCurrency(), date: dateStr
     })
 
     CloseMenu()
+  }
+  const GetConvertedCurrency = (): number => {
+    if (currency !== account.currency)
+      return RoundDecimal(convertCurrency(quantity, currency, account.currency), 2)
+    else
+      return quantity
   }
 
   const EditTransaction = async () => {
@@ -88,7 +99,7 @@ export const EditCreateTransMenu = React.memo(() => {
       categoryId: category.id,
       type,
       title,
-      quantity,
+      quantity: GetConvertedCurrency(),
       date: dateStr
     })
     CloseMenu()
@@ -121,7 +132,7 @@ export const EditCreateTransMenu = React.memo(() => {
                   title={"To category"} />
       </div>
 
-      <ResultQuantity color={category.color} type={type} />
+      <ResultQuantity type={type} />
 
       <Notes content={title} />
 

@@ -1,8 +1,9 @@
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { addToNum, removeLastNumber, setOperator } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { MathOperatorType } from "@entities/EditCreateTransaction/helpers/CalcMathOperation.ts"
 import React, { useCallback, useMemo } from "react"
 import { openMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 
 interface ICalculatorBtn {
   OnClick: () => void,
@@ -11,6 +12,8 @@ interface ICalculatorBtn {
 
 export const useGetCalculatorGridBtns = () => {
   const dispatch = useAppDispatch()
+
+  const currency = useTypedSelector(state => state.EditCreateTransaction.Transaction.currency)
 
 
   const OpenDateMenu = useCallback(() => {
@@ -30,6 +33,10 @@ export const useGetCalculatorGridBtns = () => {
     dispatch(setOperator(operator))
   }, [])
 
+  const OpenCurrencyMenu = useCallback(() => {
+    dispatch(openMenu("editCreateCurrencyMenu"))
+  }, [])
+
   const leftColumnBtns: ICalculatorBtn[] = useMemo(() => [
     { OnClick: () => SetOperator("div"), children: "÷" },
     { OnClick: () => SetOperator("mul"), children: "×" },
@@ -46,10 +53,10 @@ export const useGetCalculatorGridBtns = () => {
     { OnClick: () => AddToNum(1), children: "1" },
     { OnClick: () => AddToNum(2), children: "2" },
     { OnClick: () => AddToNum(3), children: "3" },
-    { OnClick: () => AddToNum(0), children: "$" },
+    { OnClick: OpenCurrencyMenu, children: DefaultCurrencySigns.get(currency) },
     { OnClick: () => AddToNum(0), children: "0" },
     { OnClick: () => AddToNum("."), children: "." }
-  ], [])
+  ], [currency])
 
   const rightBtns: ICalculatorBtn[] = useMemo(() => [
     { OnClick: RemoveLastNum, children: "del" },

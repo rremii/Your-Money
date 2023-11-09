@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 
 interface props {
@@ -21,11 +22,13 @@ export const TransactionHeader: FC<props> = React.memo(({ startBalance, endBalan
   return <TransactionsHeaderLayout>
     <div className="balance-cell">
       <h2>Starting balance</h2>
-      <p className={GetNumberSignStyle(startBalance)}>{startBalance < 0 ? "-" : ""}{curCurrencySign} {startBalance}</p>
+      <p
+        className={GetNumberSignStyle(startBalance)}>{startBalance < 0 ? "-" : ""}{curCurrencySign} {RoundDecimal(startBalance, 2)}</p>
     </div>
     <div className="balance-cell">
       <h2>Ending balance</h2>
-      <p className={GetNumberSignStyle(endBalance)}>{endBalance < 0 ? "-" : ""}{curCurrencySign} {endBalance}</p>
+      <p
+        className={GetNumberSignStyle(endBalance)}>{endBalance < 0 ? "-" : ""}{curCurrencySign} {RoundDecimal(endBalance, 2)}</p>
     </div>
   </TransactionsHeaderLayout>
 })
