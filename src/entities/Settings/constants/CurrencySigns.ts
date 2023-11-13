@@ -1,6 +1,10 @@
-import { Currency } from "@entities/Account/types.ts"
+import { Currency } from "@entities/Currency/types.ts"
 
-export const CurrencySigns = {
+interface ICurrencySigns {
+  [key: string]: string[]
+}
+
+export const CurrencySigns: ICurrencySigns = {
   USD: ["$", "US$", "USD"],
   JPY: ["¥", "JPY"],
   GBP: ["£", "GBP"],

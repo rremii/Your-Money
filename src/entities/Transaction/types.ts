@@ -1,5 +1,3 @@
-import { Currency } from "@entities/Account/types.ts"
-
 export interface GetTransactionDto {
   dateFrom: string
   dateTo: string

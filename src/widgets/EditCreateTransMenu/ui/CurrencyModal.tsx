@@ -1,26 +1,25 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import { Currency } from "@entities/Account/types.ts"
 import React, { useState } from "react"
-import { CurrencyModalHeader } from "@features/CurrencyModal/ui/CurrencyModalHeader.tsx"
-import { CurrencyCell } from "@features/CurrencyModal/ui/CurrencyCell.tsx"
+import { CurrencyModalHeader } from "@shared/ui/СurrencyModal/CurrencyModalHeader.tsx"
+import { CurrencyCell } from "@shared/ui/СurrencyModal/CurrencyCell.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setEditCurrency } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { Currency } from "@entities/Currency/types.ts"
+import { MainCurrencies } from "@entities/Currency/constants/MainCurrencies.ts"
 
-interface ICurrencyCell {
-  fullName: string
-  shortName: Currency
-}
 
 export const CurrencyModal = () => {
   const dispatch = useAppDispatch()
+
 
   const currency = useTypedSelector(state => state.EditCreateTransaction.Transaction.currency)
   const isOpen = useTypedSelector(state => state.Modals.editCreateCurrencyMenu.isOpen)
 
   const [chosenCurrency, setCurrency] = useState<Currency>(currency)
+
 
   const SetChosenCurrency = (currency: Currency) => {
     setCurrency(currency)
@@ -33,19 +32,6 @@ export const CurrencyModal = () => {
     dispatch(closeMenu("editCreateCurrencyMenu"))
   }
 
-  const MainCurrencies: ICurrencyCell[] = [
-
-    { fullName: "Australian dollar", shortName: Currency.AustralianDollar },
-    { fullName: "British pound", shortName: Currency.BritishPound },
-    { fullName: "Canadian dollar", shortName: Currency.CanadianDollar },
-    { fullName: "Chinese yuan", shortName: Currency.ChineseYuan },
-    { fullName: "Euro", shortName: Currency.Euro },
-    { fullName: "Japanese yen", shortName: Currency.JapaneseYen },
-    { fullName: "Russian ruble", shortName: Currency.RussianRuble },
-    { fullName: "Swiss franc", shortName: Currency.SwissFranc },
-    { fullName: "UnitedStates dollar", shortName: Currency.UnitedStatesDollar },
-    { fullName: "Belarusian ruble", shortName: Currency.BelarusianRuble }
-  ]
 
   return <>
     <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />

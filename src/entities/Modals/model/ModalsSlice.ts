@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { EditCreateMenuType, Menus } from "@entities/Modals/types.ts"
+import { CurrencyMenuType } from "@features/DefalutCurrencyModal/types.ts"
 
 
 interface initialState {
@@ -40,6 +41,10 @@ interface initialState {
   editCreateCurrencyMenu: {
     isOpen: boolean
   },
+  currencyMenu: {
+    menuType: CurrencyMenuType
+    isOpen: boolean
+  }
 
 }
 
@@ -69,6 +74,9 @@ const initialState: initialState = {
     isOpen: false
   }, editCreateCurrencyMenu: {
     isOpen: false
+  }, currencyMenu: {
+    isOpen: false,
+    menuType: "currency"
   }
 }
 
@@ -88,10 +96,13 @@ const ModalsSlice = createSlice({
     },
     setEditCreateMenuType(state, action: PayloadAction<EditCreateMenuType>) {
       state.editCreateTransMenu.menuType = action.payload
+    },
+    setCurrencyMenuType(state, action: PayloadAction<CurrencyMenuType>) {
+      state.currencyMenu.menuType = action.payload
     }
 
   }
 })
 
 export const ModalsReducer = ModalsSlice.reducer
-export const { closeMenu, setEditCreateMenuType, openMenu, closeAllMenus } = ModalsSlice.actions
+export const { closeMenu, setEditCreateMenuType, openMenu, closeAllMenus, setCurrencyMenuType } = ModalsSlice.actions

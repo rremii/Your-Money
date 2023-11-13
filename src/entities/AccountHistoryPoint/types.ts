@@ -1,5 +1,3 @@
-import { Currency } from "@entities/Account/types.ts"
-
 export interface GetHistoryPointsDto {
   accountIds: number[]
   dateFrom: string

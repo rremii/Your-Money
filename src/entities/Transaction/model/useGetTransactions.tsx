@@ -4,11 +4,12 @@ import { useGetTransactionsByDateGapQuery } from "@entities/Transaction/api/Tran
 import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConverter.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
-import { Currency, IAccount } from "@entities/Account/types.ts"
+import { IAccount } from "@entities/Account/types.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { number } from "yup"
 import { AddConvertedQuantityToTrans } from "@entities/Transaction/model/AddConvertedQuantityToTrans.ts"
 import { FilterTransactionByAccId } from "@entities/Transaction/model/FilterTransactionByAccId.ts"
+import { Currency } from "@entities/Currency/types.ts"
 
 
 export const useGetTransactions = (

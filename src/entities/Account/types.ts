@@ -1,3 +1,5 @@
+import { Currency } from "@entities/Currency/types.ts"
+
 interface AccountData {
   name: string
   color: string
@@ -15,17 +17,3 @@ export interface IAccount extends AccountData {
   id: number | null
 }
 
-
-export enum Currency {
-  AustralianDollar = "AUD",
-  BritishPound = "GBP",
-  CanadianDollar = "CAD",
-  ChineseYuan = "CNY",
-  Euro = "EUR",
-  JapaneseYen = "JPY",
-  RussianRuble = "RUB",
-  SwissFranc = "CHF",
-  UnitedStatesDollar = "USD",
-  BelarusianRuble = "BYN",
-  DefaultCurrency = Currency.BelarusianRuble
-}

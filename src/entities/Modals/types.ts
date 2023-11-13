@@ -14,3 +14,4 @@ export type Menus =
   | "titleMenu"
   | "signOutMenu"
   | "editCreateCurrencyMenu"
+  | "currencyMenu"

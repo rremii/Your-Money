@@ -20,7 +20,6 @@
     "chartjs-plugin-datalabels": "^2.2.0",
     "chartjs-plugin-sort": "^0.1.1",
     "compose-function": "^3.0.3",
-    "money": "^0.2.0",
     "node-sass": "^9.0.0",
     "prettier": "^3.0.0",
     "react": "^18.2.0",

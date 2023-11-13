@@ -20,6 +20,7 @@ import { resetTransCalculator } from "@entities/EditCreateTransaction/model/Calc
 import { closeMenu, openMenu, setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
 import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConverter.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { EditCreateMenuType } from "@entities/Modals/types.ts"
 
 export const EditCreateTransMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -117,7 +118,7 @@ export const EditCreateTransMenu = React.memo(() => {
              $isActive={isMenuOpen} $zIndex={5}
              $color={"rgba(0, 0, 0, 0.78)"} />
 
-    <MenuLayout $isActive={isMenuOpen}>
+    <MenuLayout $menuType={menuType} $isActive={isMenuOpen}>
       <div className="category-account-info">
         <InfoCell OnClick={OpenChooseAccountMenu}
                   icon={AccountsIcons.get(account.icon)}
@@ -145,6 +146,7 @@ export const EditCreateTransMenu = React.memo(() => {
 })
 const MenuLayout = styled.div<{
   $isActive?: boolean
+  $menuType?: EditCreateMenuType
 }>`
   position: fixed;
   z-index: 50;
@@ -154,7 +156,8 @@ const MenuLayout = styled.div<{
   left: 50%;
   transform: translateX(-50%) ${({ $isActive }) => $isActive ? "translateY(0)" : "translateY(120%)"};
   margin: 0 auto;
-  transition: 0.5s;
+  height: ${({ $menuType }) => $menuType === "overview" ? "325.8px" : "474px"};
+  transition: transform 0.5s, height 0.3s;
 
   .category-account-info {
     display: flex;

@@ -1,7 +1,7 @@
 import { ITransaction } from "@entities/Transaction/types.ts"
 import { number } from "yup"
-import { Currency } from "@entities/Account/types.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { Currency } from "@entities/Currency/types.ts"
 
 export const AddConvertedQuantityToTrans = (
   transactions: ITransaction[],

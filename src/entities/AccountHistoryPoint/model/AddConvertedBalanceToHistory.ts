@@ -1,6 +1,6 @@
 import { IAccountHistoryPoint } from "@entities/AccountHistoryPoint/types.ts"
-import { Currency } from "@entities/Account/types.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { Currency } from "@entities/Currency/types.ts"
 
 export const AddConvertedBalanceToHistory = (
   historyPoints: IAccountHistoryPoint[],

@@ -1,7 +1,7 @@
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import React, { FC } from "react"
-import { Currency } from "@entities/Account/types.ts"
 import styled from "styled-components"
+import { Currency } from "@entities/Currency/types.ts"
 
 interface props {
   fullName: string

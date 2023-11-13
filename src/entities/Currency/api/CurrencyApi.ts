@@ -15,6 +15,7 @@
 
 import { Api } from "@shared/api/config/Api.ts"
 import { ICategory } from "@entities/Category/type.ts"
+import { fetchCurrencyResponse } from "@entities/Currency/types.ts"
 
 export const CurrencyApi = Api.injectEndpoints({
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Currency } from "@entities/Account/types.ts"
+import { Currency } from "@entities/Currency/types.ts"
 
 interface initialState {
   id: number | null

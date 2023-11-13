@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Currency } from "@entities/Account/types.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
+import { Currency } from "@entities/Currency/types.ts"
 
 interface initialState {
   curCurrency: Currency,
@@ -15,8 +15,15 @@ const initialState: initialState = {
 const SettingsSlice = createSlice({
   name: "SettingsSlice",
   initialState,
-  reducers: {}
+  reducers: {
+    setCurCurrency(state, action: PayloadAction<Currency>) {
+      state.curCurrency = action.payload
+    },
+    setCurCurrencySign(state, action: PayloadAction<string>) {
+      state.curCurrencySign = action.payload
+    }
+  }
 })
 
 export const SettingsReducer = SettingsSlice.reducer
-export const {} = SettingsSlice.actions
+export const { setCurCurrency, setCurCurrencySign } = SettingsSlice.actions

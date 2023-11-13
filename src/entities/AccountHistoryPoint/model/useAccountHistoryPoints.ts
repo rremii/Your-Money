@@ -6,9 +6,10 @@ import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { IAccountHistoryPoint, IConvertedHistoryPoint } from "@entities/AccountHistoryPoint/types.ts"
 import { ITransaction } from "@entities/Transaction/types.ts"
-import { Currency, IAccount } from "@entities/Account/types.ts"
+import { IAccount } from "@entities/Account/types.ts"
 import { AddConvertedBalanceToHistory } from "@entities/AccountHistoryPoint/model/AddConvertedBalanceToHistory.ts"
 import { FilterHistoryByAccId } from "@entities/AccountHistoryPoint/model/FilterHistoryByAccId.ts"
+import { Currency } from "@entities/Currency/types.ts"
 
 
 export const useAccountHistoryPoints = (
