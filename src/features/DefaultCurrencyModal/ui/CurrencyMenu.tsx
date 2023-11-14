@@ -33,11 +33,11 @@ export const CurrencyMenu = () => {
   return <CurrencyMenuLayout>
     <p className="subTitle">Main currencies</p>
     <div className="currencies-box">
-      {MainCurrencies.map(({ fullName, shortName }) => (
+      {MainCurrencies.map(({ fullName, shortName }, index) => (
         <CurrencyCell OnClick={() => SetChosenCurrency(shortName)}
                       fullName={fullName}
                       shortName={shortName}
-                      isActive={currency === shortName} />
+                      isActive={currency === shortName} key={index} />
       ))}
     </div>
     <div className="btn-section">

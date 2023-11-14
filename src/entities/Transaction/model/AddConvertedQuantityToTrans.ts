@@ -1,5 +1,4 @@
 import { ITransaction } from "@entities/Transaction/types.ts"
-import { number } from "yup"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { Currency } from "@entities/Currency/types.ts"
 

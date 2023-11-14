@@ -1,4 +1,4 @@
-import { DateFilter, IConvertedTransaction, ITransaction } from "@entities/Transaction/types.ts"
+import { DateFilter, IConvertedTransaction } from "@entities/Transaction/types.ts"
 import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
 import { timeGap } from "@shared/helpers/TimeGap.ts"
 import { transByDate } from "@entities/Transaction/helpers/TransByDate.ts"

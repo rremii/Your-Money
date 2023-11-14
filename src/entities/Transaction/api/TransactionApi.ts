@@ -1,11 +1,5 @@
 import { Api } from "@shared/api/config/Api.ts"
-import {
-  CreateTransDto,
-  EditTransDto,
-  GetTransactionDto,
-  GetTransactionResponse,
-  ITransaction
-} from "@entities/Transaction/types.ts"
+import { CreateTransDto, EditTransDto, GetTransactionDto, GetTransactionResponse } from "@entities/Transaction/types.ts"
 import { DefaultResponse } from "@entities/Auth/types.ts"
 
 export const TransactionApi = Api.injectEndpoints({

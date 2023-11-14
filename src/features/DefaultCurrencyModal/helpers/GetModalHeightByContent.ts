@@ -1,4 +1,4 @@
-import { CurrencyMenuType } from "@features/DefalutCurrencyModal/types.ts"
+import { CurrencyMenuType } from "@features/DefaultCurrencyModal/types.ts"
 import { Currency } from "@entities/Currency/types.ts"
 import { CurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 

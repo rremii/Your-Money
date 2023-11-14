@@ -1,4 +1,3 @@
-import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import React, { FC } from "react"
 import styled from "styled-components"
 

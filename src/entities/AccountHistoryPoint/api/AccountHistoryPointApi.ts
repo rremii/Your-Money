@@ -1,5 +1,4 @@
 import { Api } from "@shared/api/config/Api.ts"
-import { GetTransactionDto } from "@entities/Transaction/types.ts"
 import { GetHistoryPointsDto, GetHistoryPointsResponse } from "@entities/AccountHistoryPoint/types.ts"
 
 export const TransactionApi = Api.injectEndpoints({

@@ -1,10 +1,8 @@
-import styled from "styled-components"
 import React, { useState } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { Currency } from "@entities/Currency/types.ts"
 import { closeMenu, setCurrencyMenuType } from "@entities/Modals/model/ModalsSlice.ts"
 import { setCurCurrencySign } from "@entities/Settings/model/SettingsSlice.ts"
-import { CurrencySigns, DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
+import { CurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import { CurrencySignCell } from "@shared/ui/СurrencyModal/CurrencySignCell.tsx"
 
 export const CurrencySignMenu = () => {
@@ -31,10 +29,10 @@ export const CurrencySignMenu = () => {
 
   return <div>
     <div className="currencies-box">
-      {CurrencySigns[currency].map((sign) => (
+      {CurrencySigns[currency].map((sign, index) => (
         <CurrencySignCell OnClick={() => SetChosenCurrencySign(sign)}
                           sign={sign}
-                          isActive={chosenCurrencySign === sign} />
+                          isActive={chosenCurrencySign === sign} key={index} />
       ))}
     </div>
     <div className="btn-section">

@@ -4,6 +4,7 @@ import { Routing } from "../pages"
 import "./styles/style.scss"
 import { ArcElement, BarElement, CategoryScale, Chart as ChartJS, LinearScale } from "chart.js"
 
+//todo check if i have it
 ChartJS.register(CategoryScale,
   LinearScale,
   BarElement,

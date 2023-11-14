@@ -10,7 +10,6 @@ import { SliderLayout } from "@shared/ui/Slider.tsx"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 
 
-//todo try to move trans by ids and menu ext data to store
 export const OverviewSlider = memo(() => {
   const dateMenuIds = useTypedSelector(state => state.Date.dateMenuIds)
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)

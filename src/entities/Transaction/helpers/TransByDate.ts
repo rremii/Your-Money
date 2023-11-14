@@ -1,4 +1,4 @@
-import { IConvertedTransaction, ITransaction } from "@entities/Transaction/types.ts"
+import { IConvertedTransaction } from "@entities/Transaction/types.ts"
 import { timeGap } from "@shared/helpers/TimeGap.ts"
 import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
 import { DayType } from "@shared/constants/Days.ts"

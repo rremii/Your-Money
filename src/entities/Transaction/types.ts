@@ -15,23 +15,13 @@ export interface ITransaction {
   accountId: number
   title?: string
   quantity: number
-  // account: {
-  //   currency: Currency
-  // }
+
 }
 
 export interface IConvertedTransaction extends ITransaction {
   convertedQuantity: number
 }
 
-
-//todo delete money lib
-
-// interface ITransactionWithCurrency extends ITransaction {
-//   account: {
-//     currency: Currency
-//   }
-// }
 
 export type GetTransactionResponse = ITransaction[]
 

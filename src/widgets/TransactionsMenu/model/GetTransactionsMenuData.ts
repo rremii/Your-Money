@@ -1,4 +1,4 @@
-import { IConvertedTransaction, ITransaction } from "@entities/Transaction/types.ts"
+import { IConvertedTransaction } from "@entities/Transaction/types.ts"
 import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
 
 export const GetTransactionsMenuData = (transactions: IConvertedTransaction[]) => {

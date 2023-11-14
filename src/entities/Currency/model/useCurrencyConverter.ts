@@ -1,11 +1,6 @@
-import { useEffect, useState } from "react"
 import { useFetchCurrencyQuery } from "@entities/Currency/api/CurrencyApi.ts"
-import { useAccount } from "@entities/Account/model/useAccount.tsx"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { useTimer } from "@shared/hooks/useTimer.tsx"
 
 
-//todo move to shared
 export const useCurrencyConverter = () => {
 
 

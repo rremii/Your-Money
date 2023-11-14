@@ -1,4 +1,4 @@
-import { IConvertedTransaction, ITransaction } from "@entities/Transaction/types.ts"
+import { IConvertedTransaction } from "@entities/Transaction/types.ts"
 import { ICategory } from "@entities/Category/type.ts"
 
 export const FillCategoriesWithTransactions = (categories: ICategory[], transactions: IConvertedTransaction[]) => {

@@ -1,16 +1,13 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import React, { useState } from "react"
+import React from "react"
 import { CurrencyModalHeader } from "@shared/ui/СurrencyModal/CurrencyModalHeader.tsx"
-import { CurrencyCell } from "@shared/ui/СurrencyModal/CurrencyCell.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setEditCurrency } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { closeMenu, setCurrencyMenuType } from "@entities/Modals/model/ModalsSlice.ts"
-import { CurrencyMenu } from "@features/DefalutCurrencyModal/ui/CurrencyMenu.tsx"
-import { CurrencySignMenu } from "@features/DefalutCurrencyModal/ui/CurrencySignMenu.tsx"
-import { CurrencyMenuType } from "@features/DefalutCurrencyModal/types.ts"
-import { GetModalHeightByContent } from "@features/DefalutCurrencyModal/helpers/GetModalHeightByContent.ts"
+import { CurrencyMenu } from "@features/DefaultCurrencyModal/ui/CurrencyMenu.tsx"
+import { CurrencySignMenu } from "@features/DefaultCurrencyModal/ui/CurrencySignMenu.tsx"
+import { GetModalHeightByContent } from "@features/DefaultCurrencyModal/helpers/GetModalHeightByContent.ts"
 
 
 export const CurrencyModal = () => {

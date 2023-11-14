@@ -1,5 +1,4 @@
 import { ITransaction } from "@entities/Transaction/types.ts"
-import { number } from "yup"
 
 export const FilterTransactionByAccId = (transactions: ITransaction[], curAccId: number | null) => {
   let allTransactions = transactions || []

@@ -15,7 +15,7 @@ import { CalendarMenu } from "@widgets/CalendarMenu/ui/CalendarMenu.tsx"
 import { ChooseCategorySlideMenu } from "@widgets/ChooseCategorySlideMenu/ui/ChooseCategorySlideMenu.tsx"
 import { EditCreateTransMenu } from "@widgets/EditCreateTransMenu/ui/EditCreateTransMenu.tsx"
 import { CurrencyModal } from "@widgets/EditCreateTransMenu/ui/CurrencyModal.tsx"
-import { DefalutCurrencyModal } from "@features/DefalutCurrencyModal"
+import { DefaultCurrencyModal } from "@features/DefaultCurrencyModal"
 
 interface Props {
   children: React.ReactNode
@@ -41,7 +41,7 @@ const AppLayout: FC<Props> = ({ children }) => {
       <CalendarMenu />
       <CurrencyModal />
 
-      <DefalutCurrencyModal />
+      <DefaultCurrencyModal />
       <SignOutMenu />
       <PasswordMenu />
       <NameMenu />

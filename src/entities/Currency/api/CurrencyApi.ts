@@ -1,20 +1,4 @@
-// import axios from "axios"
-//
-// export class CurrencyApi {
-//
-//   async fetchCurrency() {
-//     return await axios.get<fetchCurrencyResponse>("https://www.cbr-xml-daily.ru/latest.js")
-//
-//   }
-//
-// }
-//
-//
-// export const currencyApi = new CurrencyApi()
-
-
 import { Api } from "@shared/api/config/Api.ts"
-import { ICategory } from "@entities/Category/type.ts"
 import { fetchCurrencyResponse } from "@entities/Currency/types.ts"
 
 export const CurrencyApi = Api.injectEndpoints({

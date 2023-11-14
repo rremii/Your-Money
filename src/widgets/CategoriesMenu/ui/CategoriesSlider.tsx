@@ -8,7 +8,6 @@ import { CategoryMenu } from "@widgets/CategoriesMenu/ui/CategoryMenu.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { SliderLayout } from "@shared/ui/Slider.tsx"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
-import { useAccountHistoryPoints } from "@entities/AccountHistoryPoint/model/useAccountHistoryPoints.ts"
 
 
 export const CategoriesSlider = memo(() => {

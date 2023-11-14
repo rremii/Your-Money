@@ -6,12 +6,12 @@ import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useTimer } from "@shared/hooks/useTimer.tsx"
-import * as yup from "yup"
 import styled from "styled-components"
 import { GetMe, useChangePasswordMutation } from "@entities/User/api/UserApi.ts"
 import { HashData } from "@shared/helpers/HashData.ts"
 import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
+import { passwordSchema } from "@widgets/PasswordMenu/constants/validateSchema.ts"
 
 
 interface FormFields {
@@ -19,14 +19,6 @@ interface FormFields {
   confirmPassword: string
 }
 
-//todo
-const schema = yup
-  .object()
-  .shape({
-    password: yup.string().required("field is required"),
-    confirmPassword: yup.string().required("field is required")
-  })
-  .required()
 
 export const PasswordMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -41,7 +33,7 @@ export const PasswordMenu = React.memo(() => {
 
   const { register, formState: { errors }, clearErrors, handleSubmit, reset, setError } =
     useForm<FormFields>({
-      resolver: yupResolver(schema)
+      resolver: yupResolver(passwordSchema)
     })
   const { Reset: ResetTimer } = useTimer({ timeGap: 3, finalTime: 3, callback: clearErrors })
 
@@ -70,7 +62,7 @@ export const PasswordMenu = React.memo(() => {
     dispatch(closeMenu("passwordMenu"))
     reset()
   }
-
+  //todo move form to other file
   return <>
     <Overlay $isActive={isPasswordMenu} onClick={CloseMenu} $zIndex={15} />
     <PasswordLayout $isOpen={isPasswordMenu}>

@@ -13,7 +13,6 @@ interface props {
   OnChange: (chosenDateStr: string) => void
 }
 
-//todo create a calendar box
 const Calendar: FC<props> = memo(({ initialDate, OnChange, color }) => {
 
   const { chosenDateStr, type } = useContext(CalendarContext)
