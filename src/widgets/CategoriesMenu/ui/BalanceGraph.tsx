@@ -4,6 +4,7 @@ import React, { FC } from "react"
 import { GetDoughnutConfig } from "@widgets/CategoriesMenu/model/GetDoughnutConfig.ts"
 import { IConvertedTransaction, TransactionType } from "@entities/Transaction/types.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
+import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 export interface ICategoryData {
   name: string
@@ -37,10 +38,10 @@ export const BalanceGraph: FC<props> = React.memo(({
       <div className="type">{menuType === "expense" ? "Expense" : "Income"}</div>
       <div
         className={`${menuType === "expense" ? "current" : ""} quantity expenses`}>
-        Br <span>{expTransactionsSum}</span>
+        Br <span>{RoundDecimal(expTransactionsSum, 2)}</span>
       </div>
       <div className={`${menuType === "income" ? "current" : ""} quantity income`}>
-        Br <span>{incTransactionsSum}</span>
+        Br <span>{RoundDecimal(incTransactionsSum)}</span>
       </div>
     </div>
   </GraphLayout>

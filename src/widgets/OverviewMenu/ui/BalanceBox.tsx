@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import React, { FC } from "react"
+import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 interface props {
   expense: number
@@ -17,15 +18,15 @@ export const BalanceBox: FC<props> = React.memo(({ income, expense }) => {
   return <BalanceLayout $balance={balance}>
     <div className="balance">
       <h2>Balance</h2>
-      <p>{balanceSign}Br {Math.abs(balance)}</p>
+      <p>{balanceSign}Br {Math.abs(RoundDecimal(balance, 2))}</p>
     </div>
     <div className="expense">
       <h2>Expense</h2>
-      <p>{expense ? "-" : ""}Br {Math.abs(expense)}</p>
+      <p>{expense ? "-" : ""}Br {Math.abs(RoundDecimal(expense, 2))}</p>
     </div>
     <div className="income">
       <h2>Income</h2>
-      <p>{income ? "+" : ""}Br {income}</p>
+      <p>{income ? "+" : ""}Br {RoundDecimal(income, 2)}</p>
     </div>
   </BalanceLayout>
 })

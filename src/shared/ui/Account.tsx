@@ -6,16 +6,20 @@ import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
 interface props {
   icon: string
   name: string
-  quantity: number
+  balance: number
   OnClick?: () => void
   bgColor?: string
   color?: string
 }
 
 
-export const Account: FC<props> = ({ name, quantity, icon, OnClick, bgColor, color }) => {
+export const Account: FC<props> = ({ name, balance, icon, OnClick, bgColor, color }) => {
 
-
+  const getBalanceStyleClass = (): string => {
+    if (balance < 0) return "neg-balance"
+    if (balance > 0) return "pos-balance"
+    return ""
+  }
   return <AccountLayout onClick={OnClick} $bgColor={bgColor} $quantityColor={color} $nameColor={color}
                         className="Account">
     <div className="icon">
@@ -23,7 +27,10 @@ export const Account: FC<props> = ({ name, quantity, icon, OnClick, bgColor, col
     </div>
     <div className="accounts-info">
       <p className="name">{name}</p>
-      <p className="quantity"><span>-$</span> {Math.abs(quantity)}</p>
+      <p className={`balance ${getBalanceStyleClass()}`}>
+        <span>{balance < 0 ? "-" : ""}$</span>
+        {Math.abs(balance)}
+      </p>
     </div>
   </AccountLayout>
 }
@@ -37,7 +44,8 @@ const AccountLayout = styled.div<{
   align-items: center;
   gap: 12px;
   padding: 0 13px;
-  background-color: ${({ $bgColor }) => $bgColor ? $bgColor : "var(--bg-1)"};
+    //background-color: ${({ $bgColor }) => $bgColor ? $bgColor : "var(--bg-1)"};
+  background-color: var(--bg-1);
   cursor: pointer;
 
   .icon {
@@ -61,7 +69,8 @@ const AccountLayout = styled.div<{
     justify-content: center;
 
     .name {
-      color: ${({ $nameColor }) => $nameColor ? $nameColor : "var(--txt-5)"};
+        // color: ${({ $nameColor }) => $nameColor ? $nameColor : "var(--txt-5)"};
+      color: var(--txt-5);
       font-family: Inter;
       font-size: 13px;
       font-style: normal;
@@ -70,8 +79,16 @@ const AccountLayout = styled.div<{
       margin-bottom: 3px;
     }
 
-    .quantity {
-      color: ${({ $quantityColor }) => $quantityColor ? $quantityColor : "var(--txt-8)"};
+    .neg-balance {
+      color: var(--txt-8) !important;
+    }
+
+    .pos-balance {
+      color: var(--txt-10) !important;
+    }
+
+    .balance {
+      color: var(--txt-6);
       font-family: Inter;
       font-size: 17px;
       font-style: normal;
@@ -84,6 +101,7 @@ const AccountLayout = styled.div<{
         font-style: normal;
         font-weight: 500;
         line-height: normal;
+        margin-right: 3px;
       }
     }
   }

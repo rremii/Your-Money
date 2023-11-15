@@ -23,12 +23,12 @@ export const TransactionHeader: FC<props> = React.memo(({ startBalance, endBalan
     <div className="balance-cell">
       <h2>Starting balance</h2>
       <p
-        className={GetNumberSignStyle(startBalance)}>{startBalance < 0 ? "-" : ""}{curCurrencySign} {RoundDecimal(startBalance, 2)}</p>
+        className={GetNumberSignStyle(startBalance)}>{startBalance < 0 ? "-" : ""}{curCurrencySign} {Math.abs(RoundDecimal(startBalance, 2))}</p>
     </div>
     <div className="balance-cell">
       <h2>Ending balance</h2>
       <p
-        className={GetNumberSignStyle(endBalance)}>{endBalance < 0 ? "-" : ""}{curCurrencySign} {RoundDecimal(endBalance, 2)}</p>
+        className={GetNumberSignStyle(endBalance)}>{endBalance < 0 ? "-" : ""}{curCurrencySign} {Math.abs(RoundDecimal(endBalance, 2))}</p>
     </div>
   </TransactionsHeaderLayout>
 })

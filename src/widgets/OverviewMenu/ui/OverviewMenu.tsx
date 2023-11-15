@@ -25,6 +25,8 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
 
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)
+  const currencySign = useTypedSelector(state => state.Settings.curCurrencySign)
+
 
   const { observeRef } = useOnMenuSlide(dateGap, menuId, dateFrom)
 
@@ -53,7 +55,7 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
     <OverviewGraph {...barConfig} />
     <div className="date-money-box">
       {extInfo.map((extData, index) => (
-        <DateMoneyCell key={index} {...extData} />
+        <DateMoneyCell currencySign={currencySign} key={index} {...extData} />
       ))}
     </div>
     <div className="categories-box">

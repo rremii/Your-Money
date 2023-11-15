@@ -2,6 +2,7 @@ import styled from "styled-components"
 import React, { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { openMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 
 interface props {
@@ -13,6 +14,7 @@ export const TopHeader: FC<props> = ({ right }) => {
 
 
   const balance = useTypedSelector(state => state.CurAccount.balance)
+  const curCurrencySign = useTypedSelector(state => state.Settings.curCurrencySign)
 
 
   const OpenSideBar = () => {
@@ -28,7 +30,7 @@ export const TopHeader: FC<props> = ({ right }) => {
     </div>
     <div className="info center">
       <p>All accounts</p>
-      <p>Br {balance}</p>
+      <p>{balance < 0 ? "-" : ""} {curCurrencySign} {Math.abs(RoundDecimal(balance, 2))}</p>
     </div>
     <div className="right">{right}</div>
   </TopHeaderLayout>

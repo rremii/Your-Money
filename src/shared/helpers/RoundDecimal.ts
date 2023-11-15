@@ -1,4 +1,5 @@
-export const RoundDecimal = (number: number, length: number = 1) => {
+export const RoundDecimal = (number?: number, length: number = 1) => {
+  if (!number) return 0
   const numberStr = number.toString()
   if (!numberStr.includes(".")) return number
 

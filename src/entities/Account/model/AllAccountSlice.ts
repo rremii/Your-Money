@@ -17,7 +17,7 @@ const initialState: initialState = {
   color: "#5C6AC0",
   name: "all",
   icon: "",
-  currency: Currency.UnitedStatesDollar
+  currency: Currency.DefaultCurrency
 }
 
 const AllAccountSlice = createSlice({
@@ -33,12 +33,15 @@ const AllAccountSlice = createSlice({
     },
     setAllAccountBalance(state, action: PayloadAction<number>) {
       state.balance = action.payload
+    },
+    setAllAccountCurrency(state, action: PayloadAction<Currency>) {
+      state.currency = action.payload
     }
   }
 })
 
 export const AllAccountReducer = AllAccountSlice.reducer
-export const { setAllAccountBalance } = AllAccountSlice.actions
+export const { setAllAccountBalance, setAllAccountCurrency } = AllAccountSlice.actions
 
 
 

@@ -26,6 +26,6 @@ export const ChooseAccount: FC<props> = (account) => {
   const isActive = curName === name
   const txtColor = isActive ? "var(--txt-1)" : ""
   const bgColor = isActive ? color : ""
-  return <Account key={name} quantity={balance} name={name} icon={icon} bgColor={bgColor}
+  return <Account key={name} balance={balance} name={name} icon={icon} bgColor={bgColor}
                   color={txtColor} OnClick={() => SetAccount(account)} />
 }
