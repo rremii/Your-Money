@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { openMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 
 export const StartCreatingTrans = () => {
   const dispatch = useAppDispatch()
@@ -10,6 +11,7 @@ export const StartCreatingTrans = () => {
 
   const OnClick = () => {
     dispatch(openMenu("chooseCategorySlideMenu"))
+    dispatch(setEditTransQuantity(0))
     dispatch(setEditTransDateStr(curMenuDate))
   }
 

@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { FormField } from "@shared/ui/FormField.tsx"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
-import React from "react"
+import React, { memo } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -10,19 +10,14 @@ import * as yup from "yup"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { setEditTransTitle } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { titleValidateSchema } from "@widgets/TitleMenu/constants/TitleValidateSchema.ts"
 
 interface FormFields {
   title: string | undefined
 }
 
-const schema = yup
-  .object()
-  .shape({
-    title: yup.string().max(20)
-  })
 
-
-export const TitleMenu = () => {
+export const TitleMenu = memo(() => {
   const dispatch = useAppDispatch()
 
   const initTitle = useTypedSelector(state => state.EditCreateTransaction.Transaction.title)
@@ -31,7 +26,7 @@ export const TitleMenu = () => {
 
   const { register, formState: { errors }, handleSubmit, reset } =
     useForm<FormFields>({
-      resolver: yupResolver(schema),
+      resolver: yupResolver(titleValidateSchema),
       values: {
         title: initTitle || ""
       }
@@ -80,7 +75,7 @@ export const TitleMenu = () => {
       </form>
     </TitleMenuLayout>
   </>
-}
+})
 const TitleMenuLayout = styled(Modal)`
 
   z-index: 50;

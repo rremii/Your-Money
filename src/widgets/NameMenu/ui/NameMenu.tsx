@@ -11,18 +11,12 @@ import styled from "styled-components"
 import { GetMe, useChangeNameMutation } from "@entities/User/api/UserApi.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { nameValidateSchema } from "@widgets/NameMenu/constants/NameValidateSchema.ts"
 
 
 interface FormFields {
   name: string
 }
-
-const schema = yup
-  .object()
-  .shape({
-    name: yup.string().required("field is required")
-  })
-  .required()
 
 
 export const NameMenu = React.memo(() => {
@@ -36,7 +30,7 @@ export const NameMenu = React.memo(() => {
 
   const { register, formState: { errors }, clearErrors, handleSubmit, reset, setError } =
     useForm<FormFields>({
-      resolver: yupResolver(schema),
+      resolver: yupResolver(nameValidateSchema),
       values: {
         name: user ? user.name : ""
       }

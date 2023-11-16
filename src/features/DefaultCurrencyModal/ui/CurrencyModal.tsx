@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import React from "react"
+import React, { memo } from "react"
 import { CurrencyModalHeader } from "@shared/ui/СurrencyModal/CurrencyModalHeader.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu, setCurrencyMenuType } from "@entities/Modals/model/ModalsSlice.ts"
@@ -10,7 +10,7 @@ import { CurrencySignMenu } from "@features/DefaultCurrencyModal/ui/CurrencySign
 import { GetModalHeightByContent } from "@features/DefaultCurrencyModal/helpers/GetModalHeightByContent.ts"
 
 
-export const CurrencyModal = () => {
+export const CurrencyModal = memo(() => {
   const dispatch = useAppDispatch()
 
   const isOpen = useTypedSelector(state => state.Modals.currencyMenu.isOpen)
@@ -36,7 +36,7 @@ export const CurrencyModal = () => {
       )}
     </CurrencyModalLayout>
   </>
-}
+})
 const CurrencyModalLayout = styled(Modal)<{
   $height?: number
 }>`

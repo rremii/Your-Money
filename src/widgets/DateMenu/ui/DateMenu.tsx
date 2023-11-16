@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import React from "react"
+import React, { memo } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { SetDateToday } from "@widgets/DateMenu/ui/SetDateToday.tsx"
 import { SetDateYesterday } from "@widgets/DateMenu/ui/SetDateYesterday.tsx"
@@ -9,7 +9,7 @@ import { OpenCalendar } from "@widgets/DateMenu/ui/OpenCalendar.tsx"
 import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
 
 
-export const DateMenu = () => {
+export const DateMenu = memo(() => {
   const dispatch = useAppDispatch()
 
   const isMenuOpen = useTypedSelector(state => state.Modals.dateMenu.isOpen)
@@ -29,7 +29,7 @@ export const DateMenu = () => {
       <SetDateToday />
     </DateLayout>
   </>
-}
+})
 const DateLayout = styled(Modal)`
   z-index: 50;
   padding: 0;

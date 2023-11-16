@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { FC } from "react"
 import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
+import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 //todo check seo
 interface props {
@@ -29,7 +30,7 @@ export const Account: FC<props> = ({ name, balance, icon, OnClick, bgColor, colo
       <p className="name">{name}</p>
       <p className={`balance ${getBalanceStyleClass()}`}>
         <span>{balance < 0 ? "-" : ""}$</span>
-        {Math.abs(balance)}
+        {Math.abs(RoundDecimal(balance, 2))}
       </p>
     </div>
   </AccountLayout>

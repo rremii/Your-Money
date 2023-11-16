@@ -49,4 +49,10 @@ export const CurrencyMenu = () => {
 const CurrencyMenuLayout = styled.div`
   overflow-y: hidden;
   height: 100%;
+
+  .currencies-box {
+    display: flex;
+    flex-direction: column;
+    padding-right: 5px;
+  }
 `

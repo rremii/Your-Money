@@ -14,13 +14,14 @@ export const TransactionApi = Api.injectEndpoints({
       providesTags: ["Transactions"]
     }),
 
+    //todo check create trans flow in yandex it doubles requests
     createTransaction: build.mutation<DefaultResponse, CreateTransDto>({
       query: (data) => ({
         url: "transaction",
         method: "POST",
         data
       }),
-      invalidatesTags: ["Transactions", "HistoryPoints"]
+      invalidatesTags: ["Transactions", "HistoryPoints", "Accounts"]
     }),
 
     editTransaction: build.mutation<DefaultResponse, EditTransDto>({
@@ -29,7 +30,7 @@ export const TransactionApi = Api.injectEndpoints({
         method: "PUT",
         data
       }),
-      invalidatesTags: ["Transactions", "HistoryPoints"]
+      invalidatesTags: ["Transactions", "HistoryPoints", "Accounts"]
     }),
 
 
@@ -38,7 +39,7 @@ export const TransactionApi = Api.injectEndpoints({
         url: "transaction/" + id,
         method: "DELETE"
       }),
-      invalidatesTags: ["Transactions", "HistoryPoints"]
+      invalidatesTags: ["Transactions", "HistoryPoints", "Accounts"]
     })
 
 

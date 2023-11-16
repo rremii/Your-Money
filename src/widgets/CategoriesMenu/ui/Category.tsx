@@ -10,6 +10,7 @@ import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.
 import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { ICategory } from "@entities/Category/type.ts"
 import { openMenu, setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
+import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 
 interface props extends ICategory {
@@ -17,10 +18,12 @@ interface props extends ICategory {
   dateTo: Date
 }
 
+//todo make it shared
 export const Category: FC<props> = React.memo(({ color, quantity, icon, name, id, type, dateTo }) => {
   const dispatch = useAppDispatch()
 
   const curAccId = useTypedSelector(state => state.CurAccount.id)
+  const curCurrencySign = useTypedSelector(state => state.Settings.curCurrencySign)
 
 
   const { data: user } = GetMe.useQueryState()
@@ -42,7 +45,7 @@ export const Category: FC<props> = React.memo(({ color, quantity, icon, name, id
       dateStr: date.toUTCString(),
       type
     }))
-    dispatch(setEditTransQuantity(quantity))
+    dispatch(setEditTransQuantity(0))
     dispatch(setCategory(category))
     if (account)
       dispatch(setAccount(account))
@@ -57,7 +60,7 @@ export const Category: FC<props> = React.memo(({ color, quantity, icon, name, id
       <img src={CategoriesIcons.get(icon)} alt="category icon" />
     </div>
     <p className="quantity">
-      Br {quantity}
+      {curCurrencySign} {RoundDecimal(quantity, 2)}
     </p>
   </CategoryLayout>
 })

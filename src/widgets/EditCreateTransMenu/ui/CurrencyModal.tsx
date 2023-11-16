@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import React, { useState } from "react"
+import React, { memo, useState } from "react"
 import { CurrencyModalHeader } from "@shared/ui/СurrencyModal/CurrencyModalHeader.tsx"
 import { CurrencyCell } from "@shared/ui/СurrencyModal/CurrencyCell.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
@@ -11,7 +11,7 @@ import { Currency } from "@entities/Currency/types.ts"
 import { MainCurrencies } from "@entities/Currency/constants/MainCurrencies.ts"
 
 
-export const CurrencyModal = () => {
+export const CurrencyModal = memo(() => {
   const dispatch = useAppDispatch()
 
 
@@ -39,11 +39,11 @@ export const CurrencyModal = () => {
       <CurrencyModalHeader>Currency</CurrencyModalHeader>
       <p className="subTitle">Main currencies</p>
       <div className="currencies-box">
-        {MainCurrencies.map(({ fullName, shortName }) => (
+        {MainCurrencies.map(({ fullName, shortName }, index) => (
           <CurrencyCell OnClick={() => SetChosenCurrency(shortName)}
                         fullName={fullName}
                         shortName={shortName}
-                        isActive={chosenCurrency === shortName} />
+                        isActive={chosenCurrency === shortName} key={index} />
         ))}
       </div>
       <div className="btn-section">
@@ -52,7 +52,7 @@ export const CurrencyModal = () => {
       </div>
     </CurrencyModalLayout>
   </>
-}
+})
 const CurrencyModalLayout = styled(Modal)`
   z-index: 55;
   max-width: 360px;

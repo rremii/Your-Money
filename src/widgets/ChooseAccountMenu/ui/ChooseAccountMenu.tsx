@@ -17,7 +17,6 @@ export const ChooseAccountMenu = React.memo(() => {
   const allBalance = useTypedSelector(state => state.AllAccount.balance)
   const curCurrencySign = useTypedSelector(state => state.Settings.curCurrencySign)
 
-//todo fix backend account balance!!!
   const { data: user } = GetMe.useQueryState()
   const { allAccounts } = useAccount(user?.id)
 

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { NavLink } from "react-router-dom"
-import React, { FC } from "react"
+import React, { FC, memo } from "react"
 
 interface props {
   href: string
@@ -9,7 +9,7 @@ interface props {
   srcActive: string
 }
 
-export const Link: FC<props> = ({ src, srcActive, name, href }) => {
+export const Link: FC<props> = memo(({ src, srcActive, name, href }) => {
 
   return (
     <LinkLayout to={href} className="link">
@@ -20,7 +20,7 @@ export const Link: FC<props> = ({ src, srcActive, name, href }) => {
       <h3>{name}</h3>
     </LinkLayout>
   )
-}
+})
 const LinkLayout = styled(NavLink)`
   display: flex;
   align-items: center;

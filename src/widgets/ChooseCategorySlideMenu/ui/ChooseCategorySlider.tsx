@@ -11,7 +11,6 @@ interface props {
 }
 
 export const ChooseCategorySlider: FC<props> = ({ onScroll }) => {
-  const dispatch = useAppDispatch()
 
   const { data: user } = GetMe.useQueryState()
   const { allCategories } = useCategory(user?.id)
@@ -33,12 +32,10 @@ export const ChooseCategorySlider: FC<props> = ({ onScroll }) => {
     const scrollPercent = Math.round(curScroll / width) * 100
 
     if (scrollPercent > 50) {
-      // dispatch(setEditTransType("expense"))
       onScroll(scrollPercent)
     }
     if (scrollPercent <= 50) {
       onScroll(scrollPercent)
-      // dispatch(setEditTransType("income"))
     }
   }
 
@@ -56,4 +53,8 @@ const CategorySliderLayout = styled.div`
   overflow-x: auto;
   scroll-snap-type: x mandatory;
 
+  &::-webkit-scrollbar {
+    display: none;
+
+  }
 `

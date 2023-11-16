@@ -1,15 +1,19 @@
 import styled from "styled-components"
 import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
 import { FC, memo } from "react"
+import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 interface props {
   name: string
   icon: string
   balance: number
   color: string
+  currencySign: string
 }
 
-export const AccountInfo: FC<props> = memo(({ balance, name, icon, color }) => {
+export const AccountInfo: FC<props> = memo(({ balance, name, icon, currencySign, color }) => {
+
+
   return <AccountInfoLayout $color={color}>
     <div className="name-box">
       <img src={AccountsIcons.get(icon)} alt="account icon" className="icon" />
@@ -17,7 +21,7 @@ export const AccountInfo: FC<props> = memo(({ balance, name, icon, color }) => {
     </div>
     <div className="balance-box">
       <p className="title">Account balance</p>
-      <div className="balance">-$ {balance}</div>
+      <div className="balance">{balance < 0 ? "-" : ""}{currencySign} {Math.abs(RoundDecimal(balance, 2))}</div>
     </div>
   </AccountInfoLayout>
 })
