@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import React, { FC } from "react"
+import { CategoryIcon } from "@shared/ui/CustomIcon/CategoryIcon.tsx"
 
 interface props {
   name: string
@@ -14,9 +15,7 @@ interface props {
 
 export const CategoryCell: FC<props> = React.memo(({ currency, icon, percent, quantity, name, color }) => {
   return <CellLayout $color={color} $percent={percent * 100}>
-    <div className="icon">
-      <img src={CategoriesIcons.get(icon)} alt="icon" />
-    </div>
+    <CategoryIcon boxSize="35px" category={icon} color={color} />
     <div className="text-info">
       <h2 className="name">{name}</h2>
       <p className="quantity">{currency} {quantity}</p>
@@ -42,15 +41,8 @@ const CellLayout = styled.div<{
   row-gap: 2px;
   background-color: var(--bg-1);
 
-  .icon {
-    width: 35px;
-    height: 35px;
+  .CategoryIcon {
     grid-row: span 2;
-
-    img {
-      width: 100%;
-      height: 100%;
-    }
   }
 
   .text-info {

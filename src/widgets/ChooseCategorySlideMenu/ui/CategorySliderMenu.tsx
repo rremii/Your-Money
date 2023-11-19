@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { FC, useCallback } from "react"
-import { Category } from "@widgets/ChooseCategoryMenu/ui/Category.tsx"
+import { Category } from "@shared/ui/Category.tsx"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
 import { setEditTransType } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"

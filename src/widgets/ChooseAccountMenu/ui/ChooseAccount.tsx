@@ -4,6 +4,7 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
 import { IAccount } from "@entities/Account/types.ts"
 import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { AccountIcon } from "@shared/ui/CustomIcon/AccountIcon.tsx"
 
 
 interface props extends IAccount {
@@ -26,6 +27,9 @@ export const ChooseAccount: FC<props> = (account) => {
   const isActive = curName === name
   const txtColor = isActive ? "var(--txt-1)" : ""
   const bgColor = isActive ? color : ""
-  return <Account key={name} balance={balance} name={name} icon={icon} bgColor={bgColor}
-                  color={txtColor} OnClick={() => SetAccount(account)} />
+  return <Account key={name} balance={balance} name={name} bgColor={bgColor}
+                  color={txtColor} OnClick={() => SetAccount(account)}
+                  iconNode={
+                    <AccountIcon account={icon} color={color} />
+                  } />
 }

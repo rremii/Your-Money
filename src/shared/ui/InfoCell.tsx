@@ -1,22 +1,22 @@
 import styled from "styled-components"
-import { FC, memo } from "react"
+import { FC, memo, ReactNode } from "react"
+import { CategoryIcon } from "@shared/ui/CustomIcon/CategoryIcon.tsx"
 
 
 interface props {
   title: string
   content: string
   color: string
-  icon?: string
+  iconNode: ReactNode
   iconRadius: string
   OnClick: () => void
 }
 
-export const InfoCell: FC<props> = memo(({ icon, iconRadius, color, content, title, OnClick }) => {
-
-
+export const InfoCell: FC<props> = memo(({ iconNode, iconRadius, color, content, title, OnClick }) => {
+  
   return <CellLayout onClick={OnClick} $color={color} $iconRadius={iconRadius}>
     <div className="icon-box">
-      <img className="icon" src={icon} alt="icon" />
+      {iconNode}
     </div>
     <h2 className="title">{title}</h2>
     <p className="content">{content}</p>
@@ -40,7 +40,6 @@ const CellLayout = styled.div<{
   cursor: pointer;
 
   .icon-box {
-    //display: none;
     width: 43px;
     height: 43px;
     display: flex;
@@ -52,11 +51,6 @@ const CellLayout = styled.div<{
     top: 0;
     right: 13px;
     transform: translateY(-50%);
-
-    .icon {
-      width: 20px;
-      height: 20px;
-    }
 
 
   }

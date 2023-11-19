@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { FC, memo } from "react"
 import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import { ICategory } from "@entities/Category/type.ts"
+import { CategoryIcon } from "@shared/ui/CustomIcon/CategoryIcon.tsx"
 
 
 interface props extends ICategory {
@@ -15,7 +16,9 @@ export const Category: FC<props> = memo(({ OnClick, isActive, ...category }) => 
   return <CategoryLayout className="Category" onClick={() => OnClick(category)} $color={color}
                          $isActive={isActive}>
     <p className="name">{name}</p>
-    <img className="icon" src={CategoriesIcons.get(icon)} alt={"category icon"} />
+    <div className="icon">
+      <CategoryIcon boxSize="47px" iconSize="25px" category={icon} color={color} />
+    </div>
   </CategoryLayout>
 })
 const CategoryLayout = styled.div<{
@@ -45,11 +48,7 @@ const CategoryLayout = styled.div<{
   }
 
   .icon {
-    width: 47px;
-    height: 47px;
-    border-radius: 50%;
     opacity: ${({ $isActive }) => $isActive ? 1 : 0.7};
-
   }
 
 

@@ -1,11 +1,11 @@
 import styled from "styled-components"
-import { FC } from "react"
+import React, { FC, ReactNode } from "react"
 import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 //todo check seo
 interface props {
-  icon: string
+  iconNode: ReactNode
   name: string
   balance: number
   OnClick?: () => void
@@ -14,7 +14,7 @@ interface props {
 }
 
 
-export const Account: FC<props> = ({ name, balance, icon, OnClick, bgColor, color }) => {
+export const Account: FC<props> = ({ name, balance, iconNode, OnClick, bgColor, color }) => {
 
   const getBalanceStyleClass = (): string => {
     if (balance < 0) return "neg-balance"
@@ -23,9 +23,10 @@ export const Account: FC<props> = ({ name, balance, icon, OnClick, bgColor, colo
   }
   return <AccountLayout onClick={OnClick} $bgColor={bgColor} $quantityColor={color} $nameColor={color}
                         className="Account">
-    <div className="icon">
-      <img src={AccountsIcons.get(icon)} alt="account icon" />
-    </div>
+    {/*<div className="icon">*/}
+    {/*<img src={AccountsIcons.get(icon)} alt="account icon" />*/}
+    {/*</div>*/}
+    {iconNode}
     <div className="accounts-info">
       <p className="name">{name}</p>
       <p className={`balance ${getBalanceStyleClass()}`}>
