@@ -17,18 +17,18 @@ import { OptionsSection } from "@widgets/EditCreateTransMenu/ui/OptionsSection.t
 import { useCreateTransactionMutation, useEditTransactionMutation } from "@entities/Transaction/api/TransactionApi.ts"
 import { resetEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { resetTransCalculator } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
-import { closeMenu, openMenu, setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu, openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConverter.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
-import { EditCreateMenuType } from "@entities/Modals/types.ts"
+import { EditCreateMenuType } from "@entities/UI/types.ts"
 import { CategoryIcon } from "@shared/ui/CustomIcon/CategoryIcon.tsx"
 import { AccountIcon } from "@shared/ui/CustomIcon/AccountIcon.tsx"
 
 export const EditCreateTransMenu = React.memo(() => {
   const dispatch = useAppDispatch()
 
-  const isMenuOpen = useTypedSelector(state => state.Modals.editCreateTransMenu.isOpen)
-  const menuType = useTypedSelector(state => state.Modals.editCreateTransMenu.menuType)
+  const isMenuOpen = useTypedSelector(state => state.UI.Modals.editCreateTransMenu.isOpen)
+  const menuType = useTypedSelector(state => state.UI.Modals.editCreateTransMenu.menuType)
   const curAccId = useTypedSelector(state => state.CurAccount.id)
   const type = useTypedSelector(state => state.EditCreateTransaction.Transaction.type)
   const transactionId = useTypedSelector(state => state.EditCreateTransaction.Transaction.id)

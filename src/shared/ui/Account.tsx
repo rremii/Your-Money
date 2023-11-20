@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import React, { FC, ReactNode } from "react"
-import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 //todo check seo

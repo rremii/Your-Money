@@ -7,13 +7,11 @@ import { CurAccountReducer } from "@entities/Account/model/CurAccountSlice.ts"
 import { CategoryReducer } from "@entities/Category/model/CategorySlice.ts"
 import { AllAccountReducer } from "@entities/Account/model/AllAccountSlice.ts"
 import { EditCreateTransactionReducer } from "@entities/EditCreateTransaction/model"
-import { ModalsReducer } from "@entities/Modals/model/ModalsSlice.ts"
 import { SettingsReducer } from "@entities/Settings/model/SettingsSlice.ts"
-// import { CurrencyReducer } from "@entities/Currency/model/CurrencySlice.ts"
+import { UIReducer } from "@entities/UI/model"
 
 
 const rootReducer = combineReducers({
-  // SideBar: SideBarReducer,
   Auth: AuthReducer,
   Toast: ToastReducer,
   Date: DateReducer,
@@ -22,7 +20,7 @@ const rootReducer = combineReducers({
   EditCreateTransaction: EditCreateTransactionReducer,
   AllAccount: AllAccountReducer,
   Settings: SettingsReducer,
-  Modals: ModalsReducer,
+  UI: UIReducer,
   [Api.reducerPath]: Api.reducer
 })
 

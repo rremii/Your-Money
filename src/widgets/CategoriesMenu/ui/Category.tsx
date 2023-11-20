@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import React, { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
@@ -9,7 +8,7 @@ import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategor
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
 import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { ICategory } from "@entities/Category/type.ts"
-import { openMenu, setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
+import { openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { CategoryIcon } from "@shared/ui/CustomIcon/CategoryIcon.tsx"
 

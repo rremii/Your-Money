@@ -6,10 +6,9 @@ import React, { memo } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { setEditTransTitle } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
-import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { titleValidateSchema } from "@widgets/TitleMenu/constants/TitleValidateSchema.ts"
 
 interface FormFields {
@@ -21,7 +20,7 @@ export const TitleMenu = memo(() => {
   const dispatch = useAppDispatch()
 
   const initTitle = useTypedSelector(state => state.EditCreateTransaction.Transaction.title)
-  const isMenuOpen = useTypedSelector(state => state.Modals.titleMenu.isOpen)
+  const isMenuOpen = useTypedSelector(state => state.UI.Modals.titleMenu.isOpen)
 
 
   const { register, formState: { errors }, handleSubmit, reset } =

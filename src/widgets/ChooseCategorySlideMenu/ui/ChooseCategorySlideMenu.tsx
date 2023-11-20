@@ -9,14 +9,14 @@ import { AccountInfo } from "@widgets/ChooseCategorySlideMenu/ui/AccountInfo.tsx
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
-import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 
 export const ChooseCategorySlideMenu = memo(() => {
   const dispatch = useAppDispatch()
 
   const [scrollPercent, setScrollPercent] = useState(0)
 
-  const isMenuOpen = useTypedSelector(state => state.Modals.chooseCategorySlideMenu.isOpen)
+  const isMenuOpen = useTypedSelector(state => state.UI.Modals.chooseCategorySlideMenu.isOpen)
   const curAccId = useTypedSelector(state => state.CurAccount.id)
   const curCurrencySign = useTypedSelector(state => state.Settings.curCurrencySign)
   const activeType = useTypedSelector(state => state.EditCreateTransaction.Transaction.type)

@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import React, { FC } from "react"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 interface props {

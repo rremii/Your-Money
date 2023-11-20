@@ -10,7 +10,7 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
 import { ICategory } from "@entities/Category/type.ts"
-import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 
 export const ChooseCategoryMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -18,7 +18,7 @@ export const ChooseCategoryMenu = React.memo(() => {
   const { data: user } = GetMe.useQueryState()
   const { allCategories } = useCategory(user?.id)
 
-  const isOpen = useTypedSelector(state => state.Modals.chooseCategoryMenu.isOpen)
+  const isOpen = useTypedSelector(state => state.UI.Modals.chooseCategoryMenu.isOpen)
   const type = useTypedSelector(state => state.EditCreateTransaction.Transaction.type)
   const chosenCategoryName = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.name)
 

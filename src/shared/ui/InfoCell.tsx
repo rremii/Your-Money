@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import { FC, memo, ReactNode } from "react"
-import { CategoryIcon } from "@shared/ui/CustomIcon/CategoryIcon.tsx"
 
 
 interface props {

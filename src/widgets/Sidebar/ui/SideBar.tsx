@@ -16,13 +16,13 @@ import { ChangeCurrencyFormat } from "@features/ChangeCurrencyFormat"
 import { ChangeFirstDayWeek } from "@features/ChangeFirstDayWeek"
 import { ChangeStartScreen } from "@features/ChangeStartScreen"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 
 export const SideBar = React.memo(() => {
   const dispatch = useAppDispatch()
 
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
-  const isSideBar = useTypedSelector((state) => state.Modals.sideBar.isOpen)
+  const isSideBar = useTypedSelector((state) => state.UI.Modals.sideBar.isOpen)
 
   const CloseSideBar = () => {
     dispatch(closeMenu("sideBar"))

@@ -3,7 +3,7 @@ import Category from "@shared/assets/LightTheme/categories.png"
 import { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useDeleteTransactionMutation } from "@entities/Transaction/api/TransactionApi.ts"
-import { closeMenu, openMenu, setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu, openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
 
 interface props {
   color: string

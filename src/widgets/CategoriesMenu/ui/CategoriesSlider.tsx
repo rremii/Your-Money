@@ -11,6 +11,10 @@ import { useAccount } from "@entities/Account/model/useAccount.tsx"
 
 
 export const CategoriesSlider = memo(() => {
+  const curMenuId = useTypedSelector(state => state.Date.curMenu.id)
+  const isCategoriesEditMode = useTypedSelector(state => state.UI.Pages.categoryPage.isCategoriesEditMode)
+
+  const categoriesMenusType = useTypedSelector(state => state.UI.Pages.categoryPage.menuType)
   const dateMenuIds = useTypedSelector(state => state.Date.dateMenuIds)
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)

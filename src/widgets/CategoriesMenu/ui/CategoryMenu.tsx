@@ -34,6 +34,7 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
   const expFilledCategories = useMemo(() => FillCategoriesWithTransactions(expCategories, expTransactions), [expTransactions])
   const incFilledCategories = useMemo(() => FillCategoriesWithTransactions(incCategories, incTransactions), [incTransactions])
 
+
   return <CategoryLayout ref={observeRef}>
     <BalanceGraph
       menuType={menuType}
@@ -64,6 +65,7 @@ const CategoryLayout = styled.div`
   height: 100%;
   width: max-content;
   flex: 0 0 100%;
+
 
 
 `

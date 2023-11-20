@@ -3,7 +3,7 @@ import { TransactionType } from "@entities/Transaction/types.ts"
 import { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { MathOperatorSign } from "@entities/EditCreateTransaction/helpers/CalcMathOperation.ts"
-import { setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
+import { setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConverter.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
@@ -21,7 +21,7 @@ export const ResultQuantity: FC<props> = ({ type }) => {
   const categoryColor = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.color)
   const account = useTypedSelector(state => state.EditCreateTransaction.ChosenAccount)
 
-  const menuType = useTypedSelector(state => state.Modals.editCreateTransMenu.menuType)
+  const menuType = useTypedSelector(state => state.UI.Modals.editCreateTransMenu.menuType)
   const currency = useTypedSelector(state => state.EditCreateTransaction.Transaction.currency)
 
   const quantity = useTypedSelector(state => state.EditCreateTransaction.Calculator.quantity)

@@ -3,7 +3,7 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import React from "react"
-import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 
 export const SignIn = React.memo(() => {
   const dispatch = useAppDispatch()

@@ -6,13 +6,13 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { SetDateToday } from "@widgets/DateMenu/ui/SetDateToday.tsx"
 import { SetDateYesterday } from "@widgets/DateMenu/ui/SetDateYesterday.tsx"
 import { OpenCalendar } from "@widgets/DateMenu/ui/OpenCalendar.tsx"
-import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 
 
 export const DateMenu = memo(() => {
   const dispatch = useAppDispatch()
 
-  const isMenuOpen = useTypedSelector(state => state.Modals.dateMenu.isOpen)
+  const isMenuOpen = useTypedSelector(state => state.UI.Modals.dateMenu.isOpen)
 
   const CloseMenu = () => {
     dispatch(closeMenu("dateMenu"))

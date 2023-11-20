@@ -12,7 +12,7 @@ import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
-import { openMenu, setEditCreateMenuType } from "@entities/Modals/model/ModalsSlice.ts"
+import { openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { Currency } from "@entities/Currency/types.ts"
 import { CategoryIcon } from "@shared/ui/CustomIcon/CategoryIcon.tsx"
 

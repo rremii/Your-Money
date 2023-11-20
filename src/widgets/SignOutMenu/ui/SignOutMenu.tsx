@@ -4,14 +4,14 @@ import { useSignOutMutation } from "@entities/Auth/api/AuthApi.ts"
 import { setAuthInitial } from "@entities/Auth/model/AuthSlice.ts"
 import React from "react"
 import { Modal } from "@shared/ui/Modal.tsx"
-import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 
 export const SignOutMenu = React.memo(() => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const isOpen = useTypedSelector(state => state.Modals.signOutMenu.isOpen)
+  const isOpen = useTypedSelector(state => state.UI.Modals.signOutMenu.isOpen)
 
   const [logout] = useSignOutMutation()
 

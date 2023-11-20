@@ -1,18 +1,20 @@
 import styled from "styled-components"
 import React from "react"
 import { Header } from "@widgets/Header"
-import Categories from "@shared/assets/LightTheme/categories.png"
 import { DateSubHeader } from "@widgets/Header/ui/DateSubHeader.tsx"
 import { CategoriesSlider } from "@widgets/CategoriesMenu/ui/CategoriesSlider.tsx"
+import { StartEditCategories } from "@features/StartEditCategories/ui/StartEditCategories.tsx"
+import { EditCategoriesSlider } from "@widgets/EditCategoriesMenu/EditCategoriesSlider.tsx"
 
 const CategoriesPage = () => {
   return (
     <CategoriesLayout>
       <Header
         SubHeader={<DateSubHeader />}
-        right={<img src={Categories} alt="" />}
+        right={<StartEditCategories />}
       />
       <CategoriesSlider />
+      <EditCategoriesSlider />
     </CategoriesLayout>
   )
 }

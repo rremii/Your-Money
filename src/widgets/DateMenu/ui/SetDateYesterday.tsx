@@ -6,7 +6,7 @@ import { timeGap } from "@shared/helpers/TimeGap.ts"
 import { IsYesterday } from "@shared/helpers/IsYesterday.ts"
 import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { Months } from "@shared/constants/Months.ts"
-import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 
 
 export const SetDateYesterday = () => {

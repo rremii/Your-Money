@@ -5,7 +5,7 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { IsYesterday } from "@shared/helpers/IsYesterday.ts"
 import { IsToday } from "@shared/helpers/IsToday.ts"
 import { Months } from "@shared/constants/Months.ts"
-import { openMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 
 
 export const OpenCalendar = () => {

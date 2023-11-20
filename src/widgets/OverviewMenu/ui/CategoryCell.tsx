@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import React, { FC } from "react"
 import { CategoryIcon } from "@shared/ui/CustomIcon/CategoryIcon.tsx"
 

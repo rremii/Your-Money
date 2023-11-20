@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import { FC } from "react"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 interface props {
   currencySign: string

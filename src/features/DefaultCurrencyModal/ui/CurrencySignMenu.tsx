@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { closeMenu, setCurrencyMenuType } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu, setCurrencyMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { setCurCurrencySign } from "@entities/Settings/model/SettingsSlice.ts"
 import { CurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import { CurrencySignCell } from "@shared/ui/СurrencyModal/CurrencySignCell.tsx"

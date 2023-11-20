@@ -4,7 +4,7 @@ import { Overlay } from "@shared/ui/Overlay.tsx"
 import React, { memo } from "react"
 import { CurrencyModalHeader } from "@shared/ui/СurrencyModal/CurrencyModalHeader.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { closeMenu, setCurrencyMenuType } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu, setCurrencyMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { CurrencyMenu } from "@features/DefaultCurrencyModal/ui/CurrencyMenu.tsx"
 import { CurrencySignMenu } from "@features/DefaultCurrencyModal/ui/CurrencySignMenu.tsx"
 import { GetModalHeightByContent } from "@features/DefaultCurrencyModal/helpers/GetModalHeightByContent.ts"
@@ -13,8 +13,8 @@ import { GetModalHeightByContent } from "@features/DefaultCurrencyModal/helpers/
 export const CurrencyModal = memo(() => {
   const dispatch = useAppDispatch()
 
-  const isOpen = useTypedSelector(state => state.Modals.currencyMenu.isOpen)
-  const menuType = useTypedSelector(state => state.Modals.currencyMenu.menuType)
+  const isOpen = useTypedSelector(state => state.UI.Modals.currencyMenu.isOpen)
+  const menuType = useTypedSelector(state => state.UI.Modals.currencyMenu.menuType)
   const currency = useTypedSelector(state => state.Settings.curCurrency)
 
 

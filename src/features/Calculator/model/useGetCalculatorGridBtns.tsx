@@ -2,7 +2,7 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { addToNum, removeLastNumber, setOperator } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { MathOperatorType } from "@entities/EditCreateTransaction/helpers/CalcMathOperation.ts"
 import React, { useCallback, useMemo } from "react"
-import { openMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 
 interface ICalculatorBtn {

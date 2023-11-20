@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { CurrencyCell } from "@shared/ui/СurrencyModal/CurrencyCell.tsx"
 import React from "react"
-import { closeMenu, setCurrencyMenuType } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu, setCurrencyMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setCurCurrency, setCurCurrencySign } from "@entities/Settings/model/SettingsSlice.ts"
 import { Currency } from "@entities/Currency/types.ts"

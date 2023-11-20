@@ -8,5 +8,5 @@ export const ChangeStartScreen = React.memo(() => {
   const handleClick = () => {
   }
 
-  return <SideBarBtn onClick={handleClick} title="Startup screen" subTitle="CategoriesSlider" icon={Categories} />
+  return <SideBarBtn onClick={handleClick} title="Startup screen" subTitle="EditCategoriesSlider" icon={Categories} />
 })

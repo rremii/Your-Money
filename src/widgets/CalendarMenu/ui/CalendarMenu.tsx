@@ -5,12 +5,12 @@ import { Overlay } from "@shared/ui/Overlay.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { Calendar } from "@shared/modules/Calendar"
 import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
-import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 
 export const CalendarMenu = memo(() => {
   const dispatch = useAppDispatch()
 
-  const isOpen = useTypedSelector(state => state.Modals.calendarMenu.isOpen)
+  const isOpen = useTypedSelector(state => state.UI.Modals.calendarMenu.isOpen)
   const initialDate = useTypedSelector(state => state.EditCreateTransaction.Transaction.dateStr)
   const categoryColor = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.color)
 

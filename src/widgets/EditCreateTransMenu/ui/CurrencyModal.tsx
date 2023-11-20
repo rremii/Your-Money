@@ -6,7 +6,7 @@ import { CurrencyModalHeader } from "@shared/ui/СurrencyModal/CurrencyModalHead
 import { CurrencyCell } from "@shared/ui/СurrencyModal/CurrencyCell.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setEditCurrency } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
-import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { Currency } from "@entities/Currency/types.ts"
 import { MainCurrencies } from "@entities/Currency/constants/MainCurrencies.ts"
 
@@ -16,7 +16,7 @@ export const CurrencyModal = memo(() => {
 
 
   const currency = useTypedSelector(state => state.EditCreateTransaction.Transaction.currency)
-  const isOpen = useTypedSelector(state => state.Modals.editCreateCurrencyMenu.isOpen)
+  const isOpen = useTypedSelector(state => state.UI.Modals.editCreateCurrencyMenu.isOpen)
 
   const [chosenCurrency, setCurrency] = useState<Currency>(currency)
 

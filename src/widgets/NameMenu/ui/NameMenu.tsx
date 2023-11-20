@@ -6,11 +6,10 @@ import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useTimer } from "@shared/hooks/useTimer.tsx"
-import * as yup from "yup"
 import styled from "styled-components"
 import { GetMe, useChangeNameMutation } from "@entities/User/api/UserApi.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { nameValidateSchema } from "@widgets/NameMenu/constants/NameValidateSchema.ts"
 
 
@@ -23,7 +22,7 @@ export const NameMenu = React.memo(() => {
   const dispatch = useAppDispatch()
 
 
-  const isNameMenu = useTypedSelector(state => state.Modals.nameMenu.isOpen)
+  const isNameMenu = useTypedSelector(state => state.UI.Modals.nameMenu.isOpen)
 
   const { data: user } = GetMe.useQueryState()
   const [changeName, { isLoading }] = useChangeNameMutation()

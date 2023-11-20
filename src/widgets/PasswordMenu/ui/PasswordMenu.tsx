@@ -9,7 +9,7 @@ import { useTimer } from "@shared/hooks/useTimer.tsx"
 import styled from "styled-components"
 import { GetMe, useChangePasswordMutation } from "@entities/User/api/UserApi.ts"
 import { HashData } from "@shared/helpers/HashData.ts"
-import { closeMenu } from "@entities/Modals/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { passwordSchema } from "@widgets/PasswordMenu/constants/validateSchema.ts"
 
@@ -24,7 +24,7 @@ export const PasswordMenu = React.memo(() => {
   const dispatch = useAppDispatch()
 
 
-  const isPasswordMenu = useTypedSelector(state => state.Modals.passwordMenu.isOpen)
+  const isPasswordMenu = useTypedSelector(state => state.UI.Modals.passwordMenu.isOpen)
 
 
   const { data: user } = GetMe.useQueryState()
