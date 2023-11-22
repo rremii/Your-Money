@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import Account from "@shared/assets/LightTheme/accounts.png"
 import React, { FC } from "react"
-import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
 import { IConvertedTransaction, TransactionType } from "@entities/Transaction/types.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setEditCurrency, setEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"

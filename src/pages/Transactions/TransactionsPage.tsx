@@ -5,16 +5,23 @@ import { DateSubHeader } from "@widgets/Header/ui/DateSubHeader.tsx"
 import { TransactionsSlider } from "@widgets/TransactionsMenu/ui/TransactionsSlider.tsx"
 import { StartCreatingTrans } from "@features/StartCreatingTrans/ui/StartCreatingTrans.tsx"
 import React from "react"
+import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
+import Caregories from "@shared/assets/LightTheme/categories.png"
+
 
 const TransactionsPage = () => {
 
 
   return (
     <TransactionsLayout>
-      <Header
-        SubHeader={<DateSubHeader />}
-        right={<img src={Categories} alt="" />}
-      />
+      {/*<Header*/}
+      {/*  SubHeader={<DateSubHeader />}*/}
+      {/*  right={<img src={Categories} alt="" />}*/}
+      {/*/>*/}
+      <Header>
+        <TopHeader right={<img src={Categories} />} />
+        <DateSubHeader />
+      </Header>
       <TransactionsSlider />
       <StartCreatingTrans />
     </TransactionsLayout>

@@ -1,26 +1,23 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
 import { getIsMenuIdZero } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { Burger } from "@features/Burger/ui/Burger.tsx"
 
 interface props {
-  right?: React.ReactNode
-  left?: React.ReactNode
-  center?: React.ReactNode
-  SubHeader?: React.ReactNode
+  children?: React.ReactNode
 }
 
-export const Header: FC<props> = ({ right, SubHeader }) => {
+export const Header: FC<props> = ({ children }) => {
 
 
   const isMenuIdZero = useTypedSelector(getIsMenuIdZero)
 
 
   return (
-    <HeaderLayout $isActive={isMenuIdZero}>
-      <TopHeader right={right} />
-      {SubHeader}
+    <HeaderLayout id="header" $isActive={isMenuIdZero}>
+      <Burger />
+      {children}
     </HeaderLayout>
   )
 }
@@ -29,9 +26,9 @@ const HeaderLayout = styled.header<{
 }>`
   background-color: ${({ $isActive }) => $isActive ? "var(--account-color)" : "var(--bg-11)"};
   transition: 1s;
-
+  position: relative;
   box-shadow: 0px 2px 4px 0px var(--shadow-3);
-  z-index: 1;
+  z-index: 4;
 
 
 `

@@ -4,16 +4,23 @@ import { Header } from "@widgets/Header"
 import { AccountsSubHeader } from "@widgets/Header/ui/AccountsSubHeader.tsx"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { AccountsMenu } from "@widgets/AccountsMenu/ui/AccountsMenu.tsx"
+import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
+import { DateSubHeader } from "@widgets/Header/ui/DateSubHeader.tsx"
+import Caregories from "@shared/assets/LightTheme/categories.png"
 
 const AccountsPage = () => {
 
 
   return (
     <AccountsLayout>
-      <Header
-        SubHeader={<AccountsSubHeader />}
-        right={<img src={Categories} alt="" />}
-      />
+      {/*<Header*/}
+      {/*  SubHeader={<AccountsSubHeader />}*/}
+      {/*  right={<img src={Categories} alt="" />}*/}
+      {/*/>*/}
+      <Header>
+        <TopHeader right={<img src={Categories} />} />
+        <AccountsSubHeader />
+      </Header>
       <AccountsMenu />
     </AccountsLayout>
   )

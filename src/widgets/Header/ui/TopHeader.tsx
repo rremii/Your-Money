@@ -3,6 +3,8 @@ import React, { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { Burger } from "@features/Burger/ui/Burger.tsx"
+import { createPortal } from "react-dom"
 
 
 interface props {
@@ -10,24 +12,17 @@ interface props {
 }
 
 export const TopHeader: FC<props> = ({ right }) => {
-  const dispatch = useAppDispatch()
 
 
   const balance = useTypedSelector(state => state.CurAccount.balance)
   const curCurrencySign = useTypedSelector(state => state.Settings.curCurrencySign)
 
 
-  const OpenSideBar = () => {
-    dispatch(openMenu("sideBar"))
-  }
+  // const headerEl = document.getElementById("header")
 
-
+  // console.log(headerEl)
   return <TopHeaderLayout>
-    <div onClick={OpenSideBar} className="burger left">
-      <span />
-      <span />
-      <span />
-    </div>
+    {/*{headerEl && createPortal(<Burger />, headerEl)}*/}
     <div className="info center">
       <p>All accounts</p>
       <p>{balance < 0 ? "-" : ""} {curCurrencySign} {Math.abs(RoundDecimal(balance, 2))}</p>
@@ -42,21 +37,8 @@ const TopHeaderLayout = styled.div`
   align-items: center;
   display: grid;
 
-  .burger {
-    display: flex;
-    flex-direction: column;
-    width: 18px;
-    gap: 3px;
-    cursor: pointer;
-
-    span {
-      width: 100%;
-      height: 2px;
-      background-color: var(--bg-1);
-    }
-  }
-
   .info {
+    grid-column: 2/3;
     justify-self: center;
 
     p:nth-child(1) {
@@ -79,6 +61,7 @@ const TopHeaderLayout = styled.div`
   }
 
   .right {
+    grid-column: 3/4;
     width: 20px;
     height: 20px;
     justify-self: right;

@@ -4,12 +4,20 @@ import { Header } from "@widgets/Header"
 import { DateSubHeader } from "@widgets/Header/ui/DateSubHeader.tsx"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { OverviewSlider } from "@widgets/OverviewMenu/ui/OverviewSlider.tsx"
+import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
+import { StartEditCategories } from "@features/StartEditCategories/ui/StartEditCategories.tsx"
+import Caregories from "@shared/assets/LightTheme/categories.png"
 
 
 const OverviewPage = () => {
   return (
     <OverviewLayout>
-      <Header SubHeader={<DateSubHeader />} right={<img src={Categories} />} />
+      {/*<Header SubHeader={<DateSubHeader />} right={<img src={Categories} />} />*/}
+      <Header>
+        <TopHeader right={<img src={Categories} />} />
+        <DateSubHeader />
+      </Header>
+      {/*<DateSubHeader />*/}
       <OverviewSlider />
     </OverviewLayout>
   )

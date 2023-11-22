@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import { CategorySliderMenu } from "@widgets/ChooseCategorySlideMenu/ui/CategorySliderMenu.tsx"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"

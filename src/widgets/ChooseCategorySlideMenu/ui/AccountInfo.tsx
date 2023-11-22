@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
 import { FC, memo } from "react"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { AccountIcon } from "@shared/ui/CustomIcon/AccountIcon.tsx"

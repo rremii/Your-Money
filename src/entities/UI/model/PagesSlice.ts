@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { TransactionType } from "@entities/Transaction/types.ts"
 
 
 interface initialState {

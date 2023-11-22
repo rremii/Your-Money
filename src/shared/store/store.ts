@@ -4,7 +4,7 @@ import { AuthReducer } from "@entities/Auth/model/AuthSlice.ts"
 import { ToastReducer } from "@shared/store/globalSlices/ToastSlice.ts"
 import { DateReducer } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { CurAccountReducer } from "@entities/Account/model/CurAccountSlice.ts"
-import { CategoryReducer } from "@entities/Category/model/CategorySlice.ts"
+import { NewCategoryReducer } from "@entities/Category/model/NewCategorySlice.ts"
 import { AllAccountReducer } from "@entities/Account/model/AllAccountSlice.ts"
 import { EditCreateTransactionReducer } from "@entities/EditCreateTransaction/model"
 import { SettingsReducer } from "@entities/Settings/model/SettingsSlice.ts"
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   Toast: ToastReducer,
   Date: DateReducer,
   CurAccount: CurAccountReducer,
-  Category: CategoryReducer,
+  NewCategory: NewCategoryReducer,
   EditCreateTransaction: EditCreateTransactionReducer,
   AllAccount: AllAccountReducer,
   Settings: SettingsReducer,
