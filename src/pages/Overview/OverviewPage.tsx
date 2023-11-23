@@ -5,8 +5,6 @@ import { DateSubHeader } from "@widgets/Header/ui/DateSubHeader.tsx"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { OverviewSlider } from "@widgets/OverviewMenu/ui/OverviewSlider.tsx"
 import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
-import { StartEditCategories } from "@features/StartEditCategories/ui/StartEditCategories.tsx"
-import Caregories from "@shared/assets/LightTheme/categories.png"
 
 
 const OverviewPage = () => {

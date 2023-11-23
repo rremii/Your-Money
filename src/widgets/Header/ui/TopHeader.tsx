@@ -1,10 +1,7 @@
 import styled from "styled-components"
 import React, { FC } from "react"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
-import { Burger } from "@features/Burger/ui/Burger.tsx"
-import { createPortal } from "react-dom"
 
 
 interface props {

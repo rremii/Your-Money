@@ -3,10 +3,20 @@ import { ICategory } from "@entities/Category/type.ts"
 import { TransactionType } from "@entities/Transaction/types.ts"
 
 interface initialState {
+  id: number | null
+  name: string
+  color: string
+  icon: string
+  userId: number | null
   type: TransactionType
 }
 
 const initialState: initialState = {
+  id: null,
+  userId: null,
+  name: "",
+  color: "",
+  icon: "",
   type: "expense"
 }
 
@@ -16,9 +26,39 @@ const NewCategorySlice = createSlice({
   reducers: {
     setNewCategoryType(state, action: PayloadAction<TransactionType>) {
       state.type = action.payload
+    },
+    setEditCategory(state, action: PayloadAction<ICategory>) {
+      const { id, type, color, userId, name, icon } = action.payload
+      state.id = id
+      state.type = type
+      state.color = color
+      state.userId = userId
+      state.name = name
+      state.icon = icon
+    },
+    setNewCategoryName(state, action: PayloadAction<string>) {
+      state.name = action.payload
+    },
+    setNewCategoryColor(state, action: PayloadAction<string>) {
+      state.color = action.payload
+    },
+    resetEditCategory(state) {
+      state.id = null
+      state.color = ""
+      state.userId = null
+      state.name = ""
+      state.icon = ""
     }
+
+
   }
 })
 
 export const NewCategoryReducer = NewCategorySlice.reducer
-export const { setNewCategoryType } = NewCategorySlice.actions
+export const {
+  setNewCategoryType,
+  setEditCategory,
+  resetEditCategory,
+  setNewCategoryName,
+  setNewCategoryColor
+} = NewCategorySlice.actions

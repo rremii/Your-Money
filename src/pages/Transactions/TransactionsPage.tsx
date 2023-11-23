@@ -6,7 +6,6 @@ import { TransactionsSlider } from "@widgets/TransactionsMenu/ui/TransactionsSli
 import { StartCreatingTrans } from "@features/StartCreatingTrans/ui/StartCreatingTrans.tsx"
 import React from "react"
 import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
-import Caregories from "@shared/assets/LightTheme/categories.png"
 
 
 const TransactionsPage = () => {

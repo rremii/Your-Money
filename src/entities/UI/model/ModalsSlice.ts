@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { CurrencyMenuType } from "@features/DefaultCurrencyModal/types.ts"
-import { EditCreateMenuType, Menus } from "@entities/UI/types.ts"
+import { EditCreateCategoryType, EditCreateMenuType, Menus } from "@entities/UI/types.ts"
 
 
 interface initialState {
@@ -44,6 +44,10 @@ interface initialState {
   currencyMenu: {
     menuType: CurrencyMenuType
     isOpen: boolean
+  },
+  editCreateCategoryMenu: {
+    isOpen: boolean
+    menuType: EditCreateCategoryType
   }
 
 }
@@ -77,6 +81,9 @@ const initialState: initialState = {
   }, currencyMenu: {
     isOpen: false,
     menuType: "currency"
+  }, editCreateCategoryMenu: {
+    isOpen: false,
+    menuType: "create"
   }
 }
 
@@ -97,6 +104,9 @@ const ModalsSlice = createSlice({
     setEditCreateMenuType(state, action: PayloadAction<EditCreateMenuType>) {
       state.editCreateTransMenu.menuType = action.payload
     },
+    setEditCategoryMenuType(state, action: PayloadAction<EditCreateCategoryType>) {
+      state.editCreateCategoryMenu.menuType = action.payload
+    },
     setCurrencyMenuType(state, action: PayloadAction<CurrencyMenuType>) {
       state.currencyMenu.menuType = action.payload
     }
@@ -105,4 +115,10 @@ const ModalsSlice = createSlice({
 })
 
 export const ModalsReducer = ModalsSlice.reducer
-export const { closeMenu, setEditCreateMenuType, openMenu, setCurrencyMenuType } = ModalsSlice.actions
+export const {
+  closeMenu,
+  setEditCreateMenuType,
+  openMenu,
+  setCurrencyMenuType,
+  setEditCategoryMenuType
+} = ModalsSlice.actions

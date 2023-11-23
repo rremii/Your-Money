@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import { FC } from "react"
-import { TransactionType } from "@entities/Transaction/types.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 interface props {

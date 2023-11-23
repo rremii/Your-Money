@@ -4,6 +4,10 @@ import { ICategory } from "@entities/Category/type.ts"
 import { Category } from "@widgets/EditCategoriesMenu/ui/Category.tsx"
 import { TransactionType } from "@entities/Transaction/types.ts"
 import { StartCreatingCategory } from "@features/StartCreatingCategory/ui/StartCreatingCategory.tsx"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { openMenu, setEditCategoryMenuType } from "@entities/UI/model/ModalsSlice.ts"
+import { setEditCategory, setNewCategoryType } from "@entities/Category/model/NewCategorySlice.ts"
+import { setCategoriesEditMode } from "@entities/UI/model/PagesSlice.ts"
 
 
 interface props {
@@ -12,12 +16,19 @@ interface props {
 }
 
 export const EditCategoriesMenu: FC<props> = ({ categories, categoryType }) => {
+  const dispatch = useAppDispatch()
+
+  const EditCategory = (initCategory: ICategory) => {
+    dispatch(setEditCategory(initCategory))
+    dispatch(openMenu("editCreateCategoryMenu"))
+    dispatch(setEditCategoryMenuType("edit"))
+  }
 
 
   return <CategoryLayout>
 
     {categories.map((category) => (
-      <Category {...category} />
+      <Category key={category.id} OnClick={EditCategory} {...category} />
     ))}
 
     <StartCreatingCategory categoryType={categoryType} />

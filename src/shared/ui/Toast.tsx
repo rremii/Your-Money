@@ -32,7 +32,7 @@ const ToastLayout = styled.div<{
   $isShown?: boolean
 }>`
   position: absolute;
-  top: 100%;
+  top: 105%;
   left: 50%;
   transform: ${({ $isShown }) => $isShown ? "translateY(calc(-100% - 20px))" : ""} translateX(-50%);
   background-color: var(--bg-1);
