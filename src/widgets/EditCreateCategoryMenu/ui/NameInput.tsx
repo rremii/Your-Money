@@ -38,7 +38,6 @@ export const NameInput = () => {
   }
 
   return <NameInputLayout>
-
     <form onSubmit={handleSubmit(HandleChange)} onChange={handleSubmit(HandleChange)}>
       <FormField
         isError={Boolean(errors.root) || Boolean(errors.name)}
@@ -53,7 +52,6 @@ export const NameInput = () => {
         <ErrorMessage>{errors.name.message}</ErrorMessage>
       )}
     </form>
-    {/*<input value={name} onChange={HandleChange} type="text" />*/}
   </NameInputLayout>
 }
 const NameInputLayout = styled.div`

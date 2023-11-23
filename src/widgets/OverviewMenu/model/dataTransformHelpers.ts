@@ -29,7 +29,7 @@ export const GetConfigOptions = (currency: string = "$"): ChartOptions<"bar"> =>
           crossAlign: "near",
           stepSize: 20,
           count: 5,
-          callback: function(value, index, ticks) {
+          callback: function(value: string | number, index: number) {
             if (value === 0) return ""
             return currency + " " + value
           }
