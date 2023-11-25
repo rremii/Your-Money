@@ -5,7 +5,7 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setNewCategoryColor, setNewCategoryType } from "@entities/Category/model/NewCategorySlice.ts"
-import { GetRandomColor } from "@shared/ui/IconColorPicker/utils/GetRandomColor.ts"
+import { GetRandomColor } from "@shared/modules/IconColorPicker/utils/GetRandomColor.ts"
 
 interface props {
   categoryType: TransactionType

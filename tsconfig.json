@@ -40,6 +40,7 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true
   },
+  //  "types": ["vite-plugin-svgr/client"], //for dynamic svg import
   "include": [
     "src"
   ],

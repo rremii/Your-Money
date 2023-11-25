@@ -48,6 +48,9 @@ interface initialState {
   editCreateCategoryMenu: {
     isOpen: boolean
     menuType: EditCreateCategoryType
+  },
+  iconColorPickerMenu: {
+    isOpen: boolean
   }
 
 }
@@ -84,6 +87,9 @@ const initialState: initialState = {
   }, editCreateCategoryMenu: {
     isOpen: false,
     menuType: "create"
+  },
+  iconColorPickerMenu: {
+    isOpen: true
   }
 }
 
@@ -98,9 +104,6 @@ const ModalsSlice = createSlice({
     closeMenu(state, action: PayloadAction<Menus>) {
       state[action.payload].isOpen = false
     },
-    // closeAllMenus(state) {
-    //   state.editCreateTransMenu.isOpen = false
-    // },
     setEditCreateMenuType(state, action: PayloadAction<EditCreateMenuType>) {
       state.editCreateTransMenu.menuType = action.payload
     },

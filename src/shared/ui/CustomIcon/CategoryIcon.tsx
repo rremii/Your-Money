@@ -1,4 +1,4 @@
-import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
+import { CategoriesIcons } from "@shared/modules/IconColorPicker/constants/CategoriesIcons.ts"
 import { FC } from "react"
 import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
 

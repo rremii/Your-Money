@@ -1,4 +1,4 @@
-import { Colors } from "@shared/ui/IconColorPicker/constants/colors.ts"
+import { Colors } from "@shared/modules/IconColorPicker/constants/colors.ts"
 
 export const GetRandomColor = () => {
   const length = Colors.length

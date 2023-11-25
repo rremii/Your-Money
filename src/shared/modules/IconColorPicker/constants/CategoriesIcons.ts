@@ -24,3 +24,5 @@ CategoriesIcons.set("transport", TransportIcon)
 CategoriesIcons.set("salary", Categories)
 
 CategoriesIcons.set("burger", BurgerIcon)
+
+

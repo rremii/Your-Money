@@ -17,6 +17,8 @@ import { EditCreateTransMenu } from "@widgets/EditCreateTransMenu/ui/EditCreateT
 import { CurrencyModal } from "@widgets/EditCreateTransMenu/ui/CurrencyModal.tsx"
 import { DefaultCurrencyModal } from "@features/DefaultCurrencyModal"
 import { EditCreateCategoryMenu } from "@widgets/EditCreateCategoryMenu/ui/EditCreateCategoryMenu.tsx"
+import { CategoryIcon } from "@shared/ui/CustomIcon/CategoryIcon.tsx"
+import { CategoryIconPickerModal } from "@features/CategoryIconPickerModal/ui/CategoryIconPickerModal.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -43,6 +45,7 @@ const AppLayout: FC<Props> = ({ children }) => {
       <CurrencyModal />
 
       <EditCreateCategoryMenu />
+      <CategoryIconPickerModal />
 
       <DefaultCurrencyModal />
       <SignOutMenu />
