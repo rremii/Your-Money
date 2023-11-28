@@ -1,67 +1,58 @@
 import styled from "styled-components"
-import { useContext } from "react"
-import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
-import { CalendarType } from "@shared/modules/Calendar/types.ts"
-import { setCalendarType } from "@shared/modules/Calendar/model/Actions.ts"
-import { Days } from "@shared/constants/Days.ts"
-import { Months } from "@shared/constants/Months.ts"
-
-export const Header = () => {
-
-  const { chosenDateStr, color, type } = useContext(CalendarContext)
-
-  const date = new Date(chosenDateStr)
-  const year = date.getFullYear()
-  const day = Days.get(date.getDay())
-  const month = Months.get(date.getMonth()) as string
-  const dateDay = date.getDate()
-
-  const SetCalendarType = (type: CalendarType) => {
-    setCalendarType(type)
-  }
+import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
+import { FC, memo, useContext } from "react"
+import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
+import AccountCategoryIconComp from "@features/CategoryIconPickerModal/constants/AccountCategoryIconComp.tsx"
+import { IIconComponents } from "@shared/modules/IconColorPicker/types.ts"
 
 
-  return <HeaderLayout $color={color}>
-    <p
-      onClick={() => SetCalendarType("year")}
-      className={`sub-title ${type === "year" ? "active" : ""}`}>{year || ""}</p>
-    <p
-      onClick={() => SetCalendarType("month")}
-      className={`title ${type === "month" ? "active" : ""}`}>{day || ""}, {month?.slice(0, 3)} {dateDay}</p>
+export const Header = memo(() => {
+
+  const { curIcon, curColor, IconComponents } = useContext(PickerContext)
+
+
+  return <HeaderLayout $color={curColor}>
+    <div className="icon-box">
+      {IconComponents?.get(curIcon, { fill: "white" })}
+    </div>
+    <h1 className="title">Category icon</h1>
   </HeaderLayout>
-}
+})
 const HeaderLayout = styled.header<{
   $color?: string
 }>`
-  padding: 15px;
-  background-color: ${({ $color }) => $color ? $color : "rgb(63, 81, 181)"};
-  cursor: pointer;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
+  gap: 15px;
+  align-items: center;
+  height: 65px;
+  padding: 0 22px;
 
-  .sub-title, .title {
+  .icon-box {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: ${({ $color }) => $color ? $color : "#0BAD7B"};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .4s;
 
-    transition: 0.3s;
-    margin: 0;
-    color: var(--txt-1);
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  h1.title {
+    color: #000;
     font-family: Inter;
+    font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: normal;
-    opacity: 0.5;
+    letter-spacing: 0.32px;
+    margin-bottom: 0;
   }
 
-  .sub-title {
-    font-size: 14px;
-  }
 
-  .title {
-    font-size: 27px;
-  }
-
-  .active {
-    opacity: 1;
-  }
 `

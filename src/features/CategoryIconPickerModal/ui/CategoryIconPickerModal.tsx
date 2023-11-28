@@ -1,41 +1,67 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
-import React, { memo, useCallback, useState } from "react"
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { Calendar } from "@shared/modules/Calendar"
-import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { IconColorPicker } from "@shared/modules/IconColorPicker"
+import AccountCategoryIconComp from "@features/CategoryIconPickerModal/constants/AccountCategoryIconComp.tsx"
+import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
+import { GetRandomColor } from "@features/CategoryIconPickerModal/utils/GetRandomColor.ts"
+import { GetRandomCategoryIcon } from "@features/CategoryIconPickerModal/utils/GetRandomCategoryIcon.ts"
+import { pickerColors } from "@features/CategoryIconPickerModal/constants/PickerColors.ts"
+import { pickerIcons } from "@features/CategoryIconPickerModal/constants/PickerIcons.ts"
 
 export const CategoryIconPickerModal = memo(() => {
   const dispatch = useAppDispatch()
 
   const isOpen = useTypedSelector(state => state.UI.Modals.iconColorPickerMenu.isOpen)
-  // const isOpen = useTypedSelector(state => state.UI.Modals.iconColorPickerMenu.isOpen)
 
 
-  // const [chosenDate, setChosenDate] = useState<string>(initialDate)
+  const [chosenIconInfo, setIconInfo] = useState<{ color: string, icon: string }>({
+    color: GetRandomColor(),
+    icon: GetRandomCategoryIcon()
+  })
 
 
   const CloseIconColorPicker = () => {
     dispatch(closeMenu("iconColorPickerMenu"))
   }
 
-  // const OnChosenDateChange = useCallback((dateStr: string) => {
-  //   setChosenDate(dateStr)
-  // }, [])
+  const OnIconColorChange = useCallback((values: { color: string, icon: string }) => {
+    setIconInfo(values)
+  }, [])
 
   const OnSubmit = () => {
+    debugger
     // dispatch(closeMenu("iconColorPickerMenu"))
   }
+
+
+  const pickerSectionTitles = useMemo(() => ({ firstSection: "Accounts", secondSection: "Categories" }), [])
+  const initPickerIcons = useMemo(() => ({
+    firstSection: pickerIcons.accountIcons,
+    secondSection: pickerIcons.categoryIcons
+  }), [])
+  const initInfo = useMemo(() => ({
+    icon: chosenIconInfo.icon,
+    color: chosenIconInfo.color
+  }), [chosenIconInfo.icon, chosenIconInfo.color])
+
 
   return <>
     <Overlay onClick={CloseIconColorPicker}
              $isActive={isOpen} $zIndex={50}
              $color={"rgba(0, 0, 0, 0.5 )"} />
     <IconPickerModalLayout $color={"green"} $isOpen={isOpen}>
-      <IconColorPicker />
+      <IconColorPicker
+        OnChange={OnIconColorChange}
+        IconComponents={AccountCategoryIconComp}
+        sectionTitles={pickerSectionTitles}
+        icons={initPickerIcons}
+        colors={pickerColors}
+        initInfo={initInfo}
+      />
       <div className="btn-box">
         <button onClick={CloseIconColorPicker} className="cancel">CANCEL</button>
         <button onClick={OnSubmit} className="submit">DONE</button>

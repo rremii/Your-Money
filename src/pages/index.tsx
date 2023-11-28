@@ -7,7 +7,7 @@ import AppLayout from "../app/layout/AppLayout.tsx"
 // const Transactions = lazy(() => import("./Transactions/TransactionsPage.tsx"))
 // const Overview = lazy(() => import("./Overview/OverviewPage.tsx"))
 // const Accounts = lazy(() => import("./Accounts/AccountsPage.tsx"))
-//todo icons https://habr.com/ru/articles/276249/
+//todo icons https://www.svgrepo.com/collection/responsive-glyph-icons/
 import Categories from "./Categories/CategoriesPage.tsx"
 import Transactions from "./Transactions/TransactionsPage.tsx"
 import Overview from "./Overview/OverviewPage.tsx"

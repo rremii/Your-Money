@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
-import { AccountsIcons } from "@shared/modules/IconColorPicker/constants/AccountsIcons.ts"
+import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
 
 interface props {
   color: string

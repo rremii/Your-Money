@@ -1,15 +1,37 @@
 import React from "react"
-import { Actions, MenuType } from "@shared/modules/IconColorPicker/types.ts"
+import { Actions, IIconComponents, MenuType } from "@shared/modules/IconColorPicker/types.ts"
 
 interface initialState {
   menuType: MenuType
-  color: string
-  icon: string
+  sectionTitles: {
+    firstSection: string
+    secondSection: string
+  }
+  IconComponents: IIconComponents | null
+
+  curColor: string
+  curIcon: string
+  colors: string[]
+  icons: {
+    firstSection: string[]
+    secondSection: string[]
+  }
 }
 
 export const initialState = {
-  icon: "",
-  color: "",
+  curIcon: "",
+  curColor: "",
+  colors: [],
+  icons: {
+    firstSection: [],
+    secondSection: []
+  },
+
+  sectionTitles: {
+    firstSection: "",
+    secondSection: ""
+  },
+  IconComponents: null,
   menuType: "icon"
 } as initialState
 
@@ -23,16 +45,40 @@ export const PickerCtxReducer = (state: initialState, action: Actions): initialS
         menuType: action.payload
       }
     }
-    case "SET_PICKER_COLOR": {
+    case "SET_PICKER_CUR_COLOR": {
       return {
         ...state,
-        color: action.payload
+        curColor: action.payload
       }
     }
-    case "SET_PICKER_ICON": {
+    case "SET_PICKER_CUR_ICON": {
       return {
         ...state,
-        icon: action.payload
+        curIcon: action.payload
+      }
+    }
+    case "SET_PICKER_ICONS": {
+      return {
+        ...state,
+        icons: action.payload
+      }
+    }
+    case "SET_PICKER_COLORS": {
+      return {
+        ...state,
+        colors: action.payload
+      }
+    }
+    case "SET_PICKER_TITLES": {
+      return {
+        ...state,
+        sectionTitles: action.payload
+      }
+    }
+    case "SET_ICON_COMPONENTS": {
+      return {
+        ...state,
+        IconComponents: action.payload
       }
     }
 

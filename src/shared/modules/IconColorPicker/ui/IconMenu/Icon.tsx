@@ -1,18 +1,25 @@
 import styled from "styled-components"
-import CategoriesIconsComponents from "@shared/modules/IconColorPicker/constants/CategoriesIconsComponents.tsx"
-import { FC } from "react"
+import { FC, memo } from "react"
+import AccountCategoryIconComp from "@features/CategoryIconPickerModal/constants/AccountCategoryIconComp.tsx"
+import { IIconComponents } from "@shared/modules/IconColorPicker/types.ts"
 
 interface props {
   name: string
   isActive: boolean
+  OnClick?: (icon: string) => void
+  IconComponents: IIconComponents | null
 }
 
-export const Icon: FC<props> = ({ isActive, name }) => {
+export const Icon: FC<props> = memo(({ isActive, name, OnClick, IconComponents }) => {
 
-  return <IconLayout $isActive={isActive}>
-    {CategoriesIconsComponents.get(name)}
+  const HandleClick = () => {
+    if (OnClick) OnClick(name)
+  }
+
+  return <IconLayout onClick={HandleClick} $isActive={isActive}>
+    {IconComponents && IconComponents.get(name)}
   </IconLayout>
-}
+})
 const IconLayout = styled.div<{
   $isActive?: boolean
 }>`

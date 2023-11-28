@@ -1,0 +1,1 @@
+export const pickerColors = ["red", "black", "green", "yellow", "blue"]

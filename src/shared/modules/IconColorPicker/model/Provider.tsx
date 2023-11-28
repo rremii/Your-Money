@@ -6,7 +6,7 @@ import { initialState, PickerContext, PickerCtxReducer } from "@shared/modules/I
 export let dispatchPicker: React.Dispatch<Actions>
 
 
-export function IconColorPickerProvider<T>(Component: FC<T>): (props: any) => React.ReactNode {
+export function IconColorPickerProvider<T>(Component: FC<any>): FC<T> {
 
 
   return (props): React.ReactNode => {

@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react"
 import { setPickerMenuType } from "@shared/modules/IconColorPicker/model/Actions.ts"
+import { MenuType } from "@shared/modules/IconColorPicker/types.ts"
 
 
-export const usePickerSlider = () => {
+export const usePickerSlider = (curMenuType: MenuType) => {
 
   const ref = useRef<HTMLDivElement>(null)
 
@@ -23,9 +24,11 @@ export const usePickerSlider = () => {
     const curScroll = ref.current.scrollLeft
 
     if (curScroll <= width / 2) {
-      setPickerMenuType("icon")
+      if (curMenuType === "color")
+        setPickerMenuType("icon")
     } else {
-      setPickerMenuType("color")
+      if (curMenuType === "icon")
+        setPickerMenuType("color")
     }
   }
 

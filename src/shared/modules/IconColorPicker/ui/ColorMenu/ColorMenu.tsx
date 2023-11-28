@@ -1,16 +1,24 @@
 import styled from "styled-components"
 import { SliderMenuLayout } from "@shared/modules/IconColorPicker/ui/SliderMenuLayout.tsx"
 import { Color } from "@shared/modules/IconColorPicker/ui/ColorMenu/Color.tsx"
+import { useCallback, useContext } from "react"
+import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
+import { setPickerCurColor } from "@shared/modules/IconColorPicker/model/Actions.ts"
 
 export const ColorMenu = () => {
+
+
+  const { curColor, colors } = useContext(PickerContext)
+
+
+  const SetCurColor = useCallback((color: string) => {
+    setPickerCurColor(color)
+  }, [])
+
   return <ColorMenuLayout>
-    <Color isActive={true} color={"red"} />
-    <Color isActive={false} color={"black"} />
-    <Color isActive={false} color={"green"} />
-    <Color isActive={false} color={"blue"} />
-    <Color isActive={false} color={"yellow"} />
-    <Color isActive={false} color={"black"} />
-    <Color isActive={false} color={"black"} />
+    {colors.map(((color, index) => (
+      <Color OnClick={SetCurColor} key={index} isActive={color === curColor} color={color} />
+    )))}
   </ColorMenuLayout>
 }
 const ColorMenuLayout = styled(SliderMenuLayout)`
@@ -19,7 +27,6 @@ const ColorMenuLayout = styled(SliderMenuLayout)`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
   align-content: flex-start;
   gap: 10px;
   padding: 15px 20px;

@@ -1,15 +1,15 @@
 import styled from "styled-components"
-import { FC } from "react"
+import { FC, memo } from "react"
 
 interface props {
   title: string
 }
 
-export const IconTitle: FC<props> = ({ title }) => {
+export const IconTitle: FC<props> = memo(({ title }) => {
   return <TitleLayout>
     {title}
   </TitleLayout>
-}
+})
 const TitleLayout = styled.h2`
   color: #858585;
   flex: 1 1 100%;

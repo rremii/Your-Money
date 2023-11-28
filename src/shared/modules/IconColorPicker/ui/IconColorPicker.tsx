@@ -1,29 +1,55 @@
 import styled from "styled-components"
 import React, { FC, memo, useContext, useEffect } from "react"
-import { Header } from "@shared/modules/Calendar/ui/Header.tsx"
+import { Header } from "@shared/modules/IconColorPicker/ui/Header.tsx"
 import { SubHeader } from "@shared/modules/IconColorPicker/ui/SubHeader.tsx"
 import { Slider } from "@shared/modules/IconColorPicker/ui/Slider.tsx"
+import {
+  setPickerColors,
+  setPickerCurColor,
+  setPickerCurIcon, setPickerIconComponents,
+  setPickerIcons, setPickerTitles
+} from "@shared/modules/IconColorPicker/model/Actions.ts"
+import { IIconComponents } from "@shared/modules/IconColorPicker/types.ts"
+import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
 
 
 interface props {
-  // initialDate: string
-  // color: string
-  // OnChange: (chosenDateStr: string) => void
+  icons: {
+    firstSection: string[]
+    secondSection: string[]
+  }
+  colors: string[]
+  sectionTitles: {
+    firstSection: string
+    secondSection: string
+  }
+  initInfo: {
+    icon: string
+    color: string
+  }
+  IconComponents: IIconComponents
+  OnChange: (values: { color: string, icon: string }) => void
 }
 
-const IconColorPicker: FC<props> = memo(() => {
+const IconColorPicker: FC<props> = memo(({ icons, initInfo, IconComponents, sectionTitles, OnChange, colors }) => {
 
-  // const { chosenDateStr, type } = useContext(CalendarContext)
+  const { curIcon, curColor } = useContext(PickerContext)
 
-  // useEffect(() => {
-  //   OnChange(chosenDateStr)
-  // }, [chosenDateStr])
-  //
-  // useEffect(() => {
-  //   updateMenuDates({ initialDate })
-  //   setCurCalendarDate(initialDate)
-  //   setCalendarColor(color)
-  // }, [initialDate, color])
+  useEffect(() => {
+    OnChange({ color: curColor, icon: curIcon })
+  }, [curIcon, curColor])
+
+
+  useEffect(() => {
+
+    setPickerIcons(icons)
+    setPickerColors(colors)
+    setPickerCurColor(initInfo.color)
+    setPickerCurIcon(initInfo.icon)
+    setPickerIconComponents(IconComponents)
+    setPickerTitles(sectionTitles)
+  }, [])
+
 
   return <CalendarLayout>
     <Header />

@@ -10,6 +10,8 @@ import TransportIcon from "@shared/assets/LightTheme/transport.png"
 import Categories from "@shared/assets/LightTheme/categories.png"
 
 import BurgerIcon from "@shared/assets/LightTheme/burgerIcon.svg"
+import cupIcon from "@shared/assets/LightTheme/cup.svg"
+
 
 export const CategoriesIcons = new Map<string, string>()
 CategoriesIcons.set("family", FamilyIcon)
@@ -23,6 +25,6 @@ CategoriesIcons.set("transport", TransportIcon)
 
 CategoriesIcons.set("salary", Categories)
 
-CategoriesIcons.set("burger", BurgerIcon)
+CategoriesIcons.set("cup", cupIcon)
 
 

@@ -3,23 +3,31 @@ import { SliderMenuLayout } from "@shared/modules/IconColorPicker/ui/SliderMenuL
 import Burger from "@shared/assets/LightTheme/burgerIcon.svg?react"
 import { Icon } from "@shared/modules/IconColorPicker/ui/IconMenu/Icon.tsx"
 import { IconTitle } from "@shared/modules/IconColorPicker/ui/IconMenu/IconTitle.tsx"
+import { FC, useContext } from "react"
+import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
+import { setPickerCurIcon } from "@shared/modules/IconColorPicker/model/Actions.ts"
 
 
-export const IconMenu = () => {
+export const IconMenu: FC = () => {
+
+
+  const { curIcon, icons: { firstSection, secondSection }, IconComponents, sectionTitles } = useContext(PickerContext)
+
+  const SetCurrentIcon = (icon: string) => {
+    setPickerCurIcon(icon)
+  }
+
   return <IconMenuLayout>
-    <IconTitle title={"Accounts"} />
-    <Icon isActive={false} name={"burger"} />
-    <Icon isActive={false} name={"burger"} />
-    <Icon isActive={true} name={"burger"} />
-    <Icon isActive={true} name={"burger"} />
-    <Icon isActive={true} name={"burger"} />
-    <Icon isActive={true} name={"burger"} />
-    <Icon isActive={true} name={"burger"} />
-    <Icon isActive={true} name={"burger"} />
-    <IconTitle title={"Categories"} />
-    <Icon isActive={true} name={"burger"} />
-    <Icon isActive={true} name={"burger"} />
-    <Icon isActive={true} name={"burger"} />
+    <IconTitle title={sectionTitles.firstSection} />
+    {firstSection.map((icon, index) => (
+      <Icon IconComponents={IconComponents} OnClick={SetCurrentIcon} key={index} isActive={curIcon === icon}
+            name={icon} />
+    ))}
+    <IconTitle title={sectionTitles.secondSection} />
+    {secondSection.map((icon, index) => (
+      <Icon IconComponents={IconComponents} OnClick={SetCurrentIcon} key={index} isActive={curIcon === icon}
+            name={icon} />
+    ))}
   </IconMenuLayout>
 }
 const IconMenuLayout = styled(SliderMenuLayout)`
@@ -28,7 +36,7 @@ const IconMenuLayout = styled(SliderMenuLayout)`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  //justify-content: center;
   align-content: flex-start;
   gap: 10px;
   padding: 15px 20px;

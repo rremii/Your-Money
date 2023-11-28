@@ -1,8 +1,22 @@
 import { IconColorPickerProvider } from "@shared/modules/IconColorPicker/model/Provider.tsx"
 import IconColorPickerComponent from "@shared/modules/IconColorPicker/ui/IconColorPicker.tsx"
+import { IIconComponents } from "@shared/modules/IconColorPicker/types.ts"
 
 
 export const IconColorPicker = IconColorPickerProvider<{
-  // OnChange: (chosenDateStr: string) => void
-  // color: string
+  icons: {
+    firstSection: string[]
+    secondSection: string[]
+  }
+  colors: string[]
+  sectionTitles: {
+    firstSection: string
+    secondSection: string
+  }
+  initInfo: {
+    icon: string
+    color: string
+  }
+  IconComponents: IIconComponents
+  OnChange: (values: { color: string, icon: string }) => void
 }>(IconColorPickerComponent)

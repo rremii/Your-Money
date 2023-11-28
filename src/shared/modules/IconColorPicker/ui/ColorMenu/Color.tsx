@@ -1,15 +1,21 @@
 import styled from "styled-components"
-import { FC } from "react"
+import { FC, memo } from "react"
 
 interface props {
   color: string
   isActive: boolean
+  OnClick?: (color: string) => void
 }
 
-export const Color: FC<props> = ({ color, isActive }) => {
+export const Color: FC<props> = memo(({ color, isActive, OnClick }) => {
 
-  return <ColorLayout $isActive={isActive} $color={color} />
-}
+
+  const HandleClick = () => {
+    if (OnClick) OnClick(color)
+  }
+
+  return <ColorLayout onClick={HandleClick} $isActive={isActive} $color={color} />
+})
 const ColorLayout = styled.div<{
   $color?: string
   $isActive?: boolean
