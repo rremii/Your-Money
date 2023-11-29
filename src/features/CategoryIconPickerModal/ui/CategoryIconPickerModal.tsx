@@ -33,6 +33,7 @@ export const CategoryIconPickerModal = memo(() => {
   }, [])
 
   const OnSubmit = () => {
+    //todo start from here
     debugger
     // dispatch(closeMenu("iconColorPickerMenu"))
   }
