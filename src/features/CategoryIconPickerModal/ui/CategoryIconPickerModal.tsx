@@ -1,21 +1,21 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
-import React, { memo, useCallback, useEffect, useMemo, useState } from "react"
+import React, { memo, useCallback, useMemo, useState } from "react"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { IconColorPicker } from "@shared/modules/IconColorPicker"
-import AccountCategoryIconComp from "@features/CategoryIconPickerModal/constants/AccountCategoryIconComp.tsx"
-import { AccountsIcons } from "@shared/constants/AccountsIcons.ts"
+import AccountCategoryIconComp from "@shared/ui/AccountCategoryIconComp.tsx"
 import { GetRandomColor } from "@features/CategoryIconPickerModal/utils/GetRandomColor.ts"
 import { GetRandomCategoryIcon } from "@features/CategoryIconPickerModal/utils/GetRandomCategoryIcon.ts"
 import { pickerColors } from "@features/CategoryIconPickerModal/constants/PickerColors.ts"
 import { pickerIcons } from "@features/CategoryIconPickerModal/constants/PickerIcons.ts"
+import { setNewCategoryColor, setNewCategoryIcon } from "@entities/Category/model/NewCategorySlice.ts"
 
 export const CategoryIconPickerModal = memo(() => {
   const dispatch = useAppDispatch()
 
-  const isOpen = useTypedSelector(state => state.UI.Modals.iconColorPickerMenu.isOpen)
+  const isOpen = useTypedSelector(state => state.UI.Modals.categoryIconPickerMenu.isOpen)
 
 
   const [chosenIconInfo, setIconInfo] = useState<{ color: string, icon: string }>({
@@ -25,7 +25,7 @@ export const CategoryIconPickerModal = memo(() => {
 
 
   const CloseIconColorPicker = () => {
-    dispatch(closeMenu("iconColorPickerMenu"))
+    dispatch(closeMenu("categoryIconPickerMenu"))
   }
 
   const OnIconColorChange = useCallback((values: { color: string, icon: string }) => {
@@ -33,9 +33,9 @@ export const CategoryIconPickerModal = memo(() => {
   }, [])
 
   const OnSubmit = () => {
-    //todo start from here
-    debugger
-    // dispatch(closeMenu("iconColorPickerMenu"))
+    dispatch(setNewCategoryColor(chosenIconInfo.color))
+    dispatch(setNewCategoryIcon(chosenIconInfo.icon))
+    dispatch(closeMenu("categoryIconPickerMenu"))
   }
 
 

@@ -10,7 +10,7 @@ import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/Calc
 import { ICategory } from "@entities/Category/type.ts"
 import { openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
-import { CategoryIcon } from "@shared/ui/CustomIcon/CategoryIcon.tsx"
+import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
 
 
 interface props extends ICategory {
@@ -56,7 +56,8 @@ export const Category: FC<props> = React.memo(({ color, quantity, icon, name, id
     <h3 className="title">
       {name}
     </h3>
-    <CategoryIcon category={icon} color={color} />
+    <CustomIcon icon={icon} boxColor={color} />
+    {/*<CategoryIcon category={icon} color={color} />*/}
     <p className="quantity">
       {curCurrencySign} {RoundDecimal(quantity, 2)}
     </p>

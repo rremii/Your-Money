@@ -3,15 +3,20 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { resetEditCategory } from "@entities/Category/model/NewCategorySlice.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useCreateCategory } from "@entities/Category/model/useCreateCategory.tsx"
+import { useEditCategory } from "@entities/Category/model/useEditCategory.tsx"
 
 export const EditCategoryHeader = () => {
   const dispatch = useAppDispatch()
 
   const menuType = useTypedSelector(state => state.UI.Modals.editCreateCategoryMenu.menuType)
 
+  const { CreateCategory } = useCreateCategory()
+  const { EditCategory } = useEditCategory()
+
+
   const CloseCategoryMenu = async () => {
     dispatch(closeMenu("editCreateCategoryMenu"))
-
     let timer: NodeJS.Timeout | null = null
     await new Promise((resolve) => {
       timer = setTimeout(() => {
@@ -20,9 +25,14 @@ export const EditCategoryHeader = () => {
       }, 500)
     })
 
-    if (timer) {
+    if (timer)
       return window.clearTimeout(timer)
-    }
+  }
+
+
+  const OnConfirm = () => {
+    if (menuType === "create") CreateCategory()
+    if (menuType === "edit") EditCategory()
   }
 
 
@@ -32,7 +42,7 @@ export const EditCategoryHeader = () => {
 
     <h1 className="title">Category</h1>
 
-    <img className="confirm" src={Categories} alt="confirm" />
+    <img onClick={OnConfirm} className="confirm" src={Categories} alt="confirm" />
   </HeaderLayout>
 }
 const HeaderLayout = styled.header`

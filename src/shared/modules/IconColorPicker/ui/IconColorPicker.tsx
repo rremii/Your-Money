@@ -6,8 +6,10 @@ import { Slider } from "@shared/modules/IconColorPicker/ui/Slider.tsx"
 import {
   setPickerColors,
   setPickerCurColor,
-  setPickerCurIcon, setPickerIconComponents,
-  setPickerIcons, setPickerTitles
+  setPickerCurIcon,
+  setPickerIconComponents,
+  setPickerIcons,
+  setPickerTitles
 } from "@shared/modules/IconColorPicker/model/Actions.ts"
 import { IIconComponents } from "@shared/modules/IconColorPicker/types.ts"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"

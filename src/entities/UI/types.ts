@@ -17,4 +17,4 @@ export type Menus =
   | "editCreateCurrencyMenu"
   | "currencyMenu"
   | "editCreateCategoryMenu"
-  | "iconColorPickerMenu"
+  | "categoryIconPickerMenu"

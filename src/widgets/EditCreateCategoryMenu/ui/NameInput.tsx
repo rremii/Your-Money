@@ -4,7 +4,6 @@ import { setNewCategoryName } from "@entities/Category/model/NewCategorySlice.ts
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { useTimer } from "@shared/hooks/useTimer.tsx"
 import { FormField } from "@shared/ui/FormField.tsx"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { nameValidateSchema } from "@widgets/EditCreateCategoryMenu/constants/NameValidateSchema.ts"

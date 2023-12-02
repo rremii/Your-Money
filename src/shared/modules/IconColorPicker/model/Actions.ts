@@ -1,12 +1,14 @@
 import { dispatchPicker } from "@shared/modules/IconColorPicker/model/Provider.tsx"
 import {
+  IIconComponents,
   MenuType,
-  setPickerMenuTypeType,
   setPickerColorsType,
   setPickerCurColorType,
   setPickerCurIconType,
+  setPickerIconComponentsType,
   setPickerIconsType,
-  setPickerTitlesType, setPickerIconComponentsType, IIconComponents
+  setPickerMenuTypeType,
+  setPickerTitlesType
 } from "@shared/modules/IconColorPicker/types.ts"
 
 export const setPickerCurColor = (payload: string) => {

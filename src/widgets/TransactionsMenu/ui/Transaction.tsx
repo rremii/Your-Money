@@ -13,7 +13,7 @@ import { GetMe } from "@entities/User/api/UserApi.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import { openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { Currency } from "@entities/Currency/types.ts"
-import { CategoryIcon } from "@shared/ui/CustomIcon/CategoryIcon.tsx"
+import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
 
 type props = IConvertedTransaction
 
@@ -51,10 +51,7 @@ export const Transaction: FC<props> = (transaction) => {
   }
 
   return <TransactionLayout onClick={OnClick} $type={type}>
-    {/*<div className="icon">*/}
-    {/*  <img src={CategoriesIcons.get(category && category.icon)} alt="transaction icon" />*/}
-    {/*</div>*/}
-    <CategoryIcon category={category && category.icon} color={category && category.color} />
+    <CustomIcon icon={category && category.icon} boxColor={category && category.color} />
     <div className="info">
       <p className="category">{category && category.name}</p>
       <div className="account-info">

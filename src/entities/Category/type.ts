@@ -8,3 +8,19 @@ export interface ICategory {
   type: TransactionType
   userId: number
 }
+
+export interface CreateCategoryDto {
+  userId: number
+  name: string,
+  color: string
+  icon: string
+  type: TransactionType
+}
+
+export interface EditCategoryDto {
+  id: number
+  name: string,
+  color: string
+  icon: string
+  type: TransactionType
+}

@@ -5,7 +5,7 @@ import React from "react"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { AccountIcon } from "@shared/ui/CustomIcon/AccountIcon.tsx"
+import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
 
 
 export const AccountsMenu = () => {
@@ -22,7 +22,7 @@ export const AccountsMenu = () => {
 
     {allAccounts?.map(({ name, balance, icon, color }) => (
       <Account key={name} balance={balance} name={name} iconNode={
-        <AccountIcon account={icon} color={color} />
+        <CustomIcon icon={icon} boxColor={color} />
       } />
     ))}
   </AccountsMenuLayout>

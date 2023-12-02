@@ -27,10 +27,18 @@ const NewCategorySlice = createSlice({
     setNewCategoryType(state, action: PayloadAction<TransactionType>) {
       state.type = action.payload
     },
-    setEditCategory(state, action: PayloadAction<ICategory>) {
-      const { id, type, color, userId, name, icon } = action.payload
-      state.id = id
+    setCreateCategory(state, action: PayloadAction<Omit<ICategory, "id">>) {
+      const { type, color, userId, name, icon } = action.payload
       state.type = type
+      state.color = color
+      state.userId = userId
+      state.name = name
+      state.icon = icon
+    },
+    setEditCategory(state, action: PayloadAction<ICategory>) {
+      const { type, color, userId, name, icon, id } = action.payload
+      state.type = type
+      state.id = id
       state.color = color
       state.userId = userId
       state.name = name
@@ -38,6 +46,9 @@ const NewCategorySlice = createSlice({
     },
     setNewCategoryName(state, action: PayloadAction<string>) {
       state.name = action.payload
+    },
+    setNewCategoryIcon(state, action: PayloadAction<string>) {
+      state.icon = action.payload
     },
     setNewCategoryColor(state, action: PayloadAction<string>) {
       state.color = action.payload
@@ -57,8 +68,8 @@ const NewCategorySlice = createSlice({
 export const NewCategoryReducer = NewCategorySlice.reducer
 export const {
   setNewCategoryType,
-  setEditCategory,
+  setCreateCategory,
   resetEditCategory,
   setNewCategoryName,
-  setNewCategoryColor
+  setNewCategoryColor, setNewCategoryIcon, setEditCategory
 } = NewCategorySlice.actions

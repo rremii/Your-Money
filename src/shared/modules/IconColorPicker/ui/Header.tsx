@@ -1,9 +1,6 @@
 import styled from "styled-components"
-import { CategoriesIcons } from "@shared/constants/CategoriesIcons.ts"
-import { FC, memo, useContext } from "react"
+import { memo, useContext } from "react"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
-import AccountCategoryIconComp from "@features/CategoryIconPickerModal/constants/AccountCategoryIconComp.tsx"
-import { IIconComponents } from "@shared/modules/IconColorPicker/types.ts"
 
 
 export const Header = memo(() => {

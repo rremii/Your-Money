@@ -6,8 +6,7 @@ import { TransactionType } from "@entities/Transaction/types.ts"
 import { StartCreatingCategory } from "@features/StartCreatingCategory/ui/StartCreatingCategory.tsx"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { openMenu, setEditCategoryMenuType } from "@entities/UI/model/ModalsSlice.ts"
-import { setEditCategory, setNewCategoryType } from "@entities/Category/model/NewCategorySlice.ts"
-import { setCategoriesEditMode } from "@entities/UI/model/PagesSlice.ts"
+import { setEditCategory } from "@entities/Category/model/NewCategorySlice.ts"
 
 
 interface props {

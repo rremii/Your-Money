@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { FC, memo } from "react"
 import { ICategory } from "@entities/Category/type.ts"
-import { CategoryIcon } from "@shared/ui/CustomIcon/CategoryIcon.tsx"
+import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
 
 
 interface props extends ICategory {
@@ -21,7 +21,7 @@ export const Category: FC<props> = memo(({ OnClick, ...category }) => {
   >
     <p className="name">{name}</p>
     <div className="icon">
-      <CategoryIcon boxSize="45px" iconSize="25px" category={icon} color={color} />
+      <CustomIcon boxSize="45px" iconSize="25px" icon={icon} boxColor={color} />
     </div>
   </CategoryLayout>
 })

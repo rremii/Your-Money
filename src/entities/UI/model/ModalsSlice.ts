@@ -49,7 +49,7 @@ interface initialState {
     isOpen: boolean
     menuType: EditCreateCategoryType
   },
-  iconColorPickerMenu: {
+  categoryIconPickerMenu: {
     isOpen: boolean
   }
 
@@ -88,8 +88,8 @@ const initialState: initialState = {
     isOpen: false,
     menuType: "create"
   },
-  iconColorPickerMenu: {
-    isOpen: true
+  categoryIconPickerMenu: {
+    isOpen: false
   }
 }
 

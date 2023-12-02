@@ -8,8 +8,6 @@ import RestaurantIcon from "@shared/assets/LightTheme/restaurant.png"
 import TransportIcon from "@shared/assets/LightTheme/transport.png"
 
 import Categories from "@shared/assets/LightTheme/categories.png"
-
-import BurgerIcon from "@shared/assets/LightTheme/burgerIcon.svg"
 import cupIcon from "@shared/assets/LightTheme/cup.svg"
 
 

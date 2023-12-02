@@ -18,8 +18,7 @@ import { closeMenu, openMenu, setEditCreateMenuType } from "@entities/UI/model/M
 import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConverter.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { EditCreateMenuType } from "@entities/UI/types.ts"
-import { CategoryIcon } from "@shared/ui/CustomIcon/CategoryIcon.tsx"
-import { AccountIcon } from "@shared/ui/CustomIcon/AccountIcon.tsx"
+import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
 
 export const EditCreateTransMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -121,14 +120,16 @@ export const EditCreateTransMenu = React.memo(() => {
       <div className="category-account-info">
         <InfoCell OnClick={OpenChooseAccountMenu}
                   iconNode={
-                    <AccountIcon boxSize="20px" iconSize={"50%"} account={account.icon} color={account.color} />
+                    <CustomIcon boxSize="100%" iconSize={"50%"} icon={account.icon} boxColor="transparent"
+                                color={account.color} />
                   }
                   color={account.color} content={account.name}
                   iconRadius={"5px"}
                   title={"From account"} />
         <InfoCell OnClick={OpenChooseCategoryMenu}
                   iconNode={
-                    <CategoryIcon boxSize="20px" iconSize={"50%"} category={category.icon} color={category.color} />
+                    <CustomIcon boxSize="100%" iconSize={"50%"} icon={category.icon} boxColor="transparent"
+                                color={category.color} />
                   }
                   color={category.color}
                   content={category.name}

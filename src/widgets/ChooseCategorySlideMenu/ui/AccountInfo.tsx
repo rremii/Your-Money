@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { FC, memo } from "react"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
-import { AccountIcon } from "@shared/ui/CustomIcon/AccountIcon.tsx"
+import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
 
 interface props {
   name: string
@@ -16,7 +16,8 @@ export const AccountInfo: FC<props> = memo(({ balance, name, icon, currencySign,
 
   return <AccountInfoLayout $color={color}>
     <div className="name-box">
-      <AccountIcon boxSize={"35px"} iconSize={"100%"} account={icon} color={"transparent"} />
+      <CustomIcon boxSize={"35px"} iconSize={"100%"} icon={icon} boxColor={"transparent"} />
+
       <p className="name">{name}</p>
     </div>
     <div className="balance-box">

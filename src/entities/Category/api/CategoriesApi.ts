@@ -1,5 +1,5 @@
 import { Api } from "@shared/api/config/Api.ts"
-import { ICategory } from "@entities/Category/type.ts"
+import { CreateCategoryDto, EditCategoryDto, ICategory } from "@entities/Category/type.ts"
 
 export const CategoriesApi = Api.injectEndpoints({
 
@@ -12,6 +12,22 @@ export const CategoriesApi = Api.injectEndpoints({
         params: { userId }
       }),
       providesTags: ["Categories"]
+    }),
+    CreateCategory: build.mutation<ICategory, CreateCategoryDto>({
+      query: (createCategoryDto) => ({
+        url: "category",
+        method: "POST",
+        data: createCategoryDto
+      }),
+      invalidatesTags: ["Categories"]
+    }),
+    EditCategory: build.mutation<ICategory, EditCategoryDto>({
+      query: (editCategoryDto) => ({
+        url: "category",
+        method: "PUT",
+        data: editCategoryDto
+      }),
+      invalidatesTags: ["Categories"]
     })
 
 
@@ -20,5 +36,7 @@ export const CategoriesApi = Api.injectEndpoints({
 })
 
 export const {
-  useGetCategoriesQuery
+  useGetCategoriesQuery,
+  useCreateCategoryMutation,
+  useEditCategoryMutation
 } = CategoriesApi

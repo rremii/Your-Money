@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import { FC, memo } from "react"
-import AccountCategoryIconComp from "@features/CategoryIconPickerModal/constants/AccountCategoryIconComp.tsx"
 import { IIconComponents } from "@shared/modules/IconColorPicker/types.ts"
 
 interface props {
