@@ -1,4 +1,4 @@
-import { Module, NestModule } from "@nestjs/common"
+import { forwardRef, Module, NestModule } from "@nestjs/common"
 import { UsersService } from "./users.service"
 import { UsersController } from "./users.controller"
 import { TypeOrmModule } from "@nestjs/typeorm"
@@ -12,6 +12,7 @@ import { CategoryModule } from "../category/category.module"
     TypeOrmModule.forFeature([User]),
     TokenModule,
     AccountModule,
+
     CategoryModule,
   ],
   exports: [UsersService],

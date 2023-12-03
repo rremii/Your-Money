@@ -35,11 +35,11 @@ export class User extends BaseEntity implements IUser {
   @OneToMany(() => Account, (account) => account.user)
   accounts: Account[]
 
-  @OneToMany(
-    () => AccountHistoryPoint,
-    (accountHistoryPoint) => accountHistoryPoint.user,
-  )
-  accountHistoryPoints: AccountHistoryPoint[]
+  // @OneToMany(
+  //   () => AccountHistoryPoint,
+  //   (accountHistoryPoint) => accountHistoryPoint.user,
+  // )
+  // accountHistoryPoints: AccountHistoryPoint[]
 
   @OneToMany(() => Category, (category) => category.user)
   categories: Category[]

@@ -1,8 +1,14 @@
-import { BadRequestException, Injectable } from "@nestjs/common"
+import {
+  BadRequestException,
+  Dependencies,
+  forwardRef,
+  Inject,
+  Injectable,
+} from "@nestjs/common"
 import { CreateTransactionDto } from "./dto/create-transaction.dto"
 import { Transaction } from "./entities/transaction.entity"
 import { GetTransactionsDto } from "./dto/get-transactions.dto"
-import { Between, In, MoreThan, Repository } from "typeorm"
+import { Between, In, MoreThan, MoreThanOrEqual, Repository } from "typeorm"
 import { InjectRepository } from "@nestjs/typeorm"
 import { User } from "../users/entities/user.entity"
 import { Account } from "../account/entities/account.entity"
@@ -15,23 +21,20 @@ import { DeleteTransactionsDto } from "./dto/delete-transactions.dto"
 import { AccountService } from "../account/account.service"
 import { CategoryService } from "../category/category.service"
 import { UsersService } from "../users/users.service"
+import { AccountHistoryPoint } from "../accountHistory/entities/accountHistoryPoint.entity"
 
 @Injectable()
 export class TransactionService {
   constructor(
-    // @InjectRepository(User)
-    // private readonly usersRepository: Repository<User>,
-    // @InjectRepository(Account)
-    // private readonly accountRepository: Repository<Account>,
-    // @InjectRepository(Category)
-    // private readonly categoryRepository: Repository<Category>,
     @InjectRepository(Transaction)
     private readonly transactionRepository: Repository<Transaction>,
+    @InjectRepository(Category)
+    private readonly categoryRepository: Repository<Category>,
+    @InjectRepository(AccountHistoryPoint)
+    private readonly accountHistoryPointRepository: Repository<AccountHistoryPoint>,
 
     private readonly accountHistoryService: AccountHistoryService,
-    private readonly accountService: AccountService,
-    private readonly categoryService: CategoryService,
-    private readonly usersService: UsersService,
+    private readonly accountService: AccountService, // private readonly categoryService: CategoryService,
   ) {}
 
   private async getFreeDate(dateStr: string) {
@@ -47,8 +50,6 @@ export class TransactionService {
         date: Between(dateStr, dateBorder),
       },
     })
-    console.log(latestPoint + "--- latest")
-    console.log(dateStr, dateBorder)
     if (!latestPoint) return dateStr
 
     const freeDateMs = new Date(latestPoint.date).getTime() + 10
@@ -57,7 +58,6 @@ export class TransactionService {
   }
 
   async createTransaction({
-    // userId,
     accountId,
     quantity,
     type,
@@ -66,16 +66,14 @@ export class TransactionService {
     date,
   }: CreateTransactionDto): Promise<Transaction> {
     const accountEntity = await this.accountService.getAccountById(accountId)
-    const categoryEntity = await this.categoryService.getCategoryById(
-      categoryId,
-    )
-    // const userEntity = await this.usersService.getUserById(userId)
+    const categoryEntity = await this.categoryRepository.findOneBy({
+      id: categoryId,
+    })
 
     if (!accountEntity)
       throw new BadRequestException(ApiError.ACCOUNT_NOT_FOUND)
     if (!categoryEntity)
       throw new BadRequestException(ApiError.CATEGORY_NOT_FOUND)
-    // if (!userEntity) throw new BadRequestException(ApiError.USER_NOT_FOUND)
 
     let newAccountBalance: number = accountEntity.balance
     if (type === "income") newAccountBalance += quantity
@@ -85,7 +83,6 @@ export class TransactionService {
 
     const transaction = new Transaction()
     transaction.account = accountEntity
-    // transaction.user = userEntity
     transaction.category = categoryEntity
     transaction.date = freeDate
     transaction.type = type
@@ -100,7 +97,6 @@ export class TransactionService {
     await this.accountHistoryService.createHistoryPoint(
       transaction,
       accountEntity,
-      // userEntity,
       freeDate,
     )
 
@@ -136,11 +132,7 @@ export class TransactionService {
     return transaction
   }
 
-  //todo get rid of user-transaction relation
-  private async changeTransactionAccount(
-    transaction: EditTransactionDto,
-    // userId: number,
-  ) {
+  private async changeTransactionAccount(transaction: EditTransactionDto) {
     const removedTransaction = await this.deleteTransactionById({
       id: transaction.id,
     })
@@ -148,11 +140,9 @@ export class TransactionService {
     return await this.createTransaction({
       ...removedTransaction,
       ...transaction,
-      // userId,
     })
   }
 
-  //todo change account and category
   async editTransaction(editTransactionDto: EditTransactionDto) {
     const { id, title, categoryId, accountId, quantity, date } =
       editTransactionDto
@@ -160,7 +150,6 @@ export class TransactionService {
     let transaction = await this.transactionRepository.findOne({
       relations: {
         accountHistoryPoint: true,
-        // user: true,
       },
       where: { id },
     })
@@ -170,10 +159,7 @@ export class TransactionService {
     transaction.title = title ? title : ""
 
     if (transaction.accountId !== accountId) {
-      transaction = await this.changeTransactionAccount(
-        editTransactionDto,
-        // transaction.user.id,
-      )
+      transaction = await this.changeTransactionAccount(editTransactionDto)
     } else {
       if (date !== transaction.date)
         transaction = await this.changeTransactionDate(transaction, date)
@@ -185,12 +171,108 @@ export class TransactionService {
         )
     }
     if (transaction.categoryId !== categoryId)
-      transaction.category = await this.categoryService.getCategoryById(
-        categoryId,
-      )
+      transaction.category = await this.categoryRepository.findOneBy({
+        id: categoryId,
+      })
 
     return await transaction.save()
   }
+
+  getTransactionsByAccounts(transactions: Transaction[]) {
+    const transByAccounts = [] as Array<Transaction[]>
+
+    const diffAccountIds = new Set()
+    transactions.forEach(({ accountId }) => diffAccountIds.add(accountId))
+
+    diffAccountIds.forEach((accountId) => {
+      const sameAccountTrans = transactions.filter(
+        (trans) => trans.accountId === accountId,
+      )
+      transByAccounts.push(sameAccountTrans)
+    })
+
+    return transByAccounts
+  }
+
+  //todo integrate transactions
+  async deleteTransactionsByIds(ids: number[]) {
+    const deleteTransactions = await this.transactionRepository.find({
+      relations: {
+        accountHistoryPoint: true,
+      },
+      where: { id: In(ids) },
+    })
+
+    const transactionsByAccounts =
+      this.getTransactionsByAccounts(deleteTransactions)
+
+    return await Promise.all(
+      transactionsByAccounts.map(async (deleteTransactions) => {
+        const deleteTransIds = deleteTransactions.map(({ id }) => id)
+        const accountId = deleteTransactions[0].accountId
+
+        let startingTime = deleteTransactions[0].date
+        deleteTransactions.forEach(
+          ({ date }) => startingTime > date && (startingTime = date),
+        )
+
+        const transactions = await this.transactionRepository.find({
+          relations: {
+            accountHistoryPoint: true,
+          },
+          order: {
+            date: "ASC",
+          },
+          where: {
+            date: MoreThanOrEqual(new Date(startingTime).toUTCString()),
+            accountId,
+          },
+        })
+
+        let quantityGap = 0
+        const changedTrans = transactions
+          .map(({ id, quantity, type, ...transaction }) => {
+            const historyPoint = transaction.accountHistoryPoint
+
+            if (deleteTransIds.includes(id)) {
+              quantityGap =
+                type === "income"
+                  ? quantityGap - quantity
+                  : quantityGap + quantity
+              return null
+            } else {
+              historyPoint.balance += quantityGap
+              return {
+                ...transaction,
+                id,
+                type,
+                quantity,
+                accountHistoryPoint: historyPoint,
+              }
+            }
+          })
+          .filter((transaction) => !!transaction)
+
+        const deleteHistoryPoints = deleteTransactions.map(
+          ({ accountHistoryPoint }) => accountHistoryPoint,
+        )
+
+        await this.transactionRepository.delete(
+          deleteTransactions.map(({ id }) => id),
+        )
+
+        await this.accountHistoryPointRepository.delete(
+          deleteHistoryPoints.map(({ id }) => id),
+        )
+
+        await this.accountHistoryPointRepository.save(
+          changedTrans.map(({ accountHistoryPoint }) => accountHistoryPoint),
+        )
+        await this.transactionRepository.save(changedTrans)
+      }),
+    )
+  }
+
   async deleteTransactionById({ id }: DeleteTransactionsDto) {
     const transaction = await this.transactionRepository.findOne({
       relations: {
@@ -203,13 +285,11 @@ export class TransactionService {
       throw new BadRequestException(ApiError.TRANSACTION_NOT_FOUND)
     const removedTransaction = await transaction.remove()
 
-    //todo do same to account
     await this.accountHistoryService.deleteHistoryPoint(
       transaction,
       transaction.accountHistoryPoint,
     )
 
-    //
     const account = transaction.account
 
     let accBalanceDifference =
@@ -231,12 +311,6 @@ export class TransactionService {
     dateFrom,
     accountIds,
   }: GetTransactionsDto) {
-    // return await this.transactionRepository.query(`
-    //     SELECT * FROM transaction
-    //        INNER JOIN "public"."user" ON "transaction"."userId" = "user"."id"
-    //             WHERE "public"."user"."id" = ${userId} AND "transaction"."date" BETWEEN '${dateFrom}' and '${dateTo}'
-    // `)
-
     if (!dateTo || !dateFrom)
       return await this.transactionRepository.find({
         order: {
@@ -244,9 +318,6 @@ export class TransactionService {
         },
         where: {
           accountId: In(accountIds),
-          // user: {
-          //   id: userId,
-          // },
         },
         select: {
           account: {

@@ -12,7 +12,7 @@ async function bootstrap() {
 
   app.use(cookieParser())
   app.enableCors({
-    origin: configService.get("client_origin"),
+    origin: [configService.get("client_origin")],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })

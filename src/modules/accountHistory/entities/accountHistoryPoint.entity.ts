@@ -41,8 +41,8 @@ export class AccountHistoryPoint
   @Column()
   accountId: number
 
-  @ManyToOne(() => User, (user) => user.accounts)
-  user: User
+  // @ManyToOne(() => User, (user) => user.accounts)
+  // user: User
 
   @OneToOne(() => Transaction, (transaction) => transaction.accountHistoryPoint)
   transaction: Transaction

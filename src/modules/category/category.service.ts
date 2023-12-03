@@ -1,4 +1,10 @@
-import { BadRequestException, Injectable } from "@nestjs/common"
+import {
+  BadRequestException,
+  Dependencies,
+  forwardRef,
+  Inject,
+  Injectable,
+} from "@nestjs/common"
 import { CreateCategoryDto } from "./dto/create-category.dto"
 import { InjectRepository } from "@nestjs/typeorm"
 import { User } from "../users/entities/user.entity"
@@ -7,6 +13,10 @@ import { ApiError } from "../../common/constants/errors"
 import { Category } from "./entities/category.entity"
 import { GetCategoriesDto } from "./dto/get-categories.dto"
 import { defaultCategories } from "./constants/defaultCategories"
+import { EditCategoryDto } from "./dto/edit-category.dto"
+import { Transaction } from "../transaction/entities/transaction.entity"
+import { DeleteCategoryDto } from "./dto/delete-category.dto"
+import { TransactionService } from "../transaction/transaction.service"
 
 @Injectable()
 export class CategoryService {
@@ -15,6 +25,10 @@ export class CategoryService {
     private readonly userRepository: Repository<User>,
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
+    // @InjectRepository(Transaction)
+    // private readonly transactionRepository: Repository<Transaction>,
+
+    private readonly transactionService: TransactionService,
   ) {}
 
   async createDefaultCategories(user: User) {
@@ -35,6 +49,38 @@ export class CategoryService {
         return await category.save()
       }),
     )
+  }
+
+  async editCategory({ name, id, type, icon, color }: EditCategoryDto) {
+    return await this.categoryRepository.update(
+      { id },
+      { name, type, icon, color },
+    )
+  }
+
+  async deleteCategory({ id }: DeleteCategoryDto) {
+    const categoryWithTransIds = await this.categoryRepository.findOne({
+      where: { id },
+      select: {
+        transactions: {
+          id: true,
+        },
+      },
+      relations: {
+        transactions: true,
+      },
+    })
+
+    const transactionsIds = categoryWithTransIds.transactions.map(
+      ({ id }) => id,
+    )
+
+    await this.transactionService.deleteTransactionsByIds(transactionsIds)
+
+    await this.categoryRepository.delete({
+      id: categoryWithTransIds.id,
+    })
+    return categoryWithTransIds
   }
 
   async createCategory({

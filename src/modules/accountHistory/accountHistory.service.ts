@@ -21,9 +21,9 @@ import { TransactionType } from "../transaction/transaction.interface"
 
 interface getPrevHistoryPointParams {
   date: string
-  accountId?: number
+  accountId: number
   cmpDateFunc: cmpDateFuncType<string>
-  userId?: number
+  // userId?: number
   exceptId?: number
   // includeDate?: boolean
 }
@@ -42,7 +42,7 @@ export class AccountHistoryService {
     date,
     accountId,
     exceptId,
-    userId,
+    // userId,
     cmpDateFunc,
   }: getPrevHistoryPointParams) {
     return this.accountHistoryRepository.findOne({
@@ -53,9 +53,9 @@ export class AccountHistoryService {
         accountId: accountId && accountId,
         id: exceptId && Not(exceptId),
         date: cmpDateFunc(date),
-        user: {
-          id: userId && userId,
-        },
+        // user: {
+        //   id: userId && userId,
+        // },
       },
     })
   }
