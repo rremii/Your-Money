@@ -28,6 +28,13 @@ export const CategoriesApi = Api.injectEndpoints({
         data: editCategoryDto
       }),
       invalidatesTags: ["Categories"]
+    }),
+    DeleteCategory: build.mutation<ICategory, number>({
+      query: (id) => ({
+        url: "category/" + id,
+        method: "DELETE"
+      }),
+      invalidatesTags: ["Categories"]
     })
 
 
@@ -38,5 +45,6 @@ export const CategoriesApi = Api.injectEndpoints({
 export const {
   useGetCategoriesQuery,
   useCreateCategoryMutation,
-  useEditCategoryMutation
+  useEditCategoryMutation,
+  useDeleteCategoryMutation
 } = CategoriesApi

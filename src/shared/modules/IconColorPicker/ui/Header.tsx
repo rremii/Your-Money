@@ -7,7 +7,6 @@ export const Header = memo(() => {
 
   const { curIcon, curColor, IconComponents } = useContext(PickerContext)
 
-
   return <HeaderLayout $color={curColor}>
     <div className="icon-box">
       {IconComponents?.get(curIcon, { fill: "white" })}

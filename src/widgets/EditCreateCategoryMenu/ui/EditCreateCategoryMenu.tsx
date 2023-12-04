@@ -6,7 +6,6 @@ import { NameInput } from "@widgets/EditCreateCategoryMenu/ui/NameInput.tsx"
 import { CreateCategoryIcon } from "@features/CreateCategoryIcon/ui/CreateCategoryIcon.tsx"
 
 export const EditCreateCategoryMenu = () => {
-  const dispatch = useAppDispatch()
 
   const isMenuOpen = useTypedSelector(state => state.UI.Modals.editCreateCategoryMenu.isOpen)
   const menuType = useTypedSelector(state => state.UI.Modals.editCreateCategoryMenu.menuType)

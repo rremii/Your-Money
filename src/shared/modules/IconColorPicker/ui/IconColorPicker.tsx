@@ -38,6 +38,9 @@ const IconColorPicker: FC<props> = memo(({ icons, initInfo, IconComponents, sect
   const { curIcon, curColor } = useContext(PickerContext)
 
   useEffect(() => {
+    const { icon, color } = initInfo
+    if (!icon || !color) return
+    
     OnChange({ color: curColor, icon: curIcon })
   }, [curIcon, curColor])
 
@@ -50,7 +53,7 @@ const IconColorPicker: FC<props> = memo(({ icons, initInfo, IconComponents, sect
     setPickerCurIcon(initInfo.icon)
     setPickerIconComponents(IconComponents)
     setPickerTitles(sectionTitles)
-  }, [])
+  }, [initInfo.color, initInfo.icon])
 
 
   return <CalendarLayout>

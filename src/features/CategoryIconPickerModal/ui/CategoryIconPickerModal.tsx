@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
-import React, { memo, useCallback, useMemo, useState } from "react"
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
@@ -16,6 +16,8 @@ export const CategoryIconPickerModal = memo(() => {
   const dispatch = useAppDispatch()
 
   const isOpen = useTypedSelector(state => state.UI.Modals.categoryIconPickerMenu.isOpen)
+  const icon = useTypedSelector(state => state.NewCategory.icon)
+  const color = useTypedSelector(state => state.NewCategory.color)
 
 
   const [chosenIconInfo, setIconInfo] = useState<{ color: string, icon: string }>({
@@ -23,6 +25,9 @@ export const CategoryIconPickerModal = memo(() => {
     icon: GetRandomCategoryIcon()
   })
 
+  useEffect(() => {
+    setIconInfo({ color, icon })
+  }, [icon, color])
 
   const CloseIconColorPicker = () => {
     dispatch(closeMenu("categoryIconPickerMenu"))
