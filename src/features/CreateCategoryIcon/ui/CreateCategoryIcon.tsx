@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
-import AccountCategoryIconComp from "@shared/ui/AccountCategoryIconComp.tsx"
+import AccountCategoryIconComp from "@shared/assets/AccountCategoryIconComp.tsx"
 
 export const CreateCategoryIcon = () => {
   const dispatch = useAppDispatch()

@@ -10,9 +10,9 @@ export const useCreateCategory = () => {
 
 
   //todo make validation and toasts
-  const CreateCategory = useCallback(() => {
+  const CreateCategory = useCallback(async () => {
     if (!userId) return
-    createCategory({ name, userId, icon, color, type })
+    await createCategory({ name, userId, icon, color, type })
   }, [name, userId, icon, color, type])
 
 

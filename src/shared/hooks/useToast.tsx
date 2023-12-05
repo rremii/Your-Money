@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { clearMessage, hideToast, showToast } from "@shared/store/globalSlices/ToastSlice.ts"
 

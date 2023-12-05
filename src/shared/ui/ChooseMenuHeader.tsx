@@ -5,7 +5,6 @@ interface props {
   content: string
 }
 
-//todo create an icon component in shared that will return svg and handle this
 export const ChooseMenuHeader: FC<props> = ({ content }) => {
 
   return <HeaderLayout>

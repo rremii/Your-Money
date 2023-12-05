@@ -4,15 +4,16 @@ import { EditCategoryHeader } from "@widgets/EditCreateCategoryMenu/ui/EditCateg
 import { DeleteCategory } from "@features/DeleteCategory/ui/DeleteCategory.tsx"
 import { NameInput } from "@widgets/EditCreateCategoryMenu/ui/NameInput.tsx"
 import { CreateCategoryIcon } from "@features/CreateCategoryIcon/ui/CreateCategoryIcon.tsx"
+import { memo } from "react"
 
-export const EditCreateCategoryMenu = () => {
+export const EditCreateCategoryMenu = memo(() => {
 
   const isMenuOpen = useTypedSelector(state => state.UI.Modals.editCreateCategoryMenu.isOpen)
   const menuType = useTypedSelector(state => state.UI.Modals.editCreateCategoryMenu.menuType)
-  const newCategory = useTypedSelector(state => state.NewCategory)
+  const color = useTypedSelector(state => state.NewCategory.color)
 
 
-  return <EditCreateCategoryLayout $color={newCategory.color} $isMenuOpen={isMenuOpen}>
+  return <EditCreateCategoryLayout $color={color} $isMenuOpen={isMenuOpen}>
     <div className="colorfull-box">
       <EditCategoryHeader />
       <NameInput />
@@ -23,7 +24,7 @@ export const EditCreateCategoryMenu = () => {
       <DeleteCategory />
     )}
   </EditCreateCategoryLayout>
-}
+})
 const EditCreateCategoryLayout = styled.div<{
   $isMenuOpen?: boolean
   $color?: string

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { useContext } from "react"
+import { memo, useContext } from "react"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
 
 export const SubHeader = () => {

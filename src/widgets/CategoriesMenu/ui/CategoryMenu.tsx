@@ -31,8 +31,8 @@ export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactio
   const { allCategories } = useCategory(user?.id)
   const { expCategories, incCategories } = useMemo(() => FilterCategoriesByType(allCategories), [allCategories])
 
-  const expFilledCategories = useMemo(() => FillCategoriesWithTransactions(expCategories, expTransactions), [expTransactions])
-  const incFilledCategories = useMemo(() => FillCategoriesWithTransactions(incCategories, incTransactions), [incTransactions])
+  const expFilledCategories = useMemo(() => FillCategoriesWithTransactions(expCategories, expTransactions), [expCategories, expTransactions])
+  const incFilledCategories = useMemo(() => FillCategoriesWithTransactions(incCategories, incTransactions), [incCategories, incTransactions])
 
 
   return <CategoryLayout ref={observeRef}>

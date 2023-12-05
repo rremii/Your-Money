@@ -22,7 +22,7 @@ export const Icon: FC<props> = memo(({ isActive, name, OnClick, IconComponents }
 const IconLayout = styled.div<{
   $isActive?: boolean
 }>`
-
+  cursor: pointer;
   width: 47px;
   height: 47px;
   border-radius: 50%;

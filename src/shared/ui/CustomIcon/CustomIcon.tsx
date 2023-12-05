@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { IconLayout } from "@shared/ui/CustomIcon/IconLayout.tsx"
-import AccountCategoryIconComp from "@shared/ui/AccountCategoryIconComp.tsx"
+import AccountCategoryIconComp from "@shared/assets/AccountCategoryIconComp.tsx"
 
 interface props {
   color?: string

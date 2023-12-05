@@ -10,9 +10,9 @@ export const useEditCategory = () => {
 
 
   //todo make validation and toasts
-  const EditCategory = useCallback(() => {
+  const EditCategory = useCallback(async () => {
     if (!id) return
-    editCategory({ name, id, icon, color, type })
+    await editCategory({ name, id, icon, color, type })
   }, [name, icon, color, type, id])
 
 

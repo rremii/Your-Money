@@ -26,6 +26,7 @@ const ColorLayout = styled.div<{
   border-radius: 50%;
   transition: background-color .3s;
   position: relative;
+  cursor: pointer;
 
   &:after {
     display: ${({ $isActive }) => $isActive ? "initial" : "none"};

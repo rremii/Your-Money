@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { SliderMenuLayout } from "@shared/modules/IconColorPicker/ui/SliderMenuLayout.tsx"
 import { Icon } from "@shared/modules/IconColorPicker/ui/IconMenu/Icon.tsx"
 import { IconTitle } from "@shared/modules/IconColorPicker/ui/IconMenu/IconTitle.tsx"
-import { FC, useContext } from "react"
+import { FC, memo, useCallback, useContext } from "react"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
 import { setPickerCurIcon } from "@shared/modules/IconColorPicker/model/Actions.ts"
 
@@ -12,9 +12,9 @@ export const IconMenu: FC = () => {
 
   const { curIcon, icons: { firstSection, secondSection }, IconComponents, sectionTitles } = useContext(PickerContext)
 
-  const SetCurrentIcon = (icon: string) => {
+  const SetCurrentIcon = useCallback((icon: string) => {
     setPickerCurIcon(icon)
-  }
+  }, [])
 
   return <IconMenuLayout>
     <IconTitle title={sectionTitles.firstSection} />

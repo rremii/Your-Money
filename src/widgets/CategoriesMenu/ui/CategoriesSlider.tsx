@@ -12,6 +12,8 @@ import { useAccount } from "@entities/Account/model/useAccount.tsx"
 
 export const CategoriesSlider = memo(() => {
 
+
+  //todo fix diplicate
   const dateMenuIds = useTypedSelector(state => state.Date.dateMenuIds)
   const dateFilter = useTypedSelector(state => state.Date.dateFilter)
   const firstDay = useTypedSelector(state => state.Date.firstDay)
