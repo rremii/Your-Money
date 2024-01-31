@@ -1,17 +1,21 @@
 import styled from "styled-components"
 import Categories from "@shared/assets/LightTheme/categories.png"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { useDeleteCategoryMutation } from "@entities/Category/api/CategoriesApi.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useDeleteCategory } from "@entities/Category/model/useDeleteCategory.tsx"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 
 export const DeleteCategory = () => {
+  const dispatch = useAppDispatch()
+
   const categoryId = useTypedSelector(state => state.NewCategory.id)
 
   const { DeleteCategory: deleteCategory } = useDeleteCategory()
 
   const OnClick = async () => {
-    if (categoryId)
+    if (categoryId) {
       await deleteCategory(categoryId)
+      dispatch(closeMenu("editCreateCategoryMenu"))
+    }
   }
 
   return <DeleteCategoryLayout onClick={OnClick}>
