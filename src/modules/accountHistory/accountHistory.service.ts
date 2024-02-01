@@ -91,16 +91,6 @@ export class AccountHistoryService {
     await this.updateHistoryGapBalance(account.id, accBalanceDifference, date)
 
     return await historyPoint.save()
-
-    // AccountHistoryPoint.find({
-    //   where: {
-    //     account: {
-    //       user: {
-    //         id: 1,
-    //       },
-    //     },
-    //   },
-    // })
   }
 
   async deleteHistoryPoint(

@@ -211,6 +211,17 @@ export class TransactionService {
         const deleteTransIds = deleteTransactions.map(({ id }) => id)
         const accountId = deleteTransactions[0].accountId
 
+        let accountBalanceShift = 0
+        deleteTransactions.forEach(({ type, quantity }) => {
+          if (type === "income") accountBalanceShift -= quantity
+          if (type === "expense") accountBalanceShift += quantity
+        })
+
+        await this.accountService.changeAccountBalanceBy(
+          accountBalanceShift,
+          accountId,
+        )
+
         let startingTime = deleteTransactions[0].date
         deleteTransactions.forEach(
           ({ date }) => startingTime > date && (startingTime = date),

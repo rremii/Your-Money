@@ -33,6 +33,13 @@ export class AccountService {
   async getAccountById(id: number) {
     return this.accountRepository.findOneBy({ id })
   }
+  async changeAccountBalanceBy(balanceShift: number, accountId: number) {
+    return await this.accountRepository.increment(
+      { id: accountId },
+      "balance",
+      balanceShift,
+    )
+  }
 
   async createDefaultAccounts(user: User) {
     return await Promise.all(

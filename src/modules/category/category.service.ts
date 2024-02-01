@@ -52,10 +52,21 @@ export class CategoryService {
   }
 
   async editCategory({ name, id, type, icon, color }: EditCategoryDto) {
-    return await this.categoryRepository.update(
-      { id },
-      { name, type, icon, color },
-    )
+    const category = await this.categoryRepository.findOneBy({ id })
+
+    const existCategory = await this.categoryRepository.findOneBy({
+      userId: category.userId,
+      name,
+    })
+    if (existCategory && existCategory.id !== id)
+      throw new BadRequestException(ApiError.CATEGORY_EXIST)
+
+    category.name = name
+    category.type = type
+    category.icon = icon
+    category.color = color
+
+    return await category.save()
   }
 
   async deleteCategory({ id }: DeleteCategoryDto) {
@@ -92,6 +103,12 @@ export class CategoryService {
   }: CreateCategoryDto): Promise<Category> {
     const user = await this.userRepository.findOneBy({ id: userId })
     if (!user) throw new BadRequestException(ApiError.USER_NOT_FOUND)
+
+    const existCategory = await this.categoryRepository.findOneBy({
+      userId,
+      name,
+    })
+    if (existCategory) throw new BadRequestException(ApiError.CATEGORY_EXIST)
 
     const category = new Category()
     category.name = name

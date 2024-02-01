@@ -26,14 +26,14 @@ export class CategoryController {
   // @UseGuards(new RefreshTokenGuard())
   @UsePipes(new ValidationPipe())
   @Put("")
-  async createCategory(
+  async editCategory(
     @Body() editCategoryDto: EditCategoryDto,
-  ): Promise<UpdateResult> {
+  ): Promise<Category> {
     return this.categoryService.editCategory(editCategoryDto)
   }
   @UsePipes(new ValidationPipe())
   @Post("")
-  async editCategory(
+  async createCategory(
     @Body() createCategoryDto: CreateCategoryDto,
   ): Promise<Category> {
     return this.categoryService.createCategory(createCategoryDto)
