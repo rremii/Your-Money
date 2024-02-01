@@ -5,15 +5,15 @@ import { resetEditCategory } from "@entities/Category/model/NewCategorySlice.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useCreateCategory } from "@entities/Category/model/useCreateCategory.tsx"
 import { useEditCategory } from "@entities/Category/model/useEditCategory.tsx"
-import { memo } from "react"
+import { memo, useEffect } from "react"
 
 export const EditCategoryHeader = () => {
   const dispatch = useAppDispatch()
 
   const menuType = useTypedSelector(state => state.UI.Modals.editCreateCategoryMenu.menuType)
 
-  const { CreateCategory } = useCreateCategory()
-  const { EditCategory } = useEditCategory()
+  const { CreateCategory, isSuccess: isCreationSucceed } = useCreateCategory()
+  const { EditCategory, isSuccess: isEditingSucceed } = useEditCategory()
 
   const CloseCategoryMenu = async () => {
     dispatch(closeMenu("editCreateCategoryMenu"))
@@ -29,15 +29,17 @@ export const EditCategoryHeader = () => {
       return window.clearTimeout(timer)
   }
 
+  useEffect(() => {
+    if (isCreationSucceed || isEditingSucceed)
+      dispatch(closeMenu("editCreateCategoryMenu"))
+  }, [isCreationSucceed, isEditingSucceed])
+
 
   const OnConfirm = async () => {
-    if (menuType === "create") {
+    if (menuType === "create")
       await CreateCategory()
-    }
-    if (menuType === "edit") {
+    if (menuType === "edit")
       await EditCategory()
-    }
-    dispatch(closeMenu("editCreateCategoryMenu"))
   }
 
 

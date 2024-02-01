@@ -2,8 +2,17 @@ export type AuthResponse = {
   accessToken: string
 }
 
-export type DefaultResponse = {
+export interface DefaultResponse {
   message: string
+}
+
+export interface ErrorResponse extends DefaultResponse {
+  name: string
+  response: {
+    message: string
+    error: string
+    statusCode: number
+  }
 }
 
 export type RegisterDto = {

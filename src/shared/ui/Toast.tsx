@@ -1,16 +1,15 @@
 import styled from "styled-components"
 import React from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { toastStateType } from "@shared/store/globalSlices/ToastSlice.ts"
 
-type toastStateType = "error" | "info"
 
 export const Toast: React.FC = React.memo(() => {
 
   const isShown = useTypedSelector(state => state.Toast.isShown)
   const message = useTypedSelector(state => state.Toast.message)
+  const state = useTypedSelector(state => state.Toast.state)
 
-
-  const state: toastStateType = "info"
 
   return (
     <ToastShowZone>
@@ -29,7 +28,7 @@ const ToastShowZone = styled.div`
   height: 200px;
   overflow: hidden;
   width: 100vw;
-  z-index: 5;
+  z-index: 500;
   pointer-events: none;
 `
 const ToastLayout = styled.div<{

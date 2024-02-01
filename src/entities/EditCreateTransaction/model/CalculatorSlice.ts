@@ -87,7 +87,7 @@ const CalculatorSlice = createSlice({
       const num1 = +state.numberStr1
       const num2 = +state.numberStr2
 
-      state.quantity = CalcMathOperation([num1, num2], operator)
+      state.quantity = Math.abs(CalcMathOperation([num1, num2], operator))
       state.numberStr2 = ""
       state.numberStr1 = ""
       state.operator = null

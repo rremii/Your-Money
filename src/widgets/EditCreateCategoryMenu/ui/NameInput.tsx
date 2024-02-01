@@ -66,7 +66,12 @@ const NameInputLayout = styled.div`
     margin-bottom: 10px;
   }
 
+  .ErrorMessage {
+    color: white;
+  }
+
   .FormField {
+    margin-bottom: 5px;
     width: 100%;
     background-color: transparent;
 
