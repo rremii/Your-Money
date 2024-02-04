@@ -20,3 +20,5 @@ export const IconColorPicker = IconColorPickerProvider<{
   IconComponents: IIconComponents
   OnChange: (values: { color: string, icon: string }) => void
 }>(IconColorPickerComponent)
+
+export { IconColorPickerModal } from "@shared/modules/IconColorPicker/ui/IconColorPickerModal.tsx"

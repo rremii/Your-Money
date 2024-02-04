@@ -9,6 +9,7 @@ import { AllAccountReducer } from "@entities/Account/model/AllAccountSlice.ts"
 import { EditCreateTransactionReducer } from "@entities/EditCreateTransaction/model"
 import { SettingsReducer } from "@entities/Settings/model/SettingsSlice.ts"
 import { UIReducer } from "@entities/UI/model"
+import { NewAccountReducer } from "@entities/Account/model/NewAccountSlice.ts"
 
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   Date: DateReducer,
   CurAccount: CurAccountReducer,
   NewCategory: NewCategoryReducer,
+  NewAccount: NewAccountReducer,
   EditCreateTransaction: EditCreateTransactionReducer,
   AllAccount: AllAccountReducer,
   Settings: SettingsReducer,

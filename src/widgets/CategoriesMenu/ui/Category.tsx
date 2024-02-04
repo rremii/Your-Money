@@ -57,7 +57,6 @@ export const Category: FC<props> = React.memo(({ color, quantity, icon, name, id
       {name}
     </h3>
     <CustomIcon icon={icon} boxColor={color} />
-    {/*<CategoryIcon category={icon} color={color} />*/}
     <p className="quantity">
       {curCurrencySign} {RoundDecimal(quantity, 2)}
     </p>

@@ -1,6 +1,7 @@
 export type EditCreateMenuType = "overview" | "edit" | "create"
 
 export type EditCreateCategoryType = "edit" | "create"
+export type EditCreateAccountType = "edit" | "create"
 
 export type Menus =
   "editCreateTransMenu"
@@ -16,5 +17,8 @@ export type Menus =
   | "signOutMenu"
   | "editCreateCurrencyMenu"
   | "currencyMenu"
+  | "accountCurrencyMenu"
   | "editCreateCategoryMenu"
   | "categoryIconPickerMenu"
+  | "editCreateAccountMenu"
+  | "accountIconPickerMenu"

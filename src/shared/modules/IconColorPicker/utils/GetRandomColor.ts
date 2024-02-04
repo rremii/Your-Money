@@ -1,4 +1,4 @@
-import { pickerColors } from "@features/CategoryIconPickerModal/constants/PickerColors.ts"
+import { pickerColors } from "@shared/modules/IconColorPicker/constants/PickerColors.ts"
 
 export const GetRandomColor = () => {
   const length = pickerColors.length

@@ -4,23 +4,23 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useDeleteCategory } from "@entities/Category/model/useDeleteCategory.tsx"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 
-export const DeleteCategory = () => {
+export const DeleteAccount = () => {
   const dispatch = useAppDispatch()
 
-  const categoryId = useTypedSelector(state => state.NewCategory.id)
+  const id = useTypedSelector(state => state.NewAccount.id)
 
-  const { DeleteCategory: deleteCategory } = useDeleteCategory()
+  // const { DeleteCategory: deleteCategory } = useDeleteCategory()
 
-  const OnClick = async () => {
-    if (categoryId) {
-      await deleteCategory(categoryId)
-      dispatch(closeMenu("editCreateCategoryMenu"))
+  const OnClick = () => {
+    if (id) {
+      // await deleteCategory(id)
+      dispatch(closeMenu("editCreateAccountMenu"))
     }
   }
 
   return <DeleteCategoryLayout onClick={OnClick}>
     <img src={Categories} alt="delete icon" className="icon" />
-    <p className="content">Delete category</p>
+    <p className="content">Delete account</p>
   </DeleteCategoryLayout>
 }
 const DeleteCategoryLayout = styled.div`
@@ -32,7 +32,6 @@ const DeleteCategoryLayout = styled.div`
   padding-left: 20px;
   gap: 30px;
   box-shadow: 0 2px 5px 0 var(--shadow-3);
-  margin-top: 20px;
 
   .icon {
     width: 15px;

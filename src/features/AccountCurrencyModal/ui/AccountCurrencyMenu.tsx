@@ -10,26 +10,23 @@ import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns
 import { setNewAccountCurrency } from "@entities/Account/model/NewAccountSlice.ts"
 
 
-export const CurrencyMenu = () => {
+export const AccountCurrencyMenu = () => {
   const dispatch = useAppDispatch()
 
-  const currency = useTypedSelector(state => state.Settings.curCurrency)
+  const currency = useTypedSelector(state => state.NewAccount.currency)
 
+  const [chosenCurrency, setCurrency] = useState<Currency>(currency)
 
   const SetChosenCurrency = (currency: Currency) => {
-    dispatch(setCurrencyMenuType("currencySign"))
-    dispatch(setCurCurrency(currency))
-    const defaultSign = DefaultCurrencySigns.get(currency) || ""
-    dispatch(setCurCurrencySign(defaultSign))
+    setCurrency(currency)
   }
   const OnSubmit = () => {
-    dispatch(setCurCurrency(currency))
+    dispatch(setNewAccountCurrency(chosenCurrency))
     CloseModal()
   }
   const CloseModal = () => {
-    dispatch(closeMenu("currencyMenu"))
+    dispatch(closeMenu("accountCurrencyMenu"))
   }
-
 
   return <CurrencyMenuLayout>
     <p className="subTitle">Main currencies</p>
@@ -38,7 +35,7 @@ export const CurrencyMenu = () => {
         <CurrencyCell OnClick={() => SetChosenCurrency(shortName)}
                       fullName={fullName}
                       shortName={shortName}
-                      isActive={currency === shortName} key={index} />
+                      isActive={chosenCurrency === shortName} key={index} />
       ))}
     </div>
     <div className="btn-section">

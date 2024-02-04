@@ -22,9 +22,6 @@ export const Account: FC<props> = ({ name, balance, iconNode, OnClick, bgColor, 
   }
   return <AccountLayout onClick={OnClick} $bgColor={bgColor} $quantityColor={color} $nameColor={color}
                         className="Account">
-    {/*<div className="icon">*/}
-    {/*<img src={AccountsIcons.get(icon)} alt="account icon" />*/}
-    {/*</div>*/}
     {iconNode}
     <div className="accounts-info">
       <p className="name">{name}</p>

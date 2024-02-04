@@ -5,18 +5,15 @@ import { AccountsSubHeader } from "@widgets/Header/ui/AccountsSubHeader.tsx"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { AccountsMenu } from "@widgets/AccountsMenu/ui/AccountsMenu.tsx"
 import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
+import { StartCreatingAccount } from "@features/StartCreatingAccount/ui/StartCreatingAccount.tsx"
 
 const AccountsPage = () => {
 
 
   return (
     <AccountsLayout>
-      {/*<Header*/}
-      {/*  SubHeader={<AccountsSubHeader />}*/}
-      {/*  right={<img src={Categories} alt="" />}*/}
-      {/*/>*/}
       <Header>
-        <TopHeader right={<img src={Categories} />} />
+        <TopHeader right={<StartCreatingAccount />} />
         <AccountsSubHeader />
       </Header>
       <AccountsMenu />

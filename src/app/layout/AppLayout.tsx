@@ -18,6 +18,10 @@ import { CurrencyModal } from "@widgets/EditCreateTransMenu/ui/CurrencyModal.tsx
 import { DefaultCurrencyModal } from "@features/DefaultCurrencyModal"
 import { EditCreateCategoryMenu } from "@widgets/EditCreateCategoryMenu/ui/EditCreateCategoryMenu.tsx"
 import { CategoryIconPickerModal } from "@features/CategoryIconPickerModal/ui/CategoryIconPickerModal.tsx"
+import { EditCreateAccountMenu } from "@widgets/EditCreateAccountMenu/ui/EditCreateAccountMenu.tsx"
+import { AccountIconPickerModal } from "@features/AccountIconPickerModal/ui/AccountIconPickerModal.tsx"
+import { AccountCurrencyMenu } from "@features/AccountCurrencyModal/ui/AccountCurrencyMenu.tsx"
+import { AccountCurrencyModal } from "@features/AccountCurrencyModal/ui/AccountCurrencyModal.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -43,8 +47,13 @@ const AppLayout: FC<Props> = ({ children }) => {
       <CalendarMenu />
       <CurrencyModal />
 
+
       <EditCreateCategoryMenu />
       <CategoryIconPickerModal />
+
+      <EditCreateAccountMenu />
+      <AccountIconPickerModal />
+      <AccountCurrencyModal />
 
       <DefaultCurrencyModal />
       <SignOutMenu />

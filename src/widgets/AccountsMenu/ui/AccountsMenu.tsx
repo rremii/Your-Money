@@ -1,11 +1,10 @@
 import styled from "styled-components"
 import { AllAccountsInfo } from "@shared/ui/AllAccountsInfo.tsx"
-import { Account } from "@shared/ui/Account.tsx"
 import React from "react"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { Account } from "@widgets/AccountsMenu/ui/Account.tsx"
 
 
 export const AccountsMenu = () => {
@@ -17,13 +16,12 @@ export const AccountsMenu = () => {
   const { data: user } = GetMe.useQueryState()
   const { allAccounts } = useAccount(user?.id)
 
+
   return <AccountsMenuLayout>
     <AllAccountsInfo allBalance={allBalance} currencySign={currencySign} />
 
-    {allAccounts?.map(({ name, balance, icon, color }) => (
-      <Account key={name} balance={balance} name={name} iconNode={
-        <CustomIcon icon={icon} boxColor={color} />
-      } />
+    {allAccounts?.map((account) => (
+      <Account key={account.name} {...account} />
     ))}
   </AccountsMenuLayout>
 }

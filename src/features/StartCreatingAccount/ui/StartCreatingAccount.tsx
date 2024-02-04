@@ -1,38 +1,38 @@
 import styled from "styled-components"
-import { TransactionType } from "@entities/Transaction/types.ts"
 import { FC } from "react"
 import Categories from "@shared/assets/LightTheme/categories.png"
-import { openMenu, setEditCategoryMenuType } from "@entities/UI/model/ModalsSlice.ts"
+import { openMenu, setEditAccountMenuType, setEditCategoryMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
-import { setCreateCategory } from "@entities/Category/model/NewCategorySlice.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { GetRandomColor } from "@shared/modules/IconColorPicker/utils/GetRandomColor.ts"
-import { GetRandomCategoryIcon } from "@shared/modules/IconColorPicker/utils/GetRandomCategoryIcon.ts"
+import { setCreateAccount } from "@entities/Account/model/NewAccountSlice.ts"
+import { GetRandomAccountIcon } from "@shared/modules/IconColorPicker/utils/GetRandomAccountIcon.ts"
+import { Currency } from "@entities/Currency/types.ts"
 
 interface props {
-  categoryType: TransactionType
+  // categoryType: TransactionType
 }
 
-export const StartCreatingCategory: FC<props> = ({ categoryType }) => {
+export const StartCreatingAccount: FC<props> = () => {
   const dispatch = useAppDispatch()
 
 
   const { data: user } = GetMe.useQueryState()
 
-  const CreateCategory = () => {
+  const CreateAccount = () => {
     if (!user) return
-    dispatch(openMenu("editCreateCategoryMenu"))
-    dispatch(setCreateCategory({
+    dispatch(openMenu("editCreateAccountMenu"))
+    dispatch(setCreateAccount({
       color: GetRandomColor(),
-      icon: GetRandomCategoryIcon(),
-      type: categoryType,
+      icon: GetRandomAccountIcon(),
       name: "",
-      userId: user.id
+      balance: 0,
+      currency: Currency.DefaultCurrency
     }))
-    dispatch(setEditCategoryMenuType("create"))
+    dispatch(setEditAccountMenuType("create"))
   }
 
-  return <CreatingCategoryLayout onClick={CreateCategory}>
+  return <CreatingCategoryLayout onClick={CreateAccount}>
     <div className="icon">
       <img src={Categories} alt="create category" />
     </div>
