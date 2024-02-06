@@ -32,9 +32,9 @@ export class TransactionService {
     private readonly categoryRepository: Repository<Category>,
     @InjectRepository(AccountHistoryPoint)
     private readonly accountHistoryPointRepository: Repository<AccountHistoryPoint>,
-
-    private readonly accountHistoryService: AccountHistoryService,
-    private readonly accountService: AccountService, // private readonly categoryService: CategoryService,
+    @InjectRepository(Account)
+    private readonly accountRepository: Repository<Account>,
+    private readonly accountHistoryService: AccountHistoryService, // private readonly accountService: AccountService, // private readonly categoryService: CategoryService,
   ) {}
 
   private async getFreeDate(dateStr: string) {
@@ -65,7 +65,9 @@ export class TransactionService {
     categoryId,
     date,
   }: CreateTransactionDto): Promise<Transaction> {
-    const accountEntity = await this.accountService.getAccountById(accountId)
+    const accountEntity = await this.accountRepository.findOneBy({
+      id: accountId,
+    })
     const categoryEntity = await this.categoryRepository.findOneBy({
       id: categoryId,
     })
@@ -118,6 +120,7 @@ export class TransactionService {
     transaction.date = freeDate
     return transaction
   }
+
   private async changeTransactionQuantity(
     transaction: Transaction,
     newQuantity: number,
@@ -217,9 +220,10 @@ export class TransactionService {
           if (type === "expense") accountBalanceShift += quantity
         })
 
-        await this.accountService.changeAccountBalanceBy(
+        await this.accountRepository.increment(
+          { id: accountId },
+          "balance",
           accountBalanceShift,
-          accountId,
         )
 
         let startingTime = deleteTransactions[0].date

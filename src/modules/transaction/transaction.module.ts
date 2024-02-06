@@ -14,9 +14,14 @@ import { UsersModule } from "../users/users.module"
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Transaction, Category, AccountHistoryPoint]),
+    TypeOrmModule.forFeature([
+      Transaction,
+      Category,
+      AccountHistoryPoint,
+      Account,
+    ]),
     AccountHistoryModule,
-    AccountModule,
+    // AccountModule,
     // UsersModule,
   ],
   controllers: [TransactionController],
