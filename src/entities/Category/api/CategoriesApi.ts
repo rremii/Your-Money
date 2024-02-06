@@ -1,50 +1,50 @@
 import { Api } from "@shared/api/config/Api.ts"
-import { CreateCategoryDto, EditCategoryDto, ICategory } from "@entities/Category/type.ts"
+import {
+  CreateCategoryDto,
+  EditCategoryDto,
+  ICategory,
+} from "@entities/Category/type.ts"
 
 export const CategoriesApi = Api.injectEndpoints({
-
   endpoints: (build) => ({
-
     GetCategories: build.query<ICategory[], number | undefined>({
       query: (userId) => ({
         url: "category",
         method: "GET",
-        params: { userId }
+        params: { userId },
       }),
-      providesTags: ["Categories"]
+      providesTags: ["Categories"],
     }),
     CreateCategory: build.mutation<ICategory, CreateCategoryDto>({
       query: (createCategoryDto) => ({
         url: "category",
         method: "POST",
-        data: createCategoryDto
+        data: createCategoryDto,
       }),
-      invalidatesTags: ["Categories"]
+      invalidatesTags: ["Categories"],
     }),
     EditCategory: build.mutation<ICategory, EditCategoryDto>({
       query: (editCategoryDto) => ({
         url: "category",
         method: "PUT",
-        data: editCategoryDto
+        data: editCategoryDto,
       }),
-      invalidatesTags: ["Categories"]
+      invalidatesTags: ["Categories"],
     }),
     DeleteCategory: build.mutation<ICategory, number>({
       query: (id) => ({
         url: "category/" + id,
-        method: "DELETE"
+        method: "DELETE",
       }),
-      invalidatesTags: ["Categories"]
-    })
-
-
+      invalidatesTags: ["Categories", "Transactions", "HistoryPoints"],
+    }),
   }),
-  overrideExisting: false
+  overrideExisting: false,
 })
 
 export const {
   useGetCategoriesQuery,
   useCreateCategoryMutation,
   useEditCategoryMutation,
-  useDeleteCategoryMutation
+  useDeleteCategoryMutation,
 } = CategoriesApi

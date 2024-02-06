@@ -1,11 +1,11 @@
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { useDeleteCategoryMutation } from "@entities/Category/api/CategoriesApi.ts"
 import { useToast } from "@shared/hooks/useToast.tsx"
 import { useEffect } from "react"
 import { ErrorResponse } from "@entities/Auth/types.ts"
+import { useDeleteAccountMutation } from "@entities/Account/api/AccountsApi.ts"
 
-export const useDeleteCategory = () => {
-  const [deleteCategory, { isError, error }] = useDeleteCategoryMutation()
+export const useDeleteAccount = () => {
+  const [deleteAccount, { isError, error }] = useDeleteAccountMutation()
 
   const { ShowToast } = useToast(2000)
 
@@ -17,9 +17,9 @@ export const useDeleteCategory = () => {
     ShowToast(message, "error")
   }, [isError])
 
-  const DeleteCategory = async (categoryId: number) => {
-    await deleteCategory(categoryId)
+  const DeleteAccount = async (AccountId: number) => {
+    await deleteAccount(AccountId)
   }
 
-  return { DeleteCategory }
+  return { DeleteAccount }
 }

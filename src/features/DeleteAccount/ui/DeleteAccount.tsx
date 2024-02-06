@@ -3,25 +3,28 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useDeleteCategory } from "@entities/Category/model/useDeleteCategory.tsx"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useDeleteAccount } from "@entities/Account/model/useDeleteAccount.tsx"
 
 export const DeleteAccount = () => {
   const dispatch = useAppDispatch()
 
-  const id = useTypedSelector(state => state.NewAccount.id)
+  const id = useTypedSelector((state) => state.NewAccount.id)
 
-  // const { DeleteCategory: deleteCategory } = useDeleteCategory()
+  const { DeleteAccount } = useDeleteAccount()
 
-  const OnClick = () => {
+  const OnClick = async () => {
     if (id) {
-      // await deleteCategory(id)
+      await DeleteAccount(id)
       dispatch(closeMenu("editCreateAccountMenu"))
     }
   }
 
-  return <DeleteCategoryLayout onClick={OnClick}>
-    <img src={Categories} alt="delete icon" className="icon" />
-    <p className="content">Delete account</p>
-  </DeleteCategoryLayout>
+  return (
+    <DeleteCategoryLayout onClick={OnClick}>
+      <img src={Categories} alt="delete icon" className="icon" />
+      <p className="content">Delete account</p>
+    </DeleteCategoryLayout>
+  )
 }
 const DeleteCategoryLayout = styled.div`
   cursor: pointer;

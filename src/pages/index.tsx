@@ -2,7 +2,6 @@ import React from "react"
 import { Route, Routes } from "react-router-dom"
 import AppLayout from "../app/layout/AppLayout.tsx"
 
-
 // const Categories = lazy(() => import("./Categories/CategoriesPage.tsx"))
 // const Transactions = lazy(() => import("./Transactions/TransactionsPage.tsx"))
 // const Overview = lazy(() => import("./Overview/OverviewPage.tsx"))
@@ -25,20 +24,19 @@ import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { useAccountHistoryPoints } from "@entities/AccountHistoryPoint/model/useAccountHistoryPoints.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 
-
 export const Routing = () => {
-
   // useChangeTheme()
 
-  const isLoggedIn = useTypedSelector(state => state.Auth.isLoggedIn)
+  const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
 
   usePreloader(isLoggedIn)
 
-  const { data: user } = GetMe.useQueryState()
-  useCategory(user?.id)
+  // const { data: user } = GetMe.useQueryState()
+  // useCategory(user?.id)
   //todo check if i need to launch it here
-  const { accountIds, getAccountById } = useAccount(user?.id)
-  useAccountHistoryPoints(accountIds, getAccountById)
+
+  // const { accountIds, getAccountById } = useAccount(user?.id)
+  // useAccountHistoryPoints(accountIds, getAccountById)
 
   // const { convertCurrency } = useCurrencyConverter()
 

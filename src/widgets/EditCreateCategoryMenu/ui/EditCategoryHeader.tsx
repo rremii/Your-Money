@@ -5,15 +5,16 @@ import { resetEditCategory } from "@entities/Category/model/NewCategorySlice.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useCreateCategory } from "@entities/Category/model/useCreateCategory.tsx"
 import { useEditCategory } from "@entities/Category/model/useEditCategory.tsx"
-import { memo, useEffect } from "react"
+import React, { memo, useEffect } from "react"
+import { CreateCategory } from "@features/CreateCategory/ui/CreateCategory.tsx"
+import { EditCategory } from "@features/EditCategory/ui/EditCategory.tsx"
 
 export const EditCategoryHeader = () => {
   const dispatch = useAppDispatch()
 
-  const menuType = useTypedSelector(state => state.UI.Modals.editCreateCategoryMenu.menuType)
-
-  const { CreateCategory, isSuccess: isCreationSucceed } = useCreateCategory()
-  const { EditCategory, isSuccess: isEditingSucceed } = useEditCategory()
+  const menuType = useTypedSelector(
+    (state) => state.UI.Modals.editCreateCategoryMenu.menuType,
+  )
 
   const CloseCategoryMenu = async () => {
     dispatch(closeMenu("editCreateCategoryMenu"))
@@ -25,32 +26,35 @@ export const EditCategoryHeader = () => {
       }, 500)
     })
 
-    if (timer)
-      return window.clearTimeout(timer)
+    if (timer) return window.clearTimeout(timer)
   }
 
-  useEffect(() => {
-    if (isCreationSucceed || isEditingSucceed)
-      dispatch(closeMenu("editCreateCategoryMenu"))
-  }, [isCreationSucceed, isEditingSucceed])
+  return (
+    <HeaderLayout>
+      {menuType === "create" && (
+        <img
+          className="cancel"
+          onClick={CloseCategoryMenu}
+          src={Categories}
+          alt="cancel"
+        />
+      )}
+      {menuType === "edit" && (
+        <img
+          className="arrow"
+          onClick={CloseCategoryMenu}
+          src={Categories}
+          alt="back"
+        />
+      )}
 
+      <h1 className="title">
+        {menuType === "create" ? "New category" : "Category"}
+      </h1>
 
-  const OnConfirm = async () => {
-    if (menuType === "create")
-      await CreateCategory()
-    if (menuType === "edit")
-      await EditCategory()
-  }
-
-
-  return <HeaderLayout>
-    {menuType === "create" && <img className="cancel" onClick={CloseCategoryMenu} src={Categories} alt="cancel" />}
-    {menuType === "edit" && <img className="arrow" onClick={CloseCategoryMenu} src={Categories} alt="back" />}
-
-    <h1 className="title">{menuType === "create" ? "New category" : "Category"}</h1>
-
-    <img onClick={OnConfirm} className="confirm" src={Categories} alt="confirm" />
-  </HeaderLayout>
+      {menuType === "create" ? <CreateCategory /> : <EditCategory />}
+    </HeaderLayout>
+  )
 }
 const HeaderLayout = styled.header`
   height: 50px;
@@ -58,12 +62,14 @@ const HeaderLayout = styled.header`
   padding: 0 18px;
   align-items: center;
 
-  .cancel, .confirm, .arrow {
+  .cancel,
+  .CreateCategory,
+  .EditCategory,
+  .arrow {
     width: 17px;
     height: 17px;
     //background-color: red;
   }
-
 
   .title {
     margin-left: 30px;

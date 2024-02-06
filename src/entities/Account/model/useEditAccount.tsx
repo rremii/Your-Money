@@ -3,14 +3,15 @@ import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useCallback, useEffect } from "react"
 import { useToast } from "@shared/hooks/useToast.tsx"
 import { ErrorResponse } from "@entities/Auth/types.ts"
+import { useEditAccountMutation } from "@entities/Account/api/AccountsApi.ts"
 
-export const useEditCategory = () => {
-  const { name, icon, color, type, id } = useTypedSelector(
-    (state) => state.NewCategory,
+export const useEditAccount = () => {
+  const { name, icon, color, id } = useTypedSelector(
+    (state) => state.NewAccount,
   )
 
-  const [editCategory, { isLoading, isError, isSuccess, error }] =
-    useEditCategoryMutation()
+  const [editAccount, { isLoading, isError, isSuccess, error }] =
+    useEditAccountMutation()
 
   const { ShowToast } = useToast(2000)
 
@@ -22,10 +23,10 @@ export const useEditCategory = () => {
     ShowToast(message, "error")
   }, [isError])
 
-  const EditCategory = useCallback(async () => {
+  const EditAccount = useCallback(async () => {
     if (!id || !name) return
-    return await editCategory({ name, id, icon, color, type })
-  }, [name, icon, color, type, id])
+    return await editAccount({ name, id, icon, color })
+  }, [name, icon, color, id])
 
-  return { EditCategory, isPending: isLoading, isSuccess }
+  return { EditAccount, isPending: isLoading, isSuccess }
 }

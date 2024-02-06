@@ -6,7 +6,8 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { FormField } from "@shared/ui/FormField.tsx"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
-import { nameValidateSchema } from "@widgets/EditCreateCategoryMenu/constants/NameValidateSchema.ts"
+import { setNewAccountName } from "@entities/Account/model/NewAccountSlice.ts"
+import { nameValidateSchema } from "@widgets/EditCreateAccountMenu/constants/NameValidateSchema.ts"
 
 interface FormFields {
   name: string
@@ -15,43 +16,46 @@ interface FormFields {
 export const NameInput = () => {
   const dispatch = useAppDispatch()
 
-  const name = useTypedSelector(state => state.NewAccount.name)
+  const name = useTypedSelector((state) => state.NewAccount.name)
 
-
-  const { register, formState: { errors }, handleSubmit } =
-    useForm<FormFields>({
-      resolver: yupResolver(nameValidateSchema),
-      values: {
-        name
-      }
-    })
-
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm<FormFields>({
+    resolver: yupResolver(nameValidateSchema),
+    values: {
+      name,
+    },
+  })
 
   const ChangeAccountName = (newName: string) => {
-    dispatch(setNewCategoryName(newName))
+    if (isValid) dispatch(setNewAccountName(newName))
   }
-
 
   const HandleChange = ({ name }: FormFields) => {
     ChangeAccountName(name)
   }
 
-  return <NameInputLayout>
-    <form onSubmit={handleSubmit(HandleChange)} onChange={handleSubmit(HandleChange)}>
-      <FormField
-        isError={Boolean(errors.root) || Boolean(errors.name)}
-        label="Name"
-        input={{
-          type: "text",
-          placeholder: "",
-          registerData: { ...register("name") }
-        }}
-      />
-      {errors.name && (
-        <ErrorMessage>{errors.name.message}</ErrorMessage>
-      )}
-    </form>
-  </NameInputLayout>
+  return (
+    <NameInputLayout>
+      <form
+        onSubmit={handleSubmit(HandleChange)}
+        onChange={handleSubmit(HandleChange)}
+      >
+        <FormField
+          isError={Boolean(errors.root) || Boolean(errors.name)}
+          label="Name"
+          input={{
+            type: "text",
+            placeholder: "",
+            registerData: { ...register("name") },
+          }}
+        />
+        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+      </form>
+    </NameInputLayout>
+  )
 }
 const NameInputLayout = styled.div`
   padding: 0 66px;
@@ -89,5 +93,4 @@ const NameInputLayout = styled.div`
       border-bottom: 1px solid white;
     }
   }
-
 `
