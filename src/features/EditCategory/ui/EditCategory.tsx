@@ -21,12 +21,16 @@ export const EditCategory = () => {
   }
 
   return (
-    <EditCategoryLayout onClick={Edit} className={"EditCategory"}>
+    <EditCategoryLayout
+      disabled={isPending}
+      onClick={Edit}
+      className={"EditCategory"}
+    >
       <img src={Categories} alt="edit" />
     </EditCategoryLayout>
   )
 }
-const EditCategoryLayout = styled.div`
+const EditCategoryLayout = styled.button`
   img {
     width: 100%;
     height: 100%;

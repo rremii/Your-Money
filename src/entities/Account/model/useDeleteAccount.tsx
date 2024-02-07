@@ -5,7 +5,8 @@ import { ErrorResponse } from "@entities/Auth/types.ts"
 import { useDeleteAccountMutation } from "@entities/Account/api/AccountsApi.ts"
 
 export const useDeleteAccount = () => {
-  const [deleteAccount, { isError, error }] = useDeleteAccountMutation()
+  const [deleteAccount, { isError, error, isLoading }] =
+    useDeleteAccountMutation()
 
   const { ShowToast } = useToast(2000)
 
@@ -21,5 +22,5 @@ export const useDeleteAccount = () => {
     await deleteAccount(AccountId)
   }
 
-  return { DeleteAccount }
+  return { DeleteAccount, isLoading }
 }

@@ -5,7 +5,8 @@ import { useEffect } from "react"
 import { ErrorResponse } from "@entities/Auth/types.ts"
 
 export const useDeleteCategory = () => {
-  const [deleteCategory, { isError, error }] = useDeleteCategoryMutation()
+  const [deleteCategory, { isError, error, isLoading }] =
+    useDeleteCategoryMutation()
 
   const { ShowToast } = useToast(2000)
 
@@ -21,5 +22,5 @@ export const useDeleteCategory = () => {
     await deleteCategory(categoryId)
   }
 
-  return { DeleteCategory }
+  return { DeleteCategory, isLoading }
 }

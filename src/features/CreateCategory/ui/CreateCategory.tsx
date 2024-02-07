@@ -21,12 +21,16 @@ export const CreateCategory = () => {
   }
 
   return (
-    <CreateCategoryLayout onClick={Create} className={"CreateCategory"}>
+    <CreateCategoryLayout
+      disabled={isPending}
+      onClick={Create}
+      className={"CreateCategory"}
+    >
       <img src={Categories} alt="create" />
     </CreateCategoryLayout>
   )
 }
-const CreateCategoryLayout = styled.div`
+const CreateCategoryLayout = styled.button`
   img {
     width: 100%;
     height: 100%;

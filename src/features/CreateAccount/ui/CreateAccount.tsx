@@ -21,12 +21,16 @@ export const CreateAccount = () => {
   }
 
   return (
-    <CreateAccountLayout onClick={Create} className={"CreateAccount"}>
+    <CreateAccountLayout
+      disabled={isPending}
+      onClick={Create}
+      className={"CreateAccount"}
+    >
       <img src={Categories} alt="create" />
     </CreateAccountLayout>
   )
 }
-const CreateAccountLayout = styled.div`
+const CreateAccountLayout = styled.button`
   img {
     width: 100%;
     height: 100%;

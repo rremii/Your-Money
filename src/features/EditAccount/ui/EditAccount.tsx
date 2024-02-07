@@ -21,12 +21,16 @@ export const EditAccount = () => {
   }
 
   return (
-    <EditAccountLayout onClick={Edit} className={"EditAccount"}>
+    <EditAccountLayout
+      disabled={isPending}
+      onClick={Edit}
+      className={"EditAccount"}
+    >
       <img src={Categories} alt="edit" />
     </EditAccountLayout>
   )
 }
-const EditAccountLayout = styled.div`
+const EditAccountLayout = styled.button`
   img {
     width: 100%;
     height: 100%;

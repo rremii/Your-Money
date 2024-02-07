@@ -7,9 +7,9 @@ import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 export const DeleteCategory = () => {
   const dispatch = useAppDispatch()
 
-  const categoryId = useTypedSelector(state => state.NewCategory.id)
+  const categoryId = useTypedSelector((state) => state.NewCategory.id)
 
-  const { DeleteCategory: deleteCategory } = useDeleteCategory()
+  const { DeleteCategory: deleteCategory, isLoading } = useDeleteCategory()
 
   const OnClick = async () => {
     if (categoryId) {
@@ -18,12 +18,14 @@ export const DeleteCategory = () => {
     }
   }
 
-  return <DeleteCategoryLayout onClick={OnClick}>
-    <img src={Categories} alt="delete icon" className="icon" />
-    <p className="content">Delete category</p>
-  </DeleteCategoryLayout>
+  return (
+    <DeleteCategoryLayout disabled={isLoading} onClick={OnClick}>
+      <img src={Categories} alt="delete icon" className="icon" />
+      <p className="content">Delete category</p>
+    </DeleteCategoryLayout>
+  )
 }
-const DeleteCategoryLayout = styled.div`
+const DeleteCategoryLayout = styled.button`
   cursor: pointer;
   background-color: var(--bg-1);
   height: 60px;
@@ -33,6 +35,7 @@ const DeleteCategoryLayout = styled.div`
   gap: 30px;
   box-shadow: 0 2px 5px 0 var(--shadow-3);
   margin-top: 20px;
+  width: 100%;
 
   .icon {
     width: 15px;

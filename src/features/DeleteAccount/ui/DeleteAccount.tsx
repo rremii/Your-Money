@@ -4,13 +4,13 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useDeleteCategory } from "@entities/Category/model/useDeleteCategory.tsx"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useDeleteAccount } from "@entities/Account/model/useDeleteAccount.tsx"
-
+//todo make validation (not allowing to send many req while pending) create delete edit category/account
 export const DeleteAccount = () => {
   const dispatch = useAppDispatch()
 
   const id = useTypedSelector((state) => state.NewAccount.id)
 
-  const { DeleteAccount } = useDeleteAccount()
+  const { DeleteAccount, isLoading } = useDeleteAccount()
 
   const OnClick = async () => {
     if (id) {
@@ -20,17 +20,18 @@ export const DeleteAccount = () => {
   }
 
   return (
-    <DeleteCategoryLayout onClick={OnClick}>
+    <DeleteCategoryLayout disabled={isLoading} onClick={OnClick}>
       <img src={Categories} alt="delete icon" className="icon" />
       <p className="content">Delete account</p>
     </DeleteCategoryLayout>
   )
 }
-const DeleteCategoryLayout = styled.div`
+const DeleteCategoryLayout = styled.button`
   cursor: pointer;
   background-color: var(--bg-1);
   height: 60px;
   display: flex;
+  width: 100%;
   align-items: center;
   padding-left: 20px;
   gap: 30px;
