@@ -3,10 +3,9 @@ import { Bar } from "react-chartjs-2"
 import styled from "styled-components"
 import { ChartData, ChartOptions } from "chart.js"
 
-
 interface props {
-  options?: ChartOptions<"bar">;
-  data: ChartData<"bar">;
+  options?: ChartOptions<"bar">
+  data: ChartData<"bar">
 }
 
 export const OverviewGraph: FC<props> = React.memo((barConfig) => {

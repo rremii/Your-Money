@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { TransactionType } from "@entities/Transaction/types.ts"
 import { Currency } from "@entities/Currency/types.ts"
 
-
 interface initialState {
   id: number | null
   dateStr: string

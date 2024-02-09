@@ -1,5 +1,4 @@
 import { Currency } from "@entities/Currency/types.ts"
-import { TransactionType } from "@entities/Transaction/types.ts"
 
 interface AccountData {
   name: string

@@ -3,13 +3,17 @@ import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns
 import { Currency } from "@entities/Currency/types.ts"
 
 interface initialState {
-  curCurrency: Currency,
+  curCurrency: Currency
   curCurrencySign: string
+  language: string
 }
 
 const initialState: initialState = {
   curCurrency: Currency.DefaultCurrency,
-  curCurrencySign: DefaultCurrencySigns.get(Currency.DefaultCurrency) || Currency.DefaultCurrency
+  curCurrencySign:
+    DefaultCurrencySigns.get(Currency.DefaultCurrency) ||
+    Currency.DefaultCurrency,
+  language: window.localStorage.getItem("language") || "en",
 }
 
 const SettingsSlice = createSlice({
@@ -21,9 +25,13 @@ const SettingsSlice = createSlice({
     },
     setCurCurrencySign(state, action: PayloadAction<string>) {
       state.curCurrencySign = action.payload
-    }
-  }
+    },
+    setLanguage(state, action: PayloadAction<string>) {
+      state.language = action.payload
+    },
+  },
 })
 
 export const SettingsReducer = SettingsSlice.reducer
-export const { setCurCurrency, setCurCurrencySign } = SettingsSlice.actions
+export const { setCurCurrency, setCurCurrencySign, setLanguage } =
+  SettingsSlice.actions

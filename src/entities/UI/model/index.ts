@@ -4,5 +4,5 @@ import { PagesReducer } from "@entities/UI/model/PagesSlice.ts"
 
 export const UIReducer = combineReducers({
   Modals: ModalsReducer,
-  Pages: PagesReducer
+  Pages: PagesReducer,
 })

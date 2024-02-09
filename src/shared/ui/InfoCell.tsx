@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import { FC, memo, ReactNode } from "react"
 
-
 interface props {
   title: string
   content: string

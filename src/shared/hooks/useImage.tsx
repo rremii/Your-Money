@@ -1,7 +1,6 @@
 import { useRef, useState } from "react"
 
 export const useImage = (initialImg = "") => {
-
   const [curImage, setCurImage] = useState<string>(initialImg)
 
   const imgRef = useRef<HTMLInputElement>(null)
@@ -12,8 +11,5 @@ export const useImage = (initialImg = "") => {
     }
   }
 
-
   return { curImage, SetImage, imgRef }
-
-
 }

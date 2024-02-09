@@ -5,7 +5,7 @@ import {
   GetDatePointsAmount,
   GetLabels,
   GetTransByCategories,
-  GetTransByDateUnitWithinCategory
+  GetTransByDateUnitWithinCategory,
 } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 import { ICategory } from "@entities/Category/type.ts"
 import { DayType } from "@shared/constants/Days.ts"

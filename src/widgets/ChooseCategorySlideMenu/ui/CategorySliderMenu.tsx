@@ -5,7 +5,11 @@ import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
 import { setEditTransType } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { ICategory } from "@entities/Category/type.ts"
-import { closeMenu, openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
+import {
+  closeMenu,
+  openMenu,
+  setEditCreateMenuType,
+} from "@entities/UI/model/ModalsSlice.ts"
 
 
 interface props {

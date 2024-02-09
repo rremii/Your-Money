@@ -3,15 +3,17 @@ import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 
 export const BalanceCell = () => {
+  const balance = useTypedSelector((state) => state.NewAccount.balance)
+  const currency = useTypedSelector((state) => state.NewAccount.currency)
 
-  const balance = useTypedSelector(state => state.NewAccount.balance)
-  const currency = useTypedSelector(state => state.NewAccount.currency)
-
-
-  return <BalanceCellLayout>
-    <h2 className="title">Account balance</h2>
-    <p className="extra-info">{DefaultCurrencySigns.get(currency)} {balance || 0}</p>
-  </BalanceCellLayout>
+  return (
+    <BalanceCellLayout>
+      <h2 className="title">Account balance</h2>
+      <p className="extra-info">
+        {DefaultCurrencySigns.get(currency)} {balance || 0}
+      </p>
+    </BalanceCellLayout>
+  )
 }
 const BalanceCellLayout = styled.div`
   padding: 10px 15px;

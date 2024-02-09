@@ -6,8 +6,9 @@ import { setCategoriesEditMode } from "@entities/UI/model/PagesSlice.ts"
 export const Burger = () => {
   const dispatch = useAppDispatch()
 
-  const isEditCategoriesMode = useTypedSelector(state => state.UI.Pages.categoryPage.isCategoriesEditMode)
-
+  const isEditCategoriesMode = useTypedSelector(
+    (state) => state.UI.Pages.categoryPage.isCategoriesEditMode,
+  )
 
   const OpenSideBar = () => {
     dispatch(openMenu("sideBar"))
@@ -21,17 +22,18 @@ export const Burger = () => {
       OffCategoriesEditMode()
     } else {
       OpenSideBar()
-
     }
   }
 
-  return <BurgerLayout $isArrow={isEditCategoriesMode} onClick={OnClick}>
-    <div className={`container ${isEditCategoriesMode ? "arrow" : ""}`}>
-      <span />
-      <span />
-      <span />
-    </div>
-  </BurgerLayout>
+  return (
+    <BurgerLayout $isArrow={isEditCategoriesMode} onClick={OnClick}>
+      <div className={`container ${isEditCategoriesMode ? "arrow" : ""}`}>
+        <span />
+        <span />
+        <span />
+      </div>
+    </BurgerLayout>
+  )
 }
 const BurgerLayout = styled.div<{
   $isArrow?: boolean

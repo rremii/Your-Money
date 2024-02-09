@@ -1,24 +1,25 @@
 import styled from "styled-components"
-import { memo, useContext } from "react"
+import { useContext } from "react"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
 
 export const SubHeader = () => {
-
   const { menuType } = useContext(PickerContext)
 
   const scrollPercent = menuType === "icon" ? 0 : 100
-  return <SubHeaderLayout $scrollPercent={scrollPercent}>
-    <div className="cell">
-      <p className={`type ${menuType === "icon" ? "active" : ""}`}>ICON</p>
-    </div>
-    <div className="cell">
-      <p className={`type ${menuType === "color" ? "active" : ""}`}>COLOR</p>
-    </div>
-    <div className="slider">
-      <div className="pushing-bar" />
-      <div className="bar" />
-    </div>
-  </SubHeaderLayout>
+  return (
+    <SubHeaderLayout $scrollPercent={scrollPercent}>
+      <div className="cell">
+        <p className={`type ${menuType === "icon" ? "active" : ""}`}>ICON</p>
+      </div>
+      <div className="cell">
+        <p className={`type ${menuType === "color" ? "active" : ""}`}>COLOR</p>
+      </div>
+      <div className="slider">
+        <div className="pushing-bar" />
+        <div className="bar" />
+      </div>
+    </SubHeaderLayout>
+  )
 }
 const SubHeaderLayout = styled.header<{
   $scrollPercent?: number

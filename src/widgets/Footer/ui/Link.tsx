@@ -10,7 +10,6 @@ interface props {
 }
 
 export const Link: FC<props> = memo(({ src, srcActive, name, href }) => {
-
   return (
     <LinkLayout to={href} className="link">
       <div className="icon">

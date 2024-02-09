@@ -3,7 +3,10 @@ import * as yup from "yup"
 export const infoFormSchema = yup
   .object()
   .shape({
-    name: yup.string().max(20, "Max name length is 20 digits").required("Name is required")
+    name: yup
+      .string()
+      .max(20, "Max name length is 20 digits")
+      .required("Name is required"),
   })
   .required()
 

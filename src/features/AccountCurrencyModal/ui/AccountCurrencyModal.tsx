@@ -2,30 +2,32 @@ import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import React, { memo } from "react"
-import { CurrencyModalHeader } from "@shared/ui/СurrencyModal/CurrencyModalHeader.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { closeMenu, setCurrencyMenuType } from "@entities/UI/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { AccountCurrencyMenu } from "@features/AccountCurrencyModal/ui/AccountCurrencyMenu.tsx"
+import { SideBarModalHeader } from "@shared/ui/SideBarModalHeader.tsx"
 
 //todo implement index files and rename some files in modules and handle names in index
 export const AccountCurrencyModal = memo(() => {
   const dispatch = useAppDispatch()
 
-  const isOpen = useTypedSelector(state => state.UI.Modals.accountCurrencyMenu.isOpen)
-
+  const isOpen = useTypedSelector(
+    (state) => state.UI.Modals.accountCurrencyMenu.isOpen,
+  )
 
   const CloseModal = () => {
     dispatch(closeMenu("accountCurrencyMenu"))
   }
 
-  return <>
-    <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
-    <CurrencyModalLayout
-      $isOpen={isOpen}>
-      <CurrencyModalHeader>Currency</CurrencyModalHeader>
-      <AccountCurrencyMenu />
-    </CurrencyModalLayout>
-  </>
+  return (
+    <>
+      <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
+      <CurrencyModalLayout $isOpen={isOpen}>
+        <SideBarModalHeader>Currency</SideBarModalHeader>
+        <AccountCurrencyMenu />
+      </CurrencyModalLayout>
+    </>
+  )
 })
 const CurrencyModalLayout = styled(Modal)`
   z-index: 55;

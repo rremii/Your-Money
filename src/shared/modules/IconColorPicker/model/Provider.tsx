@@ -1,7 +1,10 @@
 import React, { Component, FC, useReducer } from "react"
 import { Actions } from "@shared/modules/IconColorPicker/types.ts"
-import { initialState, PickerContext, PickerCtxReducer } from "@shared/modules/IconColorPicker/model/Context.ts"
-
+import {
+  initialState,
+  PickerContext,
+  PickerCtxReducer,
+} from "@shared/modules/IconColorPicker/model/Context.ts"
 
 export let dispatchPicker: React.Dispatch<Actions>
 

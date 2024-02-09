@@ -18,26 +18,32 @@ interface FormFields {
   confirmPassword: string
 }
 
-
 export const SignUpPasswordForm = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
-  const email = useTypedSelector(state => state.Auth.email)
-  const avatar = useTypedSelector(state => state.Auth.avatar)
-  const name = useTypedSelector(state => state.Auth.name)
+  const email = useTypedSelector((state) => state.Auth.email)
+  const avatar = useTypedSelector((state) => state.Auth.avatar)
+  const name = useTypedSelector((state) => state.Auth.name)
 
   const [registerUser, { isLoading }] = useRegisterMutation()
 
+  const {
+    register,
+    formState: { errors },
+    clearErrors,
+    handleSubmit,
+    reset,
+    setError,
+  } = useForm<FormFields>({
+    resolver: yupResolver(passwordFormSchema),
+  })
 
-  const { register, formState: { errors }, clearErrors, handleSubmit, reset, setError } =
-    useForm<FormFields>({
-      resolver: yupResolver(passwordFormSchema)
-    })
-
-
-  const { Reset: ResetTimer } = useTimer({ timeGap: 3, finalTime: 3, callback: clearErrors })
-
+  const { Reset: ResetTimer } = useTimer({
+    timeGap: 3,
+    finalTime: 3,
+    callback: clearErrors,
+  })
 
   const SetError = (message: string) => {
     reset()
@@ -59,11 +65,14 @@ export const SignUpPasswordForm = () => {
       formData.append("email", email)
       formData.append("password", password)
 
-      await registerUser(formData).unwrap().then((res) => {
-        localStorage.setItem("accessToken", res.accessToken)
-        dispatch(setAuthSuccess())
-        navigate("/categories")
-      }).catch(error => SetError(error.message))
+      await registerUser(formData)
+        .unwrap()
+        .then((res) => {
+          localStorage.setItem("accessToken", res.accessToken)
+          dispatch(setAuthSuccess())
+          navigate("/categories")
+        })
+        .catch((error) => SetError(error.message))
     } else {
       SetError("Passwords are not equal")
     }
@@ -77,7 +86,7 @@ export const SignUpPasswordForm = () => {
           input={{
             type: "password",
             placeholder: "1234",
-            registerData: { ...register("password") }
+            registerData: { ...register("password") },
           }}
         />
         {errors.password && (
@@ -89,7 +98,7 @@ export const SignUpPasswordForm = () => {
           input={{
             type: "password",
             placeholder: "1234",
-            registerData: { ...register("confirmPassword") }
+            registerData: { ...register("confirmPassword") },
           }}
         />
         {errors.confirmPassword && (

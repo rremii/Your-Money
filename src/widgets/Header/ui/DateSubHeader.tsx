@@ -6,8 +6,7 @@ import { shiftTransMenuIdsRight } from "@entities/DateSlider/model/DateSliderSli
 export const DateSubHeader = () => {
   const dispatch = useAppDispatch()
 
-  const dateGap = useTypedSelector(state => state.Date.curMenu.dateGap)
-
+  const dateGap = useTypedSelector((state) => state.Date.curMenu.dateGap)
 
   const ShiftDateRight = () => {
     dispatch(shiftTransMenuIdsRight({ shiftAmount: 1 }))
@@ -31,12 +30,16 @@ export const DateSubHeader = () => {
 
   return (
     <SubHeaderLayout>
-      <div onClick={ShiftDateLeft} className="arrow-left">{"<"}</div>
+      <div onClick={ShiftDateLeft} className="arrow-left">
+        {"<"}
+      </div>
       <div className="date">
         <img src={Categories} alt="days" />
         <span>{dateGap}</span>
       </div>
-      <div onClick={ShiftDateRight} className="arrow-right">{">"}</div>
+      <div onClick={ShiftDateRight} className="arrow-right">
+        {">"}
+      </div>
     </SubHeaderLayout>
   )
 }

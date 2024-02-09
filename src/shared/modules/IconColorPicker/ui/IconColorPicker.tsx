@@ -9,7 +9,7 @@ import {
   setPickerCurIcon,
   setPickerIconComponents,
   setPickerIcons,
-  setPickerTitles
+  setPickerTitles,
 } from "@shared/modules/IconColorPicker/model/Actions.ts"
 import { IIconComponents } from "@shared/modules/IconColorPicker/types.ts"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"

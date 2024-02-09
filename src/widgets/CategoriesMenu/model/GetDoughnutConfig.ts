@@ -2,8 +2,8 @@ import { ChartData, ChartOptions } from "chart.js"
 import { ICategoryData } from "@widgets/CategoriesMenu/ui/BalanceGraph.tsx"
 
 interface IDoughnutProps {
-  options?: ChartOptions<"doughnut">;
-  data: ChartData<"doughnut">;
+  options?: ChartOptions<"doughnut">
+  data: ChartData<"doughnut">
 }
 
 export const GetDoughnutConfig = (categories: ICategoryData[]): IDoughnutProps => {

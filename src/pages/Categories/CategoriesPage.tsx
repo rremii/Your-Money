@@ -12,19 +12,24 @@ import { EditCategoriesSubHeader } from "@widgets/Header/ui/EditCategoriesMenu/E
 
 //todo make it better
 const CategoriesPage = () => {
-
-  const isCategoriesEditMode = useTypedSelector(state => state.UI.Pages.categoryPage.isCategoriesEditMode)
+  const isCategoriesEditMode = useTypedSelector(
+    (state) => state.UI.Pages.categoryPage.isCategoriesEditMode,
+  )
 
   return (
     <CategoriesLayout>
       <Header>
-        {isCategoriesEditMode ? (<>
-          <EditCategoriesHeader />
-          <EditCategoriesSubHeader />
-        </>) : (<>
-          <TopHeader right={<StartEditCategories />} />
-          <DateSubHeader />
-        </>)}
+        {isCategoriesEditMode ? (
+          <>
+            <EditCategoriesHeader />
+            <EditCategoriesSubHeader />
+          </>
+        ) : (
+          <>
+            <TopHeader right={<StartEditCategories />} />
+            <DateSubHeader />
+          </>
+        )}
       </Header>
       <CategoriesSlider />
       <EditCategoriesSlider />

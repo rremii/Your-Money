@@ -12,8 +12,9 @@ import { Link } from "@widgets/Footer/ui/Link.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 export const Footer = React.memo(() => {
-  const isEditCategoriesMode = useTypedSelector(state => state.UI.Pages.categoryPage.isCategoriesEditMode)
-
+  const isEditCategoriesMode = useTypedSelector(
+    (state) => state.UI.Pages.categoryPage.isCategoriesEditMode,
+  )
 
   const NavLinks = useMemo(
     () => [
@@ -21,28 +22,28 @@ export const Footer = React.memo(() => {
         src: Accounts,
         name: "Accounts",
         href: "/accounts",
-        srcActive: AccountsActive
+        srcActive: AccountsActive,
       },
       {
         src: Categories,
         name: "Categories",
         href: "/categories",
-        srcActive: CategoriesActive
+        srcActive: CategoriesActive,
       },
       {
         src: TransActions,
         name: "TransActions",
         href: "/transActions",
-        srcActive: TransActionsActive
+        srcActive: TransActionsActive,
       },
       {
         src: Overview,
         name: "Overview",
         href: "/overview",
-        srcActive: OverviewActive
-      }
+        srcActive: OverviewActive,
+      },
     ],
-    []
+    [],
   )
 
   return (
@@ -58,8 +59,8 @@ const FooterLayout = styled.footer<{
 }>`
   z-index: 4;
   position: fixed;
-  transition: transform .5s;
-  transform: ${({ $isHidden }) => $isHidden ? "translateY(100%)" : ""};
+  transition: transform 0.5s;
+  transform: ${({ $isHidden }) => ($isHidden ? "translateY(100%)" : "")};
   bottom: 0;
   width: 100vw;
   max-width: 450px;

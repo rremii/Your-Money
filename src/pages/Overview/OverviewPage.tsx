@@ -6,7 +6,6 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { OverviewSlider } from "@widgets/OverviewMenu/ui/OverviewSlider.tsx"
 import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
 
-
 const OverviewPage = () => {
   return (
     <OverviewLayout>
@@ -31,5 +30,4 @@ const OverviewLayout = styled.div`
   position: relative;
   font-size: 30px;
   background-color: var(--bg-2);
-
 `

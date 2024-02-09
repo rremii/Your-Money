@@ -3,10 +3,14 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import React from "react"
 
 export const ChangeStartScreen = React.memo(() => {
+  const handleClick = () => {}
 
-
-  const handleClick = () => {
-  }
-
-  return <SideBarBtn onClick={handleClick} title="Startup screen" subTitle="EditCategoriesSlider" icon={Categories} />
+  return (
+    <SideBarBtn
+      onClick={handleClick}
+      title="Startup screen"
+      subTitle="EditCategoriesSlider"
+      icon={Categories}
+    />
+  )
 })

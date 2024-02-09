@@ -4,8 +4,7 @@ import { useCalendarSlider } from "@shared/modules/Calendar/model/useCalendarSli
 import { MonthMenu } from "@shared/modules/Calendar/ui/MonthMenu.tsx"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
 
-interface props {
-}
+interface props {}
 
 export const MonthSlider: FC<props> = memo(() => {
   const { menusDatesStr } = useContext(CalendarContext)

@@ -1,4 +1,3 @@
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useDeleteCategoryMutation } from "@entities/Category/api/CategoriesApi.ts"
 import { useToast } from "@shared/hooks/useToast.tsx"
 import { useEffect } from "react"

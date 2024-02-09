@@ -1,4 +1,8 @@
-import { combineReducers, configureStore, PreloadedState } from "@reduxjs/toolkit"
+import {
+  combineReducers,
+  configureStore,
+  PreloadedState,
+} from "@reduxjs/toolkit"
 import { Api } from "../api/config/Api"
 import { AuthReducer } from "@entities/Auth/model/AuthSlice.ts"
 import { ToastReducer } from "@shared/store/globalSlices/ToastSlice.ts"
@@ -11,7 +15,6 @@ import { SettingsReducer } from "@entities/Settings/model/SettingsSlice.ts"
 import { UIReducer } from "@entities/UI/model"
 import { NewAccountReducer } from "@entities/Account/model/NewAccountSlice.ts"
 
-
 const rootReducer = combineReducers({
   Auth: AuthReducer,
   Toast: ToastReducer,
@@ -23,7 +26,7 @@ const rootReducer = combineReducers({
   AllAccount: AllAccountReducer,
   Settings: SettingsReducer,
   UI: UIReducer,
-  [Api.reducerPath]: Api.reducer
+  [Api.reducerPath]: Api.reducer,
 })
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
@@ -32,7 +35,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
     preloadedState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(Api.middleware),
-    devTools: true
+    devTools: true,
   })
 }
 

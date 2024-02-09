@@ -14,10 +14,8 @@ interface FormFields {
   code: string
 }
 
-
 export const SignUpCodeForm = () => {
   const navigate = useNavigate()
-
 
   const {
     register,
@@ -25,9 +23,10 @@ export const SignUpCodeForm = () => {
     clearErrors,
     setError,
     handleSubmit,
-    reset, setFocus
+    reset,
+    setFocus,
   } = useForm<FormFields>({
-    resolver: yupResolver(codeFormSchema)
+    resolver: yupResolver(codeFormSchema),
   })
   const { errors } = formState
 
@@ -36,18 +35,24 @@ export const SignUpCodeForm = () => {
   }, [setFocus])
 
   const [verifyCode] = useVerifyCodeMutation()
-  const { Reset: ResetTimer } = useTimer({ finalTime: 3, timeGap: 3, callback: clearErrors })
-
+  const { Reset: ResetTimer } = useTimer({
+    finalTime: 3,
+    timeGap: 3,
+    callback: clearErrors,
+  })
 
   const OnSubmit = async ({ code }: FormFields) => {
     if (code.length !== 6) return
-    await verifyCode(code).unwrap().then(() => {
-      navigate("/sign-up/info")
-    }).catch(error => {
-      reset()
-      setError("code", { message: error.message })
-      ResetTimer()
-    })
+    await verifyCode(code)
+      .unwrap()
+      .then(() => {
+        navigate("/sign-up/info")
+      })
+      .catch((error) => {
+        reset()
+        setError("code", { message: error.message })
+        ResetTimer()
+      })
   }
 
   const OnValueChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,9 +72,9 @@ export const SignUpCodeForm = () => {
             placeholder: "",
             registerData: {
               ...register("code", {
-                onChange: OnValueChange
-              })
-            }
+                onChange: OnValueChange,
+              }),
+            },
           }}
         />
         {errors.code && <ErrorMessage>{errors.code.message}</ErrorMessage>}

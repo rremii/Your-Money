@@ -5,7 +5,7 @@ interface initialState {
   id: number | null
   name: string
   icon: string
-  color: string,
+  color: string
   balance: number
   currency: Currency
 }

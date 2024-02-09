@@ -1,17 +1,24 @@
 import { Api } from "@shared/api/config/Api.ts"
-import { CreateTransDto, EditTransDto, GetTransactionDto, GetTransactionResponse } from "@entities/Transaction/types.ts"
+import {
+  CreateTransDto,
+  EditTransDto,
+  GetTransactionDto,
+  GetTransactionResponse,
+} from "@entities/Transaction/types.ts"
 import { DefaultResponse } from "@entities/Auth/types.ts"
 
 export const TransactionApi = Api.injectEndpoints({
-
   endpoints: (build) => ({
-    GetTransactionsByDateGap: build.query<GetTransactionResponse, GetTransactionDto>({
+    GetTransactionsByDateGap: build.query<
+      GetTransactionResponse,
+      GetTransactionDto
+    >({
       query: (transactionDto) => ({
         url: "transaction",
         method: "GET",
-        params: transactionDto
+        params: transactionDto,
       }),
-      providesTags: ["Transactions"]
+      providesTags: ["Transactions"],
     }),
 
     //todo check create trans flow in yandex it doubles requests
@@ -19,32 +26,29 @@ export const TransactionApi = Api.injectEndpoints({
       query: (data) => ({
         url: "transaction",
         method: "POST",
-        data
+        data,
       }),
-      invalidatesTags: ["Transactions", "HistoryPoints", "Accounts"]
+      invalidatesTags: ["Transactions", "HistoryPoints", "Accounts"],
     }),
 
     editTransaction: build.mutation<DefaultResponse, EditTransDto>({
       query: (data) => ({
         url: "transaction",
         method: "PUT",
-        data
+        data,
       }),
-      invalidatesTags: ["Transactions", "HistoryPoints", "Accounts"]
+      invalidatesTags: ["Transactions", "HistoryPoints", "Accounts"],
     }),
-
 
     deleteTransaction: build.mutation<DefaultResponse, number>({
       query: (id) => ({
         url: "transaction/" + id,
-        method: "DELETE"
+        method: "DELETE",
       }),
-      invalidatesTags: ["Transactions", "HistoryPoints", "Accounts"]
-    })
-
-
+      invalidatesTags: ["Transactions", "HistoryPoints", "Accounts"],
+    }),
   }),
-  overrideExisting: false
+  overrideExisting: false,
 })
 // export const {} = TransactionApi.endpoints
 

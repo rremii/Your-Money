@@ -5,10 +5,14 @@ export const useMenuType = () => {
   const [menuType, setMenuType] = useState<TransactionType>("expense")
 
   const SwitchMenuType = useCallback(() => {
-    setMenuType((menuType) => menuType === "income" ? "expense" : "income")
+    setMenuType((menuType) => (menuType === "income" ? "expense" : "income"))
   }, [])
 
-  return useMemo(() => ({
-    SwitchMenuType, menuType
-  }), [SwitchMenuType, menuType])
+  return useMemo(
+    () => ({
+      SwitchMenuType,
+      menuType,
+    }),
+    [SwitchMenuType, menuType],
+  )
 }

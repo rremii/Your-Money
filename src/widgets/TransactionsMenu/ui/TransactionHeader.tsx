@@ -3,7 +3,6 @@ import React, { FC } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
-
 interface props {
   startBalance: number
   endBalance: number

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { EditCategoryHeader } from "@widgets/EditCreateCategoryMenu/ui/EditCategoryHeader.tsx"
 import { DeleteCategory } from "@features/DeleteCategory/ui/DeleteCategory.tsx"
 import { NameInput } from "@widgets/EditCreateCategoryMenu/ui/NameInput.tsx"

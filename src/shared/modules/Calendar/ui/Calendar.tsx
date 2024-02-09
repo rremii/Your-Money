@@ -3,7 +3,11 @@ import React, { FC, memo, useContext, useEffect } from "react"
 import { Header } from "@shared/modules/IconColorPicker/ui/Header.tsx"
 import { MonthSlider } from "@shared/modules/Calendar/ui/MonthSlider.tsx"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
-import { setCalendarColor, setCurCalendarDate, updateMenuDates } from "@shared/modules/Calendar/model/Actions.ts"
+import {
+  setCalendarColor,
+  setCurCalendarDate,
+  updateMenuDates,
+} from "@shared/modules/Calendar/model/Actions.ts"
 import { YearSlider } from "@shared/modules/Calendar/ui/YearSlider.tsx"
 
 

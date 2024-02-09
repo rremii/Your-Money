@@ -1,13 +1,16 @@
 import { useEffect } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { clearMessage, hideToast, showToast, toastStateType } from "@shared/store/globalSlices/ToastSlice.ts"
+import {
+  clearMessage,
+  hideToast,
+  showToast,
+  toastStateType,
+} from "@shared/store/globalSlices/ToastSlice.ts"
 
 export const useToast = (duration: number, delay?: number) => {
   const dispatch = useAppDispatch()
 
-
-  const isShown = useTypedSelector(state => state.Toast.isShown)
-
+  const isShown = useTypedSelector((state) => state.Toast.isShown)
 
   useEffect(() => {
     const hideTimer = setTimeout(() => {
@@ -21,7 +24,6 @@ export const useToast = (duration: number, delay?: number) => {
       window.clearTimeout(hideTimer)
       window.clearTimeout(clearTimer)
     }
-
   }, [isShown])
 
   const ShowToast = (message: string, state: toastStateType = "info") => {
@@ -29,20 +31,15 @@ export const useToast = (duration: number, delay?: number) => {
 
     new Promise((resolve) => {
       delayTimer = setTimeout(() => {
-
         dispatch(showToast({ message, state }))
         resolve("")
-
       }, delay || 0)
     }).then(() => {
       window.clearTimeout(delayTimer)
     })
-
   }
 
   return {
-    ShowToast
+    ShowToast,
   }
-
-
 }

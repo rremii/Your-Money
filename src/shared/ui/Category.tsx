@@ -3,7 +3,6 @@ import { FC, memo } from "react"
 import { ICategory } from "@entities/Category/type.ts"
 import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
 
-
 interface props extends ICategory {
   isActive?: boolean
   OnClick?: (category: ICategory) => void

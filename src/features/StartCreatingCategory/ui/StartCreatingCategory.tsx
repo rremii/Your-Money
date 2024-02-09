@@ -2,7 +2,10 @@ import styled from "styled-components"
 import { TransactionType } from "@entities/Transaction/types.ts"
 import { FC } from "react"
 import Categories from "@shared/assets/LightTheme/categories.png"
-import { openMenu, setEditCategoryMenuType } from "@entities/UI/model/ModalsSlice.ts"
+import {
+  openMenu,
+  setEditCategoryMenuType,
+} from "@entities/UI/model/ModalsSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setCreateCategory } from "@entities/Category/model/NewCategorySlice.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"

@@ -1,20 +1,23 @@
 import styled from "styled-components"
-import { CurrencyCell } from "@shared/ui/СurrencyModal/CurrencyCell.tsx"
-import React, { useState } from "react"
-import { closeMenu, setCurrencyMenuType } from "@entities/UI/model/ModalsSlice.ts"
+import { CurrencyCell } from "@features/DefaultCurrencyModal/ui/CurrencyCell.tsx"
+import React from "react"
+import {
+  closeMenu,
+  setCurrencyMenuType,
+} from "@entities/UI/model/ModalsSlice.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setCurCurrency, setCurCurrencySign } from "@entities/Settings/model/SettingsSlice.ts"
+import {
+  setCurCurrency,
+  setCurCurrencySign,
+} from "@entities/Settings/model/SettingsSlice.ts"
 import { Currency } from "@entities/Currency/types.ts"
 import { MainCurrencies } from "@entities/Currency/constants/MainCurrencies.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
-import { setNewAccountCurrency } from "@entities/Account/model/NewAccountSlice.ts"
-
 
 export const CurrencyMenu = () => {
   const dispatch = useAppDispatch()
 
-  const currency = useTypedSelector(state => state.Settings.curCurrency)
-
+  const currency = useTypedSelector((state) => state.Settings.curCurrency)
 
   const SetChosenCurrency = (currency: Currency) => {
     dispatch(setCurrencyMenuType("currencySign"))
@@ -30,22 +33,30 @@ export const CurrencyMenu = () => {
     dispatch(closeMenu("currencyMenu"))
   }
 
-
-  return <CurrencyMenuLayout>
-    <p className="subTitle">Main currencies</p>
-    <div className="currencies-box">
-      {MainCurrencies.map(({ fullName, shortName }, index) => (
-        <CurrencyCell OnClick={() => SetChosenCurrency(shortName)}
-                      fullName={fullName}
-                      shortName={shortName}
-                      isActive={currency === shortName} key={index} />
-      ))}
-    </div>
-    <div className="btn-section">
-      <button className="gray" onClick={CloseModal} type="button">Cancel</button>
-      <button className="gray" onClick={OnSubmit} type="submit">Done</button>
-    </div>
-  </CurrencyMenuLayout>
+  return (
+    <CurrencyMenuLayout>
+      <p className="subTitle">Main currencies</p>
+      <div className="currencies-box">
+        {MainCurrencies.map(({ fullName, shortName }, index) => (
+          <CurrencyCell
+            OnClick={() => SetChosenCurrency(shortName)}
+            fullName={fullName}
+            shortName={shortName}
+            isActive={currency === shortName}
+            key={index}
+          />
+        ))}
+      </div>
+      <div className="btn-section">
+        <button className="gray" onClick={CloseModal} type="button">
+          Cancel
+        </button>
+        <button className="gray" onClick={OnSubmit} type="submit">
+          Done
+        </button>
+      </div>
+    </CurrencyMenuLayout>
+  )
 }
 const CurrencyMenuLayout = styled.div`
   overflow-y: hidden;

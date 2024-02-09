@@ -1,4 +1,3 @@
-import { useEditCategoryMutation } from "@entities/Category/api/CategoriesApi.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useCallback, useEffect } from "react"
 import { useToast } from "@shared/hooks/useToast.tsx"

@@ -3,7 +3,7 @@ import { AllAccountsInfo } from "@shared/ui/AllAccountsInfo.tsx"
 import React from "react"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { Account } from "@widgets/AccountsMenu/ui/Account.tsx"
 
 

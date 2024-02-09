@@ -6,16 +6,18 @@ import AccountCategoryIconComp from "@shared/assets/AccountCategoryIconComp.tsx"
 export const CreateCategoryIcon = () => {
   const dispatch = useAppDispatch()
 
-  const icon = useTypedSelector(state => state.NewCategory.icon)
-  const color = useTypedSelector(state => state.NewCategory.color)
+  const icon = useTypedSelector((state) => state.NewCategory.icon)
+  const color = useTypedSelector((state) => state.NewCategory.color)
 
   const OpenCreateCategoryMenu = () => {
     dispatch(openMenu("categoryIconPickerMenu"))
   }
 
-  return <IconLayout onClick={OpenCreateCategoryMenu}>
-    {AccountCategoryIconComp.get(icon, { fill: color })}
-  </IconLayout>
+  return (
+    <IconLayout onClick={OpenCreateCategoryMenu}>
+      {AccountCategoryIconComp.get(icon, { fill: color })}
+    </IconLayout>
+  )
 }
 const IconLayout = styled.div`
   cursor: pointer;

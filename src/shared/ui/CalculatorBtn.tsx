@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import React from "react"
 
-
 export const CalculatorBtn = styled.div<{
   $borderColor?: string
   $bgColor?: string
@@ -16,5 +15,4 @@ export const CalculatorBtn = styled.div<{
   display: flex;
   align-items: center;
   justify-content: center;
-
 `

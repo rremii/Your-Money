@@ -9,7 +9,7 @@ class TimeGap {
 
     const dayGap = curDay - Days.get(startDay)
 
-    if (dayGap < 0) return (7 - Math.abs(dayGap))
+    if (dayGap < 0) return 7 - Math.abs(dayGap)
 
     return dayGap
   }
@@ -19,8 +19,16 @@ class TimeGap {
 
     if (!initDate) initDate = new Date()
 
-    const dateFrom = new Date(initDate.getFullYear(), initDate.getMonth(), initDate.getDate() - dayGap + 7 * index)
-    const dateTo = new Date(initDate.getFullYear(), initDate.getMonth(), initDate.getDate() - dayGap + 7 * (index + 1))
+    const dateFrom = new Date(
+      initDate.getFullYear(),
+      initDate.getMonth(),
+      initDate.getDate() - dayGap + 7 * index,
+    )
+    const dateTo = new Date(
+      initDate.getFullYear(),
+      initDate.getMonth(),
+      initDate.getDate() - dayGap + 7 * (index + 1),
+    )
 
     const monthFrom = Months.get(dateFrom.getMonth()) as string
     const monthTo = Months.get(dateTo.getMonth()) as string
@@ -35,15 +43,21 @@ class TimeGap {
   GetDayGap(index: number, initDate?: Date) {
     if (!initDate) initDate = new Date()
 
-
-    const dateFrom = new Date(initDate.getFullYear(), initDate.getMonth(), initDate.getDate() + index)
-    const dateTo = new Date(initDate.getFullYear(), initDate.getMonth(), initDate.getDate() + index + 1)
+    const dateFrom = new Date(
+      initDate.getFullYear(),
+      initDate.getMonth(),
+      initDate.getDate() + index,
+    )
+    const dateTo = new Date(
+      initDate.getFullYear(),
+      initDate.getMonth(),
+      initDate.getDate() + index + 1,
+    )
 
     const day = dateTo.toUTCString().slice(0, 3)
     const date = dateFrom.getDate()
     const month = Months.get(dateFrom.getMonth()) || ""
     const year = dateTo.getFullYear()
-
 
     const dateGap = `${day}, ${date} ${month} ${year}`
 
@@ -52,7 +66,6 @@ class TimeGap {
 
   GetMonthGap(index: number, initDate?: Date) {
     if (!initDate) initDate = new Date()
-
 
     const dateFromMonth = initDate.getMonth() + index
     const dateToMonth = initDate.getMonth() + index + 1

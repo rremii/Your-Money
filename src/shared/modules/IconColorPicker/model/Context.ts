@@ -1,5 +1,9 @@
 import React from "react"
-import { Actions, IIconComponents, MenuType } from "@shared/modules/IconColorPicker/types.ts"
+import {
+  Actions,
+  IIconComponents,
+  MenuType,
+} from "@shared/modules/IconColorPicker/types.ts"
 
 interface initialState {
   menuType: MenuType

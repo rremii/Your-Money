@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { useDeleteCategory } from "@entities/Category/model/useDeleteCategory.tsx"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useDeleteAccount } from "@entities/Account/model/useDeleteAccount.tsx"
 //todo make validation (not allowing to send many req while pending) create delete edit category/account

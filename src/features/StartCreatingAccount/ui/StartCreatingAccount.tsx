@@ -1,7 +1,10 @@
 import styled from "styled-components"
 import { FC } from "react"
 import Categories from "@shared/assets/LightTheme/categories.png"
-import { openMenu, setEditAccountMenuType, setEditCategoryMenuType } from "@entities/UI/model/ModalsSlice.ts"
+import {
+  openMenu,
+  setEditAccountMenuType,
+} from "@entities/UI/model/ModalsSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { GetRandomColor } from "@shared/modules/IconColorPicker/utils/GetRandomColor.ts"

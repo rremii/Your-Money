@@ -20,19 +20,26 @@ import { EditCreateCategoryMenu } from "@widgets/EditCreateCategoryMenu/ui/EditC
 import { CategoryIconPickerModal } from "@features/CategoryIconPickerModal/ui/CategoryIconPickerModal.tsx"
 import { EditCreateAccountMenu } from "@widgets/EditCreateAccountMenu/ui/EditCreateAccountMenu.tsx"
 import { AccountIconPickerModal } from "@features/AccountIconPickerModal/ui/AccountIconPickerModal.tsx"
-import { AccountCurrencyMenu } from "@features/AccountCurrencyModal/ui/AccountCurrencyMenu.tsx"
 import { AccountCurrencyModal } from "@features/AccountCurrencyModal/ui/AccountCurrencyModal.tsx"
+import { ChangeLanguageModal } from "@features/ChangeLanguageModal/ui/ChangeLanguageModal.tsx"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { usePreloader } from "@shared/hooks/usePreloader.tsx"
+import { useI18n } from "@shared/i18n/useI18n.tsx"
 
 interface Props {
   children: React.ReactNode
 }
 
 const AppLayout: FC<Props> = ({ children }) => {
+  const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
+  const language = useTypedSelector((state) => state.Settings.language)
 
   const { data: user } = GetMe.useQueryState()
   useAccount(user?.id)
   useAllTransDateGap()
 
+  useI18n(language)
+  usePreloader(isLoggedIn)
   return (
     <LayoutStyles>
       {children}
@@ -47,7 +54,6 @@ const AppLayout: FC<Props> = ({ children }) => {
       <CalendarMenu />
       <CurrencyModal />
 
-
       <EditCreateCategoryMenu />
       <CategoryIconPickerModal />
 
@@ -56,11 +62,10 @@ const AppLayout: FC<Props> = ({ children }) => {
       <AccountCurrencyModal />
 
       <DefaultCurrencyModal />
+      <ChangeLanguageModal />
       <SignOutMenu />
       <PasswordMenu />
       <NameMenu />
-
-
     </LayoutStyles>
   )
 }

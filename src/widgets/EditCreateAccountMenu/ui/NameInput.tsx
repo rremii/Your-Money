@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import React from "react"
-import { setNewCategoryName } from "@entities/Category/model/NewCategorySlice.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"

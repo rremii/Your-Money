@@ -1,7 +1,7 @@
 import { useCreateCategoryMutation } from "@entities/Category/api/CategoriesApi.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useCallback, useEffect } from "react"
-import { DefaultResponse, ErrorResponse } from "@entities/Auth/types.ts"
+import { ErrorResponse } from "@entities/Auth/types.ts"
 import { useToast } from "@shared/hooks/useToast.tsx"
 
 export const useCreateCategory = (userId?: number) => {

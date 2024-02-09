@@ -25,7 +25,5 @@ export const SideBarSection = styled.section`
         border-bottom: 1px transparent solid;
       }
     }
-
   }
-
 `

@@ -4,7 +4,7 @@ export type EditCreateCategoryType = "edit" | "create"
 export type EditCreateAccountType = "edit" | "create"
 
 export type Menus =
-  "editCreateTransMenu"
+  | "editCreateTransMenu"
   | "calendarMenu"
   | "chooseAccountMenu"
   | "chooseCategoryMenu"
@@ -22,3 +22,4 @@ export type Menus =
   | "categoryIconPickerMenu"
   | "editCreateAccountMenu"
   | "accountIconPickerMenu"
+  | "languageMenu"

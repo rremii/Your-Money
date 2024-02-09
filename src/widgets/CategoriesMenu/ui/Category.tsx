@@ -8,7 +8,10 @@ import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategor
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
 import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { ICategory } from "@entities/Category/type.ts"
-import { openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
+import {
+  openMenu,
+  setEditCreateMenuType,
+} from "@entities/UI/model/ModalsSlice.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
 

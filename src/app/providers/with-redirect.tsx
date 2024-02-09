@@ -9,5 +9,4 @@ export const withRedirect = (Component: FC) => () => {
   }, [])
 
   return <Component />
-
 }

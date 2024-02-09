@@ -1,10 +1,13 @@
 import styled from "styled-components"
 import { useContext, useEffect, useRef } from "react"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
-import { setCalendarType, setCurCalendarDate, updateMenuDates } from "@shared/modules/Calendar/model/Actions.ts"
+import {
+  setCalendarType,
+  setCurCalendarDate,
+  updateMenuDates,
+} from "@shared/modules/Calendar/model/Actions.ts"
 
 export const YearSlider = () => {
-
   const { color, chosenDateStr } = useContext(CalendarContext)
 
   const yearSliderRef = useRef<HTMLDivElement>(null)
@@ -13,7 +16,6 @@ export const YearSlider = () => {
     if (!yearSliderRef || !yearSliderRef.current) return
     const sliderHeight = yearSliderRef.current.scrollHeight
 
-
     yearSliderRef.current.scrollTo(0, sliderHeight / 2 - 130)
   }, [yearSliderRef])
 
@@ -21,7 +23,9 @@ export const YearSlider = () => {
   const chosenDate = new Date(chosenDateStr)
   const chosenYear = chosenDate.getFullYear()
   const yearsAmount = 11
-  const years = [...new Array(yearsAmount)].map((_, index) => thisYear + index - Math.floor(yearsAmount / 2))
+  const years = [...new Array(yearsAmount)].map(
+    (_, index) => thisYear + index - Math.floor(yearsAmount / 2),
+  )
 
   const SetYear = (year: number) => {
     const date = new Date(year, chosenDate.getMonth(), chosenDate.getDate())
@@ -30,15 +34,19 @@ export const YearSlider = () => {
     setCurCalendarDate(date.toUTCString())
   }
 
-  return <YearSliderLayout ref={yearSliderRef} $color={color}>
-
-    {years.map((year) => {
-      return <div onClick={() => SetYear(year)} className={`year-box`}>
-        <p className={`year ${year === chosenYear ? "active" : ""}`}>{year}</p>
-      </div>
-    })}
-
-  </YearSliderLayout>
+  return (
+    <YearSliderLayout ref={yearSliderRef} $color={color}>
+      {years.map((year) => {
+        return (
+          <div onClick={() => SetYear(year)} className={`year-box`}>
+            <p className={`year ${year === chosenYear ? "active" : ""}`}>
+              {year}
+            </p>
+          </div>
+        )
+      })}
+    </YearSliderLayout>
+  )
 }
 const YearSliderLayout = styled.div<{
   $color?: string

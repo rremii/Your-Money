@@ -1,12 +1,14 @@
 import { useEffect, useRef } from "react"
-import { shiftTransMenuIdsLeft, shiftTransMenuIdsRight } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import {
+  shiftTransMenuIdsLeft,
+  shiftTransMenuIdsRight,
+} from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 
 export const useSlider = () => {
   const dispatch = useAppDispatch()
 
   const ref = useRef<HTMLDivElement>(null)
-
 
   useEffect(() => {
     if (!ref || !ref.current) return
@@ -17,7 +19,6 @@ export const useSlider = () => {
 
     ref.current.scrollTo(sliderWidth / 2 - 250, 0)
   }, [ref])
-
 
   const OnScroll = () => {
     if (!ref || !ref.current) return
@@ -39,8 +40,8 @@ export const useSlider = () => {
     }
   }
 
-
   return {
-    OnScroll, sliderRef: ref
+    OnScroll,
+    sliderRef: ref,
   }
 }

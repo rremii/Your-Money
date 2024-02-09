@@ -28,36 +28,41 @@ export const SideBar = React.memo(() => {
     dispatch(closeMenu("sideBar"))
   }
 
-  return <>
-    <Overlay $isActive={isSideBar} $zIndex={5} onClick={CloseSideBar} />
-    <SideBarLayout $isSideBar={isSideBar}>
-      <SideBarHeader />
-      <SideBarSection>
-        <div className="title">Profile</div>
-        <div className="content">
-          {isLoggedIn === "success" ? <>
-              <ChangeName />
-              <ChangePassword />
-              <SignOut />
-            </> :
-            <SignIn />}
-        </div>
-      </SideBarSection>
-      <Separator />
-      <SideBarSection>
-        <div className="title">Settings</div>
-        <div className="content">
-          <ChangeLanguage />
-          <ChangeTheme />
-          <ChangeCurrency />
-          <ChangeCurrencyFormat />
-          <ChangeFirstDayWeek />
-          <ChangeFirstDayMonth />
-          <ChangeStartScreen />
-        </div>
-      </SideBarSection>
-    </SideBarLayout>
-  </>
+  return (
+    <>
+      <Overlay $isActive={isSideBar} $zIndex={5} onClick={CloseSideBar} />
+      <SideBarLayout $isSideBar={isSideBar}>
+        <SideBarHeader />
+        <SideBarSection>
+          <div className="title">Profile</div>
+          <div className="content">
+            {isLoggedIn === "success" ? (
+              <>
+                <ChangeName />
+                <ChangePassword />
+                <SignOut />
+              </>
+            ) : (
+              <SignIn />
+            )}
+          </div>
+        </SideBarSection>
+        <Separator />
+        <SideBarSection>
+          <div className="title">Settings</div>
+          <div className="content">
+            <ChangeLanguage />
+            <ChangeTheme />
+            <ChangeCurrency />
+            <ChangeCurrencyFormat />
+            <ChangeFirstDayWeek />
+            <ChangeFirstDayMonth />
+            <ChangeStartScreen />
+          </div>
+        </SideBarSection>
+      </SideBarLayout>
+    </>
+  )
 })
 const SideBarLayout = styled.div<{
   $isSideBar?: boolean
@@ -75,6 +80,4 @@ const SideBarLayout = styled.div<{
   align-items: center;
   overflow-y: auto;
   transition: left 0.5s;
-
 `
-

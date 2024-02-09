@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { CalcMathOperation, MathOperatorType } from "@entities/EditCreateTransaction/helpers/CalcMathOperation.ts"
-
+import {
+  CalcMathOperation,
+  MathOperatorType,
+} from "@entities/EditCreateTransaction/helpers/CalcMathOperation.ts"
 
 interface initialState {
   quantity: number
   numberStr1: string
   numberStr2: string
   operator: MathOperatorType
-
 }
 
 const initialState: initialState = {

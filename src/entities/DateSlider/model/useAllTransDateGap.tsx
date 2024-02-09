@@ -6,10 +6,9 @@ import { timeGap } from "@shared/helpers/TimeGap.ts"
 export const useAllTransDateGap = () => {
   const dispatch = useAppDispatch()
 
-  const dateFilter = useTypedSelector(state => state.Date.dateFilter)
-  const dateMenuIds = useTypedSelector(state => state.Date.dateMenuIds)
-  const firstDay = useTypedSelector(state => state.Date.firstDay)
-
+  const dateFilter = useTypedSelector((state) => state.Date.dateFilter)
+  const dateMenuIds = useTypedSelector((state) => state.Date.dateMenuIds)
+  const firstDay = useTypedSelector((state) => state.Date.firstDay)
 
   useEffect(() => {
     switch (dateFilter) {
@@ -24,7 +23,12 @@ export const useAllTransDateGap = () => {
         const { dateFrom } = timeGap.GetYearGap(firstMenuId)
         const { dateTo } = timeGap.GetYearGap(lastMenuId)
 
-        dispatch(setAllTransDateGap({ dateFrom: dateFrom.toUTCString(), dateTo: dateTo.toUTCString() }))
+        dispatch(
+          setAllTransDateGap({
+            dateFrom: dateFrom.toUTCString(),
+            dateTo: dateTo.toUTCString(),
+          }),
+        )
         break
       }
       case "month": {
@@ -34,7 +38,12 @@ export const useAllTransDateGap = () => {
         const { dateFrom } = timeGap.GetMonthGap(firstMenuId)
         const { dateTo } = timeGap.GetMonthGap(lastMenuId)
 
-        dispatch(setAllTransDateGap({ dateFrom: dateFrom.toUTCString(), dateTo: dateTo.toUTCString() }))
+        dispatch(
+          setAllTransDateGap({
+            dateFrom: dateFrom.toUTCString(),
+            dateTo: dateTo.toUTCString(),
+          }),
+        )
         break
       }
       case "week": {
@@ -44,7 +53,12 @@ export const useAllTransDateGap = () => {
         const { dateFrom } = timeGap.GetWeekGap(firstDay, firstMenuId)
         const { dateTo } = timeGap.GetWeekGap(firstDay, lastMenuId)
 
-        dispatch(setAllTransDateGap({ dateFrom: dateFrom.toUTCString(), dateTo: dateTo.toUTCString() }))
+        dispatch(
+          setAllTransDateGap({
+            dateFrom: dateFrom.toUTCString(),
+            dateTo: dateTo.toUTCString(),
+          }),
+        )
         break
       }
       case "day": {
@@ -57,15 +71,15 @@ export const useAllTransDateGap = () => {
         const startMonth = timeGap.GetMonthGap(0, dateFrom)
         const endMonth = timeGap.GetMonthGap(0, dateTo)
 
-        dispatch(setAllTransDateGap({
-          dateFrom: startMonth.dateFrom.toISOString(),
-          dateTo: endMonth.dateTo.toISOString()
-        }))
+        dispatch(
+          setAllTransDateGap({
+            dateFrom: startMonth.dateFrom.toISOString(),
+            dateTo: endMonth.dateTo.toISOString(),
+          }),
+        )
 
         break
       }
     }
-
-
   }, [dateFilter, dateMenuIds, firstDay])
 }

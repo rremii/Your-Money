@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { SliderMenuLayout } from "@shared/modules/IconColorPicker/ui/SliderMenuLayout.tsx"
 import { Color } from "@shared/modules/IconColorPicker/ui/ColorMenu/Color.tsx"
-import { memo, useCallback, useContext } from "react"
+import { useCallback, useContext } from "react"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
 import { setPickerCurColor } from "@shared/modules/IconColorPicker/model/Actions.ts"
 

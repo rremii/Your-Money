@@ -1,8 +1,14 @@
 import { useEffect } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { setCurAccount, setCurAccountId } from "@entities/Account/model/CurAccountSlice.ts"
+import {
+  setCurAccount,
+  setCurAccountId,
+} from "@entities/Account/model/CurAccountSlice.ts"
 import { useGetAccountsQuery } from "@entities/Account/api/AccountsApi.ts"
-import { setAllAccountBalance, setAllAccountCurrency } from "@entities/Account/model/AllAccountSlice.ts"
+import {
+  setAllAccountBalance,
+  setAllAccountCurrency,
+} from "@entities/Account/model/AllAccountSlice.ts"
 import { IAccount } from "@entities/Account/types.ts"
 import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConverter.ts"
 

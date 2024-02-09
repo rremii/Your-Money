@@ -9,5 +9,4 @@ export const SliderLayout = styled.div`
   //scroll-behavior: smooth;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-
 `

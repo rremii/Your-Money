@@ -2,7 +2,7 @@ import { TransactionType } from "@entities/Transaction/types.ts"
 
 export interface ICategory {
   id: number
-  name: string,
+  name: string
   color: string
   icon: string
   type: TransactionType

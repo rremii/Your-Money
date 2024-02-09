@@ -1,13 +1,13 @@
 import { useFetchCurrencyQuery } from "@entities/Currency/api/CurrencyApi.ts"
 
-
 export const useCurrencyConverter = () => {
-
-
   const { data } = useFetchCurrencyQuery()
 
-
-  const convertCurrency = (quantity: number, currencyFrom: string, currencyTo: string): number => {
+  const convertCurrency = (
+    quantity: number,
+    currencyFrom: string,
+    currencyTo: string,
+  ): number => {
     if (!data) return 0
     const { base, rates } = data
 
@@ -25,10 +25,7 @@ export const useCurrencyConverter = () => {
     const factor = toRate / fromRate
 
     return quantity * factor
-
-
   }
 
   return { convertCurrency }
-
 }

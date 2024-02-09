@@ -1,9 +1,7 @@
 import styled from "styled-components"
 
 export const EditCategoriesHeader = () => {
-  return <HeaderLayout>
-    Edit categories
-  </HeaderLayout>
+  return <HeaderLayout>Edit categories</HeaderLayout>
 }
 const HeaderLayout = styled.header`
   height: 65px;

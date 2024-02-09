@@ -1,10 +1,7 @@
 import styled from "styled-components"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { CurrencyNames } from "@entities/Currency/constants/CurrencyNames.ts"
-import {
-  CurrencySigns,
-  DefaultCurrencySigns,
-} from "@entities/Settings/constants/CurrencySigns.ts"
+import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 
 export const CurrencyCell = () => {

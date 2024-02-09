@@ -19,7 +19,7 @@ export default function useDebounce(fn: () => void, delay: number) {
       // @ts-ignore
       timeoutRef.current = setTimeout(() => fn(...args), delay)
     },
-    [fn, delay]
+    [fn, delay],
   )
 
   return cb

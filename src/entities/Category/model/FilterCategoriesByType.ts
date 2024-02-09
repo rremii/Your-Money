@@ -1,7 +1,6 @@
 import { ICategory } from "@entities/Category/type.ts"
 
 export const FilterCategoriesByType = (categories?: ICategory[]) => {
-
   const expCategories: ICategory[] = []
   const incCategories: ICategory[] = []
 
@@ -11,6 +10,7 @@ export const FilterCategoriesByType = (categories?: ICategory[]) => {
   })
 
   return {
-    expCategories, incCategories
+    expCategories,
+    incCategories,
   }
 }

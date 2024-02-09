@@ -8,7 +8,7 @@ import {
   setPickerIconComponentsType,
   setPickerIconsType,
   setPickerMenuTypeType,
-  setPickerTitlesType
+  setPickerTitlesType,
 } from "@shared/modules/IconColorPicker/types.ts"
 
 export const setPickerCurColor = (payload: string) => {

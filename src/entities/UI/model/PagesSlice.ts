@@ -1,12 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-
 interface initialState {
-
   categoryPage: {
     isCategoriesEditMode: boolean
   }
-
 }
 
 const initialState: initialState = {

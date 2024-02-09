@@ -20,14 +20,15 @@ export const SignUpInfoForm = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { register, formState: { errors }, handleSubmit } =
-    useForm<FormFields>({
-      resolver: yupResolver(infoFormSchema)
-    })
-
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<FormFields>({
+    resolver: yupResolver(infoFormSchema),
+  })
 
   const { SetImage, curImage: curAvatar, imgRef } = useImage()
-
 
   const OnSubmit = ({ name }: FormFields) => {
     dispatch(setUserInfo({ name, avatar: curAvatar }))
@@ -37,7 +38,12 @@ export const SignUpInfoForm = () => {
     <SignUpFormLayout>
       <AuthForm OnSubmit={handleSubmit(OnSubmit)}>
         <div className="avatar">
-          <input onChange={SetImage} accept="image/*" ref={imgRef} type="file" />
+          <input
+            onChange={SetImage}
+            accept="image/*"
+            ref={imgRef}
+            type="file"
+          />
           <img src={curAvatar || Categories} alt="" />
         </div>
         <FormField
@@ -46,21 +52,16 @@ export const SignUpInfoForm = () => {
           input={{
             type: "text",
             placeholder: "",
-            registerData: { ...register("name") }
+            registerData: { ...register("name") },
           }}
         />
-        {errors.name && (
-          <ErrorMessage>{errors.name.message}</ErrorMessage>
-        )}
+        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
         <AuthSubmitBtn>CONTINUE</AuthSubmitBtn>
       </AuthForm>
     </SignUpFormLayout>
   )
 }
 const SignUpFormLayout = styled.div`
-
-
-
   .avatar {
     align-self: center;
     width: 150px;
@@ -89,7 +90,6 @@ const SignUpFormLayout = styled.div`
     input[type="file"]::-webkit-file-upload-button {
       display: none;
     }
-
   }
 
   .AuthSubmitBtn {

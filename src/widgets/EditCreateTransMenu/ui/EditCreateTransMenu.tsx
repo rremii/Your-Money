@@ -11,10 +11,17 @@ import { ResultQuantity } from "@widgets/EditCreateTransMenu/ui/ResultQuantity.t
 import { Notes } from "@widgets/EditCreateTransMenu/ui/NotesInput.tsx"
 import { TransDate } from "@shared/ui/TransDate.tsx"
 import { OptionsSection } from "@widgets/EditCreateTransMenu/ui/OptionsSection.tsx"
-import { useCreateTransactionMutation, useEditTransactionMutation } from "@entities/Transaction/api/TransactionApi.ts"
+import {
+  useCreateTransactionMutation,
+  useEditTransactionMutation,
+} from "@entities/Transaction/api/TransactionApi.ts"
 import { resetEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { resetTransCalculator } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
-import { closeMenu, openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
+import {
+  closeMenu,
+  openMenu,
+  setEditCreateMenuType,
+} from "@entities/UI/model/ModalsSlice.ts"
 import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConverter.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { EditCreateMenuType } from "@entities/UI/types.ts"

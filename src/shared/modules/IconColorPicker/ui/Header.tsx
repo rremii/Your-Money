@@ -1,18 +1,18 @@
 import styled from "styled-components"
-import { memo, useContext } from "react"
+import { useContext } from "react"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
 
-
 export const Header = () => {
-
   const { curIcon, curColor, IconComponents } = useContext(PickerContext)
 
-  return <HeaderLayout $color={curColor}>
-    <div className="icon-box">
-      {IconComponents?.get(curIcon, { fill: "white" })}
-    </div>
-    <h1 className="title">Category icon</h1>
-  </HeaderLayout>
+  return (
+    <HeaderLayout $color={curColor}>
+      <div className="icon-box">
+        {IconComponents?.get(curIcon, { fill: "white" })}
+      </div>
+      <h1 className="title">Category icon</h1>
+    </HeaderLayout>
+  )
 }
 const HeaderLayout = styled.header<{
   $color?: string

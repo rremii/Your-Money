@@ -1,7 +1,6 @@
 import { IConvertedTransaction } from "@entities/Transaction/types.ts"
 
 export const FilterTransByType = (transactions: IConvertedTransaction[]) => {
-
   const expTransactions: IConvertedTransaction[] = []
   const incTransactions: IConvertedTransaction[] = []
 
@@ -11,6 +10,7 @@ export const FilterTransByType = (transactions: IConvertedTransaction[]) => {
   })
 
   return {
-    expTransactions, incTransactions
+    expTransactions,
+    incTransactions,
   }
 }

@@ -4,7 +4,7 @@ import {
   setCalendarColorType,
   setCalendarTypeType,
   setCurCalendarDateType,
-  updateMenuDatesType
+  updateMenuDatesType,
 } from "@shared/modules/Calendar/types.ts"
 
 

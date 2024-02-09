@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { SliderMenuLayout } from "@shared/modules/IconColorPicker/ui/SliderMenuLayout.tsx"
 import { Icon } from "@shared/modules/IconColorPicker/ui/IconMenu/Icon.tsx"
 import { IconTitle } from "@shared/modules/IconColorPicker/ui/IconMenu/IconTitle.tsx"
-import { FC, memo, useCallback, useContext } from "react"
+import { FC, useCallback, useContext } from "react"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
 import { setPickerCurIcon } from "@shared/modules/IconColorPicker/model/Actions.ts"
 

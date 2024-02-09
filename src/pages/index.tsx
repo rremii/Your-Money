@@ -17,19 +17,9 @@ import SignUpCode from "./SignUp/SignUpCode.tsx"
 import SignUpPassword from "./SignUp/SignUpPassword.tsx"
 import Layout from "../app/layout/Layout.tsx"
 import SignUpInfo from "./SignUp/SignUpInfo.tsx"
-import { usePreloader } from "@shared/hooks/usePreloader.tsx"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { useCategory } from "@entities/Category/model/useCategory.tsx"
-import { useAccount } from "@entities/Account/model/useAccount.tsx"
-import { useAccountHistoryPoints } from "@entities/AccountHistoryPoint/model/useAccountHistoryPoints.ts"
-import { GetMe } from "@entities/User/api/UserApi.ts"
 
 export const Routing = () => {
   // useChangeTheme()
-
-  const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
-
-  usePreloader(isLoggedIn)
 
   // const { data: user } = GetMe.useQueryState()
   // useCategory(user?.id)

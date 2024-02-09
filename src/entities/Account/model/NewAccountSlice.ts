@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ICategory } from "@entities/Category/type.ts"
 import { IAccount } from "@entities/Account/types.ts"
 import { Currency } from "@entities/Currency/types.ts"
 

@@ -1,4 +1,3 @@
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useToast } from "@shared/hooks/useToast.tsx"
 import { useEffect } from "react"
 import { ErrorResponse } from "@entities/Auth/types.ts"

@@ -7,10 +7,7 @@ import { StartCreatingTrans } from "@features/StartCreatingTrans/ui/StartCreatin
 import React from "react"
 import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
 
-
 const TransactionsPage = () => {
-
-
   return (
     <TransactionsLayout>
       {/*<Header*/}
@@ -37,5 +34,4 @@ const TransactionsLayout = styled.div`
   position: relative;
   font-size: 30px;
   background-color: var(--bg-2);
-
 `

@@ -1,7 +1,10 @@
 import styled from "styled-components"
 import { FC, memo } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
+import {
+  openMenu,
+  setEditCreateMenuType,
+} from "@entities/UI/model/ModalsSlice.ts"
 
 interface props {
   content?: string

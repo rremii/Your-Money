@@ -17,23 +17,23 @@ interface FormFields {
   password: string
 }
 
-
 export const SignInForm = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
 
   const [login] = useLoginMutation()
 
-
   const { register, clearErrors, setError, formState, handleSubmit, reset } =
     useForm<FormFields>({
-      resolver: yupResolver(signInSchema)
+      resolver: yupResolver(signInSchema),
     })
   const { errors } = formState
 
-
-  const { Reset: ResetTimer } = useTimer({ timeGap: 3, finalTime: 3, callback: clearErrors })
-
+  const { Reset: ResetTimer } = useTimer({
+    timeGap: 3,
+    finalTime: 3,
+    callback: clearErrors,
+  })
 
   const SetError = (message: string) => {
     reset()
@@ -41,11 +41,14 @@ export const SignInForm = () => {
     ResetTimer()
   }
   const OnSubmit = async (authData: FormFields) => {
-    await login(authData).unwrap().then((res) => {
-      localStorage.setItem("accessToken", res.accessToken)
-      dispatch(setAuthSuccess())
-      navigate("/categories")
-    }).catch(error => SetError(error.message))
+    await login(authData)
+      .unwrap()
+      .then((res) => {
+        localStorage.setItem("accessToken", res.accessToken)
+        dispatch(setAuthSuccess())
+        navigate("/categories")
+      })
+      .catch((error) => SetError(error.message))
   }
   return (
     <SignInFormLayout>
@@ -56,7 +59,7 @@ export const SignInForm = () => {
           input={{
             type: "email",
             placeholder: "abc@gmail.com",
-            registerData: { ...register("email") }
+            registerData: { ...register("email") },
           }}
         />
         <FormField
@@ -65,7 +68,7 @@ export const SignInForm = () => {
           input={{
             type: "password",
             placeholder: "1234",
-            registerData: { ...register("password") }
+            registerData: { ...register("password") },
           }}
         />
         {errors.root && <ErrorMessage>{errors.root.message}</ErrorMessage>}

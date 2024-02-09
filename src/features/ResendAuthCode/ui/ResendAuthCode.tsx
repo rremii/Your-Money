@@ -2,21 +2,32 @@ import styled from "styled-components"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useResendCode } from "@features/ResendAuthCode/model/useResendCode.tsx"
 
-
 export const ResendAuthCode = () => {
+  const email = useTypedSelector((state) => state.Auth.email)
 
-
-  const email = useTypedSelector(state => state.Auth.email)
-
-  const { ResendCode, time, isUninitialized, isLoading, resultStr, isError, isSuccess } = useResendCode()
+  const {
+    ResendCode,
+    time,
+    isUninitialized,
+    isLoading,
+    resultStr,
+    isError,
+    isSuccess,
+  } = useResendCode()
 
   const HandleClick = async () => {
     await ResendCode(email)
   }
 
-  return <AuthCodeLayout disabled={isLoading || !isUninitialized} onClick={HandleClick}>
-    {resultStr} {(isSuccess || isError) && <span>send another one in {time}s</span>}
-  </AuthCodeLayout>
+  return (
+    <AuthCodeLayout
+      disabled={isLoading || !isUninitialized}
+      onClick={HandleClick}
+    >
+      {resultStr}{" "}
+      {(isSuccess || isError) && <span>send another one in {time}s</span>}
+    </AuthCodeLayout>
+  )
 }
 const AuthCodeLayout = styled.button`
   color: var(--txt-6);

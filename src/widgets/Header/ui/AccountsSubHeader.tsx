@@ -1,21 +1,17 @@
 import styled from "styled-components"
 import React from "react"
 
-
 export const AccountsSubHeader = () => {
-
-
-  return <SubHeaderLayout>
-    <button className="cell">
-      Accounts
-    </button>
-  </SubHeaderLayout>
+  return (
+    <SubHeaderLayout>
+      <button className="cell">Accounts</button>
+    </SubHeaderLayout>
+  )
 }
 const SubHeaderLayout = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-
 
   .cell {
     width: 150px;
@@ -30,7 +26,7 @@ const SubHeaderLayout = styled.div`
     padding: 10px 0;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       left: 0;

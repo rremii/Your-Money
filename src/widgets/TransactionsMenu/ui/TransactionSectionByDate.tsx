@@ -5,8 +5,8 @@ import { IConvertedTransaction } from "@entities/Transaction/types.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 
 interface props {
-  date: Date;
-  transactions: IConvertedTransaction[];
+  date: Date
+  transactions: IConvertedTransaction[]
 }
 
 export const TransactionSectionByDate: FC<props> = React.memo(({ date, transactions }) => {

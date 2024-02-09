@@ -8,7 +8,11 @@ interface props {
 
 export const AuthSubmitBtn: FC<props> = ({ children, isLoading }) => {
   return (
-    <ButtonLayout type="submit" $isLoading={isLoading} className="AuthSubmitBtn">
+    <ButtonLayout
+      type="submit"
+      $isLoading={isLoading}
+      className="AuthSubmitBtn"
+    >
       {children}
     </ButtonLayout>
   )
@@ -20,7 +24,8 @@ const ButtonLayout = styled.button<{
 
   height: 45px;
   border-radius: 5px;
-  background: ${({ $isLoading }) => $isLoading ? "var(--bg-active-1)" : "var(--bg-4)"};
+  background: ${({ $isLoading }) =>
+    $isLoading ? "var(--bg-active-1)" : "var(--bg-4)"};
   color: var(--txt-1);
   font-family: Inter;
   font-size: 13px;

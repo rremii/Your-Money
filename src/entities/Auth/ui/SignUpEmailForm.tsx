@@ -17,36 +17,47 @@ interface FormFields {
   email: string
 }
 
-
 export const SignUpEmailForm = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { register, setFocus, formState, clearErrors, setError, handleSubmit, reset } =
-    useForm<FormFields>({
-      resolver: yupResolver(emailFormSchema),
-      values: { email: "noruto2021@gmail.com" }
-    })
+  const {
+    register,
+    setFocus,
+    formState,
+    clearErrors,
+    setError,
+    handleSubmit,
+    reset,
+  } = useForm<FormFields>({
+    resolver: yupResolver(emailFormSchema),
+    values: { email: "noruto2021@gmail.com" },
+  })
   const { errors } = formState
   useEffect(() => {
     setFocus("email")
   }, [setFocus])
 
-
-  const { Reset: ResetTimer } = useTimer({ timeGap: 3, finalTime: 3, callback: clearErrors })
+  const { Reset: ResetTimer } = useTimer({
+    timeGap: 3,
+    finalTime: 3,
+    callback: clearErrors,
+  })
 
   const [confirmEmail, { isLoading }] = useConfirmEmailMutation()
 
-
   const OnSubmit = async ({ email }: FormFields) => {
     if (isLoading) return
-    await confirmEmail(email).unwrap().then(() => {
-      dispatch(setEmail(email))
-      navigate("/sign-up/code")
-    }).catch(error => {
-      setError("email", { message: error?.message })
-      ResetTimer()
-    })
+    await confirmEmail(email)
+      .unwrap()
+      .then(() => {
+        dispatch(setEmail(email))
+        navigate("/sign-up/code")
+      })
+      .catch((error) => {
+        setError("email", { message: error?.message })
+        ResetTimer()
+      })
   }
   return (
     <SignUpFormLayout>
@@ -57,7 +68,7 @@ export const SignUpEmailForm = () => {
           input={{
             type: "email",
             placeholder: "abc@gmail.com",
-            registerData: { ...register("email") }
+            registerData: { ...register("email") },
           }}
         />
         {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}

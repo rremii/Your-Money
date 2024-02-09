@@ -1,7 +1,6 @@
 import { CalculatorBtn } from "@shared/ui/CalculatorBtn.tsx"
 import React, { FC, memo } from "react"
 
-
 interface props {
   children: React.ReactNode
   OnClick: () => void

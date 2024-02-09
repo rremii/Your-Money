@@ -4,11 +4,7 @@ import {
   CreateAccountDto,
   EditAccountDto,
 } from "@entities/Account/types.ts"
-import {
-  CreateCategoryDto,
-  EditCategoryDto,
-  ICategory,
-} from "@entities/Category/type.ts"
+import { ICategory } from "@entities/Category/type.ts"
 
 export const AccountsApi = Api.injectEndpoints({
   endpoints: (build) => ({

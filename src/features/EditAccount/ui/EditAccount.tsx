@@ -1,7 +1,5 @@
 import styled from "styled-components"
 import Categories from "@shared/assets/LightTheme/categories.png"
-import { GetMe } from "@entities/User/api/UserApi.ts"
-import { useCreateAccount } from "@entities/Account/model/useCreateAccount.tsx"
 import { useEditAccount } from "@entities/Account/model/useEditAccount.tsx"
 import { useEffect } from "react"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const CurrencyModalHeader = styled.header`
+export const SideBarModalHeader = styled.header`
   color: var(--txt-5);
   font-family: Inter;
   font-size: 17px;

@@ -10,17 +10,17 @@ export const Modal = styled.div<{
   max-width: 320px;
   width: 90%;
   left: 50%;
-  transform: ${({ $isOpen }) => $isOpen ? "scale(1)" : "scale(0.7)"} translate(-50%, -50%);
+  transform: ${({ $isOpen }) => ($isOpen ? "scale(1)" : "scale(0.7)")}
+    translate(-50%, -50%);
   transform-origin: bottom center;
   z-index: 20;
   background-color: var(--bg-1);
   border-radius: 3px;
 
-
   transition: 0.3s;
 
-  pointer-events: ${({ $isOpen }) => $isOpen ? "initial" : "none"};
-  opacity: ${({ $isOpen }) => $isOpen ? 1 : 0};
+  pointer-events: ${({ $isOpen }) => ($isOpen ? "initial" : "none")};
+  opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
 
   .title {
     color: var(--txt-5);
@@ -68,5 +68,4 @@ export const Modal = styled.div<{
       color: var(--txt-4);
     }
   }
-
 `
