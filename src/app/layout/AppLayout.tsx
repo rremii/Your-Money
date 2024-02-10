@@ -25,6 +25,9 @@ import { ChangeLanguageModal } from "@features/ChangeLanguageModal/ui/ChangeLang
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { usePreloader } from "@shared/hooks/usePreloader.tsx"
 import { useI18n } from "@shared/i18n/useI18n.tsx"
+import { ChangeThemeModal } from "@features/ChangeThemeModal/ui/ChangeThemeModal.tsx"
+import { SetStyleProperty } from "@entities/Settings/helpers/SetStyleProperty.tsx"
+import { useTheme } from "@entities/Settings/hooks/useTheme.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -33,11 +36,14 @@ interface Props {
 const AppLayout: FC<Props> = ({ children }) => {
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
   const language = useTypedSelector((state) => state.Settings.language)
+  const theme = useTypedSelector((state) => state.Settings.theme)
 
+  //todo check if i need that
   const { data: user } = GetMe.useQueryState()
   useAccount(user?.id)
   useAllTransDateGap()
 
+  useTheme(theme)
   useI18n(language)
   usePreloader(isLoggedIn)
   return (
@@ -63,6 +69,7 @@ const AppLayout: FC<Props> = ({ children }) => {
 
       <DefaultCurrencyModal />
       <ChangeLanguageModal />
+      <ChangeThemeModal />
       <SignOutMenu />
       <PasswordMenu />
       <NameMenu />

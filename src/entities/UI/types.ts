@@ -23,3 +23,4 @@ export type Menus =
   | "editCreateAccountMenu"
   | "accountIconPickerMenu"
   | "languageMenu"
+  | "themeMenu"

@@ -69,6 +69,9 @@ interface initialState {
   languageMenu: {
     isOpen: boolean
   }
+  themeMenu: {
+    isOpen: boolean
+  }
 }
 
 const initialState: initialState = {
@@ -131,6 +134,9 @@ const initialState: initialState = {
     isOpen: false,
   },
   languageMenu: {
+    isOpen: false,
+  },
+  themeMenu: {
     isOpen: false,
   },
 }

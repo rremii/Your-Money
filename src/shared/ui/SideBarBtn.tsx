@@ -8,17 +8,16 @@ interface props {
   subTitle?: string
 }
 
-
 export const SideBarBtn: FC<props> = ({ onClick, title, subTitle, icon }) => {
-
-
-  return <BtnLayout onClick={onClick} className="SideBarBtn cell">
-    <img src={icon} alt="icon" />
-    <div className="text-info">
-      <h3>{title}</h3>
-      {subTitle && <h4>{subTitle}</h4>}
-    </div>
-  </BtnLayout>
+  return (
+    <BtnLayout onClick={onClick} className="SideBarBtn cell">
+      <img src={icon} alt="icon" />
+      <div className="text-info">
+        <h3>{title}</h3>
+        {subTitle && <h4>{subTitle}</h4>}
+      </div>
+    </BtnLayout>
+  )
 }
 const BtnLayout = styled.button`
   cursor: pointer;
@@ -53,6 +52,7 @@ const BtnLayout = styled.button`
     }
 
     h4 {
+      text-transform: capitalize;
       color: var(--txt-4);
       text-align: left;
       font-family: Inter;
