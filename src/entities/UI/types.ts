@@ -24,3 +24,4 @@ export type Menus =
   | "accountIconPickerMenu"
   | "languageMenu"
   | "themeMenu"
+  | "currencyFormatMenu"

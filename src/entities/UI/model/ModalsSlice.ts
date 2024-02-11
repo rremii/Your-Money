@@ -72,6 +72,9 @@ interface initialState {
   themeMenu: {
     isOpen: boolean
   }
+  currencyFormatMenu: {
+    isOpen: boolean
+  }
 }
 
 const initialState: initialState = {
@@ -137,6 +140,9 @@ const initialState: initialState = {
     isOpen: false,
   },
   themeMenu: {
+    isOpen: false,
+  },
+  currencyFormatMenu: {
     isOpen: false,
   },
 }

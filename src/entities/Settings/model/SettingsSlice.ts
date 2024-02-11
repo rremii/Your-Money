@@ -4,11 +4,14 @@ import { Currency } from "@entities/Currency/types.ts"
 
 export type themeType = "light" | "dark"
 
+extends type currencyFormat = '1'
+
 interface initialState {
   curCurrency: Currency
   curCurrencySign: string
   language: string
   theme: themeType
+  currencyFormat:currencyFormat
 }
 
 const initialState: initialState = {
@@ -18,6 +21,7 @@ const initialState: initialState = {
     Currency.DefaultCurrency,
   language: window.localStorage.getItem("language") || "en",
   theme: (window.localStorage.getItem("theme") as themeType) || "light",
+  currencyFormat:'1'
 }
 
 const SettingsSlice = createSlice({
@@ -36,9 +40,12 @@ const SettingsSlice = createSlice({
     setTheme(state, action: PayloadAction<themeType>) {
       state.theme = action.payload
     },
+    setCurrencyFormat(state,action:PayloadAction<currencyFormat>){
+      state.currencyFormat = action.payload
+    }
   },
 })
 
 export const SettingsReducer = SettingsSlice.reducer
-export const { setCurCurrency, setCurCurrencySign, setLanguage, setTheme } =
+export const { setCurCurrency, setCurCurrencySign, setLanguage, setTheme,setCurrencyFormat } =
   SettingsSlice.actions
