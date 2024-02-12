@@ -2,18 +2,34 @@ import React, { FC } from "react"
 import styled from "styled-components"
 import { RadioBtn } from "@shared/ui/RadioBtn.tsx"
 import { FullNameLanguages } from "@entities/Settings/constants/FullNameLanguages.ts"
+import { CurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
+import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 
 interface props {
   format: string
+  currencySign: string
   isActive: boolean
   OnClick?: () => void
 }
 
-export const FormatCell: FC<props> = ({ format, isActive, OnClick }) => {
+export const FormatCell: FC<props> = ({
+  format,
+  isActive,
+  OnClick,
+  currencySign,
+}) => {
+  const exampleNumber = -12554254.2
   return (
     <FormatCellLayout onClick={OnClick}>
       <RadioBtn $isActive={isActive} />
-      <p className="format">{format}</p>
+      <p className="format">
+        {FormatCurrencyString({
+          formatString: format,
+          quantity: exampleNumber,
+          currencySign,
+          sign: "-",
+        })}
+      </p>
     </FormatCellLayout>
   )
 }

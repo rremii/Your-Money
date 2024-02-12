@@ -28,6 +28,7 @@ import { useI18n } from "@shared/i18n/useI18n.tsx"
 import { ChangeThemeModal } from "@features/ChangeThemeModal/ui/ChangeThemeModal.tsx"
 import { SetStyleProperty } from "@entities/Settings/helpers/SetStyleProperty.tsx"
 import { useTheme } from "@entities/Settings/hooks/useTheme.tsx"
+import { ChangeCurrencyFormatModal } from "@features/ChangeCurrencyFormatModal/ui/ChangeCurrencyFormatModal.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -73,6 +74,7 @@ const AppLayout: FC<Props> = ({ children }) => {
       <SignOutMenu />
       <PasswordMenu />
       <NameMenu />
+      <ChangeCurrencyFormatModal />
     </LayoutStyles>
   )
 }

@@ -5,21 +5,22 @@ import React, { memo } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { SideBarModalHeader } from "@shared/ui/SideBarModalHeader.tsx"
-import { LanguageCell } from "@features/ChangeLanguageModal/ui/LanguageCell.tsx"
-import { Languages } from "@features/ChangeLanguageModal/constants/Languages.ts"
-import {
-  setCurrencyFormat,
-  setLanguage,
-} from "@entities/Settings/model/SettingsSlice.ts"
+import { setCurrencyFormat } from "@entities/Settings/model/SettingsSlice.ts"
 import { FormatCell } from "@features/ChangeCurrencyFormatModal/ui/FormatCell.tsx"
+import { CurrencyFormats } from "@features/ChangeCurrencyFormatModal/constants/CurrencyFormats.ts"
 
 export const ChangeCurrencyFormatModal = memo(() => {
   const dispatch = useAppDispatch()
 
   const isOpen = useTypedSelector(
-    (state) => state.UI.Modals.languageMenu.isOpen,
+    (state) => state.UI.Modals.currencyFormatMenu.isOpen,
   )
-  const curLanguage = useTypedSelector((state) => state.Settings.language)
+  const currencyFormat = useTypedSelector(
+    (state) => state.Settings.currencyFormat,
+  )
+  const currencySign = useTypedSelector(
+    (state) => state.Settings.curCurrencySign,
+  )
 
   const SetCurrencyFormat = (format: string) => {
     window.localStorage.setItem("currencyFormat", format)
@@ -27,7 +28,6 @@ export const ChangeCurrencyFormatModal = memo(() => {
     CloseModal()
   }
 
-  //todo add format
   const CloseModal = () => {
     dispatch(closeMenu("currencyFormatMenu"))
   }
@@ -36,13 +36,14 @@ export const ChangeCurrencyFormatModal = memo(() => {
     <>
       <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
       <CurrencyFormatLayout $isOpen={isOpen}>
-        <SideBarModalHeader>Language</SideBarModalHeader>
+        <SideBarModalHeader>Currency format</SideBarModalHeader>
         <div className="format-box">
-          {Languages.map((language, index) => (
+          {CurrencyFormats.map((format, index) => (
             <FormatCell
-              OnClick={() => SetCurrencyFormat(language)}
-              format={language}
-              isActive={curLanguage === language}
+              currencySign={currencySign}
+              OnClick={() => SetCurrencyFormat(format)}
+              format={format}
+              isActive={currencyFormat === format}
               key={index}
             />
           ))}

@@ -3,10 +3,9 @@ export const RoundDecimal = (number?: number, length: number = 1) => {
   const numberStr = number.toString()
   if (!numberStr.includes(".")) return number
 
-  const integerPart = numberStr.split(".")[0]
-  const decimalPart = numberStr.split(".")[1]
+  const [integerPart, fractionalPart] = numberStr.split(".")
 
-  const roundedDecimal = Math.round(+decimalPart.slice(0, length))
+  const roundedDecimal = Math.round(+fractionalPart.slice(0, length))
 
   return Number(integerPart + "." + roundedDecimal)
 }
