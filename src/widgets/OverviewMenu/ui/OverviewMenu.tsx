@@ -16,17 +16,26 @@ import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 
-
 interface props extends ITransByMenu {
   extInfo: IExtraInfo[]
 }
 
-export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGap, extInfo, menuId }) => {
-
-  const dateFilter = useTypedSelector(state => state.Date.dateFilter)
-  const firstDay = useTypedSelector(state => state.Date.firstDay)
-  const currencySign = useTypedSelector(state => state.Settings.curCurrencySign)
-
+export const OverviewMenu: FC<props> = ({
+  transactions,
+  dateFrom,
+  dateTo,
+  dateGap,
+  extInfo,
+  menuId,
+}) => {
+  const dateFilter = useTypedSelector((state) => state.Date.dateFilter)
+  const firstDay = useTypedSelector((state) => state.Date.firstDay)
+  const currencySign = useTypedSelector(
+    (state) => state.Settings.curCurrencySign,
+  )
+  const currencyFormat = useTypedSelector(
+    (state) => state.Settings.currencyFormat,
+  )
 
   const { observeRef } = useOnMenuSlide(dateGap, menuId, dateFrom)
 
@@ -34,39 +43,69 @@ export const OverviewMenu: FC<props> = ({ transactions, dateFrom, dateTo, dateGa
   const { allCategories } = useCategory(user?.id)
 
   const { expCategories } = FilterCategoriesByType(allCategories)
-  const { expTransactions, incTransactions } = useMemo(() => FilterTransByType(transactions), [transactions])
+  const { expTransactions, incTransactions } = useMemo(
+    () => FilterTransByType(transactions),
+    [transactions],
+  )
 
-  const filledCategories = FillCategoriesWithTransactions(expCategories, expTransactions)
+  const filledCategories = FillCategoriesWithTransactions(
+    expCategories,
+    expTransactions,
+  )
 
   const expTransQuantity = SumAllTransactions(expTransactions)
   const incTransQuantity = SumAllTransactions(incTransactions)
 
-  const barConfig = useMemo(() => GetBarConfig({
-    categories: expCategories,
-    transactions: expTransactions,
-    dateFrom,
-    dateTo,
-    filter: dateFilter,
-    firstDay
-  }), [dateFilter, dateFrom, dateTo, expTransactions, firstDay])
+  const barConfig = useMemo(
+    () =>
+      GetBarConfig({
+        categories: expCategories,
+        transactions: expTransactions,
+        dateFrom,
+        dateTo,
+        filter: dateFilter,
+        firstDay,
+      }),
+    [dateFilter, dateFrom, dateTo, expTransactions, firstDay],
+  )
 
-  return <MenuLayout ref={observeRef}>
-    <BalanceBox expense={expTransQuantity} income={incTransQuantity} />
-    <OverviewGraph {...barConfig} />
-    <div className="date-money-box">
-      {extInfo.map((extData, index) => (
-        <DateMoneyCell currencySign={currencySign} key={index} {...extData} />
-      ))}
-    </div>
-    <div className="categories-box">
-      {filledCategories
-        .sort((prev, cur) => prev.quantity < cur.quantity ? 1 : -1)
-        .map(({ name, quantity, color, icon }, index) => (
-          <CategoryCell icon={icon} key={index} currency={"Br"} color={color} name={name} quantity={quantity || 0}
-                        percent={Math.abs(quantity / expTransQuantity) || 0} />
+  return (
+    <MenuLayout ref={observeRef}>
+      <BalanceBox
+        currencySign={currencySign}
+        formatStr={currencyFormat}
+        expense={expTransQuantity}
+        income={incTransQuantity}
+      />
+      <OverviewGraph {...barConfig} />
+      <div className="date-money-box">
+        {extInfo.map((extData, index) => (
+          <DateMoneyCell
+            formatStr={currencyFormat}
+            currencySign={currencySign}
+            key={index}
+            {...extData}
+          />
         ))}
-    </div>
-  </MenuLayout>
+      </div>
+      <div className="categories-box">
+        {filledCategories
+          .sort((prev, cur) => (prev.quantity < cur.quantity ? 1 : -1))
+          .map(({ name, quantity, color, icon }, index) => (
+            <CategoryCell
+              icon={icon}
+              key={index}
+              currencySign={currencySign}
+              formatStr={currencyFormat}
+              color={color}
+              name={name}
+              quantity={quantity || 0}
+              percent={Math.abs(quantity / expTransQuantity) || 0}
+            />
+          ))}
+      </div>
+    </MenuLayout>
+  )
 }
 const MenuLayout = styled.div`
   scroll-snap-stop: always;
@@ -93,9 +132,4 @@ const MenuLayout = styled.div`
     //grid-template-columns: 1fr 1fr 1fr;
     //grid-template-rows: 1fr;
   }
-
-
-
-
-
 `

@@ -1,31 +1,43 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
+import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 
 interface props {
   name: string
   quantity: number
   percent: number
   color: string
-  currency: string
+  currencySign: string
+  formatStr: string
   icon: string
 }
 
-
-export const CategoryCell: FC<props> = React.memo(({ currency, icon, percent, quantity, name, color }) => {
-  return <CellLayout $color={color} $percent={percent * 100}>
-    <CustomIcon boxSize="35px" icon={icon} boxColor={color} />
-    <div className="text-info">
-      <h2 className="name">{name}</h2>
-      <p className="quantity">{currency} {quantity}</p>
-    </div>
-    <div className="percent-bar">
-      <div className="bar" />
-      <div className="filled-bar" />
-      <div className="percent">{Math.round(percent * 100)}%</div>
-    </div>
-  </CellLayout>
-})
+export const CategoryCell: FC<props> = React.memo(
+  ({ icon, percent, quantity, name, color, currencySign, formatStr }) => {
+    return (
+      <CellLayout $color={color} $percent={percent * 100}>
+        <CustomIcon boxSize="35px" icon={icon} boxColor={color} />
+        <div className="text-info">
+          <h2 className="name">{name}</h2>
+          <p className="quantity">
+            {FormatCurrencyString({
+              currencySign,
+              quantity: quantity,
+              formatString: formatStr,
+              sign: quantity < 0 ? "-" : "",
+            })}
+          </p>
+        </div>
+        <div className="percent-bar">
+          <div className="bar" />
+          <div className="filled-bar" />
+          <div className="percent">{Math.round(percent * 100)}%</div>
+        </div>
+      </CellLayout>
+    )
+  },
+)
 const CellLayout = styled.div<{
   $color?: string
   $percent?: number
@@ -94,7 +106,8 @@ const CellLayout = styled.div<{
       z-index: 1;
       padding: 0 7px;
       background-color: var(--bg-1);
-      color: ${({ $percent, $color }) => $percent === 0 ? "var(--txt-12)" : $color};
+      color: ${({ $percent, $color }) =>
+        $percent === 0 ? "var(--txt-12)" : $color};
       font-family: Inter;
       font-size: 12px;
       font-style: normal;

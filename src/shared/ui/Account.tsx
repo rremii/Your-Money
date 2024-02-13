@@ -6,6 +6,7 @@ import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 interface props {
   iconNode: ReactNode
   name: string
+  formattedStr: string
   balance: number
   currencySign?: string
   OnClick?: () => void
@@ -15,12 +16,12 @@ interface props {
 
 export const Account: FC<props> = ({
   name,
+  formattedStr,
   balance,
   iconNode,
   OnClick,
   bgColor,
   color,
-  currencySign,
 }) => {
   const getBalanceStyleClass = (): string => {
     if (balance < 0) return "neg-balance"
@@ -38,13 +39,7 @@ export const Account: FC<props> = ({
       {iconNode}
       <div className="accounts-info">
         <p className="name">{name}</p>
-        <p className={`balance ${getBalanceStyleClass()}`}>
-          <span>
-            {balance < 0 ? "-" : ""}
-            {currencySign || "$"}
-          </span>
-          {Math.abs(RoundDecimal(balance, 2))}
-        </p>
+        <p className={`balance ${getBalanceStyleClass()}`}>{formattedStr}</p>
       </div>
     </AccountLayout>
   )
@@ -111,15 +106,6 @@ const AccountLayout = styled.div<{
       font-style: normal;
       font-weight: 500;
       line-height: normal;
-
-      span {
-        font-family: Inter;
-        font-size: 15px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        margin-right: 3px;
-      }
     }
   }
 `

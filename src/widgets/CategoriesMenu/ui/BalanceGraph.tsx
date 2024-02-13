@@ -8,6 +8,8 @@ import {
 } from "@entities/Transaction/types.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 export interface ICategoryData {
   name: string
@@ -23,32 +25,56 @@ interface props {
   OnClick?: () => void
 }
 
-export const BalanceGraph: FC<props> = React.memo(({
-                                                     categories,
-                                                     incTransactions,
-                                                     expTransactions,
-                                                     menuType,
-                                                     OnClick
-                                                   }) => {
-  const incTransactionsSum = SumAllTransactions(incTransactions)
-  const expTransactionsSum = SumAllTransactions(expTransactions)
+export const BalanceGraph: FC<props> = React.memo(
+  ({ categories, incTransactions, expTransactions, menuType, OnClick }) => {
+    const curCurrencySign = useTypedSelector(
+      (state) => state.Settings.curCurrencySign,
+    )
+    const currencyFormat = useTypedSelector(
+      (state) => state.Settings.currencyFormat,
+    )
 
-  const doughnutConfig = GetDoughnutConfig(categories)
+    const incTransactionsSum = SumAllTransactions(incTransactions)
+    const expTransactionsSum = SumAllTransactions(expTransactions)
 
-  return <GraphLayout onClick={OnClick}>
-    <Doughnut {...doughnutConfig} />
-    <div className="balance">
-      <div className="type">{menuType === "expense" ? "Expense" : "Income"}</div>
-      <div
-        className={`${menuType === "expense" ? "current" : ""} quantity expenses`}>
-        Br <span>{RoundDecimal(expTransactionsSum, 2)}</span>
-      </div>
-      <div className={`${menuType === "income" ? "current" : ""} quantity income`}>
-        Br <span>{RoundDecimal(incTransactionsSum)}</span>
-      </div>
-    </div>
-  </GraphLayout>
-})
+    const doughnutConfig = GetDoughnutConfig(categories)
+
+    return (
+      <GraphLayout onClick={OnClick}>
+        <Doughnut {...doughnutConfig} />
+        <div className="balance">
+          <div className="type">
+            {menuType === "expense" ? "Expense" : "Income"}
+          </div>
+          <div
+            className={`${
+              menuType === "expense" ? "current" : ""
+            } quantity expenses`}
+          >
+            {FormatCurrencyString({
+              currencySign: curCurrencySign,
+              quantity: expTransactionsSum,
+              formatString: currencyFormat,
+              sign: expTransactionsSum < 0 ? "-" : "",
+            })}
+          </div>
+          <div
+            className={`${
+              menuType === "income" ? "current" : ""
+            } quantity income`}
+          >
+            {FormatCurrencyString({
+              currencySign: curCurrencySign,
+              quantity: incTransactionsSum,
+              formatString: currencyFormat,
+              sign: incTransactionsSum < 0 ? "-" : "",
+            })}
+          </div>
+        </div>
+      </GraphLayout>
+    )
+  },
+)
 const GraphLayout = styled.div`
   position: relative;
   grid-row: 2/4;
@@ -83,10 +109,7 @@ const GraphLayout = styled.div`
     }
 
     .quantity {
-      display: flex;
-      align-items: center;
-      gap: 3px;
-
+      width: max-content;
       position: absolute;
       left: 50%;
       top: 50%;
@@ -98,21 +121,12 @@ const GraphLayout = styled.div`
       line-height: normal;
 
       font-size: 13px;
-
-      span {
-        font-size: 16px;
-      }
     }
 
     .current {
       font-size: 16px;
       transform: translateX(-50%) translateY(-50%);
-
-      span {
-        font-size: 19px;
-      }
     }
-
 
     .income {
       color: var(--txt-9);
@@ -122,5 +136,4 @@ const GraphLayout = styled.div`
       color: var(--txt-8);
     }
   }
-
 `

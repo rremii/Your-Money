@@ -8,29 +8,31 @@ import { CurrencyCell } from "@widgets/EditCreateAccountMenu/ui/CurrencyCell.tsx
 import { BalanceCell } from "@widgets/EditCreateAccountMenu/ui/BalanceCell.tsx"
 
 export const EditCreateAccountMenu = () => {
+  const isMenuOpen = useTypedSelector(
+    (state) => state.UI.Modals.editCreateAccountMenu.isOpen,
+  )
+  const menuType = useTypedSelector(
+    (state) => state.UI.Modals.editCreateAccountMenu.menuType,
+  )
+  const color = useTypedSelector((state) => state.NewAccount.color)
 
-  const isMenuOpen = useTypedSelector(state => state.UI.Modals.editCreateAccountMenu.isOpen)
-  const menuType = useTypedSelector(state => state.UI.Modals.editCreateAccountMenu.menuType)
-  const color = useTypedSelector(state => state.NewAccount.color)
+  return (
+    <EditCreateAccountLayout $isMenuOpen={isMenuOpen} $color={color}>
+      <div className="colorfull-box">
+        <EditAccountHeader />
+        <NameInput />
+        <CreateAccountIcon />
+      </div>
 
+      <header className="section-header">Account</header>
+      <CurrencyCell />
 
-  return <EditCreateAccountLayout $isMenuOpen={isMenuOpen} $color={color}>
-    <div className="colorfull-box">
-      <EditAccountHeader />
-      <NameInput />
-      <CreateAccountIcon />
-    </div>
+      <header className="section-header">Balance</header>
+      <BalanceCell />
 
-    <header className="section-header">Account</header>
-    <CurrencyCell />
-
-    <header className="section-header">Balance</header>
-    <BalanceCell />
-
-    {menuType === "edit" && (
-      <DeleteAccount />
-    )}
-  </EditCreateAccountLayout>
+      {menuType === "edit" && <DeleteAccount />}
+    </EditCreateAccountLayout>
+  )
 }
 const EditCreateAccountLayout = styled.div<{
   $isMenuOpen?: boolean
@@ -43,9 +45,10 @@ const EditCreateAccountLayout = styled.div<{
   max-width: 450px;
   top: 0;
   left: 0;
-  transition: transform .5s;
-  pointer-events: ${({ $isMenuOpen }) => $isMenuOpen ? "initial" : "none"};
-  transform: ${({ $isMenuOpen }) => $isMenuOpen ? "translateX(0)" : "translateX(100%)"};
+  transition: transform 0.5s;
+  pointer-events: ${({ $isMenuOpen }) => ($isMenuOpen ? "initial" : "none")};
+  transform: ${({ $isMenuOpen }) =>
+    $isMenuOpen ? "translateX(0)" : "translateX(100%)"};
   background-color: var(--bg-2);
 
   .section-header {
@@ -59,7 +62,7 @@ const EditCreateAccountLayout = styled.div<{
   }
 
   .colorfull-box {
-    background-color: ${({ $color }) => $color ? $color : "#0BAD7B"};
+    background-color: ${({ $color }) => ($color ? $color : "#0BAD7B")};
     color: var(--txt-1);
     height: 130px;
     //margin-bottom: 20px;

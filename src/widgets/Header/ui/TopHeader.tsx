@@ -2,29 +2,38 @@ import styled from "styled-components"
 import React, { FC } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 
 interface props {
   right: React.ReactNode
 }
 
 export const TopHeader: FC<props> = ({ right }) => {
+  const balance = useTypedSelector((state) => state.CurAccount.balance)
 
+  const currencyFormat = useTypedSelector(
+    (state) => state.Settings.currencyFormat,
+  )
+  const currencySign = useTypedSelector(
+    (state) => state.Settings.curCurrencySign,
+  )
 
-  const balance = useTypedSelector(state => state.CurAccount.balance)
-  const curCurrencySign = useTypedSelector(state => state.Settings.curCurrencySign)
-
-
-  // const headerEl = document.getElementById("header")
-
-  // console.log(headerEl)
-  return <TopHeaderLayout>
-    {/*{headerEl && createPortal(<Burger />, headerEl)}*/}
-    <div className="info center">
-      <p>All accounts</p>
-      <p>{balance < 0 ? "-" : ""} {curCurrencySign} {Math.abs(RoundDecimal(balance, 2))}</p>
-    </div>
-    <div className="right">{right}</div>
-  </TopHeaderLayout>
+  return (
+    <TopHeaderLayout>
+      <div className="info center">
+        <p>All accounts</p>
+        <p>
+          {FormatCurrencyString({
+            currencySign,
+            quantity: balance,
+            formatString: currencyFormat,
+            sign: balance < 0 ? "-" : "",
+          })}
+        </p>
+      </div>
+      <div className="right">{right}</div>
+    </TopHeaderLayout>
+  )
 }
 const TopHeaderLayout = styled.div`
   padding: 0 17px;
@@ -67,5 +76,4 @@ const TopHeaderLayout = styled.div`
     width: 100%;
     height: 100%;
   }
-
 `

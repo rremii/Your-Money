@@ -3,30 +3,45 @@ import React, { FC } from "react"
 import { TransformDate } from "@widgets/TransactionsMenu/model/TransformDate.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 
 interface props {
   date: Date
   dateBalance: number
+  currencySign: string
+  formatStr: string
 }
 
-
-export const DateBox: FC<props> = ({ date: curDate, dateBalance }) => {
-
-  const curCurrencySign = useTypedSelector(state => state.Settings.curCurrencySign)
-
+export const DateBox: FC<props> = ({
+  date: curDate,
+  dateBalance,
+  formatStr,
+  currencySign,
+}) => {
   const { isToday, month, year, date, day } = TransformDate(curDate)
 
-
-  return <DateBoxLayout $balance={dateBalance} $isToday={isToday}>
-    <p className="date">{date.toUpperCase()}</p>
-    <div className="other-info">
-      <p className="day">{day.toUpperCase()}</p>
-      <p className="month-year">{month && month.toUpperCase()} {year}</p>
-    </div>
-    <div className="quantity">
-      {dateBalance < 0 ? "-" : "+"}{curCurrencySign} {RoundDecimal(Math.abs(dateBalance))}
-    </div>
-  </DateBoxLayout>
+  let balanceSign: "" | "+" | "-" = ""
+  if (dateBalance > 0) balanceSign = "+"
+  if (dateBalance < 0) balanceSign = "-"
+  return (
+    <DateBoxLayout $balance={dateBalance} $isToday={isToday}>
+      <p className="date">{date.toUpperCase()}</p>
+      <div className="other-info">
+        <p className="day">{day.toUpperCase()}</p>
+        <p className="month-year">
+          {month && month.toUpperCase()} {year}
+        </p>
+      </div>
+      <div className="quantity">
+        {FormatCurrencyString({
+          currencySign,
+          quantity: dateBalance,
+          formatString: formatStr,
+          sign: balanceSign,
+        })}
+      </div>
+    </DateBoxLayout>
+  )
 }
 const DateBoxLayout = styled.div<{
   $isToday?: boolean
@@ -42,7 +57,7 @@ const DateBoxLayout = styled.div<{
   //background-color: white !important;
 
   .date {
-    color: ${({ $isToday }) => $isToday ? "var(--txt-3)" : "var(--txt-6)"};
+    color: ${({ $isToday }) => ($isToday ? "var(--txt-3)" : "var(--txt-6)")};
     text-align: center;
     font-family: Inter;
     font-size: 23px;
@@ -58,7 +73,7 @@ const DateBoxLayout = styled.div<{
     flex: 1 1 auto;
 
     .day {
-      color: ${({ $isToday }) => $isToday ? "var(--txt-4)" : "var(--txt-12)"};
+      color: ${({ $isToday }) => ($isToday ? "var(--txt-4)" : "var(--txt-12)")};
       font-family: Inter;
       font-size: 10px;
       font-style: normal;
@@ -67,7 +82,7 @@ const DateBoxLayout = styled.div<{
     }
 
     .month-year {
-      color: ${({ $isToday }) => $isToday ? "var(--txt-3)" : "var(--txt-6)"};
+      color: ${({ $isToday }) => ($isToday ? "var(--txt-3)" : "var(--txt-6)")};
       font-family: Inter;
       font-size: 11px;
       font-style: normal;
@@ -77,7 +92,8 @@ const DateBoxLayout = styled.div<{
   }
 
   .quantity {
-    color: ${({ $balance }) => $balance && $balance < 0 ? "var(--txt-8)" : "var(--txt-10)"};
+    color: ${({ $balance }) =>
+      $balance && $balance < 0 ? "var(--txt-8)" : "var(--txt-10)"};
     text-align: center;
     font-family: Inter;
     font-size: 15px;
@@ -85,6 +101,4 @@ const DateBoxLayout = styled.div<{
     font-weight: 500;
     line-height: normal;
   }
-
-
 `

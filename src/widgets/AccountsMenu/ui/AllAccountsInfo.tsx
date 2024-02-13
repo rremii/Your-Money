@@ -1,27 +1,40 @@
 import styled from "styled-components"
 import { FC } from "react"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 interface props {
-  currencySign: string
   allBalance: number
+  currencyFormat: string
+  currencySign: string
 }
 
-
-export const AllAccountsInfo: FC<props> = ({ currencySign, allBalance }) => {
-
-
+export const AllAccountsInfo: FC<props> = ({
+  allBalance,
+  currencySign,
+  currencyFormat,
+}) => {
   const getBalanceStyleClass = (): string => {
     if (allBalance < 0) return "neg-balance"
     if (allBalance > 0) return "pos-balance"
     return ""
   }
-  return <AccountsInfoLayout>
-    <div className="accounts-top-info">
-      <h2 className="title">ACCOUNTS</h2>
-      <p className={`balance ${getBalanceStyleClass()}`}><span>{currencySign}</span> {RoundDecimal(allBalance, 2)}</p>
-    </div>
-  </AccountsInfoLayout>
+  return (
+    <AccountsInfoLayout>
+      <div className="accounts-top-info">
+        <h2 className="title">ACCOUNTS</h2>
+        <p className={`balance ${getBalanceStyleClass()}`}>
+          {FormatCurrencyString({
+            formatString: currencyFormat,
+            currencySign,
+            sign: "",
+            quantity: allBalance,
+          })}
+        </p>
+      </div>
+    </AccountsInfoLayout>
+  )
 }
 const AccountsInfoLayout = styled.div`
   .accounts-top-info {
@@ -64,6 +77,5 @@ const AccountsInfoLayout = styled.div`
         font-size: 14px;
       }
     }
-
   }
 `

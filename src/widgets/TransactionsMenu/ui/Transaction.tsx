@@ -5,7 +5,7 @@ import {
   IConvertedTransaction,
   TransactionType,
 } from "@entities/Transaction/types.ts"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import {
   setEditCurrency,
   setEditTransaction,
@@ -23,15 +23,17 @@ import {
 } from "@entities/UI/model/ModalsSlice.ts"
 import { Currency } from "@entities/Currency/types.ts"
 import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
+import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 
 type props = IConvertedTransaction
 
 export const Transaction: FC<props> = (transaction) => {
-  const { quantity, type, title, accountId, categoryId, convertedQuantity, id, date } = transaction
+  const { quantity, type, title, accountId, categoryId, id, date } = transaction
   const dispatch = useAppDispatch()
 
-  // const curCurrencySign = useTypedSelector(state => state.SideBar.curCurrencySign)
-
+  const currencyFormat = useTypedSelector(
+    (state) => state.Settings.currencyFormat,
+  )
 
   const { data: user } = GetMe.useQueryState()
   const { getAccountById } = useAccount(user?.id)
@@ -39,18 +41,18 @@ export const Transaction: FC<props> = (transaction) => {
   const account = getAccountById(accountId)
   const category = getCategoryById(categoryId)
 
-
   const OnClick = () => {
     dispatch(setEditCreateMenuType("overview"))
     dispatch(openMenu("editCreateTransMenu"))
 
-
-    dispatch(setEditTransaction({
-      id: id,
-      title: title,
-      dateStr: date,
-      type
-    }))
+    dispatch(
+      setEditTransaction({
+        id: id,
+        title: title,
+        dateStr: date,
+        type,
+      }),
+    )
     dispatch(setEditTransQuantity(quantity))
     dispatch(setCategory(category))
     if (account) {
@@ -59,25 +61,36 @@ export const Transaction: FC<props> = (transaction) => {
     }
   }
 
-  return <TransactionLayout onClick={OnClick} $type={type}>
-    <CustomIcon icon={category && category.icon} boxColor={category && category.color} />
-    <div className="info">
-      <p className="category">{category && category.name}</p>
-      <div className="account-info">
-        <img src={Account} alt="account type" />
-        <p>{account?.name}</p>
+  return (
+    <TransactionLayout onClick={OnClick} $type={type}>
+      <CustomIcon
+        icon={category && category.icon}
+        boxColor={category && category.color}
+      />
+      <div className="info">
+        <p className="category">{category && category.name}</p>
+        <div className="account-info">
+          <img src={Account} alt="account type" />
+          <p>{account?.name}</p>
+        </div>
+        <p className="title">{title ? title : ""}</p>
       </div>
-      <p className="title">{title ? title : ""}</p>
-    </div>
-    <div className="quantity">
-      {type === "income" ? "+" : "-"}{DefaultCurrencySigns.get(account?.currency || Currency.DefaultCurrency)} {quantity}
-    </div>
-  </TransactionLayout>
+      <div className="quantity">
+        {FormatCurrencyString({
+          currencySign: account
+            ? (DefaultCurrencySigns.get(account.currency) as string)
+            : "",
+          quantity,
+          formatString: currencyFormat,
+          sign: quantity < 0 ? "-" : "",
+        })}
+      </div>
+    </TransactionLayout>
+  )
 }
 const TransactionLayout = styled.div<{
   $type?: TransactionType
 }>`
-
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -141,14 +154,13 @@ const TransactionLayout = styled.div<{
   }
 
   .quantity {
-
     align-self: flex-start;
-    color: ${({ $type }) => $type === "expense" ? "var(--txt-8)" : "var(--txt-10)"};
+    color: ${({ $type }) =>
+      $type === "expense" ? "var(--txt-8)" : "var(--txt-10)"};
     font-family: Inter, sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
   }
-
 `

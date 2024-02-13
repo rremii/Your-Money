@@ -1,35 +1,61 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 
 interface props {
   expense: number
   income: number
+  currencySign: string
+  formatStr: string
 }
 
-export const BalanceBox: FC<props> = React.memo(({ income, expense }) => {
+export const BalanceBox: FC<props> = React.memo(
+  ({ income, expense, currencySign, formatStr }) => {
+    const balance = income + expense
 
-
-  const balance = income + expense
-
-  let balanceSign = ""
-  if (balance > 0) balanceSign = "+"
-  if (balance < 0) balanceSign = "-"
-  return <BalanceLayout $balance={balance}>
-    <div className="balance">
-      <h2>Balance</h2>
-      <p>{balanceSign}Br {Math.abs(RoundDecimal(balance, 2))}</p>
-    </div>
-    <div className="expense">
-      <h2>Expense</h2>
-      <p>{expense ? "-" : ""}Br {Math.abs(RoundDecimal(expense, 2))}</p>
-    </div>
-    <div className="income">
-      <h2>Income</h2>
-      <p>{income ? "+" : ""}Br {RoundDecimal(income, 2)}</p>
-    </div>
-  </BalanceLayout>
-})
+    let balanceSign: "" | "+" | "-" = ""
+    if (balance > 0) balanceSign = "+"
+    if (balance < 0) balanceSign = "-"
+    return (
+      <BalanceLayout $balance={balance}>
+        <div className="balance">
+          <h2>Balance</h2>
+          <p>
+            {FormatCurrencyString({
+              currencySign,
+              quantity: balance,
+              formatString: formatStr,
+              sign: balanceSign,
+            })}
+          </p>
+        </div>
+        <div className="expense">
+          <h2>Expense</h2>
+          <p>
+            {FormatCurrencyString({
+              currencySign,
+              quantity: expense,
+              formatString: formatStr,
+              sign: expense ? "-" : "",
+            })}
+          </p>
+        </div>
+        <div className="income">
+          <h2>Income</h2>
+          <p>
+            {FormatCurrencyString({
+              currencySign,
+              quantity: income,
+              formatString: formatStr,
+              sign: income ? "+" : "",
+            })}
+          </p>
+        </div>
+      </BalanceLayout>
+    )
+  },
+)
 const BalanceLayout = styled.div<{
   $balance?: number
 }>`
@@ -72,8 +98,8 @@ const BalanceLayout = styled.div<{
     }
   }
 
-
-  .expense, .income {
+  .expense,
+  .income {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,10 +127,10 @@ const BalanceLayout = styled.div<{
     height: 100%;
     background-color: var(--bg-6);
 
-    h2, p {
+    h2,
+    p {
       color: var(--txt-1);
     }
-
   }
 
   .income {
@@ -117,9 +143,7 @@ const BalanceLayout = styled.div<{
     }
 
     p {
-
       color: var(--txt-10);
     }
-
   }
 `

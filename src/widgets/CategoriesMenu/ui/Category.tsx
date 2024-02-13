@@ -14,57 +14,71 @@ import {
 } from "@entities/UI/model/ModalsSlice.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
-
+import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 
 interface props extends ICategory {
-  quantity: number,
+  quantity: number
   dateTo: Date
 }
 
 //todo make it shared
-export const Category: FC<props> = React.memo(({ color, quantity, icon, name, id, type, dateTo }) => {
-  const dispatch = useAppDispatch()
+export const Category: FC<props> = React.memo(
+  ({ color, quantity, icon, name, id, type, dateTo }) => {
+    const dispatch = useAppDispatch()
 
-  const curAccId = useTypedSelector(state => state.CurAccount.id)
-  const curCurrencySign = useTypedSelector(state => state.Settings.curCurrencySign)
+    const curAccId = useTypedSelector((state) => state.CurAccount.id)
+    const curCurrencySign = useTypedSelector(
+      (state) => state.Settings.curCurrencySign,
+    )
+    const currencyFormat = useTypedSelector(
+      (state) => state.Settings.currencyFormat,
+    )
 
+    const { data: user } = GetMe.useQueryState()
+    const { getAccountById } = useAccount(user?.id)
 
-  const { data: user } = GetMe.useQueryState()
-  const { getAccountById } = useAccount(user?.id)
+    const OnClick = () => {
+      dispatch(setEditCreateMenuType("create"))
+      dispatch(openMenu("editCreateTransMenu"))
 
-  const OnClick = () => {
+      const account = getAccountById(curAccId)
+      const category = { name, color, icon, id }
+      const date = new Date(
+        dateTo.getFullYear(),
+        dateTo.getMonth(),
+        dateTo.getDate(),
+        dateTo.getHours() - 1,
+      )
 
-    dispatch(setEditCreateMenuType("create"))
-    dispatch(openMenu("editCreateTransMenu"))
+      dispatch(
+        setEditTransaction({
+          id: null,
+          title: "",
+          dateStr: date.toUTCString(),
+          type,
+        }),
+      )
+      dispatch(setEditTransQuantity(0))
+      dispatch(setCategory(category))
+      if (account) dispatch(setAccount(account))
+    }
 
-
-    const account = getAccountById(curAccId)
-    const category = { name, color, icon, id }
-    const date = new Date(dateTo.getFullYear(), dateTo.getMonth(), dateTo.getDate(), dateTo.getHours() - 1)
-
-    dispatch(setEditTransaction({
-      id: null,
-      title: "",
-      dateStr: date.toUTCString(),
-      type
-    }))
-    dispatch(setEditTransQuantity(0))
-    dispatch(setCategory(category))
-    if (account)
-      dispatch(setAccount(account))
-
-  }
-
-  return <CategoryLayout onClick={OnClick} $color={quantity ? color : ""}>
-    <h3 className="title">
-      {name}
-    </h3>
-    <CustomIcon icon={icon} boxColor={color} />
-    <p className="quantity">
-      {curCurrencySign} {RoundDecimal(quantity, 2)}
-    </p>
-  </CategoryLayout>
-})
+    return (
+      <CategoryLayout onClick={OnClick} $color={quantity ? color : ""}>
+        <h3 className="title">{name}</h3>
+        <CustomIcon icon={icon} boxColor={color} />
+        <p className="quantity">
+          {FormatCurrencyString({
+            currencySign: curCurrencySign,
+            quantity,
+            formatString: currencyFormat,
+            sign: quantity < 0 ? "-" : "",
+          })}
+        </p>
+      </CategoryLayout>
+    )
+  },
+)
 const CategoryLayout = styled.div<{
   $color?: string
 }>`
@@ -83,14 +97,12 @@ const CategoryLayout = styled.div<{
     line-height: normal;
   }
 
-
   .quantity {
-    color: ${({ $color }) => $color ? $color : "var(--txt-2)"};
+    color: ${({ $color }) => ($color ? $color : "var(--txt-2)")};
     font-family: Inter;
     font-size: 11px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
   }
-
 `

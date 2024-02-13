@@ -12,13 +12,16 @@ const FormatQuantity = (quantity: number, template: string): string => {
   }
   switch (template) {
     case "quantity_coma":
-      resStr = intPartArr.join(",") + "." + fractionalPart
+      resStr = intPartArr.join(",")
+      if (fractionalPart) resStr += "." + fractionalPart
       break
     case "quantity_space":
-      resStr = intPartArr.join(" ") + "." + fractionalPart
+      resStr = intPartArr.join(" ")
+      if (fractionalPart) resStr += "." + fractionalPart
       break
     case "quantity_point": {
-      resStr = intPartArr.join(".") + "," + fractionalPart
+      resStr = intPartArr.join(".")
+      if (fractionalPart) resStr += "," + fractionalPart
       break
     }
   }
@@ -46,7 +49,6 @@ export const FormatCurrencyString = ({
 
   const roundedQuantity = Math.abs(RoundDecimal(quantity, 2))
   const resQuantity = FormatQuantity(roundedQuantity, quantityFormat)
-
   return resSting
     .replace("{currency}", currencySign)
     .replace("{sign}", sign)

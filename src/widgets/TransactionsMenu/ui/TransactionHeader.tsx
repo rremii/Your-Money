@@ -2,6 +2,7 @@ import styled from "styled-components"
 import React, { FC } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 
 interface props {
   startBalance: number
@@ -14,23 +15,43 @@ const GetNumberSignStyle = (num: number) => {
   return "zero"
 }
 
-export const TransactionHeader: FC<props> = React.memo(({ startBalance, endBalance }) => {
+export const TransactionHeader: FC<props> = React.memo(
+  ({ startBalance, endBalance }) => {
+    const curCurrencySign = useTypedSelector(
+      (state) => state.Settings.curCurrencySign,
+    )
+    const currencyFormat = useTypedSelector(
+      (state) => state.Settings.currencyFormat,
+    )
 
-  const curCurrencySign = useTypedSelector(state => state.Settings.curCurrencySign)
-
-  return <TransactionsHeaderLayout>
-    <div className="balance-cell">
-      <h2>Starting balance</h2>
-      <p
-        className={GetNumberSignStyle(startBalance)}>{startBalance < 0 ? "-" : ""}{curCurrencySign} {Math.abs(RoundDecimal(startBalance, 2))}</p>
-    </div>
-    <div className="balance-cell">
-      <h2>Ending balance</h2>
-      <p
-        className={GetNumberSignStyle(endBalance)}>{endBalance < 0 ? "-" : ""}{curCurrencySign} {Math.abs(RoundDecimal(endBalance, 2))}</p>
-    </div>
-  </TransactionsHeaderLayout>
-})
+    return (
+      <TransactionsHeaderLayout>
+        <div className="balance-cell">
+          <h2>Starting balance</h2>
+          <p className={GetNumberSignStyle(startBalance)}>
+            {FormatCurrencyString({
+              currencySign: curCurrencySign,
+              quantity: startBalance,
+              formatString: currencyFormat,
+              sign: startBalance < 0 ? "-" : "",
+            })}
+          </p>
+        </div>
+        <div className="balance-cell">
+          <h2>Ending balance</h2>
+          <p className={GetNumberSignStyle(endBalance)}>
+            {FormatCurrencyString({
+              currencySign: curCurrencySign,
+              quantity: endBalance,
+              formatString: currencyFormat,
+              sign: endBalance < 0 ? "-" : "",
+            })}
+          </p>
+        </div>
+      </TransactionsHeaderLayout>
+    )
+  },
+)
 const TransactionsHeaderLayout = styled.header`
   width: 100%;
   height: 55px;
@@ -46,7 +67,7 @@ const TransactionsHeaderLayout = styled.header`
   border-right: solid 1px var(--bg-5);
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 50%;
@@ -55,7 +76,6 @@ const TransactionsHeaderLayout = styled.header`
     width: 1px;
     background-color: var(--bg-5);
   }
-
 
   .zero {
     color: var(var(--txt-2));
@@ -70,7 +90,6 @@ const TransactionsHeaderLayout = styled.header`
   }
 
   .balance-cell {
-
     h2 {
       color: var(--txt-5);
       font-family: Inter;
@@ -80,7 +99,6 @@ const TransactionsHeaderLayout = styled.header`
       line-height: normal;
     }
 
-
     p {
       font-family: Inter;
       font-size: 15px;
@@ -88,7 +106,5 @@ const TransactionsHeaderLayout = styled.header`
       font-weight: 400;
       line-height: normal;
     }
-
-
   }
 `

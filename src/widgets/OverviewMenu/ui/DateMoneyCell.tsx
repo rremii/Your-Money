@@ -1,21 +1,32 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 
 interface props {
   title: string
   quantity: number
   currencySign: string
+  formatStr: string
 }
 
-export const DateMoneyCell: FC<props> = React.memo(({ quantity, title, currencySign }) => {
-
-
-  return <CellLayout>
-    <h3 className="date">{title}</h3>
-    <p className="quantity">{quantity !== 0 ? "-" : ""}{currencySign} {Math.abs(RoundDecimal(quantity, 2))}</p>
-  </CellLayout>
-})
+export const DateMoneyCell: FC<props> = React.memo(
+  ({ quantity, title, currencySign, formatStr }) => {
+    return (
+      <CellLayout>
+        <h3 className="date">{title}</h3>
+        <p className="quantity">
+          {FormatCurrencyString({
+            currencySign,
+            quantity: quantity,
+            formatString: formatStr,
+            sign: "",
+          })}
+        </p>
+      </CellLayout>
+    )
+  },
+)
 const CellLayout = styled.div`
   display: flex;
   flex: 1 1 auto;
@@ -44,5 +55,4 @@ const CellLayout = styled.div`
     font-weight: 400;
     line-height: normal;
   }
-
 `
