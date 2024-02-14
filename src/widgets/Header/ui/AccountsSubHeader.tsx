@@ -31,7 +31,7 @@ const SubHeaderLayout = styled.div`
       bottom: 0;
       left: 0;
       width: 100%;
-      background-color: var(--bg-1);
+      background-color: white;
       height: 3px;
       border-radius: 10px 10px 0px 0px;
     }

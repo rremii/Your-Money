@@ -8,18 +8,32 @@ import { MenuWithHistory } from "@widgets/TransactionsMenu/model/AddHistoryPoint
 
 type props = MenuWithHistory
 
-export const TransactionsMenu: FC<props> = ({ transactions, dateGap, dateFrom, menuId, startBalance, endBalance }) => {
-
+export const TransactionsMenu: FC<props> = ({
+  transactions,
+  dateGap,
+  dateFrom,
+  menuId,
+  startBalance,
+  endBalance,
+}) => {
   const { observeRef } = useOnMenuSlide(dateGap, menuId, dateFrom)
 
-  const transactionsMenuData = useMemo(() => GetTransactionsMenuData(transactions), [transactions])
+  const transactionsMenuData = useMemo(
+    () => GetTransactionsMenuData(transactions),
+    [transactions],
+  )
 
-  return <TransactionsLayout ref={observeRef}>
-    <TransactionHeader startBalance={startBalance} endBalance={endBalance} />
-    {transactionsMenuData.map((sectionData) => (
-      <TransactionSectionByDate key={sectionData.date.getDate()} {...sectionData} />
-    ))}
-  </TransactionsLayout>
+  return (
+    <TransactionsLayout ref={observeRef}>
+      <TransactionHeader startBalance={startBalance} endBalance={endBalance} />
+      {transactionsMenuData.map((sectionData) => (
+        <TransactionSectionByDate
+          key={sectionData.date.getDate()}
+          {...sectionData}
+        />
+      ))}
+    </TransactionsLayout>
+  )
 }
 const TransactionsLayout = styled.div`
   scroll-snap-stop: always;
@@ -28,7 +42,5 @@ const TransactionsLayout = styled.div`
   height: 100%;
   width: max-content;
   flex: 0 0 100%;
-
-
-
+  background-color: var(--main-bg);
 `

@@ -50,7 +50,7 @@ const CellLayout = styled.div<{
   grid-template-rows: repeat(2, min-content);
   column-gap: 10px;
   row-gap: 2px;
-  background-color: var(--bg-1);
+  background-color: var(--sub-bg);
 
   .CategoryIcon {
     grid-row: span 2;
@@ -62,7 +62,7 @@ const CellLayout = styled.div<{
     justify-content: space-between;
 
     .name {
-      color: var(--txt-5);
+      color: var(--sub-txt);
       font-family: Inter;
       font-size: 15px;
       font-style: normal;
@@ -71,7 +71,7 @@ const CellLayout = styled.div<{
     }
 
     .quantity {
-      color: var(--txt-2);
+      color: var(--main-txt);
       font-family: Inter;
       font-size: 15px;
       font-style: normal;
@@ -105,7 +105,7 @@ const CellLayout = styled.div<{
     .percent {
       z-index: 1;
       padding: 0 7px;
-      background-color: var(--bg-1);
+      background-color: var(--sub-bg);
       color: ${({ $percent, $color }) =>
         $percent === 0 ? "var(--txt-12)" : $color};
       font-family: Inter;

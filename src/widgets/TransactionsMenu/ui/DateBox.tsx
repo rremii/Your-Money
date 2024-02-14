@@ -54,10 +54,9 @@ const DateBoxLayout = styled.div<{
   height: 45px;
   padding: 7px 13px;
   gap: 7px;
-  //background-color: white !important;
 
   .date {
-    color: ${({ $isToday }) => ($isToday ? "var(--txt-3)" : "var(--txt-6)")};
+    color: ${({ $isToday }) => ($isToday ? "var(--txt-3)" : "var(--main-txt)")};
     text-align: center;
     font-family: Inter;
     font-size: 23px;
@@ -73,7 +72,8 @@ const DateBoxLayout = styled.div<{
     flex: 1 1 auto;
 
     .day {
-      color: ${({ $isToday }) => ($isToday ? "var(--txt-4)" : "var(--txt-12)")};
+      color: ${({ $isToday }) =>
+        $isToday ? "var(--txt-4)" : "var(--pale-txt)"};
       font-family: Inter;
       font-size: 10px;
       font-style: normal;
@@ -82,7 +82,8 @@ const DateBoxLayout = styled.div<{
     }
 
     .month-year {
-      color: ${({ $isToday }) => ($isToday ? "var(--txt-3)" : "var(--txt-6)")};
+      color: ${({ $isToday }) =>
+        $isToday ? "var(--txt-3)" : "var(--main-txt)"};
       font-family: Inter;
       font-size: 11px;
       font-style: normal;

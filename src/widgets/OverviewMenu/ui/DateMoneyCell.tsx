@@ -33,13 +33,24 @@ const CellLayout = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--bg-8);
+  background-color: var(--sub-bg);
   height: 46px;
-  border: 1px solid var(--bg-2);
+  border: 1px solid rgba(84, 84, 84, 0.4);
   gap: 3px;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(255, 0, 0, 0.03);
+  }
 
   .date {
-    color: var(--txt-5);
+    color: var(--sub-txt);
     font-family: Inter;
     font-size: 12px;
     font-style: normal;

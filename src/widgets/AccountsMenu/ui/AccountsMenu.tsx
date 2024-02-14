@@ -33,7 +33,7 @@ export const AccountsMenu = () => {
   )
 }
 const AccountsMenuLayout = styled.main`
-  background-color: var(--bg-1);
+  background-color: var(--sub-bg);
   width: 100%;
   height: 100%;
 

@@ -98,16 +98,9 @@ const TransactionLayout = styled.div<{
   padding: 10px 13px;
   gap: 12px;
   min-height: 60px;
-  background-color: var(--txt-1);
+  background-color: var(--sub-bg);
   box-shadow: 0px 2px 4px 0px var(--shadow-2);
   margin-bottom: 1px;
-
-  //.icon {
-  //  img {
-  //    width: 40px;
-  //    height: 40px;
-  //  }
-  //}
 
   .info {
     flex: 1 1 auto;
@@ -122,7 +115,7 @@ const TransactionLayout = styled.div<{
     }
 
     .category {
-      color: var(--txt-5);
+      color: var(--sub-txt);
       font-family: Inter;
       font-size: 15px;
       font-style: normal;
@@ -143,7 +136,7 @@ const TransactionLayout = styled.div<{
       }
 
       p {
-        color: var(--txt-2);
+        color: var(--main-txt);
         font-family: Inter;
         font-size: 13px;
         font-style: normal;

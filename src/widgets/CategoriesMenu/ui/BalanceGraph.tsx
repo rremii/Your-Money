@@ -100,7 +100,7 @@ const GraphLayout = styled.div`
       top: 50%;
       transform: translateX(-50%) translateY(calc(-20px - 50%));
 
-      color: var(--txt-5);
+      color: var(--sub-txt);
       font-family: Inter;
       font-size: 14px;
       font-style: normal;

@@ -60,7 +60,7 @@ const TransactionsHeaderLayout = styled.header`
   justify-items: center;
   align-content: center;
   position: relative;
-  background-color: var(--bg-1);
+  background-color: var(--sub-bg);
 
   box-shadow: 0px 2px 4px 0px var(--shadow-2);
   border-left: solid 1px var(--bg-5);
@@ -78,7 +78,7 @@ const TransactionsHeaderLayout = styled.header`
   }
 
   .zero {
-    color: var(var(--txt-2));
+    color: var(--main-txt);
   }
 
   .negative {
@@ -91,7 +91,7 @@ const TransactionsHeaderLayout = styled.header`
 
   .balance-cell {
     h2 {
-      color: var(--txt-5);
+      color: var(--sub-txt);
       font-family: Inter;
       font-size: 12px;
       font-style: normal;

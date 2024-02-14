@@ -45,7 +45,7 @@ const AccountsInfoLayout = styled.div`
     padding: 0 15px;
 
     .title {
-      color: var(--txt-2);
+      color: var(--main-txt);
       font-family: Inter;
       font-size: 12px;
       font-style: normal;
@@ -62,7 +62,7 @@ const AccountsInfoLayout = styled.div`
     }
 
     .balance {
-      color: var(--txt-5);
+      color: var(--sub-txt);
       font-family: Inter;
       font-size: 18px;
       font-style: normal;

@@ -65,11 +65,9 @@ const FooterLayout = styled.footer<{
   width: 100vw;
   max-width: 450px;
   box-shadow: 0 1px 5px 0 var(--shadow-1);
-  //border-top: var(--shadow-1) 1px solid;
-  background-color: var(--bg-1);
+  background-color: var(--sub-bg);
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   height: 55px;
-  //display: none;
 `

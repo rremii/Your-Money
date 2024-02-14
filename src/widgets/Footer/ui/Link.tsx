@@ -64,7 +64,7 @@ const LinkLayout = styled(NavLink)`
 
   h3 {
     transition: 0.5s;
-    color: var(--txt-2);
+    color: var(--main-txt);
     font-family: Inter;
     font-size: 12px;
     font-style: normal;

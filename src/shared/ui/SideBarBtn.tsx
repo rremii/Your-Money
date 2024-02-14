@@ -33,7 +33,7 @@ const BtnLayout = styled.button`
   }
 
   .text-info {
-    border-bottom: 1px var(--separator-1) solid;
+    border-bottom: 1px rgba(109, 108, 108, 0.24) solid;
     flex: 1 1 auto;
     display: flex;
     justify-content: center;
@@ -42,7 +42,7 @@ const BtnLayout = styled.button`
     height: 100%;
 
     h3 {
-      color: var(--txt-5);
+      color: var(--sub-txt);
       text-align: left;
       font-family: Inter;
       font-size: 15px;

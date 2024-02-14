@@ -68,7 +68,7 @@ const SideBarLayout = styled.div<{
   $isSideBar?: boolean
 }>`
   position: absolute;
-  background-color: var(--bg-1);
+  background-color: var(--sub-bg);
   z-index: 10;
   top: 0;
   left: ${({ $isSideBar }) => ($isSideBar ? "0" : "-100%")};

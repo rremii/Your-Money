@@ -54,9 +54,7 @@ const AccountLayout = styled.div<{
   align-items: center;
   gap: 12px;
   padding: 0 13px;
-  //background-color: ${({ $bgColor }) =>
-    $bgColor ? $bgColor : "var(--bg-1)"};
-  background-color: var(--bg-1);
+  background-color: var(--sub-bg);
   cursor: pointer;
 
   .icon {
@@ -80,9 +78,7 @@ const AccountLayout = styled.div<{
     justify-content: center;
 
     .name {
-      // color: ${({ $nameColor }) =>
-        $nameColor ? $nameColor : "var(--txt-5)"};
-      color: var(--txt-5);
+      color: var(--sub-txt);
       font-family: Inter;
       font-size: 13px;
       font-style: normal;
@@ -100,7 +96,7 @@ const AccountLayout = styled.div<{
     }
 
     .balance {
-      color: var(--txt-6);
+      color: var(--main-txt);
       font-family: Inter;
       font-size: 17px;
       font-style: normal;

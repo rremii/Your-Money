@@ -8,8 +8,9 @@ import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
 import { ICategory } from "@entities/Category/type.ts"
 import { Days, DayType, FullDays } from "@shared/constants/Days.ts"
 
-export const GetConfigOptions = (currency: string = "$"): ChartOptions<"bar"> => {
-
+export const GetConfigOptions = (
+  currency: string = "$",
+): ChartOptions<"bar"> => {
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -18,14 +19,14 @@ export const GetConfigOptions = (currency: string = "$"): ChartOptions<"bar"> =>
         stacked: true,
         ticks: {
           autoSkip: false,
-          maxRotation: 0
+          maxRotation: 0,
         },
         grid: {
           // display: false,
           lineWidth: 0,
           drawTicks: true,
-          tickWidth: 1
-        }
+          tickWidth: 1,
+        },
       },
       y: {
         ticks: {
@@ -33,43 +34,50 @@ export const GetConfigOptions = (currency: string = "$"): ChartOptions<"bar"> =>
           crossAlign: "near",
           stepSize: 20,
           count: 5,
-          callback: function(value: string | number, index: number) {
+          callback: function (value: string | number, index: number) {
             if (value === 0) return ""
             return currency + " " + value
-          }
+          },
         },
 
-        stacked: true
-      }
-    }
+        stacked: true,
+      },
+    },
   }
 }
 
-export const GetDatePointsAmount = (dateFrom: Date, dateTo: Date, filter: DateFilter) => {
-  let divUnit = (1000 * 60 * 60 * 24) // day
-
+export const GetDatePointsAmount = (
+  dateFrom: Date,
+  dateTo: Date,
+  filter: DateFilter,
+) => {
+  let divUnit = 1000 * 60 * 60 * 24 // day
 
   if (filter === "allTime") {
-    divUnit = (1000 * 60 * 60 * 24 * 365) //year
+    divUnit = 1000 * 60 * 60 * 24 * 365 //year
   }
   if (filter === "year") {
-    divUnit = (1000 * 60 * 60 * 24 * 30) //month
+    divUnit = 1000 * 60 * 60 * 24 * 30 //month
   }
 
   const dif = dateTo.getTime() - dateFrom.getTime()
   const datePoints = Math.round(dif / divUnit)
 
   return datePoints
-
-
 }
 
-export const GetTransByCategories = (categories: ICategory[], transactions: ITransaction[]) => {
-
+export const GetTransByCategories = (
+  categories: ICategory[],
+  transactions: ITransaction[],
+) => {
   return categories.map(({ name, color, id }) => {
-    const categoryTransactions = transactions.filter(({ categoryId }) => categoryId === id)
+    const categoryTransactions = transactions.filter(
+      ({ categoryId }) => categoryId === id,
+    )
     return {
-      name, color, transactions: categoryTransactions
+      name,
+      color,
+      transactions: categoryTransactions,
     }
   })
 }
@@ -80,14 +88,21 @@ interface tranByCategories {
   transactions: ITransaction[]
 }
 
-export const GetTransByDateUnitWithinCategory = (transByCategories: tranByCategories[], dateFrom: Date, dateTo: Date, datePointsAmount: number, filter: DateFilter) => {
-
-
+export const GetTransByDateUnitWithinCategory = (
+  transByCategories: tranByCategories[],
+  dateFrom: Date,
+  dateTo: Date,
+  datePointsAmount: number,
+  filter: DateFilter,
+) => {
   return transByCategories.map(({ name, color, transactions }) => {
     const curUnitTrans = []
 
-    for (let dateUnitIndex = 0; dateUnitIndex < datePointsAmount; dateUnitIndex++) {
-
+    for (
+      let dateUnitIndex = 0;
+      dateUnitIndex < datePointsAmount;
+      dateUnitIndex++
+    ) {
       const year = dateFrom.getFullYear()
       const month = dateFrom.getMonth()
       const date = dateFrom.getDate()
@@ -117,31 +132,37 @@ export const GetTransByDateUnitWithinCategory = (transByCategories: tranByCatego
           nextUnitDate = new Date(year + dateUnitIndex + 1, 0, 1)
       }
 
-
       const transQuantity = transactions
-        .filter(({ date }) => IsDateBetween(curDate, new Date(date), nextUnitDate, "left"))
+        .filter(({ date }) =>
+          IsDateBetween(curDate, new Date(date), nextUnitDate, "left"),
+        )
         .reduce((acc, cur) => acc + cur.quantity, 0)
 
       curUnitTrans.push(transQuantity)
     }
 
-
     return { transactions: curUnitTrans, name, color }
   })
 }
 
-
 const yearLabels = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"]
 const weekLabels = ["S", "M", "T", "W", "T", "F", "S"]
 
-export const GetLabels = (dateFrom: Date, dateTo: Date, datePointsAmount: number, filter: DateFilter, firstDay?: DayType) => {
+export const GetLabels = (
+  dateFrom: Date,
+  dateTo: Date,
+  datePointsAmount: number,
+  filter: DateFilter,
+  firstDay?: DayType,
+) => {
   let labels: string[] = []
 
   switch (filter) {
-    case "day": {
-      const day = FullDays.get(dateFrom.getDay()) as string
-      labels = [day]
-    }
+    case "day":
+      {
+        const day = FullDays.get(dateFrom.getDay()) as string
+        labels = [day]
+      }
       break
     case "month":
       for (let i = 1; i <= datePointsAmount; i++) {
@@ -153,7 +174,7 @@ export const GetLabels = (dateFrom: Date, dateTo: Date, datePointsAmount: number
       }
       break
     case "week": {
-      if (!firstDay) return labels = weekLabels
+      if (!firstDay) return (labels = weekLabels)
       const dayId = Days.get(firstDay) as number
 
       const shiftedDaysLeft = weekLabels.slice(0, dayId)
@@ -168,21 +189,23 @@ export const GetLabels = (dateFrom: Date, dateTo: Date, datePointsAmount: number
     case "allTime": {
       const yearFrom = dateFrom.getFullYear()
 
-      for (let curYear = yearFrom; curYear < yearFrom + datePointsAmount; curYear++) {
+      for (
+        let curYear = yearFrom;
+        curYear < yearFrom + datePointsAmount;
+        curYear++
+      ) {
         labels.push(String(curYear))
       }
-
     }
   }
-
 
   return labels
 }
 
-
-export const SumAllTransactions = (transactions: IConvertedTransaction[]): number => {
+export const SumAllTransactions = (
+  transactions: IConvertedTransaction[],
+): number => {
   return transactions.reduce((acc, cur) => {
-
     if (cur.type === "income") return acc + cur.convertedQuantity
     else return acc - cur.convertedQuantity
   }, 0)

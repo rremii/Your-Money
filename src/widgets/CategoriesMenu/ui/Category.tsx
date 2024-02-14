@@ -89,7 +89,7 @@ const CategoryLayout = styled.div<{
   cursor: pointer;
 
   .title {
-    color: var(--txt-5);
+    color: var(--sub-txt);
     font-family: Inter;
     font-size: 12px;
     font-style: normal;
@@ -98,7 +98,7 @@ const CategoryLayout = styled.div<{
   }
 
   .quantity {
-    color: ${({ $color }) => ($color ? $color : "var(--txt-2)")};
+    color: ${({ $color }) => ($color ? $color : "var(--pale-txt)")};
     font-family: Inter;
     font-size: 11px;
     font-style: normal;

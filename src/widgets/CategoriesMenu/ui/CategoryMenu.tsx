@@ -11,53 +11,70 @@ import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
 
-
 interface props {
   menuId: number
   dateGap: string
   transactions: IConvertedTransaction[]
-  dateTo: Date,
-  dateFrom: Date,
+  dateTo: Date
+  dateFrom: Date
 }
 
-export const CategoryMenu: FC<props> = React.memo(({ menuId, dateGap, transactions, dateTo, dateFrom }) => {
+export const CategoryMenu: FC<props> = React.memo(
+  ({ menuId, dateGap, transactions, dateTo, dateFrom }) => {
+    const { SwitchMenuType, menuType } = useMenuType()
+    const { observeRef } = useOnMenuSlide(dateGap, menuId, dateFrom)
 
-  const { SwitchMenuType, menuType } = useMenuType()
-  const { observeRef } = useOnMenuSlide(dateGap, menuId, dateFrom)
+    const { incTransactions, expTransactions } = useMemo(
+      () => FilterTransByType(transactions),
+      [transactions],
+    )
 
-  const { incTransactions, expTransactions } = useMemo(() => FilterTransByType(transactions), [transactions])
+    const { data: user } = GetMe.useQueryState()
+    const { allCategories } = useCategory(user?.id)
+    const { expCategories, incCategories } = useMemo(
+      () => FilterCategoriesByType(allCategories),
+      [allCategories],
+    )
 
-  const { data: user } = GetMe.useQueryState()
-  const { allCategories } = useCategory(user?.id)
-  const { expCategories, incCategories } = useMemo(() => FilterCategoriesByType(allCategories), [allCategories])
+    const expFilledCategories = useMemo(
+      () => FillCategoriesWithTransactions(expCategories, expTransactions),
+      [expCategories, expTransactions],
+    )
+    const incFilledCategories = useMemo(
+      () => FillCategoriesWithTransactions(incCategories, incTransactions),
+      [incCategories, incTransactions],
+    )
 
-  const expFilledCategories = useMemo(() => FillCategoriesWithTransactions(expCategories, expTransactions), [expCategories, expTransactions])
-  const incFilledCategories = useMemo(() => FillCategoriesWithTransactions(incCategories, incTransactions), [incCategories, incTransactions])
+    return (
+      <CategoryLayout ref={observeRef}>
+        <BalanceGraph
+          menuType={menuType}
+          OnClick={SwitchMenuType}
+          expTransactions={expTransactions}
+          incTransactions={incTransactions}
+          categories={
+            menuType === "expense" ? expFilledCategories : incFilledCategories
+          }
+        />
 
-
-  return <CategoryLayout ref={observeRef}>
-    <BalanceGraph
-      menuType={menuType}
-      OnClick={SwitchMenuType}
-      expTransactions={expTransactions}
-      incTransactions={incTransactions}
-      categories={menuType === "expense" ? expFilledCategories : incFilledCategories}
-    />
-
-    {menuType === "income" && incFilledCategories.map((categoryData, i) => (
-      <Category key={i} dateTo={dateTo} {...categoryData} />
-    ))}
-    {menuType === "expense" && expFilledCategories.map((categoryData, i) => (
-      <Category key={i} dateTo={dateTo} {...categoryData} />
-    ))}
-  </CategoryLayout>
-})
+        {menuType === "income" &&
+          incFilledCategories.map((categoryData, i) => (
+            <Category key={i} dateTo={dateTo} {...categoryData} />
+          ))}
+        {menuType === "expense" &&
+          expFilledCategories.map((categoryData, i) => (
+            <Category key={i} dateTo={dateTo} {...categoryData} />
+          ))}
+      </CategoryLayout>
+    )
+  },
+)
 const CategoryLayout = styled.div`
   scroll-snap-stop: always;
   scroll-snap-align: center;
   padding: 40px 15px 15px;
   overflow-y: auto;
-  background-color: var(--bg-1);
+  background-color: var(--sub-bg);
   display: grid;
   grid-template-rows: min-content min-content;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -65,7 +82,4 @@ const CategoryLayout = styled.div`
   height: 100%;
   width: max-content;
   flex: 0 0 100%;
-
-
-
 `

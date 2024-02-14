@@ -65,7 +65,7 @@ const BalanceLayout = styled.div<{
 
   .balance {
     grid-column: span 2;
-    background-color: var(--bg-1);
+    background-color: var(--sub-bg);
     width: 100%;
     display: flex;
     justify-content: center;
@@ -75,7 +75,7 @@ const BalanceLayout = styled.div<{
     height: 57px;
 
     h2 {
-      color: var(--txt-5);
+      color: var(--sub-txt);
       font-family: Inter;
       font-size: 12px;
       font-style: normal;
@@ -136,14 +136,25 @@ const BalanceLayout = styled.div<{
   .income {
     width: 100%;
     height: 100%;
-    background-color: var(--bg-7);
+    background: var(--sub-bg);
+    position: relative;
 
     h2 {
-      color: var(--txt-5);
+      color: var(--sub-txt);
     }
 
     p {
       color: var(--txt-10);
+    }
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(76, 176, 80, 0.15);
     }
   }
 `

@@ -11,30 +11,41 @@ import { ICategory } from "@entities/Category/type.ts"
 import { DayType } from "@shared/constants/Days.ts"
 
 interface IBarProps {
-  options?: ChartOptions<"bar">;
-  data: ChartData<"bar">;
+  options?: ChartOptions<"bar">
+  data: ChartData<"bar">
 }
 
 interface props {
-  categories: ICategory[],
-  transactions: ITransaction[],
-  dateFrom: Date,
-  dateTo: Date,
+  categories: ICategory[]
+  transactions: ITransaction[]
+  dateFrom: Date
+  dateTo: Date
   filter: DateFilter
   firstDay?: DayType
 }
 
-export const GetBarConfig = ({ categories, dateTo, dateFrom, filter, transactions, firstDay }: props): IBarProps => {
+export const GetBarConfig = ({
+  categories,
+  dateTo,
+  dateFrom,
+  filter,
+  transactions,
+  firstDay,
+}: props): IBarProps => {
   const options = GetConfigOptions("Br")
-
 
   const datePointsAmount = GetDatePointsAmount(dateFrom, dateTo, filter)
 
   const labels = GetLabels(dateFrom, dateTo, datePointsAmount, filter, firstDay)
 
   const transByCategories = GetTransByCategories(categories, transactions)
-  const transByDateUnits = GetTransByDateUnitWithinCategory(transByCategories, dateFrom, dateTo, datePointsAmount, filter)
-
+  const transByDateUnits = GetTransByDateUnitWithinCategory(
+    transByCategories,
+    dateFrom,
+    dateTo,
+    datePointsAmount,
+    filter,
+  )
 
   const data: ChartData<"bar"> = {
     labels,
@@ -43,14 +54,13 @@ export const GetBarConfig = ({ categories, dateTo, dateFrom, filter, transaction
         backgroundColor: color,
         data: transactions,
         animation: false,
-        maxBarThickness: 100
+        maxBarThickness: 100,
       }
-    })
+    }),
   }
-
 
   return {
     data,
-    options
+    options,
   }
 }
