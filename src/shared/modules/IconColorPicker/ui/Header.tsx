@@ -27,11 +27,11 @@ const HeaderLayout = styled.header<{
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background-color: ${({ $color }) => $color ? $color : "#0BAD7B"};
+    background-color: ${({ $color }) => ($color ? $color : "#0BAD7B")};
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color .4s;
+    transition: background-color 0.4s;
 
     svg {
       width: 25px;
@@ -40,7 +40,7 @@ const HeaderLayout = styled.header<{
   }
 
   h1.title {
-    color: #000;
+    color: var(--sub-txt);
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
@@ -49,6 +49,4 @@ const HeaderLayout = styled.header<{
     letter-spacing: 0.32px;
     margin-bottom: 0;
   }
-
-
 `

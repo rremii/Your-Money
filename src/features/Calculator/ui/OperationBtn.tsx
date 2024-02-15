@@ -7,7 +7,13 @@ interface props {
 }
 
 export const OperationBtn: FC<props> = memo(({ OnClick, children }) => {
-
-  return <CalculatorBtn $borderColor={"var(--bg-13)"} onClick={OnClick}
-                        $bgColor={"var(--bg-14)"}>{children}</CalculatorBtn>
+  return (
+    <CalculatorBtn
+      $borderColor={"rgba(163, 162, 162, 0.13)"}
+      onClick={OnClick}
+      $bgColor={"var(--sub-bg-2)"}
+    >
+      {children}
+    </CalculatorBtn>
+  )
 })

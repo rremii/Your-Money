@@ -27,7 +27,7 @@ export const DeleteAccount = () => {
 }
 const DeleteCategoryLayout = styled.button`
   cursor: pointer;
-  background-color: var(--bg-1);
+  background-color: var(--sub-bg);
   height: 60px;
   display: flex;
   width: 100%;

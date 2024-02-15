@@ -11,7 +11,6 @@ import {
 } from "@entities/UI/model/ModalsSlice.ts"
 import { setEditCategory } from "@entities/Category/model/NewCategorySlice.ts"
 
-
 interface props {
   categories: ICategory[]
   categoryType: TransactionType
@@ -26,16 +25,15 @@ export const EditCategoriesMenu: FC<props> = ({ categories, categoryType }) => {
     dispatch(setEditCategoryMenuType("edit"))
   }
 
+  return (
+    <CategoryLayout>
+      {categories.map((category) => (
+        <Category key={category.id} OnClick={EditCategory} {...category} />
+      ))}
 
-  return <CategoryLayout>
-
-    {categories.map((category) => (
-      <Category key={category.id} OnClick={EditCategory} {...category} />
-    ))}
-
-    <StartCreatingCategory categoryType={categoryType} />
-
-  </CategoryLayout>
+      <StartCreatingCategory categoryType={categoryType} />
+    </CategoryLayout>
+  )
 }
 const CategoryLayout = styled.div<{
   $isHidden?: boolean
@@ -44,8 +42,8 @@ const CategoryLayout = styled.div<{
   scroll-snap-align: center;
   padding: 40px 15px 25px;
   overflow-y: auto;
-  background-color: var(--bg-1);
-  display: ${({ $isHidden }) => $isHidden ? "none" : "grid"};
+  background-color: var(--sub-bg);
+  display: ${({ $isHidden }) => ($isHidden ? "none" : "grid")};
   grid-auto-rows: min-content;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 40px;
@@ -55,6 +53,4 @@ const CategoryLayout = styled.div<{
 
   justify-items: center;
   align-items: flex-end;
-
-
 `

@@ -62,10 +62,10 @@ const YearSliderLayout = styled.div<{
   overflow-x: hidden;
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     transform: translateY(calc(-50% - 8px));
-    box-shadow: 0 7px 6px 0px var(--txt-1);
+    box-shadow: 0 7px 6px 0px var(--sub-bg-light);
     left: 0;
     background-color: transparent;
     height: 15px;
@@ -74,10 +74,10 @@ const YearSliderLayout = styled.div<{
   }
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     transform: translateY(calc(50% + 8px));
-    box-shadow: 0 -7px 6px 0px var(--txt-1);
+    box-shadow: 0 -7px 6px 0px var(--sub-bg-light);
     left: 0;
     bottom: 0;
     background-color: transparent;
@@ -100,7 +100,7 @@ const YearSliderLayout = styled.div<{
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--txt-5);
+      color: var(--sub-txt);
       font-family: Inter;
       font-size: 20px;
       font-style: normal;
@@ -109,10 +109,8 @@ const YearSliderLayout = styled.div<{
     }
 
     .active {
-      background-color: ${({ $color }) => $color ? $color : "rgb(63,81,181)"};
-      color: var(--txt-1)
+      background-color: ${({ $color }) => ($color ? $color : "rgb(63,81,181)")};
+      color: var(--txt-1);
     }
   }
-
-
 `

@@ -14,4 +14,5 @@ export const SignUpCodeMenu = () => {
 const SignUpCodeLayout = styled.main`
   width: 100%;
   padding: 25px 25px 0;
+  background-color: var(--main-bg);
 `

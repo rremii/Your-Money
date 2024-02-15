@@ -50,6 +50,7 @@ const LanguageModalLayout = styled(Modal)`
   z-index: 55;
   max-width: 360px;
   padding: 20px 22px;
+  background-color: var(--sub-bg-light);
 
   .languages-box {
     display: flex;

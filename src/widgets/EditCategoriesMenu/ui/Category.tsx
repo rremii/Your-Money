@@ -10,24 +10,27 @@ interface props extends ICategory {
 export const Category: FC<props> = memo(({ OnClick, ...category }) => {
   const { name, icon, color } = category
 
-
   const HandleOnClick = () => {
-    if (OnClick)
-      OnClick(category)
+    if (OnClick) OnClick(category)
   }
 
-  return <CategoryLayout className="Category" onClick={HandleOnClick} $color={color}
-  >
-    <p className="name">{name}</p>
-    <div className="icon">
-      <CustomIcon boxSize="45px" iconSize="25px" icon={icon} boxColor={color} />
-    </div>
-  </CategoryLayout>
+  return (
+    <CategoryLayout className="Category" onClick={HandleOnClick} $color={color}>
+      <p className="name">{name}</p>
+      <div className="icon">
+        <CustomIcon
+          boxSize="45px"
+          iconSize="25px"
+          icon={icon}
+          boxColor={color}
+        />
+      </div>
+    </CategoryLayout>
+  )
 })
 const CategoryLayout = styled.div<{
   $color?: string
 }>`
-
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -35,7 +38,7 @@ const CategoryLayout = styled.div<{
   cursor: pointer;
 
   .name {
-    color: var(--txt-5);
+    color: var(--sub-txt);
     font-family: Inter;
     font-size: 12px;
     font-style: normal;
@@ -47,9 +50,4 @@ const CategoryLayout = styled.div<{
   //  width: 50px;
   //  height: 50px;
   //}
-
-
-
-
-
 `

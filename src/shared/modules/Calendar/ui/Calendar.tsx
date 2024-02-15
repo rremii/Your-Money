@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import React, { FC, memo, useContext, useEffect } from "react"
-import { Header } from "@shared/modules/IconColorPicker/ui/Header.tsx"
 import { MonthSlider } from "@shared/modules/Calendar/ui/MonthSlider.tsx"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
 import {
@@ -9,7 +8,7 @@ import {
   updateMenuDates,
 } from "@shared/modules/Calendar/model/Actions.ts"
 import { YearSlider } from "@shared/modules/Calendar/ui/YearSlider.tsx"
-
+import { Header } from "@shared/modules/Calendar/ui/Header.tsx"
 
 interface props {
   initialDate: string
@@ -18,7 +17,6 @@ interface props {
 }
 
 const Calendar: FC<props> = memo(({ initialDate, OnChange, color }) => {
-
   const { chosenDateStr, type } = useContext(CalendarContext)
 
   useEffect(() => {
@@ -31,10 +29,13 @@ const Calendar: FC<props> = memo(({ initialDate, OnChange, color }) => {
     setCalendarColor(color)
   }, [initialDate, color])
 
-  return <CalendarLayout>
-    <Header />
-    {type === "month" ? <MonthSlider /> : <YearSlider />}
-  </CalendarLayout>
+  //todo make optimization
+  return (
+    <CalendarLayout>
+      <Header />
+      {type === "month" ? <MonthSlider /> : <YearSlider />}
+    </CalendarLayout>
+  )
 })
 export default Calendar
 const CalendarLayout = styled.div`

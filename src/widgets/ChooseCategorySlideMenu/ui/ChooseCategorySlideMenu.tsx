@@ -16,24 +16,32 @@ export const ChooseCategorySlideMenu = memo(() => {
 
   const [scrollPercent, setScrollPercent] = useState(0)
 
-  const isMenuOpen = useTypedSelector(state => state.UI.Modals.chooseCategorySlideMenu.isOpen)
-  const curAccId = useTypedSelector(state => state.CurAccount.id)
-  const curCurrencySign = useTypedSelector(state => state.Settings.curCurrencySign)
-  const activeType = useTypedSelector(state => state.EditCreateTransaction.Transaction.type)
-  const chosenAccount = useTypedSelector(state => state.EditCreateTransaction.ChosenAccount)
-
+  const isMenuOpen = useTypedSelector(
+    (state) => state.UI.Modals.chooseCategorySlideMenu.isOpen,
+  )
+  const curAccId = useTypedSelector((state) => state.CurAccount.id)
+  const curCurrencySign = useTypedSelector(
+    (state) => state.Settings.curCurrencySign,
+  )
+  const activeType = useTypedSelector(
+    (state) => state.EditCreateTransaction.Transaction.type,
+  )
+  const chosenAccount = useTypedSelector(
+    (state) => state.EditCreateTransaction.ChosenAccount,
+  )
 
   const { data: user } = GetMe.useQueryState()
   const { allAccounts } = useAccount(user?.id)
 
   useEffect(() => {
     if (!allAccounts?.length) return
-    const curAccount = curAccId ? allAccounts.find(({ id }) => id === curAccId) : allAccounts[0]
+    const curAccount = curAccId
+      ? allAccounts.find(({ id }) => id === curAccId)
+      : allAccounts[0]
 
     if (!curAccount) return
     dispatch(setAccount(curAccount))
   }, [allAccounts])
-
 
   const CloseMenu = () => {
     dispatch(closeMenu("chooseCategorySlideMenu"))
@@ -43,17 +51,24 @@ export const ChooseCategorySlideMenu = memo(() => {
     setScrollPercent(scroll)
   }
 
-
-  return <>
-    <Overlay onClick={CloseMenu}
-             $isActive={isMenuOpen} $zIndex={50}
-             $color={"rgba(0, 0, 0, 0.5 )"} />
-    <CategorySlideMenuLayout $isOpen={isMenuOpen}>
-      <AccountInfo currencySign={curCurrencySign} {...chosenAccount} />
-      <CategorySlideHeader scrollPercent={scrollPercent} activeType={activeType} />
-      <ChooseCategorySlider onScroll={OnScroll} />
-    </CategorySlideMenuLayout>
-  </>
+  return (
+    <>
+      <Overlay
+        onClick={CloseMenu}
+        $isActive={isMenuOpen}
+        $zIndex={50}
+        $color={"rgba(0, 0, 0, 0.5 )"}
+      />
+      <CategorySlideMenuLayout $isOpen={isMenuOpen}>
+        <AccountInfo currencySign={curCurrencySign} {...chosenAccount} />
+        <CategorySlideHeader
+          scrollPercent={scrollPercent}
+          activeType={scrollPercent >= 50 ? "expense" : "income"}
+        />
+        <ChooseCategorySlider onScroll={OnScroll} />
+      </CategorySlideMenuLayout>
+    </>
+  )
 })
 const CategorySlideMenuLayout = styled(Modal)`
   z-index: 50;
@@ -63,6 +78,4 @@ const CategorySlideMenuLayout = styled(Modal)`
   top: initial;
   transform: translate(-50%, 0);
   padding: 0;
-
-
 `

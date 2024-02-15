@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const Modal = styled.div<{
   $isOpen?: boolean
 }>`
-  padding: 25px 22px;
+  padding: 25px 20px;
   position: fixed;
   display: block;
   top: 50%;
@@ -14,7 +14,7 @@ export const Modal = styled.div<{
     translate(-50%, -50%);
   transform-origin: bottom center;
   z-index: 20;
-  background-color: var(--bg-1);
+  background-color: var(--sub-bg-light);
   border-radius: 3px;
 
   transition: 0.3s;
@@ -23,7 +23,7 @@ export const Modal = styled.div<{
   opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
 
   .title {
-    color: var(--txt-5);
+    color: var(--sub-txt);
     font-family: Inter;
     font-size: 17px;
     font-style: normal;

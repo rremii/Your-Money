@@ -56,6 +56,7 @@ const CurrencyFormatLayout = styled(Modal)`
   z-index: 55;
   max-width: 360px;
   padding: 20px 22px;
+  background-color: var(--sub-bg);
 
   .format-box {
     display: flex;

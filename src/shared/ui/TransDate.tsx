@@ -8,7 +8,6 @@ interface props {
 }
 
 export const TransDate: FC<props> = memo(({ dateStr }) => {
-
   const transDate = new Date(dateStr)
 
   const day = FullDays.get(transDate.getDay()) as string
@@ -18,21 +17,19 @@ export const TransDate: FC<props> = memo(({ dateStr }) => {
 
   const resDate = `${day}, ${month.slice(0, 3)} ${date}, ${year}`.toUpperCase()
 
-  return <TransDateLayout>
-    {resDate}
-  </TransDateLayout>
+  return <TransDateLayout>{resDate}</TransDateLayout>
 })
 const TransDateLayout = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-14);
+  background-color: var(--sub-bg-2);
   padding: 5px 0;
   font-family: Inter;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   font-size: 12px;
-  color: var(--txt-6);
-  border: 1px solid var(--bg-13);
+  color: var(--pale-txt);
+  border: 1px solid rgba(163, 162, 162, 0.13);
 `

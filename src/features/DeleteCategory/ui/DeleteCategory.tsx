@@ -27,7 +27,7 @@ export const DeleteCategory = () => {
 }
 const DeleteCategoryLayout = styled.button`
   cursor: pointer;
-  background-color: var(--bg-1);
+  background-color: var(--sub-bg);
   height: 60px;
   display: flex;
   align-items: center;

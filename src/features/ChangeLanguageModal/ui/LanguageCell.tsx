@@ -24,7 +24,7 @@ const LanguageCellLayout = styled.div`
   cursor: pointer;
 
   .language {
-    color: var(--txt-5);
+    color: var(--sub-txt);
     font-family: Inter;
     font-size: 15px;
     font-style: normal;

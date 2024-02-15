@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const SideBarModalHeader = styled.header`
-  color: var(--txt-5);
+  color: var(--sub-txt);
   font-family: Inter;
   font-size: 17px;
   font-style: normal;

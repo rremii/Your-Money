@@ -31,7 +31,7 @@ const CurrencyLayout = styled.div<{
 }>`
   cursor: pointer;
   padding: 10px 15px;
-  background-color: white;
+  background-color: var(--sub-bg);
   margin-bottom: 10px;
   box-shadow: 0 5px 5px -5px var(--shadow-3);
 
@@ -39,7 +39,7 @@ const CurrencyLayout = styled.div<{
     font-weight: 400;
     font-size: 14px;
     font-family: Inter, sans-serif;
-    color: black;
+    color: var(--sub-txt);
     margin-bottom: 7px;
   }
 

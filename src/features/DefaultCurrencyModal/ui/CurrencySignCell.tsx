@@ -23,7 +23,7 @@ const SignCellLayout = styled.div`
   cursor: pointer;
 
   .sign {
-    color: var(--txt-5);
+    color: var(--sub-txt);
     font-family: Inter;
     font-size: 15px;
     font-style: normal;

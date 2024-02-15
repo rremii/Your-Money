@@ -13,17 +13,18 @@ interface props {
 export const Notes: FC<props> = memo(({ content }) => {
   const dispatch = useAppDispatch()
 
-  const menuType = useTypedSelector(state => state.UI.Modals.editCreateTransMenu.menuType)
+  const menuType = useTypedSelector(
+    (state) => state.UI.Modals.editCreateTransMenu.menuType,
+  )
 
   const OpenEditMenu = () => {
     dispatch(openMenu("titleMenu"))
-    if (menuType === "overview")
-      dispatch(setEditCreateMenuType("edit"))
+    if (menuType === "overview") dispatch(setEditCreateMenuType("edit"))
   }
 
-  return <InputLayout onClick={OpenEditMenu}>
-    {content || "Notes ..."}
-  </InputLayout>
+  return (
+    <InputLayout onClick={OpenEditMenu}>{content || "Notes ..."}</InputLayout>
+  )
 })
 const InputLayout = styled.div`
   height: 53px;
@@ -31,8 +32,8 @@ const InputLayout = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--sub-bg);
 
-  background-color: var(--bg-1);
   color: var(--txt-2);
   font-family: Inter;
   font-size: 13px;
@@ -41,5 +42,4 @@ const InputLayout = styled.div`
   line-height: normal;
   padding: 0 10px;
   cursor: pointer;
-
 `

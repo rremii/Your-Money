@@ -7,21 +7,28 @@ interface props {
   scrollPercent: number
 }
 
-export const CategorySlideHeader: FC<props> = ({ activeType, scrollPercent }) => {
-
-
-  return <SlideHeaderLayout $scrollPercent={scrollPercent}>
-    <div className="cell">
-      <p className={`type ${activeType === "income" ? "active" : ""}`}>INCOME</p>
-    </div>
-    <div className="cell">
-      <p className={`type ${activeType === "expense" ? "active" : ""}`}>EXPENSE</p>
-    </div>
-    <div className="slider">
-      <div className="pushing-bar" />
-      <div className="bar" />
-    </div>
-  </SlideHeaderLayout>
+export const CategorySlideHeader: FC<props> = ({
+  activeType,
+  scrollPercent,
+}) => {
+  return (
+    <SlideHeaderLayout $scrollPercent={scrollPercent}>
+      <div className="cell">
+        <p className={`type ${activeType === "income" ? "active" : ""}`}>
+          INCOME
+        </p>
+      </div>
+      <div className="cell">
+        <p className={`type ${activeType === "expense" ? "active" : ""}`}>
+          EXPENSE
+        </p>
+      </div>
+      <div className="slider">
+        <div className="pushing-bar" />
+        <div className="bar" />
+      </div>
+    </SlideHeaderLayout>
+  )
 }
 const SlideHeaderLayout = styled.header<{
   $scrollPercent?: number
@@ -32,7 +39,7 @@ const SlideHeaderLayout = styled.header<{
   box-shadow: 0 0 5px 0 var(--shadow-3);
 
   .slider {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -46,7 +53,6 @@ const SlideHeaderLayout = styled.header<{
     }
 
     .bar {
-
       flex: 0 0 50%;
       background-color: var(--bg-11);
       height: 3px;
@@ -61,7 +67,8 @@ const SlideHeaderLayout = styled.header<{
     align-items: center;
 
     .type {
-      color: var(--txt-12);
+      transition: 0.4s;
+      color: var(--pale-txt);
       font-family: Inter;
       font-size: 12px;
       font-style: normal;
@@ -70,7 +77,7 @@ const SlideHeaderLayout = styled.header<{
     }
 
     .active {
-      color: var(--txt-13);
+      color: var(--main-txt);
     }
   }
 `

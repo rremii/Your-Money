@@ -10,14 +10,26 @@ interface props {
   OnClick?: () => void
 }
 
-export const PickDateBtn: FC<props> = ({ title, subTitle, img, isActive, color, OnClick }) => {
-
-
-  return <PickDateBtnLayout onClick={OnClick} $isActive={isActive} $color={color} className="PickDateBtn">
-    <img src={img} alt="icon" />
-    <h2 className="title">{title}</h2>
-    <p className="sub-title">{subTitle}</p>
-  </PickDateBtnLayout>
+export const PickDateBtn: FC<props> = ({
+  title,
+  subTitle,
+  img,
+  isActive,
+  color,
+  OnClick,
+}) => {
+  return (
+    <PickDateBtnLayout
+      onClick={OnClick}
+      $isActive={isActive}
+      $color={color}
+      className="PickDateBtn"
+    >
+      <img src={img} alt="icon" />
+      <h2 className="title">{title}</h2>
+      <p className="sub-title">{subTitle}</p>
+    </PickDateBtnLayout>
+  )
 }
 const PickDateBtnLayout = styled.button<{
   $isActive?: boolean
@@ -31,7 +43,8 @@ const PickDateBtnLayout = styled.button<{
   padding: 10px;
   border: ${({ $isActive }) => $isActive && "none"} !important;
   border-collapse: collapse;
-  background-color: ${({ $isActive, $color }) => $isActive ? $color : "transparent"};
+  background-color: ${({ $isActive, $color }) =>
+    $isActive ? $color : "transparent"};
 
   img {
     width: 25px;
@@ -40,23 +53,22 @@ const PickDateBtnLayout = styled.button<{
   }
 
   .title {
-    color: ${({ $isActive }) => $isActive ? "var(--txt-1)" : "var(--txt-5)"};
+    color: ${({ $isActive }) =>
+      $isActive ? "var(--txt-1)" : "var(--sub-txt)"};
     font-family: Inter;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 1;
     margin-bottom: 3px;
-
   }
 
   .sub-title {
-    color: ${({ $isActive }) => $isActive ? "var(--txt-1)" : "var(--txt-6)"};
+    color: ${({ $isActive }) => ($isActive ? "var(--txt-1)" : "var(--txt-6)")};
     font-family: Inter;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: 1;
   }
-
 `

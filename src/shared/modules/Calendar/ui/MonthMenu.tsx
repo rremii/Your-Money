@@ -6,7 +6,6 @@ import { setCurCalendarDate } from "@shared/modules/Calendar/model/Actions.ts"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
 import { Months } from "@shared/constants/Months.ts"
 
-
 interface props {
   dateStr: string
 }
@@ -14,9 +13,7 @@ interface props {
 export const MonthMenu: FC<props> = memo(({ dateStr }) => {
   const { chosenDateStr, color } = useContext(CalendarContext)
 
-
   const { days, weekDayShift } = GetMonthDays(dateStr)
-
 
   const OnDayClick = (date: Date) => {
     setCurCalendarDate(date.toUTCString())
@@ -26,31 +23,37 @@ export const MonthMenu: FC<props> = memo(({ dateStr }) => {
   const month = Months.get(date.getMonth())
   const year = date.getFullYear()
 
-  return <MonthContentLayout>
-    <div className="date">{month} {year}</div>
-    <ul className="week-days-box">
-      <li className="week-day">S</li>
-      <li className="week-day">M</li>
-      <li className="week-day">T</li>
-      <li className="week-day">W</li>
-      <li className="week-day">T</li>
-      <li className="week-day">F</li>
-      <li className="week-day">S</li>
-    </ul>
-    <DaysBox $color={color} $daysShift={weekDayShift}>
-      <div className="days-shift" />
-      {days.map((day) => {
-        const isActive = DatesEqualUpToDays(day, chosenDateStr)
-        return <div
-          key={day.toUTCString()}
-          onClick={() => OnDayClick(day)}
-          className={`day ${isActive ? "active" : ""}`}>
-          {day.getDate()}
-        </div>
-      })}
-    </DaysBox>
-
-  </MonthContentLayout>
+  return (
+    <MonthContentLayout>
+      <div className="date">
+        {month} {year}
+      </div>
+      <ul className="week-days-box">
+        <li className="week-day">S</li>
+        <li className="week-day">M</li>
+        <li className="week-day">T</li>
+        <li className="week-day">W</li>
+        <li className="week-day">T</li>
+        <li className="week-day">F</li>
+        <li className="week-day">S</li>
+      </ul>
+      <DaysBox $color={color} $daysShift={weekDayShift}>
+        <div className="days-shift" />
+        {days.map((day) => {
+          const isActive = DatesEqualUpToDays(day, chosenDateStr)
+          return (
+            <div
+              key={day.toUTCString()}
+              onClick={() => OnDayClick(day)}
+              className={`day ${isActive ? "active" : ""}`}
+            >
+              {day.getDate()}
+            </div>
+          )
+        })}
+      </DaysBox>
+    </MonthContentLayout>
+  )
 })
 
 const MonthContentLayout = styled.div`
@@ -60,7 +63,6 @@ const MonthContentLayout = styled.div`
 
   scroll-snap-stop: always;
   scroll-snap-align: center;
-
 
   .week-days-box {
     gap: 7px;
@@ -88,23 +90,18 @@ const MonthContentLayout = styled.div`
     justify-content: center;
     align-items: center;
     padding: 8px;
-    color: var(--txt-5);
+    color: var(--sub-txt);
     font-family: Inter;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
   }
-
-
-
-
 `
 const DaysBox = styled.div<{
   $daysShift?: number
   $color?: string
 }>`
-
   width: 100%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -118,7 +115,7 @@ const DaysBox = styled.div<{
 
   .day {
     cursor: pointer;
-    color: var(--txt-5);
+    color: var(--sub-txt);
     font-family: Inter;
     font-size: 11px;
     font-style: normal;
@@ -133,7 +130,7 @@ const DaysBox = styled.div<{
   }
 
   .active {
-    background-color: ${({ $color }) => $color ? $color : "rgb(63, 81, 181)"};
+    background-color: ${({ $color }) => ($color ? $color : "rgb(63, 81, 181)")};
     color: var(--txt-1);
   }
 `

@@ -13,30 +13,36 @@ import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { passwordSchema } from "@widgets/PasswordMenu/constants/validateSchema.ts"
 
-
 interface FormFields {
   password: string
   confirmPassword: string
 }
 
-
 export const PasswordMenu = React.memo(() => {
   const dispatch = useAppDispatch()
 
-
-  const isPasswordMenu = useTypedSelector(state => state.UI.Modals.passwordMenu.isOpen)
-
+  const isPasswordMenu = useTypedSelector(
+    (state) => state.UI.Modals.passwordMenu.isOpen,
+  )
 
   const { data: user } = GetMe.useQueryState()
   const [changePassword, { isLoading }] = useChangePasswordMutation()
 
-
-  const { register, formState: { errors }, clearErrors, handleSubmit, reset, setError } =
-    useForm<FormFields>({
-      resolver: yupResolver(passwordSchema)
-    })
-  const { Reset: ResetTimer } = useTimer({ timeGap: 3, finalTime: 3, callback: clearErrors })
-
+  const {
+    register,
+    formState: { errors },
+    clearErrors,
+    handleSubmit,
+    reset,
+    setError,
+  } = useForm<FormFields>({
+    resolver: yupResolver(passwordSchema),
+  })
+  const { Reset: ResetTimer } = useTimer({
+    timeGap: 3,
+    finalTime: 3,
+    callback: clearErrors,
+  })
 
   const SetError = (message: string) => {
     reset()
@@ -49,10 +55,12 @@ export const PasswordMenu = React.memo(() => {
     if (password === confirmPassword) {
       const hashedPassword = await HashData(password)
 
-      changePassword({ id: user.id, hashedPassword }).unwrap().then(() => {
-        CloseMenu()
-      }).catch(error => SetError(error.message))
-
+      changePassword({ id: user.id, hashedPassword })
+        .unwrap()
+        .then(() => {
+          CloseMenu()
+        })
+        .catch((error) => SetError(error.message))
     } else {
       SetError("Passwords are not equal")
     }
@@ -63,47 +71,52 @@ export const PasswordMenu = React.memo(() => {
     reset()
   }
   //todo move form to other file
-  return <>
-    <Overlay $isActive={isPasswordMenu} onClick={CloseMenu} $zIndex={15} />
-    <PasswordLayout $isOpen={isPasswordMenu}>
-      <h2 className="title">Change password</h2>
-      <form onSubmit={handleSubmit(ChangePassword)}>
-        <div className="fields">
+  return (
+    <>
+      <Overlay $isActive={isPasswordMenu} onClick={CloseMenu} $zIndex={15} />
+      <PasswordLayout $isOpen={isPasswordMenu}>
+        <h2 className="title">Change password</h2>
+        <form onSubmit={handleSubmit(ChangePassword)}>
+          <div className="fields">
+            <FormField
+              isError={Boolean(errors.root) || Boolean(errors.password)}
+              label=""
+              input={{
+                type: "password",
+                placeholder: "Password",
+                registerData: { ...register("password") },
+              }}
+            />
+            {errors.password && (
+              <ErrorMessage>{errors.password.message}</ErrorMessage>
+            )}
+            <FormField
+              isError={Boolean(errors.root || Boolean(errors.confirmPassword))}
+              label=""
+              input={{
+                type: "password",
+                placeholder: "Confirm password",
+                registerData: { ...register("confirmPassword") },
+              }}
+            />
+            {errors.confirmPassword && (
+              <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
+            )}
+            {errors.root && <ErrorMessage>{errors.root.message}</ErrorMessage>}
+          </div>
 
-          <FormField
-            isError={Boolean(errors.root) || Boolean(errors.password)}
-            label=""
-            input={{
-              type: "password",
-              placeholder: "Password",
-              registerData: { ...register("password") }
-            }}
-          />
-          {errors.password && (
-            <ErrorMessage>{errors.password.message}</ErrorMessage>
-          )}
-          <FormField
-            isError={Boolean(errors.root || Boolean(errors.confirmPassword))}
-            label=""
-            input={{
-              type: "password",
-              placeholder: "Confirm password",
-              registerData: { ...register("confirmPassword") }
-            }}
-          />
-          {errors.confirmPassword && (
-            <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
-          )}
-          {errors.root && <ErrorMessage>{errors.root.message}</ErrorMessage>}
-        </div>
-
-        <div className="btn-section">
-          <button className="gray" type="button" onClick={CloseMenu}>CANCEL</button>
-          <button className="red" type="submit">CHANGE PASSWORD</button>
-        </div>
-      </form>
-    </PasswordLayout>
-  </>
+          <div className="btn-section">
+            <button className="gray" type="button" onClick={CloseMenu}>
+              CANCEL
+            </button>
+            <button className="red" type="submit">
+              CHANGE PASSWORD
+            </button>
+          </div>
+        </form>
+      </PasswordLayout>
+    </>
+  )
 })
 const PasswordLayout = styled(Modal)`
   .btn-section {

@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const ChooseMenuLayout = styled.div<{
   $isActive?: boolean
 }>`
-  background-color: var(--bg-1);
+  background-color: var(--sub-bg);
   position: fixed;
   z-index: 50;
   width: 100%;

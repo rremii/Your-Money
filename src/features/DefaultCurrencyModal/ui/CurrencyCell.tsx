@@ -33,7 +33,7 @@ const CurrencyCellLayout = styled.div`
   cursor: pointer;
 
   .name {
-    color: var(--txt-5);
+    color: var(--sub-txt);
     font-family: Inter;
     font-size: 15px;
     font-style: normal;

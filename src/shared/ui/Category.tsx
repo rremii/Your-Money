@@ -8,23 +8,35 @@ interface props extends ICategory {
   OnClick?: (category: ICategory) => void
 }
 
-export const Category: FC<props> = memo(({ OnClick, isActive, ...category }) => {
-  const { name, icon, color } = category
+export const Category: FC<props> = memo(
+  ({ OnClick, isActive, ...category }) => {
+    const { name, icon, color } = category
 
+    const HandleOnClick = () => {
+      if (OnClick) OnClick(category)
+    }
 
-  const HandleOnClick = () => {
-    if (OnClick)
-      OnClick(category)
-  }
-
-  return <CategoryLayout className="Category" onClick={HandleOnClick} $color={color}
-                         $isActive={isActive}>
-    <p className="name">{name}</p>
-    <div className="icon">
-      <CustomIcon boxSize="47px" iconSize="25px" boxColor={color} icon={icon} color={"white"} />
-    </div>
-  </CategoryLayout>
-})
+    return (
+      <CategoryLayout
+        className="Category"
+        onClick={HandleOnClick}
+        $color={color}
+        $isActive={isActive}
+      >
+        <p className="name">{name}</p>
+        <div className="icon">
+          <CustomIcon
+            boxSize="47px"
+            iconSize="25px"
+            boxColor={color}
+            icon={icon}
+            color={"white"}
+          />
+        </div>
+      </CategoryLayout>
+    )
+  },
+)
 const CategoryLayout = styled.div<{
   $isActive?: boolean
   $color?: string
@@ -40,10 +52,12 @@ const CategoryLayout = styled.div<{
   gap: 6px;
   flex-direction: column;
   cursor: pointer;
-  background-color: ${({ $isActive, $color }) => $isActive ? $color : "transparent"};
+  background-color: ${({ $isActive, $color }) =>
+    $isActive ? $color : "transparent"};
 
   .name {
-    color: ${({ $isActive }) => $isActive ? "var(--txt-1)" : "var(--txt-2)"};
+    color: ${({ $isActive }) =>
+      $isActive ? "var(--txt-1)" : "var(--sub-txt)"};
     font-family: Inter;
     font-size: 12px;
     font-style: normal;
@@ -52,9 +66,6 @@ const CategoryLayout = styled.div<{
   }
 
   .icon {
-    opacity: ${({ $isActive }) => $isActive ? 1 : 0.7};
+    opacity: ${({ $isActive }) => ($isActive ? 1 : 0.7)};
   }
-
-
-
 `

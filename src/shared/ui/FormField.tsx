@@ -34,7 +34,7 @@ const FieldLayout = styled.div`
 
   label,
   input {
-    color: var(--txt-6);
+    color: var(--main-txt);
     font-family: Inter;
     font-size: 15px;
     font-style: normal;

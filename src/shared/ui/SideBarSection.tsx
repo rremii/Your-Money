@@ -3,6 +3,7 @@ import styled from "styled-components"
 export const SideBarSection = styled.section`
   width: 100%;
   padding-left: 20px;
+  flex: 1 1 auto;
 
   .title {
     color: var(--txt-3);
@@ -20,9 +21,9 @@ export const SideBarSection = styled.section`
     flex-direction: column;
     width: 100%;
 
-    .SideBarButton:last-child {
+    button:last-child {
       .text-info {
-        border-bottom: 1px transparent solid;
+        border-bottom: none;
       }
     }
   }

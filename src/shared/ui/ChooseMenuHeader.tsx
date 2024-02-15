@@ -6,15 +6,12 @@ interface props {
 }
 
 export const ChooseMenuHeader: FC<props> = ({ content }) => {
-
-  return <HeaderLayout>
-    {content.toUpperCase()}
-  </HeaderLayout>
+  return <HeaderLayout>{content.toUpperCase()}</HeaderLayout>
 }
 const HeaderLayout = styled.header`
   height: 45px;
   width: 100%;
-  color: var(--txt-2);
+  color: var(--main-txt);
   font-family: Inter;
   font-size: 12px;
   font-style: normal;
@@ -27,13 +24,13 @@ const HeaderLayout = styled.header`
   justify-content: center;
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 3px;
     border-radius: 4px 4px 0px 0px;
-    background-color: var(--bg-5);
+    background-color: var(--sub-bg-light);
   }
 `

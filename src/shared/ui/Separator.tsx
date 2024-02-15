@@ -2,6 +2,6 @@ import styled from "styled-components"
 
 export const Separator = styled.div`
   width: 100%;
-  height: 1px;
-  background-color: var(--separator-1);
+  flex: 0 0 1px;
+  background-color: rgba(109, 108, 108, 0.24);
 `

@@ -8,7 +8,6 @@ import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConver
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
-
 interface props {
   type: TransactionType
   // color: string
@@ -17,18 +16,32 @@ interface props {
 export const ResultQuantity: FC<props> = ({ type }) => {
   const dispatch = useAppDispatch()
 
+  const categoryColor = useTypedSelector(
+    (state) => state.EditCreateTransaction.ChosenCategory.color,
+  )
+  const account = useTypedSelector(
+    (state) => state.EditCreateTransaction.ChosenAccount,
+  )
 
-  const categoryColor = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.color)
-  const account = useTypedSelector(state => state.EditCreateTransaction.ChosenAccount)
+  const menuType = useTypedSelector(
+    (state) => state.UI.Modals.editCreateTransMenu.menuType,
+  )
+  const currency = useTypedSelector(
+    (state) => state.EditCreateTransaction.Transaction.currency,
+  )
 
-  const menuType = useTypedSelector(state => state.UI.Modals.editCreateTransMenu.menuType)
-  const currency = useTypedSelector(state => state.EditCreateTransaction.Transaction.currency)
-
-  const quantity = useTypedSelector(state => state.EditCreateTransaction.Calculator.quantity)
-  let numberStr1 = useTypedSelector(state => state.EditCreateTransaction.Calculator.numberStr1)
-  let numberStr2 = useTypedSelector(state => state.EditCreateTransaction.Calculator.numberStr2)
-  const operator = useTypedSelector(state => state.EditCreateTransaction.Calculator.operator)
-
+  const quantity = useTypedSelector(
+    (state) => state.EditCreateTransaction.Calculator.quantity,
+  )
+  let numberStr1 = useTypedSelector(
+    (state) => state.EditCreateTransaction.Calculator.numberStr1,
+  )
+  let numberStr2 = useTypedSelector(
+    (state) => state.EditCreateTransaction.Calculator.numberStr2,
+  )
+  const operator = useTypedSelector(
+    (state) => state.EditCreateTransaction.Calculator.operator,
+  )
 
   const { convertCurrency } = useCurrencyConverter()
 
@@ -39,59 +52,74 @@ export const ResultQuantity: FC<props> = ({ type }) => {
   if (!numberStr1 || menuType === "overview") quantityStr = "" + quantity
   else {
     if (operator)
-      quantityStr = numberStr1 + " " + MathOperatorSign.get(operator) + " " + numberStr2
+      quantityStr =
+        numberStr1 + " " + MathOperatorSign.get(operator) + " " + numberStr2
     else quantityStr = numberStr1
   }
 
-
   const OnClick = () => {
-    if (menuType === "overview")
-      dispatch(setEditCreateMenuType("edit"))
+    if (menuType === "overview") dispatch(setEditCreateMenuType("edit"))
   }
-
 
   const rightCell = {
     color: categoryColor,
-    bgColor: categoryColor
+    bgColor: categoryColor,
   }
   const leftCell = {
-    color: account.color
+    color: account.color,
   }
 
   const GetConvertedCurrency = () => {
-    return RoundDecimal(convertCurrency(+quantityStr ? +quantityStr : +numberStr1, currency, account.currency), 2)
+    return RoundDecimal(
+      convertCurrency(
+        +quantityStr ? +quantityStr : +numberStr1,
+        currency,
+        account.currency,
+      ),
+      2,
+    )
   }
 
-  return <QuantityLayout onClick={OnClick} $leftCell={leftCell} $rightCell={rightCell}>
-    {currency !== account.currency &&
-      <div className="cell left">
+  return (
+    <QuantityLayout
+      onClick={OnClick}
+      $leftCell={leftCell}
+      $rightCell={rightCell}
+    >
+      {currency !== account.currency && (
+        <div className="cell left">
+          <p className="type">{type}</p>
+          <p className="quantity">
+            {DefaultCurrencySigns.get(account.currency)}{" "}
+            {GetConvertedCurrency() || "0"}
+          </p>
+          <div className="colorFilter" />
+        </div>
+      )}
+      <div className="cell right">
         <p className="type">{type}</p>
-        <p
-          className="quantity">{DefaultCurrencySigns.get(account.currency)} {GetConvertedCurrency() || "0"}</p>
+        <p className="quantity">
+          {DefaultCurrencySigns.get(currency)} {quantityStr || "0"}
+        </p>
         <div className="colorFilter" />
       </div>
-    }
-    <div className="cell right">
-      <p className="type">{type}</p>
-      <p className="quantity">{DefaultCurrencySigns.get(currency)} {quantityStr || "0"}</p>
-      <div className="colorFilter" />
-    </div>
-  </QuantityLayout>
+    </QuantityLayout>
+  )
 }
 const QuantityLayout = styled.div<{
   $rightCell?: {
     color: string
     bgColor: string
-  },
+  }
   $leftCell?: {
     color: string
   }
 }>`
   cursor: pointer;
-  background-color: var(--bg-1);
+  background-color: var(--sub-bg);
   height: 75px;
   display: flex;
-  border-bottom: 1px solid var(--bg-10);
+  border-bottom: 1px solid rgba(163, 162, 162, 0.13);
 
   .cell {
     width: 100%;
@@ -113,21 +141,25 @@ const QuantityLayout = styled.div<{
       top: 0;
       left: 0;
       opacity: 0.15;
-      background-color: ${({ $rightCell }) => $rightCell?.bgColor || "white"} !important;
+      background-color: ${({ $rightCell }) =>
+        $rightCell?.bgColor || "white"} !important;
     }
 
-    .type, .quantity {
+    .type,
+    .quantity {
       color: ${({ $rightCell }) => $rightCell?.color || "white"} !important;
     }
   }
 
   .left {
-    .type, .quantity {
+    .type,
+    .quantity {
       color: ${({ $leftCell }) => $leftCell?.color || "var(--txt-3)"};
     }
   }
 
-  .type, .quantity {
+  .type,
+  .quantity {
     font-family: Inter;
     font-style: normal;
     font-weight: 400;

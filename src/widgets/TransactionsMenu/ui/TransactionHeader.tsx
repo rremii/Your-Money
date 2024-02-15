@@ -63,8 +63,8 @@ const TransactionsHeaderLayout = styled.header`
   background-color: var(--sub-bg);
 
   box-shadow: 0px 2px 4px 0px var(--shadow-2);
-  border-left: solid 1px var(--bg-5);
-  border-right: solid 1px var(--bg-5);
+  border-left: solid 1px rgba(109, 108, 108, 0.24);
+  border-right: solid 1px rgba(109, 108, 108, 0.24);
 
   &::after {
     content: "";
@@ -74,7 +74,7 @@ const TransactionsHeaderLayout = styled.header`
     transform: translateX(-50%);
     height: 100%;
     width: 1px;
-    background-color: var(--bg-5);
+    background-color: rgba(109, 108, 108, 0.3);
   }
 
   .zero {

@@ -7,23 +7,25 @@ import { CreateCategoryIcon } from "@features/CreateCategoryIcon/ui/CreateCatego
 import { memo } from "react"
 
 export const EditCreateCategoryMenu = memo(() => {
+  const isMenuOpen = useTypedSelector(
+    (state) => state.UI.Modals.editCreateCategoryMenu.isOpen,
+  )
+  const menuType = useTypedSelector(
+    (state) => state.UI.Modals.editCreateCategoryMenu.menuType,
+  )
+  const color = useTypedSelector((state) => state.NewCategory.color)
 
-  const isMenuOpen = useTypedSelector(state => state.UI.Modals.editCreateCategoryMenu.isOpen)
-  const menuType = useTypedSelector(state => state.UI.Modals.editCreateCategoryMenu.menuType)
-  const color = useTypedSelector(state => state.NewCategory.color)
+  return (
+    <EditCreateCategoryLayout $color={color} $isMenuOpen={isMenuOpen}>
+      <div className="colorfull-box">
+        <EditCategoryHeader />
+        <NameInput />
+        <CreateCategoryIcon />
+      </div>
 
-
-  return <EditCreateCategoryLayout $color={color} $isMenuOpen={isMenuOpen}>
-    <div className="colorfull-box">
-      <EditCategoryHeader />
-      <NameInput />
-      <CreateCategoryIcon />
-    </div>
-
-    {menuType === "edit" && (
-      <DeleteCategory />
-    )}
-  </EditCreateCategoryLayout>
+      {menuType === "edit" && <DeleteCategory />}
+    </EditCreateCategoryLayout>
+  )
 })
 const EditCreateCategoryLayout = styled.div<{
   $isMenuOpen?: boolean
@@ -36,14 +38,14 @@ const EditCreateCategoryLayout = styled.div<{
   max-width: 450px;
   top: 0;
   left: 0;
-  transition: transform .5s;
-  pointer-events: ${({ $isMenuOpen }) => $isMenuOpen ? "initial" : "none"};
-  transform: ${({ $isMenuOpen }) => $isMenuOpen ? "translateX(0)" : "translateX(100%)"};
-  background-color: var(--bg-2);
-
+  transition: transform 0.5s;
+  pointer-events: ${({ $isMenuOpen }) => ($isMenuOpen ? "initial" : "none")};
+  transform: ${({ $isMenuOpen }) =>
+    $isMenuOpen ? "translateX(0)" : "translateX(100%)"};
+  background-color: var(--main-bg);
 
   .colorfull-box {
-    background-color: ${({ $color }) => $color ? $color : "#0BAD7B"};
+    background-color: ${({ $color }) => ($color ? $color : "#0BAD7B")};
     color: var(--txt-1);
     height: 130px;
     margin-bottom: 20px;

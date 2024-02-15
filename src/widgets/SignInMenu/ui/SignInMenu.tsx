@@ -16,6 +16,7 @@ export const SignInMenu = () => {
   )
 }
 const SignInMenuLayout = styled.main`
+  background-color: var(--main-bg);
   width: 100%;
   padding: 25px 25px 0;
 `

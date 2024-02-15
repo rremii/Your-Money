@@ -49,6 +49,8 @@ const CurrencyModalLayout = styled(Modal)<{
   height: ${({ $height }) => ($height ? $height + "px" : "500px")};
   overflow-y: hidden;
 
+  background-color: var(--sub-bg-light);
+
   .subTitle {
     color: var(--txt-3);
     font-family: Inter;
@@ -62,6 +64,11 @@ const CurrencyModalLayout = styled(Modal)<{
 
   .btn-section {
     margin-top: 20px;
+    font-size: 18px;
+
+    button {
+      font-size: 13px;
+    }
   }
 
   .currencies-box {

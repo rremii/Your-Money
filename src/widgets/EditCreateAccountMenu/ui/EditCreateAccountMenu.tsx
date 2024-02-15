@@ -49,11 +49,11 @@ const EditCreateAccountLayout = styled.div<{
   pointer-events: ${({ $isMenuOpen }) => ($isMenuOpen ? "initial" : "none")};
   transform: ${({ $isMenuOpen }) =>
     $isMenuOpen ? "translateX(0)" : "translateX(100%)"};
-  background-color: var(--bg-2);
+  background-color: var(--main-bg);
 
   .section-header {
     padding: 10px 15px;
-    background-color: white;
+    background-color: var(--sub-bg);
     font-weight: 400;
     font-size: 14px;
     font-family: Inter, sans-serif;

@@ -8,10 +8,15 @@ interface props {
 }
 
 export const DigitBtn: FC<props> = memo(({ OnClick, children }) => {
-
-  return <CalculatorBtn $borderColor={"var(--bg-14)"} onClick={OnClick} $bgColor={"var(--bg-1)"}>
-    <DigitLayout>{children}</DigitLayout>
-  </CalculatorBtn>
+  return (
+    <CalculatorBtn
+      $borderColor={"rgba(163, 162, 162, 0.13)"}
+      onClick={OnClick}
+      $bgColor={"var(--sub-bg)"}
+    >
+      <DigitLayout>{children}</DigitLayout>
+    </CalculatorBtn>
+  )
 })
 
 const DigitLayout = styled.span`
@@ -20,5 +25,4 @@ const DigitLayout = styled.span`
   font-weight: 300;
   line-height: normal;
   font-size: 22px;
-  color: var(--txt-6);
 `

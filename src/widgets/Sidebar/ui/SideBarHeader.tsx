@@ -5,13 +5,14 @@ import React, { useEffect } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { getIsMenuIdZero } from "@entities/DateSlider/model/DateSliderSlice.ts"
 
-
-const time = new Date().getHours() + ":" + new Date().getMinutes().toString().padStart(2, "0")
+const time =
+  new Date().getHours() +
+  ":" +
+  new Date().getMinutes().toString().padStart(2, "0")
 
 export const SideBarHeader = React.memo(() => {
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
   const isMenuIdZero = useTypedSelector(getIsMenuIdZero)
-
 
   const [getMe, { data: userInfo }] = useLazyGetMeQuery()
 
@@ -20,39 +21,39 @@ export const SideBarHeader = React.memo(() => {
     getMe()
   }, [getMe, isLoggedIn])
 
-
   const GetSectionsData = () => {
     if (isLoggedIn === "success") {
       return {
         avatar: userInfo?.avatar || Categories,
         email: userInfo?.email,
         name: userInfo?.name,
-        time: "Today, " + time
+        time: "Today, " + time,
       }
     } else {
       return {
         avatar: Categories,
         email: "Synchronization disabled...",
         name: "SIGN IN",
-        time: "Synchronization..."
+        time: "Synchronization...",
       }
     }
   }
 
-  return <HeaderLayout $isActive={isMenuIdZero}>
-    <div className="avatar-box">
-      <img className="avatar" src={GetSectionsData().avatar}
-           alt="avatar" />
-      <div className="extra-info">
-        <div className="date">{GetSectionsData().time}</div>
-        <img src={Categories} alt="cloud" />
+  return (
+    <HeaderLayout $isActive={isMenuIdZero}>
+      <div className="avatar-box">
+        <img className="avatar" src={GetSectionsData().avatar} alt="avatar" />
+        <div className="extra-info">
+          <div className="date">{GetSectionsData().time}</div>
+          <img src={Categories} alt="cloud" />
+        </div>
       </div>
-    </div>
-    <div className="user-info">
-      <h2 className="name">{GetSectionsData().name}</h2>
-      <h3 className="email">{GetSectionsData().email}</h3>
-    </div>
-  </HeaderLayout>
+      <div className="user-info">
+        <h2 className="name">{GetSectionsData().name}</h2>
+        <h3 className="email">{GetSectionsData().email}</h3>
+      </div>
+    </HeaderLayout>
+  )
 })
 const HeaderLayout = styled.header<{
   $isActive?: boolean
@@ -60,7 +61,7 @@ const HeaderLayout = styled.header<{
   padding-left: 20px;
   width: 100%;
   flex: 0 0 135px;
-  background-color: ${({ $isActive }) => $isActive ? "var(--account-color)" : "var(--bg-11)"};
+  background-color: var(--account-color);
   padding-top: 35px;
   padding-right: 15px;
 
@@ -111,5 +112,4 @@ const HeaderLayout = styled.header<{
       font-size: 16px;
     }
   }
-
 `

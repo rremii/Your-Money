@@ -36,7 +36,7 @@ const OrSeparatorLayout = styled.div`
     width: 45px;
     height: 25px;
     z-index: -1;
-    background-color: var(--bg-1);
+    background-color: var(--main-bg);
     top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);

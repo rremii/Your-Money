@@ -27,9 +27,9 @@ export const BalanceCell = () => {
 }
 const BalanceCellLayout = styled.div`
   padding: 10px 15px;
-  background-color: white;
   margin-bottom: 10px;
   box-shadow: 0 5px 5px -5px var(--shadow-3);
+  background-color: var(--sub-bg);
 
   display: flex;
   justify-content: space-between;
@@ -38,7 +38,7 @@ const BalanceCellLayout = styled.div`
     font-weight: 400;
     font-size: 14px;
     font-family: Inter, sans-serif;
-    color: black;
+    color: var(--sub-txt);
     margin-bottom: 2px;
   }
 
