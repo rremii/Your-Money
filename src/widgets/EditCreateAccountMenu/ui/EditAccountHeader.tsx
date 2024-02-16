@@ -5,6 +5,7 @@ import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { resetEditAccount } from "@entities/Account/model/NewAccountSlice.ts"
 import { CreateAccount } from "@features/CreateAccount/ui/CreateAccount.tsx"
 import { EditAccount } from "@features/EditAccount/ui/EditAccount.tsx"
+import { memo } from "react"
 
 export const EditAccountHeader = () => {
   const dispatch = useAppDispatch()
@@ -12,9 +13,6 @@ export const EditAccountHeader = () => {
   const menuType = useTypedSelector(
     (state) => state.UI.Modals.editCreateAccountMenu.menuType,
   )
-
-  // const { CreateCategory, isSuccess: isCreationSucceed } = useCreateCategory()
-  // const { EditCategory, isSuccess: isEditingSucceed } = useEditCategory()
 
   const CloseAccountMenu = async () => {
     dispatch(closeMenu("editCreateAccountMenu"))
@@ -27,18 +25,6 @@ export const EditAccountHeader = () => {
     })
 
     if (timer) return window.clearTimeout(timer)
-  }
-
-  // useEffect(() => {
-  //   if (isCreationSucceed || isEditingSucceed)
-  //     dispatch(closeMenu("editCreateCategoryMenu"))
-  // }, [isCreationSucceed, isEditingSucceed])
-
-  const OnConfirm = async () => {
-    // if (menuType === "create")
-    //   await CreateCategory()
-    // if (menuType === "edit")
-    //   await EditCategory()
   }
 
   return (

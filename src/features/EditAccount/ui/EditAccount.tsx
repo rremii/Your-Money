@@ -1,11 +1,11 @@
 import styled from "styled-components"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { useEditAccount } from "@entities/Account/model/useEditAccount.tsx"
-import { useEffect } from "react"
+import { memo, useEffect } from "react"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 
-export const EditAccount = () => {
+export const EditAccount = memo(() => {
   const dispatch = useAppDispatch()
 
   const { EditAccount, isSuccess, isPending } = useEditAccount()
@@ -27,7 +27,7 @@ export const EditAccount = () => {
       <img src={Categories} alt="edit" />
     </EditAccountLayout>
   )
-}
+})
 const EditAccountLayout = styled.button`
   img {
     width: 100%;

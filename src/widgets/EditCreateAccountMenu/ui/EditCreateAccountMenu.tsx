@@ -6,8 +6,9 @@ import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { DeleteAccount } from "@features/DeleteAccount/ui/DeleteAccount.tsx"
 import { CurrencyCell } from "@widgets/EditCreateAccountMenu/ui/CurrencyCell.tsx"
 import { BalanceCell } from "@widgets/EditCreateAccountMenu/ui/BalanceCell.tsx"
+import { memo } from "react"
 
-export const EditCreateAccountMenu = () => {
+export const EditCreateAccountMenu = memo(() => {
   const isMenuOpen = useTypedSelector(
     (state) => state.UI.Modals.editCreateAccountMenu.isOpen,
   )
@@ -33,7 +34,7 @@ export const EditCreateAccountMenu = () => {
       {menuType === "edit" && <DeleteAccount />}
     </EditCreateAccountLayout>
   )
-}
+})
 const EditCreateAccountLayout = styled.div<{
   $isMenuOpen?: boolean
   $color?: string

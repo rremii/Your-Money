@@ -18,7 +18,6 @@ export const AccountCurrencyModal = memo(() => {
   const CloseModal = () => {
     dispatch(closeMenu("accountCurrencyMenu"))
   }
-
   return (
     <>
       <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />

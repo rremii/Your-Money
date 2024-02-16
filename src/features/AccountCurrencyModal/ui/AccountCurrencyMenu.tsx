@@ -1,14 +1,15 @@
 import styled from "styled-components"
 import { CurrencyCell } from "@features/DefaultCurrencyModal/ui/CurrencyCell.tsx"
-import React, { useState } from "react"
+import React, { memo, useState } from "react"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { Currency } from "@entities/Currency/types.ts"
 import { MainCurrencies } from "@entities/Currency/constants/MainCurrencies.ts"
 import { setNewAccountCurrency } from "@entities/Account/model/NewAccountSlice.ts"
 
-export const AccountCurrencyMenu = () => {
+export const AccountCurrencyMenu = memo(() => {
   const dispatch = useAppDispatch()
+  console.log("qweqwe")
 
   const currency = useTypedSelector((state) => state.NewAccount.currency)
 
@@ -49,7 +50,7 @@ export const AccountCurrencyMenu = () => {
       </div>
     </CurrencyMenuLayout>
   )
-}
+})
 const CurrencyMenuLayout = styled.div`
   overflow-y: hidden;
   height: 100%;

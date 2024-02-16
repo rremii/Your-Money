@@ -2,11 +2,11 @@ import styled from "styled-components"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { useCreateAccount } from "@entities/Account/model/useCreateAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
-import { useEffect } from "react"
+import { memo, useEffect } from "react"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 
-export const CreateAccount = () => {
+export const CreateAccount = memo(() => {
   const dispatch = useAppDispatch()
 
   const { data: user } = GetMe.useQueryState()
@@ -29,7 +29,7 @@ export const CreateAccount = () => {
       <img src={Categories} alt="create" />
     </CreateAccountLayout>
   )
-}
+})
 const CreateAccountLayout = styled.button`
   img {
     width: 100%;
