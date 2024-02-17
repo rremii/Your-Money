@@ -5,15 +5,14 @@ import {
   setAuthRejected,
   setAuthSuccess,
 } from "@entities/Auth/model/AuthSlice.ts"
-import { useToast } from "@shared/hooks/useToast.tsx"
+import { useNotifyToast } from "@shared/GlobalModules/Toasts"
 
 export const withAuth = (Component: FC) => () => {
   const dispatch = useAppDispatch()
 
-  const { ShowToast } = useToast(5000, 1000)
+  const { ShowToast } = useNotifyToast(5000, 1000)
   const { data, isLoading, isError, isUninitialized } = useRefreshQuery()
   useEffect(() => {
-
     if (!localStorage.getItem("accessToken")) dispatch(setAuthRejected())
 
     if (data) {
@@ -23,14 +22,19 @@ export const withAuth = (Component: FC) => () => {
 
     if (!data && isError) {
       dispatch(setAuthRejected())
-      ShowToast("Please login, the maximum amount of transactions is limited by 20 and synchronization is not available")
+      ShowToast({
+        message:
+          "Please login, the maximum amount of transactions is limited by 20 and synchronization is not available",
+        state: "info",
+      })
     }
   }, [data, isError])
 
   const isFinished = !isUninitialized && !isLoading
-  return <>
-    {/*{isFinished && <Component />}*/}
-    {<Component />}
-  </>
-
+  return (
+    <>
+      {/*{isFinished && <Component />}*/}
+      {<Component />}
+    </>
+  )
 }

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { CurrencyCell } from "@features/DefaultCurrencyModal/ui/CurrencyCell.tsx"
-import React, { memo, useState } from "react"
+import React, { memo, useCallback, useState } from "react"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { Currency } from "@entities/Currency/types.ts"
@@ -9,15 +9,14 @@ import { setNewAccountCurrency } from "@entities/Account/model/NewAccountSlice.t
 
 export const AccountCurrencyMenu = memo(() => {
   const dispatch = useAppDispatch()
-  console.log("qweqwe")
 
   const currency = useTypedSelector((state) => state.NewAccount.currency)
 
   const [chosenCurrency, setCurrency] = useState<Currency>(currency)
 
-  const SetChosenCurrency = (currency: Currency) => {
+  const SetChosenCurrency = useCallback((currency: Currency) => {
     setCurrency(currency)
-  }
+  }, [])
   const OnSubmit = () => {
     dispatch(setNewAccountCurrency(chosenCurrency))
     CloseModal()
@@ -32,7 +31,7 @@ export const AccountCurrencyMenu = memo(() => {
       <div className="currencies-box">
         {MainCurrencies.map(({ fullName, shortName }, index) => (
           <CurrencyCell
-            OnClick={() => SetChosenCurrency(shortName)}
+            OnClick={SetChosenCurrency}
             fullName={fullName}
             shortName={shortName}
             isActive={chosenCurrency === shortName}

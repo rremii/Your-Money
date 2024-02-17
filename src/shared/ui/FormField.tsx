@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import React, { FC } from "react"
+import React, { FC, memo } from "react"
 
 interface props {
   isError?: boolean

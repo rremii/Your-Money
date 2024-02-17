@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import React, { memo } from "react"
+import React, { memo, useCallback } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { SideBarModalHeader } from "@shared/ui/SideBarModalHeader.tsx"
@@ -22,11 +22,11 @@ export const ChangeCurrencyFormatModal = memo(() => {
     (state) => state.Settings.curCurrencySign,
   )
 
-  const SetCurrencyFormat = (format: string) => {
+  const SetCurrencyFormat = useCallback((format: string) => {
     window.localStorage.setItem("currencyFormat", format)
     dispatch(setCurrencyFormat(format))
     CloseModal()
-  }
+  }, [])
 
   const CloseModal = () => {
     dispatch(closeMenu("currencyFormatMenu"))
@@ -41,7 +41,7 @@ export const ChangeCurrencyFormatModal = memo(() => {
           {CurrencyFormats.map((format, index) => (
             <FormatCell
               currencySign={currencySign}
-              OnClick={() => SetCurrencyFormat(format)}
+              OnClick={SetCurrencyFormat}
               format={format}
               isActive={currencyFormat === format}
               key={index}

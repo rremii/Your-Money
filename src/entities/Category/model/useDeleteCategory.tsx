@@ -1,20 +1,23 @@
 import { useDeleteCategoryMutation } from "@entities/Category/api/CategoriesApi.ts"
-import { useToast } from "@shared/hooks/useToast.tsx"
+import { useToast } from "@shared/GlobalModules/Toasts/model/useToast.tsx"
 import { useEffect } from "react"
 import { ErrorResponse } from "@entities/Auth/types.ts"
+import { useNotifyToast } from "@shared/GlobalModules/Toasts/model/useNotifyToast.tsx"
+import { useLoadingToast } from "@shared/GlobalModules/Toasts"
 
 export const useDeleteCategory = () => {
   const [deleteCategory, { isError, error, isLoading }] =
     useDeleteCategoryMutation()
 
-  const { ShowToast } = useToast(2000)
+  const { ShowToast } = useNotifyToast(2000)
+  useLoadingToast(isLoading, "Deleting the category...")
 
   useEffect(() => {
     if (!isError) return
 
     const { message } = error as ErrorResponse
 
-    ShowToast(message, "error")
+    ShowToast({ message, state: "error" })
   }, [isError])
 
   const DeleteCategory = async (categoryId: number) => {

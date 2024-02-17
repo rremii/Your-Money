@@ -1,5 +1,5 @@
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
-import React, { FC } from "react"
+import React, { FC, memo } from "react"
 import styled from "styled-components"
 import { Currency } from "@entities/Currency/types.ts"
 import { RadioBtn } from "@shared/ui/RadioBtn.tsx"
@@ -8,23 +8,20 @@ interface props {
   fullName: string
   shortName: Currency
   isActive: boolean
-  OnClick?: () => void
+  OnClick: (currency: Currency) => void
 }
 
-export const CurrencyCell: FC<props> = ({
-  fullName,
-  shortName,
-  isActive,
-  OnClick,
-}) => {
-  return (
-    <CurrencyCellLayout onClick={OnClick}>
-      <RadioBtn $isActive={isActive} />
-      <p className="name">{fullName}</p>
-      <p className="sign">{DefaultCurrencySigns.get(shortName)}</p>
-    </CurrencyCellLayout>
-  )
-}
+export const CurrencyCell: FC<props> = memo(
+  ({ fullName, shortName, isActive, OnClick }) => {
+    return (
+      <CurrencyCellLayout onClick={() => OnClick(shortName)}>
+        <RadioBtn $isActive={isActive} />
+        <p className="name">{fullName}</p>
+        <p className="sign">{DefaultCurrencySigns.get(shortName)}</p>
+      </CurrencyCellLayout>
+    )
+  },
+)
 const CurrencyCellLayout = styled.div`
   display: flex;
   align-items: center;

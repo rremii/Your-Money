@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, memo } from "react"
 import styled from "styled-components"
 import { RadioBtn } from "@shared/ui/RadioBtn.tsx"
 import { FullNameLanguages } from "@entities/Settings/constants/FullNameLanguages.ts"
@@ -7,17 +7,17 @@ import { themeType } from "@entities/Settings/model/SettingsSlice.ts"
 interface props {
   theme: themeType
   isActive: boolean
-  OnClick?: () => void
+  OnClick: (theme: themeType) => void
 }
 
-export const ThemeCell: FC<props> = ({ theme, isActive, OnClick }) => {
+export const ThemeCell: FC<props> = memo(({ theme, isActive, OnClick }) => {
   return (
-    <ThemeCellLayout onClick={OnClick}>
+    <ThemeCellLayout onClick={() => OnClick(theme)}>
       <RadioBtn $isActive={isActive} />
       <p className="theme">{theme}</p>
     </ThemeCellLayout>
   )
-}
+})
 const ThemeCellLayout = styled.div`
   display: flex;
   align-items: center;

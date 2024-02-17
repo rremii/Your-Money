@@ -16,8 +16,9 @@ interface props {
 export const OptionsSection: FC<props> = ({ color }) => {
   const dispatch = useAppDispatch()
 
-
-  const transId = useTypedSelector(state => state.EditCreateTransaction.Transaction.id)
+  const transId = useTypedSelector(
+    (state) => state.EditCreateTransaction.Transaction.id,
+  )
 
   const [deleteTrans, { isLoading }] = useDeleteTransactionMutation()
 
@@ -38,27 +39,32 @@ export const OptionsSection: FC<props> = ({ color }) => {
     dispatch(closeMenu("editCreateTransMenu"))
   }
 
-
-  return <OptionsLayout $color={color}>
-    <div onClick={OnDeleteClick} className="option delete">
-      <div className="icon">
-        <img src={Category} alt="delete" />
+  return (
+    <OptionsLayout $color={color}>
+      <button
+        onClick={OnDeleteClick}
+        disabled={isLoading}
+        className="option delete"
+      >
+        <div className="icon">
+          <img src={Category} alt="delete" />
+        </div>
+        <p>Delete</p>
+      </button>
+      <div onClick={OnDateClick} className="option date">
+        <div className="icon">
+          <img src={Category} alt="date" />
+        </div>
+        <p>Date</p>
       </div>
-      <p>Delete</p>
-    </div>
-    <div onClick={OnDateClick} className="option date">
-      <div className="icon">
-        <img src={Category} alt="date" />
+      <div onClick={OnDuplicateClick} className="option duplicate">
+        <div className="icon">
+          <img src={Category} alt="duplicate" />
+        </div>
+        <p>Duplicate</p>
       </div>
-      <p>Date</p>
-    </div>
-    <div onClick={OnDuplicateClick} className="option duplicate">
-      <div className="icon">
-        <img src={Category} alt="duplicate" />
-      </div>
-      <p>Duplicate</p>
-    </div>
-  </OptionsLayout>
+    </OptionsLayout>
+  )
 }
 const OptionsLayout = styled.div<{
   $color?: string
@@ -99,30 +105,23 @@ const OptionsLayout = styled.div<{
         width: 20px;
       }
     }
-
-
   }
 
   .delete {
     .icon {
-
       background-color: var(--bg-15);
     }
   }
 
   .date {
     .icon {
-
       background-color: var(--bg-5);
     }
   }
 
   .duplicate {
     .icon {
-
       background-color: ${({ $color }) => $color || ""};
     }
-
   }
-
 `

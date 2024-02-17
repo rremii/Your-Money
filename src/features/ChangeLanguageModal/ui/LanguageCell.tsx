@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, memo } from "react"
 import styled from "styled-components"
 import { RadioBtn } from "@shared/ui/RadioBtn.tsx"
 import { FullNameLanguages } from "@entities/Settings/constants/FullNameLanguages.ts"
@@ -6,17 +6,19 @@ import { FullNameLanguages } from "@entities/Settings/constants/FullNameLanguage
 interface props {
   language: string
   isActive: boolean
-  OnClick?: () => void
+  OnClick: (language: string) => void
 }
 
-export const LanguageCell: FC<props> = ({ language, isActive, OnClick }) => {
-  return (
-    <LanguageCellLayout onClick={OnClick}>
-      <RadioBtn $isActive={isActive} />
-      <p className="language">{FullNameLanguages.get(language)}</p>
-    </LanguageCellLayout>
-  )
-}
+export const LanguageCell: FC<props> = memo(
+  ({ language, isActive, OnClick }) => {
+    return (
+      <LanguageCellLayout onClick={() => OnClick(language)}>
+        <RadioBtn $isActive={isActive} />
+        <p className="language">{FullNameLanguages.get(language)}</p>
+      </LanguageCellLayout>
+    )
+  },
+)
 const LanguageCellLayout = styled.div`
   display: flex;
   align-items: center;

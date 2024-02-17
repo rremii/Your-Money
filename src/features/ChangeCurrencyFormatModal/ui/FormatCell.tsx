@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { FC, memo } from "react"
 import styled from "styled-components"
 import { RadioBtn } from "@shared/ui/RadioBtn.tsx"
 import { FullNameLanguages } from "@entities/Settings/constants/FullNameLanguages.ts"
@@ -9,30 +9,27 @@ interface props {
   format: string
   currencySign: string
   isActive: boolean
-  OnClick?: () => void
+  OnClick: (format: string) => void
 }
 
-export const FormatCell: FC<props> = ({
-  format,
-  isActive,
-  OnClick,
-  currencySign,
-}) => {
-  const exampleNumber = -12554254.2
-  return (
-    <FormatCellLayout onClick={OnClick}>
-      <RadioBtn $isActive={isActive} />
-      <p className="format">
-        {FormatCurrencyString({
-          formatString: format,
-          quantity: exampleNumber,
-          currencySign,
-          sign: "-",
-        })}
-      </p>
-    </FormatCellLayout>
-  )
-}
+export const FormatCell: FC<props> = memo(
+  ({ format, isActive, OnClick, currencySign }) => {
+    const exampleNumber = -12554254.2
+    return (
+      <FormatCellLayout onClick={() => OnClick(format)}>
+        <RadioBtn $isActive={isActive} />
+        <p className="format">
+          {FormatCurrencyString({
+            formatString: format,
+            quantity: exampleNumber,
+            currencySign,
+            sign: "-",
+          })}
+        </p>
+      </FormatCellLayout>
+    )
+  },
+)
 const FormatCellLayout = styled.div`
   display: flex;
   align-items: center;

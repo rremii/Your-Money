@@ -1,6 +1,7 @@
 import styled from "styled-components"
+import { memo } from "react"
 
-export const SideBarModalHeader = styled.header`
+export const SideBarModalHeader = memo(styled.header`
   color: var(--sub-txt);
   font-family: Inter;
   font-size: 17px;
@@ -9,4 +10,4 @@ export const SideBarModalHeader = styled.header`
   line-height: normal;
   letter-spacing: 0.17px;
   margin-bottom: 20px;
-`
+`)

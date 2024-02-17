@@ -30,9 +30,6 @@ export const Account: FC<props> = ({
 }) => {
   const dispatch = useAppDispatch()
 
-  const currencySign = useTypedSelector(
-    (state) => state.Settings.curCurrencySign,
-  )
   const currencyFormat = useTypedSelector(
     (state) => state.Settings.currencyFormat,
   )
@@ -58,7 +55,7 @@ export const Account: FC<props> = ({
       currencySign={DefaultCurrencySigns.get(currency)}
       balance={balance}
       formattedStr={FormatCurrencyString({
-        currencySign,
+        currencySign: DefaultCurrencySigns.get(currency) as string,
         formatString: currencyFormat,
         quantity: balance,
         sign: balance < 0 ? "-" : "",

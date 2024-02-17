@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { CurrencyCell } from "@features/DefaultCurrencyModal/ui/CurrencyCell.tsx"
-import React from "react"
+import React, { useCallback } from "react"
 import {
   closeMenu,
   setCurrencyMenuType,
@@ -19,12 +19,12 @@ export const CurrencyMenu = () => {
 
   const currency = useTypedSelector((state) => state.Settings.curCurrency)
 
-  const SetChosenCurrency = (currency: Currency) => {
+  const SetChosenCurrency = useCallback((currency: Currency) => {
     dispatch(setCurrencyMenuType("currencySign"))
     dispatch(setCurCurrency(currency))
     const defaultSign = DefaultCurrencySigns.get(currency) || ""
     dispatch(setCurCurrencySign(defaultSign))
-  }
+  }, [])
   const OnSubmit = () => {
     dispatch(setCurCurrency(currency))
     CloseModal()
@@ -39,7 +39,7 @@ export const CurrencyMenu = () => {
       <div className="currencies-box">
         {MainCurrencies.map(({ fullName, shortName }, index) => (
           <CurrencyCell
-            OnClick={() => SetChosenCurrency(shortName)}
+            OnClick={SetChosenCurrency}
             fullName={fullName}
             shortName={shortName}
             isActive={currency === shortName}

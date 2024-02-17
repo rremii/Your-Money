@@ -1,8 +1,9 @@
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useCallback, useEffect } from "react"
-import { useToast } from "@shared/hooks/useToast.tsx"
+import { useToast } from "@shared/GlobalModules/Toasts/model/useToast.tsx"
 import { ErrorResponse } from "@entities/Auth/types.ts"
 import { useEditAccountMutation } from "@entities/Account/api/AccountsApi.ts"
+import { useLoadingToast, useNotifyToast } from "@shared/GlobalModules/Toasts"
 
 export const useEditAccount = () => {
   const { name, icon, color, id } = useTypedSelector(
@@ -12,14 +13,15 @@ export const useEditAccount = () => {
   const [editAccount, { isLoading, isError, isSuccess, error }] =
     useEditAccountMutation()
 
-  const { ShowToast } = useToast(2000)
+  const { ShowToast } = useNotifyToast(2000)
+  useLoadingToast(isLoading, "Editing the account...")
 
   useEffect(() => {
     if (!isError) return
 
     const { message } = error as ErrorResponse
 
-    ShowToast(message, "error")
+    ShowToast({ message, state: "error" })
   }, [isError])
 
   const EditAccount = useCallback(async () => {

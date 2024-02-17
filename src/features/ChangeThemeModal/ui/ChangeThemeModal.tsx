@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import React, { memo } from "react"
+import React, { memo, useCallback } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { SideBarModalHeader } from "@shared/ui/SideBarModalHeader.tsx"
@@ -21,11 +21,11 @@ export const ChangeThemeModal = memo(() => {
   const isOpen = useTypedSelector((state) => state.UI.Modals.themeMenu.isOpen)
   const curTheme = useTypedSelector((state) => state.Settings.theme)
 
-  const SetTheme = (theme: themeType) => {
+  const SetTheme = useCallback((theme: themeType) => {
     window.localStorage.setItem("theme", theme)
     dispatch(setTheme(theme))
     CloseModal()
-  }
+  }, [])
 
   const CloseModal = () => {
     dispatch(closeMenu("themeMenu"))
@@ -35,11 +35,11 @@ export const ChangeThemeModal = memo(() => {
     <>
       <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
       <LanguageModalLayout $isOpen={isOpen}>
-        <SideBarModalHeader>Language</SideBarModalHeader>
+        <SideBarModalHeader>Theme</SideBarModalHeader>
         <div className="theme-box">
           {Themes.map((theme, index) => (
             <ThemeCell
-              OnClick={() => SetTheme(theme)}
+              OnClick={SetTheme}
               theme={theme}
               isActive={curTheme === theme}
               key={index}

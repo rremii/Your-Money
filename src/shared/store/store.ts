@@ -5,7 +5,6 @@ import {
 } from "@reduxjs/toolkit"
 import { Api } from "../api/config/Api"
 import { AuthReducer } from "@entities/Auth/model/AuthSlice.ts"
-import { ToastReducer } from "@shared/store/globalSlices/ToastSlice.ts"
 import { DateReducer } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { CurAccountReducer } from "@entities/Account/model/CurAccountSlice.ts"
 import { NewCategoryReducer } from "@entities/Category/model/NewCategorySlice.ts"
@@ -14,10 +13,11 @@ import { EditCreateTransactionReducer } from "@entities/EditCreateTransaction/mo
 import { SettingsReducer } from "@entities/Settings/model/SettingsSlice.ts"
 import { UIReducer } from "@entities/UI/model"
 import { NewAccountReducer } from "@entities/Account/model/NewAccountSlice.ts"
+import { ToastsReducer } from "@shared/GlobalModules/Toasts"
 
 const rootReducer = combineReducers({
   Auth: AuthReducer,
-  Toast: ToastReducer,
+  Toasts: ToastsReducer,
   Date: DateReducer,
   CurAccount: CurAccountReducer,
   NewCategory: NewCategoryReducer,

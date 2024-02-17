@@ -3,7 +3,6 @@ import React, { FC } from "react"
 import { SignOutMenu } from "@widgets/SignOutMenu/ui/SignOutMenu.tsx"
 import { PasswordMenu } from "@widgets/PasswordMenu/ui/PasswordMenu.tsx"
 import { NameMenu } from "@widgets/NameMenu/ui/NameMenu.tsx"
-import { Toast } from "@shared/ui/Toast.tsx"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAllTransDateGap } from "@entities/DateSlider/model/useAllTransDateGap.tsx"
@@ -29,6 +28,7 @@ import { ChangeThemeModal } from "@features/ChangeThemeModal/ui/ChangeThemeModal
 import { SetStyleProperty } from "@entities/Settings/helpers/SetStyleProperty.tsx"
 import { useTheme } from "@entities/Settings/hooks/useTheme.tsx"
 import { ChangeCurrencyFormatModal } from "@features/ChangeCurrencyFormatModal/ui/ChangeCurrencyFormatModal.tsx"
+import { LoadingToast, NotifyToast } from "@shared/GlobalModules/Toasts"
 
 interface Props {
   children: React.ReactNode
@@ -50,7 +50,8 @@ const AppLayout: FC<Props> = ({ children }) => {
   return (
     <LayoutStyles>
       {children}
-      <Toast />
+      <NotifyToast />
+      <LoadingToast />
 
       <EditCreateTransMenu />
       <ChooseCategoryMenu />

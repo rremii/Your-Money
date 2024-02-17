@@ -1,8 +1,9 @@
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useCallback, useEffect } from "react"
 import { ErrorResponse } from "@entities/Auth/types.ts"
-import { useToast } from "@shared/hooks/useToast.tsx"
+import { useToast } from "@shared/GlobalModules/Toasts/model/useToast.tsx"
 import { useCreateAccountMutation } from "@entities/Account/api/AccountsApi.ts"
+import { useLoadingToast, useNotifyToast } from "@shared/GlobalModules/Toasts"
 
 export const useCreateAccount = (userId?: number) => {
   const { name, icon, color, currency } = useTypedSelector(
@@ -12,14 +13,15 @@ export const useCreateAccount = (userId?: number) => {
   const [createAccount, { isLoading, isError, error, isSuccess }] =
     useCreateAccountMutation()
 
-  const { ShowToast } = useToast(2000)
+  const { ShowToast } = useNotifyToast(2000)
+  useLoadingToast(isLoading, "Creating an account...")
 
   useEffect(() => {
     if (!isError) return
 
     const { message } = error as ErrorResponse
 
-    ShowToast(message, "error")
+    ShowToast({ message, state: "error" })
   }, [isError])
 
   const CreateAccount = useCallback(async () => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import {
   closeMenu,
@@ -19,9 +19,9 @@ export const CurrencySignMenu = () => {
   const [chosenCurrencySign, setCurrencySign] =
     useState<string>(curCurrencySign)
 
-  const SetChosenCurrencySign = (currencySign: string) => {
+  const SetChosenCurrencySign = useCallback((currencySign: string) => {
     setCurrencySign(currencySign)
-  }
+  }, [])
   const OnSubmit = () => {
     dispatch(setCurCurrencySign(chosenCurrencySign))
     dispatch(closeMenu("currencyMenu"))
@@ -36,7 +36,7 @@ export const CurrencySignMenu = () => {
       <div className="currencies-box">
         {CurrencySigns[currency].map((sign, index) => (
           <CurrencySignCell
-            OnClick={() => SetChosenCurrencySign(sign)}
+            OnClick={SetChosenCurrencySign}
             sign={sign}
             isActive={chosenCurrencySign === sign}
             key={index}

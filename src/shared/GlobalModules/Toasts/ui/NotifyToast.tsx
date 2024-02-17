@@ -1,12 +1,12 @@
 import styled from "styled-components"
 import React from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { toastStateType } from "@shared/store/globalSlices/ToastSlice.ts"
+import { notifyStateType } from "@shared/GlobalModules/Toasts/model/NotifyToastSlice.ts"
 
-export const Toast: React.FC = React.memo(() => {
-  const isShown = useTypedSelector((state) => state.Toast.isShown)
-  const message = useTypedSelector((state) => state.Toast.message)
-  const state = useTypedSelector((state) => state.Toast.state)
+export const NotifyToast: React.FC = React.memo(() => {
+  const isShown = useTypedSelector((state) => state.Toasts.NotifyToast.isShown)
+  const message = useTypedSelector((state) => state.Toasts.NotifyToast.message)
+  const state = useTypedSelector((state) => state.Toasts.NotifyToast.state)
 
   return (
     <ToastShowZone>
@@ -29,7 +29,7 @@ const ToastShowZone = styled.div`
 `
 const ToastLayout = styled.div<{
   $isShown?: boolean
-  $toastState?: toastStateType
+  $toastState?: notifyStateType
 }>`
   position: absolute;
   top: 105%;

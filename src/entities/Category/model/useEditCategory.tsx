@@ -1,8 +1,9 @@
 import { useEditCategoryMutation } from "@entities/Category/api/CategoriesApi.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useCallback, useEffect } from "react"
-import { useToast } from "@shared/hooks/useToast.tsx"
+import { useToast } from "@shared/GlobalModules/Toasts/model/useToast.tsx"
 import { ErrorResponse } from "@entities/Auth/types.ts"
+import { useLoadingToast, useNotifyToast } from "@shared/GlobalModules/Toasts"
 
 export const useEditCategory = () => {
   const { name, icon, color, type, id } = useTypedSelector(
@@ -12,14 +13,15 @@ export const useEditCategory = () => {
   const [editCategory, { isLoading, isError, isSuccess, error }] =
     useEditCategoryMutation()
 
-  const { ShowToast } = useToast(2000)
+  const { ShowToast } = useNotifyToast(2000)
+  useLoadingToast(isLoading, "Editing the category...")
 
   useEffect(() => {
     if (!isError) return
 
     const { message } = error as ErrorResponse
 
-    ShowToast(message, "error")
+    ShowToast({ message, state: "error" })
   }, [isError])
 
   const EditCategory = useCallback(async () => {
