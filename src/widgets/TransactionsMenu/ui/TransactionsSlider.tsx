@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import React, { memo, useEffect, useMemo } from "react"
 import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
 import { GetTransByMenus } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import { useSlider } from "@entities/DateSlider/model/useSlider.tsx"
@@ -9,14 +9,13 @@ import { GetMe } from "@entities/User/api/UserApi.ts"
 import { AddHistoryPointsToMenus } from "@widgets/TransactionsMenu/model/AddHistoryPointsToMenus.ts"
 import { SliderLayout } from "@shared/ui/Slider.tsx"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
-
+import { ref } from "yup"
 
 export const TransactionsSlider = memo(() => {
-  const dateMenuIds = useTypedSelector(state => state.Date.dateMenuIds)
-  const dateFilter = useTypedSelector(state => state.Date.dateFilter)
-  const firstDay = useTypedSelector(state => state.Date.firstDay)
-  const curAccountId = useTypedSelector(state => state.CurAccount.id)
-
+  const dateMenuIds = useTypedSelector((state) => state.Date.dateMenuIds)
+  const dateFilter = useTypedSelector((state) => state.Date.dateFilter)
+  const firstDay = useTypedSelector((state) => state.Date.firstDay)
+  const curAccountId = useTypedSelector((state) => state.CurAccount.id)
 
   const { data: user } = GetMe.useQueryState()
   const { accountIds, getAccountById } = useAccount(user?.id)
@@ -26,15 +25,23 @@ export const TransactionsSlider = memo(() => {
   const { sliderRef, OnScroll } = useSlider()
 
   const transByMenus = GetTransByMenus({
-    allTransactions, dateFilter, dateMenuIds, firstDay
+    allTransactions,
+    dateFilter,
+    dateMenuIds,
+    firstDay,
   })
 
-  const menusWithHistory = AddHistoryPointsToMenus(transByMenus, history, curAccountId)
+  const menusWithHistory = AddHistoryPointsToMenus(
+    transByMenus,
+    history,
+    curAccountId,
+  )
 
-
-  return <SliderLayout id="slider" ref={sliderRef} onScroll={OnScroll}>
-    {menusWithHistory.map((menuData) => (
-      <TransactionsMenu key={menuData.menuId} {...menuData} />
-    ))}
-  </SliderLayout>
+  return (
+    <SliderLayout id="slider" ref={sliderRef} onScroll={OnScroll}>
+      {menusWithHistory.map((menuData) => (
+        <TransactionsMenu key={menuData.menuId} {...menuData} />
+      ))}
+    </SliderLayout>
+  )
 })

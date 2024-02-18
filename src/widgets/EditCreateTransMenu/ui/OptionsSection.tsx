@@ -8,19 +8,15 @@ import {
   openMenu,
   setEditCreateMenuType,
 } from "@entities/UI/model/ModalsSlice.ts"
+import { useDeleteTransaction } from "@entities/Transaction/model/useDeleteTransaction.tsx"
 
-interface props {
-  color: string
-}
-
-export const OptionsSection: FC<props> = ({ color }) => {
+export const OptionsSection = () => {
   const dispatch = useAppDispatch()
 
-  const transId = useTypedSelector(
-    (state) => state.EditCreateTransaction.Transaction.id,
+  const color = useTypedSelector(
+    (state) => state.EditCreateTransaction.ChosenCategory.color,
   )
-
-  const [deleteTrans, { isLoading }] = useDeleteTransactionMutation()
+  const { DeleteTransaction, isLoading } = useDeleteTransaction()
 
   const OnDuplicateClick = () => {
     dispatch(setEditCreateMenuType("create"))
@@ -32,11 +28,7 @@ export const OptionsSection: FC<props> = ({ color }) => {
   }
 
   const OnDeleteClick = async () => {
-    if (!transId) return
-
-    await deleteTrans(transId)
-
-    dispatch(closeMenu("editCreateTransMenu"))
+    await DeleteTransaction()
   }
 
   return (
@@ -70,7 +62,7 @@ const OptionsLayout = styled.div<{
   $color?: string
 }>`
   height: 100px;
-  background-color: var(--bg-1);
+  background-color: var(--sub-bg);
   width: 100%;
   display: flex;
   align-items: center;

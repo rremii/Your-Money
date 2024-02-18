@@ -7,15 +7,16 @@ import { setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConverter.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
+import { useGetConvertedTransCurrency } from "@entities/Transaction/model/useGetConvertedTransCurrency.tsx"
 
-interface props {
-  type: TransactionType
-  // color: string
-}
-
-export const ResultQuantity: FC<props> = ({ type }) => {
+export const ResultQuantity = () => {
   const dispatch = useAppDispatch()
-
+  const type = useTypedSelector(
+    (state) => state.EditCreateTransaction.Transaction.type,
+  )
+  const currency = useTypedSelector(
+    (state) => state.EditCreateTransaction.Transaction.currency,
+  )
   const categoryColor = useTypedSelector(
     (state) => state.EditCreateTransaction.ChosenCategory.color,
   )
@@ -26,24 +27,14 @@ export const ResultQuantity: FC<props> = ({ type }) => {
   const menuType = useTypedSelector(
     (state) => state.UI.Modals.editCreateTransMenu.menuType,
   )
-  const currency = useTypedSelector(
-    (state) => state.EditCreateTransaction.Transaction.currency,
+  const { quantity, operator } = useTypedSelector(
+    (state) => state.EditCreateTransaction.Calculator,
+  )
+  let { numberStr1, numberStr2 } = useTypedSelector(
+    (state) => state.EditCreateTransaction.Calculator,
   )
 
-  const quantity = useTypedSelector(
-    (state) => state.EditCreateTransaction.Calculator.quantity,
-  )
-  let numberStr1 = useTypedSelector(
-    (state) => state.EditCreateTransaction.Calculator.numberStr1,
-  )
-  let numberStr2 = useTypedSelector(
-    (state) => state.EditCreateTransaction.Calculator.numberStr2,
-  )
-  const operator = useTypedSelector(
-    (state) => state.EditCreateTransaction.Calculator.operator,
-  )
-
-  const { convertCurrency } = useCurrencyConverter()
+  const { GetConvertedCurrency } = useGetConvertedTransCurrency()
 
   if (numberStr1.startsWith(".")) numberStr1 = "0" + numberStr1
   if (numberStr2.startsWith(".")) numberStr2 = "0" + numberStr2
@@ -67,17 +58,6 @@ export const ResultQuantity: FC<props> = ({ type }) => {
   }
   const leftCell = {
     color: account.color,
-  }
-
-  const GetConvertedCurrency = () => {
-    return RoundDecimal(
-      convertCurrency(
-        +quantityStr ? +quantityStr : +numberStr1,
-        currency,
-        account.currency,
-      ),
-      2,
-    )
   }
 
   return (

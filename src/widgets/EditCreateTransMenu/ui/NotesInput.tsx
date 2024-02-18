@@ -6,13 +6,12 @@ import {
   setEditCreateMenuType,
 } from "@entities/UI/model/ModalsSlice.ts"
 
-interface props {
-  content?: string
-}
-
-export const Notes: FC<props> = memo(({ content }) => {
+export const Notes = memo(() => {
   const dispatch = useAppDispatch()
 
+  const content = useTypedSelector(
+    (state) => state.EditCreateTransaction.Transaction.title,
+  )
   const menuType = useTypedSelector(
     (state) => state.UI.Modals.editCreateTransMenu.menuType,
   )

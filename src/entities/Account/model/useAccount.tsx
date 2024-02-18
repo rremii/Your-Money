@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useCallback, useEffect, useMemo } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import {
   setCurAccount,
@@ -15,24 +15,21 @@ import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConver
 export const useAccount = (userId?: number) => {
   const dispatch = useAppDispatch()
 
-  const curAccId = useTypedSelector(state => state.CurAccount.id)
-  const allAccount = useTypedSelector(state => state.AllAccount)
-  const curCurrency = useTypedSelector(state => state.Settings.curCurrency)
-
+  const curAccId = useTypedSelector((state) => state.CurAccount.id)
+  const allAccount = useTypedSelector((state) => state.AllAccount)
+  const curCurrency = useTypedSelector((state) => state.Settings.curCurrency)
 
   const { data: allAccounts } = useGetAccountsQuery(userId, {
-    skip: !userId
+    skip: !userId,
   })
 
   //todo move it somewhere
   const { convertCurrency } = useCurrencyConverter()
 
-
   useEffect(() => {
     if (!allAccounts) return
 
     dispatch(setCurAccountId(null))
-
 
     const allAccBalance = allAccounts.reduce((acc, cur) => {
       return acc + convertCurrency(cur.balance, cur.currency, curCurrency)
@@ -51,25 +48,26 @@ export const useAccount = (userId?: number) => {
       curAcc = allAccount
     }
 
-
     dispatch(setCurAccount(curAcc))
     document.documentElement.style.setProperty("--account-color", curAcc.color)
   }, [curAccId, allAccounts])
 
+  const getAccountById = useCallback(
+    (id: number | null): IAccount | null => {
+      if (id) return allAccounts?.find((account) => account.id === id) || null
+      else return allAccounts?.at(0) || null
+    },
+    [allAccounts],
+  )
 
-  const getAccountById = (id: number | null): IAccount | null => {
-    if (id)
-      return allAccounts?.find((account) => account.id === id) || null
-    else
-      return allAccounts?.at(0) || null
-  }
-
-  const getAccountIds = (): number[] => {
+  const getAccountIds = useCallback((): number[] => {
     return allAccounts?.map(({ id }) => id) || []
-  }
+  }, [allAccounts])
 
-
+  const accountIds = getAccountIds()
   return {
-    allAccounts, getAccountById, accountIds: getAccountIds()
+    allAccounts,
+    getAccountById,
+    accountIds,
   }
 }

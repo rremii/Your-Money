@@ -4,7 +4,7 @@ import React, { useCallback, useEffect } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
-import { Calculator } from "@features/Calculator/ui/Calculator.tsx"
+import { Calculator } from "@shared/ui/CalculatorBtns/Calculator.tsx"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
 import { InfoCell } from "@shared/ui/InfoCell.tsx"
 import { ResultQuantity } from "@widgets/EditCreateTransMenu/ui/ResultQuantity.tsx"
@@ -26,6 +26,10 @@ import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConver
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { EditCreateMenuType } from "@entities/UI/types.ts"
 import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
+import { CreateTransaction } from "@features/CreateTransaction/ui/CreateTransaction.tsx"
+import { EditTransaction } from "@features/EditTransaction/ui/EditTransaction.tsx"
+import { OpenChooseAccountMenu } from "@features/OpenChooseAccountMenu/ui/OpenChooseAccountMenu.tsx"
+import { OpenChooseCategoryMenu } from "@features/OpenChooseCategoryMenu/ui/OpenChooseCategoryMenu.tsx"
 
 export const EditCreateTransMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -36,33 +40,11 @@ export const EditCreateTransMenu = React.memo(() => {
   const menuType = useTypedSelector(
     (state) => state.UI.Modals.editCreateTransMenu.menuType,
   )
-  const curAccId = useTypedSelector((state) => state.CurAccount.id)
-  const type = useTypedSelector(
-    (state) => state.EditCreateTransaction.Transaction.type,
-  )
-  const transactionId = useTypedSelector(
-    (state) => state.EditCreateTransaction.Transaction.id,
-  )
-  const account = useTypedSelector(
-    (state) => state.EditCreateTransaction.ChosenAccount,
-  )
-  const title = useTypedSelector(
-    (state) => state.EditCreateTransaction.Transaction.title,
-  )
-  const quantity = useTypedSelector(
-    (state) => state.EditCreateTransaction.Calculator.quantity,
-  )
   const dateStr = useTypedSelector(
     (state) => state.EditCreateTransaction.Transaction.dateStr,
   )
-  const category = useTypedSelector(
-    (state) => state.EditCreateTransaction.ChosenCategory,
-  )
-  const currency = useTypedSelector(
-    (state) => state.EditCreateTransaction.Transaction.currency,
-  )
+  const curAccId = useTypedSelector((state) => state.CurAccount.id)
 
-  const { convertCurrency } = useCurrencyConverter()
   const { data: user } = GetMe.useQueryState()
   const { allAccounts } = useAccount(user?.id)
 
@@ -83,63 +65,6 @@ export const EditCreateTransMenu = React.memo(() => {
     dispatch(resetTransCalculator())
   }
 
-  const OpenChooseCategoryMenu = useCallback(() => {
-    dispatch(openMenu("chooseCategoryMenu"))
-    if (menuType === "overview") dispatch(setEditCreateMenuType("edit"))
-  }, [menuType])
-
-  const OpenChooseAccountMenu = useCallback(() => {
-    dispatch(openMenu("chooseAccountMenu"))
-    if (menuType === "overview") dispatch(setEditCreateMenuType("edit"))
-  }, [menuType])
-
-  const [createTransaction, { isLoading: isCreating }] =
-    useCreateTransactionMutation()
-  const [editTransaction, { isLoading: isEditing }] =
-    useEditTransactionMutation()
-
-  const CreateTransaction = async () => {
-    if (!user?.id || !account.id || !category.id || !quantity) return
-
-    await createTransaction({
-      type,
-      title,
-      accountId: account.id,
-      categoryId: category.id,
-      quantity: GetConvertedCurrency(),
-      date: dateStr,
-    })
-
-    CloseMenu()
-  }
-  const GetConvertedCurrency = (): number => {
-    if (currency !== account.currency)
-      return RoundDecimal(
-        convertCurrency(quantity, currency, account.currency),
-        2,
-      )
-    else return quantity
-  }
-
-  const EditTransaction = async () => {
-    if (!transactionId || !account.id || !category.id || !quantity) return
-    await editTransaction({
-      id: transactionId,
-      accountId: account.id,
-      categoryId: category.id,
-      type,
-      title,
-      quantity: GetConvertedCurrency(),
-      date: dateStr,
-    })
-    CloseMenu()
-  }
-
-  const OnSubmit = async () => {
-    if (menuType === "create") await CreateTransaction()
-    if (menuType === "edit") await EditTransaction()
-  }
-
   return (
     <>
       <Overlay
@@ -151,53 +76,25 @@ export const EditCreateTransMenu = React.memo(() => {
 
       <MenuLayout $menuType={menuType} $isActive={isMenuOpen}>
         <div className="category-account-info">
-          <InfoCell
-            OnClick={OpenChooseAccountMenu}
-            iconNode={
-              <CustomIcon
-                boxSize="100%"
-                iconSize={"50%"}
-                icon={account.icon}
-                boxColor="transparent"
-                color={account.color}
-              />
-            }
-            color={account.color}
-            content={account.name}
-            iconRadius={"5px"}
-            title={"From account"}
-          />
-          <InfoCell
-            OnClick={OpenChooseCategoryMenu}
-            iconNode={
-              <CustomIcon
-                boxSize="100%"
-                iconSize={"50%"}
-                icon={category.icon}
-                boxColor="transparent"
-                color={category.color}
-              />
-            }
-            color={category.color}
-            content={category.name}
-            iconRadius={"50%"}
-            title={"To category"}
-          />
+          <OpenChooseAccountMenu />
+          <OpenChooseCategoryMenu />
         </div>
 
-        <ResultQuantity type={type} />
+        <ResultQuantity />
 
-        <Notes content={title} />
+        <Notes />
 
         {menuType !== "overview" && (
-          <Calculator
-            isLoading={isEditing || isCreating}
-            OnSubmit={OnSubmit}
-            color={category.color}
-          />
+          <Calculator>
+            {menuType === "create" ? (
+              <CreateTransaction />
+            ) : (
+              <EditTransaction />
+            )}
+          </Calculator>
         )}
         <TransDate dateStr={dateStr} />
-        {menuType === "overview" && <OptionsSection color={category.color} />}
+        {menuType === "overview" && <OptionsSection />}
       </MenuLayout>
     </>
   )

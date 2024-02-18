@@ -6,35 +6,48 @@ import { IAccount } from "@entities/Account/types.ts"
 import { AddConvertedQuantityToTrans } from "@entities/Transaction/model/AddConvertedQuantityToTrans.ts"
 import { FilterTransactionByAccId } from "@entities/Transaction/model/FilterTransactionByAccId.ts"
 import { Currency } from "@entities/Currency/types.ts"
-
+import { useCallback, useEffect, useMemo } from "react"
 
 export const useGetTransactions = (
   accountIds: number[],
-  getAccountById: (id: number | null) => IAccount | null
+  getAccountById: (id: number | null) => IAccount | null,
 ): { allTransactions: IConvertedTransaction[] } => {
+  const curAccId = useTypedSelector((state) => state.CurAccount.id)
+  const dateTo = useTypedSelector((state) => state.Date.allTransDateGap.dateTo)
+  const dateFrom = useTypedSelector(
+    (state) => state.Date.allTransDateGap.dateFrom,
+  )
 
-  const curAccId = useTypedSelector(state => state.CurAccount.id)
-  const allTransDateGap = useTypedSelector(state => state.Date.allTransDateGap)
-  const curCurrency = useTypedSelector(state => state.Settings.curCurrency)
+  const curCurrency = useTypedSelector((state) => state.Settings.curCurrency)
 
-
-  const { data: transactions } = useGetTransactionsByDateGapQuery({
-    ...allTransDateGap,
-    accountIds
-  }, {
-    skip: !accountIds.length
-  })
+  const { data: transactions } = useGetTransactionsByDateGapQuery(
+    {
+      dateTo,
+      dateFrom,
+      accountIds,
+    },
+    {
+      skip: !accountIds.length,
+    },
+  )
 
   const { convertCurrency } = useCurrencyConverter()
   const getAccountCurrency = (accountId: number) => {
     return getAccountById(accountId)?.currency || Currency.DefaultCurrency
   }
 
-
-  const transactionsWithConvertedQuantity = AddConvertedQuantityToTrans(transactions || [], getAccountCurrency, convertCurrency, curCurrency)
-  const allTransactions = FilterTransactionByAccId(transactionsWithConvertedQuantity, curAccId) as IConvertedTransaction[]
+  const transactionsWithConvertedQuantity = AddConvertedQuantityToTrans(
+    transactions || [],
+    getAccountCurrency,
+    convertCurrency,
+    curCurrency,
+  )
+  const allTransactions = FilterTransactionByAccId(
+    transactionsWithConvertedQuantity,
+    curAccId,
+  ) as IConvertedTransaction[]
 
   return {
-    allTransactions
+    allTransactions,
   }
 }
