@@ -39,11 +39,11 @@ export const MonthMenu: FC<props> = memo(({ dateStr }) => {
       </ul>
       <DaysBox $color={color} $daysShift={weekDayShift}>
         <div className="days-shift" />
-        {days.map((day) => {
+        {days.map((day, index) => {
           const isActive = DatesEqualUpToDays(day, chosenDateStr)
           return (
             <div
-              key={day.toUTCString()}
+              key={index}
               onClick={() => OnDayClick(day)}
               className={`day ${isActive ? "active" : ""}`}
             >

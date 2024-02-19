@@ -16,19 +16,22 @@ export const TransactionsSlider = memo(() => {
   const dateFilter = useTypedSelector((state) => state.Date.dateFilter)
   const firstDay = useTypedSelector((state) => state.Date.firstDay)
   const curAccountId = useTypedSelector((state) => state.CurAccount.id)
+  const initDate = useTypedSelector((state) => state.Date.initDate)
 
   const { data: user } = GetMe.useQueryState()
+
   const { accountIds, getAccountById } = useAccount(user?.id)
   const { allTransactions } = useGetTransactions(accountIds, getAccountById)
   const { history } = useAccountHistoryPoints(accountIds, getAccountById)
 
-  const { sliderRef, OnScroll } = useSlider()
+  const { sliderRef, OnScroll } = useSlider(dateFilter, dateMenuIds)
 
   const transByMenus = GetTransByMenus({
     allTransactions,
     dateFilter,
     dateMenuIds,
     firstDay,
+    initDate,
   })
 
   const menusWithHistory = AddHistoryPointsToMenus(

@@ -3,7 +3,7 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { useLazyGetMeQuery } from "@entities/User/api/UserApi.ts"
 import React, { useEffect } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { getIsMenuIdZero } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { IsCurDateToday } from "@entities/DateSlider/model/DateSliderSlice.ts"
 
 const time =
   new Date().getHours() +
@@ -12,7 +12,7 @@ const time =
 
 export const SideBarHeader = React.memo(() => {
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
-  const isMenuIdZero = useTypedSelector(getIsMenuIdZero)
+  const isCurDateToday = useTypedSelector(IsCurDateToday)
 
   const [getMe, { data: userInfo }] = useLazyGetMeQuery()
 
@@ -40,7 +40,7 @@ export const SideBarHeader = React.memo(() => {
   }
 
   return (
-    <HeaderLayout $isActive={isMenuIdZero}>
+    <HeaderLayout $isActive={isCurDateToday}>
       <div className="avatar-box">
         <img className="avatar" src={GetSectionsData().avatar} alt="avatar" />
         <div className="extra-info">

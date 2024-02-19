@@ -4,8 +4,9 @@ import {
   shiftTransMenuIdsRight,
 } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { DateFilter } from "@entities/Transaction/types.ts"
 
-export const useSlider = () => {
+export const useSlider = (dateFilter: DateFilter, menuIds: number[]) => {
   const dispatch = useAppDispatch()
 
   const ref = useRef<HTMLDivElement>(null)
@@ -13,14 +14,15 @@ export const useSlider = () => {
   useEffect(() => {
     if (!ref || !ref.current) return
     const sliderWidth = ref.current.scrollWidth
-
     const scrollLeft = window.localStorage.getItem("scroll")
+
     if (scrollLeft) return ref.current.scrollTo(+scrollLeft, 0)
     ref.current.scrollTo(sliderWidth / 2 - 250, 0)
-  }, [ref])
+  }, [ref, menuIds])
 
   const OnScroll = useCallback(() => {
-    if (!ref || !ref.current) return
+    if (!ref || !ref.current || dateFilter === "allTime") return
+
     const scrollWidth = ref.current.scrollWidth
     const width = ref.current.clientWidth
     const curScroll = ref.current.scrollLeft

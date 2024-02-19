@@ -7,7 +7,6 @@ import { Days } from "@shared/constants/Days.ts"
 import { Months } from "@shared/constants/Months.ts"
 
 export const Header = () => {
-
   const { chosenDateStr, color, type } = useContext(CalendarContext)
 
   const date = new Date(chosenDateStr)
@@ -20,32 +19,39 @@ export const Header = () => {
     setCalendarType(type)
   }
 
-
-  return <HeaderLayout $color={color}>
-    <p
-      onClick={() => SetCalendarType("year")}
-      className={`sub-title ${type === "year" ? "active" : ""}`}>{year || ""}</p>
-    <p
-      onClick={() => SetCalendarType("month")}
-      className={`title ${type === "month" ? "active" : ""}`}>{day || ""}, {month?.slice(0, 3)} {dateDay}</p>
-  </HeaderLayout>
+  return (
+    <HeaderLayout $color={color}>
+      <p
+        onClick={() => SetCalendarType("year")}
+        className={`sub-title ${type === "year" ? "active" : ""}`}
+      >
+        {year || ""}
+      </p>
+      <p
+        onClick={() => SetCalendarType("month")}
+        className={`title ${type === "month" ? "active" : ""}`}
+      >
+        {day || ""}, {month?.slice(0, 3)} {dateDay}
+      </p>
+    </HeaderLayout>
+  )
 }
 const HeaderLayout = styled.header<{
   $color?: string
 }>`
   padding: 15px;
-  background-color: ${({ $color }) => $color ? $color : "rgb(63, 81, 181)"};
+  background-color: ${({ $color }) => ($color ? $color : "rgb(63, 81, 181)")};
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
 
-  .sub-title, .title {
-
+  .sub-title,
+  .title {
     transition: 0.3s;
     margin: 0;
-    color: var(--txt-1);
+    color: white;
     font-family: Inter;
     font-style: normal;
     font-weight: 400;

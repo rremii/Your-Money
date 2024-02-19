@@ -10,37 +10,40 @@ interface props {
   allTransactions: IConvertedTransaction[]
   dateFilter: DateFilter
   firstDay: DayType
+  initDate: string
 }
 
 export interface ITransByMenu {
-  transactions: IConvertedTransaction[],
-  dateGap: string,
-  dateTo: Date,
-  dateFrom: Date,
+  transactions: IConvertedTransaction[]
+  dateGap: string
+  dateTo: Date
+  dateFrom: Date
   menuId: number
 }
 
-export const GetTransByMenus = ({ dateMenuIds, allTransactions, dateFilter, firstDay }: props): ITransByMenu[] => {
-
+export const GetTransByMenus = ({
+  dateMenuIds,
+  allTransactions,
+  dateFilter,
+  firstDay,
+  initDate,
+}: props): ITransByMenu[] => {
   return dateMenuIds.map((menuId) => {
     switch (dateFilter) {
-
       case "day":
-        return transByDate.byDay(allTransactions, menuId)
+        return transByDate.byDay(allTransactions, menuId, initDate)
 
       case "week":
-        return transByDate.byWeek(allTransactions, menuId, firstDay)
+        return transByDate.byWeek(allTransactions, menuId, firstDay, initDate)
 
       case "month":
-        return transByDate.byMonth(allTransactions, menuId)
+        return transByDate.byMonth(allTransactions, menuId, initDate)
 
       case "year":
-        return transByDate.byYear(allTransactions, menuId)
+        return transByDate.byYear(allTransactions, menuId, initDate)
 
       case "allTime":
         return transByDate.byAllTime(allTransactions, menuId)
-
     }
   })
-
 }

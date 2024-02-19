@@ -10,7 +10,7 @@ import { ChooseCategoryMenu } from "@widgets/ChooseCategoryMenu/ui/ChooseCategor
 import { ChooseAccountMenu } from "@widgets/ChooseAccountMenu/ui/ChooseAccountMenu.tsx"
 import { TitleMenu } from "@widgets/TitleMenu/ui/TitleMenu.tsx"
 import { DateMenu } from "@widgets/DateMenu/ui/DateMenu.tsx"
-import { CalendarMenu } from "@widgets/CalendarMenu/ui/CalendarMenu.tsx"
+import { TransCalendarMenu } from "@widgets/TransCalendarMenu/ui/TransCalendarMenu.tsx"
 import { ChooseCategorySlideMenu } from "@widgets/ChooseCategorySlideMenu/ui/ChooseCategorySlideMenu.tsx"
 import { EditCreateTransMenu } from "@widgets/EditCreateTransMenu/ui/EditCreateTransMenu.tsx"
 import { CurrencyModal } from "@widgets/EditCreateTransMenu/ui/CurrencyModal.tsx"
@@ -29,6 +29,8 @@ import { SetStyleProperty } from "@entities/Settings/helpers/SetStyleProperty.ts
 import { useTheme } from "@entities/Settings/hooks/useTheme.tsx"
 import { ChangeCurrencyFormatModal } from "@features/ChangeCurrencyFormatModal/ui/ChangeCurrencyFormatModal.tsx"
 import { LoadingToast, NotifyToast } from "@shared/GlobalModules/Toasts"
+import { ChangeDateRangeModal } from "@features/ChangeDateRangeModal/ui/ChangeDateRangeModal.tsx"
+import { CalendarMenu } from "@features/CalendarMenu/ui/CalendarMenu.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -59,8 +61,11 @@ const AppLayout: FC<Props> = ({ children }) => {
       <ChooseAccountMenu />
       <TitleMenu />
       <DateMenu />
-      <CalendarMenu />
+      <TransCalendarMenu />
       <CurrencyModal />
+
+      <CalendarMenu />
+      <ChangeDateRangeModal />
 
       <EditCreateCategoryMenu />
       <CategoryIconPickerModal />

@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { getIsMenuIdZero } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { IsCurDateToday } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { Burger } from "@features/Burger/ui/Burger.tsx"
 
 interface props {
@@ -9,10 +9,10 @@ interface props {
 }
 
 export const Header: FC<props> = ({ children }) => {
-  const isMenuIdZero = useTypedSelector(getIsMenuIdZero)
+  const isCurDateToday = useTypedSelector(IsCurDateToday)
 
   return (
-    <HeaderLayout id="header" $isActive={isMenuIdZero}>
+    <HeaderLayout id="header" $isActive={isCurDateToday}>
       <Burger />
       {children}
     </HeaderLayout>

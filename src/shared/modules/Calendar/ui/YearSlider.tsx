@@ -36,9 +36,9 @@ export const YearSlider = () => {
 
   return (
     <YearSliderLayout ref={yearSliderRef} $color={color}>
-      {years.map((year) => {
+      {years.map((year, index) => {
         return (
-          <div onClick={() => SetYear(year)} className={`year-box`}>
+          <div key={index} onClick={() => SetYear(year)} className={`year-box`}>
             <p className={`year ${year === chosenYear ? "active" : ""}`}>
               {year}
             </p>

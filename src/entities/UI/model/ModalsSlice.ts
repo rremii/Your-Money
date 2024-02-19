@@ -12,7 +12,7 @@ interface initialState {
     isOpen: boolean
     menuType: EditCreateMenuType
   }
-  calendarMenu: {
+  transCalendarMenu: {
     isOpen: boolean
   }
   chooseAccountMenu: {
@@ -75,6 +75,12 @@ interface initialState {
   currencyFormatMenu: {
     isOpen: boolean
   }
+  dateRangeMenu: {
+    isOpen: boolean
+  }
+  calendarMenu: {
+    isOpen: boolean
+  }
 }
 
 const initialState: initialState = {
@@ -82,7 +88,7 @@ const initialState: initialState = {
     isOpen: false,
     menuType: "overview",
   },
-  calendarMenu: {
+  transCalendarMenu: {
     isOpen: false,
   },
   dateMenu: {
@@ -143,6 +149,12 @@ const initialState: initialState = {
     isOpen: false,
   },
   currencyFormatMenu: {
+    isOpen: false,
+  },
+  dateRangeMenu: {
+    isOpen: false,
+  },
+  calendarMenu: {
     isOpen: false,
   },
 }

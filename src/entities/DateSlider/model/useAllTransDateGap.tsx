@@ -7,6 +7,7 @@ export const useAllTransDateGap = () => {
   const dispatch = useAppDispatch()
 
   const dateFilter = useTypedSelector((state) => state.Date.dateFilter)
+  const initDate = useTypedSelector((state) => state.Date.initDate)
   const dateMenuIds = useTypedSelector((state) => state.Date.dateMenuIds)
   const firstDay = useTypedSelector((state) => state.Date.firstDay)
 
@@ -20,8 +21,8 @@ export const useAllTransDateGap = () => {
         const firstMenuId = dateMenuIds[0]
         const lastMenuId = dateMenuIds[dateMenuIds.length - 1]
 
-        const { dateFrom } = timeGap.GetYearGap(firstMenuId)
-        const { dateTo } = timeGap.GetYearGap(lastMenuId)
+        const { dateFrom } = timeGap.GetYearGap(firstMenuId, initDate)
+        const { dateTo } = timeGap.GetYearGap(lastMenuId, initDate)
 
         dispatch(
           setAllTransDateGap({
@@ -35,8 +36,8 @@ export const useAllTransDateGap = () => {
         const firstMenuId = dateMenuIds[0]
         const lastMenuId = dateMenuIds[dateMenuIds.length - 1]
 
-        const { dateFrom } = timeGap.GetMonthGap(firstMenuId)
-        const { dateTo } = timeGap.GetMonthGap(lastMenuId)
+        const { dateFrom } = timeGap.GetMonthGap(firstMenuId, initDate)
+        const { dateTo } = timeGap.GetMonthGap(lastMenuId, initDate)
 
         dispatch(
           setAllTransDateGap({
@@ -50,8 +51,8 @@ export const useAllTransDateGap = () => {
         const firstMenuId = dateMenuIds[0]
         const lastMenuId = dateMenuIds[dateMenuIds.length - 1]
 
-        const { dateFrom } = timeGap.GetWeekGap(firstDay, firstMenuId)
-        const { dateTo } = timeGap.GetWeekGap(firstDay, lastMenuId)
+        const { dateFrom } = timeGap.GetWeekGap(firstDay, firstMenuId, initDate)
+        const { dateTo } = timeGap.GetWeekGap(firstDay, lastMenuId, initDate)
 
         dispatch(
           setAllTransDateGap({
@@ -65,12 +66,11 @@ export const useAllTransDateGap = () => {
         const firstMenuId = dateMenuIds[0]
         const lastMenuId = dateMenuIds[dateMenuIds.length - 1]
 
-        const { dateFrom } = timeGap.GetDayGap(firstMenuId)
-        const { dateTo } = timeGap.GetDayGap(lastMenuId)
+        const { dateFrom } = timeGap.GetDayGap(firstMenuId, initDate)
+        const { dateTo } = timeGap.GetDayGap(lastMenuId, initDate)
 
         const startMonth = timeGap.GetMonthGap(0, dateFrom)
         const endMonth = timeGap.GetMonthGap(0, dateTo)
-
         dispatch(
           setAllTransDateGap({
             dateFrom: startMonth.dateFrom.toISOString(),

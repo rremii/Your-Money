@@ -1,7 +1,11 @@
 import styled from "styled-components"
 import Categories from "@shared/assets/LightTheme/categories.png"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { shiftTransMenuIdsRight } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import {
+  shiftTransMenuIdsLeft,
+  shiftTransMenuIdsRight,
+} from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 
 export const DateSubHeader = () => {
   const dispatch = useAppDispatch()
@@ -10,22 +14,14 @@ export const DateSubHeader = () => {
 
   const ShiftDateRight = () => {
     dispatch(shiftTransMenuIdsRight({ shiftAmount: 1 }))
-    const slider = document.querySelector("#slider")
-    if (!slider) return
-
-    const width = slider.clientWidth
-
-    slider.scrollBy(width, 0)
   }
 
   const ShiftDateLeft = () => {
-    dispatch(shiftTransMenuIdsRight({ shiftAmount: 1 }))
-    const slider = document.querySelector("#slider")
-    if (!slider) return
+    dispatch(shiftTransMenuIdsLeft({ shiftAmount: 1 }))
+  }
 
-    const width = slider.clientWidth
-
-    slider.scrollBy(-width, 0)
+  const OpenDateRangeMenu = () => {
+    dispatch(openMenu("dateRangeMenu"))
   }
 
   return (
@@ -33,7 +29,7 @@ export const DateSubHeader = () => {
       <div onClick={ShiftDateLeft} className="arrow-left">
         {"<"}
       </div>
-      <div className="date">
+      <div className="date" onClick={OpenDateRangeMenu}>
         <img src={Categories} alt="days" />
         <span>{dateGap}</span>
       </div>
@@ -62,6 +58,7 @@ const SubHeaderLayout = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
+    cursor: pointer;
 
     img {
       width: 20px;

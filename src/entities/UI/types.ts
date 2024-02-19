@@ -5,7 +5,7 @@ export type EditCreateAccountType = "edit" | "create"
 
 export type Menus =
   | "editCreateTransMenu"
-  | "calendarMenu"
+  | "transCalendarMenu"
   | "chooseAccountMenu"
   | "chooseCategoryMenu"
   | "chooseCategorySlideMenu"
@@ -25,3 +25,5 @@ export type Menus =
   | "languageMenu"
   | "themeMenu"
   | "currencyFormatMenu"
+  | "dateRangeMenu"
+  | "calendarMenu"

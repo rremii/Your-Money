@@ -14,10 +14,10 @@ class TimeGap {
     return dayGap
   }
 
-  GetWeekGap(firstDay: DayType, index: number, initDate?: Date) {
-    const dayGap = this.GetWeekDaysGap(firstDay, initDate)
+  GetWeekGap(firstDay: DayType, index: number, initDateStr?: string | Date) {
+    const initDate = initDateStr ? new Date(initDateStr) : new Date()
 
-    if (!initDate) initDate = new Date()
+    const dayGap = this.GetWeekDaysGap(firstDay, initDate)
 
     const dateFrom = new Date(
       initDate.getFullYear(),
@@ -40,8 +40,8 @@ class TimeGap {
     return { dateFrom, dateTo, dateGap }
   }
 
-  GetDayGap(index: number, initDate?: Date) {
-    if (!initDate) initDate = new Date()
+  GetDayGap(index: number, initDateStr?: string | Date) {
+    const initDate = initDateStr ? new Date(initDateStr) : new Date()
 
     const dateFrom = new Date(
       initDate.getFullYear(),
@@ -64,8 +64,8 @@ class TimeGap {
     return { dateFrom, dateTo, dateGap }
   }
 
-  GetMonthGap(index: number, initDate?: Date) {
-    if (!initDate) initDate = new Date()
+  GetMonthGap(index: number, initDateStr?: string | Date) {
+    const initDate = initDateStr ? new Date(initDateStr) : new Date()
 
     const dateFromMonth = initDate.getMonth() + index
     const dateToMonth = initDate.getMonth() + index + 1
@@ -81,8 +81,8 @@ class TimeGap {
     return { dateFrom, dateTo, dateGap }
   }
 
-  GetYearGap(index: number, initDate?: Date) {
-    if (!initDate) initDate = new Date()
+  GetYearGap(index: number = 0, initDateStr?: string | Date) {
+    const initDate = initDateStr ? new Date(initDateStr) : new Date()
 
     const dateFrom = new Date(initDate.getFullYear() + index, 0, 1)
     const dateTo = new Date(initDate.getFullYear() + index + 1, 0, 1)
@@ -96,4 +96,3 @@ class TimeGap {
 }
 
 export const timeGap = new TimeGap()
-

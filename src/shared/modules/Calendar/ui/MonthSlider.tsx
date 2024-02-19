@@ -9,14 +9,17 @@ interface props {}
 export const MonthSlider: FC<props> = memo(() => {
   const { menusDatesStr } = useContext(CalendarContext)
 
+  const { sliderRef, OnScroll } = useCalendarSlider({
+    menusDates: menusDatesStr,
+  })
 
-  const { sliderRef, OnScroll } = useCalendarSlider({ menusDates: menusDatesStr })
-
-  return <SliderLayout onScroll={OnScroll} ref={sliderRef}>
-    {menusDatesStr.map((date) => (
-      <MonthMenu key={date} dateStr={date} />
-    ))}
-  </SliderLayout>
+  return (
+    <SliderLayout onScroll={OnScroll} ref={sliderRef}>
+      {menusDatesStr.map((date, index) => (
+        <MonthMenu key={index} dateStr={date} />
+      ))}
+    </SliderLayout>
+  )
 })
 const SliderLayout = styled.div`
   display: flex;
