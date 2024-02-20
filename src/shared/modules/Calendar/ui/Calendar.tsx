@@ -16,7 +16,7 @@ interface props {
   OnChange: (chosenDateStr: string) => void
 }
 
-const Calendar: FC<props> = memo(({ initialDate, OnChange, color }) => {
+const Calendar: FC<props> = ({ initialDate, OnChange, color }) => {
   const { chosenDateStr, type } = useContext(CalendarContext)
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Calendar: FC<props> = memo(({ initialDate, OnChange, color }) => {
       {type === "month" ? <MonthSlider /> : <YearSlider />}
     </CalendarLayout>
   )
-})
+}
 export default Calendar
 const CalendarLayout = styled.div`
   position: relative;

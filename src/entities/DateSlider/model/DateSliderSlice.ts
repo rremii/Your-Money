@@ -36,7 +36,7 @@ const initialState = {
     dateFrom: "",
     dateTo: "",
   },
-  dateFilter: "day",
+  dateFilter: window.localStorage.getItem("dateFilter") || "day",
   firstDay: "Sun",
   dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5],
 } as initialState

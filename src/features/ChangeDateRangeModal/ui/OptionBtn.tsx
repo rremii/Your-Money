@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { FC, ReactNode } from "react"
+import { FC, memo, ReactNode } from "react"
 
 interface props {
   icon: ReactNode
@@ -24,6 +24,7 @@ export const OptionBtn: FC<props> = ({
     </OptionBtnLayout>
   )
 }
+
 const OptionBtnLayout = styled.button<{
   $isActive?: boolean
 }>`

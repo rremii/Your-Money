@@ -13,8 +13,10 @@ import {
   setYearFilter,
 } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { timeGap } from "@shared/helpers/TimeGap.ts"
+import { memo } from "react"
+import { DateFilter } from "@entities/Transaction/types.ts"
 
-export const ChangeDateRangeModal = () => {
+export const ChangeDateRangeModal = memo(() => {
   const dispatch = useAppDispatch()
 
   const initDate = useTypedSelector((state) => state.Date.curMenu.dateFrom)
@@ -23,19 +25,28 @@ export const ChangeDateRangeModal = () => {
     (state) => state.UI.Modals.dateRangeMenu.isOpen,
   )
 
+  const SetDateFilter = (filter: DateFilter) => {
+    window.localStorage.setItem("dateFilter", filter)
+  }
   const CloseMenu = () => {
     dispatch(closeMenu("dateRangeMenu"))
   }
   const OpenSelectDayMenu = () => {
     dispatch(openMenu("calendarMenu"))
     dispatch(closeMenu("dateRangeMenu"))
+    SetDateFilter("day")
+    CloseMenu()
   }
 
   const SetAllTimeRange = () => {
     dispatch(setAllTimeFilter())
+    SetDateFilter("allTime")
+    CloseMenu()
   }
   const SetWeekRange = () => {
     dispatch(setWeekFilter(initDate))
+    SetDateFilter("week")
+    CloseMenu()
   }
   const SetTodayRange = () => {
     const date = new Date(
@@ -50,12 +61,18 @@ export const ChangeDateRangeModal = () => {
 
     window.localStorage.setItem("scroll", String(sliderWidth / 2 - 200))
     dispatch(setCurDate(date))
+    SetDateFilter("day")
+    CloseMenu()
   }
   const SetMonthRange = () => {
     dispatch(setMonthFilter(initDate))
+    SetDateFilter("month")
+    CloseMenu()
   }
   const SetYearRange = () => {
     dispatch(setYearFilter(initDate))
+    SetDateFilter("year")
+    CloseMenu()
   }
 
   const { dateGap: todaySubTitle } = timeGap.GetDayGap(0, new Date(Date.now()))
@@ -105,7 +122,7 @@ export const ChangeDateRangeModal = () => {
       </DateModalLayout>
     </>
   )
-}
+})
 const DateModalLayout = styled(Modal)`
   z-index: 55;
   max-width: 310px;
