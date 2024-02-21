@@ -17,7 +17,7 @@ const initialState: initialState = {
   icon: "",
   color: "",
   name: "",
-  currency: Currency.UnitedStatesDollar
+  currency: Currency.UnitedStatesDollar,
 }
 
 const CurAccountSlice = createSlice({
@@ -25,7 +25,8 @@ const CurAccountSlice = createSlice({
   initialState,
   reducers: {
     setCurAccount(state, action: PayloadAction<IAccount>) {
-      const { name, color, icon, balance, currency } = action.payload
+      const { name, color, icon, balance, currency, id } = action.payload
+      state.id = id
       state.name = name
       state.balance = balance
       state.icon = icon
@@ -34,12 +35,9 @@ const CurAccountSlice = createSlice({
     },
     setCurAccountId(state, action: PayloadAction<number | null>) {
       state.id = action.payload
-    }
-  }
+    },
+  },
 })
 
 export const CurAccountReducer = CurAccountSlice.reducer
 export const { setCurAccount, setCurAccountId } = CurAccountSlice.actions
-
-
-

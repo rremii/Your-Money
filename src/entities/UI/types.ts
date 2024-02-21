@@ -27,3 +27,4 @@ export type Menus =
   | "currencyFormatMenu"
   | "dateRangeMenu"
   | "calendarMenu"
+  | "changeAccountMenu"

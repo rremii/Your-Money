@@ -29,7 +29,12 @@ export const useAccount = (userId?: number) => {
   useEffect(() => {
     if (!allAccounts) return
 
-    dispatch(setCurAccountId(null))
+    const initAccountId = window.localStorage.getItem("curAccountId")
+    dispatch(
+      setCurAccountId(
+        initAccountId !== "null" && initAccountId ? +initAccountId : null,
+      ),
+    )
 
     const allAccBalance = allAccounts.reduce((acc, cur) => {
       return acc + convertCurrency(cur.balance, cur.currency, curCurrency)

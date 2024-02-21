@@ -81,6 +81,9 @@ interface initialState {
   calendarMenu: {
     isOpen: boolean
   }
+  changeAccountMenu: {
+    isOpen: boolean
+  }
 }
 
 const initialState: initialState = {
@@ -155,6 +158,9 @@ const initialState: initialState = {
     isOpen: false,
   },
   calendarMenu: {
+    isOpen: false,
+  },
+  changeAccountMenu: {
     isOpen: false,
   },
 }

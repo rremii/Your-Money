@@ -1,14 +1,17 @@
 import styled from "styled-components"
 import React, { FC } from "react"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
+import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 
 interface props {
   right: React.ReactNode
 }
 
 export const TopHeader: FC<props> = ({ right }) => {
+  const dispatch = useAppDispatch()
+
   const balance = useTypedSelector((state) => state.CurAccount.balance)
 
   const currencyFormat = useTypedSelector(
@@ -18,9 +21,13 @@ export const TopHeader: FC<props> = ({ right }) => {
     (state) => state.Settings.curCurrencySign,
   )
 
+  const OpenChangeAccountMenu = () => {
+    dispatch(openMenu("changeAccountMenu"))
+  }
+
   return (
     <TopHeaderLayout>
-      <div className="info center">
+      <div onClick={OpenChangeAccountMenu} className="info center">
         <p>All accounts</p>
         <p>
           {FormatCurrencyString({
@@ -43,6 +50,7 @@ const TopHeaderLayout = styled.div`
   display: grid;
 
   .info {
+    cursor: pointer;
     grid-column: 2/3;
     justify-self: center;
 

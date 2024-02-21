@@ -7,7 +7,7 @@ import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAllTransDateGap } from "@entities/DateSlider/model/useAllTransDateGap.tsx"
 import { ChooseCategoryMenu } from "@widgets/ChooseCategoryMenu/ui/ChooseCategoryMenu.tsx"
-import { ChooseAccountMenu } from "@widgets/ChooseAccountMenu/ui/ChooseAccountMenu.tsx"
+import { ChooseTransAccountMenu } from "@features/ChooseTransAccountMenu/ui/ChooseTransAccountMenu.tsx"
 import { TitleMenu } from "@widgets/TitleMenu/ui/TitleMenu.tsx"
 import { DateMenu } from "@widgets/DateMenu/ui/DateMenu.tsx"
 import { TransCalendarMenu } from "@widgets/TransCalendarMenu/ui/TransCalendarMenu.tsx"
@@ -31,6 +31,7 @@ import { ChangeCurrencyFormatModal } from "@features/ChangeCurrencyFormatModal/u
 import { LoadingToast, NotifyToast } from "@shared/GlobalModules/Toasts"
 import { ChangeDateRangeModal } from "@features/ChangeDateRangeModal/ui/ChangeDateRangeModal.tsx"
 import { CalendarMenu } from "@features/CalendarMenu/ui/CalendarMenu.tsx"
+import { ChangeAccountModal } from "@features/ChangeAccountModal/ui/ChangeAccountModal.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -58,7 +59,7 @@ const AppLayout: FC<Props> = ({ children }) => {
       <EditCreateTransMenu />
       <ChooseCategoryMenu />
       <ChooseCategorySlideMenu />
-      <ChooseAccountMenu />
+      <ChooseTransAccountMenu />
       <TitleMenu />
       <DateMenu />
       <TransCalendarMenu />
@@ -67,6 +68,7 @@ const AppLayout: FC<Props> = ({ children }) => {
       <CalendarMenu />
       <ChangeDateRangeModal />
 
+      <ChangeAccountModal />
       <EditCreateCategoryMenu />
       <CategoryIconPickerModal />
 

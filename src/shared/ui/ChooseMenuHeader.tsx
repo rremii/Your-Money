@@ -6,7 +6,11 @@ interface props {
 }
 
 export const ChooseMenuHeader: FC<props> = ({ content }) => {
-  return <HeaderLayout>{content.toUpperCase()}</HeaderLayout>
+  return (
+    <HeaderLayout className="ChooseMenuHeader">
+      {content.toUpperCase()}
+    </HeaderLayout>
+  )
 }
 const HeaderLayout = styled.header`
   height: 45px;

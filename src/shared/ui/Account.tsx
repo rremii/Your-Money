@@ -54,7 +54,7 @@ const AccountLayout = styled.div<{
   align-items: center;
   gap: 12px;
   padding: 0 13px;
-  background-color: var(--sub-bg);
+  background-color: ${({ $bgColor }) => $bgColor || "var(--sub-bg)"};
   cursor: pointer;
 
   .icon {
@@ -78,7 +78,7 @@ const AccountLayout = styled.div<{
     justify-content: center;
 
     .name {
-      color: var(--sub-txt);
+      color: ${({ $nameColor }) => $nameColor || "var(--sub-txt)"};
       font-family: Inter;
       font-size: 13px;
       font-style: normal;
@@ -87,21 +87,22 @@ const AccountLayout = styled.div<{
       margin-bottom: 3px;
     }
 
-    .neg-balance {
-      color: var(--txt-8) !important;
-    }
-
-    .pos-balance {
-      color: var(--txt-10) !important;
-    }
-
     .balance {
-      color: var(--main-txt);
+      color: ${({ $quantityColor }) =>
+        $quantityColor ? $quantityColor + " !important" : "var(--main-txt)"};
       font-family: Inter;
       font-size: 17px;
       font-style: normal;
       font-weight: 500;
       line-height: normal;
+    }
+
+    .neg-balance {
+      color: var(--txt-8);
+    }
+
+    .pos-balance {
+      color: var(--txt-10);
     }
   }
 `

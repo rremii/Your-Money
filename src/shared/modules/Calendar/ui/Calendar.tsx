@@ -29,7 +29,7 @@ const Calendar: FC<props> = ({ initialDate, OnChange, color }) => {
     setCalendarColor(color)
   }, [initialDate, color])
 
-  //todo make optimization
+  //todo make optimization probaly make anothe slice for the modal and update the date only when nessecery
   return (
     <CalendarLayout>
       <Header />
