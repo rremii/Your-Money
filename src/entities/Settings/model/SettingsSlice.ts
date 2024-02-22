@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import { Currency } from "@entities/Currency/types.ts"
-
-export type themeType = "light" | "dark"
+import { DayType } from "@shared/constants/Days.ts"
+import { startScreenType, themeType } from "@entities/Settings/types.ts"
 
 interface initialState {
   curCurrency: Currency
@@ -10,6 +10,8 @@ interface initialState {
   language: string
   theme: themeType
   currencyFormat: string
+  firstDay: DayType
+  startScreen: startScreenType
 }
 
 const initialState: initialState = {
@@ -22,6 +24,10 @@ const initialState: initialState = {
   currencyFormat:
     window.localStorage.getItem("currencyFormat") ||
     "{currency} {sign}{quantity_coma}",
+  firstDay: (window.localStorage.getItem("firstDayWeek") as DayType) || "Sun",
+  startScreen:
+    (window.localStorage.getItem("startScreen") as startScreenType) ||
+    "Transactions",
 }
 
 const SettingsSlice = createSlice({
@@ -43,6 +49,12 @@ const SettingsSlice = createSlice({
     setCurrencyFormat(state, action: PayloadAction<string>) {
       state.currencyFormat = action.payload
     },
+    setWeekDay(state, action: PayloadAction<DayType>) {
+      state.firstDay = action.payload
+    },
+    setStartScreen(state, action: PayloadAction<startScreenType>) {
+      state.startScreen = action.payload
+    },
   },
 })
 
@@ -53,4 +65,6 @@ export const {
   setLanguage,
   setTheme,
   setCurrencyFormat,
+  setWeekDay,
+  setStartScreen,
 } = SettingsSlice.actions

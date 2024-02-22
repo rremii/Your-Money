@@ -29,7 +29,7 @@ export const OverviewMenu: FC<props> = ({
   menuId,
 }) => {
   const dateFilter = useTypedSelector((state) => state.Date.dateFilter)
-  const firstDay = useTypedSelector((state) => state.Date.firstDay)
+  const firstDay = useTypedSelector((state) => state.Settings.firstDay)
   const currencySign = useTypedSelector(
     (state) => state.Settings.curCurrencySign,
   )

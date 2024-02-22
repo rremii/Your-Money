@@ -14,7 +14,7 @@ import { ref } from "yup"
 export const TransactionsSlider = memo(() => {
   const dateMenuIds = useTypedSelector((state) => state.Date.dateMenuIds)
   const dateFilter = useTypedSelector((state) => state.Date.dateFilter)
-  const firstDay = useTypedSelector((state) => state.Date.firstDay)
+  const firstDay = useTypedSelector((state) => state.Settings.firstDay)
   const curAccountId = useTypedSelector((state) => state.CurAccount.id)
   const initDate = useTypedSelector((state) => state.Date.initDate)
 

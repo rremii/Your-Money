@@ -20,7 +20,7 @@ export const ChangeDateRangeModal = memo(() => {
   const dispatch = useAppDispatch()
 
   const initDate = useTypedSelector((state) => state.Date.curMenu.dateFrom)
-  const firstDay = useTypedSelector((state) => state.Date.firstDay)
+  const firstDay = useTypedSelector((state) => state.Settings.firstDay)
   const isOpen = useTypedSelector(
     (state) => state.UI.Modals.dateRangeMenu.isOpen,
   )
@@ -44,7 +44,7 @@ export const ChangeDateRangeModal = memo(() => {
     CloseMenu()
   }
   const SetWeekRange = () => {
-    dispatch(setWeekFilter(initDate))
+    dispatch(setWeekFilter({ initDate, firstDay }))
     SetDateFilter("week")
     CloseMenu()
   }

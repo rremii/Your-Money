@@ -9,54 +9,57 @@ import { LanguageCell } from "@features/ChangeLanguageModal/ui/LanguageCell.tsx"
 import { Languages } from "@features/ChangeLanguageModal/constants/Languages.ts"
 import {
   setLanguage,
-  setTheme,
+  setStartScreen,
 } from "@entities/Settings/model/SettingsSlice.ts"
-import { Themes } from "@features/ChangeThemeModal/constants/Themes.ts"
-import { ThemeCell } from "@features/ChangeThemeModal/ui/ThemeCell.tsx"
-import { themeType } from "@entities/Settings/types.ts"
+import { startScreenType } from "@entities/Settings/types.ts"
+import { Screens } from "@features/ChangeStartScreenModal/constants/Screens.ts"
+import { ScreenCell } from "@features/ChangeStartScreenModal/ui/ScreenCell.tsx"
 
-export const ChangeThemeModal = memo(() => {
+export const ChangeStartScreenModal = memo(() => {
   const dispatch = useAppDispatch()
 
-  const isOpen = useTypedSelector((state) => state.UI.Modals.themeMenu.isOpen)
-  const curTheme = useTypedSelector((state) => state.Settings.theme)
+  const isOpen = useTypedSelector(
+    (state) => state.UI.Modals.startScreenMenu.isOpen,
+  )
+  const curScreen = useTypedSelector((state) => state.Settings.startScreen)
 
-  const SetTheme = useCallback((theme: themeType) => {
-    window.localStorage.setItem("theme", theme)
-    dispatch(setTheme(theme))
+  const SetScreen = useCallback((screen: startScreenType) => {
+    window.localStorage.setItem("startScreen", screen)
+    dispatch(setStartScreen(screen))
     CloseModal()
   }, [])
 
   const CloseModal = () => {
-    dispatch(closeMenu("themeMenu"))
+    dispatch(closeMenu("startScreenMenu"))
   }
 
+  //todo make preloader stay till everything is loaded
   return (
     <>
       <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
-      <LanguageModalLayout $isOpen={isOpen}>
-        <SideBarModalHeader>Theme</SideBarModalHeader>
-        <div className="theme-box">
-          {Themes.map((theme, index) => (
-            <ThemeCell
-              OnClick={SetTheme}
-              theme={theme}
-              isActive={curTheme === theme}
+      <ScreenModalLayout $isOpen={isOpen}>
+        <SideBarModalHeader>Startup screen</SideBarModalHeader>
+        <div className="screens-box">
+          {Screens.map((screen, index) => (
+            <ScreenCell
+              OnClick={SetScreen}
+              screen={screen}
+              isActive={curScreen === screen}
               key={index}
             />
           ))}
         </div>
-      </LanguageModalLayout>
+      </ScreenModalLayout>
     </>
   )
 })
-const LanguageModalLayout = styled(Modal)`
+const ScreenModalLayout = styled(Modal)`
   z-index: 55;
   max-width: 360px;
   padding: 20px 22px;
   background-color: var(--sub-bg-light);
 
-  .theme-box {
+  .screens-box {
     display: flex;
     flex-direction: column;
     align-items: center;

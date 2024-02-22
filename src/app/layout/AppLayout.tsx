@@ -32,6 +32,9 @@ import { LoadingToast, NotifyToast } from "@shared/GlobalModules/Toasts"
 import { ChangeDateRangeModal } from "@features/ChangeDateRangeModal/ui/ChangeDateRangeModal.tsx"
 import { CalendarMenu } from "@features/CalendarMenu/ui/CalendarMenu.tsx"
 import { ChangeAccountModal } from "@features/ChangeAccountModal/ui/ChangeAccountModal.tsx"
+import { WeekDayModal } from "@features/ChangeFirstDayWeekModal/ui/WeekDayModal.tsx"
+import { ChangeStartScreenModal } from "@features/ChangeStartScreenModal/ui/ChangeStartScreenModal.tsx"
+import { useStartScreen } from "@entities/Settings/hooks/useStartScreen.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -47,6 +50,7 @@ const AppLayout: FC<Props> = ({ children }) => {
   useAccount(user?.id)
   useAllTransDateGap()
 
+  useStartScreen()
   useTheme(theme)
   useI18n(language)
   usePreloader(isLoggedIn)
@@ -76,8 +80,10 @@ const AppLayout: FC<Props> = ({ children }) => {
       <AccountIconPickerModal />
       <AccountCurrencyModal />
 
+      <ChangeStartScreenModal />
       <DefaultCurrencyModal />
       <ChangeLanguageModal />
+      <WeekDayModal />
       <ChangeThemeModal />
       <SignOutMenu />
       <PasswordMenu />

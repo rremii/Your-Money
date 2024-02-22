@@ -23,7 +23,7 @@ export const useOnMenuSlide = (
     const curScroll = document.querySelector("#slider")?.scrollLeft
     if (!curScroll) return
     window.localStorage.setItem("scroll", curScroll.toString())
-  }, [inView])
+  }, [inView, dateGap, dateFrom])
 
   return { observeRef }
 }

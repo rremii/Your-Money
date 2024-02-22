@@ -84,6 +84,12 @@ interface initialState {
   changeAccountMenu: {
     isOpen: boolean
   }
+  firstWeekDayMenu: {
+    isOpen: boolean
+  }
+  startScreenMenu: {
+    isOpen: boolean
+  }
 }
 
 const initialState: initialState = {
@@ -161,6 +167,12 @@ const initialState: initialState = {
     isOpen: false,
   },
   changeAccountMenu: {
+    isOpen: false,
+  },
+  firstWeekDayMenu: {
+    isOpen: false,
+  },
+  startScreenMenu: {
     isOpen: false,
   },
 }

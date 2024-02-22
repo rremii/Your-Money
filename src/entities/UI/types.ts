@@ -28,3 +28,5 @@ export type Menus =
   | "dateRangeMenu"
   | "calendarMenu"
   | "changeAccountMenu"
+  | "firstWeekDayMenu"
+  | "startScreenMenu"

@@ -9,54 +9,57 @@ import { LanguageCell } from "@features/ChangeLanguageModal/ui/LanguageCell.tsx"
 import { Languages } from "@features/ChangeLanguageModal/constants/Languages.ts"
 import {
   setLanguage,
-  setTheme,
+  setWeekDay,
 } from "@entities/Settings/model/SettingsSlice.ts"
-import { Themes } from "@features/ChangeThemeModal/constants/Themes.ts"
-import { ThemeCell } from "@features/ChangeThemeModal/ui/ThemeCell.tsx"
-import { themeType } from "@entities/Settings/types.ts"
+import { DayType } from "@shared/constants/Days.ts"
+import { DayCell } from "@features/ChangeFirstDayWeekModal/ui/DayCell.tsx"
+import { FullNameLanguages } from "@entities/Settings/constants/FullNameLanguages.ts"
+import { Days } from "@features/ChangeFirstDayWeekModal/constants/Days.tsx"
 
-export const ChangeThemeModal = memo(() => {
+export const WeekDayModal = memo(() => {
   const dispatch = useAppDispatch()
 
-  const isOpen = useTypedSelector((state) => state.UI.Modals.themeMenu.isOpen)
-  const curTheme = useTypedSelector((state) => state.Settings.theme)
+  const isOpen = useTypedSelector(
+    (state) => state.UI.Modals.firstWeekDayMenu.isOpen,
+  )
+  const curDay = useTypedSelector((state) => state.Settings.firstDay)
 
-  const SetTheme = useCallback((theme: themeType) => {
-    window.localStorage.setItem("theme", theme)
-    dispatch(setTheme(theme))
+  const SetFirstWeekDay = useCallback((day: DayType) => {
+    window.localStorage.setItem("firstDayWeek", day)
+    dispatch(setWeekDay(day))
     CloseModal()
   }, [])
 
   const CloseModal = () => {
-    dispatch(closeMenu("themeMenu"))
+    dispatch(closeMenu("firstWeekDayMenu"))
   }
 
   return (
     <>
       <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
-      <LanguageModalLayout $isOpen={isOpen}>
-        <SideBarModalHeader>Theme</SideBarModalHeader>
-        <div className="theme-box">
-          {Themes.map((theme, index) => (
-            <ThemeCell
-              OnClick={SetTheme}
-              theme={theme}
-              isActive={curTheme === theme}
+      <WeekDayModalLayout $isOpen={isOpen}>
+        <SideBarModalHeader>First Day of week</SideBarModalHeader>
+        <div className="days-box">
+          {Days.map((day, index) => (
+            <DayCell
+              OnClick={SetFirstWeekDay}
+              day={day}
+              isActive={curDay === day.slice(0, 3)}
               key={index}
             />
           ))}
         </div>
-      </LanguageModalLayout>
+      </WeekDayModalLayout>
     </>
   )
 })
-const LanguageModalLayout = styled(Modal)`
+const WeekDayModalLayout = styled(Modal)`
   z-index: 55;
   max-width: 360px;
   padding: 20px 22px;
   background-color: var(--sub-bg-light);
 
-  .theme-box {
+  .days-box {
     display: flex;
     flex-direction: column;
     align-items: center;

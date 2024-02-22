@@ -9,7 +9,7 @@ export const useAllTransDateGap = () => {
   const dateFilter = useTypedSelector((state) => state.Date.dateFilter)
   const initDate = useTypedSelector((state) => state.Date.initDate)
   const dateMenuIds = useTypedSelector((state) => state.Date.dateMenuIds)
-  const firstDay = useTypedSelector((state) => state.Date.firstDay)
+  const firstDay = useTypedSelector((state) => state.Settings.firstDay)
 
   useEffect(() => {
     switch (dateFilter) {

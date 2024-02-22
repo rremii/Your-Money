@@ -18,7 +18,6 @@ interface initialState {
   }
   dateFilter: DateFilter
   dateMenuIds: number[]
-  firstDay: DayType
 }
 
 const initialState = {
@@ -37,7 +36,6 @@ const initialState = {
     dateTo: "",
   },
   dateFilter: window.localStorage.getItem("dateFilter") || "day",
-  firstDay: "Sun",
   dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5],
 } as initialState
 
@@ -58,12 +56,15 @@ const DateSliderSlice = createSlice({
         dateFrom: dateFrom.toUTCString(),
       }
     },
-    setWeekFilter(state, action: PayloadAction<string>) {
+    setWeekFilter(
+      state,
+      action: PayloadAction<{ initDate: string; firstDay: DayType }>,
+    ) {
       state.dateFilter = "week"
       const { dateGap, dateFrom } = timeGap.GetWeekGap(
-        state.firstDay,
+        action.payload.firstDay,
         0,
-        action.payload,
+        action.payload.initDate,
       )
       state.dateMenuIds = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
       state.curMenu = {
