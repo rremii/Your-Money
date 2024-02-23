@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { closeMenu, openMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { ChooseMenuHeader } from "@shared/ui/ChooseMenuHeader.tsx"
 import React from "react"
 import { GetMe } from "@entities/User/api/UserApi.ts"

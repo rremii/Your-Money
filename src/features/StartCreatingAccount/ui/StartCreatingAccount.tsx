@@ -19,27 +19,30 @@ interface props {
 export const StartCreatingAccount: FC<props> = () => {
   const dispatch = useAppDispatch()
 
-
   const { data: user } = GetMe.useQueryState()
 
   const CreateAccount = () => {
     if (!user) return
     dispatch(openMenu("editCreateAccountMenu"))
-    dispatch(setCreateAccount({
-      color: GetRandomColor(),
-      icon: GetRandomAccountIcon(),
-      name: "",
-      balance: 0,
-      currency: Currency.DefaultCurrency
-    }))
+    dispatch(
+      setCreateAccount({
+        color: GetRandomColor(),
+        icon: GetRandomAccountIcon(),
+        name: "",
+        balance: 0,
+        currency: Currency.DefaultCurrency,
+      }),
+    )
     dispatch(setEditAccountMenuType("create"))
   }
 
-  return <CreatingCategoryLayout onClick={CreateAccount}>
-    <div className="icon">
-      <img src={Categories} alt="create category" />
-    </div>
-  </CreatingCategoryLayout>
+  return (
+    <CreatingCategoryLayout onClick={CreateAccount}>
+      <div className="icon">
+        <img src={Categories} alt="create category" />
+      </div>
+    </CreatingCategoryLayout>
+  )
 }
 const CreatingCategoryLayout = styled.div`
   width: 50px;

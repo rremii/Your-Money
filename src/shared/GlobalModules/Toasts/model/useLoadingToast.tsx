@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import {
   hideLoadingToast,
   loadingToastShowProps,

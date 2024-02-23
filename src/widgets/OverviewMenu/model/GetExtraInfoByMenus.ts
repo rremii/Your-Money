@@ -8,7 +8,6 @@ import { transByDate } from "@entities/Transaction/helpers/TransByDate.ts"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { DayType } from "@shared/constants/Days.ts"
 
-
 export interface IExtraInfo {
   title: string
   quantity: number

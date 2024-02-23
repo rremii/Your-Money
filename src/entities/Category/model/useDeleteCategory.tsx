@@ -1,5 +1,4 @@
 import { useDeleteCategoryMutation } from "@entities/Category/api/CategoriesApi.ts"
-import { useToast } from "@shared/GlobalModules/Toasts/model/useToast.tsx"
 import { useEffect } from "react"
 import { ErrorResponse } from "@entities/Auth/types.ts"
 import { useNotifyToast } from "@shared/GlobalModules/Toasts/model/useNotifyToast.tsx"

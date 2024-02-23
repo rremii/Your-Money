@@ -1,7 +1,6 @@
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useCallback, useEffect } from "react"
 import { ErrorResponse } from "@entities/Auth/types.ts"
-import { useToast } from "@shared/GlobalModules/Toasts/model/useToast.tsx"
 import { useCreateAccountMutation } from "@entities/Account/api/AccountsApi.ts"
 import { useLoadingToast, useNotifyToast } from "@shared/GlobalModules/Toasts"
 

@@ -58,15 +58,14 @@ const BurgerLayout = styled.div<{
       height: 2px;
       background-color: var(--bg-1);
     }
-
-
   }
 
   .arrow {
     transform: rotate(360deg);
 
     span:nth-child(1) {
-      transform: rotate(-45deg) scaleX(0.5) scaleY(0.8) translateX(-10px) translateY(-2.5px);
+      transform: rotate(-45deg) scaleX(0.5) scaleY(0.8) translateX(-10px)
+        translateY(-2.5px);
     }
 
     span:nth-child(2) {
@@ -74,8 +73,8 @@ const BurgerLayout = styled.div<{
     }
 
     span:nth-child(3) {
-      transform: rotate(45deg) scaleX(0.5) scaleY(0.8) translateX(-10px) translateY(1.8px);
+      transform: rotate(45deg) scaleX(0.5) scaleY(0.8) translateX(-10px)
+        translateY(1.8px);
     }
   }
-
 `

@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo } from "react"
+import React, { memo } from "react"
 import { TransactionsMenu } from "@widgets/TransactionsMenu/ui/TransactionsMenu.tsx"
 import { GetTransByMenus } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import { useSlider } from "@entities/DateSlider/model/useSlider.tsx"
@@ -9,7 +9,6 @@ import { GetMe } from "@entities/User/api/UserApi.ts"
 import { AddHistoryPointsToMenus } from "@widgets/TransactionsMenu/model/AddHistoryPointsToMenus.ts"
 import { SliderLayout } from "@shared/ui/Slider.tsx"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
-import { ref } from "yup"
 
 export const TransactionsSlider = memo(() => {
   const dateMenuIds = useTypedSelector((state) => state.Date.dateMenuIds)

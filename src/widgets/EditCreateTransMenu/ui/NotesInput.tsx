@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { FC, memo } from "react"
+import { memo } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import {
   openMenu,

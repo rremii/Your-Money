@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import React, { FC, ReactNode } from "react"
-import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 //todo check seo
 interface props {

@@ -1,8 +1,7 @@
 import React, { FC, memo } from "react"
 import styled from "styled-components"
 import { RadioBtn } from "@shared/ui/RadioBtn.tsx"
-import { FullNameLanguages } from "@entities/Settings/constants/FullNameLanguages.ts"
-import { Days, DayType, FullDays } from "@shared/constants/Days.ts"
+import { DayType } from "@shared/constants/Days.ts"
 
 interface props {
   day: string

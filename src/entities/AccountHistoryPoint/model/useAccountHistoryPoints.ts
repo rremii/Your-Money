@@ -6,7 +6,6 @@ import { IAccount } from "@entities/Account/types.ts"
 import { AddConvertedBalanceToHistory } from "@entities/AccountHistoryPoint/model/AddConvertedBalanceToHistory.ts"
 import { FilterHistoryByAccId } from "@entities/AccountHistoryPoint/model/FilterHistoryByAccId.ts"
 import { Currency } from "@entities/Currency/types.ts"
-import { useCallback, useMemo } from "react"
 
 export const useAccountHistoryPoints = (
   accountIds: number[],

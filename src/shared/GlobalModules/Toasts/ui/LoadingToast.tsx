@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import React from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { notifyStateType } from "@shared/GlobalModules/Toasts/model/NotifyToastSlice.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { Spinner } from "@shared/ui/Spinner/Spinner.tsx"
 

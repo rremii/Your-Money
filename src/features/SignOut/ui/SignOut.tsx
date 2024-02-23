@@ -7,7 +7,6 @@ import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 export const SignOut = React.memo(() => {
   const dispatch = useAppDispatch()
 
-
   const OnClick = () => {
     dispatch(openMenu("signOutMenu"))
   }

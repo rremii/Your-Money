@@ -5,12 +5,7 @@ import React, { memo, useCallback } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { SideBarModalHeader } from "@shared/ui/SideBarModalHeader.tsx"
-import { LanguageCell } from "@features/ChangeLanguageModal/ui/LanguageCell.tsx"
-import { Languages } from "@features/ChangeLanguageModal/constants/Languages.ts"
-import {
-  setLanguage,
-  setTheme,
-} from "@entities/Settings/model/SettingsSlice.ts"
+import { setTheme } from "@entities/Settings/model/SettingsSlice.ts"
 import { Themes } from "@features/ChangeThemeModal/constants/Themes.ts"
 import { ThemeCell } from "@features/ChangeThemeModal/ui/ThemeCell.tsx"
 import { themeType } from "@entities/Settings/types.ts"

@@ -32,7 +32,7 @@ const IconLayout = styled.div`
   width: 55px;
   height: 55px;
   transform: translateY(-50%);
-  box-shadow: 0 1px 5px -1px  var(--shadow-3);
+  box-shadow: 0 1px 5px -1px var(--shadow-3);
 
   svg {
     width: 25px;

@@ -1,4 +1,3 @@
-import styles from "./Spinner.module.css"
 import styled from "styled-components"
 import { FC } from "react"
 

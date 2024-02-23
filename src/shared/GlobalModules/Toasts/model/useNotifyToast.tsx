@@ -1,4 +1,3 @@
-import { useEffect } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import {
   hideNotifyToast,

@@ -8,5 +8,5 @@ export const EditCreateTransactionReducer = combineReducers({
   Transaction: TransactionReducer,
   ChosenCategory: ChosenCategoryReducer,
   ChosenAccount: ChosenAccountReducer,
-  Calculator: CalculatorReducer
+  Calculator: CalculatorReducer,
 })

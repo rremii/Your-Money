@@ -7,10 +7,15 @@ import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 export const ChangePassword = React.memo(() => {
   const dispatch = useAppDispatch()
 
-
   const handleClick = () => {
     dispatch(openMenu("passwordMenu"))
   }
 
-  return <SideBarBtn onClick={handleClick} title="Change password" icon={Categories} />
+  return (
+    <SideBarBtn
+      onClick={handleClick}
+      title="Change password"
+      icon={Categories}
+    />
+  )
 })

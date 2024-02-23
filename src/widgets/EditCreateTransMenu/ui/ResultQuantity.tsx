@@ -1,12 +1,8 @@
 import styled from "styled-components"
-import { TransactionType } from "@entities/Transaction/types.ts"
-import { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { MathOperatorSign } from "@entities/EditCreateTransaction/helpers/CalcMathOperation.ts"
 import { setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
-import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConverter.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
-import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { useGetConvertedTransCurrency } from "@entities/Transaction/model/useGetConvertedTransCurrency.tsx"
 
 export const ResultQuantity = () => {

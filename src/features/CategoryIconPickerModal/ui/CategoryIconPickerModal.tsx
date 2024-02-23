@@ -10,20 +10,29 @@ import {
 export const CategoryIconPickerModal = memo(() => {
   const dispatch = useAppDispatch()
 
-  const isOpen = useTypedSelector(state => state.UI.Modals.categoryIconPickerMenu.isOpen)
-  const icon = useTypedSelector(state => state.NewCategory.icon)
-  const color = useTypedSelector(state => state.NewCategory.color)
-  
+  const isOpen = useTypedSelector(
+    (state) => state.UI.Modals.categoryIconPickerMenu.isOpen,
+  )
+  const icon = useTypedSelector((state) => state.NewCategory.icon)
+  const color = useTypedSelector((state) => state.NewCategory.color)
+
   const CloseIconColorPicker = () => {
     dispatch(closeMenu("categoryIconPickerMenu"))
   }
 
-  const OnSubmit = ({ icon, color }: { icon: string, color: string }) => {
+  const OnSubmit = ({ icon, color }: { icon: string; color: string }) => {
     dispatch(setNewCategoryColor(color))
     dispatch(setNewCategoryIcon(icon))
     dispatch(closeMenu("categoryIconPickerMenu"))
   }
 
-  return <IconColorPickerModal icon={icon} color={color} isOpen={isOpen} OnSubmit={OnSubmit}
-                               OnClose={CloseIconColorPicker} />
+  return (
+    <IconColorPickerModal
+      icon={icon}
+      color={color}
+      isOpen={isOpen}
+      OnSubmit={OnSubmit}
+      OnClose={CloseIconColorPicker}
+    />
+  )
 })

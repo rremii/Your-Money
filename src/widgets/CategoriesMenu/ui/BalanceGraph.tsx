@@ -7,7 +7,6 @@ import {
   TransactionType,
 } from "@entities/Transaction/types.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
-import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 

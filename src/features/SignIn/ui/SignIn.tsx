@@ -9,7 +9,6 @@ export const SignIn = React.memo(() => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-
   const handleClick = () => {
     navigate("/sign-in")
     dispatch(closeMenu("sideBar"))

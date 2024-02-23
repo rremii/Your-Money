@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 

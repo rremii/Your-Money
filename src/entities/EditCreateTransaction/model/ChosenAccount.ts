@@ -16,7 +16,7 @@ const initialState: initialState = {
   color: "",
   icon: "",
   name: "",
-  currency: Currency.DefaultCurrency
+  currency: Currency.DefaultCurrency,
 }
 
 const ChosenAccount = createSlice({
@@ -37,9 +37,8 @@ const ChosenAccount = createSlice({
       state.balance = 0
       state.color = ""
       state.icon = ""
-    }
-
-  }
+    },
+  },
 })
 
 export const ChosenAccountReducer = ChosenAccount.reducer

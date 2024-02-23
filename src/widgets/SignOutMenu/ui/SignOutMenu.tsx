@@ -11,7 +11,7 @@ export const SignOutMenu = React.memo(() => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const isOpen = useTypedSelector(state => state.UI.Modals.signOutMenu.isOpen)
+  const isOpen = useTypedSelector((state) => state.UI.Modals.signOutMenu.isOpen)
 
   const [logout] = useSignOutMutation()
 
@@ -27,18 +27,24 @@ export const SignOutMenu = React.memo(() => {
     dispatch(closeMenu("signOutMenu"))
   }
 
-
-  return <>
-    <Overlay onClick={CloseMenu} $isActive={isOpen} $zIndex={15} />
-    <Modal $isOpen={isOpen}>
-      <h2 className="title">Sign out?</h2>
-      <p className="content">Data synchronization and other features
-        will be disabled in offline.</p>
-      <div className="btn-section">
-        <button className="gray" onClick={CloseMenu}>CANCEL</button>
-        <button className="red" onClick={SignOut}>SIGN OUT</button>
-      </div>
-    </Modal>
-  </>
+  return (
+    <>
+      <Overlay onClick={CloseMenu} $isActive={isOpen} $zIndex={15} />
+      <Modal $isOpen={isOpen}>
+        <h2 className="title">Sign out?</h2>
+        <p className="content">
+          Data synchronization and other features will be disabled in offline.
+        </p>
+        <div className="btn-section">
+          <button className="gray" onClick={CloseMenu}>
+            CANCEL
+          </button>
+          <button className="red" onClick={SignOut}>
+            SIGN OUT
+          </button>
+        </div>
+      </Modal>
+    </>
+  )
 })
 

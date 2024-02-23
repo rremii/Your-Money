@@ -14,7 +14,6 @@ import {
 import { IIconComponents } from "@shared/modules/IconColorPicker/types.ts"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
 
-
 interface props {
   icons: {
     firstSection: string[]
@@ -30,7 +29,7 @@ interface props {
     color: string
   }
   IconComponents: IIconComponents
-  OnChange: (values: { color: string, icon: string }) => void
+  OnChange: (values: { color: string; icon: string }) => void
 }
 
 const IconColorPicker: FC<props> = memo(({ icons, initInfo, IconComponents, sectionTitles, OnChange, colors }) => {

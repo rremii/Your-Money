@@ -12,7 +12,6 @@ import {
   openMenu,
   setEditCreateMenuType,
 } from "@entities/UI/model/ModalsSlice.ts"
-import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 

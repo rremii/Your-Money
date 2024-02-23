@@ -17,13 +17,13 @@ interface ICalculatorBtn {
 export const useGetCalculatorGridBtns = () => {
   const dispatch = useAppDispatch()
 
-  const currency = useTypedSelector(state => state.EditCreateTransaction.Transaction.currency)
-
+  const currency = useTypedSelector(
+    (state) => state.EditCreateTransaction.Transaction.currency,
+  )
 
   const OpenDateMenu = useCallback(() => {
     dispatch(openMenu("dateMenu"))
   }, [])
-
 
   const RemoveLastNum = useCallback(() => {
     dispatch(removeLastNumber())
@@ -41,35 +41,47 @@ export const useGetCalculatorGridBtns = () => {
     dispatch(openMenu("editCreateCurrencyMenu"))
   }, [])
 
-  const leftColumnBtns: ICalculatorBtn[] = useMemo(() => [
-    { OnClick: () => SetOperator("div"), children: "÷" },
-    { OnClick: () => SetOperator("mul"), children: "×" },
-    { OnClick: () => SetOperator("sub"), children: "-" },
-    { OnClick: () => SetOperator("sum"), children: "+" }
-  ], [])
-  const middleBtns: ICalculatorBtn[] = useMemo(() => [
-    { OnClick: () => AddToNum(7), children: "7" },
-    { OnClick: () => AddToNum(8), children: "8" },
-    { OnClick: () => AddToNum(9), children: "9" },
-    { OnClick: () => AddToNum(4), children: "4" },
-    { OnClick: () => AddToNum(5), children: "5" },
-    { OnClick: () => AddToNum(6), children: "6" },
-    { OnClick: () => AddToNum(1), children: "1" },
-    { OnClick: () => AddToNum(2), children: "2" },
-    { OnClick: () => AddToNum(3), children: "3" },
-    { OnClick: OpenCurrencyMenu, children: DefaultCurrencySigns.get(currency) },
-    { OnClick: () => AddToNum(0), children: "0" },
-    { OnClick: () => AddToNum("."), children: "." }
-  ], [currency])
+  const leftColumnBtns: ICalculatorBtn[] = useMemo(
+    () => [
+      { OnClick: () => SetOperator("div"), children: "÷" },
+      { OnClick: () => SetOperator("mul"), children: "×" },
+      { OnClick: () => SetOperator("sub"), children: "-" },
+      { OnClick: () => SetOperator("sum"), children: "+" },
+    ],
+    [],
+  )
+  const middleBtns: ICalculatorBtn[] = useMemo(
+    () => [
+      { OnClick: () => AddToNum(7), children: "7" },
+      { OnClick: () => AddToNum(8), children: "8" },
+      { OnClick: () => AddToNum(9), children: "9" },
+      { OnClick: () => AddToNum(4), children: "4" },
+      { OnClick: () => AddToNum(5), children: "5" },
+      { OnClick: () => AddToNum(6), children: "6" },
+      { OnClick: () => AddToNum(1), children: "1" },
+      { OnClick: () => AddToNum(2), children: "2" },
+      { OnClick: () => AddToNum(3), children: "3" },
+      {
+        OnClick: OpenCurrencyMenu,
+        children: DefaultCurrencySigns.get(currency),
+      },
+      { OnClick: () => AddToNum(0), children: "0" },
+      { OnClick: () => AddToNum("."), children: "." },
+    ],
+    [currency],
+  )
 
-  const rightBtns: ICalculatorBtn[] = useMemo(() => [
-    { OnClick: RemoveLastNum, children: "del" },
-    { OnClick: OpenDateMenu, children: "date" }
-  ], [])
+  const rightBtns: ICalculatorBtn[] = useMemo(
+    () => [
+      { OnClick: RemoveLastNum, children: "del" },
+      { OnClick: OpenDateMenu, children: "date" },
+    ],
+    [],
+  )
 
   return {
-    leftColumnBtns, middleBtns, rightBtns
+    leftColumnBtns,
+    middleBtns,
+    rightBtns,
   }
-
-
 }

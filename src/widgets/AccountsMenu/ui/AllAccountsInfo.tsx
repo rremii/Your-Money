@@ -1,8 +1,6 @@
 import styled from "styled-components"
 import { FC } from "react"
-import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 
 interface props {
   allBalance: number

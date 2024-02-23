@@ -5,7 +5,6 @@ import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { resetEditAccount } from "@entities/Account/model/NewAccountSlice.ts"
 import { CreateAccount } from "@features/CreateAccount/ui/CreateAccount.tsx"
 import { EditAccount } from "@features/EditAccount/ui/EditAccount.tsx"
-import { memo } from "react"
 
 export const EditAccountHeader = () => {
   const dispatch = useAppDispatch()

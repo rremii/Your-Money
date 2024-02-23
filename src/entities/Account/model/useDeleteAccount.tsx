@@ -1,4 +1,3 @@
-import { useToast } from "@shared/GlobalModules/Toasts/model/useToast.tsx"
 import { useEffect } from "react"
 import { ErrorResponse } from "@entities/Auth/types.ts"
 import { useDeleteAccountMutation } from "@entities/Account/api/AccountsApi.ts"

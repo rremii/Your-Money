@@ -7,11 +7,10 @@ import {
   updateMenuDatesType,
 } from "@shared/modules/Calendar/types.ts"
 
-
 export const setCurCalendarDate = (payload: string) => {
   const action: setCurCalendarDateType = {
     type: "SET_CUR_DATE",
-    payload
+    payload,
   }
   dispatchCalendar(action)
 }

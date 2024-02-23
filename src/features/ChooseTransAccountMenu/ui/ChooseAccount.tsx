@@ -1,6 +1,6 @@
 import { Account } from "@shared/ui/Account.tsx"
 import React, { FC } from "react"
-import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
 import { IAccount } from "@entities/Account/types.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"

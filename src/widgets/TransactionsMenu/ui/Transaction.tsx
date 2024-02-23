@@ -21,7 +21,6 @@ import {
   openMenu,
   setEditCreateMenuType,
 } from "@entities/UI/model/ModalsSlice.ts"
-import { Currency } from "@entities/Currency/types.ts"
 import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 

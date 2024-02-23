@@ -18,39 +18,61 @@ export const ChooseCategoryMenu = React.memo(() => {
   const { data: user } = GetMe.useQueryState()
   const { allCategories } = useCategory(user?.id)
 
-  const isOpen = useTypedSelector(state => state.UI.Modals.chooseCategoryMenu.isOpen)
-  const type = useTypedSelector(state => state.EditCreateTransaction.Transaction.type)
-  const chosenCategoryName = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.name)
+  const isOpen = useTypedSelector(
+    (state) => state.UI.Modals.chooseCategoryMenu.isOpen,
+  )
+  const type = useTypedSelector(
+    (state) => state.EditCreateTransaction.Transaction.type,
+  )
+  const chosenCategoryName = useTypedSelector(
+    (state) => state.EditCreateTransaction.ChosenCategory.name,
+  )
 
   const CloseMenu = () => {
     dispatch(closeMenu("chooseCategoryMenu"))
   }
 
-
   const SetCategory = ({ color, name, icon, id }: ICategory) => {
-    dispatch(setCategory({
-      id, name, icon, color
-    }))
+    dispatch(
+      setCategory({
+        id,
+        name,
+        icon,
+        color,
+      }),
+    )
     CloseMenu()
   }
 
-  return <>
-    <Overlay onClick={CloseMenu}
-             $isActive={isOpen} $zIndex={50}
-             $color={"rgba(0, 0, 0, 0.5 )"} />
+  return (
+    <>
+      <Overlay
+        onClick={CloseMenu}
+        $isActive={isOpen}
+        $zIndex={50}
+        $color={"rgba(0, 0, 0, 0.5 )"}
+      />
 
-    <ChooseMenuLayout $isActive={isOpen}>
-      <ChooseMenuHeader content={type} />
+      <ChooseMenuLayout $isActive={isOpen}>
+        <ChooseMenuHeader content={type} />
 
-      <CategoriesBox>
-        {allCategories?.filter((category) => category.type === type)
-          .map((category, index) => {
-            return <Category OnClick={SetCategory} key={index} {...category}
-                             isActive={chosenCategoryName === category.name} />
-          })}
-      </CategoriesBox>
-    </ChooseMenuLayout>
-  </>
+        <CategoriesBox>
+          {allCategories
+            ?.filter((category) => category.type === type)
+            .map((category, index) => {
+              return (
+                <Category
+                  OnClick={SetCategory}
+                  key={index}
+                  {...category}
+                  isActive={chosenCategoryName === category.name}
+                />
+              )
+            })}
+        </CategoriesBox>
+      </ChooseMenuLayout>
+    </>
+  )
 })
 
 const CategoriesBox = styled.div`

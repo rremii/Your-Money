@@ -1,8 +1,6 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { TransformDate } from "@widgets/TransactionsMenu/model/TransformDate.ts"
-import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 
 interface props {

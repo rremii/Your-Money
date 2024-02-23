@@ -7,14 +7,15 @@ import { IsToday } from "@shared/helpers/IsToday.ts"
 import { Months } from "@shared/constants/Months.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 
-
 export const OpenCalendar = () => {
   const dispatch = useAppDispatch()
 
-
-  const color = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.color)
-  const dateStr = useTypedSelector(state => state.EditCreateTransaction.Transaction.dateStr)
-
+  const color = useTypedSelector(
+    (state) => state.EditCreateTransaction.ChosenCategory.color,
+  )
+  const dateStr = useTypedSelector(
+    (state) => state.EditCreateTransaction.Transaction.dateStr,
+  )
 
   const OpenCalendar = () => {
     dispatch(openMenu("calendarMenu"))
@@ -29,12 +30,14 @@ export const OpenCalendar = () => {
 
   const subTitle = month + " " + day + ", " + year
 
-  return <PickDateBtn color={color}
-                      isActive={isActive}
-                      title="Select day"
-                      subTitle={isActive ? subTitle : ""}
-                      img={Category}
-                      OnClick={OpenCalendar}
-  />
-
+  return (
+    <PickDateBtn
+      color={color}
+      isActive={isActive}
+      title="Select day"
+      subTitle={isActive ? subTitle : ""}
+      img={Category}
+      OnClick={OpenCalendar}
+    />
+  )
 }

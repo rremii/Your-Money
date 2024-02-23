@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import React, { FC } from "react"
-import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 
 interface props {

@@ -8,19 +8,21 @@ import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
 import { setNewCategoryType } from "@entities/Category/model/NewCategorySlice.ts"
 
-
 export const EditCategoriesSlider = memo(() => {
   const dispatch = useAppDispatch()
 
-  const isEditMode = useTypedSelector(state => state.UI.Pages.categoryPage.isCategoriesEditMode)
+  const isEditMode = useTypedSelector(
+    (state) => state.UI.Pages.categoryPage.isCategoriesEditMode,
+  )
 
   const { data: user } = GetMe.useQueryState()
   const { allCategories } = useCategory(user?.id)
-  const { expCategories, incCategories } = useMemo(() => FilterCategoriesByType(allCategories), [allCategories])
-
+  const { expCategories, incCategories } = useMemo(
+    () => FilterCategoriesByType(allCategories),
+    [allCategories],
+  )
 
   const sliderRef = useRef<HTMLDivElement>(null)
-
 
   useEffect(() => {
     OnScroll()
@@ -41,13 +43,16 @@ export const EditCategoriesSlider = memo(() => {
     }
   }
 
-
-  return <EditCategoriesLayout onScroll={OnScroll} ref={sliderRef} $isHidden={!isEditMode}>
-
-    <EditCategoriesMenu categoryType="expense" categories={expCategories} />
-    <EditCategoriesMenu categoryType="income" categories={incCategories} />
-
-  </EditCategoriesLayout>
+  return (
+    <EditCategoriesLayout
+      onScroll={OnScroll}
+      ref={sliderRef}
+      $isHidden={!isEditMode}
+    >
+      <EditCategoriesMenu categoryType="expense" categories={expCategories} />
+      <EditCategoriesMenu categoryType="income" categories={incCategories} />
+    </EditCategoriesLayout>
+  )
 })
 const EditCategoriesLayout = styled(SliderLayout)<{
   $isHidden?: boolean

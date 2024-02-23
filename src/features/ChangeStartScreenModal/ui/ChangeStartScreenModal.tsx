@@ -5,12 +5,7 @@ import React, { memo, useCallback } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { SideBarModalHeader } from "@shared/ui/SideBarModalHeader.tsx"
-import { LanguageCell } from "@features/ChangeLanguageModal/ui/LanguageCell.tsx"
-import { Languages } from "@features/ChangeLanguageModal/constants/Languages.ts"
-import {
-  setLanguage,
-  setStartScreen,
-} from "@entities/Settings/model/SettingsSlice.ts"
+import { setStartScreen } from "@entities/Settings/model/SettingsSlice.ts"
 import { startScreenType } from "@entities/Settings/types.ts"
 import { Screens } from "@features/ChangeStartScreenModal/constants/Screens.ts"
 import { ScreenCell } from "@features/ChangeStartScreenModal/ui/ScreenCell.tsx"
@@ -32,7 +27,7 @@ export const ChangeStartScreenModal = memo(() => {
   const CloseModal = () => {
     dispatch(closeMenu("startScreenMenu"))
   }
-
+  //todo and error boundary
   //todo make preloader stay till everything is loaded
   return (
     <>

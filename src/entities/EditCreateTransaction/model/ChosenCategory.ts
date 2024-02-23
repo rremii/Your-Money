@@ -11,7 +11,7 @@ const initialState: initialState = {
   id: null,
   name: "",
   color: "",
-  icon: ""
+  icon: "",
 }
 
 const ChosenCategory = createSlice({
@@ -29,8 +29,8 @@ const ChosenCategory = createSlice({
       state.name = ""
       state.color = ""
       state.icon = ""
-    }
-  }
+    },
+  },
 })
 
 export const ChosenCategoryReducer = ChosenCategory.reducer

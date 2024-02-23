@@ -8,7 +8,6 @@ import { SignOut } from "@features/SignOut"
 import { ChangePassword } from "@features/ChangePassword"
 import { ChangeName } from "@features/ChangeName"
 import { SignIn } from "@features/SignIn"
-import { ChangeFirstDayMonth } from "@features/ChangeFirstDayMonth"
 import { ChangeLanguage } from "@features/ChangeLanguage"
 import { ChangeTheme } from "@features/ChangeTheme"
 import { ChangeCurrency } from "@features/ChangeCurrency"
@@ -56,7 +55,6 @@ export const SideBar = React.memo(() => {
             <ChangeCurrency />
             <ChangeCurrencyFormat />
             <ChangeFirstDayWeek />
-            <ChangeFirstDayMonth />
             <ChangeStartScreen />
           </div>
         </SideBarSection>

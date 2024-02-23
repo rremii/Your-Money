@@ -21,6 +21,4 @@ export const TransactionApi = Api.injectEndpoints({
   overrideExisting: false,
 })
 
-export const {
-  useGetHistoryPointsByDateGapQuery
-} = TransactionApi
+export const { useGetHistoryPointsByDateGapQuery } = TransactionApi

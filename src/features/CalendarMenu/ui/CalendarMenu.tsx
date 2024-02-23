@@ -4,9 +4,7 @@ import React, { memo, useCallback, useState } from "react"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { Calendar } from "@shared/modules/Calendar"
-import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
-import { setCurCalendarDate } from "@shared/modules/Calendar/model/Actions.ts"
 import { setCurDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
 
 //todo make smth with todos like hide it or whatever in order them not to stay on the top lvl

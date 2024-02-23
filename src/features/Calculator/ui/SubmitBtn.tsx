@@ -9,13 +9,19 @@ interface props {
   isLoading?: boolean
 }
 
-export const SubmitBtn: FC<props> = memo(({ bgColor, OnClick, children, isLoading }) => {
-
-  return <SubmitBtnLayout $borderColor={"transparent"} onClick={OnClick}
-                          $bgColor={bgColor}>
-    <IconLayout>{children}</IconLayout>
-  </SubmitBtnLayout>
-})
+export const SubmitBtn: FC<props> = memo(
+  ({ bgColor, OnClick, children, isLoading }) => {
+    return (
+      <SubmitBtnLayout
+        $borderColor={"transparent"}
+        onClick={OnClick}
+        $bgColor={bgColor}
+      >
+        <IconLayout>{children}</IconLayout>
+      </SubmitBtnLayout>
+    )
+  },
+)
 const SubmitBtnLayout = styled(CalculatorBtn)`
   grid-row: span 2;
 `

@@ -1,7 +1,6 @@
 import React, { FC, memo } from "react"
 import styled from "styled-components"
 import { RadioBtn } from "@shared/ui/RadioBtn.tsx"
-import { FullNameLanguages } from "@entities/Settings/constants/FullNameLanguages.ts"
 import { startScreenType } from "@entities/Settings/types.ts"
 
 interface props {

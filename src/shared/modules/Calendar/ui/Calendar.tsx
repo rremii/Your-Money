@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import React, { FC, memo, useContext, useEffect } from "react"
+import React, { FC, useContext, useEffect } from "react"
 import { MonthSlider } from "@shared/modules/Calendar/ui/MonthSlider.tsx"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
 import {

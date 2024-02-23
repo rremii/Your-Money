@@ -1,31 +1,22 @@
 import styled from "styled-components"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import React, { useCallback, useEffect } from "react"
+import React, { useEffect } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { Calculator } from "@shared/ui/CalculatorBtns/Calculator.tsx"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
-import { InfoCell } from "@shared/ui/InfoCell.tsx"
 import { ResultQuantity } from "@widgets/EditCreateTransMenu/ui/ResultQuantity.tsx"
 import { Notes } from "@widgets/EditCreateTransMenu/ui/NotesInput.tsx"
 import { TransDate } from "@shared/ui/TransDate.tsx"
 import { OptionsSection } from "@widgets/EditCreateTransMenu/ui/OptionsSection.tsx"
-import {
-  useCreateTransactionMutation,
-  useEditTransactionMutation,
-} from "@entities/Transaction/api/TransactionApi.ts"
 import { resetEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { resetTransCalculator } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import {
   closeMenu,
-  openMenu,
   setEditCreateMenuType,
 } from "@entities/UI/model/ModalsSlice.ts"
-import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConverter.ts"
-import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { EditCreateMenuType } from "@entities/UI/types.ts"
-import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
 import { CreateTransaction } from "@features/CreateTransaction/ui/CreateTransaction.tsx"
 import { EditTransaction } from "@features/EditTransaction/ui/EditTransaction.tsx"
 import { OpenChooseAccountMenu } from "@features/OpenChooseAccountMenu/ui/OpenChooseAccountMenu.tsx"

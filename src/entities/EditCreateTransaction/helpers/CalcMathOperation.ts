@@ -2,9 +2,10 @@ import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 
 export type MathOperatorType = "mul" | "sub" | "div" | "sum" | null
 
-
-export const CalcMathOperation = (arg: number[], operator: MathOperatorType) => {
-
+export const CalcMathOperation = (
+  arg: number[],
+  operator: MathOperatorType,
+) => {
   switch (operator) {
     case "mul":
       return RoundDecimal(arg.reduce((acc, cur) => acc * cur, 1))
@@ -17,7 +18,6 @@ export const CalcMathOperation = (arg: number[], operator: MathOperatorType) => 
     default:
       return arg[0]
   }
-
 }
 
 //todo change to icons

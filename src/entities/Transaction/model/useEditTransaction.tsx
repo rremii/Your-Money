@@ -1,8 +1,5 @@
 import { useEditTransactionMutation } from "@entities/Transaction/api/TransactionApi.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { GetMe } from "@entities/User/api/UserApi.ts"
-import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
-import { useCurrencyConverter } from "@entities/Currency/model/useCurrencyConverter.ts"
 import { useGetConvertedTransCurrency } from "@entities/Transaction/model/useGetConvertedTransCurrency.tsx"
 import { useLoadingToast, useNotifyToast } from "@shared/GlobalModules/Toasts"
 import { useEffect } from "react"

@@ -14,7 +14,7 @@ import {
 export const setPickerCurColor = (payload: string) => {
   const action: setPickerCurColorType = {
     type: "SET_PICKER_CUR_COLOR",
-    payload
+    payload,
   }
   dispatchPicker(action)
 }

@@ -5,15 +5,9 @@ import React, { memo, useCallback } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { SideBarModalHeader } from "@shared/ui/SideBarModalHeader.tsx"
-import { LanguageCell } from "@features/ChangeLanguageModal/ui/LanguageCell.tsx"
-import { Languages } from "@features/ChangeLanguageModal/constants/Languages.ts"
-import {
-  setLanguage,
-  setWeekDay,
-} from "@entities/Settings/model/SettingsSlice.ts"
+import { setWeekDay } from "@entities/Settings/model/SettingsSlice.ts"
 import { DayType } from "@shared/constants/Days.ts"
 import { DayCell } from "@features/ChangeFirstDayWeekModal/ui/DayCell.tsx"
-import { FullNameLanguages } from "@entities/Settings/constants/FullNameLanguages.ts"
 import { Days } from "@features/ChangeFirstDayWeekModal/constants/Days.tsx"
 
 export const WeekDayModal = memo(() => {

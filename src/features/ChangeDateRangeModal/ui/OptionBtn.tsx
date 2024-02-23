@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { FC, memo, ReactNode } from "react"
+import { FC, ReactNode } from "react"
 
 interface props {
   icon: ReactNode

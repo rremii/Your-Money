@@ -7,7 +7,7 @@ import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/Calc
 export const StartCreatingTrans = () => {
   const dispatch = useAppDispatch()
 
-  const curMenuDate = useTypedSelector(state => state.Date.curMenu.dateFrom)
+  const curMenuDate = useTypedSelector((state) => state.Date.curMenu.dateFrom)
 
   const OnClick = () => {
     dispatch(openMenu("chooseCategorySlideMenu"))
@@ -15,9 +15,7 @@ export const StartCreatingTrans = () => {
     dispatch(setEditTransDateStr(curMenuDate))
   }
 
-  return <CreatingTransLayout onClick={OnClick}>
-    +
-  </CreatingTransLayout>
+  return <CreatingTransLayout onClick={OnClick}>+</CreatingTransLayout>
 }
 const CreatingTransLayout = styled.div`
   cursor: pointer;

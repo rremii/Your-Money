@@ -11,7 +11,6 @@ import {
   setEditCreateMenuType,
 } from "@entities/UI/model/ModalsSlice.ts"
 
-
 interface props {
   categories: ICategory[]
 }

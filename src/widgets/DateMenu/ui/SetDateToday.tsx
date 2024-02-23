@@ -7,12 +7,15 @@ import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/Trans
 import { Months } from "@shared/constants/Months.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 
-
 export const SetDateToday = () => {
   const dispatch = useAppDispatch()
 
-  const color = useTypedSelector(state => state.EditCreateTransaction.ChosenCategory.color)
-  const dateStr = useTypedSelector(state => state.EditCreateTransaction.Transaction.dateStr)
+  const color = useTypedSelector(
+    (state) => state.EditCreateTransaction.ChosenCategory.color,
+  )
+  const dateStr = useTypedSelector(
+    (state) => state.EditCreateTransaction.Transaction.dateStr,
+  )
 
   const isActive = IsToday(dateStr)
 
@@ -28,6 +31,14 @@ export const SetDateToday = () => {
     dispatch(closeMenu("dateMenu"))
   }
 
-  return <PickDateBtn OnClick={SetDateToday} isActive={isActive} color={color} title="Today" img={Category}
-                      subTitle={subTitle} />
+  return (
+    <PickDateBtn
+      OnClick={SetDateToday}
+      isActive={isActive}
+      color={color}
+      title="Today"
+      img={Category}
+      subTitle={subTitle}
+    />
+  )
 }

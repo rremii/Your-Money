@@ -5,18 +5,17 @@ import { ColorMenu } from "@shared/modules/IconColorPicker/ui/ColorMenu/ColorMen
 import { FC, useContext } from "react"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
 
-
 export const Slider: FC = () => {
-
   const { menuType } = useContext(PickerContext)
 
   const { OnScroll, sliderRef } = usePickerSlider(menuType)
 
-
-  return <SliderLayout ref={sliderRef} onScroll={OnScroll}>
-    <IconMenu />
-    <ColorMenu />
-  </SliderLayout>
+  return (
+    <SliderLayout ref={sliderRef} onScroll={OnScroll}>
+      <IconMenu />
+      <ColorMenu />
+    </SliderLayout>
+  )
 }
 const SliderLayout = styled.div`
   height: 450px;

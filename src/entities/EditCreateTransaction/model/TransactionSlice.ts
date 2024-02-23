@@ -11,19 +11,21 @@ interface initialState {
 }
 
 const initialState: initialState = {
-
   id: null,
   dateStr: new Date().toUTCString(),
   title: "",
   type: "expense",
-  currency: Currency.DefaultCurrency
+  currency: Currency.DefaultCurrency,
 }
 
 const TransactionSlice = createSlice({
   name: "TransactionSlice",
   initialState,
   reducers: {
-    setEditTransaction(state, action: PayloadAction<Omit<initialState, "currency">>) {
+    setEditTransaction(
+      state,
+      action: PayloadAction<Omit<initialState, "currency">>,
+    ) {
       state.id = action.payload.id
       state.title = action.payload.title
       state.type = action.payload.type
@@ -47,8 +49,8 @@ const TransactionSlice = createSlice({
     },
     setEditTransDateStr(state, action: PayloadAction<string>) {
       state.dateStr = action.payload
-    }
-  }
+    },
+  },
 })
 
 export const TransactionReducer = TransactionSlice.reducer
@@ -58,5 +60,5 @@ export const {
   setEditTransType,
   resetEditTransaction,
   setEditTransaction,
-  setEditCurrency
+  setEditCurrency,
 } = TransactionSlice.actions

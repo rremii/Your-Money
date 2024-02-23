@@ -8,13 +8,18 @@ import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 export const ChangeName = React.memo(() => {
   const dispatch = useAppDispatch()
 
-
   const { data: userInfo } = GetMe.useQueryState()
-
 
   const handleClick = () => {
     dispatch(openMenu("nameMenu"))
   }
 
-  return <SideBarBtn onClick={handleClick} title="Name" subTitle={userInfo?.name} icon={Categories} />
+  return (
+    <SideBarBtn
+      onClick={handleClick}
+      title="Name"
+      subTitle={userInfo?.name}
+      icon={Categories}
+    />
+  )
 })
