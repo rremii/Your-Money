@@ -19,10 +19,6 @@ export const useOnMenuSlide = (
     dispatch(
       setCurMenu({ dateGap, id: menuId, dateFrom: dateFrom.toUTCString() }),
     )
-
-    const curScroll = document.querySelector("#slider")?.scrollLeft
-    if (!curScroll) return
-    window.localStorage.setItem("scroll", curScroll.toString())
   }, [inView, dateGap, dateFrom])
 
   return { observeRef }

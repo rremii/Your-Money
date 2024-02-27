@@ -59,9 +59,9 @@ export const ChangeDateRangeModal = memo(() => {
 
     const sliderWidth = slider.clientWidth * 11
 
-    window.localStorage.setItem("scroll", String(sliderWidth / 2 - 200))
-    dispatch(setCurDate(date))
     SetDateFilter("day")
+    dispatch(setCurDate(date))
+    window.localStorage.setItem("scroll", String(sliderWidth / 2 - 200))
     CloseMenu()
   }
   const SetMonthRange = () => {

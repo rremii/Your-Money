@@ -46,10 +46,16 @@ export const Footer = React.memo(() => {
     [],
   )
 
+  const KeepCurMenuScroll = () => {
+    const curScroll = document.querySelector("#slider")?.scrollLeft
+    if (!curScroll) return
+    window.localStorage.setItem("scroll", curScroll.toString())
+  }
+
   return (
     <FooterLayout $isHidden={isEditCategoriesMode}>
       {NavLinks.map((linkData, i) => (
-        <Link key={i} {...linkData} />
+        <Link OnClick={KeepCurMenuScroll} key={i} {...linkData} />
       ))}
     </FooterLayout>
   )

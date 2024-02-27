@@ -7,19 +7,22 @@ interface props {
   name: string
   src: string
   srcActive: string
+  OnClick: () => void
 }
 
-export const Link: FC<props> = memo(({ src, srcActive, name, href }) => {
-  return (
-    <LinkLayout to={href} className="link">
-      <div className="icon">
-        <img src={src} alt={name} />
-        <img className="active" src={srcActive} alt={name} />
-      </div>
-      <h3>{name}</h3>
-    </LinkLayout>
-  )
-})
+export const Link: FC<props> = memo(
+  ({ src, srcActive, name, href, OnClick }) => {
+    return (
+      <LinkLayout onClick={OnClick} to={href} className="link">
+        <div className="icon">
+          <img src={src} alt={name} />
+          <img className="active" src={srcActive} alt={name} />
+        </div>
+        <h3>{name}</h3>
+      </LinkLayout>
+    )
+  },
+)
 const LinkLayout = styled(NavLink)`
   display: flex;
   align-items: center;

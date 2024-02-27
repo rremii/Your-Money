@@ -29,13 +29,13 @@ export const useSlider = (dateFilter: DateFilter, menuIds: number[]) => {
     const scrollDif = scrollWidth - curScroll - width
     if (scrollDif === 0) {
       dispatch(shiftTransMenuIdsRight({ shiftAmount: 2 }))
-      ref.current.scrollTo(scrollWidth - width * 3, 0)
+      // ref.current.scrollTo(scrollWidth - width * 3, 0)
       window.localStorage.setItem("scroll", String(curScroll - width * 2))
     }
 
     if (curScroll === 0) {
       dispatch(shiftTransMenuIdsLeft({ shiftAmount: 2 }))
-      ref.current.scrollTo(width * 2, 0)
+      // ref.current.scrollTo(width * 2, 0)
       window.localStorage.setItem("scroll", String(width * 2))
     }
   }, [ref])
