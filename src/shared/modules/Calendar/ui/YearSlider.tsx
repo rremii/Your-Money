@@ -110,7 +110,7 @@ const YearSliderLayout = styled.div<{
 
     .active {
       background-color: ${({ $color }) => ($color ? $color : "rgb(63,81,181)")};
-      color: var(--txt-1);
+      color: #ffffff;
     }
   }
 `

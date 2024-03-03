@@ -6,7 +6,7 @@ export const SideBarSection = styled.section`
   //flex: 1 1 auto;
 
   .title {
-    color: var(--txt-3);
+    color: #5c6ac0;
     font-family: Inter;
     font-size: 15px;
     font-style: normal;

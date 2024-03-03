@@ -24,9 +24,8 @@ const ButtonLayout = styled.button<{
 
   height: 45px;
   border-radius: 5px;
-  background: ${({ $isLoading }) =>
-    $isLoading ? "var(--bg-active-1)" : "var(--bg-4)"};
-  color: var(--txt-1);
+  background: ${({ $isLoading }) => ($isLoading ? "#1b77c0" : "#2196F3")};
+  color: #ffffff;
   font-family: Inter;
   font-size: 13px;
   font-style: normal;

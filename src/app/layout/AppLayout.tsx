@@ -1,17 +1,17 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { SignOutMenu } from "@widgets/SignOutMenu/ui/SignOutMenu.tsx"
-import { PasswordMenu } from "@widgets/PasswordMenu/ui/PasswordMenu.tsx"
-import { NameMenu } from "@widgets/NameMenu/ui/NameMenu.tsx"
+import { PasswordMenu } from "@features/PasswordMenu/ui/PasswordMenu.tsx"
+import { NameMenu } from "@features/NameMenu/ui/NameMenu.tsx"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAllTransDateGap } from "@entities/DateSlider/model/useAllTransDateGap.tsx"
-import { ChooseCategoryMenu } from "@widgets/ChooseCategoryMenu/ui/ChooseCategoryMenu.tsx"
+import { ChooseCategoryMenu } from "@features/ChooseCategoryMenu/ui/ChooseCategoryMenu.tsx"
 import { ChooseTransAccountMenu } from "@features/ChooseTransAccountMenu/ui/ChooseTransAccountMenu.tsx"
-import { TitleMenu } from "@widgets/TitleMenu/ui/TitleMenu.tsx"
-import { DateMenu } from "@widgets/DateMenu/ui/DateMenu.tsx"
-import { TransCalendarMenu } from "@widgets/TransCalendarMenu/ui/TransCalendarMenu.tsx"
-import { ChooseCategorySlideMenu } from "@widgets/ChooseCategorySlideMenu/ui/ChooseCategorySlideMenu.tsx"
+import { TitleMenu } from "@features/TitleMenu/ui/TitleMenu.tsx"
+import { DateMenu } from "@features/DateMenu/ui/DateMenu.tsx"
+import { TransCalendarMenu } from "@features/TransCalendarMenu/ui/TransCalendarMenu.tsx"
+import { ChooseCategorySlideMenu } from "@features/ChooseCategorySlideMenu/ui/ChooseCategorySlideMenu.tsx"
 import { EditCreateTransMenu } from "@widgets/EditCreateTransMenu/ui/EditCreateTransMenu.tsx"
 import { CurrencyModal } from "@widgets/EditCreateTransMenu/ui/CurrencyModal.tsx"
 import { DefaultCurrencyModal } from "@features/DefaultCurrencyModal"
@@ -34,6 +34,8 @@ import { ChangeAccountModal } from "@features/ChangeAccountModal/ui/ChangeAccoun
 import { WeekDayModal } from "@features/ChangeFirstDayWeekModal/ui/WeekDayModal.tsx"
 import { ChangeStartScreenModal } from "@features/ChangeStartScreenModal/ui/ChangeStartScreenModal.tsx"
 import { useStartScreen } from "@entities/Settings/hooks/useStartScreen.tsx"
+
+// const EditCreateTransaction = lazy(()=>import())
 
 interface Props {
   children: React.ReactNode

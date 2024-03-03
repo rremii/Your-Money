@@ -8,7 +8,7 @@ const HeaderLayout = styled.header`
   display: flex;
   align-items: center;
   padding-left: 60px;
-  color: var(--txt-1);
+  color: #ffffff;
   font-family: Inter;
   font-size: 17px;
   font-style: normal;

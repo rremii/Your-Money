@@ -58,7 +58,7 @@ const CellLayout = styled.div`
   }
 
   .quantity {
-    color: var(--txt-8);
+    color: #e25e76;
     font-family: Inter;
     font-size: 14px;
     font-style: normal;

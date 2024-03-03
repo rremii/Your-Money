@@ -59,12 +59,12 @@ const EditCreateAccountLayout = styled.div<{
     font-size: 14px;
     font-family: Inter, sans-serif;
     color: ${({ $color }) => $color || "black"};
-    box-shadow: 0 -5px 5px -5px var(--shadow-3);
+    box-shadow: 0 -5px 5px -5px #0000003f;
   }
 
   .colorfull-box {
     background-color: ${({ $color }) => ($color ? $color : "#0BAD7B")};
-    color: var(--txt-1);
+    color: #ffffff;
     height: 130px;
     //margin-bottom: 20px;
     position: relative;

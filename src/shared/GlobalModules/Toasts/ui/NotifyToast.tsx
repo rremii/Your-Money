@@ -39,8 +39,8 @@ const ToastLayout = styled.div<{
     translateX(-50%);
   background-color: var(--sub-bg);
   box-shadow: ${({ $toastState }) =>
-    ($toastState === "info" && "0px 2px 5px 0px var(--shadow-1)") ||
-    ($toastState === "error" && "0px 2px 5px 0px var(--shadow-4)")};
+    ($toastState === "info" && "0px 2px 5px 0px #5C6AC07F") ||
+    ($toastState === "error" && "0px 2px 5px 0px #C05C5C7F")};
 
   max-width: 320px;
   width: calc(100vw - 52px);
@@ -51,7 +51,7 @@ const ToastLayout = styled.div<{
   p {
     color: ${({ $toastState }) =>
       ($toastState === "info" && "var(--main-txt)") ||
-      ($toastState === "error" && "var(--txt-14)")};
+      ($toastState === "error" && "#C05C5CFF")};
 
     text-align: center;
     font-family: Inter;

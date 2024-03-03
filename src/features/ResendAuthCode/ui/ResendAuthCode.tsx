@@ -30,7 +30,7 @@ export const ResendAuthCode = () => {
   )
 }
 const AuthCodeLayout = styled.button`
-  color: var(--txt-6);
+  color: #818181;
   font-family: Inter;
   font-size: 14px;
   font-style: normal;

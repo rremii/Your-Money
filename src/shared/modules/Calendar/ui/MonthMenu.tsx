@@ -76,7 +76,7 @@ const MonthContentLayout = styled.div`
     .week-day {
       width: 30px;
       text-align: center;
-      color: var(--txt-6);
+      color: #818181;
       font-family: Inter;
       font-size: 11px;
       font-style: normal;
@@ -131,6 +131,6 @@ const DaysBox = styled.div<{
 
   .active {
     background-color: ${({ $color }) => ($color ? $color : "rgb(63, 81, 181)")};
-    color: var(--txt-1);
+    color: #ffffff;
   }
 `

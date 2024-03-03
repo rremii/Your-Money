@@ -83,7 +83,7 @@ const HeaderLayout = styled.header<{
       gap: 25px;
 
       .date {
-        color: var(--txt-1);
+        color: #ffffff;
         font-family: Inter;
         font-size: 13px;
         font-style: italic;
@@ -100,7 +100,7 @@ const HeaderLayout = styled.header<{
   .user-info {
     .name,
     .email {
-      color: var(--txt-1);
+      color: #ffffff;
       font-family: Inter;
       font-size: 14px;
       font-style: normal;

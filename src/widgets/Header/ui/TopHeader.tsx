@@ -54,7 +54,7 @@ const TopHeaderLayout = styled.div`
     justify-self: center;
 
     p:nth-child(1) {
-      color: var(--txt-1);
+      color: #ffffff;
       font-family: Inter;
       font-size: 15px;
       font-style: normal;
@@ -63,7 +63,7 @@ const TopHeaderLayout = styled.div`
     }
 
     p:nth-child(2) {
-      color: var(--txt-1);
+      color: #ffffff;
       font-family: Inter;
       font-size: 17px;
       font-style: normal;

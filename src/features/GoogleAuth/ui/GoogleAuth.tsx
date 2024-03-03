@@ -20,9 +20,9 @@ const GoogleAuthLayout = styled(NavLink)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-1);
+  background: white;
   box-shadow: 0px 0px 10px -3px rgba(0, 0, 0, 0.7);
-  color: var(--txt-6);
+  color: #818181;
   font-family: Inter;
   font-size: 15px;
   font-style: normal;

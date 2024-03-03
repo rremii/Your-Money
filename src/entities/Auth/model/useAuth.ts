@@ -1,7 +1,10 @@
 import { useEffect } from "react"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { useRefreshQuery } from "@entities/Auth/api/AuthApi.ts"
-import { setAuthRejected, setAuthSuccess } from "@entities/Auth/model/AuthSlice.ts"
+import {
+  setAuthRejected,
+  setAuthSuccess,
+} from "@entities/Auth/model/AuthSlice.ts"
 
 
 //todo bring it to context

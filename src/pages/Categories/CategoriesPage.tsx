@@ -47,7 +47,7 @@ const CategoriesLayout = styled.div`
   flex-direction: column;
   position: relative;
   font-size: 30px;
-  background-color: var(--bg-2);
+  background-color: #ececec;
 
   main {
     //flex: 1 1 auto;

@@ -61,7 +61,7 @@ const TransactionsHeaderLayout = styled.header`
   position: relative;
   background-color: var(--sub-bg);
 
-  box-shadow: 0px 2px 4px 0px var(--shadow-2);
+  box-shadow: 0px 2px 4px 0px #00000019;
   border-left: solid 1px rgba(109, 108, 108, 0.24);
   border-right: solid 1px rgba(109, 108, 108, 0.24);
 
@@ -81,11 +81,11 @@ const TransactionsHeaderLayout = styled.header`
   }
 
   .negative {
-    color: var(--txt-8);
+    color: #e25e76;
   }
 
   .positive {
-    color: var(--txt-10);
+    color: #0bad7b;
   }
 
   .balance-cell {

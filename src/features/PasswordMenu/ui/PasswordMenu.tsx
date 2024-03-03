@@ -11,7 +11,7 @@ import { GetMe, useChangePasswordMutation } from "@entities/User/api/UserApi.ts"
 import { HashData } from "@shared/helpers/HashData.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
-import { passwordSchema } from "@widgets/PasswordMenu/constants/validateSchema.ts"
+import { passwordSchema } from "@features/PasswordMenu/constants/validateSchema.ts"
 
 interface FormFields {
   password: string

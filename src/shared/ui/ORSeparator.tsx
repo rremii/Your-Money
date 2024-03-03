@@ -4,7 +4,7 @@ export const ORSeparator = () => {
   return <OrSeparatorLayout className="OrSeparator">OR</OrSeparatorLayout>
 }
 const OrSeparatorLayout = styled.div`
-  color: var(--txt-6);
+  color: #818181;
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
@@ -24,7 +24,7 @@ const OrSeparatorLayout = styled.div`
     position: absolute;
     width: 100%;
     height: 1px;
-    background-color: var(--separator-2);
+    background-color: #818181;
     top: 50%;
     left: 0;
     transform: translateY(-50%);

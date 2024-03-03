@@ -10,7 +10,7 @@ import styled from "styled-components"
 import { GetMe, useChangeNameMutation } from "@entities/User/api/UserApi.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
-import { nameValidateSchema } from "@widgets/NameMenu/constants/NameValidateSchema.ts"
+import { nameValidateSchema } from "@features/NameMenu/constants/NameValidateSchema.ts"
 
 interface FormFields {
   name: string

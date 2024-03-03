@@ -56,8 +56,7 @@ const CategoryLayout = styled.div<{
     $isActive ? $color : "transparent"};
 
   .name {
-    color: ${({ $isActive }) =>
-      $isActive ? "var(--txt-1)" : "var(--sub-txt)"};
+    color: ${({ $isActive }) => ($isActive ? "#FFFFFF" : "var(--sub-txt)")};
     font-family: Inter;
     font-size: 12px;
     font-style: normal;

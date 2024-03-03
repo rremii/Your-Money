@@ -9,7 +9,7 @@ export const ErrorMessage: FC<props> = ({ children }) => {
   return <ErrorLayout className="ErrorMessage">{children}</ErrorLayout>
 }
 const ErrorLayout = styled.div`
-  color: var(--error-1);
+  color: #dd724e;
   font-family: Inter;
   font-size: 13px;
   font-style: normal;

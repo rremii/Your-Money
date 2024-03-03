@@ -18,7 +18,6 @@ interface props {
 export const CategorySliderMenu: FC<props> = ({ categories }) => {
   const dispatch = useAppDispatch()
 
-
   const SetCategory = useCallback((category: ICategory) => {
     dispatch(setCategory(category))
     dispatch(setEditTransType(category.type))
@@ -28,11 +27,13 @@ export const CategorySliderMenu: FC<props> = ({ categories }) => {
     dispatch(openMenu("editCreateTransMenu"))
   }, [])
 
-  return <CategorySliderMenuLayout>
-    {categories.map((category) => (
-      <Category key={category.id} OnClick={SetCategory} {...category} />
-    ))}
-  </CategorySliderMenuLayout>
+  return (
+    <CategorySliderMenuLayout>
+      {categories.map((category) => (
+        <Category key={category.id} OnClick={SetCategory} {...category} />
+      ))}
+    </CategorySliderMenuLayout>
+  )
 }
 const CategorySliderMenuLayout = styled.div`
   //height: 260px;

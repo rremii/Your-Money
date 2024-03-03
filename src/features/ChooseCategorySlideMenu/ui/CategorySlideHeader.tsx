@@ -36,7 +36,7 @@ const SlideHeaderLayout = styled.header<{
   display: flex;
   height: 50px;
   position: relative;
-  box-shadow: 0 0 5px 0 var(--shadow-3);
+  box-shadow: 0 0 5px 0 #0000003f;
 
   .slider {
     content: "";
@@ -54,7 +54,7 @@ const SlideHeaderLayout = styled.header<{
 
     .bar {
       flex: 0 0 50%;
-      background-color: var(--bg-11);
+      background-color: #707070;
       height: 3px;
       border-radius: 10px 10px 0px 0px;
     }

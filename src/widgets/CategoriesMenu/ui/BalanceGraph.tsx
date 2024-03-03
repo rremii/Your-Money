@@ -128,11 +128,11 @@ const GraphLayout = styled.div`
     }
 
     .income {
-      color: var(--txt-9);
+      color: #72dabbff;
     }
 
     .expenses {
-      color: var(--txt-8);
+      color: #e25e76;
     }
   }
 `

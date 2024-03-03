@@ -41,7 +41,7 @@ const CurrencyCellLayout = styled.div`
   .sign {
     flex: 1 1 auto;
     text-align: right;
-    color: var(--txt-6);
+    color: #818181;
     font-family: Inter;
     font-size: 14px;
     font-style: normal;

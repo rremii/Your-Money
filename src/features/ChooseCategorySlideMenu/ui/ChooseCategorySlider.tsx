@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { CategorySliderMenu } from "@widgets/ChooseCategorySlideMenu/ui/CategorySliderMenu.tsx"
+import { CategorySliderMenu } from "@features/ChooseCategorySlideMenu/ui/CategorySliderMenu.tsx"
 import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
@@ -10,14 +10,12 @@ interface props {
 }
 
 export const ChooseCategorySlider: FC<props> = ({ onScroll }) => {
-
   const { data: user } = GetMe.useQueryState()
   const { allCategories } = useCategory(user?.id)
 
   const { incCategories, expCategories } = FilterCategoriesByType(allCategories)
 
   const sliderRef = useRef<HTMLDivElement>(null)
-
 
   useEffect(() => {
     OnScroll()
@@ -38,14 +36,14 @@ export const ChooseCategorySlider: FC<props> = ({ onScroll }) => {
     }
   }
 
-
-  return <CategorySliderLayout onScroll={OnScroll} ref={sliderRef}>
-    <CategorySliderMenu categories={incCategories} />
-    <CategorySliderMenu categories={expCategories} />
-  </CategorySliderLayout>
+  return (
+    <CategorySliderLayout onScroll={OnScroll} ref={sliderRef}>
+      <CategorySliderMenu categories={incCategories} />
+      <CategorySliderMenu categories={expCategories} />
+    </CategorySliderLayout>
+  )
 }
 const CategorySliderLayout = styled.div`
-
   width: 100%;
   display: flex;
   scroll-snap-stop: always;
@@ -54,6 +52,5 @@ const CategorySliderLayout = styled.div`
 
   &::-webkit-scrollbar {
     display: none;
-
   }
 `

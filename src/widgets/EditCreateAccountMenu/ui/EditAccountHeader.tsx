@@ -71,7 +71,7 @@ const HeaderLayout = styled.header`
   .title {
     margin-left: 30px;
     flex: 1 1 auto;
-    color: var(--txt-1);
+    color: #ffffff;
     font-family: Inter;
     font-size: 17px;
     font-style: normal;

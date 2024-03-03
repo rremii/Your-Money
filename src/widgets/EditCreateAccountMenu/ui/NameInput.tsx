@@ -83,7 +83,7 @@ const NameInputLayout = styled.div`
     }
 
     input {
-      color: var(--txt-1) !important;
+      color: #ffffff !important;
       font-family: Inter;
       font-size: 21px;
       font-style: normal;

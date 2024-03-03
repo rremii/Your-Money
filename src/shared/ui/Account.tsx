@@ -71,7 +71,7 @@ const AccountLayout = styled.div<{
   .accounts-info {
     flex: 1 1 auto;
     height: 100%;
-    border-bottom: 1px solid var(--separator-2);
+    border-bottom: 1px solid #818181;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -97,11 +97,11 @@ const AccountLayout = styled.div<{
     }
 
     .neg-balance {
-      color: var(--txt-8);
+      color: #e25e76;
     }
 
     .pos-balance {
-      color: var(--txt-10);
+      color: #0bad7b;
     }
   }
 `

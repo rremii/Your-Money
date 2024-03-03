@@ -74,7 +74,7 @@ const OptionsLayout = styled.div<{
     gap: 6px;
 
     p {
-      color: var(--txt-6);
+      color: #818181;
       font-family: Inter;
       font-size: 11px;
       font-style: normal;
@@ -98,13 +98,13 @@ const OptionsLayout = styled.div<{
 
   .delete {
     .icon {
-      background-color: var(--bg-15);
+      background-color: #fcd0cdff;
     }
   }
 
   .date {
     .icon {
-      background-color: var(--bg-5);
+      background-color: #808080;
     }
   }
 

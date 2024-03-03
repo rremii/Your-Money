@@ -54,7 +54,7 @@ const DateBoxLayout = styled.div<{
   gap: 7px;
 
   .date {
-    color: ${({ $isToday }) => ($isToday ? "var(--txt-3)" : "var(--main-txt)")};
+    color: ${({ $isToday }) => ($isToday ? "#5C6AC0" : "var(--main-txt)")};
     text-align: center;
     font-family: Inter;
     font-size: 23px;
@@ -70,8 +70,7 @@ const DateBoxLayout = styled.div<{
     flex: 1 1 auto;
 
     .day {
-      color: ${({ $isToday }) =>
-        $isToday ? "var(--txt-4)" : "var(--pale-txt)"};
+      color: ${({ $isToday }) => ($isToday ? "#606ca6" : "var(--pale-txt)")};
       font-family: Inter;
       font-size: 10px;
       font-style: normal;
@@ -80,8 +79,7 @@ const DateBoxLayout = styled.div<{
     }
 
     .month-year {
-      color: ${({ $isToday }) =>
-        $isToday ? "var(--txt-3)" : "var(--main-txt)"};
+      color: ${({ $isToday }) => ($isToday ? "#5C6AC0" : "var(--main-txt)")};
       font-family: Inter;
       font-size: 11px;
       font-style: normal;
@@ -92,7 +90,7 @@ const DateBoxLayout = styled.div<{
 
   .quantity {
     color: ${({ $balance }) =>
-      $balance && $balance < 0 ? "var(--txt-8)" : "var(--txt-10)"};
+      $balance && $balance < 0 ? "#E25E76" : "#0BAD7B"};
     text-align: center;
     font-family: Inter;
     font-size: 15px;

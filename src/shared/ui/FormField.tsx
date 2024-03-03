@@ -45,11 +45,11 @@ const FieldLayout = styled.div`
   input {
     background-color: transparent;
     height: 30px;
-    border-bottom: var(--bg-5) solid 2px;
+    border-bottom: #808080 solid 2px;
   }
 
   .error {
-    color: var(--error-1);
-    border-bottom-color: var(--error-1);
+    color: #dd724e;
+    border-bottom-color: #dd724e;
   }
 `

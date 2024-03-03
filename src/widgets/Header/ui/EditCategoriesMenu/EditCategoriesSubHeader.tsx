@@ -8,22 +8,27 @@ interface props {
 }
 
 export const EditCategoriesSubHeader: FC<props> = () => {
-
-  const categoryType = useTypedSelector(state => state.NewCategory.type)
+  const categoryType = useTypedSelector((state) => state.NewCategory.type)
 
   const scrollPercent = categoryType === "expense" ? 0 : 100
-  return <SlideHeaderLayout $scrollPercent={scrollPercent}>
-    <div className="cell">
-      <p className={`type ${categoryType === "expense" ? "active" : ""}`}>EXPENSE</p>
-    </div>
-    <div className="cell">
-      <p className={`type ${categoryType === "income" ? "active" : ""}`}>INCOME</p>
-    </div>
-    <div className="slider">
-      <div className="pushing-bar" />
-      <div className="bar" />
-    </div>
-  </SlideHeaderLayout>
+  return (
+    <SlideHeaderLayout $scrollPercent={scrollPercent}>
+      <div className="cell">
+        <p className={`type ${categoryType === "expense" ? "active" : ""}`}>
+          EXPENSE
+        </p>
+      </div>
+      <div className="cell">
+        <p className={`type ${categoryType === "income" ? "active" : ""}`}>
+          INCOME
+        </p>
+      </div>
+      <div className="slider">
+        <div className="pushing-bar" />
+        <div className="bar" />
+      </div>
+    </SlideHeaderLayout>
+  )
 }
 const SlideHeaderLayout = styled.header<{
   $scrollPercent?: number
@@ -31,10 +36,10 @@ const SlideHeaderLayout = styled.header<{
   display: flex;
   height: 30px;
   position: relative;
-  box-shadow: 0 0px 10px -10px var(--shadow-3);
+  box-shadow: 0 0px 10px -10px #0000003f;
 
   .slider {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -48,9 +53,8 @@ const SlideHeaderLayout = styled.header<{
     }
 
     .bar {
-
       flex: 0 0 50%;
-      background-color: var(--bg-1);
+      background-color: white;
       height: 3px;
       border-radius: 10px 10px 0px 0px;
     }
@@ -63,7 +67,7 @@ const SlideHeaderLayout = styled.header<{
     align-items: center;
 
     .type {
-      transition: color .3s;
+      transition: color 0.3s;
       color: rgba(255, 255, 255, 0.5);
       font-family: Inter;
       font-size: 12px;
@@ -73,7 +77,7 @@ const SlideHeaderLayout = styled.header<{
     }
 
     .active {
-      color: var(--txt-1);
+      color: #ffffff;
     }
   }
 `

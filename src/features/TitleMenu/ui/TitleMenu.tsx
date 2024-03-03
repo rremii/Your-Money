@@ -9,7 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { setEditTransTitle } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
-import { titleValidateSchema } from "@widgets/TitleMenu/constants/TitleValidateSchema.ts"
+import { titleValidateSchema } from "@features/TitleMenu/constants/TitleValidateSchema.ts"
 
 interface FormFields {
   title: string | undefined

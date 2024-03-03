@@ -20,13 +20,13 @@ export const AuthHeader: FC<props> = ({ children }) => {
 }
 const AuthHeaderLayout = styled.header`
   display: flex;
-  color: var(--txt-1);
+  color: #ffffff;
   font-family: Inter;
   font-size: 17px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  background-color: var(--bg-3);
+  background-color: #5c6ac0;
   height: 55px;
   align-items: center;
   padding-left: 28px;

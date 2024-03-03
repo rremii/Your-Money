@@ -33,7 +33,7 @@ export const Modal = styled.div<{
   }
 
   .content {
-    color: var(--txt-2);
+    color: #7d7d7d;
     font-family: Inter;
     font-size: 14px;
     font-style: normal;
@@ -57,15 +57,15 @@ export const Modal = styled.div<{
     }
 
     .red {
-      color: var(--txt-7);
+      color: #ba4c4b;
     }
 
     .gray {
-      color: var(--txt-2);
+      color: #7d7d7d;
     }
 
     .purple {
-      color: var(--txt-4);
+      color: #606ca6;
     }
   }
 `

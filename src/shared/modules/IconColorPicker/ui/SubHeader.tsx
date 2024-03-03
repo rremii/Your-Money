@@ -27,11 +27,11 @@ const SubHeaderLayout = styled.header<{
   display: flex;
   height: 40px;
   position: relative;
-  box-shadow: 0 5px 5px -5px var(--shadow-3);
+  box-shadow: 0 5px 5px -5px #0000003f;
   z-index: 1;
 
   .slider {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -45,7 +45,6 @@ const SubHeaderLayout = styled.header<{
     }
 
     .bar {
-
       flex: 0 0 50%;
       background-color: #808080;
       height: 3px;
@@ -60,13 +59,13 @@ const SubHeaderLayout = styled.header<{
     align-items: center;
 
     .type {
-      transition: color .3s;
+      transition: color 0.3s;
       font-family: Inter;
       font-size: 13px;
       font-style: normal;
       font-weight: 500;
       line-height: normal;
-      color: #C9C9C9;
+      color: #c9c9c9;
     }
 
     .active {

@@ -37,7 +37,7 @@ const CurrencyModalLayout = styled(Modal)`
   overflow-y: hidden;
 
   .subTitle {
-    color: var(--txt-3);
+    color: #5c6ac0;
     font-family: Inter;
     font-size: 14px;
     font-style: normal;
@@ -61,7 +61,7 @@ const CurrencyModalLayout = styled(Modal)`
     max-height: 350px;
     overflow-y: auto;
 
-    border-bottom: 1px solid var(--bg-11);
+    border-bottom: 1px solid #707070;
 
     padding-bottom: 20px;
   }

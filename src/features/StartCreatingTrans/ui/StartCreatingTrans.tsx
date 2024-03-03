@@ -19,7 +19,7 @@ export const StartCreatingTrans = () => {
 }
 const CreatingTransLayout = styled.div`
   cursor: pointer;
-  color: var(--txt-1);
+  color: #ffffff;
   background-color: var(--account-color);
   position: absolute;
   font-size: 30px;

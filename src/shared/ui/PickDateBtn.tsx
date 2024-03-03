@@ -53,8 +53,7 @@ const PickDateBtnLayout = styled.button<{
   }
 
   .title {
-    color: ${({ $isActive }) =>
-      $isActive ? "var(--txt-1)" : "var(--sub-txt)"};
+    color: ${({ $isActive }) => ($isActive ? "#FFFFFF" : "var(--sub-txt)")};
     font-family: Inter;
     font-size: 14px;
     font-style: normal;
@@ -64,7 +63,7 @@ const PickDateBtnLayout = styled.button<{
   }
 
   .sub-title {
-    color: ${({ $isActive }) => ($isActive ? "var(--txt-1)" : "var(--txt-6)")};
+    color: ${({ $isActive }) => ($isActive ? "#FFFFFF" : "#818181")};
     font-family: Inter;
     font-size: 12px;
     font-style: normal;

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { lazy } from "react"
 import { Route, Routes } from "react-router-dom"
 import AppLayout from "../app/layout/AppLayout.tsx"
 
@@ -19,19 +19,6 @@ import Layout from "../app/layout/Layout.tsx"
 import SignUpInfo from "./SignUp/SignUpInfo.tsx"
 
 export const Routing = () => {
-  // useChangeTheme()
-
-  // const { data: user } = GetMe.useQueryState()
-  // useCategory(user?.id)
-  //todo check if i need to launch it here
-
-  // const { accountIds, getAccountById } = useAccount(user?.id)
-  // useAccountHistoryPoints(accountIds, getAccountById)
-
-  // const { convertCurrency } = useCurrencyConverter()
-
-  // console.log(convertCurrency(1, "USD", "BYN"))
-
   return (
     <>
       <AppLayout>

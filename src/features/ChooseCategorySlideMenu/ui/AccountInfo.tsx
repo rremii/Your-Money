@@ -11,25 +11,34 @@ interface props {
   currencySign: string
 }
 
-export const AccountInfo: FC<props> = memo(({ balance, name, icon, currencySign, color }) => {
+export const AccountInfo: FC<props> = memo(
+  ({ balance, name, icon, currencySign, color }) => {
+    return (
+      <AccountInfoLayout $color={color}>
+        <div className="name-box">
+          <CustomIcon
+            boxSize={"35px"}
+            iconSize={"100%"}
+            icon={icon}
+            boxColor={"transparent"}
+          />
 
-
-  return <AccountInfoLayout $color={color}>
-    <div className="name-box">
-      <CustomIcon boxSize={"35px"} iconSize={"100%"} icon={icon} boxColor={"transparent"} />
-
-      <p className="name">{name}</p>
-    </div>
-    <div className="balance-box">
-      <p className="title">Account balance</p>
-      <div className="balance">{balance < 0 ? "-" : ""}{currencySign} {Math.abs(RoundDecimal(balance, 2))}</div>
-    </div>
-  </AccountInfoLayout>
-})
+          <p className="name">{name}</p>
+        </div>
+        <div className="balance-box">
+          <p className="title">Account balance</p>
+          <div className="balance">
+            {balance < 0 ? "-" : ""}
+            {currencySign} {Math.abs(RoundDecimal(balance, 2))}
+          </div>
+        </div>
+      </AccountInfoLayout>
+    )
+  },
+)
 const AccountInfoLayout = styled.div<{
   $color?: string
 }>`
-
   height: 115px;
   border-radius: 5px 5px 0 0;
   position: absolute;
@@ -50,13 +59,12 @@ const AccountInfoLayout = styled.div<{
     align-items: center;
 
     .name {
-      color: var(--txt-1);
+      color: #ffffff;
       font-family: Inter;
       font-size: 18px;
       font-style: normal;
       font-weight: 500;
       line-height: normal;
-
     }
   }
 
@@ -68,7 +76,7 @@ const AccountInfoLayout = styled.div<{
 
     .title {
       margin-bottom: 5px;
-      color: var(--txt-1);
+      color: #ffffff;
       font-family: Inter;
       font-size: 12px;
       font-style: normal;
@@ -78,7 +86,7 @@ const AccountInfoLayout = styled.div<{
     }
 
     .balance {
-      color: var(--txt-1);
+      color: #ffffff;
       font-family: Inter;
       font-size: 18px;
       font-style: normal;
@@ -86,5 +94,4 @@ const AccountInfoLayout = styled.div<{
       line-height: normal;
     }
   }
-
 `

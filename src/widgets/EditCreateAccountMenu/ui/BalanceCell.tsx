@@ -28,7 +28,7 @@ export const BalanceCell = () => {
 const BalanceCellLayout = styled.div`
   padding: 10px 15px;
   margin-bottom: 10px;
-  box-shadow: 0 5px 5px -5px var(--shadow-3);
+  box-shadow: 0 5px 5px -5px #0000003f;
   background-color: var(--sub-bg);
 
   display: flex;

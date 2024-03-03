@@ -53,7 +53,7 @@ const BtnLayout = styled.button`
 
     h4 {
       text-transform: capitalize;
-      color: var(--txt-4);
+      color: #606ca6;
       text-align: left;
       font-family: Inter;
       font-size: 13px;

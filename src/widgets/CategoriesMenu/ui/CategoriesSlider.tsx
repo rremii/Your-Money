@@ -39,5 +39,5 @@ export const CategoriesSlider = memo(() => {
   )
 })
 const CategoriesLayout = styled(SliderLayout)`
-  background-color: var(--bg-1);
+  background-color: white;
 `

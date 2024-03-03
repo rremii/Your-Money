@@ -9,8 +9,7 @@ export const RadioBtn = styled.button<{
   height: 19px;
   margin-right: 13px;
   border-radius: 50%;
-  border: ${({ $isActive }) => ($isActive ? "var(--bg-3)" : "#808080")} solid
-    2.5px;
+  border: ${({ $isActive }) => ($isActive ? "#5C6AC0" : "#808080")} solid 2.5px;
 
   &::after {
     display: ${({ $isActive }) => ($isActive ? "initial" : "none")};
@@ -21,7 +20,7 @@ export const RadioBtn = styled.button<{
     transform: translate(-50%, -50%);
     width: 75%;
     height: 75%;
-    background-color: var(--bg-3);
+    background-color: #5c6ac0;
     border-radius: 50%;
   }
 `

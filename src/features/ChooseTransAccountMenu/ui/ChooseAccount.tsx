@@ -32,7 +32,7 @@ export const ChooseAccount: FC<props> = (account) => {
   })
 
   const isActive = curName === name
-  const txtColor = isActive ? "var(--txt-1)" : ""
+  const txtColor = isActive ? "#FFFFFF" : ""
   const bgColor = isActive ? color : ""
   return (
     <Account

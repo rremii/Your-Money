@@ -84,9 +84,9 @@ const BalanceLayout = styled.div<{
 
     p {
       color: ${({ $balance }) => {
-        let color = "var(--txt-6)"
-        if ($balance && $balance > 0) color = "var(--txt-10)"
-        if ($balance && $balance < 0) color = "var(--txt-8)"
+        let color = "#818181"
+        if ($balance && $balance > 0) color = "#0BAD7B"
+        if ($balance && $balance < 0) color = "#E25E76"
         return color
       }};
       font-family: Inter;
@@ -124,11 +124,11 @@ const BalanceLayout = styled.div<{
   .expense {
     width: 100%;
     height: 100%;
-    background-color: var(--bg-6);
+    background-color: #ed5564;
 
     h2,
     p {
-      color: var(--txt-1);
+      color: #ffffff;
     }
   }
 
@@ -143,7 +143,7 @@ const BalanceLayout = styled.div<{
     }
 
     p {
-      color: var(--txt-10);
+      color: #0bad7b;
     }
 
     &::after {

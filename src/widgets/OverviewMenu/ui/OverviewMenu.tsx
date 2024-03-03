@@ -6,7 +6,6 @@ import { BalanceBox } from "@widgets/OverviewMenu/ui/BalanceBox.tsx"
 import { GetBarConfig } from "@widgets/OverviewMenu/model/GetBarConfig.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
-import { FillCategoriesWithTransactions } from "@entities/Transaction/helpers/FillCategoriesWithTransactions.ts"
 import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
 import { ITransByMenu } from "@entities/Transaction/model/GetTransByMenus.tsx"
 import { IExtraInfo } from "@widgets/OverviewMenu/model/GetExtraInfoByMenus.ts"
@@ -15,6 +14,7 @@ import { OverviewGraph } from "@widgets/OverviewMenu/ui/OverviewGraph.tsx"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
+import { FillCategoriesWithTransactions } from "@entities/Transaction"
 
 interface props extends ITransByMenu {
   extInfo: IExtraInfo[]

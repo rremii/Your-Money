@@ -27,12 +27,12 @@ const IconLayout = styled.div`
   position: absolute;
   top: 100%;
   right: 10px;
-  background-color: var(--bg-1);
+  background-color: white;
   border-radius: 50%;
   width: 55px;
   height: 55px;
   transform: translateY(-50%);
-  box-shadow: 0 1px 5px -1px var(--shadow-3);
+  box-shadow: 0 1px 5px -1px #0000003f;
 
   svg {
     width: 25px;

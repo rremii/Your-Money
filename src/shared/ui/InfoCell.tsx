@@ -10,16 +10,17 @@ interface props {
   OnClick: () => void
 }
 
-export const InfoCell: FC<props> = memo(({ iconNode, iconRadius, color, content, title, OnClick }) => {
-  
-  return <CellLayout onClick={OnClick} $color={color} $iconRadius={iconRadius}>
-    <div className="icon-box">
-      {iconNode}
-    </div>
-    <h2 className="title">{title}</h2>
-    <p className="content">{content}</p>
-  </CellLayout>
-})
+export const InfoCell: FC<props> = memo(
+  ({ iconNode, iconRadius, color, content, title, OnClick }) => {
+    return (
+      <CellLayout onClick={OnClick} $color={color} $iconRadius={iconRadius}>
+        <div className="icon-box">{iconNode}</div>
+        <h2 className="title">{title}</h2>
+        <p className="content">{content}</p>
+      </CellLayout>
+    )
+  },
+)
 const CellLayout = styled.div<{
   $color?: string
   $iconRadius?: string
@@ -30,7 +31,7 @@ const CellLayout = styled.div<{
   gap: 4px;
   flex-direction: column;
   padding: 0 16px;
-  background-color: ${({ $color }) => $color || "var(--bg-3)"};
+  background-color: ${({ $color }) => $color || "#5C6AC0"};
   //flex: 1 1 auto;
   width: 100%;
   position: relative;
@@ -44,17 +45,15 @@ const CellLayout = styled.div<{
     align-items: center;
     justify-content: center;
     position: absolute;
-    background-color: var(--bg-1);
+    background-color: white;
     border-radius: ${({ $iconRadius }) => $iconRadius || "5px"};
     top: 0;
     right: 13px;
     transform: translateY(-50%);
-
-
   }
 
   .title {
-    color: var(--txt-1);
+    color: #ffffff;
     font-family: Inter;
     font-size: 12px;
     font-style: normal;
@@ -63,7 +62,7 @@ const CellLayout = styled.div<{
   }
 
   .content {
-    color: var(--txt-1);
+    color: #ffffff;
     font-family: Inter;
     font-size: 19px;
     font-style: normal;

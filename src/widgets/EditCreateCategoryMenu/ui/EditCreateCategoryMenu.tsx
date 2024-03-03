@@ -46,7 +46,7 @@ const EditCreateCategoryLayout = styled.div<{
 
   .colorfull-box {
     background-color: ${({ $color }) => ($color ? $color : "#0BAD7B")};
-    color: var(--txt-1);
+    color: #ffffff;
     height: 130px;
     margin-bottom: 20px;
     position: relative;

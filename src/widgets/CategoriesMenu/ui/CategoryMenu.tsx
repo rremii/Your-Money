@@ -1,6 +1,5 @@
 import React, { FC, useMemo } from "react"
 import styled from "styled-components"
-import { FillCategoriesWithTransactions } from "@entities/Transaction/helpers/FillCategoriesWithTransactions.ts"
 import { IConvertedTransaction } from "@entities/Transaction/types.ts"
 import { Category } from "@widgets/CategoriesMenu/ui/Category.tsx"
 import { BalanceGraph } from "@widgets/CategoriesMenu/ui/BalanceGraph.tsx"
@@ -10,6 +9,7 @@ import { useMenuType } from "@widgets/CategoriesMenu/model/useMenuType.tsx"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
+import { FillCategoriesWithTransactions } from "@entities/Transaction"
 
 interface props {
   menuId: number

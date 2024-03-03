@@ -33,7 +33,7 @@ const CurrencyLayout = styled.div<{
   padding: 10px 15px;
   background-color: var(--sub-bg);
   margin-bottom: 10px;
-  box-shadow: 0 5px 5px -5px var(--shadow-3);
+  box-shadow: 0 5px 5px -5px #0000003f;
 
   .title {
     font-weight: 400;

@@ -33,7 +33,7 @@ const InputLayout = styled.div`
   justify-content: center;
   background-color: var(--sub-bg);
 
-  color: var(--txt-2);
+  color: #7d7d7d;
   font-family: Inter;
   font-size: 13px;
   font-style: italic;

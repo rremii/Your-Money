@@ -66,7 +66,7 @@ const SubHeaderLayout = styled.div`
     }
 
     span {
-      color: var(--txt-1);
+      color: #ffffff;
       font-family: Inter;
       font-size: 16px;
       font-style: normal;

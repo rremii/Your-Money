@@ -42,7 +42,7 @@ const LinkLayout = styled(NavLink)`
     }
 
     h3 {
-      color: var(--txt-3);
+      color: #5c6ac0;
     }
   }
 

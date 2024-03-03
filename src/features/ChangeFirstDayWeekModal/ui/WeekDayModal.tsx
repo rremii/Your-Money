@@ -63,7 +63,7 @@ const WeekDayModalLayout = styled(Modal)`
     max-height: 350px;
     overflow-y: auto;
 
-    border-bottom: 1px solid var(--bg-11);
+    border-bottom: 1px solid #707070;
 
     padding-bottom: 20px;
   }

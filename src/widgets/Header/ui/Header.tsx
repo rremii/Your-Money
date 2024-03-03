@@ -22,9 +22,9 @@ const HeaderLayout = styled.header<{
   $isActive?: boolean
 }>`
   background-color: ${({ $isActive }) =>
-    $isActive ? "var(--account-color)" : "var(--bg-11)"};
+    $isActive ? "var(--account-color)" : "#707070"};
   transition: 1s;
   position: relative;
-  box-shadow: 0px 2px 4px 0px var(--shadow-3);
+  box-shadow: 0px 2px 4px 0px #0000003f;
   z-index: 4;
 `

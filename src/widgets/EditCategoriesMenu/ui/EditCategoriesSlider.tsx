@@ -59,15 +59,13 @@ const EditCategoriesLayout = styled(SliderLayout)<{
 }>`
   position: absolute;
 
-  pointer-events: ${({ $isHidden }) => $isHidden ? "none" : "initial"};
-  opacity: ${({ $isHidden }) => $isHidden ? 0 : 1};
+  pointer-events: ${({ $isHidden }) => ($isHidden ? "none" : "initial")};
+  opacity: ${({ $isHidden }) => ($isHidden ? 0 : 1)};
   transition: opacity 0.4s;
-
 
   height: calc(100vh - 0px - 95px); // - footer - header
   top: 95px;
-  background-color: var(--bg-1);
+  background-color: white;
 
   z-index: 1;
 `
-

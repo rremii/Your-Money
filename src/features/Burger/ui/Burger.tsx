@@ -56,7 +56,7 @@ const BurgerLayout = styled.div<{
       transition: transform 0.4s;
       width: 100%;
       height: 2px;
-      background-color: var(--bg-1);
+      background-color: white;
     }
   }
 

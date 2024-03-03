@@ -98,14 +98,14 @@ const TransactionLayout = styled.div<{
   gap: 12px;
   min-height: 60px;
   background-color: var(--sub-bg);
-  box-shadow: 0px 2px 4px 0px var(--shadow-2);
+  box-shadow: 0px 2px 4px 0px #00000019;
   margin-bottom: 1px;
 
   .info {
     flex: 1 1 auto;
 
     .title {
-      color: var(--txt-12);
+      color: #a9a9a9;
       font-family: Inter;
       font-size: 13px;
       font-style: normal;
@@ -147,8 +147,7 @@ const TransactionLayout = styled.div<{
 
   .quantity {
     align-self: flex-start;
-    color: ${({ $type }) =>
-      $type === "expense" ? "var(--txt-8)" : "var(--txt-10)"};
+    color: ${({ $type }) => ($type === "expense" ? "#E25E76" : "#0BAD7B")};
     font-family: Inter, sans-serif;
     font-size: 15px;
     font-style: normal;

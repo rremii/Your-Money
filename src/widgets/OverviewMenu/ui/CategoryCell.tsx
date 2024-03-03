@@ -42,7 +42,7 @@ const CellLayout = styled.div<{
   $color?: string
   $percent?: number
 }>`
-  box-shadow: 0px 2px 4px 0px var(--shadow-2);
+  box-shadow: 0px 2px 4px 0px #00000019;
   padding: 7px 15px;
   height: 52px;
   display: grid;
@@ -90,7 +90,7 @@ const CellLayout = styled.div<{
       position: absolute;
       left: 0;
       top: 0;
-      background-color: var(--bg-10);
+      background-color: #d9d9d9;
       height: 5px;
       width: 100%;
     }
@@ -98,7 +98,7 @@ const CellLayout = styled.div<{
     .filled-bar {
       z-index: 1;
       height: 5px;
-      background-color: ${({ $color }) => $color || "var(--bg-9)"};
+      background-color: ${({ $color }) => $color || "#4CB050"};
       width: ${({ $percent }) => $percent + "%"};
     }
 
@@ -106,8 +106,7 @@ const CellLayout = styled.div<{
       z-index: 1;
       padding: 0 7px;
       background-color: var(--sub-bg);
-      color: ${({ $percent, $color }) =>
-        $percent === 0 ? "var(--txt-12)" : $color};
+      color: ${({ $percent, $color }) => ($percent === 0 ? "#A9A9A9" : $color)};
       font-family: Inter;
       font-size: 12px;
       font-style: normal;

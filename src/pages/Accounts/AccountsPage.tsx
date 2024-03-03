@@ -27,5 +27,5 @@ const AccountsLayout = styled.div`
   flex-direction: column;
   position: relative;
   font-size: 30px;
-  background-color: var(--bg-1);
+  background-color: white;
 `

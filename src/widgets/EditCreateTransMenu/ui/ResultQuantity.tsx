@@ -130,7 +130,7 @@ const QuantityLayout = styled.div<{
   .left {
     .type,
     .quantity {
-      color: ${({ $leftCell }) => $leftCell?.color || "var(--txt-3)"};
+      color: ${({ $leftCell }) => $leftCell?.color || "#5C6AC0"};
     }
   }
 

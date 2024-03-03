@@ -52,11 +52,11 @@ const AccountsInfoLayout = styled.div`
     }
 
     .neg-balance {
-      color: var(--txt-8) !important;
+      color: #e25e76 !important;
     }
 
     .pos-balance {
-      color: var(--txt-10) !important;
+      color: #0bad7b !important;
     }
 
     .balance {

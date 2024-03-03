@@ -17,7 +17,7 @@ const LinkLayout = styled.div`
   margin-top: 8px;
 
   a {
-    color: var(--txt-6);
+    color: #818181;
     font-family: Inter;
     font-size: 15px;
     font-style: normal;

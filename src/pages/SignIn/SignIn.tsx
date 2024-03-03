@@ -20,8 +20,9 @@ const LayoutSignInLayout = styled.div`
   //max-width: 450px;
   position: relative;
   font-size: 30px;
-  background-color: var(--bg-1);
+  background-color: white;
   //overflow-x: hidden;
+
   main {
     flex: 1 1 auto;
   }

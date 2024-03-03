@@ -21,7 +21,7 @@ const SubHeaderLayout = styled.div`
     font-weight: 400;
     line-height: normal;
     position: relative;
-    color: var(--txt-1);
+    color: #ffffff;
     font-family: Inter;
     padding: 10px 0;
 

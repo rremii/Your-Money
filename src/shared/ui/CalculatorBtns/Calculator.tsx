@@ -61,7 +61,7 @@ export const Calculator: FC<props> = memo(({ children }) => {
   )
 })
 const CalculatorLayout = styled.div`
-  background-color: var(--bg-1);
+  background-color: white;
   display: grid;
 
   grid-template-columns: 1fr 3fr 1fr;

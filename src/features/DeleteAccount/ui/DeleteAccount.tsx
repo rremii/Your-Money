@@ -34,14 +34,14 @@ const DeleteCategoryLayout = styled.button`
   align-items: center;
   padding-left: 20px;
   gap: 30px;
-  box-shadow: 0 2px 5px 0 var(--shadow-3);
+  box-shadow: 0 2px 5px 0 #0000003f;
 
   .icon {
     width: 15px;
   }
 
   .content {
-    color: var(--txt-7);
+    color: #ba4c4b;
     font-family: Inter;
     font-size: 14px;
     font-style: normal;
