@@ -1,3 +1,197 @@
 {
-  "hello": "hello Remi"
+  "general": {
+    "themes": {
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "languages": {
+      "en": "English",
+      "rus": "Русский"
+    },
+    "currency": {
+      "AUD": "Australian dollar",
+      "GBP": "British pound",
+      "CAD": "Canadian dollar",
+      "CNY": "Chinese yuan",
+      "EUR": "Euro",
+      "JPY": "Japanese yen",
+      "RUB": "Russian ruble",
+      "CHF": "Swiss franc",
+      "USD": "UnitedStates dollar",
+      "BYN": "Belarusian ruble"
+    },
+    "or": "Or",
+    "expense": "Expense",
+    "income": "Income",
+    "balance": "Balance",
+    "buttons": {
+      "cancel": "Cancel",
+      "ok": "Ok",
+      "change": "Change",
+      "done": "Done"
+    },
+    "time": {
+      "day": "Day",
+      "month": "Month",
+      "year": "Year",
+      "week": "Week",
+      "today": "Today",
+      "yesterday": "Yesterday"
+    },
+    "months": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November"
+    },
+    "days": {
+      "sun": "Sunday",
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday"
+    },
+    "accounts": "Accounts",
+    "categories": "Categories",
+    "transactions": "Transactions"
+  },
+  "transactions": {
+    "startBalance": "Starting balance",
+    "endBalance": "Ending balance"
+  },
+  "overview": "Overview",
+  "dateRange": {
+    "selectDay": "Select day",
+    "allTime": "All time"
+  },
+  "topHeader": {
+    "title": "All accounts"
+  },
+  "changeAccount": {
+    "title": "Account filter"
+  },
+  "sideBar": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "name": "Name",
+    "password": "Change password",
+    "signOut": "SignOut",
+    "language": "Language",
+    "theme": "Theme",
+    "defaultCurrency": "Default currency",
+    "currencyFormat": "Currency format",
+    "firstDayWeek": "First day of week",
+    "startScreen": "Startup screen"
+  },
+  "nameMenu": {
+    "placeholder": "Remi S"
+  },
+  "passwordMenu": {
+    "placeholder": "password",
+    "confirmPlaceholder": "Confirm password"
+  },
+  "signOutMenu": {
+    "title": "Sign out?",
+    "content": "Data synchronization and other features will be disabled in offline.",
+    "submit": "Sign out"
+  },
+  "languageMenu": {
+    "title": "Language"
+  },
+  "themeMenu": {
+    "title": "Theme"
+  },
+  "currencyFormatMenu": {
+    "title": "Currency format"
+  },
+  "firstDayWeekMenu": {
+    "title": "First day of week"
+  },
+  "startScreenMenu": {
+    "title": "Startup screen"
+  },
+  "defaultCurrencyMenu": {
+    "title": "Currency",
+    "subTitle": "Main currencies"
+  },
+  "categorySlider": {
+    "accountInfo": {
+      "title": "Account balance"
+    }
+  },
+  "transactionMenu": {
+    "accountInfo": {
+      "title": "From account"
+    },
+    "categoryInfo": {
+      "title": "To category"
+    },
+    "description": "Notes ...",
+    "delete": "Delete",
+    "date": "Date",
+    "duplicate": "Duplicate"
+  },
+  "categoryMenu": {
+    "createTitle": "New Category",
+    "editTitle": "Category",
+    "name": "Name",
+    "delete": "Delete category"
+  },
+  "accountMenu": {
+    "createTitle": "New Account",
+    "editTitle": "Edit Account",
+    "name": "Name",
+    "delete": "Delete account",
+    "sections": {
+      "account": {
+        "title": "Account",
+        "currency": "Account currency"
+      },
+      "balance": {
+        "title": "Balance",
+        "balance": "Account balance"
+      }
+    }
+  },
+  "createIconMenu": {
+    "title": "Category icon",
+    "header": {
+      "icon": "Icon",
+      "color": "Color"
+    },
+    "sections": {
+      "accounts": "Accounts",
+      "categories": "Categories"
+    }
+  },
+  "signUpEmailMenu": {
+    "title": "Sign up",
+    "email": "Email",
+    "submit": "Continue"
+  },
+  "signUpCodeMenu": {
+    "title": "Sign up",
+    "code": "Code",
+    "resendCode": "Send the code again"
+  },
+  "signUpInfoMenu": {
+    "title": "Sign up",
+    "name": "Name",
+    "submit": "Continue"
+  },
+  "signUpPasswordMenu": {
+    "title": "Sign up",
+    "password": "Password",
+    "confirm": "Confirm password",
+    "submit": "Continue"
+  }
 }

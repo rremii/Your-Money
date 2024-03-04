@@ -5,7 +5,6 @@ export const Modal = styled.div<{
 }>`
   padding: 25px 20px;
   position: fixed;
-  display: block;
   top: 50%;
   max-width: 320px;
   width: 90%;
@@ -16,10 +15,10 @@ export const Modal = styled.div<{
   z-index: 20;
   background-color: var(--sub-bg-light);
   border-radius: 3px;
-
   transition: 0.3s;
-
   pointer-events: ${({ $isOpen }) => ($isOpen ? "initial" : "none")};
+  display: block;
+
   opacity: ${({ $isOpen }) => ($isOpen ? 1 : 0)};
 
   .title {

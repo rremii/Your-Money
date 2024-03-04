@@ -38,6 +38,8 @@ export const CalendarMenu = memo(() => {
     CloseCalendar()
   }
 
+  console.log("qwe")
+
   return (
     <>
       <Overlay

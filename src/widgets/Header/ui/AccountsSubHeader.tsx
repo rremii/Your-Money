@@ -1,7 +1,9 @@
 import styled from "styled-components"
 import React from "react"
+import { useTranslation } from "react-i18next"
 
 export const AccountsSubHeader = () => {
+  const {} = useTranslation()
   return (
     <SubHeaderLayout>
       <button className="cell">Accounts</button>
