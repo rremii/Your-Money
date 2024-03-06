@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   title: string
@@ -11,9 +12,15 @@ interface props {
 
 export const DateMoneyCell: FC<props> = React.memo(
   ({ quantity, title, currencySign, formatStr }) => {
+    const { t } = useTranslation()
+
+    const translationPath = String(
+      "general.time." + title,
+    ) as "general.time.day"
+
     return (
       <CellLayout>
-        <h3 className="date">{title}</h3>
+        <h3 className="date">{t(translationPath)}</h3>
         <p className="quantity">
           {FormatCurrencyString({
             currencySign,

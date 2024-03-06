@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   expense: number
@@ -13,13 +14,15 @@ export const BalanceBox: FC<props> = React.memo(
   ({ income, expense, currencySign, formatStr }) => {
     const balance = income + expense
 
+    const { t } = useTranslation()
+
     let balanceSign: "" | "+" | "-" = ""
     if (balance > 0) balanceSign = "+"
     if (balance < 0) balanceSign = "-"
     return (
       <BalanceLayout $balance={balance}>
         <div className="balance">
-          <h2>Balance</h2>
+          <h2>{t("general.balance")}</h2>
           <p>
             {FormatCurrencyString({
               currencySign,
@@ -30,7 +33,7 @@ export const BalanceBox: FC<props> = React.memo(
           </p>
         </div>
         <div className="expense">
-          <h2>Expense</h2>
+          <h2>{t("general.expense")}</h2>
           <p>
             {FormatCurrencyString({
               currencySign,
@@ -41,7 +44,7 @@ export const BalanceBox: FC<props> = React.memo(
           </p>
         </div>
         <div className="income">
-          <h2>Income</h2>
+          <h2>{t("general.income")}</h2>
           <p>
             {FormatCurrencyString({
               currencySign,

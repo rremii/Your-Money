@@ -9,6 +9,7 @@ import {
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useTranslation } from "react-i18next"
 
 export interface ICategoryData {
   name: string
@@ -33,6 +34,8 @@ export const BalanceGraph: FC<props> = React.memo(
       (state) => state.Settings.currencyFormat,
     )
 
+    const { t } = useTranslation()
+
     const incTransactionsSum = SumAllTransactions(incTransactions)
     const expTransactionsSum = SumAllTransactions(expTransactions)
 
@@ -43,7 +46,9 @@ export const BalanceGraph: FC<props> = React.memo(
         <Doughnut {...doughnutConfig} />
         <div className="balance">
           <div className="type">
-            {menuType === "expense" ? "Expense" : "Income"}
+            {menuType === "expense"
+              ? t("general.expense")
+              : t("general.income")}
           </div>
           <div
             className={`${

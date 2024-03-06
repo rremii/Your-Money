@@ -1,3 +1,197 @@
 {
-  "hello": "Привет Remi"
+  "general": {
+    "themes": {
+      "light": "Светлая",
+      "dark": "Темная"
+    },
+    "languages": {
+      "en": "Англиский",
+      "rus": "Русский"
+    },
+    "currency": {
+      "AUD": "Австралийский доллар",
+      "GBP": "British pound",
+      "CAD": "Canadian dollar",
+      "CNY": "Chinese yuan",
+      "EUR": "Euro",
+      "JPY": "Japanese yen",
+      "RUB": "Russian ruble",
+      "CHF": "Swiss franc",
+      "USD": "UnitedStates dollar",
+      "BYN": "Belarusian ruble"
+    },
+    "or": "Или",
+    "expense": "Потрачено",
+    "income": "Прибыло",
+    "balance": "Баланс",
+    "buttons": {
+      "cancel": "Отмена",
+      "ok": "Ок",
+      "change": "Изменить",
+      "done": "Готово"
+    },
+    "time": {
+      "day": "День",
+      "month": "Месяц",
+      "year": "Год",
+      "week": "Неделя",
+      "today": "Сегодня",
+      "yesterday": "Вчера"
+    },
+    "months": {
+      "january": "Январь",
+      "february": "Февраль",
+      "march": "Март",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November"
+    },
+    "days": {
+      "sun": "Воскресенье",
+      "mon": "Понедельник",
+      "tue": "Вторник",
+      "wed": "Среда",
+      "thu": "Четверг",
+      "fri": "Пятница",
+      "sat": "Суббота"
+    },
+    "accounts": "Аккаунты",
+    "categories": "Категории",
+    "transactions": "Транзакции"
+  },
+  "transactions": {
+    "startBalance": "Начальный баланс",
+    "endBalance": "Конечный баланс"
+  },
+  "overview": "Обзор",
+  "dateRange": {
+    "selectDay": "Выбрать день",
+    "allTime": "Все время"
+  },
+  "topHeader": {
+    "title": "Все аккаунты"
+  },
+  "changeAccount": {
+    "title": "Фильтр аккаунтов"
+  },
+  "sideBar": {
+    "profile": "Профиль",
+    "settings": "Настройки",
+    "name": "Имя",
+    "password": "Изменить пароль",
+    "signOut": "Выйти",
+    "language": "Язык",
+    "theme": "Тема",
+    "defaultCurrency": "Валюта по умолчанию",
+    "currencyFormat": "Формат валюты",
+    "firstDayWeek": "Первый день недели",
+    "startScreen": "Начальный экран"
+  },
+  "nameMenu": {
+    "placeholder": "Remi S"
+  },
+  "passwordMenu": {
+    "placeholder": "пароль",
+    "confirmPlaceholder": "Подтвердить пароль"
+  },
+  "signOutMenu": {
+    "title": "Выйти?",
+    "content": "Синхронизация и другая функциональность недоступна в оффлайн режиме.",
+    "submit": "Выйти"
+  },
+  "languageMenu": {
+    "title": "Язык"
+  },
+  "themeMenu": {
+    "title": "Тема"
+  },
+  "currencyFormatMenu": {
+    "title": "Формат валюты"
+  },
+  "firstDayWeekMenu": {
+    "title": "Первый день недели"
+  },
+  "startScreenMenu": {
+    "title": "Начальный экран"
+  },
+  "defaultCurrencyMenu": {
+    "title": "Валюта",
+    "subTitle": "Основные валюты"
+  },
+  "categorySlider": {
+    "accountInfo": {
+      "title": "Баланс аккаунта"
+    }
+  },
+  "transactionMenu": {
+    "accountInfo": {
+      "title": "Из аккаунта"
+    },
+    "categoryInfo": {
+      "title": "Категории"
+    },
+    "description": "Записки ...",
+    "delete": "Удалить",
+    "date": "Дата",
+    "duplicate": "Повторить"
+  },
+  "categoryMenu": {
+    "createTitle": "Новая категория",
+    "editTitle": "Изменить категорию",
+    "name": "Имя",
+    "delete": "Удалить категорию"
+  },
+  "accountMenu": {
+    "createTitle": "Новый аккаунт",
+    "editTitle": "Изменить аккаунт",
+    "name": "Имя",
+    "delete": "Удалить аккаунт",
+    "sections": {
+      "account": {
+        "title": "Аккаунт",
+        "currency": "Валюта аккаунта"
+      },
+      "balance": {
+        "title": "Баланс",
+        "balance": "Баланс аккаунта"
+      }
+    }
+  },
+  "createIconMenu": {
+    "title": "Иконки категории",
+    "header": {
+      "icon": "Иконки",
+      "color": "Цвет"
+    },
+    "sections": {
+      "accounts": "Аккаунты",
+      "categories": "Категории"
+    }
+  },
+  "signUpEmailMenu": {
+    "title": "Выйти",
+    "email": "Адрес почты",
+    "submit": "Продолжить"
+  },
+  "signUpCodeMenu": {
+    "title": "Выйти",
+    "code": "Код",
+    "resendCode": "Отправить код повторно"
+  },
+  "signUpInfoMenu": {
+    "title": "Выйти",
+    "name": "Имя",
+    "submit": "Продолжить"
+  },
+  "signUpPasswordMenu": {
+    "title": "Выйти",
+    "password": "Пароль",
+    "confirm": "Подтвердить пароль",
+    "submit": "отправить"
+  }
 }

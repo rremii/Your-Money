@@ -35,6 +35,7 @@
     "strict": true,
     //    "@typescript-eslint/no-unsafe-return": false,
     //    "@typescript-eslint/no-unsafe-assignment": false,
+    //    "strictNullChecks": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,

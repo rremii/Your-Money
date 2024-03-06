@@ -3,6 +3,7 @@ import React, { FC } from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   right: React.ReactNode
@@ -12,13 +13,14 @@ export const TopHeader: FC<props> = ({ right }) => {
   const dispatch = useAppDispatch()
 
   const balance = useTypedSelector((state) => state.CurAccount.balance)
-
   const currencyFormat = useTypedSelector(
     (state) => state.Settings.currencyFormat,
   )
   const currencySign = useTypedSelector(
     (state) => state.Settings.curCurrencySign,
   )
+
+  const { t } = useTranslation()
 
   const OpenChangeAccountMenu = () => {
     dispatch(openMenu("changeAccountMenu"))
@@ -27,7 +29,7 @@ export const TopHeader: FC<props> = ({ right }) => {
   return (
     <TopHeaderLayout>
       <div onClick={OpenChangeAccountMenu} className="info center">
-        <p>All accounts</p>
+        <p>{t("topHeader.title")}</p>
         <p>
           {FormatCurrencyString({
             currencySign,

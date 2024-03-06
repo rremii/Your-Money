@@ -2,6 +2,7 @@ import styled from "styled-components"
 import React, { FC } from "react"
 import { TransformDate } from "@widgets/TransactionsMenu/model/TransformDate.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   date: Date
@@ -18,16 +19,27 @@ export const DateBox: FC<props> = ({
 }) => {
   const { isToday, month, year, date, day } = TransformDate(curDate)
 
+  const { t } = useTranslation()
+
   let balanceSign: "" | "+" | "-" = ""
   if (dateBalance > 0) balanceSign = "+"
   if (dateBalance < 0) balanceSign = "-"
+
+  const monthTranslationPath = ("general.months." +
+    month.toLowerCase()) as "general.months.april" //!!!
+  const resMonth = month ? t(monthTranslationPath).toUpperCase() : ""
+
+  const dayTranslationPath = ("general.time." +
+    day.toLowerCase()) as "general.time.day" //!!!
+  const resDay = day ? t(dayTranslationPath).toUpperCase() : ""
+
   return (
     <DateBoxLayout $balance={dateBalance} $isToday={isToday}>
       <p className="date">{date.toUpperCase()}</p>
       <div className="other-info">
-        <p className="day">{day.toUpperCase()}</p>
+        <p className="day">{resDay}</p>
         <p className="month-year">
-          {month && month.toUpperCase()} {year}
+          {resMonth} {year}
         </p>
       </div>
       <div className="quantity">

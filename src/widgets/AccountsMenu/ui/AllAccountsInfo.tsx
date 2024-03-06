@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { FC } from "react"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   allBalance: number
@@ -13,6 +14,8 @@ export const AllAccountsInfo: FC<props> = ({
   currencySign,
   currencyFormat,
 }) => {
+  const { t } = useTranslation()
+
   const getBalanceStyleClass = (): string => {
     if (allBalance < 0) return "neg-balance"
     if (allBalance > 0) return "pos-balance"
@@ -21,7 +24,7 @@ export const AllAccountsInfo: FC<props> = ({
   return (
     <AccountsInfoLayout>
       <div className="accounts-top-info">
-        <h2 className="title">ACCOUNTS</h2>
+        <h2 className="title">{t("general.accounts").toUpperCase()}</h2>
         <p className={`balance ${getBalanceStyleClass()}`}>
           {FormatCurrencyString({
             formatString: currencyFormat,

@@ -6,11 +6,15 @@ import {
   shiftTransMenuIdsRight,
 } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 export const DateSubHeader = () => {
   const dispatch = useAppDispatch()
 
   const dateGap = useTypedSelector((state) => state.Date.curMenu.dateGap)
+  const dateFilter = useTypedSelector((state) => state.Date.dateFilter)
+
+  const { t } = useTranslation()
 
   const ShiftDateRight = () => {
     dispatch(shiftTransMenuIdsRight({ shiftAmount: 1 }))

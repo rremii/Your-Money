@@ -31,6 +31,11 @@
       "done": "Done"
     },
     "time": {
+      "timeGap_day": "{{day}},{{date}} {{month}} {{year}}",
+      "timeGap_month": "",
+      "timeGap_year": "",
+      "timeGap_allTime": "",
+      "timeGap_week": "",
       "day": "Day",
       "month": "Month",
       "year": "Year",

@@ -2,6 +2,7 @@ import styled from "styled-components"
 import React, { FC } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   startBalance: number
@@ -23,10 +24,12 @@ export const TransactionHeader: FC<props> = React.memo(
       (state) => state.Settings.currencyFormat,
     )
 
+    const { t } = useTranslation()
+
     return (
       <TransactionsHeaderLayout>
         <div className="balance-cell">
-          <h2>Starting balance</h2>
+          <h2>{t("transactions.startBalance")}</h2>
           <p className={GetNumberSignStyle(startBalance)}>
             {FormatCurrencyString({
               currencySign: curCurrencySign,
@@ -37,7 +40,7 @@ export const TransactionHeader: FC<props> = React.memo(
           </p>
         </div>
         <div className="balance-cell">
-          <h2>Ending balance</h2>
+          <h2>{t("transactions.endBalance")}</h2>
           <p className={GetNumberSignStyle(endBalance)}>
             {FormatCurrencyString({
               currencySign: curCurrencySign,

@@ -4,6 +4,7 @@ import React, { FC } from "react"
 import { IConvertedTransaction } from "@entities/Transaction/types.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   date: Date

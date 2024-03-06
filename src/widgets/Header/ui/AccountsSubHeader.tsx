@@ -3,10 +3,10 @@ import React from "react"
 import { useTranslation } from "react-i18next"
 
 export const AccountsSubHeader = () => {
-  const {} = useTranslation()
+  const { t } = useTranslation()
   return (
     <SubHeaderLayout>
-      <button className="cell">Accounts</button>
+      <button className="cell">{t("general.accounts")}</button>
     </SubHeaderLayout>
   )
 }
