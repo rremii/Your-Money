@@ -15,6 +15,8 @@ import {
 import { timeGap } from "@shared/helpers/TimeGap.ts"
 import { memo } from "react"
 import { DateFilter } from "@entities/Transaction/types.ts"
+import { useTranslation } from "react-i18next"
+import { TranslateDateGap } from "@entities/DateSlider"
 
 export const ChangeDateRangeModal = memo(() => {
   const dispatch = useAppDispatch()
@@ -24,6 +26,19 @@ export const ChangeDateRangeModal = memo(() => {
   const isOpen = useTypedSelector(
     (state) => state.UI.Modals.dateRangeMenu.isOpen,
   )
+
+  const { t } = useTranslation()
+
+  const { dateGap: todaySubTitle } = timeGap.GetDayGap(0, new Date(Date.now()))
+  const transTodaySubTitle = TranslateDateGap(t, todaySubTitle, "day")
+  const { dateGap: selectedDaySubTitle } = timeGap.GetDayGap(0, initDate)
+  const tranSelectDaySubTitle = TranslateDateGap(t, selectedDaySubTitle, "day")
+  const { dateGap: weekSubTitle } = timeGap.GetWeekGap(firstDay, 0, initDate)
+  const transWeekSubTitle = TranslateDateGap(t, weekSubTitle, "week")
+  const { dateGap: monthSubTitle } = timeGap.GetMonthGap(0, initDate)
+  const transMonthSubTitle = TranslateDateGap(t, monthSubTitle, "month")
+  const { dateGap: yearSubTitle } = timeGap.GetYearGap(0, initDate)
+  const transYearSubTitle = TranslateDateGap(t, yearSubTitle, "year")
 
   const SetDateFilter = (filter: DateFilter) => {
     window.localStorage.setItem("dateFilter", filter)
@@ -75,48 +90,43 @@ export const ChangeDateRangeModal = memo(() => {
     CloseMenu()
   }
 
-  const { dateGap: todaySubTitle } = timeGap.GetDayGap(0, new Date(Date.now()))
-  const { dateGap: selectedDaySubTitle } = timeGap.GetDayGap(0, initDate)
-  const { dateGap: weekSubTitle } = timeGap.GetWeekGap(firstDay, 0, initDate)
-  const { dateGap: monthSubTitle } = timeGap.GetMonthGap(0, initDate)
-  const { dateGap: yearSubTitle } = timeGap.GetYearGap(0, initDate)
   return (
     <>
       <Overlay onClick={CloseMenu} $zIndex={50} $isActive={isOpen} />
       <DateModalLayout $isOpen={isOpen}>
         <OptionBtn
           OnClick={SetAllTimeRange}
-          title={"All time"}
+          title={t("dateRange.allTime")}
           icon={<img src={Categories} alt="all time" />}
         />
         <OptionBtn
           OnClick={OpenSelectDayMenu}
-          title={"Select day"}
-          subTitle={selectedDaySubTitle}
+          title={t("dateRange.selectDay")}
+          subTitle={tranSelectDaySubTitle}
           icon={<img src={Categories} alt="Select day" />}
         />
         <OptionBtn
           OnClick={SetWeekRange}
-          title={"Week"}
-          subTitle={weekSubTitle}
+          title={t("general.time.week")}
+          subTitle={transWeekSubTitle}
           icon={<img src={Categories} alt="Week" />}
         />
         <OptionBtn
           OnClick={SetTodayRange}
-          title={"Today"}
-          subTitle={todaySubTitle}
+          title={t("general.time.today")}
+          subTitle={transTodaySubTitle}
           icon={<img src={Categories} alt="Today" />}
         />
         <OptionBtn
           OnClick={SetYearRange}
-          title={"Year"}
-          subTitle={yearSubTitle}
+          title={t("general.time.year")}
+          subTitle={transYearSubTitle}
           icon={<img src={Categories} alt="Year" />}
         />
         <OptionBtn
           OnClick={SetMonthRange}
-          title={"Month"}
-          subTitle={monthSubTitle}
+          title={t("general.time.month")}
+          subTitle={transMonthSubTitle}
           icon={<img src={Categories} alt="Month" />}
         />
       </DateModalLayout>
@@ -130,5 +140,5 @@ const DateModalLayout = styled(Modal)`
   background-color: var(--sub-bg);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 85px;
+  grid-auto-rows: 95px;
 `

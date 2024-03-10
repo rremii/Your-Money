@@ -24,6 +24,7 @@
     "expense": "Потрачено",
     "income": "Прибыло",
     "balance": "Баланс",
+    "avg": "сред.",
     "buttons": {
       "cancel": "Отмена",
       "ok": "Ок",
@@ -42,14 +43,26 @@
       "january": "Январь",
       "february": "Февраль",
       "march": "Март",
-      "april": "April",
-      "may": "May",
-      "june": "June",
-      "july": "July",
-      "august": "August",
-      "september": "September",
-      "october": "October",
-      "november": "November"
+      "april": "Апрель",
+      "may": "Май",
+      "june": "Июнь",
+      "july": "Июль",
+      "august": "Август",
+      "september": "Сентябрь",
+      "october": "Октябрь",
+      "november": "Ноябрь",
+      "december": "Декабрь",
+      "dec": "Дек.",
+      "jan": "Янв.",
+      "feb": "Фев.",
+      "mar": "Мар.",
+      "apr": "Апр.",
+      "jun": "Июнь",
+      "jul": "Июль",
+      "aug": "Авг.",
+      "sep": "Сент.",
+      "oct": "Окт.",
+      "nov": "Ноя."
     },
     "days": {
       "sun": "Воскресенье",
@@ -60,6 +73,7 @@
       "fri": "Пятница",
       "sat": "Суббота"
     },
+    "overview": "Обзор",
     "accounts": "Аккаунты",
     "categories": "Категории",
     "transactions": "Транзакции"
@@ -68,7 +82,6 @@
     "startBalance": "Начальный баланс",
     "endBalance": "Конечный баланс"
   },
-  "overview": "Обзор",
   "dateRange": {
     "selectDay": "Выбрать день",
     "allTime": "Все время"

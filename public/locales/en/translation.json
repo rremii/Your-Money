@@ -24,6 +24,7 @@
     "expense": "Expense",
     "income": "Income",
     "balance": "Balance",
+    "avg": "avg.",
     "buttons": {
       "cancel": "Cancel",
       "ok": "Ok",
@@ -31,11 +32,6 @@
       "done": "Done"
     },
     "time": {
-      "timeGap_day": "{{day}},{{date}} {{month}} {{year}}",
-      "timeGap_month": "",
-      "timeGap_year": "",
-      "timeGap_allTime": "",
-      "timeGap_week": "",
       "day": "Day",
       "month": "Month",
       "year": "Year",
@@ -54,7 +50,19 @@
       "august": "August",
       "september": "September",
       "october": "October",
-      "november": "November"
+      "november": "November",
+      "december": "December",
+      "dec": "Dec",
+      "jan": "Jan",
+      "feb": "Feb",
+      "mar": "Mar",
+      "apr": "Apr",
+      "jun": "Jun",
+      "jul": "Jul",
+      "aug": "Aug",
+      "sep": "Sep",
+      "oct": "Oct",
+      "nov": "Nov"
     },
     "days": {
       "sun": "Sunday",
@@ -65,6 +73,7 @@
       "fri": "Friday",
       "sat": "Saturday"
     },
+    "overview": "Overview",
     "accounts": "Accounts",
     "categories": "Categories",
     "transactions": "Transactions"
@@ -73,7 +82,6 @@
     "startBalance": "Starting balance",
     "endBalance": "Ending balance"
   },
-  "overview": "Overview",
   "dateRange": {
     "selectDay": "Select day",
     "allTime": "All time"

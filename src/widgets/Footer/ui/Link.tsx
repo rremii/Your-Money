@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { NavLink } from "react-router-dom"
 import React, { FC, memo } from "react"
+import { useTranslation } from "react-i18next"
 
 interface props {
   href: string
@@ -12,13 +13,17 @@ interface props {
 
 export const Link: FC<props> = memo(
   ({ src, srcActive, name, href, OnClick }) => {
+    const { t } = useTranslation()
+    const translatingPath = ("general." +
+      name.toLowerCase()) as "general.overview"
+
     return (
       <LinkLayout onClick={OnClick} to={href} className="link">
         <div className="icon">
           <img src={src} alt={name} />
           <img className="active" src={srcActive} alt={name} />
         </div>
-        <h3>{name}</h3>
+        <h3>{t(translatingPath)}</h3>
       </LinkLayout>
     )
   },

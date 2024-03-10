@@ -9,8 +9,6 @@ export const Footer = React.memo(() => {
     (state) => state.UI.Pages.categoryPage.isCategoriesEditMode,
   )
 
-  // const NavLinks = useMemo(() => [])
-
   const KeepCurMenuScroll = () => {
     const curScroll = document.querySelector("#slider")?.scrollLeft
     if (!curScroll) return

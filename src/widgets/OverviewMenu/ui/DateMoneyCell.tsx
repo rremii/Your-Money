@@ -14,13 +14,20 @@ export const DateMoneyCell: FC<props> = React.memo(
   ({ quantity, title, currencySign, formatStr }) => {
     const { t } = useTranslation()
 
-    const translationPath = String(
-      "general.time." + title,
+    const [timeGap, average] = title.split(" ")
+
+    let translatedDate = title
+
+    const translationTimePath = String(
+      "general.time." + timeGap,
     ) as "general.time.day"
+    translatedDate = t(translationTimePath)
+
+    if (average) translatedDate += " (" + t("general.avg") + ")"
 
     return (
       <CellLayout>
-        <h3 className="date">{t(translationPath)}</h3>
+        <h3 className="date">{translatedDate}</h3>
         <p className="quantity">
           {FormatCurrencyString({
             currencySign,
