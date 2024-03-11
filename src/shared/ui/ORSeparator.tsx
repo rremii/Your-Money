@@ -1,7 +1,14 @@
 import styled from "styled-components"
+import { useTranslation } from "react-i18next"
 
 export const ORSeparator = () => {
-  return <OrSeparatorLayout className="OrSeparator">OR</OrSeparatorLayout>
+  const { t } = useTranslation()
+
+  return (
+    <OrSeparatorLayout className="OrSeparator">
+      {t("general.or")}
+    </OrSeparatorLayout>
+  )
 }
 const OrSeparatorLayout = styled.div`
   color: #818181;

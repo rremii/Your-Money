@@ -9,6 +9,7 @@ import { setWeekDay } from "@entities/Settings/model/SettingsSlice.ts"
 import { DayType } from "@shared/constants/Days.ts"
 import { DayCell } from "@features/ChangeFirstDayWeekModal/ui/DayCell.tsx"
 import { Days } from "@features/ChangeFirstDayWeekModal/constants/Days.tsx"
+import { useTranslation } from "react-i18next"
 
 export const WeekDayModal = memo(() => {
   const dispatch = useAppDispatch()
@@ -17,6 +18,8 @@ export const WeekDayModal = memo(() => {
     (state) => state.UI.Modals.firstWeekDayMenu.isOpen,
   )
   const curDay = useTypedSelector((state) => state.Settings.firstDay)
+
+  const { t } = useTranslation()
 
   const SetFirstWeekDay = useCallback((day: DayType) => {
     window.localStorage.setItem("firstDayWeek", day)
@@ -32,7 +35,7 @@ export const WeekDayModal = memo(() => {
     <>
       <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
       <WeekDayModalLayout $isOpen={isOpen}>
-        <SideBarModalHeader>First Day of week</SideBarModalHeader>
+        <SideBarModalHeader>{t("firstDayWeekMenu.title")}</SideBarModalHeader>
         <div className="days-box">
           {Days.map((day, index) => (
             <DayCell

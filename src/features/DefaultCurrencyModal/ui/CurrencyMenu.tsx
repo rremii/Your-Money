@@ -13,11 +13,14 @@ import {
 import { Currency } from "@entities/Currency/types.ts"
 import { MainCurrencies } from "@entities/Currency/constants/MainCurrencies.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
+import { useTranslation } from "react-i18next"
 
 export const CurrencyMenu = () => {
   const dispatch = useAppDispatch()
 
   const currency = useTypedSelector((state) => state.Settings.curCurrency)
+
+  const { t } = useTranslation()
 
   const SetChosenCurrency = useCallback((currency: Currency) => {
     dispatch(setCurrencyMenuType("currencySign"))
@@ -35,7 +38,7 @@ export const CurrencyMenu = () => {
 
   return (
     <CurrencyMenuLayout>
-      <p className="subTitle">Main currencies</p>
+      <p className="subTitle">{t("defaultCurrencyMenu.subTitle")}</p>
       <div className="currencies-box">
         {MainCurrencies.map(({ fullName, shortName }, index) => (
           <CurrencyCell
@@ -49,10 +52,10 @@ export const CurrencyMenu = () => {
       </div>
       <div className="btn-section">
         <button className="gray" onClick={CloseModal} type="button">
-          Cancel
+          {t("general.buttons.cancel")}
         </button>
         <button className="gray" onClick={OnSubmit} type="submit">
-          Done
+          {t("general.buttons.done")}
         </button>
       </div>
     </CurrencyMenuLayout>

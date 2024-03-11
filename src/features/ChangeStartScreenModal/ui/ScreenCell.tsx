@@ -2,6 +2,7 @@ import React, { FC, memo } from "react"
 import styled from "styled-components"
 import { RadioBtn } from "@shared/ui/RadioBtn.tsx"
 import { startScreenType } from "@entities/Settings/types.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   screen: startScreenType
@@ -10,10 +11,14 @@ interface props {
 }
 
 export const ScreenCell: FC<props> = memo(({ screen, isActive, OnClick }) => {
+  const { t } = useTranslation()
+
+  const translateScreenPath = ("general." +
+    screen.toLowerCase()) as "general.overview"
   return (
     <StartScreenCellLayout onClick={() => OnClick(screen)}>
       <RadioBtn $isActive={isActive} />
-      <p className="screen">{screen}</p>
+      <p className="screen">{t(translateScreenPath)}</p>
     </StartScreenCellLayout>
   )
 })

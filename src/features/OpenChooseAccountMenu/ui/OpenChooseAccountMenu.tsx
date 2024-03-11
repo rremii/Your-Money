@@ -6,6 +6,7 @@ import {
   openMenu,
   setEditCreateMenuType,
 } from "@entities/UI/model/ModalsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 export const OpenChooseAccountMenu = () => {
   const dispatch = useAppDispatch()
@@ -15,6 +16,8 @@ export const OpenChooseAccountMenu = () => {
   const account = useTypedSelector(
     (state) => state.EditCreateTransaction.ChosenAccount,
   )
+
+  const { t } = useTranslation()
 
   const OnClick = useCallback(() => {
     dispatch(openMenu("chooseAccountMenu"))
@@ -36,7 +39,7 @@ export const OpenChooseAccountMenu = () => {
       color={account.color}
       content={account.name}
       iconRadius={"5px"}
-      title={"From account"}
+      title={t("transactionMenu.accountInfo.title")}
     />
   )
 }

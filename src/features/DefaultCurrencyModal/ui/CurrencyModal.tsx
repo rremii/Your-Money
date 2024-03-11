@@ -11,6 +11,7 @@ import { CurrencyMenu } from "@features/DefaultCurrencyModal/ui/CurrencyMenu.tsx
 import { CurrencySignMenu } from "@features/DefaultCurrencyModal/ui/CurrencySignMenu.tsx"
 import { GetModalHeightByContent } from "@features/DefaultCurrencyModal/helpers/GetModalHeightByContent.ts"
 import { SideBarModalHeader } from "@shared/ui/SideBarModalHeader.tsx"
+import { useTranslation } from "react-i18next"
 
 export const CurrencyModal = memo(() => {
   const dispatch = useAppDispatch()
@@ -23,6 +24,8 @@ export const CurrencyModal = memo(() => {
   )
   const currency = useTypedSelector((state) => state.Settings.curCurrency)
 
+  const { t } = useTranslation()
+
   const CloseModal = () => {
     dispatch(closeMenu("currencyMenu"))
     dispatch(setCurrencyMenuType("currency"))
@@ -33,7 +36,9 @@ export const CurrencyModal = memo(() => {
     <>
       <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
       <CurrencyModalLayout $height={modalHeight} $isOpen={isOpen}>
-        <SideBarModalHeader>Currency</SideBarModalHeader>
+        <SideBarModalHeader>
+          {t("defaultCurrencyMenu.title")}
+        </SideBarModalHeader>
         {menuType === "currency" ? <CurrencyMenu /> : <CurrencySignMenu />}
       </CurrencyModalLayout>
     </>

@@ -4,21 +4,27 @@ import React from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { CurrencyNames } from "@entities/Currency/constants/CurrencyNames.ts"
+import { useTranslation } from "react-i18next"
 
 export const ChangeCurrency = React.memo(() => {
   const dispatch = useAppDispatch()
 
   const curCurrency = useTypedSelector((state) => state.Settings.curCurrency)
 
+  const { t } = useTranslation()
+
   const handleClick = () => {
     dispatch(openMenu("currencyMenu"))
   }
 
+  const currencyTranslatePath = ("general.currency." +
+    curCurrency.toUpperCase()) as "general.currency.BYN"
+
   return (
     <SideBarBtn
       onClick={handleClick}
-      title="Default currency"
-      subTitle={CurrencyNames.get(curCurrency)}
+      title={t("sideBar.defaultCurrency")}
+      subTitle={t(currencyTranslatePath)}
       icon={Categories}
     />
   )

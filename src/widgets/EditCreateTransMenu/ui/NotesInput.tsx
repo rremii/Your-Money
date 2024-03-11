@@ -5,6 +5,7 @@ import {
   openMenu,
   setEditCreateMenuType,
 } from "@entities/UI/model/ModalsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 export const Notes = memo(() => {
   const dispatch = useAppDispatch()
@@ -16,13 +17,17 @@ export const Notes = memo(() => {
     (state) => state.UI.Modals.editCreateTransMenu.menuType,
   )
 
+  const { t } = useTranslation()
+
   const OpenEditMenu = () => {
     dispatch(openMenu("titleMenu"))
     if (menuType === "overview") dispatch(setEditCreateMenuType("edit"))
   }
 
   return (
-    <InputLayout onClick={OpenEditMenu}>{content || "Notes ..."}</InputLayout>
+    <InputLayout onClick={OpenEditMenu}>
+      {content || t("transactionMenu.description")}
+    </InputLayout>
   )
 })
 const InputLayout = styled.div`

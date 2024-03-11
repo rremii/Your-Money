@@ -3,21 +3,27 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import React from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 export const ChangeTheme = React.memo(() => {
   const dispatch = useAppDispatch()
 
   const theme = useTypedSelector((state) => state.Settings.theme)
 
+  const { t } = useTranslation()
+
   const handleClick = () => {
     dispatch(openMenu("themeMenu"))
   }
 
+  const themeTranslatePath = ("general.themes." +
+    theme.toLowerCase()) as "general.themes.light"
+
   return (
     <SideBarBtn
       onClick={handleClick}
-      title="Theme"
-      subTitle={theme}
+      title={t("sideBar.theme")}
+      subTitle={t(themeTranslatePath)}
       icon={Categories}
     />
   )

@@ -5,20 +5,31 @@ import { CalendarType } from "@shared/modules/Calendar/types.ts"
 import { setCalendarType } from "@shared/modules/Calendar/model/Actions.ts"
 import { Days } from "@shared/constants/Days.ts"
 import { Months } from "@shared/constants/Months.ts"
+import { useTranslation } from "react-i18next"
 
 export const Header = () => {
   const { chosenDateStr, color, type } = useContext(CalendarContext)
+  const { t } = useTranslation()
 
-  const date = new Date(chosenDateStr)
+  const date = new Date(chosenDateStr || Date.now())
   const year = date.getFullYear()
-  const day = Days.get(date.getDay())
-  const month = Months.get(date.getMonth()) as string
+
+  const day = Days.get(date.getDay() || 0)
+  const dayTranslatePath = ("general.days." +
+    day.toLowerCase()) as "general.days.mon"
+
+  const month = Months.get(date.getMonth() || 0) as string
+  const monthTranslatePath = ("general.months." +
+    month.slice(0, 3).toLowerCase()) as "general.months.jan"
   const dateDay = date.getDate()
 
   const SetCalendarType = (type: CalendarType) => {
     setCalendarType(type)
   }
 
+  const resultDayMonthStr = `${
+    t(dayTranslatePath).slice(0, 3) + "." || ""
+  }, ${t(monthTranslatePath)} ${dateDay}`
   return (
     <HeaderLayout $color={color}>
       <p
@@ -31,7 +42,7 @@ export const Header = () => {
         onClick={() => SetCalendarType("month")}
         className={`title ${type === "month" ? "active" : ""}`}
       >
-        {day || ""}, {month?.slice(0, 3)} {dateDay}
+        {resultDayMonthStr}
       </p>
     </HeaderLayout>
   )

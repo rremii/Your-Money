@@ -8,6 +8,7 @@ import { SideBarModalHeader } from "@shared/ui/SideBarModalHeader.tsx"
 import { LanguageCell } from "@features/ChangeLanguageModal/ui/LanguageCell.tsx"
 import { Languages } from "@features/ChangeLanguageModal/constants/Languages.ts"
 import { setLanguage } from "@entities/Settings/model/SettingsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 export const ChangeLanguageModal = memo(() => {
   const dispatch = useAppDispatch()
@@ -16,6 +17,8 @@ export const ChangeLanguageModal = memo(() => {
     (state) => state.UI.Modals.languageMenu.isOpen,
   )
   const curLanguage = useTypedSelector((state) => state.Settings.language)
+
+  const { t } = useTranslation()
 
   const SetLanguage = useCallback((language: string) => {
     window.localStorage.setItem("language", language)
@@ -31,7 +34,7 @@ export const ChangeLanguageModal = memo(() => {
     <>
       <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
       <LanguageModalLayout $isOpen={isOpen}>
-        <SideBarModalHeader>Language</SideBarModalHeader>
+        <SideBarModalHeader>{t("languageMenu.title")}</SideBarModalHeader>
         <div className="languages-box">
           {Languages.map((language, index) => (
             <LanguageCell

@@ -9,6 +9,7 @@ import { setStartScreen } from "@entities/Settings/model/SettingsSlice.ts"
 import { startScreenType } from "@entities/Settings/types.ts"
 import { Screens } from "@features/ChangeStartScreenModal/constants/Screens.ts"
 import { ScreenCell } from "@features/ChangeStartScreenModal/ui/ScreenCell.tsx"
+import { useTranslation } from "react-i18next"
 
 export const ChangeStartScreenModal = memo(() => {
   const dispatch = useAppDispatch()
@@ -17,6 +18,8 @@ export const ChangeStartScreenModal = memo(() => {
     (state) => state.UI.Modals.startScreenMenu.isOpen,
   )
   const curScreen = useTypedSelector((state) => state.Settings.startScreen)
+
+  const { t } = useTranslation()
 
   const SetScreen = useCallback((screen: startScreenType) => {
     window.localStorage.setItem("startScreen", screen)
@@ -33,7 +36,7 @@ export const ChangeStartScreenModal = memo(() => {
     <>
       <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
       <ScreenModalLayout $isOpen={isOpen}>
-        <SideBarModalHeader>Startup screen</SideBarModalHeader>
+        <SideBarModalHeader>{t("startScreenMenu.title")}</SideBarModalHeader>
         <div className="screens-box">
           {Screens.map((screen, index) => (
             <ScreenCell

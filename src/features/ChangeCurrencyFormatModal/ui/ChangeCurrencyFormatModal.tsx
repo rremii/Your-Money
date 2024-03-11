@@ -8,6 +8,7 @@ import { SideBarModalHeader } from "@shared/ui/SideBarModalHeader.tsx"
 import { setCurrencyFormat } from "@entities/Settings/model/SettingsSlice.ts"
 import { FormatCell } from "@features/ChangeCurrencyFormatModal/ui/FormatCell.tsx"
 import { CurrencyFormats } from "@features/ChangeCurrencyFormatModal/constants/CurrencyFormats.ts"
+import { useTranslation } from "react-i18next"
 
 export const ChangeCurrencyFormatModal = memo(() => {
   const dispatch = useAppDispatch()
@@ -21,6 +22,8 @@ export const ChangeCurrencyFormatModal = memo(() => {
   const currencySign = useTypedSelector(
     (state) => state.Settings.curCurrencySign,
   )
+
+  const { t } = useTranslation()
 
   const SetCurrencyFormat = useCallback((format: string) => {
     window.localStorage.setItem("currencyFormat", format)
@@ -36,7 +39,7 @@ export const ChangeCurrencyFormatModal = memo(() => {
     <>
       <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
       <CurrencyFormatLayout $isOpen={isOpen}>
-        <SideBarModalHeader>Currency format</SideBarModalHeader>
+        <SideBarModalHeader>{t("currencyFormatMenu.title")}</SideBarModalHeader>
         <div className="format-box">
           {CurrencyFormats.map((format, index) => (
             <FormatCell

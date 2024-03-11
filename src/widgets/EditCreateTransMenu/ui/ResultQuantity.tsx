@@ -4,6 +4,7 @@ import { MathOperatorSign } from "@entities/EditCreateTransaction/helpers/CalcMa
 import { setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import { useGetConvertedTransCurrency } from "@entities/Transaction/model/useGetConvertedTransCurrency.tsx"
+import { useTranslation } from "react-i18next"
 
 export const ResultQuantity = () => {
   const dispatch = useAppDispatch()
@@ -19,7 +20,6 @@ export const ResultQuantity = () => {
   const account = useTypedSelector(
     (state) => state.EditCreateTransaction.ChosenAccount,
   )
-
   const menuType = useTypedSelector(
     (state) => state.UI.Modals.editCreateTransMenu.menuType,
   )
@@ -29,6 +29,8 @@ export const ResultQuantity = () => {
   let { numberStr1, numberStr2 } = useTypedSelector(
     (state) => state.EditCreateTransaction.Calculator,
   )
+
+  const { t } = useTranslation()
 
   const { GetConvertedCurrency } = useGetConvertedTransCurrency()
 
@@ -64,7 +66,7 @@ export const ResultQuantity = () => {
     >
       {currency !== account.currency && (
         <div className="cell left">
-          <p className="type">{type}</p>
+          <p className="type">{t(("general." + type) as "general.income")}</p>
           <p className="quantity">
             {DefaultCurrencySigns.get(account.currency)}{" "}
             {GetConvertedCurrency() || "0"}
@@ -73,7 +75,7 @@ export const ResultQuantity = () => {
         </div>
       )}
       <div className="cell right">
-        <p className="type">{type}</p>
+        <p className="type">{t(("general." + type) as "general.income")}</p>
         <p className="quantity">
           {DefaultCurrencySigns.get(currency)} {quantityStr || "0"}
         </p>

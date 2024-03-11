@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
 import { useConfirmEmailMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useTimer } from "@shared/hooks/useTimer.tsx"
-import { CodeResult } from "@features/ResendAuthCode/constants/CodeResult.ts"
+import { codeResultType } from "@features/ResendAuthCode/types.ts"
 
 export const useResendCode = () => {
-  const [resultStr, setResultStr] = useState(CodeResult.initial)
+  const [resultStr, setResultStr] = useState<codeResultType>("initial")
 
   const [sendCode, { isSuccess, isLoading, reset, isError, isUninitialized }] =
     useConfirmEmailMutation()
 
   const Reset = () => {
-    setResultStr(CodeResult.initial)
+    setResultStr("initial")
     reset()
   }
 
@@ -27,8 +27,8 @@ export const useResendCode = () => {
   }
 
   useEffect(() => {
-    if (isSuccess) setResultStr(CodeResult.success)
-    if (isError) setResultStr(CodeResult.rejected)
+    if (isSuccess) setResultStr("success")
+    if (isError) setResultStr("rejected")
   }, [isSuccess, isError])
 
   return {

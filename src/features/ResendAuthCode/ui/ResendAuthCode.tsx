@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useResendCode } from "@features/ResendAuthCode/model/useResendCode.tsx"
+import { useTranslation } from "react-i18next"
 
 export const ResendAuthCode = () => {
   const email = useTypedSelector((state) => state.Auth.email)
@@ -14,18 +15,24 @@ export const ResendAuthCode = () => {
     isError,
     isSuccess,
   } = useResendCode()
+  const { t } = useTranslation()
 
   const HandleClick = async () => {
     await ResendCode(email)
   }
+
+  const codeResultTranslatePath = ("signUpCodeMenu.codeResult." +
+    resultStr) as "signUpCodeMenu.codeResult.initial"
 
   return (
     <AuthCodeLayout
       disabled={isLoading || !isUninitialized}
       onClick={HandleClick}
     >
-      {resultStr}{" "}
-      {(isSuccess || isError) && <span>send another one in {time}s</span>}
+      {t(codeResultTranslatePath)}{" "}
+      {(isSuccess || isError) && (
+        <span>{t("signUpCodeMenu.resendCode", { time })}</span>
+      )}
     </AuthCodeLayout>
   )
 }

@@ -12,6 +12,7 @@ import { HashData } from "@shared/helpers/HashData.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { passwordSchema } from "@features/PasswordMenu/constants/validateSchema.ts"
+import { useTranslation } from "react-i18next"
 
 interface FormFields {
   password: string
@@ -27,6 +28,7 @@ export const PasswordMenu = React.memo(() => {
 
   const { data: user } = GetMe.useQueryState()
   const [changePassword, { isLoading }] = useChangePasswordMutation()
+  const { t } = useTranslation()
 
   const {
     register,
@@ -75,7 +77,7 @@ export const PasswordMenu = React.memo(() => {
     <>
       <Overlay $isActive={isPasswordMenu} onClick={CloseMenu} $zIndex={15} />
       <PasswordLayout $isOpen={isPasswordMenu}>
-        <h2 className="title">Change password</h2>
+        <h2 className="title">{t("passwordMenu.title")}</h2>
         <form onSubmit={handleSubmit(ChangePassword)}>
           <div className="fields">
             <FormField
@@ -83,7 +85,7 @@ export const PasswordMenu = React.memo(() => {
               label=""
               input={{
                 type: "password",
-                placeholder: "Password",
+                placeholder: t("passwordMenu.placeholder"),
                 registerData: { ...register("password") },
               }}
             />
@@ -95,7 +97,7 @@ export const PasswordMenu = React.memo(() => {
               label=""
               input={{
                 type: "password",
-                placeholder: "Confirm password",
+                placeholder: t("passwordMenu.confirmPlaceholder"),
                 registerData: { ...register("confirmPassword") },
               }}
             />
@@ -107,10 +109,10 @@ export const PasswordMenu = React.memo(() => {
 
           <div className="btn-section">
             <button className="gray" type="button" onClick={CloseMenu}>
-              CANCEL
+              {t("general.buttons.cancel").toUpperCase()}
             </button>
             <button className="red" type="submit">
-              CHANGE PASSWORD
+              {t("passwordMenu.submit").toUpperCase()}
             </button>
           </div>
         </form>

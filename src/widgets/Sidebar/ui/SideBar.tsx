@@ -16,12 +16,15 @@ import { ChangeFirstDayWeek } from "@features/ChangeFirstDayWeek"
 import { ChangeStartScreen } from "@features/ChangeStartScreen"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 export const SideBar = React.memo(() => {
   const dispatch = useAppDispatch()
 
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
   const isSideBar = useTypedSelector((state) => state.UI.Modals.sideBar.isOpen)
+
+  const { t } = useTranslation()
 
   const CloseSideBar = () => {
     dispatch(closeMenu("sideBar"))
@@ -33,7 +36,7 @@ export const SideBar = React.memo(() => {
       <SideBarLayout $isSideBar={isSideBar}>
         <SideBarHeader />
         <SideBarSection>
-          <div className="title">Profile</div>
+          <div className="title">{t("sideBar.profile")}</div>
           <div className="content">
             {isLoggedIn === "success" ? (
               <>
@@ -48,7 +51,7 @@ export const SideBar = React.memo(() => {
         </SideBarSection>
         <Separator />
         <SideBarSection>
-          <div className="title">Settings</div>
+          <div className="title">{t("sideBar.settings")}</div>
           <div className="content">
             <ChangeLanguage />
             <ChangeTheme />

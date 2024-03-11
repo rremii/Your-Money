@@ -2,6 +2,7 @@ import React, { FC, memo } from "react"
 import styled from "styled-components"
 import { RadioBtn } from "@shared/ui/RadioBtn.tsx"
 import { themeType } from "@entities/Settings/types.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   theme: themeType
@@ -10,10 +11,15 @@ interface props {
 }
 
 export const ThemeCell: FC<props> = memo(({ theme, isActive, OnClick }) => {
+  const { t } = useTranslation()
+
+  const themeTranslatePath = ("general.themes." +
+    theme.toLowerCase()) as "general.themes.light"
+
   return (
     <ThemeCellLayout onClick={() => OnClick(theme)}>
       <RadioBtn $isActive={isActive} />
-      <p className="theme">{theme}</p>
+      <p className="theme">{t(themeTranslatePath)}</p>
     </ThemeCellLayout>
   )
 })

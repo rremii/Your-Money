@@ -29,7 +29,8 @@
       "cancel": "Cancel",
       "ok": "Ok",
       "change": "Change",
-      "done": "Done"
+      "done": "Done",
+      "back": "Back"
     },
     "time": {
       "day": "Day",
@@ -90,9 +91,16 @@
     "title": "All accounts"
   },
   "changeAccount": {
+    "allAccounts": "All accounts",
     "title": "Account filter"
   },
   "sideBar": {
+    "signIn": "Sign In",
+    "header": {
+      "email": "Synchronization disabled...",
+      "name": "SIGN IN",
+      "time": "Synchronization..."
+    },
     "profile": "Profile",
     "settings": "Settings",
     "name": "Name",
@@ -106,11 +114,14 @@
     "startScreen": "Startup screen"
   },
   "nameMenu": {
+    "title": "Change name",
     "placeholder": "Remi S"
   },
   "passwordMenu": {
+    "title": "Change password",
     "placeholder": "password",
-    "confirmPlaceholder": "Confirm password"
+    "confirmPlaceholder": "Confirm password",
+    "submit": "Change password"
   },
   "signOutMenu": {
     "title": "Sign out?",
@@ -153,6 +164,10 @@
     "date": "Date",
     "duplicate": "Duplicate"
   },
+  "titleMenu": {
+    "title": "Notes",
+    "placeholder": "Comments..."
+  },
   "categoryMenu": {
     "createTitle": "New Category",
     "editTitle": "Category",
@@ -187,24 +202,33 @@
     }
   },
   "signUpEmailMenu": {
-    "title": "Sign up",
     "email": "Email",
     "submit": "Continue"
   },
   "signUpCodeMenu": {
-    "title": "Sign up",
     "code": "Code",
-    "resendCode": "Send the code again"
+    "resendCode": "send another one in {{time}}s",
+    "codeResult": {
+      "initial": "Send the code again",
+      "success": "Code was send successfully,",
+      "rejected": "Couldn't send the code,"
+    }
   },
+  "signInHeader": "Sign In",
+  "signUpHeader": "Sign up",
   "signUpInfoMenu": {
-    "title": "Sign up",
     "name": "Name",
     "submit": "Continue"
   },
   "signUpPasswordMenu": {
-    "title": "Sign up",
     "password": "Password",
     "confirm": "Confirm password",
     "submit": "Continue"
+  },
+  "signInMenu": {
+    "email": "Email",
+    "password": "Password",
+    "submit": "Continue",
+    "noAccountLink": "Don't have an account?"
   }
 }

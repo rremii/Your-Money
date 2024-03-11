@@ -4,6 +4,7 @@ import React from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
+import { useTranslation } from "react-i18next"
 
 export const ChangeCurrencyFormat = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -14,6 +15,7 @@ export const ChangeCurrencyFormat = React.memo(() => {
   const curCurrencySign = useTypedSelector(
     (state) => state.Settings.curCurrencySign,
   )
+  const { t } = useTranslation()
 
   const handleClick = () => {
     dispatch(openMenu("currencyFormatMenu"))
@@ -24,7 +26,7 @@ export const ChangeCurrencyFormat = React.memo(() => {
   return (
     <SideBarBtn
       onClick={handleClick}
-      title="Currency format"
+      title={t("sideBar.currencyFormat")}
       subTitle={FormatCurrencyString({
         quantity: exampleNumber,
         sign: "-",

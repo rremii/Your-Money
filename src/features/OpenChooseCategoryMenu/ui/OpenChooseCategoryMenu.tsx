@@ -6,6 +6,7 @@ import {
   setEditCreateMenuType,
 } from "@entities/UI/model/ModalsSlice.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useTranslation } from "react-i18next"
 
 export const OpenChooseCategoryMenu = () => {
   const dispatch = useAppDispatch()
@@ -15,6 +16,8 @@ export const OpenChooseCategoryMenu = () => {
   const category = useTypedSelector(
     (state) => state.EditCreateTransaction.ChosenCategory,
   )
+
+  const { t } = useTranslation()
 
   const OnClick = useCallback(() => {
     dispatch(openMenu("chooseCategoryMenu"))
@@ -36,7 +39,7 @@ export const OpenChooseCategoryMenu = () => {
       color={category.color}
       content={category.name}
       iconRadius={"50%"}
-      title={"To category"}
+      title={t("transactionMenu.categoryInfo.title")}
     />
   )
 }

@@ -4,11 +4,13 @@ import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import React from "react"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 export const ChangeName = React.memo(() => {
   const dispatch = useAppDispatch()
 
   const { data: userInfo } = GetMe.useQueryState()
+  const { t } = useTranslation()
 
   const handleClick = () => {
     dispatch(openMenu("nameMenu"))
@@ -17,7 +19,7 @@ export const ChangeName = React.memo(() => {
   return (
     <SideBarBtn
       onClick={handleClick}
-      title="Name"
+      title={t("sideBar.name")}
       subTitle={userInfo?.name}
       icon={Categories}
     />

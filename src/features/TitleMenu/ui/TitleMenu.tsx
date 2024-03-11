@@ -10,6 +10,7 @@ import { Overlay } from "@shared/ui/Overlay.tsx"
 import { setEditTransTitle } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { titleValidateSchema } from "@features/TitleMenu/constants/TitleValidateSchema.ts"
+import { useTranslation } from "react-i18next"
 
 interface FormFields {
   title: string | undefined
@@ -24,6 +25,8 @@ export const TitleMenu = memo(() => {
   const isMenuOpen = useTypedSelector(
     (state) => state.UI.Modals.titleMenu.isOpen,
   )
+
+  const { t } = useTranslation()
 
   const {
     register,
@@ -57,7 +60,7 @@ export const TitleMenu = memo(() => {
         $color={"rgba(0, 0, 0, 0.5 )"}
       />
       <TitleMenuLayout $isOpen={isMenuOpen}>
-        <h2 className="title">Notes</h2>
+        <h2 className="title">{t("titleMenu.title")}</h2>
         <form onSubmit={handleSubmit(ChangeTitle)}>
           <div className="fields">
             <FormField
@@ -65,7 +68,7 @@ export const TitleMenu = memo(() => {
               label=""
               input={{
                 type: "text",
-                placeholder: "Comments...",
+                placeholder: t("titleMenu.placeholder"),
                 registerData: { ...register("title") },
               }}
             />
@@ -76,10 +79,10 @@ export const TitleMenu = memo(() => {
 
           <div className="btn-section">
             <button className="gray" type="button" onClick={CloseMenu}>
-              CANCEL
+              {t("general.buttons.cancel").toUpperCase()}
             </button>
             <button className="gray" type="submit">
-              OK
+              {t("general.buttons.ok")}
             </button>
           </div>
         </form>

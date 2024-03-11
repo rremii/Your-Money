@@ -5,6 +5,7 @@ import { GetMonthDays } from "@shared/modules/Calendar/model/GetMonthDays.ts"
 import { setCurCalendarDate } from "@shared/modules/Calendar/model/Actions.ts"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
 import { Months } from "@shared/constants/Months.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   dateStr: string
@@ -12,6 +13,7 @@ interface props {
 
 export const MonthMenu: FC<props> = memo(({ dateStr }) => {
   const { chosenDateStr, color } = useContext(CalendarContext)
+  const { t } = useTranslation()
 
   const { days, weekDayShift } = GetMonthDays(dateStr)
 
@@ -19,23 +21,39 @@ export const MonthMenu: FC<props> = memo(({ dateStr }) => {
     setCurCalendarDate(date.toUTCString())
   }
 
-  const date = new Date(dateStr)
-  const month = Months.get(date.getMonth())
+  const date = new Date(dateStr || Date.now())
+  const month = Months.get(date.getMonth()) as string
+  const monthTranslatePath = ("general.months." +
+    month.slice(0, 3).toLowerCase()) as "general.months.jan"
   const year = date.getFullYear()
 
   return (
     <MonthContentLayout>
       <div className="date">
-        {month} {year}
+        {t(monthTranslatePath)} {year}
       </div>
       <ul className="week-days-box">
-        <li className="week-day">S</li>
-        <li className="week-day">M</li>
-        <li className="week-day">T</li>
-        <li className="week-day">W</li>
-        <li className="week-day">T</li>
-        <li className="week-day">F</li>
-        <li className="week-day">S</li>
+        <li className="week-day">
+          {t("general.days.sun").slice(0, 1).toUpperCase()}
+        </li>
+        <li className="week-day">
+          {t("general.days.mon").slice(0, 1).toUpperCase()}
+        </li>
+        <li className="week-day">
+          {t("general.days.tue").slice(0, 1).toUpperCase()}
+        </li>
+        <li className="week-day">
+          {t("general.days.wed").slice(0, 1).toUpperCase()}
+        </li>
+        <li className="week-day">
+          {t("general.days.thu").slice(0, 1).toUpperCase()}
+        </li>
+        <li className="week-day">
+          {t("general.days.fri").slice(0, 1).toUpperCase()}
+        </li>
+        <li className="week-day">
+          {t("general.days.fri").slice(0, 1).toUpperCase()}
+        </li>
       </ul>
       <DaysBox $color={color} $daysShift={weekDayShift}>
         <div className="days-shift" />

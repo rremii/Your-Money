@@ -12,6 +12,7 @@ import { useTimer } from "@shared/hooks/useTimer.tsx"
 import { ConvertURLtoFile } from "@shared/helpers/ConvertURLtoFile.ts"
 import { setAuthSuccess } from "@entities/Auth/model/AuthSlice.ts"
 import { passwordFormSchema } from "@entities/Auth/constants/SignUpValidateSchemas.ts"
+import { useTranslation } from "react-i18next"
 
 interface FormFields {
   password: string
@@ -38,6 +39,7 @@ export const SignUpPasswordForm = () => {
   } = useForm<FormFields>({
     resolver: yupResolver(passwordFormSchema),
   })
+  const { t } = useTranslation()
 
   const { Reset: ResetTimer } = useTimer({
     timeGap: 3,
@@ -82,7 +84,7 @@ export const SignUpPasswordForm = () => {
       <AuthForm OnSubmit={handleSubmit(OnSubmit)}>
         <FormField
           isError={Boolean(errors.root) || Boolean(errors.password)}
-          label="Password"
+          label={t("signUpPasswordMenu.password")}
           input={{
             type: "password",
             placeholder: "1234",
@@ -94,7 +96,7 @@ export const SignUpPasswordForm = () => {
         )}
         <FormField
           isError={Boolean(errors.root || Boolean(errors.confirmPassword))}
-          label="Confirm password"
+          label={t("signUpPasswordMenu.confirm")}
           input={{
             type: "password",
             placeholder: "1234",
@@ -105,7 +107,9 @@ export const SignUpPasswordForm = () => {
           <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
         )}
         {errors.root && <ErrorMessage>{errors.root.message}</ErrorMessage>}
-        <AuthSubmitBtn isLoading={isLoading}>SUBMIT</AuthSubmitBtn>
+        <AuthSubmitBtn isLoading={isLoading}>
+          {t("signUpPasswordMenu.submit").toUpperCase()}
+        </AuthSubmitBtn>
       </AuthForm>
     </SignUpFormLayout>
   )

@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { FC, memo } from "react"
 import { RoundDecimal } from "@shared/helpers/RoundDecimal.ts"
 import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
+import { useTranslation } from "react-i18next"
 
 interface props {
   name: string
@@ -13,6 +14,8 @@ interface props {
 
 export const AccountInfo: FC<props> = memo(
   ({ balance, name, icon, currencySign, color }) => {
+    const { t } = useTranslation()
+
     return (
       <AccountInfoLayout $color={color}>
         <div className="name-box">
@@ -26,7 +29,7 @@ export const AccountInfo: FC<props> = memo(
           <p className="name">{name}</p>
         </div>
         <div className="balance-box">
-          <p className="title">Account balance</p>
+          <p className="title">{t("categorySlider.accountInfo.title")}</p>
           <div className="balance">
             {balance < 0 ? "-" : ""}
             {currencySign} {Math.abs(RoundDecimal(balance, 2))}

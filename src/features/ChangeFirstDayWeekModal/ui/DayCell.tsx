@@ -2,6 +2,7 @@ import React, { FC, memo } from "react"
 import styled from "styled-components"
 import { RadioBtn } from "@shared/ui/RadioBtn.tsx"
 import { DayType } from "@shared/constants/Days.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   day: string
@@ -10,10 +11,15 @@ interface props {
 }
 
 export const DayCell: FC<props> = memo(({ day, isActive, OnClick }) => {
+  const { t } = useTranslation()
+
+  const dayTranslatePath = ("general.days." +
+    day.slice(0, 3).toLowerCase()) as "general.days.mon"
+
   return (
     <DayCellLayout onClick={() => OnClick(day.slice(0, 3) as DayType)}>
       <RadioBtn $isActive={isActive} />
-      <p className="day">{day}</p>
+      <p className="day">{t(dayTranslatePath)}</p>
     </DayCellLayout>
   )
 })

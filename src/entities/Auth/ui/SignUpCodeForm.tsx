@@ -9,6 +9,7 @@ import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { useVerifyCodeMutation } from "@entities/Auth/api/AuthApi.ts"
 import { useTimer } from "@shared/hooks/useTimer.tsx"
 import { codeFormSchema } from "@entities/Auth/constants/SignUpValidateSchemas.ts"
+import { useTranslation } from "react-i18next"
 
 interface FormFields {
   code: string
@@ -19,7 +20,7 @@ export const SignUpCodeForm = () => {
 
   const {
     register,
-    formState,
+    formState: { errors },
     clearErrors,
     setError,
     handleSubmit,
@@ -28,11 +29,8 @@ export const SignUpCodeForm = () => {
   } = useForm<FormFields>({
     resolver: yupResolver(codeFormSchema),
   })
-  const { errors } = formState
 
-  useEffect(() => {
-    setFocus("code")
-  }, [setFocus])
+  const { t } = useTranslation()
 
   const [verifyCode] = useVerifyCodeMutation()
   const { Reset: ResetTimer } = useTimer({
@@ -40,6 +38,10 @@ export const SignUpCodeForm = () => {
     timeGap: 3,
     callback: clearErrors,
   })
+
+  useEffect(() => {
+    setFocus("code")
+  }, [setFocus])
 
   const OnSubmit = async ({ code }: FormFields) => {
     if (code.length !== 6) return
@@ -66,7 +68,7 @@ export const SignUpCodeForm = () => {
       <AuthForm OnSubmit={handleSubmit(OnSubmit)}>
         <FormField
           isError={Boolean(errors.code)}
-          label="Code"
+          label={t("signUpCodeMenu.code")}
           input={{
             type: "text",
             placeholder: "",

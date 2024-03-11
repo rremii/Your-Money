@@ -3,9 +3,12 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import React from "react"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 export const ChangePassword = React.memo(() => {
   const dispatch = useAppDispatch()
+
+  const { t } = useTranslation()
 
   const handleClick = () => {
     dispatch(openMenu("passwordMenu"))
@@ -14,7 +17,7 @@ export const ChangePassword = React.memo(() => {
   return (
     <SideBarBtn
       onClick={handleClick}
-      title="Change password"
+      title={t("sideBar.password")}
       icon={Categories}
     />
   )

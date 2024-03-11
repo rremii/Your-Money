@@ -7,6 +7,7 @@ import {
 import { setCurCurrencySign } from "@entities/Settings/model/SettingsSlice.ts"
 import { CurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import { CurrencySignCell } from "@features/DefaultCurrencyModal/ui/CurrencySignCell.tsx"
+import { useTranslation } from "react-i18next"
 
 export const CurrencySignMenu = () => {
   const dispatch = useAppDispatch()
@@ -18,6 +19,7 @@ export const CurrencySignMenu = () => {
 
   const [chosenCurrencySign, setCurrencySign] =
     useState<string>(curCurrencySign)
+  const { t } = useTranslation()
 
   const SetChosenCurrencySign = useCallback((currencySign: string) => {
     setCurrencySign(currencySign)
@@ -45,10 +47,10 @@ export const CurrencySignMenu = () => {
       </div>
       <div className="btn-section">
         <button className="gray" onClick={GoToCurrencyMenu} type="button">
-          Back
+          {t("general.buttons.back")}
         </button>
         <button className="gray" onClick={OnSubmit} type="submit">
-          Done
+          {t("general.buttons.done")}
         </button>
       </div>
     </div>

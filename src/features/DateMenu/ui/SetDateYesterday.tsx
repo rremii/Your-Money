@@ -7,6 +7,7 @@ import { IsYesterday } from "@shared/helpers/IsYesterday.ts"
 import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { Months } from "@shared/constants/Months.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 export const SetDateYesterday = () => {
   const dispatch = useAppDispatch()
@@ -18,13 +19,17 @@ export const SetDateYesterday = () => {
     (state) => state.EditCreateTransaction.Transaction.dateStr,
   )
 
+  const { t } = useTranslation()
+
   const isActive = IsYesterday(dateStr)
 
   const { dateFrom } = timeGap.GetDayGap(-1)
-  const month = Months.get(dateFrom.getMonth())
+  const month = Months.get(dateFrom.getMonth()) as string
+  const monthTranslatePath = ("general.months." +
+    month.toLowerCase()) as "general.months.december"
   const day = dateFrom.getDate()
 
-  const subTitle = month + " " + day
+  const subTitle = t(monthTranslatePath) + " " + day
 
   const SetDateYesterday = () => {
     const now = new Date()
@@ -38,7 +43,7 @@ export const SetDateYesterday = () => {
       OnClick={SetDateYesterday}
       isActive={isActive}
       color={color}
-      title="Yesterday"
+      title={t("general.time.yesterday")}
       img={Category}
       subTitle={subTitle}
     />

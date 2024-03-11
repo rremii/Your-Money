@@ -11,12 +11,10 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
 import { ICategory } from "@entities/Category/type.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 export const ChooseCategoryMenu = React.memo(() => {
   const dispatch = useAppDispatch()
-
-  const { data: user } = GetMe.useQueryState()
-  const { allCategories } = useCategory(user?.id)
 
   const isOpen = useTypedSelector(
     (state) => state.UI.Modals.chooseCategoryMenu.isOpen,
@@ -27,6 +25,10 @@ export const ChooseCategoryMenu = React.memo(() => {
   const chosenCategoryName = useTypedSelector(
     (state) => state.EditCreateTransaction.ChosenCategory.name,
   )
+
+  const { data: user } = GetMe.useQueryState()
+  const { allCategories } = useCategory(user?.id)
+  const { t } = useTranslation()
 
   const CloseMenu = () => {
     dispatch(closeMenu("chooseCategoryMenu"))
@@ -54,7 +56,9 @@ export const ChooseCategoryMenu = React.memo(() => {
       />
 
       <ChooseMenuLayout $isActive={isOpen}>
-        <ChooseMenuHeader content={type} />
+        <ChooseMenuHeader
+          content={t(("general." + type) as "general.income")}
+        />
 
         <CategoriesBox>
           {allCategories

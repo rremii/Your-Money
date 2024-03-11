@@ -9,6 +9,7 @@ import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { ChooseAccount } from "@features/ChooseTransAccountMenu/ui/ChooseAccount.tsx"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 export const ChooseTransAccountMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -27,6 +28,8 @@ export const ChooseTransAccountMenu = React.memo(() => {
     (state) => state.EditCreateTransaction.ChosenAccount.name,
   )
 
+  const { t } = useTranslation()
+
   const { data: user } = GetMe.useQueryState()
   const { allAccounts } = useAccount(user?.id)
 
@@ -43,7 +46,7 @@ export const ChooseTransAccountMenu = React.memo(() => {
         $color={"rgba(0, 0, 0, 0.5 )"}
       />
       <AccountMenuLayout $isActive={isOpen}>
-        <ChooseMenuHeader content={"from account"} />
+        <ChooseMenuHeader content={t("transactionMenu.accountInfo.title")} />
         <AllAccountsInfo
           currencySign={currencySign}
           allBalance={allBalance}

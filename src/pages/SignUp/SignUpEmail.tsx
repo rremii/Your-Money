@@ -2,11 +2,12 @@ import styled from "styled-components"
 import { AuthHeader } from "@widgets/AuthHeader"
 import React from "react"
 import { SignUpEmailMenu } from "@widgets/SignUpEmailMenu/ui/SignUpEmailMenu.tsx"
+import { SignUpHeader } from "@widgets/Header/ui/SignUpHeader.tsx"
 
 const SignUpEmail = () => {
   return (
     <LayoutSignUpLayout>
-      <AuthHeader>Sign up</AuthHeader>
+      <SignUpHeader />
       <SignUpEmailMenu />
     </LayoutSignUpLayout>
   )

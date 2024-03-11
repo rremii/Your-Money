@@ -11,6 +11,7 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { setUserInfo } from "@entities/Auth/model/AuthSlice.ts"
 import { useImage } from "@shared/hooks/useImage.tsx"
 import { infoFormSchema } from "@entities/Auth/constants/SignUpValidateSchemas.ts"
+import { useTranslation } from "react-i18next"
 
 interface FormFields {
   name: string
@@ -27,6 +28,8 @@ export const SignUpInfoForm = () => {
   } = useForm<FormFields>({
     resolver: yupResolver(infoFormSchema),
   })
+
+  const [t] = useTranslation()
 
   const { SetImage, curImage: curAvatar, imgRef } = useImage()
 
@@ -48,7 +51,7 @@ export const SignUpInfoForm = () => {
         </div>
         <FormField
           isError={Boolean(errors.root) || Boolean(errors.name)}
-          label="Name"
+          label={t("signUpInfoMenu.name")}
           input={{
             type: "text",
             placeholder: "",
@@ -56,7 +59,9 @@ export const SignUpInfoForm = () => {
           }}
         />
         {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
-        <AuthSubmitBtn>CONTINUE</AuthSubmitBtn>
+        <AuthSubmitBtn>
+          {t("signUpInfoMenu.submit").toUpperCase()}
+        </AuthSubmitBtn>
       </AuthForm>
     </SignUpFormLayout>
   )

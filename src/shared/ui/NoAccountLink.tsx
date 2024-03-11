@@ -1,11 +1,14 @@
 import styled from "styled-components"
 import { NavLink } from "react-router-dom"
 import React from "react"
+import { useTranslation } from "react-i18next"
 
 export const NoAccountLink = () => {
+  const { t } = useTranslation()
+
   return (
     <LinkLayout>
-      <NavLink to="/sign-up/email">Don't have an account?</NavLink>
+      <NavLink to="/sign-up/email">{t("signInMenu.noAccountLink")}</NavLink>
     </LinkLayout>
   )
 }

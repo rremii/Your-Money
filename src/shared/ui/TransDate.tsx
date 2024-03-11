@@ -1,7 +1,8 @@
 import styled from "styled-components"
 import React, { FC, memo } from "react"
-import { FullDays } from "@shared/constants/Days.ts"
+import { Days, FullDays } from "@shared/constants/Days.ts"
 import { Months } from "@shared/constants/Months.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   dateStr: string
@@ -10,12 +11,21 @@ interface props {
 export const TransDate: FC<props> = memo(({ dateStr }) => {
   const transDate = new Date(dateStr)
 
-  const day = FullDays.get(transDate.getDay()) as string
+  const { t } = useTranslation()
+
+  const day = Days.get(transDate.getDay()) as string
   const year = transDate.getFullYear()
   const month = Months.get(transDate.getMonth()) as string
   const date = transDate.getDate()
 
-  const resDate = `${day}, ${month.slice(0, 3)} ${date}, ${year}`.toUpperCase()
+  const dayTranslatePath = ("general.days." +
+    day.toLowerCase()) as "general.days.mon"
+  const monthTranslatePath = ("general.months." +
+    month.slice(0, 3).toLowerCase()) as "general.months.dec"
+
+  const resDate = `${t(dayTranslatePath)}, ${t(
+    monthTranslatePath,
+  )} ${date}, ${year}`.toUpperCase()
 
   return <TransDateLayout>{resDate}</TransDateLayout>
 })

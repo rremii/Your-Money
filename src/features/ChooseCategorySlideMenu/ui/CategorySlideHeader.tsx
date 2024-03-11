@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { FC } from "react"
 import { TransactionType } from "@entities/Transaction/types.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   activeType: TransactionType
@@ -11,16 +12,18 @@ export const CategorySlideHeader: FC<props> = ({
   activeType,
   scrollPercent,
 }) => {
+  const { t } = useTranslation()
+
   return (
     <SlideHeaderLayout $scrollPercent={scrollPercent}>
       <div className="cell">
         <p className={`type ${activeType === "income" ? "active" : ""}`}>
-          INCOME
+          {t("general.income").toUpperCase()}
         </p>
       </div>
       <div className="cell">
         <p className={`type ${activeType === "expense" ? "active" : ""}`}>
-          EXPENSE
+          {t("general.expense").toUpperCase()}
         </p>
       </div>
       <div className="slider">

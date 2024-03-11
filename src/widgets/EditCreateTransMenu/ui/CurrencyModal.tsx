@@ -9,6 +9,7 @@ import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { Currency } from "@entities/Currency/types.ts"
 import { MainCurrencies } from "@entities/Currency/constants/MainCurrencies.ts"
 import { SideBarModalHeader } from "@shared/ui/SideBarModalHeader.tsx"
+import { useTranslation } from "react-i18next"
 
 export const CurrencyModal = memo(() => {
   const dispatch = useAppDispatch()
@@ -19,8 +20,9 @@ export const CurrencyModal = memo(() => {
   const isOpen = useTypedSelector(
     (state) => state.UI.Modals.editCreateCurrencyMenu.isOpen,
   )
-
   const [chosenCurrency, setCurrency] = useState<Currency>(currency)
+
+  const { t } = useTranslation()
 
   const SetChosenCurrency = (currency: Currency) => {
     setCurrency(currency)
@@ -37,8 +39,10 @@ export const CurrencyModal = memo(() => {
     <>
       <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
       <CurrencyModalLayout $isOpen={isOpen}>
-        <SideBarModalHeader>Currency</SideBarModalHeader>
-        <p className="subTitle">Main currencies</p>
+        <SideBarModalHeader>
+          {t("defaultCurrencyMenu.title")}
+        </SideBarModalHeader>
+        <p className="subTitle">{t("defaultCurrencyMenu.subTitle")}</p>
         <div className="currencies-box">
           {MainCurrencies.map(({ fullName, shortName }, index) => (
             <CurrencyCell
@@ -52,10 +56,10 @@ export const CurrencyModal = memo(() => {
         </div>
         <div className="btn-section">
           <button className="gray" onClick={CloseModal} type="button">
-            Cancel
+            {t("general.buttons.cancel")}
           </button>
           <button className="gray" onClick={OnSubmit} type="submit">
-            Done
+            {t("general.buttons.done")}
           </button>
         </div>
       </CurrencyModalLayout>

@@ -4,23 +4,26 @@ import React from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { Days, FullDays } from "@shared/constants/Days.ts"
+import { useTranslation } from "react-i18next"
 
 export const ChangeFirstDayWeek = React.memo(() => {
   const dispatch = useAppDispatch()
 
   const curDay = useTypedSelector((state) => state.Settings.firstDay)
 
+  const { t } = useTranslation()
+
   const handleClick = () => {
     dispatch(openMenu("firstWeekDayMenu"))
   }
 
-  const fullDayName = FullDays.get(Days.get(curDay)) as string
-
+  const dayTranslatePath = ("general.days." +
+    curDay.slice(0, 3).toLowerCase()) as "general.days.mon"
   return (
     <SideBarBtn
       onClick={handleClick}
-      title="First Day of week"
-      subTitle={fullDayName}
+      title={t("sideBar.firstDayWeek")}
+      subTitle={t(dayTranslatePath)}
       icon={Categories}
     />
   )

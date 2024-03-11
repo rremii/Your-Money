@@ -11,12 +11,12 @@ import { GetMe, useChangeNameMutation } from "@entities/User/api/UserApi.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { nameValidateSchema } from "@features/NameMenu/constants/NameValidateSchema.ts"
+import { useTranslation } from "react-i18next"
 
 interface FormFields {
   name: string
 }
 
-//todo move it to features
 export const NameMenu = React.memo(() => {
   const dispatch = useAppDispatch()
 
@@ -26,6 +26,7 @@ export const NameMenu = React.memo(() => {
 
   const { data: user } = GetMe.useQueryState()
   const [changeName, { isLoading }] = useChangeNameMutation()
+  const { t } = useTranslation()
 
   const {
     register,
@@ -72,7 +73,7 @@ export const NameMenu = React.memo(() => {
     <>
       <Overlay $isActive={isNameMenu} onClick={CloseMenu} $zIndex={15} />
       <NameLayout $isOpen={isNameMenu}>
-        <h2 className="title">Change name</h2>
+        <h2 className="title">{t("nameMenu.title")}</h2>
         <form onSubmit={handleSubmit(ChangeName)}>
           <div className="fields">
             <FormField
@@ -80,7 +81,7 @@ export const NameMenu = React.memo(() => {
               label=""
               input={{
                 type: "text",
-                placeholder: "Name",
+                placeholder: t("nameMenu.placeholder"),
                 registerData: { ...register("name") },
               }}
             />
@@ -89,10 +90,10 @@ export const NameMenu = React.memo(() => {
 
           <div className="btn-section">
             <button className="gray" type="button" onClick={CloseMenu}>
-              CANCEL
+              {t("general.buttons.cancel")}
             </button>
             <button className="red" type="submit">
-              CHANGE
+              {t("general.buttons.change")}
             </button>
           </div>
         </form>

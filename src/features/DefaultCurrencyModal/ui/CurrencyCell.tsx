@@ -3,6 +3,7 @@ import React, { FC, memo } from "react"
 import styled from "styled-components"
 import { Currency } from "@entities/Currency/types.ts"
 import { RadioBtn } from "@shared/ui/RadioBtn.tsx"
+import { useTranslation } from "react-i18next"
 
 interface props {
   fullName: string
@@ -13,10 +14,15 @@ interface props {
 
 export const CurrencyCell: FC<props> = memo(
   ({ fullName, shortName, isActive, OnClick }) => {
+    const { t } = useTranslation()
+
+    const currencyTranslatePath = ("general.currency." +
+      shortName.toUpperCase()) as "general.currency.BYN"
+
     return (
       <CurrencyCellLayout onClick={() => OnClick(shortName)}>
         <RadioBtn $isActive={isActive} />
-        <p className="name">{fullName}</p>
+        <p className="name">{t(currencyTranslatePath)}</p>
         <p className="sign">{DefaultCurrencySigns.get(shortName)}</p>
       </CurrencyCellLayout>
     )

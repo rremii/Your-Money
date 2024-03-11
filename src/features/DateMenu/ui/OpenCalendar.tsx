@@ -6,6 +6,7 @@ import { IsYesterday } from "@shared/helpers/IsYesterday.ts"
 import { IsToday } from "@shared/helpers/IsToday.ts"
 import { Months } from "@shared/constants/Months.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 export const OpenCalendar = () => {
   const dispatch = useAppDispatch()
@@ -16,6 +17,8 @@ export const OpenCalendar = () => {
   const dateStr = useTypedSelector(
     (state) => state.EditCreateTransaction.Transaction.dateStr,
   )
+
+  const { t } = useTranslation()
 
   const OpenCalendar = () => {
     dispatch(openMenu("calendarMenu"))
@@ -34,7 +37,7 @@ export const OpenCalendar = () => {
     <PickDateBtn
       color={color}
       isActive={isActive}
-      title="Select day"
+      title={t("dateRange.selectDay")}
       subTitle={isActive ? subTitle : ""}
       img={Category}
       OnClick={OpenCalendar}

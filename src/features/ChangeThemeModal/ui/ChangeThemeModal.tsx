@@ -9,12 +9,15 @@ import { setTheme } from "@entities/Settings/model/SettingsSlice.ts"
 import { Themes } from "@features/ChangeThemeModal/constants/Themes.ts"
 import { ThemeCell } from "@features/ChangeThemeModal/ui/ThemeCell.tsx"
 import { themeType } from "@entities/Settings/types.ts"
+import { useTranslation } from "react-i18next"
 
 export const ChangeThemeModal = memo(() => {
   const dispatch = useAppDispatch()
 
   const isOpen = useTypedSelector((state) => state.UI.Modals.themeMenu.isOpen)
   const curTheme = useTypedSelector((state) => state.Settings.theme)
+
+  const { t } = useTranslation()
 
   const SetTheme = useCallback((theme: themeType) => {
     window.localStorage.setItem("theme", theme)
@@ -30,7 +33,7 @@ export const ChangeThemeModal = memo(() => {
     <>
       <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />
       <LanguageModalLayout $isOpen={isOpen}>
-        <SideBarModalHeader>Theme</SideBarModalHeader>
+        <SideBarModalHeader>{t("themeMenu.title")}</SideBarModalHeader>
         <div className="theme-box">
           {Themes.map((theme, index) => (
             <ThemeCell

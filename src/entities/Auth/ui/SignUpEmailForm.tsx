@@ -12,6 +12,7 @@ import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setEmail } from "@entities/Auth/model/AuthSlice.ts"
 import { useTimer } from "@shared/hooks/useTimer.tsx"
 import { emailFormSchema } from "@entities/Auth/constants/SignUpValidateSchemas.ts"
+import { useTranslation } from "react-i18next"
 
 interface FormFields {
   email: string
@@ -24,16 +25,17 @@ export const SignUpEmailForm = () => {
   const {
     register,
     setFocus,
-    formState,
+    formState: { errors },
     clearErrors,
     setError,
     handleSubmit,
-    reset,
   } = useForm<FormFields>({
     resolver: yupResolver(emailFormSchema),
     values: { email: "noruto2021@gmail.com" },
   })
-  const { errors } = formState
+
+  const { t } = useTranslation()
+
   useEffect(() => {
     setFocus("email")
   }, [setFocus])
@@ -63,7 +65,7 @@ export const SignUpEmailForm = () => {
     <SignUpFormLayout>
       <AuthForm OnSubmit={handleSubmit(OnSubmit)}>
         <FormField
-          label="Email"
+          label={t("signUpEmailMenu.email")}
           isError={Boolean(errors.email)}
           input={{
             type: "email",
@@ -72,7 +74,9 @@ export const SignUpEmailForm = () => {
           }}
         />
         {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
-        <AuthSubmitBtn>CONTINUE</AuthSubmitBtn>
+        <AuthSubmitBtn>
+          {t("signUpEmailMenu.submit").toUpperCase()}
+        </AuthSubmitBtn>
       </AuthForm>
     </SignUpFormLayout>
   )

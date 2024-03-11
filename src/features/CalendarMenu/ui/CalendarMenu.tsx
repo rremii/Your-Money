@@ -6,6 +6,7 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { Calendar } from "@shared/modules/Calendar"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { setCurDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { useTranslation } from "react-i18next"
 
 //todo make smth with todos like hide it or whatever in order them not to stay on the top lvl
 export const CalendarMenu = memo(() => {
@@ -18,6 +19,7 @@ export const CalendarMenu = memo(() => {
   const color = useTypedSelector((state) => state.CurAccount.color)
 
   const [chosenDate, setChosenDate] = useState<string>(initDate)
+  const { t } = useTranslation()
 
   const CloseCalendar = () => {
     dispatch(closeMenu("calendarMenu"))
@@ -38,8 +40,6 @@ export const CalendarMenu = memo(() => {
     CloseCalendar()
   }
 
-  console.log("qwe")
-
   return (
     <>
       <Overlay
@@ -56,10 +56,10 @@ export const CalendarMenu = memo(() => {
         />
         <div className="btn-box">
           <button onClick={CloseCalendar} className="cancel">
-            CANCEL
+            {t("general.buttons.cancel")}
           </button>
           <button onClick={OnSubmit} className="submit">
-            OK
+            {t("general.buttons.ok")}
           </button>
         </div>
       </CalendarMenuLayout>

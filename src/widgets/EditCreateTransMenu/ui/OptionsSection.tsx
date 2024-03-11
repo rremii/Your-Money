@@ -6,6 +6,7 @@ import {
   setEditCreateMenuType,
 } from "@entities/UI/model/ModalsSlice.ts"
 import { useDeleteTransaction } from "@entities/Transaction/model/useDeleteTransaction.tsx"
+import { useTranslation } from "react-i18next"
 
 export const OptionsSection = () => {
   const dispatch = useAppDispatch()
@@ -14,6 +15,8 @@ export const OptionsSection = () => {
     (state) => state.EditCreateTransaction.ChosenCategory.color,
   )
   const { DeleteTransaction, isLoading } = useDeleteTransaction()
+
+  const { t } = useTranslation()
 
   const OnDuplicateClick = () => {
     dispatch(setEditCreateMenuType("create"))
@@ -38,19 +41,19 @@ export const OptionsSection = () => {
         <div className="icon">
           <img src={Category} alt="delete" />
         </div>
-        <p>Delete</p>
+        <p>{t("transactionMenu.delete")}</p>
       </button>
       <div onClick={OnDateClick} className="option date">
         <div className="icon">
           <img src={Category} alt="date" />
         </div>
-        <p>Date</p>
+        <p>{t("transactionMenu.date")}</p>
       </div>
       <div onClick={OnDuplicateClick} className="option duplicate">
         <div className="icon">
           <img src={Category} alt="duplicate" />
         </div>
-        <p>Duplicate</p>
+        <p>{t("transactionMenu.duplicate")}</p>
       </div>
     </OptionsLayout>
   )

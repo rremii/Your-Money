@@ -4,6 +4,7 @@ import { useLazyGetMeQuery } from "@entities/User/api/UserApi.ts"
 import React, { useEffect } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { IsCurDateToday } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { useTranslation } from "react-i18next"
 
 const time =
   new Date().getHours() +
@@ -15,6 +16,7 @@ export const SideBarHeader = React.memo(() => {
   const isCurDateToday = useTypedSelector(IsCurDateToday)
 
   const [getMe, { data: userInfo }] = useLazyGetMeQuery()
+  const { t } = useTranslation()
 
   useEffect(() => {
     if (isLoggedIn !== "success") return
@@ -27,14 +29,14 @@ export const SideBarHeader = React.memo(() => {
         avatar: userInfo?.avatar || Categories,
         email: userInfo?.email,
         name: userInfo?.name,
-        time: "Today, " + time,
+        time: t("general.time.today") + ", " + time,
       }
     } else {
       return {
         avatar: Categories,
-        email: "Synchronization disabled...",
-        name: "SIGN IN",
-        time: "Synchronization...",
+        email: t("sideBar.header.email"),
+        name: t("sideBar.header.name"),
+        time: t("sideBar.header.time"),
       }
     }
   }

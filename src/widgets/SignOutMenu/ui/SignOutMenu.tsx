@@ -6,6 +6,7 @@ import React from "react"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
+import { useTranslation } from "react-i18next"
 
 export const SignOutMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -14,6 +15,8 @@ export const SignOutMenu = React.memo(() => {
   const isOpen = useTypedSelector((state) => state.UI.Modals.signOutMenu.isOpen)
 
   const [logout] = useSignOutMutation()
+
+  const { t } = useTranslation()
 
   const SignOut = async () => {
     await logout()
@@ -31,20 +34,17 @@ export const SignOutMenu = React.memo(() => {
     <>
       <Overlay onClick={CloseMenu} $isActive={isOpen} $zIndex={15} />
       <Modal $isOpen={isOpen}>
-        <h2 className="title">Sign out?</h2>
-        <p className="content">
-          Data synchronization and other features will be disabled in offline.
-        </p>
+        <h2 className="title"> {t("signOutMenu.title")}</h2>
+        <p className="content">{t("signOutMenu.content")}</p>
         <div className="btn-section">
           <button className="gray" onClick={CloseMenu}>
-            CANCEL
+            {t("general.buttons.cancel")}
           </button>
           <button className="red" onClick={SignOut}>
-            SIGN OUT
+            {t("signOutMenu.submit")}
           </button>
         </div>
       </Modal>
     </>
   )
 })
-

@@ -7,6 +7,7 @@ import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { ChooseAccount } from "@features/ChangeAccountModal/ui/ChooseAccount.tsx"
+import { useTranslation } from "react-i18next"
 
 export const ChangeAccountModal = () => {
   const dispatch = useAppDispatch()
@@ -22,6 +23,7 @@ export const ChangeAccountModal = () => {
 
   const { data: user } = GetMe.useQueryState()
   const { allAccounts } = useAccount(user?.id)
+  const { t } = useTranslation()
 
   const CloseChangeAccountMenu = () => {
     dispatch(closeMenu("changeAccountMenu"))
@@ -38,7 +40,7 @@ export const ChangeAccountModal = () => {
         onClick={CloseChangeAccountMenu}
         $isMenuOpen={isOpen}
       >
-        <ChooseMenuHeader content={"ACCOUNT FILTER"} />
+        <ChooseMenuHeader content={t("changeAccount.title").toUpperCase()} />
         <div className="all-account">
           <ChooseAccount
             curName={curAccName}
@@ -48,7 +50,7 @@ export const ChangeAccountModal = () => {
           />
         </div>
         <div className="accounts">
-          <div className="title">ACCOUNTS</div>
+          <div className="title">{t("general.accounts").toUpperCase()}</div>
           {allAccounts?.map((account) => (
             <ChooseAccount
               curName={curAccName}

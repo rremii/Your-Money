@@ -11,6 +11,7 @@ import { useTimer } from "@shared/hooks/useTimer.tsx"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setAuthSuccess } from "@entities/Auth/model/AuthSlice.ts"
 import { signInSchema } from "@entities/Auth/constants/SignInValidateSchemas.ts"
+import { useTranslation } from "react-i18next"
 
 interface FormFields {
   email: string
@@ -23,17 +24,22 @@ export const SignInForm = () => {
 
   const [login] = useLoginMutation()
 
-  const { register, clearErrors, setError, formState, handleSubmit, reset } =
-    useForm<FormFields>({
-      resolver: yupResolver(signInSchema),
-    })
-  const { errors } = formState
-
+  const {
+    register,
+    clearErrors,
+    setError,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm<FormFields>({
+    resolver: yupResolver(signInSchema),
+  })
   const { Reset: ResetTimer } = useTimer({
     timeGap: 3,
     finalTime: 3,
     callback: clearErrors,
   })
+  const { t } = useTranslation()
 
   const SetError = (message: string) => {
     reset()
@@ -55,7 +61,7 @@ export const SignInForm = () => {
       <AuthForm OnSubmit={handleSubmit(OnSubmit)}>
         <FormField
           isError={Boolean(errors.root) || Boolean(errors.email)}
-          label="Email"
+          label={t("signInMenu.email")}
           input={{
             type: "email",
             placeholder: "abc@gmail.com",
@@ -64,7 +70,7 @@ export const SignInForm = () => {
         />
         <FormField
           isError={Boolean(errors.root) || Boolean(errors.password)}
-          label="Password"
+          label={t("signInMenu.password")}
           input={{
             type: "password",
             placeholder: "1234",
@@ -72,7 +78,7 @@ export const SignInForm = () => {
           }}
         />
         {errors.root && <ErrorMessage>{errors.root.message}</ErrorMessage>}
-        <AuthSubmitBtn>CONTINUE</AuthSubmitBtn>
+        <AuthSubmitBtn>{t("signInMenu.submit").toUpperCase()}</AuthSubmitBtn>
       </AuthForm>
     </SignInFormLayout>
   )
