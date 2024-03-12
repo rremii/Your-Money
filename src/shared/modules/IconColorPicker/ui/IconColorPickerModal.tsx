@@ -15,17 +15,19 @@ import { pickerIcons } from "@shared/modules/IconColorPicker/constants/PickerIco
 import { pickerColors } from "@shared/modules/IconColorPicker/constants/PickerColors.ts"
 import { GetRandomColor } from "@shared/modules/IconColorPicker/utils/GetRandomColor.ts"
 import { GetRandomCategoryIcon } from "@shared/modules/IconColorPicker/utils/GetRandomCategoryIcon.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   isOpen: boolean
   icon: string
   color: string
   OnClose: () => void
+  type: "account" | "category"
   OnSubmit: ({ icon, color }: { icon: string; color: string }) => void
 }
 
 export const IconColorPickerModal: FC<props> = memo(
-  ({ icon, color, isOpen, OnClose, OnSubmit }) => {
+  ({ icon, color, isOpen, OnClose, OnSubmit, type }) => {
     const [chosenIconInfo, setIconInfo] = useState<{
       color: string
       icon: string
@@ -33,6 +35,8 @@ export const IconColorPickerModal: FC<props> = memo(
       color: GetRandomColor(),
       icon: GetRandomCategoryIcon(),
     })
+
+    const { t } = useTranslation()
 
     useEffect(() => {
       setIconInfo({ color, icon })
@@ -50,9 +54,25 @@ export const IconColorPickerModal: FC<props> = memo(
     }
 
     const pickerSectionTitles = useMemo(
-      () => ({ firstSection: "Accounts", secondSection: "Categories" }),
+      () => ({
+        firstSection: t("createIconMenu.sections.accounts"),
+        secondSection: t("createIconMenu.sections.categories"),
+      }),
       [],
     )
+    const pickerTitle = useMemo(
+      () => t("createIconMenu.title", { context: type }),
+      [type],
+    )
+    const pickerSubTitles = useMemo(
+      () =>
+        t("createIconMenu.subTitles", { returnObjects: true }) as [
+          string,
+          string,
+        ],
+      [],
+    )
+
     const initPickerIcons = useMemo(
       () => ({
         firstSection: pickerIcons.accountIcons,
@@ -78,19 +98,21 @@ export const IconColorPickerModal: FC<props> = memo(
         />
         <IconPickerModalLayout $isOpen={isOpen}>
           <IconColorPicker
+            subTitles={pickerSubTitles}
             OnChange={OnIconColorChange}
             IconComponents={AccountCategoryIconComp}
             sectionTitles={pickerSectionTitles}
+            title={pickerTitle}
             icons={initPickerIcons}
             colors={pickerColors}
             initInfo={initInfo}
           />
           <div className="btn-box">
             <button onClick={OnClose} className="cancel">
-              CANCEL
+              {t("general.buttons.cancel")}
             </button>
             <button onClick={HandleSubmit} className="submit">
-              DONE
+              {t("general.buttons.done")}
             </button>
           </div>
         </IconPickerModalLayout>

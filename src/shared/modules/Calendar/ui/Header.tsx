@@ -15,12 +15,7 @@ export const Header = () => {
   const year = date.getFullYear()
 
   const day = Days.get(date.getDay() || 0)
-  const dayTranslatePath = ("general.days." +
-    day.toLowerCase()) as "general.days.mon"
-
   const month = Months.get(date.getMonth() || 0) as string
-  const monthTranslatePath = ("general.months." +
-    month.slice(0, 3).toLowerCase()) as "general.months.jan"
   const dateDay = date.getDate()
 
   const SetCalendarType = (type: CalendarType) => {
@@ -28,8 +23,10 @@ export const Header = () => {
   }
 
   const resultDayMonthStr = `${
-    t(dayTranslatePath).slice(0, 3) + "." || ""
-  }, ${t(monthTranslatePath)} ${dateDay}`
+    t("general.days", { context: day.toLowerCase() }).slice(0, 3) + "." || ""
+  }, ${t("general.months", {
+    context: month.slice(0, 3).toLowerCase(),
+  })} ${dateDay}`
   return (
     <HeaderLayout $color={color}>
       <p

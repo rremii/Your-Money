@@ -16,14 +16,11 @@ export const ChangeTheme = React.memo(() => {
     dispatch(openMenu("themeMenu"))
   }
 
-  const themeTranslatePath = ("general.themes." +
-    theme.toLowerCase()) as "general.themes.light"
-
   return (
     <SideBarBtn
       onClick={handleClick}
       title={t("sideBar.theme")}
-      subTitle={t(themeTranslatePath)}
+      subTitle={t("general.themes", { context: theme })}
       icon={Categories}
     />
   )

@@ -1,25 +1,22 @@
 {
   "general": {
-    "themes": {
-      "light": "Light",
-      "dark": "Dark"
-    },
-    "languages": {
-      "en": "English",
-      "rus": "Русский"
-    },
-    "currency": {
-      "AUD": "Australian dollar",
-      "GBP": "British pound",
-      "CAD": "Canadian dollar",
-      "CNY": "Chinese yuan",
-      "EUR": "Euro",
-      "JPY": "Japanese yen",
-      "RUB": "Russian ruble",
-      "CHF": "Swiss franc",
-      "USD": "UnitedStates dollar",
-      "BYN": "Belarusian ruble"
-    },
+    "themes": "Light",
+    "themes_light": "Light",
+    "themes_dark": "Dark",
+    "languages": "English",
+    "languages_en": "English",
+    "languages_rus": "Русский",
+    "currency": "Belarusian ruble",
+    "currency_AUD": "Australian dollar",
+    "currency_GBP": "British pound",
+    "currency_CAD": "Canadian dollar",
+    "currency_CNY": "Chinese yuan",
+    "currency_EUR": "Euro",
+    "currency_JPY": "Japanese yen",
+    "currency_RUB": "Russian ruble",
+    "currency_CHF": "Swiss franc",
+    "currency_USD": "UnitedStates dollar",
+    "currency_BYN": "Belarusian ruble",
     "or": "Or",
     "expense": "Expense",
     "income": "Income",
@@ -40,40 +37,38 @@
       "today": "Today",
       "yesterday": "Yesterday"
     },
-    "months": {
-      "january": "January",
-      "february": "February",
-      "march": "March",
-      "april": "April",
-      "may": "May",
-      "june": "June",
-      "july": "July",
-      "august": "August",
-      "september": "September",
-      "october": "October",
-      "november": "November",
-      "december": "December",
-      "dec": "Dec",
-      "jan": "Jan",
-      "feb": "Feb",
-      "mar": "Mar",
-      "apr": "Apr",
-      "jun": "Jun",
-      "jul": "Jul",
-      "aug": "Aug",
-      "sep": "Sep",
-      "oct": "Oct",
-      "nov": "Nov"
-    },
-    "days": {
-      "sun": "Sunday",
-      "mon": "Monday",
-      "tue": "Tuesday",
-      "wed": "Wednesday",
-      "thu": "Thursday",
-      "fri": "Friday",
-      "sat": "Saturday"
-    },
+    "months": "January",
+    "months_january": "January",
+    "months_february": "February",
+    "months_march": "March",
+    "months_april": "April",
+    "months_may": "May",
+    "months_june": "June",
+    "months_july": "July",
+    "months_august": "August",
+    "months_september": "September",
+    "months_october": "October",
+    "months_november": "November",
+    "months_december": "December",
+    "months_dec": "Dec",
+    "months_jan": "Jan",
+    "months_feb": "Feb",
+    "months_mar": "Mar",
+    "months_apr": "Apr",
+    "months_jun": "Jun",
+    "months_jul": "Jul",
+    "months_aug": "Aug",
+    "months_sep": "Sep",
+    "months_oct": "Oct",
+    "months_nov": "Nov",
+    "days": "Sunday",
+    "days_sun": "Sunday",
+    "days_mon": "Monday",
+    "days_tue": "Tuesday",
+    "days_wed": "Wednesday",
+    "days_thu": "Thursday",
+    "days_fri": "Friday",
+    "days_sat": "Saturday",
     "overview": "Overview",
     "accounts": "Accounts",
     "categories": "Categories",
@@ -169,14 +164,14 @@
     "placeholder": "Comments..."
   },
   "categoryMenu": {
-    "createTitle": "New Category",
-    "editTitle": "Category",
+    "title_create": "New Category",
+    "title_edit": "Category",
     "name": "Name",
     "delete": "Delete category"
   },
   "accountMenu": {
-    "createTitle": "New Account",
-    "editTitle": "Edit Account",
+    "title_create": "New Account",
+    "title_edit": "Edit Account",
     "name": "Name",
     "delete": "Delete account",
     "sections": {
@@ -191,7 +186,12 @@
     }
   },
   "createIconMenu": {
-    "title": "Category icon",
+    "title_account": "Account icon",
+    "title_category": "Category icon",
+    "subTitles": [
+      "Icon",
+      "Color"
+    ],
     "header": {
       "icon": "Icon",
       "color": "Color"
@@ -230,5 +230,9 @@
     "password": "Password",
     "submit": "Continue",
     "noAccountLink": "Don't have an account?"
-  }
+  },
+  "editCategoriesMenu": {
+    "title": "Edit categories"
+  },
+  "toastOfflineWarn": "Please login, the maximum amount of transactions is limited by 20 and synchronization is not available"
 }

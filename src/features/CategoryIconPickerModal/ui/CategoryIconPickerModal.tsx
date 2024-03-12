@@ -28,6 +28,7 @@ export const CategoryIconPickerModal = memo(() => {
 
   return (
     <IconColorPickerModal
+      type={"category"}
       icon={icon}
       color={color}
       isOpen={isOpen}

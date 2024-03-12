@@ -25,11 +25,10 @@ export const SetDateYesterday = () => {
 
   const { dateFrom } = timeGap.GetDayGap(-1)
   const month = Months.get(dateFrom.getMonth()) as string
-  const monthTranslatePath = ("general.months." +
-    month.toLowerCase()) as "general.months.december"
   const day = dateFrom.getDate()
 
-  const subTitle = t(monthTranslatePath) + " " + day
+  const subTitle =
+    t("general.months", { context: month.toLowerCase() }) + " " + day
 
   const SetDateYesterday = () => {
     const now = new Date()

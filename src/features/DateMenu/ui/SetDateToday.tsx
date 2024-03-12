@@ -24,11 +24,10 @@ export const SetDateToday = () => {
 
   const now = new Date()
   const month = Months.get(now.getMonth()) as string
-  const monthTranslatePath = ("general.months." +
-    month.toLowerCase()) as "general.months.december"
   const day = now.getDate()
 
-  const subTitle = t(monthTranslatePath) + " " + day
+  const subTitle =
+    t("general.months", { context: month.toLowerCase() }) + " " + day
 
   const SetDateToday = () => {
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())

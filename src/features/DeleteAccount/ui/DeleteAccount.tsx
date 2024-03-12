@@ -3,12 +3,14 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useDeleteAccount } from "@entities/Account/model/useDeleteAccount.tsx"
+import { useTranslation } from "react-i18next"
 //todo make validation (not allowing to send many req while pending) create delete edit category/account
 export const DeleteAccount = () => {
   const dispatch = useAppDispatch()
 
   const id = useTypedSelector((state) => state.NewAccount.id)
 
+  const { t } = useTranslation()
   const { DeleteAccount, isLoading } = useDeleteAccount()
 
   const OnClick = async () => {
@@ -21,7 +23,7 @@ export const DeleteAccount = () => {
   return (
     <DeleteCategoryLayout disabled={isLoading} onClick={OnClick}>
       <img src={Categories} alt="delete icon" className="icon" />
-      <p className="content">Delete account</p>
+      <p className="content">{t("accountMenu.delete")}</p>
     </DeleteCategoryLayout>
   )
 }

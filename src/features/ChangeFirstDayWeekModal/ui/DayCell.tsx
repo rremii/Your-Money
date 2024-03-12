@@ -13,13 +13,11 @@ interface props {
 export const DayCell: FC<props> = memo(({ day, isActive, OnClick }) => {
   const { t } = useTranslation()
 
-  const dayTranslatePath = ("general.days." +
-    day.slice(0, 3).toLowerCase()) as "general.days.mon"
-
+  const translateCtx = day.toLowerCase().slice(0, 3)
   return (
     <DayCellLayout onClick={() => OnClick(day.slice(0, 3) as DayType)}>
       <RadioBtn $isActive={isActive} />
-      <p className="day">{t(dayTranslatePath)}</p>
+      <p className="day">{t("general.days", { context: translateCtx })}</p>
     </DayCellLayout>
   )
 })

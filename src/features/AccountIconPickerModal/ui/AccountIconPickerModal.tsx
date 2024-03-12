@@ -28,6 +28,7 @@ export const AccountIconPickerModal = memo(() => {
 
   return (
     <IconColorPickerModal
+      type={"account"}
       icon={icon}
       color={color}
       isOpen={isOpen}

@@ -18,13 +18,9 @@ export const TransDate: FC<props> = memo(({ dateStr }) => {
   const month = Months.get(transDate.getMonth()) as string
   const date = transDate.getDate()
 
-  const dayTranslatePath = ("general.days." +
-    day.toLowerCase()) as "general.days.mon"
-  const monthTranslatePath = ("general.months." +
-    month.slice(0, 3).toLowerCase()) as "general.months.dec"
-
-  const resDate = `${t(dayTranslatePath)}, ${t(
-    monthTranslatePath,
+  const resDate = `${t("general.days", { context: day.toLowerCase() })}, ${t(
+    "general.months",
+    { context: month.slice(0, 3).toLowerCase() },
   )} ${date}, ${year}`.toUpperCase()
 
   return <TransDateLayout>{resDate}</TransDateLayout>

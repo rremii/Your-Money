@@ -5,6 +5,7 @@ import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { resetEditAccount } from "@entities/Account/model/NewAccountSlice.ts"
 import { CreateAccount } from "@features/CreateAccount/ui/CreateAccount.tsx"
 import { EditAccount } from "@features/EditAccount/ui/EditAccount.tsx"
+import { useTranslation } from "react-i18next"
 
 export const EditAccountHeader = () => {
   const dispatch = useAppDispatch()
@@ -12,6 +13,7 @@ export const EditAccountHeader = () => {
   const menuType = useTypedSelector(
     (state) => state.UI.Modals.editCreateAccountMenu.menuType,
   )
+  const { t } = useTranslation()
 
   const CloseAccountMenu = async () => {
     dispatch(closeMenu("editCreateAccountMenu"))
@@ -46,7 +48,9 @@ export const EditAccountHeader = () => {
       )}
 
       <h1 className="title">
-        {menuType === "create" ? "New account" : "Edit account"}
+        {menuType === "create"
+          ? t("accountMenu.title", { context: "create" })
+          : t("accountMenu.title", { context: "edit" })}
       </h1>
 
       {menuType === "create" ? <CreateAccount /> : <EditAccount />}

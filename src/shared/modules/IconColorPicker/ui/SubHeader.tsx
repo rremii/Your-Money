@@ -1,18 +1,23 @@
 import styled from "styled-components"
 import { useContext } from "react"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
+import { useTranslation } from "react-i18next"
 
 export const SubHeader = () => {
-  const { menuType } = useContext(PickerContext)
+  const { menuType, subTitles } = useContext(PickerContext)
 
   const scrollPercent = menuType === "icon" ? 0 : 100
   return (
     <SubHeaderLayout $scrollPercent={scrollPercent}>
       <div className="cell">
-        <p className={`type ${menuType === "icon" ? "active" : ""}`}>ICON</p>
+        <p className={`type ${menuType === "icon" ? "active" : ""}`}>
+          {subTitles[0].toUpperCase()}
+        </p>
       </div>
       <div className="cell">
-        <p className={`type ${menuType === "color" ? "active" : ""}`}>COLOR</p>
+        <p className={`type ${menuType === "color" ? "active" : ""}`}>
+          {subTitles[1].toUpperCase()}
+        </p>
       </div>
       <div className="slider">
         <div className="pushing-bar" />

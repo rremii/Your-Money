@@ -103,4 +103,5 @@ const LayoutStyles = styled.div`
   position: relative;
   overflow: hidden;
   margin: 0 auto;
+  background-color: var(--sub-bg);
 `

@@ -11,6 +11,8 @@ interface initialState {
     firstSection: string
     secondSection: string
   }
+  subTitles: [string, string]
+  title: string
   IconComponents: IIconComponents | null
 
   curColor: string
@@ -28,61 +30,77 @@ export const initialState = {
   colors: [],
   icons: {
     firstSection: [],
-    secondSection: []
+    secondSection: [],
   },
 
   sectionTitles: {
     firstSection: "",
-    secondSection: ""
+    secondSection: "",
   },
+  subTitles: ["", ""],
+  title: "",
   IconComponents: null,
-  menuType: "icon"
+  menuType: "icon",
 } as initialState
 
 export const PickerContext = React.createContext(initialState)
-export const PickerCtxReducer = (state: initialState, action: Actions): initialState => {
-
+export const PickerCtxReducer = (
+  state: initialState,
+  action: Actions,
+): initialState => {
   switch (action.type) {
     case "SET_MENU_TYPE": {
       return {
         ...state,
-        menuType: action.payload
+        menuType: action.payload,
       }
     }
     case "SET_PICKER_CUR_COLOR": {
       return {
         ...state,
-        curColor: action.payload
+        curColor: action.payload,
       }
     }
     case "SET_PICKER_CUR_ICON": {
       return {
         ...state,
-        curIcon: action.payload
+        curIcon: action.payload,
       }
     }
     case "SET_PICKER_ICONS": {
       return {
         ...state,
-        icons: action.payload
+        icons: action.payload,
       }
     }
     case "SET_PICKER_COLORS": {
       return {
         ...state,
-        colors: action.payload
+        colors: action.payload,
       }
     }
-    case "SET_PICKER_TITLES": {
+    case "SET_PICKER_SECTION_TITLES": {
       return {
         ...state,
-        sectionTitles: action.payload
+        sectionTitles: action.payload,
+      }
+    }
+    case "SET_PICKER_SUB_TITLES": {
+      return {
+        ...state,
+        subTitles: action.payload,
+      }
+    }
+    case "SET_PICKER_TITLE": {
+      return {
+        ...state,
+        title: action.payload,
       }
     }
     case "SET_ICON_COMPONENTS": {
       return {
         ...state,
-        IconComponents: action.payload
+        IconComponents: action.payload,
       }
     }
 
@@ -90,7 +108,4 @@ export const PickerCtxReducer = (state: initialState, action: Actions): initialS
       return state
     }
   }
-
 }
-
-

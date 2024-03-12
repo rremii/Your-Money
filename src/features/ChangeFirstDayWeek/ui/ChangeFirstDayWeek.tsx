@@ -17,13 +17,13 @@ export const ChangeFirstDayWeek = React.memo(() => {
     dispatch(openMenu("firstWeekDayMenu"))
   }
 
-  const dayTranslatePath = ("general.days." +
-    curDay.slice(0, 3).toLowerCase()) as "general.days.mon"
+  const translateCtx = curDay.toLowerCase().slice(0, 3)
+
   return (
     <SideBarBtn
       onClick={handleClick}
       title={t("sideBar.firstDayWeek")}
-      subTitle={t(dayTranslatePath)}
+      subTitle={t("general.days", { context: translateCtx })}
       icon={Categories}
     />
   )

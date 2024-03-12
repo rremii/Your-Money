@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { FormField } from "@shared/ui/FormField.tsx"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { nameValidateSchema } from "@widgets/EditCreateCategoryMenu/constants/NameValidateSchema.ts"
+import { useTranslation } from "react-i18next"
 
 interface FormFields {
   name: string
@@ -16,6 +17,8 @@ export const NameInput = () => {
   const dispatch = useAppDispatch()
 
   const name = useTypedSelector((state) => state.NewCategory.name)
+
+  const { t } = useTranslation()
 
   const {
     register,
@@ -44,7 +47,7 @@ export const NameInput = () => {
       >
         <FormField
           isError={Boolean(errors.root) || Boolean(errors.name)}
-          label="Name"
+          label={t("categoryMenu.name")}
           input={{
             type: "text",
             placeholder: "",

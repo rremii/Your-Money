@@ -9,7 +9,9 @@ import {
   setPickerCurIcon,
   setPickerIconComponents,
   setPickerIcons,
-  setPickerTitles,
+  setPickerSectionTitles,
+  setPickerSubTitles,
+  setPickerTitle,
 } from "@shared/modules/IconColorPicker/model/Actions.ts"
 import { IIconComponents } from "@shared/modules/IconColorPicker/types.ts"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
@@ -24,6 +26,8 @@ interface props {
     firstSection: string
     secondSection: string
   }
+  title: string
+  subTitles: [string, string]
   initInfo: {
     icon: string
     color: string
@@ -32,35 +36,46 @@ interface props {
   OnChange: (values: { color: string; icon: string }) => void
 }
 
-const IconColorPicker: FC<props> = memo(({ icons, initInfo, IconComponents, sectionTitles, OnChange, colors }) => {
+const IconColorPicker: FC<props> = memo(
+  ({
+    icons,
+    initInfo,
+    IconComponents,
+    sectionTitles,
+    OnChange,
+    colors,
+    title,
+    subTitles,
+  }) => {
+    const { curIcon, curColor } = useContext(PickerContext)
 
-  const { curIcon, curColor } = useContext(PickerContext)
+    useEffect(() => {
+      const { icon, color } = initInfo
+      if (!icon || !color) return
 
-  useEffect(() => {
-    const { icon, color } = initInfo
-    if (!icon || !color) return
-    
-    OnChange({ color: curColor, icon: curIcon })
-  }, [curIcon, curColor])
+      OnChange({ color: curColor, icon: curIcon })
+    }, [curIcon, curColor])
 
+    useEffect(() => {
+      setPickerIcons(icons)
+      setPickerColors(colors)
+      setPickerCurColor(initInfo.color)
+      setPickerCurIcon(initInfo.icon)
+      setPickerIconComponents(IconComponents)
+      setPickerSectionTitles(sectionTitles)
+      setPickerTitle(title)
+      setPickerSubTitles(subTitles)
+    }, [initInfo.color, initInfo.icon])
 
-  useEffect(() => {
-
-    setPickerIcons(icons)
-    setPickerColors(colors)
-    setPickerCurColor(initInfo.color)
-    setPickerCurIcon(initInfo.icon)
-    setPickerIconComponents(IconComponents)
-    setPickerTitles(sectionTitles)
-  }, [initInfo.color, initInfo.icon])
-
-
-  return <CalendarLayout>
-    <Header />
-    <SubHeader />
-    <Slider />
-  </CalendarLayout>
-})
+    return (
+      <CalendarLayout>
+        <Header />
+        <SubHeader />
+        <Slider />
+      </CalendarLayout>
+    )
+  },
+)
 export default IconColorPicker
 const CalendarLayout = styled.div`
   position: relative;

@@ -22,37 +22,36 @@ export const MonthMenu: FC<props> = memo(({ dateStr }) => {
   }
 
   const date = new Date(dateStr || Date.now())
-  const month = Months.get(date.getMonth()) as string
-  const monthTranslatePath = ("general.months." +
-    month.slice(0, 3).toLowerCase()) as "general.months.jan"
+  const month = Months.get(date.getMonth() || 0) as string
   const year = date.getFullYear()
 
   return (
     <MonthContentLayout>
       <div className="date">
-        {t(monthTranslatePath)} {year}
+        {t("general.months", { context: month.slice(0, 3).toLowerCase() })}{" "}
+        {year}
       </div>
       <ul className="week-days-box">
         <li className="week-day">
-          {t("general.days.sun").slice(0, 1).toUpperCase()}
+          {t("general.days", { context: "sun" }).slice(0, 1).toUpperCase()}
         </li>
         <li className="week-day">
-          {t("general.days.mon").slice(0, 1).toUpperCase()}
+          {t("general.days", { context: "mon" }).slice(0, 1).toUpperCase()}
         </li>
         <li className="week-day">
-          {t("general.days.tue").slice(0, 1).toUpperCase()}
+          {t("general.days", { context: "tue" }).slice(0, 1).toUpperCase()}
         </li>
         <li className="week-day">
-          {t("general.days.wed").slice(0, 1).toUpperCase()}
+          {t("general.days", { context: "wed" }).slice(0, 1).toUpperCase()}
         </li>
         <li className="week-day">
-          {t("general.days.thu").slice(0, 1).toUpperCase()}
+          {t("general.days", { context: "thu" }).slice(0, 1).toUpperCase()}
         </li>
         <li className="week-day">
-          {t("general.days.fri").slice(0, 1).toUpperCase()}
+          {t("general.days", { context: "fri" }).slice(0, 1).toUpperCase()}
         </li>
         <li className="week-day">
-          {t("general.days.fri").slice(0, 1).toUpperCase()}
+          {t("general.days", { context: "sat" }).slice(0, 1).toUpperCase()}
         </li>
       </ul>
       <DaysBox $color={color} $daysShift={weekDayShift}>

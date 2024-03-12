@@ -17,14 +17,11 @@ export const ChangeCurrency = React.memo(() => {
     dispatch(openMenu("currencyMenu"))
   }
 
-  const currencyTranslatePath = ("general.currency." +
-    curCurrency.toUpperCase()) as "general.currency.BYN"
-
   return (
     <SideBarBtn
       onClick={handleClick}
       title={t("sideBar.defaultCurrency")}
-      subTitle={t(currencyTranslatePath)}
+      subTitle={t("general.currency", { context: curCurrency })}
       icon={Categories}
     />
   )

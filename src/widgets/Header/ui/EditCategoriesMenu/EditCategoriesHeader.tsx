@@ -1,7 +1,10 @@
 import styled from "styled-components"
+import { useTranslation } from "react-i18next"
 
 export const EditCategoriesHeader = () => {
-  return <HeaderLayout>Edit categories</HeaderLayout>
+  const { t } = useTranslation()
+
+  return <HeaderLayout>{t("editCategoriesMenu.title")}</HeaderLayout>
 }
 const HeaderLayout = styled.header`
   height: 65px;

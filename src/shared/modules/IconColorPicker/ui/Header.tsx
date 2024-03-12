@@ -3,14 +3,14 @@ import { useContext } from "react"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
 
 export const Header = () => {
-  const { curIcon, curColor, IconComponents } = useContext(PickerContext)
+  const { curIcon, curColor, IconComponents, title } = useContext(PickerContext)
 
   return (
     <HeaderLayout $color={curColor}>
       <div className="icon-box">
         {IconComponents?.get(curIcon, { fill: "white" })}
       </div>
-      <h1 className="title">Category icon</h1>
+      <h1 className="title">{title}</h1>
     </HeaderLayout>
   )
 }

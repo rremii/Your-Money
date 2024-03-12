@@ -6,12 +6,16 @@ import {
   setAuthSuccess,
 } from "@entities/Auth/model/AuthSlice.ts"
 import { useNotifyToast } from "@shared/GlobalModules/Toasts"
+import { useTranslation } from "react-i18next"
 
+//todo make it hook
 export const withAuth = (Component: FC) => () => {
   const dispatch = useAppDispatch()
 
   const { ShowToast } = useNotifyToast(5000, 1000)
+  const { t } = useTranslation()
   const { data, isLoading, isError, isUninitialized } = useRefreshQuery()
+
   useEffect(() => {
     if (!localStorage.getItem("accessToken")) dispatch(setAuthRejected())
 
@@ -23,8 +27,7 @@ export const withAuth = (Component: FC) => () => {
     if (!data && isError) {
       dispatch(setAuthRejected())
       ShowToast({
-        message:
-          "Please login, the maximum amount of transactions is limited by 20 and synchronization is not available",
+        message: t("toastOfflineWarn"),
         state: "info",
       })
     }

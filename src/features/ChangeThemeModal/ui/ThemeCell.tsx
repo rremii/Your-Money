@@ -13,13 +13,10 @@ interface props {
 export const ThemeCell: FC<props> = memo(({ theme, isActive, OnClick }) => {
   const { t } = useTranslation()
 
-  const themeTranslatePath = ("general.themes." +
-    theme.toLowerCase()) as "general.themes.light"
-
   return (
     <ThemeCellLayout onClick={() => OnClick(theme)}>
       <RadioBtn $isActive={isActive} />
-      <p className="theme">{t(themeTranslatePath)}</p>
+      <p className="theme">{t("general.themes", { context: theme })}</p>
     </ThemeCellLayout>
   )
 })

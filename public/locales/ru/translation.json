@@ -20,6 +20,16 @@
       "USD": "UnitedStates dollar",
       "BYN": "Belarusian ruble"
     },
+    "currency_AUD": "Australian dollar",
+    "currency_GBP": "British pound",
+    "currency_CAD": "Canadian dollar",
+    "currency_CNY": "Chinese yuan",
+    "currency_EUR": "Euro",
+    "currency_JPY": "Japanese yen",
+    "currency_RUB": "Russian ruble",
+    "currency_CHF": "Swiss franc",
+    "currency_USD": "UnitedStates dollar",
+    "currency_BYN": "Belarusian ruble",
     "or": "Или",
     "expense": "Потрачено",
     "income": "Прибыло",
@@ -181,7 +191,8 @@
     }
   },
   "createIconMenu": {
-    "title": "Иконки категории",
+    "title_account": "Account icon",
+    "title_category": "Category icon",
     "header": {
       "icon": "Иконки",
       "color": "Цвет"

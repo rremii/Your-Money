@@ -3,6 +3,7 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useDeleteCategory } from "@entities/Category/model/useDeleteCategory.tsx"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
+import { useTranslation } from "react-i18next"
 
 export const DeleteCategory = () => {
   const dispatch = useAppDispatch()
@@ -10,6 +11,7 @@ export const DeleteCategory = () => {
   const categoryId = useTypedSelector((state) => state.NewCategory.id)
 
   const { DeleteCategory: deleteCategory, isLoading } = useDeleteCategory()
+  const { t } = useTranslation()
 
   const OnClick = async () => {
     if (categoryId) {
@@ -21,7 +23,7 @@ export const DeleteCategory = () => {
   return (
     <DeleteCategoryLayout disabled={isLoading} onClick={OnClick}>
       <img src={Categories} alt="delete icon" className="icon" />
-      <p className="content">Delete category</p>
+      <p className="content">{t("categoryMenu.delete")}</p>
     </DeleteCategoryLayout>
   )
 }

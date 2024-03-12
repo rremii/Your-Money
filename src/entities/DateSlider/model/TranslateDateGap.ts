@@ -15,13 +15,9 @@ export const TranslateDateGap = (
       )
       if (!day || !month) return
 
-      const dayTransPath = ("general.days." +
-        day[0].toLowerCase()) as "general.days.fri"
-      const transDay = t(dayTransPath)
+      const transDay = t("general.days", { context: day })
 
-      const monthTransPath = ("general.months." +
-        month[0].toLowerCase()) as "general.months.june"
-      const transMonth = t(monthTransPath)
+      const transMonth = t("general.months", { context: month })
 
       return (
         dateGap.replace(day[0], transDay).replace(month[0], transMonth) || ""
@@ -33,9 +29,7 @@ export const TranslateDateGap = (
       )
       if (!month) return
 
-      const monthTransPath = ("general.months." +
-        month[0].toLowerCase()) as "general.months.june"
-      const transMonth = t(monthTransPath)
+      const transMonth = t("general.months", { context: month })
 
       return dateGap.replace(month[0], transMonth) || ""
     }
@@ -52,19 +46,18 @@ export const TranslateDateGap = (
         ...dateGap.matchAll(/Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec/g),
       ]
       if (!months.length) return
-      const month1 = months[0][0] || ""
-      const month2 = months[1][0] || ""
+      const month1 = months[0] || ""
+      const month2 = months[1] || ""
+      if (!month1 || !month2) return
 
-      const month1TransPath = ("general.months." +
-        month1.toLowerCase()) as "general.months.june"
-      const transMonth1 = t(month1TransPath)
+      const transMonth1 = t("general.months", { context: month1 })
 
-      const month2TransPath = ("general.months." +
-        month2.toLowerCase()) as "general.months.june"
-      const transMonth2 = t(month2TransPath)
+      const transMonth2 = t("general.months", { context: month2 })
 
       return (
-        dateGap.replace(month1, transMonth1).replace(month2, transMonth2) || ""
+        dateGap
+          .replace(month1[0], transMonth1)
+          .replace(month2[0], transMonth2) || ""
       )
     }
   }

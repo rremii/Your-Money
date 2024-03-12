@@ -2,18 +2,20 @@ import styled from "styled-components"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
+import { useTranslation } from "react-i18next"
 
 export const BalanceCell = () => {
   const balance = useTypedSelector((state) => state.NewAccount.balance)
   const currency = useTypedSelector((state) => state.NewAccount.currency)
-
   const currencyFormat = useTypedSelector(
     (state) => state.Settings.currencyFormat,
   )
 
+  const { t } = useTranslation()
+
   return (
     <BalanceCellLayout>
-      <h2 className="title">Account balance</h2>
+      <h2 className="title">{t("accountMenu.sections.balance.balance")}</h2>
       <p className="extra-info">
         {FormatCurrencyString({
           formatString: currencyFormat,

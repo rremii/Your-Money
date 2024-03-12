@@ -6,6 +6,7 @@ import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import React from "react"
 import { CreateCategory } from "@features/CreateCategory/ui/CreateCategory.tsx"
 import { EditCategory } from "@features/EditCategory/ui/EditCategory.tsx"
+import { useTranslation } from "react-i18next"
 
 export const EditCategoryHeader = () => {
   const dispatch = useAppDispatch()
@@ -13,6 +14,8 @@ export const EditCategoryHeader = () => {
   const menuType = useTypedSelector(
     (state) => state.UI.Modals.editCreateCategoryMenu.menuType,
   )
+
+  const { t } = useTranslation()
 
   const CloseCategoryMenu = async () => {
     dispatch(closeMenu("editCreateCategoryMenu"))
@@ -47,7 +50,9 @@ export const EditCategoryHeader = () => {
       )}
 
       <h1 className="title">
-        {menuType === "create" ? "New category" : "Category"}
+        {menuType === "create"
+          ? t("categoryMenu.title", { context: "create" })
+          : t("categoryMenu.title", { context: "edit" })}
       </h1>
 
       {menuType === "create" ? <CreateCategory /> : <EditCategory />}

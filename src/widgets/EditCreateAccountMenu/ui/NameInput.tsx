@@ -7,6 +7,7 @@ import { FormField } from "@shared/ui/FormField.tsx"
 import { ErrorMessage } from "@shared/ui/ErrorMessage.tsx"
 import { setNewAccountName } from "@entities/Account/model/NewAccountSlice.ts"
 import { nameValidateSchema } from "@widgets/EditCreateAccountMenu/constants/NameValidateSchema.ts"
+import { useTranslation } from "react-i18next"
 
 interface FormFields {
   name: string
@@ -27,6 +28,7 @@ export const NameInput = () => {
       name,
     },
   })
+  const { t } = useTranslation()
 
   const ChangeAccountName = (newName: string) => {
     if (isValid) dispatch(setNewAccountName(newName))
@@ -44,7 +46,7 @@ export const NameInput = () => {
       >
         <FormField
           isError={Boolean(errors.root) || Boolean(errors.name)}
-          label="Name"
+          label={t("accountMenu.name")}
           input={{
             type: "text",
             placeholder: "",

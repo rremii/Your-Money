@@ -16,13 +16,10 @@ export const CurrencyCell: FC<props> = memo(
   ({ fullName, shortName, isActive, OnClick }) => {
     const { t } = useTranslation()
 
-    const currencyTranslatePath = ("general.currency." +
-      shortName.toUpperCase()) as "general.currency.BYN"
-
     return (
       <CurrencyCellLayout onClick={() => OnClick(shortName)}>
         <RadioBtn $isActive={isActive} />
-        <p className="name">{t(currencyTranslatePath)}</p>
+        <p className="name">{t("general.currency", { context: shortName })}</p>
         <p className="sign">{DefaultCurrencySigns.get(shortName)}</p>
       </CurrencyCellLayout>
     )

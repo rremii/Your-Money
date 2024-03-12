@@ -7,6 +7,7 @@ import { DeleteAccount } from "@features/DeleteAccount/ui/DeleteAccount.tsx"
 import { CurrencyCell } from "@widgets/EditCreateAccountMenu/ui/CurrencyCell.tsx"
 import { BalanceCell } from "@widgets/EditCreateAccountMenu/ui/BalanceCell.tsx"
 import { memo } from "react"
+import { useTranslation } from "react-i18next"
 
 export const EditCreateAccountMenu = memo(() => {
   const isMenuOpen = useTypedSelector(
@@ -17,6 +18,8 @@ export const EditCreateAccountMenu = memo(() => {
   )
   const color = useTypedSelector((state) => state.NewAccount.color)
 
+  const { t } = useTranslation()
+
   return (
     <EditCreateAccountLayout $isMenuOpen={isMenuOpen} $color={color}>
       <div className="colorfull-box">
@@ -25,10 +28,14 @@ export const EditCreateAccountMenu = memo(() => {
         <CreateAccountIcon />
       </div>
 
-      <header className="section-header">Account</header>
+      <header className="section-header">
+        {t("accountMenu.sections.account.title")}
+      </header>
       <CurrencyCell />
 
-      <header className="section-header">Balance</header>
+      <header className="section-header">
+        {t("accountMenu.sections.balance.title")}
+      </header>
       <BalanceCell />
 
       {menuType === "edit" && <DeleteAccount />}

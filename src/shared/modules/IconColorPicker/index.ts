@@ -12,6 +12,8 @@ export const IconColorPicker = IconColorPickerProvider<{
     firstSection: string
     secondSection: string
   }
+  title: string
+  subTitles: [string, string]
   initInfo: {
     icon: string
     color: string

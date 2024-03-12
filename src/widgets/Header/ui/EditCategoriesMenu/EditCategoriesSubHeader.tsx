@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { FC } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { useTranslation } from "react-i18next"
 
 interface props {
   // activeType: TransactionType
@@ -9,18 +10,19 @@ interface props {
 
 export const EditCategoriesSubHeader: FC<props> = () => {
   const categoryType = useTypedSelector((state) => state.NewCategory.type)
+  const { t } = useTranslation()
 
   const scrollPercent = categoryType === "expense" ? 0 : 100
   return (
     <SlideHeaderLayout $scrollPercent={scrollPercent}>
       <div className="cell">
         <p className={`type ${categoryType === "expense" ? "active" : ""}`}>
-          EXPENSE
+          {t("general.expense").toUpperCase()}
         </p>
       </div>
       <div className="cell">
         <p className={`type ${categoryType === "income" ? "active" : ""}`}>
-          INCOME
+          {t("general.income").toUpperCase()}
         </p>
       </div>
       <div className="slider">
