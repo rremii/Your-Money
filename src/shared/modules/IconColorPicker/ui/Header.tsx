@@ -4,7 +4,6 @@ import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
 
 export const Header = () => {
   const { curIcon, curColor, IconComponents, title } = useContext(PickerContext)
-
   return (
     <HeaderLayout $color={curColor}>
       <div className="icon-box">

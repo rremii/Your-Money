@@ -1,45 +1,30 @@
 {
   "general": {
-    "themes": {
-      "light": "Светлая",
-      "dark": "Темная"
-    },
-    "languages": {
-      "en": "Англиский",
-      "rus": "Русский"
-    },
-    "currency": {
-      "AUD": "Австралийский доллар",
-      "GBP": "British pound",
-      "CAD": "Canadian dollar",
-      "CNY": "Chinese yuan",
-      "EUR": "Euro",
-      "JPY": "Japanese yen",
-      "RUB": "Russian ruble",
-      "CHF": "Swiss franc",
-      "USD": "UnitedStates dollar",
-      "BYN": "Belarusian ruble"
-    },
-    "currency_AUD": "Australian dollar",
-    "currency_GBP": "British pound",
-    "currency_CAD": "Canadian dollar",
-    "currency_CNY": "Chinese yuan",
-    "currency_EUR": "Euro",
-    "currency_JPY": "Japanese yen",
-    "currency_RUB": "Russian ruble",
-    "currency_CHF": "Swiss franc",
-    "currency_USD": "UnitedStates dollar",
-    "currency_BYN": "Belarusian ruble",
+    "themes": "Светлая",
+    "themes_light": "Светлая",
+    "themes_dark": "Темная",
+    "currency": "Белорусский рубль",
+    "currency_AUD": "Австралийский доллар",
+    "currency_GBP": "Британский фунт",
+    "currency_CAD": "Канадский доллар",
+    "currency_CNY": "Китайская Йена",
+    "currency_EUR": "Евро",
+    "currency_JPY": "Японская Йена",
+    "currency_RUB": "Русский рубль",
+    "currency_CHF": "Шведский франк",
+    "currency_USD": "Доллар США",
+    "currency_BYN": "Белорусский рубль",
     "or": "Или",
-    "expense": "Потрачено",
-    "income": "Прибыло",
+    "expense": "Расход",
+    "income": "Доход",
     "balance": "Баланс",
     "avg": "сред.",
     "buttons": {
       "cancel": "Отмена",
       "ok": "Ок",
       "change": "Изменить",
-      "done": "Готово"
+      "done": "Готово",
+      "back": "Назад"
     },
     "time": {
       "day": "День",
@@ -49,44 +34,42 @@
       "today": "Сегодня",
       "yesterday": "Вчера"
     },
-    "months": {
-      "january": "Январь",
-      "february": "Февраль",
-      "march": "Март",
-      "april": "Апрель",
-      "may": "Май",
-      "june": "Июнь",
-      "july": "Июль",
-      "august": "Август",
-      "september": "Сентябрь",
-      "october": "Октябрь",
-      "november": "Ноябрь",
-      "december": "Декабрь",
-      "dec": "Дек.",
-      "jan": "Янв.",
-      "feb": "Фев.",
-      "mar": "Мар.",
-      "apr": "Апр.",
-      "jun": "Июнь",
-      "jul": "Июль",
-      "aug": "Авг.",
-      "sep": "Сент.",
-      "oct": "Окт.",
-      "nov": "Ноя."
-    },
-    "days": {
-      "sun": "Воскресенье",
-      "mon": "Понедельник",
-      "tue": "Вторник",
-      "wed": "Среда",
-      "thu": "Четверг",
-      "fri": "Пятница",
-      "sat": "Суббота"
-    },
+    "months": "Январь",
+    "months_january": "Январь",
+    "months_february": "Февраль",
+    "months_march": "Март",
+    "months_april": "Апрель",
+    "months_may": "Май",
+    "months_june": "Июнь",
+    "months_july": "Июль",
+    "months_august": "Август",
+    "months_september": "Сентябрь",
+    "months_october": "Октябрь",
+    "months_november": "Ноябрь",
+    "months_december": "Декабрь",
+    "months_dec": "Дек",
+    "months_jan": "Янв",
+    "months_feb": "Фев",
+    "months_mar": "Мар",
+    "months_apr": "Апр",
+    "months_jun": "Июнь",
+    "months_jul": "Июль",
+    "months_aug": "Авг",
+    "months_sep": "Сент",
+    "months_oct": "Окт",
+    "months_nov": "Ноя",
+    "days": "Воскресенье",
+    "days_sun": "Воскресенье",
+    "days_mon": "Понедельник",
+    "days_tue": "Вторник",
+    "days_wed": "Среда",
+    "days_thu": "Четверг",
+    "days_fri": "Пятница",
+    "days_sat": "Суббота",
     "overview": "Обзор",
-    "accounts": "Аккаунты",
+    "accounts": "Счета",
     "categories": "Категории",
-    "transactions": "Транзакции"
+    "transactions": "Операции"
   },
   "transactions": {
     "startBalance": "Начальный баланс",
@@ -97,12 +80,14 @@
     "allTime": "Все время"
   },
   "topHeader": {
-    "title": "Все аккаунты"
+    "title": "Все счета"
   },
   "changeAccount": {
-    "title": "Фильтр аккаунтов"
+    "allAccounts": "Все счета",
+    "title": "Фильтр счетов"
   },
   "sideBar": {
+    "signIn": "Войти",
     "header": {
       "email": "Синхронизация отключена...",
       "name": "ВОЙТИ",
@@ -115,21 +100,24 @@
     "signOut": "Выйти",
     "language": "Язык",
     "theme": "Тема",
-    "defaultCurrency": "Валюта по умолчанию",
+    "defaultCurrency": "Основная валюта",
     "currencyFormat": "Формат валюты",
-    "firstDayWeek": "Первый день недели",
+    "firstDayWeek": "Начало недели",
     "startScreen": "Начальный экран"
   },
   "nameMenu": {
+    "title": "Изменить имя",
     "placeholder": "Remi S"
   },
   "passwordMenu": {
-    "placeholder": "пароль",
-    "confirmPlaceholder": "Подтвердить пароль"
+    "title": "Изменить пароль",
+    "placeholder": "Пароль",
+    "confirmPlaceholder": "Подтвердить пароль",
+    "submit": "Изменить пароль"
   },
   "signOutMenu": {
     "title": "Выйти?",
-    "content": "Синхронизация и другая функциональность недоступна в оффлайн режиме.",
+    "content": "Синхронизация и многое другое не работает в оффлайн режиме.",
     "submit": "Выйти"
   },
   "languageMenu": {
@@ -153,74 +141,95 @@
   },
   "categorySlider": {
     "accountInfo": {
-      "title": "Баланс аккаунта"
+      "title": "Баланс счета"
     }
   },
   "transactionMenu": {
     "accountInfo": {
-      "title": "Из аккаунта"
+      "title": "Со счета"
     },
     "categoryInfo": {
-      "title": "Категории"
+      "title": "На категорию"
     },
-    "description": "Записки ...",
+    "description": "Заметки ...",
     "delete": "Удалить",
     "date": "Дата",
     "duplicate": "Повторить"
   },
+  "titleMenu": {
+    "title": "Заметки",
+    "placeholder": "Комментарии..."
+  },
   "categoryMenu": {
-    "createTitle": "Новая категория",
-    "editTitle": "Изменить категорию",
-    "name": "Имя",
+    "title_create": "Новая категория",
+    "title_edit": "Категория",
+    "name": "Название",
     "delete": "Удалить категорию"
   },
   "accountMenu": {
-    "createTitle": "Новый аккаунт",
-    "editTitle": "Изменить аккаунт",
-    "name": "Имя",
-    "delete": "Удалить аккаунт",
+    "title_create": "Новый счет",
+    "title_edit": "Изменить счет",
+    "name": "Название",
+    "delete": "Удалить счет",
     "sections": {
       "account": {
-        "title": "Аккаунт",
-        "currency": "Валюта аккаунта"
+        "title": "Счет",
+        "currency": "Валюта счета"
       },
       "balance": {
         "title": "Баланс",
-        "balance": "Баланс аккаунта"
+        "balance": "Баланс счета"
       }
     }
   },
   "createIconMenu": {
-    "title_account": "Account icon",
-    "title_category": "Category icon",
+    "title_account": "Иконка счета",
+    "title_category": "Иконка категории",
+    "subTitles": [
+      "Иконка",
+      "Цвет"
+    ],
     "header": {
-      "icon": "Иконки",
+      "icon": "Иконка",
       "color": "Цвет"
     },
     "sections": {
-      "accounts": "Аккаунты",
+      "accounts": "Счета",
       "categories": "Категории"
     }
   },
   "signUpEmailMenu": {
-    "title": "Выйти",
-    "email": "Адрес почты",
+    "email": "Адрес эл. почты",
     "submit": "Продолжить"
   },
   "signUpCodeMenu": {
-    "title": "Выйти",
     "code": "Код",
-    "resendCode": "отправить код повторно через {{time}}с"
+    "resendCode": "Отправить еще раз через {{time}}с",
+    "codeResult": {
+      "initial": "Отправить код повторно",
+      "success": "Код был успешно отправлен,",
+      "rejected": "Не удалось отправить код,"
+    }
   },
+  "signInHeader": "Вход",
+  "signUpHeader": "Регистрация",
   "signUpInfoMenu": {
-    "title": "Выйти",
     "name": "Имя",
     "submit": "Продолжить"
   },
   "signUpPasswordMenu": {
-    "title": "Выйти",
     "password": "Пароль",
     "confirm": "Подтвердить пароль",
-    "submit": "отправить"
-  }
+    "submit": "Продолжить"
+  },
+  "signInMenu": {
+    "email": "Адрес эл. почты",
+    "password": "Пароль",
+    "submit": "Продолжить",
+    "noAccountLink": "Еще не зарегистрированы?"
+  },
+  "editCategoriesMenu": {
+    "title": "Изменить категории"
+  },
+  "toastOfflineWarn": "Пожалуйста войдите, большая часть функциональности доступна только после входа в аккаунт."
 }

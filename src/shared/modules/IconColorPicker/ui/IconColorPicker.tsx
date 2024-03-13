@@ -65,7 +65,7 @@ const IconColorPicker: FC<props> = memo(
       setPickerSectionTitles(sectionTitles)
       setPickerTitle(title)
       setPickerSubTitles(subTitles)
-    }, [initInfo.color, initInfo.icon])
+    }, [initInfo.color, initInfo.icon, title])
 
     return (
       <CalendarLayout>

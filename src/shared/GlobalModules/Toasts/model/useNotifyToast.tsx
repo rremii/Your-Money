@@ -10,7 +10,9 @@ import { useToast } from "@shared/GlobalModules/Toasts/model/useToast.tsx"
 export const useNotifyToast = (duration: number, delay?: number) => {
   const dispatch = useAppDispatch()
 
-  const isShown = useTypedSelector((state) => state.Toasts.NotifyToast.isShown)
+  const isToastShown = useTypedSelector(
+    (state) => state.Toasts.NotifyToast.isShown,
+  )
 
   const HideToast = () => {
     dispatch(hideNotifyToast())
@@ -26,7 +28,7 @@ export const useNotifyToast = (duration: number, delay?: number) => {
     ShowToast,
     DoAfterHide: ClearMessage,
     HideToast,
-    isShown,
+    isToastShown,
     delay,
     duration,
   })

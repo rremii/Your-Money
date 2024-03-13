@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react"
-import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useRefreshQuery } from "@entities/Auth/api/AuthApi.ts"
 import {
   setAuthRejected,

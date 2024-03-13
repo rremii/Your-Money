@@ -34,8 +34,7 @@ import { ChangeAccountModal } from "@features/ChangeAccountModal/ui/ChangeAccoun
 import { WeekDayModal } from "@features/ChangeFirstDayWeekModal/ui/WeekDayModal.tsx"
 import { ChangeStartScreenModal } from "@features/ChangeStartScreenModal/ui/ChangeStartScreenModal.tsx"
 import { useStartScreen } from "@entities/Settings/hooks/useStartScreen.tsx"
-
-// const EditCreateTransaction = lazy(()=>import())
+import { useAuth } from "@entities/Auth"
 
 interface Props {
   children: React.ReactNode
@@ -45,15 +44,16 @@ const AppLayout: FC<Props> = ({ children }) => {
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
   const language = useTypedSelector((state) => state.Settings.language)
   const theme = useTypedSelector((state) => state.Settings.theme)
+  useI18n(language)
 
   //todo check if i need that
   const { data: user } = GetMe.useQueryState()
   useAccount(user?.id)
   useAllTransDateGap()
 
+  useAuth()
   useStartScreen()
   useTheme(theme)
-  useI18n(language)
   usePreloader(isLoggedIn)
   return (
     <LayoutStyles>

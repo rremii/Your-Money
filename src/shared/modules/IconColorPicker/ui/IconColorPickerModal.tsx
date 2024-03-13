@@ -42,51 +42,31 @@ export const IconColorPickerModal: FC<props> = memo(
       setIconInfo({ color, icon })
     }, [icon, color])
 
-    const OnIconColorChange = useCallback(
-      (values: { color: string; icon: string }) => {
-        setIconInfo(values)
-      },
-      [],
-    )
+    const OnIconColorChange = (values: { color: string; icon: string }) => {
+      setIconInfo(values)
+    }
 
     const HandleSubmit = () => {
       OnSubmit({ color: chosenIconInfo.color, icon: chosenIconInfo.icon })
     }
 
-    const pickerSectionTitles = useMemo(
-      () => ({
-        firstSection: t("createIconMenu.sections.accounts"),
-        secondSection: t("createIconMenu.sections.categories"),
-      }),
-      [],
-    )
-    const pickerTitle = useMemo(
-      () => t("createIconMenu.title", { context: type }),
-      [type],
-    )
-    const pickerSubTitles = useMemo(
-      () =>
-        t("createIconMenu.subTitles", { returnObjects: true }) as [
-          string,
-          string,
-        ],
-      [],
-    )
+    const pickerSectionTitles = {
+      firstSection: t("createIconMenu.sections.accounts"),
+      secondSection: t("createIconMenu.sections.categories"),
+    }
+    const pickerTitle = t("createIconMenu.title", { context: type })
+    const pickerSubTitles = t("createIconMenu.subTitles", {
+      returnObjects: true,
+    }) as [string, string]
 
-    const initPickerIcons = useMemo(
-      () => ({
-        firstSection: pickerIcons.accountIcons,
-        secondSection: pickerIcons.categoryIcons,
-      }),
-      [],
-    )
-    const initInfo = useMemo(
-      () => ({
-        icon: chosenIconInfo.icon,
-        color: chosenIconInfo.color,
-      }),
-      [chosenIconInfo.icon, chosenIconInfo.color],
-    )
+    const initPickerIcons = {
+      firstSection: pickerIcons.accountIcons,
+      secondSection: pickerIcons.categoryIcons,
+    }
+    const initInfo = {
+      icon: chosenIconInfo.icon,
+      color: chosenIconInfo.color,
+    }
 
     return (
       <>
