@@ -25,21 +25,19 @@ export const DateBox: FC<props> = ({
   if (dateBalance > 0) balanceSign = "+"
   if (dateBalance < 0) balanceSign = "-"
 
-  const monthTranslationPath = ("general.months." +
-    month.toLowerCase()) as "general.months.april" //!!!
-  const resMonth = month ? t(monthTranslationPath).toUpperCase() : ""
+  const resMonth = month ? t("general.months", { context: "dec" }) : ""
 
-  const dayTranslationPath = ("general.time." +
-    day.toLowerCase()) as "general.time.day" //!!!
-  const resDay = day ? t(dayTranslationPath).toUpperCase() : ""
+  const resDay = day
+    ? t("general.time.day", { context: day.toLowerCase() })
+    : ""
 
   return (
     <DateBoxLayout $balance={dateBalance} $isToday={isToday}>
       <p className="date">{date.toUpperCase()}</p>
       <div className="other-info">
-        <p className="day">{resDay}</p>
+        <p className="day">{resDay.toUpperCase()}</p>
         <p className="month-year">
-          {resMonth} {year}
+          {resMonth.toUpperCase()} {year}
         </p>
       </div>
       <div className="quantity">

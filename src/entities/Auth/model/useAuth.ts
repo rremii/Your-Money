@@ -10,10 +10,11 @@ import { useTranslation } from "react-i18next"
 
 //todo bring it to context
 export const useAuth = () => {
+  //todo fix bug with logout tha you can still use after logout !!!!!!!!!!!!!!!!!!
   const dispatch = useAppDispatch()
 
   const language = useTypedSelector((state) => state.Settings.language)
-  const { ShowToast } = useNotifyToast(10000, 1500)
+  const { ShowToast } = useNotifyToast(5000, 1500)
   const { t } = useTranslation()
   const { data, isLoading, isError, isUninitialized } = useRefreshQuery()
 
