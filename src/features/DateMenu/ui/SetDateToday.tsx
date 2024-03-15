@@ -27,7 +27,7 @@ export const SetDateToday = () => {
   const day = now.getDate()
 
   const subTitle =
-    t("general.months", { context: month.toLowerCase() }) + " " + day
+    t("general.months", { context: [month.toLowerCase()] }) + " " + day
 
   const SetDateToday = () => {
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())

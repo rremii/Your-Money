@@ -23,7 +23,7 @@ export const ChangeFirstDayWeek = React.memo(() => {
     <SideBarBtn
       onClick={handleClick}
       title={t("sideBar.firstDayWeek")}
-      subTitle={t("general.days", { context: translateCtx })}
+      subTitle={t("general.days", { context: [translateCtx] })}
       icon={Categories}
     />
   )

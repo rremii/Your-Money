@@ -25,10 +25,12 @@ export const DateBox: FC<props> = ({
   if (dateBalance > 0) balanceSign = "+"
   if (dateBalance < 0) balanceSign = "-"
 
-  const resMonth = month ? t("general.months", { context: "dec" }) : ""
+  const resMonth = month
+    ? t("general.months", { context: [month.toLowerCase()] })
+    : ""
 
   const resDay = day
-    ? t("general.time.day", { context: day.toLowerCase() })
+    ? t("general.time.day", { context: [day.toLowerCase()] })
     : ""
 
   return (

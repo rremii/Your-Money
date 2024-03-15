@@ -25,7 +25,7 @@ export const Header = () => {
   const resultDayMonthStr = `${
     t("general.days", { context: day.toLowerCase() }).slice(0, 3) + "." || ""
   }, ${t("general.months", {
-    context: month.slice(0, 3).toLowerCase(),
+    context: [month.slice(0, 3).toLowerCase()],
   })} ${dateDay}`
   return (
     <HeaderLayout $color={color}>
