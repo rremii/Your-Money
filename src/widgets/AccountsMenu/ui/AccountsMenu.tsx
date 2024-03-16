@@ -5,6 +5,7 @@ import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { Account } from "@widgets/AccountsMenu/ui/Account.tsx"
+import { LoginRequiredMenu } from "@shared/ui/LoginRequiredMenu.tsx"
 
 export const AccountsMenu = () => {
   const currencyFormat = useTypedSelector(
@@ -13,11 +14,13 @@ export const AccountsMenu = () => {
   const currencySign = useTypedSelector(
     (state) => state.Settings.curCurrencySign,
   )
+  const loginState = useTypedSelector((state) => state.Auth.isLoggedIn)
   const allBalance = useTypedSelector((state) => state.AllAccount.balance)
 
   const { data: user } = GetMe.useQueryState()
   const { allAccounts } = useAccount(user?.id)
 
+  if (loginState !== "success") return <LoginRequiredMenu />
   return (
     <AccountsMenuLayout>
       <AllAccountsInfo

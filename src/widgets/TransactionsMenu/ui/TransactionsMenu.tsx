@@ -5,6 +5,9 @@ import { TransactionSectionByDate } from "@widgets/TransactionsMenu/ui/Transacti
 import { GetTransactionsMenuData } from "@widgets/TransactionsMenu/model/GetTransactionsMenuData.ts"
 import { useOnMenuSlide } from "@entities/DateSlider/model/useOnMenuSlide.tsx"
 import { MenuWithHistory } from "@widgets/TransactionsMenu/model/AddHistoryPointsToMenus.ts"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { LoginRequiredMenu } from "@shared/ui/LoginRequiredMenu.tsx"
+import { NoTransactionsSection } from "@widgets/TransactionsMenu/ui/NoTransactionsMenu.tsx"
 
 type props = MenuWithHistory
 
@@ -17,21 +20,27 @@ export const TransactionsMenu: FC<props> = ({
   endBalance,
 }) => {
   const { observeRef } = useOnMenuSlide(dateGap, menuId, dateFrom)
+  const loginState = useTypedSelector((state) => state.Auth.isLoggedIn)
 
   const transactionsMenuData = useMemo(
     () => GetTransactionsMenuData(transactions),
     [transactions],
   )
-
+  if (loginState !== "success")
+    return <LoginRequiredMenu nodeRef={observeRef} />
   return (
     <TransactionsLayout ref={observeRef}>
       <TransactionHeader startBalance={startBalance} endBalance={endBalance} />
-      {transactionsMenuData.map((sectionData) => (
-        <TransactionSectionByDate
-          key={sectionData.date.getDate()}
-          {...sectionData}
-        />
-      ))}
+      {transactionsMenuData.length ? (
+        transactionsMenuData.map((sectionData) => (
+          <TransactionSectionByDate
+            key={sectionData.date.getDate()}
+            {...sectionData}
+          />
+        ))
+      ) : (
+        <NoTransactionsSection />
+      )}
     </TransactionsLayout>
   )
 }
@@ -42,5 +51,7 @@ const TransactionsLayout = styled.div`
   height: 100%;
   width: max-content;
   flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
   background-color: var(--main-bg);
 `

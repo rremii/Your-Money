@@ -13,6 +13,8 @@ export const TopHeader: FC<props> = ({ right }) => {
   const dispatch = useAppDispatch()
 
   const balance = useTypedSelector((state) => state.CurAccount.balance)
+  const curAccId = useTypedSelector((state) => state.CurAccount.id)
+  const curAccName = useTypedSelector((state) => state.CurAccount.name)
   const currencyFormat = useTypedSelector(
     (state) => state.Settings.currencyFormat,
   )
@@ -25,11 +27,10 @@ export const TopHeader: FC<props> = ({ right }) => {
   const OpenChangeAccountMenu = () => {
     dispatch(openMenu("changeAccountMenu"))
   }
-
   return (
     <TopHeaderLayout>
       <div onClick={OpenChangeAccountMenu} className="info center">
-        <p>{t("topHeader.title")}</p>
+        <p>{curAccId ? curAccName : t("topHeader.title")}</p>
         <p>
           {FormatCurrencyString({
             currencySign,

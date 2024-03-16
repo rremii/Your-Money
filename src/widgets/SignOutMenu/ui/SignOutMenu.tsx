@@ -7,6 +7,8 @@ import { Modal } from "@shared/ui/Modal.tsx"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { useTranslation } from "react-i18next"
+import { Api } from "@shared/api/config/Api.ts"
+import { resetCurAccount } from "@entities/Account"
 
 export const SignOutMenu = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -21,10 +23,12 @@ export const SignOutMenu = React.memo(() => {
   const SignOut = async () => {
     await logout()
     dispatch(setAuthInitial())
-    localStorage.removeItem("accessToken")
-    navigate("/sign-in")
+    dispatch(resetCurAccount())
     CloseMenu()
     dispatch(closeMenu("sideBar"))
+    localStorage.removeItem("accessToken")
+    navigate("/sign-in")
+    dispatch(Api.util?.resetApiState())
   }
   const CloseMenu = () => {
     dispatch(closeMenu("signOutMenu"))

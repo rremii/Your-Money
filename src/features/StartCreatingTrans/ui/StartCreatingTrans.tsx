@@ -8,6 +8,7 @@ export const StartCreatingTrans = () => {
   const dispatch = useAppDispatch()
 
   const curMenuDate = useTypedSelector((state) => state.Date.curMenu.dateFrom)
+  const loginState = useTypedSelector((state) => state.Auth.isLoggedIn)
 
   const OnClick = () => {
     dispatch(openMenu("chooseCategorySlideMenu"))
@@ -15,6 +16,7 @@ export const StartCreatingTrans = () => {
     dispatch(setEditTransDateStr(curMenuDate))
   }
 
+  if (loginState !== "success") return ""
   return <CreatingTransLayout onClick={OnClick}>+</CreatingTransLayout>
 }
 const CreatingTransLayout = styled.div`

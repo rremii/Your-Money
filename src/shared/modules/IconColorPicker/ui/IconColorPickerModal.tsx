@@ -1,13 +1,6 @@
 import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
-import React, {
-  FC,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react"
+import React, { FC, memo, useEffect, useState } from "react"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { IconColorPicker } from "@shared/modules/IconColorPicker"
 import AccountCategoryIconComp from "@shared/assets/AccountCategoryIconComp.tsx"

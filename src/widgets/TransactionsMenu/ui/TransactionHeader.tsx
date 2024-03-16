@@ -56,7 +56,7 @@ export const TransactionHeader: FC<props> = React.memo(
 )
 const TransactionsHeaderLayout = styled.header`
   width: 100%;
-  height: 55px;
+  flex: 0 0 55px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: center;

@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import React from "react"
-import { AuthHeader } from "@widgets/AuthHeader"
 import { SignInMenu } from "@widgets/SignInMenu/ui/SignInMenu.tsx"
 import { SignInHeader } from "@widgets/Header/ui/SignInHeader.tsx"
 

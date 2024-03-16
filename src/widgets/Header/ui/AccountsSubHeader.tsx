@@ -14,6 +14,7 @@ const SubHeaderLayout = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  height: 30px;
 
   .cell {
     width: 150px;
@@ -25,7 +26,7 @@ const SubHeaderLayout = styled.div`
     position: relative;
     color: #ffffff;
     font-family: Inter;
-    padding: 10px 0;
+    padding: 0 0 10px;
 
     &::after {
       content: "";

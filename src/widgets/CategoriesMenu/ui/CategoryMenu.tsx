@@ -10,6 +10,8 @@ import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
 import { FillCategoriesWithTransactions } from "@entities/Transaction"
+import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
+import { LoginRequiredMenu } from "@shared/ui/LoginRequiredMenu.tsx"
 
 interface props {
   menuId: number
@@ -21,6 +23,8 @@ interface props {
 
 export const CategoryMenu: FC<props> = React.memo(
   ({ menuId, dateGap, transactions, dateTo, dateFrom }) => {
+    const loginState = useTypedSelector((state) => state.Auth.isLoggedIn)
+
     const { SwitchMenuType, menuType } = useMenuType()
     const { observeRef } = useOnMenuSlide(dateGap, menuId, dateFrom)
 
@@ -44,7 +48,8 @@ export const CategoryMenu: FC<props> = React.memo(
       () => FillCategoriesWithTransactions(incCategories, incTransactions),
       [incCategories, incTransactions],
     )
-
+    if (loginState !== "success")
+      return <LoginRequiredMenu nodeRef={observeRef} />
     return (
       <CategoryLayout ref={observeRef}>
         <BalanceGraph

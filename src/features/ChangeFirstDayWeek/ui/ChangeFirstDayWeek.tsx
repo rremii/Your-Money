@@ -3,7 +3,6 @@ import Categories from "@shared/assets/LightTheme/categories.png"
 import React from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
-import { Days, FullDays } from "@shared/constants/Days.ts"
 import { useTranslation } from "react-i18next"
 
 export const ChangeFirstDayWeek = React.memo(() => {

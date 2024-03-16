@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import { useContext } from "react"
 import { PickerContext } from "@shared/modules/IconColorPicker/model/Context.ts"
-import { useTranslation } from "react-i18next"
 
 export const SubHeader = () => {
   const { menuType, subTitles } = useContext(PickerContext)

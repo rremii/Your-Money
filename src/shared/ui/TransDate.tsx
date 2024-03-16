@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import React, { FC, memo } from "react"
-import { Days, FullDays } from "@shared/constants/Days.ts"
+import { Days } from "@shared/constants/Days.ts"
 import { Months } from "@shared/constants/Months.ts"
 import { useTranslation } from "react-i18next"
 

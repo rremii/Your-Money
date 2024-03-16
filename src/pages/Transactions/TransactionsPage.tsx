@@ -6,6 +6,7 @@ import { TransactionsSlider } from "@widgets/TransactionsMenu/ui/TransactionsSli
 import { StartCreatingTrans } from "@features/StartCreatingTrans/ui/StartCreatingTrans.tsx"
 import React from "react"
 import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
+import { MainMenuPageLayout } from "@shared/ui/MainMenuPageLayout.tsx"
 
 const TransactionsPage = () => {
   return (
@@ -24,14 +25,13 @@ const TransactionsPage = () => {
   )
 }
 export default TransactionsPage
-const TransactionsLayout = styled.div`
-  width: 100%;
-  height: 100%;
-  //flex: 1 1 auto;
-  max-height: calc(100vh - 55px);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  font-size: 30px;
-  background-color: #ececec;
+const TransactionsLayout = styled(MainMenuPageLayout)`
+  //width: 100%;
+  //height: 100%;
+  //max-height: calc(100vh - 55px);
+  //display: flex;
+  //flex-direction: column;
+  //position: relative;
+  //font-size: 30px;
+  //background-color: #ececec;
 `

@@ -30,6 +30,7 @@ export const useAccount = (userId?: number) => {
     if (!allAccounts) return
 
     const initAccountId = window.localStorage.getItem("curAccountId")
+
     dispatch(
       setCurAccountId(
         initAccountId !== "null" && initAccountId ? +initAccountId : null,
@@ -47,15 +48,22 @@ export const useAccount = (userId?: number) => {
     if (allAccounts?.length === 0 || !allAccounts) return
 
     let curAcc: IAccount
+    let convertedBalance = 0
     if (typeof curAccId === "number") {
       curAcc = allAccounts.find(({ id }) => id === curAccId) as IAccount
+      convertedBalance = convertCurrency(
+        curAcc.balance,
+        curAcc.currency,
+        curCurrency,
+      )
     } else {
       curAcc = allAccount
+      convertedBalance = allAccount.balance
     }
 
-    dispatch(setCurAccount(curAcc))
+    dispatch(setCurAccount({ ...curAcc, balance: convertedBalance }))
     document.documentElement.style.setProperty("--account-color", curAcc.color)
-  }, [curAccId, allAccounts])
+  }, [curAccId, allAccounts, dispatch, allAccount])
 
   const getAccountById = useCallback(
     (id: number | null): IAccount | null => {

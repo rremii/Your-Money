@@ -15,6 +15,7 @@ import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { FilterCategoriesByType } from "@entities/Category/model/FilterCategoriesByType.ts"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { FillCategoriesWithTransactions } from "@entities/Transaction"
+import { LoginRequiredMenu } from "@shared/ui/LoginRequiredMenu.tsx"
 
 interface props extends ITransByMenu {
   extInfo: IExtraInfo[]
@@ -36,6 +37,7 @@ export const OverviewMenu: FC<props> = ({
   const currencyFormat = useTypedSelector(
     (state) => state.Settings.currencyFormat,
   )
+  const loginState = useTypedSelector((state) => state.Auth.isLoggedIn)
 
   const { observeRef } = useOnMenuSlide(dateGap, menuId, dateFrom)
 
@@ -68,7 +70,8 @@ export const OverviewMenu: FC<props> = ({
       }),
     [dateFilter, dateFrom, dateTo, expTransactions, firstDay],
   )
-
+  if (loginState !== "success")
+    return <LoginRequiredMenu nodeRef={observeRef} />
   return (
     <MenuLayout ref={observeRef}>
       <BalanceBox

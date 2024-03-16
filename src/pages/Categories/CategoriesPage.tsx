@@ -9,6 +9,7 @@ import { TopHeader } from "@widgets/Header/ui/TopHeader.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { EditCategoriesHeader } from "@widgets/Header/ui/EditCategoriesMenu/EditCategoriesHeader.tsx"
 import { EditCategoriesSubHeader } from "@widgets/Header/ui/EditCategoriesMenu/EditCategoriesSubHeader.tsx"
+import { MainMenuPageLayout } from "@shared/ui/MainMenuPageLayout.tsx"
 
 //todo make it better
 const CategoriesPage = () => {
@@ -37,19 +38,13 @@ const CategoriesPage = () => {
   )
 }
 export default CategoriesPage
-const CategoriesLayout = styled.div`
-  width: 100%;
-  height: 100%;
-  //flex: 1 1 auto;
-  max-height: calc(100vh - 55px);
-
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  font-size: 30px;
-  background-color: #ececec;
-
-  main {
-    //flex: 1 1 auto;
-  }
+const CategoriesLayout = styled(MainMenuPageLayout)`
+  //width: 100%;
+  //height: 100%;
+  //max-height: calc(100vh - 55px);
+  //display: flex;
+  //flex-direction: column;
+  //position: relative;
+  //font-size: 30px;
+  //background-color: #ececec;
 `

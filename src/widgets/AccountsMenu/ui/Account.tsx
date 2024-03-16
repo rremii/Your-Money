@@ -10,7 +10,6 @@ import { setEditAccount } from "@entities/Account/model/NewAccountSlice.ts"
 import { Currency } from "@entities/Currency/types.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
-import { useTranslation } from "react-i18next"
 
 interface props {
   name: string

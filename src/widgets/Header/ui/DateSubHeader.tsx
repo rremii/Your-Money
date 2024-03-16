@@ -7,11 +7,6 @@ import {
 } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useTranslation } from "react-i18next"
-import { TFunction } from "i18next"
-import { DateFilter } from "@entities/Transaction/types.ts"
-import { Days } from "@shared/constants/Days.ts"
-import { Months } from "@shared/constants/Months.ts"
-import { find } from "styled-components/test-utils"
 import { TranslateDateGap } from "@entities/DateSlider"
 
 export const DateSubHeader = () => {

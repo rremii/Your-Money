@@ -4,7 +4,7 @@ import React, { FC } from "react"
 import { IConvertedTransaction } from "@entities/Transaction/types.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { useTranslation } from "react-i18next"
+import { NoTransactionsSection } from "@widgets/TransactionsMenu/ui/NoTransactionsMenu.tsx"
 
 interface props {
   date: Date
@@ -26,7 +26,7 @@ export const TransactionSectionByDate: FC<props> = React.memo(
     transactions.forEach(({ quantity }) => {
       dateBalance -= quantity
     })
-
+    if (!transactions.length) return <NoTransactionsSection />
     return (
       <>
         <DateBox

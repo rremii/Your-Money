@@ -36,8 +36,12 @@ const CurAccountSlice = createSlice({
     setCurAccountId(state, action: PayloadAction<number | null>) {
       state.id = action.payload
     },
+    resetCurAccount(state) {
+      return initialState
+    },
   },
 })
 
 export const CurAccountReducer = CurAccountSlice.reducer
-export const { setCurAccount, setCurAccountId } = CurAccountSlice.actions
+export const { setCurAccount, setCurAccountId, resetCurAccount } =
+  CurAccountSlice.actions
