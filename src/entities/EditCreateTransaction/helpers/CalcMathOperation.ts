@@ -20,7 +20,6 @@ export const CalcMathOperation = (
   }
 }
 
-//todo change to icons
 export const MathOperatorSign = new Map<string, string>()
 MathOperatorSign.set("div", "÷")
 MathOperatorSign.set("sub", "-")

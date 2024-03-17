@@ -23,7 +23,6 @@ export const useAccount = (userId?: number) => {
     skip: !userId,
   })
 
-  //todo move it somewhere
   const { convertCurrency } = useCurrencyConverter()
 
   useEffect(() => {

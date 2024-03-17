@@ -11,7 +11,6 @@ import { EditCategoriesHeader } from "@widgets/Header/ui/EditCategoriesMenu/Edit
 import { EditCategoriesSubHeader } from "@widgets/Header/ui/EditCategoriesMenu/EditCategoriesSubHeader.tsx"
 import { MainMenuPageLayout } from "@shared/ui/MainMenuPageLayout.tsx"
 
-//todo make it better
 const CategoriesPage = () => {
   const isCategoriesEditMode = useTypedSelector(
     (state) => state.UI.Pages.categoryPage.isCategoriesEditMode,

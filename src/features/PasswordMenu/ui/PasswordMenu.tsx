@@ -72,7 +72,6 @@ export const PasswordMenu = React.memo(() => {
     dispatch(closeMenu("passwordMenu"))
     reset()
   }
-  //todo move form to other file
   return (
     <>
       <Overlay $isActive={isPasswordMenu} onClick={CloseMenu} $zIndex={15} />

@@ -4,7 +4,7 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useDeleteAccount } from "@entities/Account/model/useDeleteAccount.tsx"
 import { useTranslation } from "react-i18next"
-//todo make validation (not allowing to send many req while pending) create delete edit category/account
+
 export const DeleteAccount = () => {
   const dispatch = useAppDispatch()
 

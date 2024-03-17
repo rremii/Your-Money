@@ -7,7 +7,6 @@ import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { AccountCurrencyMenu } from "@features/AccountCurrencyModal/ui/AccountCurrencyMenu.tsx"
 import { SideBarModalHeader } from "@shared/ui/SideBarModalHeader.tsx"
 
-//todo implement index files and rename some files in modules and handle names in index
 export const AccountCurrencyModal = memo(() => {
   const dispatch = useAppDispatch()
 

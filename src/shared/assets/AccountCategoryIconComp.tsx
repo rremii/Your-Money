@@ -13,7 +13,6 @@ interface IconComponents {
   [key: string]: FC<any>
 }
 
-
 const IconComponents: IconComponents = {
   burger: BurgerComp,
   cup: CupComp,
@@ -22,17 +21,15 @@ const IconComponents: IconComponents = {
   health: HealthComp,
   leisure: LeisureComp,
   restaurant: RestaurantComp,
-  transport: TransportComp
+  transport: TransportComp,
 }
-
 
 interface GetComponentsProps {
   fill: string
 }
 
 class AccountCategoryIconComp {
-  get(name: string, svgParams ?: GetComponentsProps) {
-
+  get(name: string, svgParams?: GetComponentsProps) {
     const Component = IconComponents[name]
     if (!Component) return ""
     return <Component {...svgParams} />
@@ -40,5 +37,3 @@ class AccountCategoryIconComp {
 }
 
 export default new AccountCategoryIconComp()
-
-

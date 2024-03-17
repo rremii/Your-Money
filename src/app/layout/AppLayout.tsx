@@ -46,9 +46,6 @@ const AppLayout: FC<Props> = ({ children }) => {
   const theme = useTypedSelector((state) => state.Settings.theme)
   useI18n(language)
 
-  //todo check if i need that
-  const { data: user } = GetMe.useQueryState()
-  useAccount(user?.id)
   useAllTransDateGap()
 
   useAuth()

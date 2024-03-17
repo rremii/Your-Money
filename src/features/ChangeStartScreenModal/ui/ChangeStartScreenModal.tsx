@@ -30,8 +30,6 @@ export const ChangeStartScreenModal = memo(() => {
   const CloseModal = () => {
     dispatch(closeMenu("startScreenMenu"))
   }
-  //todo and error boundary
-  //todo make preloader stay till everything is loaded
   return (
     <>
       <Overlay onClick={CloseModal} $zIndex={55} $isActive={isOpen} />

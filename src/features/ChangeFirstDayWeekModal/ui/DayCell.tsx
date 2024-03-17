@@ -17,7 +17,9 @@ export const DayCell: FC<props> = memo(({ day, isActive, OnClick }) => {
   return (
     <DayCellLayout onClick={() => OnClick(day.slice(0, 3) as DayType)}>
       <RadioBtn $isActive={isActive} />
-      <p className="day">{t("general.days", { context: [translateCtx] })}</p>
+      <p className="day">
+        {t("general.days", { context: translateCtx as "mon" })}
+      </p>
     </DayCellLayout>
   )
 })

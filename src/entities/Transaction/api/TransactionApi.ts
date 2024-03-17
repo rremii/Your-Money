@@ -21,7 +21,6 @@ export const TransactionApi = Api.injectEndpoints({
       providesTags: ["Transactions"],
     }),
 
-    //todo check create trans flow in yandex it doubles requests
     createTransaction: build.mutation<DefaultResponse, CreateTransDto>({
       query: (data) => ({
         url: "transaction",
@@ -57,5 +56,5 @@ export const {
   useCreateTransactionMutation,
   useEditTransactionMutation,
   useLazyGetTransactionsByDateGapQuery,
-  useDeleteTransactionMutation
+  useDeleteTransactionMutation,
 } = TransactionApi

@@ -8,7 +8,6 @@ import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { setCurDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { useTranslation } from "react-i18next"
 
-//todo make smth with todos like hide it or whatever in order them not to stay on the top lvl
 export const CalendarMenu = memo(() => {
   const dispatch = useAppDispatch()
 

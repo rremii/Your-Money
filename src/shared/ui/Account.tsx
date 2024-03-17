@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import React, { FC, ReactNode } from "react"
 
-//todo check seo
 interface props {
   iconNode: ReactNode
   name: string

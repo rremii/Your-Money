@@ -28,7 +28,9 @@ export const MonthMenu: FC<props> = memo(({ dateStr }) => {
   return (
     <MonthContentLayout>
       <div className="date">
-        {t("general.months", { context: [month.slice(0, 3).toLowerCase()] })}{" "}
+        {t("general.months", {
+          context: month.slice(0, 3).toLowerCase() as "dec",
+        })}{" "}
         {year}
       </div>
       <ul className="week-days-box">

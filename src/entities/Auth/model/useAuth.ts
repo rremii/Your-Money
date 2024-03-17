@@ -8,9 +8,7 @@ import {
 import { useNotifyToast } from "@shared/GlobalModules/Toasts"
 import { useTranslation } from "react-i18next"
 
-//todo bring it to context
 export const useAuth = () => {
-  //todo fix bug with logout tha you can still use after logout !!!!!!!!!!!!!!!!!!
   const dispatch = useAppDispatch()
 
   const language = useTypedSelector((state) => state.Settings.language)
