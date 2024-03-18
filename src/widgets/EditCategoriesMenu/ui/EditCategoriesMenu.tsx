@@ -35,7 +35,7 @@ export const EditCategoriesMenu: FC<props> = ({ categories, categoryType }) => {
     </CategoryLayout>
   )
 }
-const CategoryLayout = styled.div<{
+const CategoryLayout = styled.section<{
   $isHidden?: boolean
 }>`
   scroll-snap-stop: always;

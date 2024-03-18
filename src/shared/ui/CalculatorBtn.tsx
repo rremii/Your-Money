@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const CalculatorBtn = styled.div<{
+export const CalculatorBtn = styled.button<{
   $borderColor?: string
   $bgColor?: string
 }>`

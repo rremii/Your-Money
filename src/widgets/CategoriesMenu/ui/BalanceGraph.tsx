@@ -45,12 +45,12 @@ export const BalanceGraph: FC<props> = React.memo(
       <GraphLayout onClick={OnClick}>
         <Doughnut {...doughnutConfig} />
         <div className="balance">
-          <div className="type">
+          <h3 className="type">
             {menuType === "expense"
               ? t("general.expense")
               : t("general.income")}
-          </div>
-          <div
+          </h3>
+          <p
             className={`${
               menuType === "expense" ? "current" : ""
             } quantity expenses`}
@@ -61,8 +61,8 @@ export const BalanceGraph: FC<props> = React.memo(
               formatString: currencyFormat,
               sign: expTransactionsSum < 0 ? "-" : "",
             })}
-          </div>
-          <div
+          </p>
+          <p
             className={`${
               menuType === "income" ? "current" : ""
             } quantity income`}
@@ -73,7 +73,7 @@ export const BalanceGraph: FC<props> = React.memo(
               formatString: currencyFormat,
               sign: incTransactionsSum < 0 ? "-" : "",
             })}
-          </div>
+          </p>
         </div>
       </GraphLayout>
     )
@@ -87,6 +87,7 @@ const GraphLayout = styled.div`
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
+  width: 100%;
 
   .balance {
     position: absolute;

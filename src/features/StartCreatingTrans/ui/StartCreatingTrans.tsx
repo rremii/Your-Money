@@ -19,7 +19,7 @@ export const StartCreatingTrans = () => {
   if (loginState !== "success") return ""
   return <CreatingTransLayout onClick={OnClick}>+</CreatingTransLayout>
 }
-const CreatingTransLayout = styled.div`
+const CreatingTransLayout = styled.button`
   cursor: pointer;
   color: #ffffff;
   background-color: var(--account-color);

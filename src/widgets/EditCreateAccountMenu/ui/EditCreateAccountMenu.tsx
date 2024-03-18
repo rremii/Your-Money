@@ -28,21 +28,21 @@ export const EditCreateAccountMenu = memo(() => {
         <CreateAccountIcon />
       </div>
 
-      <header className="section-header">
+      <h2 className="section-header">
         {t("accountMenu.sections.account.title")}
-      </header>
+      </h2>
       <CurrencyCell />
 
-      <header className="section-header">
+      <h2 className="section-header">
         {t("accountMenu.sections.balance.title")}
-      </header>
+      </h2>
       <BalanceCell />
 
       {menuType === "edit" && <DeleteAccount />}
     </EditCreateAccountLayout>
   )
 })
-const EditCreateAccountLayout = styled.div<{
+const EditCreateAccountLayout = styled.section<{
   $isMenuOpen?: boolean
   $color?: string
 }>`

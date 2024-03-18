@@ -31,20 +31,24 @@ export const EditAccountHeader = () => {
   return (
     <HeaderLayout>
       {menuType === "create" && (
-        <img
-          className="cancel"
-          onClick={CloseAccountMenu}
-          src={Categories}
-          alt="cancel"
-        />
+        <button>
+          <img
+            className="cancel"
+            onClick={CloseAccountMenu}
+            src={Categories}
+            alt="cancel"
+          />
+        </button>
       )}
       {menuType === "edit" && (
-        <img
-          className="arrow"
-          onClick={CloseAccountMenu}
-          src={Categories}
-          alt="back"
-        />
+        <button>
+          <img
+            className="arrow"
+            onClick={CloseAccountMenu}
+            src={Categories}
+            alt="back"
+          />
+        </button>
       )}
 
       <h1 className="title">

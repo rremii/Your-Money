@@ -72,9 +72,9 @@ export const Transaction: FC<props> = (transaction) => {
           <img src={Account} alt="account type" />
           <p>{account?.name}</p>
         </div>
-        <p className="title">{title ? title : ""}</p>
+        <h3 className="title">{title ? title : ""}</h3>
       </div>
-      <div className="quantity">
+      <span className="quantity">
         {FormatCurrencyString({
           currencySign: account
             ? (DefaultCurrencySigns.get(account.currency) as string)
@@ -83,11 +83,11 @@ export const Transaction: FC<props> = (transaction) => {
           formatString: currencyFormat,
           sign: quantity < 0 ? "-" : "",
         })}
-      </div>
+      </span>
     </TransactionLayout>
   )
 }
-const TransactionLayout = styled.div<{
+const TransactionLayout = styled.button<{
   $type?: TransactionType
 }>`
   cursor: pointer;
@@ -114,6 +114,7 @@ const TransactionLayout = styled.div<{
     }
 
     .category {
+      text-align: start;
       color: var(--sub-txt);
       font-family: Inter;
       font-size: 15px;

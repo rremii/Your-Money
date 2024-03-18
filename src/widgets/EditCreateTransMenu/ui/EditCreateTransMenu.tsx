@@ -66,10 +66,10 @@ export const EditCreateTransMenu = React.memo(() => {
       />
 
       <MenuLayout $menuType={menuType} $isActive={isMenuOpen}>
-        <div className="category-account-info">
+        <section className="category-account-info">
           <OpenChooseAccountMenu />
           <OpenChooseCategoryMenu />
-        </div>
+        </section>
 
         <ResultQuantity />
 
@@ -90,7 +90,7 @@ export const EditCreateTransMenu = React.memo(() => {
     </>
   )
 })
-const MenuLayout = styled.div<{
+const MenuLayout = styled.section<{
   $isActive?: boolean
   $menuType?: EditCreateMenuType
 }>`

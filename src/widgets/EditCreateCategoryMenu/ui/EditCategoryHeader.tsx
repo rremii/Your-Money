@@ -33,27 +33,31 @@ export const EditCategoryHeader = () => {
   return (
     <HeaderLayout>
       {menuType === "create" && (
-        <img
-          className="cancel"
-          onClick={CloseCategoryMenu}
-          src={Categories}
-          alt="cancel"
-        />
+        <button>
+          <img
+            className="cancel"
+            onClick={CloseCategoryMenu}
+            src={Categories}
+            alt="cancel"
+          />
+        </button>
       )}
       {menuType === "edit" && (
-        <img
-          className="arrow"
-          onClick={CloseCategoryMenu}
-          src={Categories}
-          alt="back"
-        />
+        <button>
+          <img
+            className="arrow"
+            onClick={CloseCategoryMenu}
+            src={Categories}
+            alt="back"
+          />
+        </button>
       )}
 
-      <h1 className="title">
+      <h2 className="title">
         {menuType === "create"
           ? t("categoryMenu.title", { context: "create" })
           : t("categoryMenu.title", { context: "edit" })}
-      </h1>
+      </h2>
 
       {menuType === "create" ? <CreateCategory /> : <EditCategory />}
     </HeaderLayout>

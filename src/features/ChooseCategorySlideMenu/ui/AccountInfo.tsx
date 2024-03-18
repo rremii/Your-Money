@@ -25,15 +25,14 @@ export const AccountInfo: FC<props> = memo(
             icon={icon}
             boxColor={"transparent"}
           />
-
-          <p className="name">{name}</p>
+          <h2 className="name">{name}</h2>
         </div>
         <div className="balance-box">
-          <p className="title">{t("categorySlider.accountInfo.title")}</p>
-          <div className="balance">
+          <h3 className="title">{t("categorySlider.accountInfo.title")}</h3>
+          <p className="balance">
             {balance < 0 ? "-" : ""}
             {currencySign} {Math.abs(RoundDecimal(balance, 2))}
-          </div>
+          </p>
         </div>
       </AccountInfoLayout>
     )

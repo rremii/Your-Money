@@ -42,14 +42,14 @@ export const DateBox: FC<props> = ({
           {resMonth.toUpperCase()} {year}
         </p>
       </div>
-      <div className="quantity">
+      <span className="quantity">
         {FormatCurrencyString({
           currencySign,
           quantity: dateBalance,
           formatString: formatStr,
           sign: balanceSign,
         })}
-      </div>
+      </span>
     </DateBoxLayout>
   )
 }

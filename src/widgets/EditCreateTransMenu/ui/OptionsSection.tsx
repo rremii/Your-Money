@@ -43,22 +43,22 @@ export const OptionsSection = () => {
         </div>
         <p>{t("transactionMenu.delete")}</p>
       </button>
-      <div onClick={OnDateClick} className="option date">
+      <button onClick={OnDateClick} className="option date">
         <div className="icon">
           <img src={Category} alt="date" />
         </div>
         <p>{t("transactionMenu.date")}</p>
-      </div>
-      <div onClick={OnDuplicateClick} className="option duplicate">
+      </button>
+      <button onClick={OnDuplicateClick} className="option duplicate">
         <div className="icon">
           <img src={Category} alt="duplicate" />
         </div>
         <p>{t("transactionMenu.duplicate")}</p>
-      </div>
+      </button>
     </OptionsLayout>
   )
 }
-const OptionsLayout = styled.div<{
+const OptionsLayout = styled.section<{
   $color?: string
 }>`
   height: 100px;

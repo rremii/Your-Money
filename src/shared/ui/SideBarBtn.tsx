@@ -14,7 +14,7 @@ export const SideBarBtn: FC<props> = ({ onClick, title, subTitle, icon }) => {
       <img src={icon} alt="icon" />
       <div className="text-info">
         <h3>{title}</h3>
-        {subTitle && <h4>{subTitle}</h4>}
+        {subTitle && <p>{subTitle}</p>}
       </div>
     </BtnLayout>
   )
@@ -51,7 +51,7 @@ const BtnLayout = styled.button`
       line-height: normal;
     }
 
-    h4 {
+    p {
       text-transform: capitalize;
       color: #606ca6;
       text-align: left;

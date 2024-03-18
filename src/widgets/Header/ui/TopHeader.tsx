@@ -29,17 +29,17 @@ export const TopHeader: FC<props> = ({ right }) => {
   }
   return (
     <TopHeaderLayout>
-      <div onClick={OpenChangeAccountMenu} className="info center">
-        <p>{curAccId ? curAccName : t("topHeader.title")}</p>
-        <p>
+      <button onClick={OpenChangeAccountMenu} className="info center">
+        <h2>{curAccId ? curAccName : t("topHeader.title")}</h2>
+        <h1>
           {FormatCurrencyString({
             currencySign,
             quantity: balance,
             formatString: currencyFormat,
             sign: balance < 0 ? "-" : "",
           })}
-        </p>
-      </div>
+        </h1>
+      </button>
       <div className="right">{right}</div>
     </TopHeaderLayout>
   )
@@ -56,7 +56,7 @@ const TopHeaderLayout = styled.div`
     grid-column: 2/3;
     justify-self: center;
 
-    p:nth-child(1) {
+    h2 {
       color: #ffffff;
       font-family: Inter;
       font-size: 15px;
@@ -65,13 +65,14 @@ const TopHeaderLayout = styled.div`
       line-height: normal;
     }
 
-    p:nth-child(2) {
+    h1 {
       color: #ffffff;
       font-family: Inter;
       font-size: 17px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
+      letter-spacing: 1px;
     }
   }
 

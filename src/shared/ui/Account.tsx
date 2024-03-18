@@ -42,13 +42,15 @@ export const Account: FC<props> = ({
     </AccountLayout>
   )
 }
-const AccountLayout = styled.div<{
+const AccountLayout = styled.button<{
   $bgColor?: string
   $nameColor?: string
   $quantityColor?: string
 }>`
+  width: 100%;
   height: 55px;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   gap: 12px;
   padding: 0 13px;
@@ -73,6 +75,7 @@ const AccountLayout = styled.div<{
     border-bottom: 1px solid #818181;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
 
     .name {

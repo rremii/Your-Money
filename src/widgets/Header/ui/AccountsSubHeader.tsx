@@ -6,11 +6,12 @@ export const AccountsSubHeader = () => {
   const { t } = useTranslation()
   return (
     <SubHeaderLayout>
-      <button className="cell">{t("general.accounts")}</button>
+      <span className="cell">{t("general.accounts")}</span>
     </SubHeaderLayout>
   )
 }
 const SubHeaderLayout = styled.div`
+  text-align: center;
   width: 100%;
   display: flex;
   align-items: center;

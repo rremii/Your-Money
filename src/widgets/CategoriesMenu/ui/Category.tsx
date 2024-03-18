@@ -78,10 +78,11 @@ export const Category: FC<props> = React.memo(
     )
   },
 )
-const CategoryLayout = styled.div<{
+const CategoryLayout = styled.button<{
   $color?: string
 }>`
   display: inline-flex;
+  width: min-content;
   flex-direction: column;
   align-items: center;
   gap: 5px;

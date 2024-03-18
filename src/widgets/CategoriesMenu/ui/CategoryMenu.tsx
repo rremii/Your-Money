@@ -74,7 +74,7 @@ export const CategoryMenu: FC<props> = React.memo(
     )
   },
 )
-const CategoryLayout = styled.div`
+const CategoryLayout = styled.section`
   scroll-snap-stop: always;
   scroll-snap-align: center;
   padding: 40px 15px 15px;
@@ -83,6 +83,7 @@ const CategoryLayout = styled.div`
   display: grid;
   grid-template-rows: min-content min-content;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-items: center;
   row-gap: 40px;
   height: 100%;
   width: max-content;

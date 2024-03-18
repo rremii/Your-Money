@@ -16,7 +16,7 @@ export const StartEditCategories = () => {
     </StartEditLayout>
   )
 }
-const StartEditLayout = styled.div`
+const StartEditLayout = styled.button`
   width: 20px;
   height: 20px;
 `

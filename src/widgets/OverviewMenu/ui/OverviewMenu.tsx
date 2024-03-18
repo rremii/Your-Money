@@ -81,7 +81,7 @@ export const OverviewMenu: FC<props> = ({
         income={incTransQuantity}
       />
       <OverviewGraph {...barConfig} />
-      <div className="date-money-box">
+      <section className="date-money-box">
         {extInfo.map((extData, index) => (
           <DateMoneyCell
             formatStr={currencyFormat}
@@ -90,8 +90,8 @@ export const OverviewMenu: FC<props> = ({
             {...extData}
           />
         ))}
-      </div>
-      <div className="categories-box">
+      </section>
+      <section className="categories-box">
         {filledCategories
           .sort((prev, cur) => (prev.quantity < cur.quantity ? 1 : -1))
           .map(({ name, quantity, color, icon }, index) => (
@@ -106,11 +106,11 @@ export const OverviewMenu: FC<props> = ({
               percent={Math.abs(quantity / expTransQuantity) || 0}
             />
           ))}
-      </div>
+      </section>
     </MenuLayout>
   )
 }
-const MenuLayout = styled.div`
+const MenuLayout = styled.section`
   scroll-snap-stop: always;
   scroll-snap-align: center;
   overflow-y: auto;

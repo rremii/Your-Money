@@ -9,7 +9,7 @@ export const Header = () => {
       <div className="icon-box">
         {IconComponents?.get(curIcon, { fill: "white" })}
       </div>
-      <h1 className="title">{title}</h1>
+      <h2 className="title">{title}</h2>
     </HeaderLayout>
   )
 }
@@ -38,7 +38,7 @@ const HeaderLayout = styled.header<{
     }
   }
 
-  h1.title {
+  h2.title {
     color: var(--sub-txt);
     font-family: Inter;
     font-size: 16px;

@@ -27,12 +27,12 @@ export const MonthMenu: FC<props> = memo(({ dateStr }) => {
 
   return (
     <MonthContentLayout>
-      <div className="date">
+      <p className="date">
         {t("general.months", {
           context: month.slice(0, 3).toLowerCase() as "dec",
         })}{" "}
         {year}
-      </div>
+      </p>
       <ul className="week-days-box">
         <li className="week-day">
           {t("general.days", { context: "sun" }).slice(0, 1).toUpperCase()}
@@ -61,13 +61,13 @@ export const MonthMenu: FC<props> = memo(({ dateStr }) => {
         {days.map((day, index) => {
           const isActive = DatesEqualUpToDays(day, chosenDateStr)
           return (
-            <div
+            <button
               key={index}
               onClick={() => OnDayClick(day)}
               className={`day ${isActive ? "active" : ""}`}
             >
               {day.getDate()}
-            </div>
+            </button>
           )
         })}
       </DaysBox>
@@ -75,7 +75,7 @@ export const MonthMenu: FC<props> = memo(({ dateStr }) => {
   )
 })
 
-const MonthContentLayout = styled.div`
+const MonthContentLayout = styled.section`
   height: 260px;
   flex: 0 0 320px;
   padding: 0 20px;

@@ -8,30 +8,30 @@ interface props {
 }
 
 export const Color: FC<props> = memo(({ color, isActive, OnClick }) => {
-
-
   const HandleClick = () => {
     if (OnClick) OnClick(color)
   }
 
-  return <ColorLayout onClick={HandleClick} $isActive={isActive} $color={color} />
+  return (
+    <ColorLayout onClick={HandleClick} $isActive={isActive} $color={color} />
+  )
 })
-const ColorLayout = styled.div<{
+const ColorLayout = styled.button<{
   $color?: string
   $isActive?: boolean
 }>`
-  background-color: ${({ $color }) => $color ? $color : "black"};
+  background-color: ${({ $color }) => ($color ? $color : "black")};
   width: 47px;
   height: 47px;
   border-radius: 50%;
-  transition: background-color .3s;
+  transition: background-color 0.3s;
   position: relative;
   cursor: pointer;
 
   &:after {
-    display: ${({ $isActive }) => $isActive ? "initial" : "none"};
+    display: ${({ $isActive }) => ($isActive ? "initial" : "none")};
     position: absolute;
-    content: '';
+    content: "";
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -42,16 +42,16 @@ const ColorLayout = styled.div<{
   }
 
   &:before {
-    display: ${({ $isActive }) => $isActive ? "initial" : "none"};
+    display: ${({ $isActive }) => ($isActive ? "initial" : "none")};
     position: absolute;
-    content: '';
+    content: "";
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
     width: 36px;
     height: 36px;
-    background-color: ${({ $color }) => $color ? $color : "black"};
+    background-color: ${({ $color }) => ($color ? $color : "black")};
     border-radius: 50%;
   }
 `

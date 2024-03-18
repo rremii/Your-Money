@@ -80,14 +80,14 @@ export const IconColorPickerModal: FC<props> = memo(
             colors={pickerColors}
             initInfo={initInfo}
           />
-          <div className="btn-box">
+          <section className="btn-box">
             <button onClick={OnClose} className="cancel">
               {t("general.buttons.cancel")}
             </button>
             <button onClick={HandleSubmit} className="submit">
               {t("general.buttons.done")}
             </button>
-          </div>
+          </section>
         </IconPickerModalLayout>
       </>
     )

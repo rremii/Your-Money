@@ -17,9 +17,11 @@ export const Footer = React.memo(() => {
 
   return (
     <FooterLayout $isHidden={isEditCategoriesMode}>
-      {LinksData.map((linkData, i) => (
-        <Link OnClick={KeepCurMenuScroll} key={i} {...linkData} />
-      ))}
+      <nav>
+        {LinksData.map((linkData, i) => (
+          <Link OnClick={KeepCurMenuScroll} key={i} {...linkData} />
+        ))}
+      </nav>
     </FooterLayout>
   )
 })
@@ -35,8 +37,11 @@ const FooterLayout = styled.footer<{
   max-width: 450px;
   box-shadow: 0 1px 5px 0 #5c6ac07f;
   background-color: var(--sub-bg);
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
   height: 55px;
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
 `

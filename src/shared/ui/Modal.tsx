@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const Modal = styled.div<{
+export const Modal = styled.article<{
   $isOpen?: boolean
 }>`
   padding: 25px 20px;

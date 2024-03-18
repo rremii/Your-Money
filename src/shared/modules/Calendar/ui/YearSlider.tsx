@@ -38,11 +38,15 @@ export const YearSlider = () => {
     <YearSliderLayout ref={yearSliderRef} $color={color}>
       {years.map((year, index) => {
         return (
-          <div key={index} onClick={() => SetYear(year)} className={`year-box`}>
+          <button
+            key={index}
+            onClick={() => SetYear(year)}
+            className={`year-box`}
+          >
             <p className={`year ${year === chosenYear ? "active" : ""}`}>
               {year}
             </p>
-          </div>
+          </button>
         )
       })}
     </YearSliderLayout>
@@ -53,12 +57,8 @@ const YearSliderLayout = styled.div<{
 }>`
   display: flex;
   flex-direction: column;
-  //align-items: center;
-  //justify-content: center;
   overflow-y: auto;
-  //flex: 0 0 300px;
   height: 260px;
-  //position: relative;
   overflow-x: hidden;
 
   &:after {

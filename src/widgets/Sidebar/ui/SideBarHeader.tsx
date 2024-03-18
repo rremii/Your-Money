@@ -46,7 +46,7 @@ export const SideBarHeader = React.memo(() => {
       <div className="avatar-box">
         <img className="avatar" src={GetSectionsData().avatar} alt="avatar" />
         <div className="extra-info">
-          <div className="date">{GetSectionsData().time}</div>
+          <span className="date">{GetSectionsData().time}</span>
           <img src={Categories} alt="cloud" />
         </div>
       </div>

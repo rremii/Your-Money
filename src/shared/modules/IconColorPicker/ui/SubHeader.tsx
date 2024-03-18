@@ -9,14 +9,14 @@ export const SubHeader = () => {
   return (
     <SubHeaderLayout $scrollPercent={scrollPercent}>
       <div className="cell">
-        <p className={`type ${menuType === "icon" ? "active" : ""}`}>
+        <span className={`type ${menuType === "icon" ? "active" : ""}`}>
           {subTitles[0].toUpperCase()}
-        </p>
+        </span>
       </div>
       <div className="cell">
-        <p className={`type ${menuType === "color" ? "active" : ""}`}>
+        <span className={`type ${menuType === "color" ? "active" : ""}`}>
           {subTitles[1].toUpperCase()}
-        </p>
+        </span>
       </div>
       <div className="slider">
         <div className="pushing-bar" />

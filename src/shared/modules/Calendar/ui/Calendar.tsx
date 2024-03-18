@@ -38,6 +38,6 @@ const Calendar: FC<props> = ({ initialDate, OnChange, color }) => {
   )
 }
 export default Calendar
-const CalendarLayout = styled.div`
+const CalendarLayout = styled.article`
   position: relative;
 `

@@ -75,7 +75,7 @@ export const ResultQuantity = () => {
         </div>
       )}
       <div className="cell right">
-        <p className="type">{t(("general." + type) as "general.income")}</p>
+        <h3 className="type">{t(("general." + type) as "general.income")}</h3>
         <p className="quantity">
           {DefaultCurrencySigns.get(currency)} {quantityStr || "0"}
         </p>
@@ -84,7 +84,7 @@ export const ResultQuantity = () => {
     </QuantityLayout>
   )
 }
-const QuantityLayout = styled.div<{
+const QuantityLayout = styled.button<{
   $rightCell?: {
     color: string
     bgColor: string
@@ -93,6 +93,7 @@ const QuantityLayout = styled.div<{
     color: string
   }
 }>`
+  width: 100%;
   cursor: pointer;
   background-color: var(--sub-bg);
   height: 75px;

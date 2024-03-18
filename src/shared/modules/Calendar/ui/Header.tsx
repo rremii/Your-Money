@@ -29,18 +29,18 @@ export const Header = () => {
   })} ${dateDay}`
   return (
     <HeaderLayout $color={color}>
-      <p
+      <h3
         onClick={() => SetCalendarType("year")}
         className={`sub-title ${type === "year" ? "active" : ""}`}
       >
         {year || ""}
-      </p>
-      <p
+      </h3>
+      <h2
         onClick={() => SetCalendarType("month")}
         className={`title ${type === "month" ? "active" : ""}`}
       >
         {resultDayMonthStr}
-      </p>
+      </h2>
     </HeaderLayout>
   )
 }

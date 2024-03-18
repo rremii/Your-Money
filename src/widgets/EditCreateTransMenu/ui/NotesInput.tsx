@@ -30,7 +30,7 @@ export const Notes = memo(() => {
     </InputLayout>
   )
 })
-const InputLayout = styled.div`
+const InputLayout = styled.button`
   height: 53px;
   width: 100%;
   display: flex;

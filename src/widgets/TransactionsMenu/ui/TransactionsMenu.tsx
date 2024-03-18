@@ -44,7 +44,7 @@ export const TransactionsMenu: FC<props> = ({
     </TransactionsLayout>
   )
 }
-const TransactionsLayout = styled.div`
+const TransactionsLayout = styled.section`
   scroll-snap-stop: always;
   scroll-snap-align: center;
   overflow-y: auto;

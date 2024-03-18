@@ -15,7 +15,7 @@ export const BalanceCell = () => {
 
   return (
     <BalanceCellLayout>
-      <h2 className="title">{t("accountMenu.sections.balance.balance")}</h2>
+      <h3 className="title">{t("accountMenu.sections.balance.balance")}</h3>
       <p className="extra-info">
         {FormatCurrencyString({
           formatString: currencyFormat,

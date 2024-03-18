@@ -37,7 +37,7 @@ export const AllAccountsInfo: FC<props> = ({
     </AccountsInfoLayout>
   )
 }
-const AccountsInfoLayout = styled.div`
+const AccountsInfoLayout = styled.section`
   .accounts-top-info {
     display: flex;
     align-items: center;

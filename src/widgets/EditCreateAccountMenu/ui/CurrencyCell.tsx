@@ -20,7 +20,7 @@ export const CurrencyCell = () => {
   }
   return (
     <CurrencyLayout onClick={OnClick} $color={color}>
-      <h2 className="title">{t("accountMenu.sections.account.currency")}</h2>
+      <h3 className="title">{t("accountMenu.sections.account.currency")}</h3>
       <p className="extra-info">
         {t("general.currency", { context: currency })} -{" "}
         {DefaultCurrencySigns.get(currency)}

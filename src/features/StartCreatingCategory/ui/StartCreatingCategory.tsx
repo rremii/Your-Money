@@ -44,7 +44,7 @@ export const StartCreatingCategory: FC<props> = ({ categoryType }) => {
     </CreatingCategoryLayout>
   )
 }
-const CreatingCategoryLayout = styled.div`
+const CreatingCategoryLayout = styled.button`
   width: 50px;
   height: 50px;
   border-radius: 50%;

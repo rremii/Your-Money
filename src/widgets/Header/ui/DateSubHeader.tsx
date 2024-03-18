@@ -32,16 +32,16 @@ export const DateSubHeader = () => {
 
   return (
     <SubHeaderLayout>
-      <div onClick={ShiftDateLeft} className="arrow-left">
+      <button onClick={ShiftDateLeft} className="arrow-left">
         {"<"}
-      </div>
-      <div className="date" onClick={OpenDateRangeMenu}>
+      </button>
+      <button className="date" onClick={OpenDateRangeMenu}>
         <img src={Categories} alt="days" />
         <span>{translatedDateGap}</span>
-      </div>
-      <div onClick={ShiftDateRight} className="arrow-right">
+      </button>
+      <button onClick={ShiftDateRight} className="arrow-right">
         {">"}
-      </div>
+      </button>
     </SubHeaderLayout>
   )
 }
@@ -58,6 +58,8 @@ const SubHeaderLayout = styled.div`
     color: white;
     font-size: 15px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
   }
 
   .date {

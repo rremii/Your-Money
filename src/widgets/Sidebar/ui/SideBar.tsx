@@ -36,7 +36,7 @@ export const SideBar = React.memo(() => {
       <SideBarLayout $isSideBar={isSideBar}>
         <SideBarHeader />
         <SideBarSection>
-          <div className="title">{t("sideBar.profile")}</div>
+          <h2 className="title">{t("sideBar.profile")}</h2>
           <div className="content">
             {isLoggedIn === "success" ? (
               <>
@@ -51,7 +51,7 @@ export const SideBar = React.memo(() => {
         </SideBarSection>
         <Separator />
         <SideBarSection>
-          <div className="title">{t("sideBar.settings")}</div>
+          <h2 className="title">{t("sideBar.settings")}</h2>
           <div className="content">
             <ChangeLanguage />
             <ChangeTheme />
@@ -65,7 +65,7 @@ export const SideBar = React.memo(() => {
     </>
   )
 })
-const SideBarLayout = styled.div<{
+const SideBarLayout = styled.aside<{
   $isSideBar?: boolean
 }>`
   position: absolute;

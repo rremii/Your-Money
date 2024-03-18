@@ -28,7 +28,7 @@ export const Category: FC<props> = memo(({ OnClick, ...category }) => {
     </CategoryLayout>
   )
 })
-const CategoryLayout = styled.div<{
+const CategoryLayout = styled.button<{
   $color?: string
 }>`
   display: inline-flex;

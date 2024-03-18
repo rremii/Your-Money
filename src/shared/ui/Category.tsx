@@ -37,7 +37,7 @@ export const Category: FC<props> = memo(
     )
   },
 )
-const CategoryLayout = styled.div<{
+const CategoryLayout = styled.button<{
   $isActive?: boolean
   $color?: string
 }>`
