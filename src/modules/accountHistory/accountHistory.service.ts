@@ -15,7 +15,6 @@ import {
 import { AccountHistoryPoint } from "./entities/accountHistoryPoint.entity"
 import { Transaction } from "../transaction/entities/transaction.entity"
 import { Account } from "../account/entities/account.entity"
-import { User } from "../users/entities/user.entity"
 import { InjectRepository } from "@nestjs/typeorm"
 import { TransactionType } from "../transaction/transaction.interface"
 
@@ -34,15 +33,12 @@ export class AccountHistoryService {
   constructor(
     @InjectRepository(AccountHistoryPoint)
     private readonly accountHistoryRepository: Repository<AccountHistoryPoint>,
-    @InjectRepository(Account)
-    private readonly accountRepository: Repository<Account>,
   ) {}
 
   private async getPrevHistoryPoint({
     date,
     accountId,
     exceptId,
-    // userId,
     cmpDateFunc,
   }: getPrevHistoryPointParams) {
     return this.accountHistoryRepository.findOne({
@@ -64,7 +60,6 @@ export class AccountHistoryService {
   async createHistoryPoint(
     transaction: Transaction,
     account: Account,
-    // user: User,
     date: string,
   ) {
     const type = transaction.type
@@ -77,11 +72,8 @@ export class AccountHistoryService {
       cmpDateFunc: LessThanOrEqual,
     })
 
-    // const freeDate = await this.getFreeDate(date)
-
     const historyPoint = new AccountHistoryPoint()
     historyPoint.account = account
-    // historyPoint.user = user
     historyPoint.transaction = transaction
     historyPoint.date = date
     historyPoint.balance = prevHistoryPoint
@@ -223,7 +215,6 @@ export class AccountHistoryService {
         accountIds.map(async (id) => {
           const historyPoint = await this.getPrevHistoryPoint({
             date: dateFrom,
-            // userId,
             accountId: id,
             cmpDateFunc: LessThan,
           })
