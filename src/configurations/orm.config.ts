@@ -20,11 +20,11 @@ export const getOrmConfig = async (config: ConfigService): Promise<any> => {
 
     entities: [User, Code, Account, Transaction, Category, AccountHistoryPoint],
 
-    ssl: true,
-    extra: {
-      ssl: {
-        rejectUnauthorized: false,
-      },
-    },
+    // ssl: true,
+    // extra: {
+    //   ssl: {
+    //     rejectUnauthorized: false,
+    //   },
+    // },
   }
 }

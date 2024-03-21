@@ -6,7 +6,10 @@ import {
   Injectable,
 } from "@nestjs/common"
 import { CreateTransactionDto } from "./dto/create-transaction.dto"
-import { Transaction as TransactionEntity } from "./entities/transaction.entity"
+import {
+  Transaction,
+  Transaction as TransactionEntity,
+} from "./entities/transaction.entity"
 import { GetTransactionsDto } from "./dto/get-transactions.dto"
 import {
   Between,
@@ -16,7 +19,6 @@ import {
   MoreThan,
   MoreThanOrEqual,
   Repository,
-  Transaction,
 } from "typeorm"
 import { InjectRepository } from "@nestjs/typeorm"
 import { User } from "../users/entities/user.entity"
@@ -28,6 +30,7 @@ import { use } from "passport"
 import { EditTransactionDto } from "./dto/edit-transaction.dto"
 import { DeleteTransactionsDto } from "./dto/delete-transactions.dto"
 import { AccountHistoryPoint } from "../accountHistory/entities/accountHistoryPoint.entity"
+import { TransactionInterface } from "./transaction.interface"
 
 @Injectable()
 export class TransactionService {
@@ -64,21 +67,41 @@ export class TransactionService {
     return new Date(freeDateMs).toISOString()
   }
 
-  async createTransaction({
+  async createTransactionTransaction(
+    createDto: CreateTransactionDto,
+  ): Promise<Transaction> {
+    const queryRunner = this.dataSource.createQueryRunner()
+    await queryRunner.connect()
+    await queryRunner.startTransaction()
+    const manager = queryRunner.manager
+
+    try {
+      const transaction = await this.createTransaction({
+        manager,
+        ...createDto,
+      })
+      await queryRunner.commitTransaction()
+      return transaction
+    } catch (err) {
+      await queryRunner.rollbackTransaction()
+    } finally {
+      await queryRunner.release()
+    }
+  }
+
+  private async createTransaction({
+    manager,
     accountId,
     quantity,
     type,
     title,
     categoryId,
     date,
-  }: CreateTransactionDto): Promise<TransactionEntity> {
-    const queryRunner = this.dataSource.createQueryRunner()
-    await queryRunner.connect()
-
-    const accountEntity = await this.accountRepository.findOneBy({
+  }: CreateTransactionDto & TransactionInterface): Promise<TransactionEntity> {
+    const accountEntity = await manager.findOneBy(Account, {
       id: accountId,
     })
-    const categoryEntity = await this.categoryRepository.findOneBy({
+    const categoryEntity = await manager.findOneBy(Category, {
       id: categoryId,
     })
 
@@ -103,10 +126,11 @@ export class TransactionService {
 
     accountEntity.balance = newAccountBalance
 
-    await accountEntity.save()
-    await transaction.save()
+    await manager.save(accountEntity)
+    await manager.save(transaction)
 
     await this.accountHistoryService.createHistoryPoint(
+      manager,
       transaction,
       accountEntity,
       freeDate,
@@ -116,11 +140,13 @@ export class TransactionService {
   }
 
   private async changeTransactionDate(
+    manager: EntityManager,
     transaction: TransactionEntity,
     newDate: string,
   ) {
     const freeDate = await this.getFreeDate(newDate)
     await this.accountHistoryService.changeHistoryPointDate(
+      manager,
       transaction.id,
       freeDate,
       transaction.date,
@@ -132,10 +158,12 @@ export class TransactionService {
   }
 
   private async changeTransactionQuantity(
+    manager: EntityManager,
     transaction: TransactionEntity,
     newQuantity: number,
   ) {
     await this.accountHistoryService.changeHistoryPointBalance(
+      manager,
       transaction.id,
       transaction.quantity,
       newQuantity,
@@ -145,12 +173,17 @@ export class TransactionService {
     return transaction
   }
 
-  private async changeTransactionAccount(transaction: EditTransactionDto) {
+  private async changeTransactionAccount(
+    manager: EntityManager,
+    transaction: EditTransactionDto,
+  ) {
     const removedTransaction = await this.deleteTransactionById({
+      manager,
       id: transaction.id,
     })
 
     return await this.createTransaction({
+      manager,
       ...removedTransaction,
       ...transaction,
     })
@@ -160,35 +193,56 @@ export class TransactionService {
     const { id, title, categoryId, accountId, quantity, date } =
       editTransactionDto
 
-    let transaction = await this.transactionRepository.findOne({
-      relations: {
-        accountHistoryPoint: true,
-      },
-      where: { id },
-    })
-    if (!transaction)
-      throw new BadRequestException(ApiError.TRANSACTION_NOT_FOUND)
-
-    transaction.title = title ? title : ""
-
-    if (transaction.accountId !== accountId) {
-      transaction = await this.changeTransactionAccount(editTransactionDto)
-    } else {
-      if (date !== transaction.date)
-        transaction = await this.changeTransactionDate(transaction, date)
-
-      if (transaction.quantity !== quantity)
-        transaction = await this.changeTransactionQuantity(
-          transaction,
-          quantity,
-        )
-    }
-    if (transaction.categoryId !== categoryId)
-      transaction.category = await this.categoryRepository.findOneBy({
-        id: categoryId,
+    const queryRunner = this.dataSource.createQueryRunner()
+    await queryRunner.connect()
+    await queryRunner.startTransaction()
+    const manager = queryRunner.manager
+    try {
+      let transaction = await manager.findOne(Transaction, {
+        relations: {
+          accountHistoryPoint: true,
+        },
+        where: { id },
       })
+      if (!transaction)
+        throw new BadRequestException(ApiError.TRANSACTION_NOT_FOUND)
 
-    return await transaction.save()
+      transaction.title = title ? title : ""
+
+      if (transaction.accountId !== accountId) {
+        transaction = await this.changeTransactionAccount(
+          manager,
+          editTransactionDto,
+        )
+      } else {
+        if (date !== transaction.date)
+          transaction = await this.changeTransactionDate(
+            manager,
+            transaction,
+            date,
+          )
+
+        if (transaction.quantity !== quantity)
+          transaction = await this.changeTransactionQuantity(
+            manager,
+            transaction,
+            quantity,
+          )
+      }
+      if (transaction.categoryId !== categoryId)
+        transaction.category = await manager.findOneBy(Category, {
+          id: categoryId,
+        })
+
+      const resTransaction = await manager.save(transaction)
+      await queryRunner.commitTransaction()
+
+      return resTransaction
+    } catch (err) {
+      await queryRunner.rollbackTransaction()
+    } finally {
+      await queryRunner.release()
+    }
   }
 
   getTransactionsByAccounts(transactions: TransactionEntity[]) {
@@ -208,8 +262,8 @@ export class TransactionService {
   }
 
   //todo integrate transactions
-  async deleteTransactionsByIds(ids: number[]) {
-    const deleteTransactions = await this.transactionRepository.find({
+  async deleteTransactionsByIds(manager: EntityManager, ids: number[]) {
+    const deleteTransactions = await manager.find(Transaction, {
       relations: {
         accountHistoryPoint: true,
       },
@@ -230,7 +284,8 @@ export class TransactionService {
           if (type === "expense") accountBalanceShift += quantity
         })
 
-        await this.accountRepository.increment(
+        await manager.increment(
+          Account,
           { id: accountId },
           "balance",
           accountBalanceShift,
@@ -241,7 +296,7 @@ export class TransactionService {
           ({ date }) => startingTime > date && (startingTime = date),
         )
 
-        const transactions = await this.transactionRepository.find({
+        const transactions = await manager.find(Transaction, {
           relations: {
             accountHistoryPoint: true,
           },
@@ -282,24 +337,45 @@ export class TransactionService {
           ({ accountHistoryPoint }) => accountHistoryPoint,
         )
 
-        await this.transactionRepository.delete(
+        await manager.delete(
+          Transaction,
           deleteTransactions.map(({ id }) => id),
         )
 
-        await this.accountHistoryPointRepository.delete(
+        await manager.delete(
+          AccountHistoryPoint,
           deleteHistoryPoints.map(({ id }) => id),
         )
 
-        await this.accountHistoryPointRepository.save(
+        await manager.save(
+          AccountHistoryPoint,
           changedTrans.map(({ accountHistoryPoint }) => accountHistoryPoint),
         )
-        await this.transactionRepository.save(changedTrans)
+        await manager.save(Transaction, changedTrans)
       }),
     )
   }
+  async deleteTransactionByIdTransaction({ id }: DeleteTransactionsDto) {
+    const queryRunner = this.dataSource.createQueryRunner()
+    await queryRunner.connect()
+    await queryRunner.startTransaction()
+    const manager = queryRunner.manager
+    try {
+      await this.deleteTransactionById({ id, manager })
 
-  async deleteTransactionById({ id }: DeleteTransactionsDto) {
-    const transaction = await this.transactionRepository.findOne({
+      await queryRunner.commitTransaction()
+    } catch (err) {
+      await queryRunner.rollbackTransaction()
+    } finally {
+      await queryRunner.release()
+    }
+  }
+
+  private async deleteTransactionById({
+    id,
+    manager,
+  }: DeleteTransactionsDto & TransactionInterface) {
+    const transaction = await manager.findOne(Transaction, {
       relations: {
         accountHistoryPoint: true,
         account: true,
@@ -308,9 +384,10 @@ export class TransactionService {
     })
     if (!transaction)
       throw new BadRequestException(ApiError.TRANSACTION_NOT_FOUND)
-    const removedTransaction = await transaction.remove()
+    const removedTransaction = await manager.remove(transaction)
 
     await this.accountHistoryService.deleteHistoryPoint(
+      manager,
       transaction,
       transaction.accountHistoryPoint,
     )
@@ -323,8 +400,8 @@ export class TransactionService {
         : +transaction.quantity
 
     account.balance += accBalanceDifference
-    await account.save()
-    //
+
+    await manager.save(account)
 
     return removedTransaction
   }

@@ -9,7 +9,7 @@ import { Account } from "../account/entities/account.entity"
 
 @Module({
   imports: [TypeOrmModule.forFeature([AccountHistoryPoint, Account])],
-  controllers: [AccountHistoryController, ],
+  controllers: [AccountHistoryController],
   providers: [AccountHistoryService],
   exports: [AccountHistoryService],
 })

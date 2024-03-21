@@ -29,7 +29,9 @@ export class TransactionController {
   async createTransaction(
     @Body() createTransactionDto: CreateTransactionDto,
   ): Promise<Transaction> {
-    return this.transactionService.createTransaction(createTransactionDto)
+    return this.transactionService.createTransactionTransaction(
+      createTransactionDto,
+    )
   }
 
   // @UseGuards(new RefreshTokenGuard())
@@ -52,6 +54,8 @@ export class TransactionController {
   // @UseGuards(new RefreshTokenGuard())
   @Delete("/:id")
   async deleteTransById(@Param() deleteTransactionDto: DeleteTransactionsDto) {
-    return this.transactionService.deleteTransactionById(deleteTransactionDto)
+    return this.transactionService.deleteTransactionByIdTransaction(
+      deleteTransactionDto,
+    )
   }
 }

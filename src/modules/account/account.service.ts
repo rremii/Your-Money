@@ -3,7 +3,7 @@ import { CreateAccountDto } from "./dto/create-account.dto"
 import { Account } from "./entities/account.entity"
 import { InjectRepository } from "@nestjs/typeorm"
 import { User } from "../users/entities/user.entity"
-import { Repository } from "typeorm"
+import { DataSource, Repository } from "typeorm"
 import { ApiError } from "../../common/constants/errors"
 import { defaultAccounts } from "./constants/defaultAccounts"
 import { GetAccountsDto } from "./dto/get-accounts.dto"
@@ -18,9 +18,8 @@ export class AccountService {
     private readonly usersRepository: Repository<User>,
     @InjectRepository(Account)
     private readonly accountRepository: Repository<Account>,
-    @InjectRepository(Transaction)
-    private readonly transactionRepository: Repository<Transaction>,
     private readonly transactionService: TransactionService,
+    private readonly dataSource: DataSource,
   ) {}
 
   async getAccounts({ userId }: GetAccountsDto) {
@@ -57,26 +56,44 @@ export class AccountService {
   }
 
   async deleteAccount(id: number) {
-    const accountWithTransIds = await this.accountRepository.findOne({
-      where: { id },
-      select: {
-        transactions: {
-          id: true,
+    const queryRunner = this.dataSource.createQueryRunner()
+    await queryRunner.connect()
+    await queryRunner.startTransaction()
+    const manager = queryRunner.manager
+    try {
+      const accountWithTransIds = await manager.findOne(Account, {
+        where: { id },
+        select: {
+          transactions: {
+            id: true,
+          },
         },
-      },
-      relations: {
-        transactions: true,
-      },
-    })
+        relations: {
+          transactions: true,
+        },
+      })
 
-    const transactionsIds = accountWithTransIds.transactions.map(({ id }) => id)
+      const transactionsIds = accountWithTransIds.transactions.map(
+        ({ id }) => id,
+      )
 
-    await this.transactionService.deleteTransactionsByIds(transactionsIds)
+      await this.transactionService.deleteTransactionsByIds(
+        manager,
+        transactionsIds,
+      )
 
-    await this.accountRepository.delete({
-      id: accountWithTransIds.id,
-    })
-    return accountWithTransIds
+      await manager.delete(Account, {
+        id: accountWithTransIds.id,
+      })
+
+      await queryRunner.commitTransaction()
+
+      return accountWithTransIds
+    } catch (err) {
+      await queryRunner.rollbackTransaction()
+    } finally {
+      await queryRunner.release()
+    }
   }
 
   async editAccount({ id, color, name, icon }: EditAccountDto) {

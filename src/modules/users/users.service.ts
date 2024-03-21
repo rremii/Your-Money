@@ -37,7 +37,6 @@ export class UsersService {
 
     const createdUser = await newUser.save()
 
-    console.log(createdUser)
     await this.accountService.createDefaultAccounts(createdUser)
     await this.categoryService.createDefaultCategories(createdUser)
 

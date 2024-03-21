@@ -7,10 +7,6 @@ export class CreateTransactionDto {
   @IsNotEmpty()
   accountId: number
 
-  // @IsNumber()
-  // @IsNotEmpty()
-  // userId: number
-
   @IsNumber()
   @IsNotEmpty()
   categoryId: number

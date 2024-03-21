@@ -3,6 +3,7 @@ import { GetAccountHistoryDto } from "./dto/get-accountHistory.dto"
 import {
   And,
   Between,
+  EntityManager,
   FindOperator,
   In,
   LessThan,
@@ -22,9 +23,7 @@ interface getPrevHistoryPointParams {
   date: string
   accountId: number
   cmpDateFunc: cmpDateFuncType<string>
-  // userId?: number
   exceptId?: number
-  // includeDate?: boolean
 }
 type cmpDateFuncType<T> = (value: T | FindOperator<T>) => FindOperator<T>
 
@@ -49,15 +48,13 @@ export class AccountHistoryService {
         accountId: accountId && accountId,
         id: exceptId && Not(exceptId),
         date: cmpDateFunc(date),
-        // user: {
-        //   id: userId && userId,
-        // },
       },
     })
   }
 
   //todo add pipe to convert str date to date
   async createHistoryPoint(
+    manager: EntityManager,
     transaction: Transaction,
     account: Account,
     date: string,
@@ -80,12 +77,18 @@ export class AccountHistoryService {
       ? prevHistoryPoint.balance + accBalanceDifference
       : accBalanceDifference
 
-    await this.updateHistoryGapBalance(account.id, accBalanceDifference, date)
+    await this.updateHistoryGapBalance(
+      manager,
+      account.id,
+      accBalanceDifference,
+      date,
+    )
 
-    return await historyPoint.save()
+    return await manager.save(historyPoint)
   }
 
   async deleteHistoryPoint(
+    manager: EntityManager,
     transaction: Transaction,
     historyPoint: AccountHistoryPoint,
   ) {
@@ -94,15 +97,17 @@ export class AccountHistoryService {
     let accBalanceDifference =
       type === "income" ? -transaction.quantity : +transaction.quantity
 
-    await historyPoint.remove()
+    await manager.remove(historyPoint)
 
     await this.updateHistoryGapBalance(
+      manager,
       transaction.accountId,
       accBalanceDifference,
       date,
     )
   }
   private async updateHistoryGapBalance(
+    manager: EntityManager,
     accountId: number,
     balanceDiff: number,
     date1: string,
@@ -116,7 +121,7 @@ export class AccountHistoryService {
       dateTo = date1
     }
 
-    const historyPoints = await this.accountHistoryRepository.findBy({
+    const historyPoints = await manager.findBy(AccountHistoryPoint, {
       date: dateTo ? Between(dateFrom, dateTo) : MoreThanOrEqual(dateFrom),
       id: exceptId && Not(exceptId),
       accountId,
@@ -127,20 +132,19 @@ export class AccountHistoryService {
       balance: historyPoint.balance + balanceDiff,
     }))
 
-    console.log(accountId)
-    console.log(historyPoints)
-    await this.accountHistoryRepository.save(updatedHistoryPoints)
+    await manager.save(updatedHistoryPoints)
 
     return historyPoints
   }
 
   async changeHistoryPointBalance(
+    manager: EntityManager,
     transactionId: number,
     oldQuantity: number,
     newQuantity: number,
     type: "expense" | "income",
   ) {
-    const datePoint = await this.accountHistoryRepository.findOne({
+    const datePoint = await manager.findOne(AccountHistoryPoint, {
       relations: {
         account: true,
       },
@@ -157,22 +161,25 @@ export class AccountHistoryService {
 
     const account = datePoint.account
     account.balance += balanceDiff
-    await account.save()
+
+    await manager.save(account)
 
     return await this.updateHistoryGapBalance(
+      manager,
       datePoint.accountId,
       balanceDiff,
       datePoint.date,
     )
   }
   async changeHistoryPointDate(
+    manager: EntityManager,
     transactionId: number,
     newDate: string,
     oldDate: string,
     type: TransactionType,
     quantity: number,
   ) {
-    const datePoint = await this.accountHistoryRepository.findOneBy({
+    const datePoint = await manager.findOneBy(AccountHistoryPoint, {
       transaction: { id: transactionId },
     })
 
@@ -182,6 +189,7 @@ export class AccountHistoryService {
     else balanceDiff = type === "expense" ? -quantity : +quantity
 
     await this.updateHistoryGapBalance(
+      manager,
       datePoint.accountId,
       balanceDiff,
       oldDate,

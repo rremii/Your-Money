@@ -8,7 +8,7 @@ import {
 import { CreateCategoryDto } from "./dto/create-category.dto"
 import { InjectRepository } from "@nestjs/typeorm"
 import { User } from "../users/entities/user.entity"
-import { Repository } from "typeorm"
+import { DataSource, Repository } from "typeorm"
 import { ApiError } from "../../common/constants/errors"
 import { Category } from "./entities/category.entity"
 import { GetCategoriesDto } from "./dto/get-categories.dto"
@@ -25,10 +25,8 @@ export class CategoryService {
     private readonly userRepository: Repository<User>,
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
-    // @InjectRepository(Transaction)
-    // private readonly transactionRepository: Repository<Transaction>,
-
     private readonly transactionService: TransactionService,
+    private readonly dataSource: DataSource,
   ) {}
 
   async createDefaultCategories(user: User) {
@@ -70,28 +68,43 @@ export class CategoryService {
   }
 
   async deleteCategory({ id }: DeleteCategoryDto) {
-    const categoryWithTransIds = await this.categoryRepository.findOne({
-      where: { id },
-      select: {
-        transactions: {
-          id: true,
+    const queryRunner = this.dataSource.createQueryRunner()
+    await queryRunner.connect()
+    await queryRunner.startTransaction()
+    const manager = queryRunner.manager
+    try {
+      const categoryWithTransIds = await manager.findOne(Category, {
+        where: { id },
+        select: {
+          transactions: {
+            id: true,
+          },
         },
-      },
-      relations: {
-        transactions: true,
-      },
-    })
+        relations: {
+          transactions: true,
+        },
+      })
 
-    const transactionsIds = categoryWithTransIds.transactions.map(
-      ({ id }) => id,
-    )
+      const transactionsIds = categoryWithTransIds.transactions.map(
+        ({ id }) => id,
+      )
 
-    await this.transactionService.deleteTransactionsByIds(transactionsIds)
+      await this.transactionService.deleteTransactionsByIds(
+        manager,
+        transactionsIds,
+      )
 
-    await this.categoryRepository.delete({
-      id: categoryWithTransIds.id,
-    })
-    return categoryWithTransIds
+      await manager.delete(Category, {
+        id: categoryWithTransIds.id,
+      })
+
+      await queryRunner.commitTransaction()
+      return categoryWithTransIds
+    } catch (err) {
+      await queryRunner.rollbackTransaction()
+    } finally {
+      await queryRunner.release()
+    }
   }
 
   async createCategory({
