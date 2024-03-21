@@ -36,7 +36,12 @@ export const CategoriesApi = Api.injectEndpoints({
         url: "category/" + id,
         method: "DELETE",
       }),
-      invalidatesTags: ["Categories", "Transactions", "HistoryPoints"],
+      invalidatesTags: [
+        "Categories",
+        "Transactions",
+        "HistoryPoints",
+        "Accounts",
+      ],
     }),
   }),
   overrideExisting: false,
