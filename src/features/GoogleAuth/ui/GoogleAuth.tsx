@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Google from "@shared/assets/LightTheme/google.svg"
+import Google from "../../../../public/icons/general/google.svg"
 import React from "react"
 import { NavLink } from "react-router-dom"
 import { API_URL } from "@shared/api/config"

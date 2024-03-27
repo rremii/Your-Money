@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Categories from "@shared/assets/LightTheme/categories.png"
+import Categories from "../../../../public/icons/general/categories.png"
 import { useCreateAccount } from "@entities/Account/model/useCreateAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { memo, useEffect } from "react"

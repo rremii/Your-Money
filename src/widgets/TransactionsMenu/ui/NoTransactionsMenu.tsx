@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { FC } from "react"
-import Caregories from "@shared/assets/LightTheme/categories.png"
+import Caregories from "../../../../public/icons/general/categories.png"
 
 interface props {
   nodeRef?: (node?: Element | null | undefined) => void

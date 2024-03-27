@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Categories from "@shared/assets/LightTheme/categories.png"
+import Categories from "../../../../public/icons/general/categories.png"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { resetEditCategory } from "@entities/Category/model/NewCategorySlice.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Categories from "@shared/assets/LightTheme/categories.png"
+import Categories from "../../../../public/icons/general/categories.png"
 import { useLazyGetMeQuery } from "@entities/User/api/UserApi.ts"
 import React, { useEffect } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"

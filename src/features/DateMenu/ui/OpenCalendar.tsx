@@ -1,5 +1,5 @@
 import { PickDateBtn } from "@shared/ui/PickDateBtn.tsx"
-import Category from "@shared/assets/LightTheme/categories.png"
+import Category from "../../../../public/icons/general/categories.png"
 import React from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { IsYesterday } from "@shared/helpers/IsYesterday.ts"

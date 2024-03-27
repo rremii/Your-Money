@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Account from "@shared/assets/LightTheme/accounts.png"
+import Account from "../../../../public/icons/general/accounts.png"
 import React, { FC } from "react"
 import {
   IConvertedTransaction,

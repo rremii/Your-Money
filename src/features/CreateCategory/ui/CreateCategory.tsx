@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Categories from "@shared/assets/LightTheme/categories.png"
+import Categories from "../../../../public/icons/general/categories.png"
 import { useCreateCategory } from "@entities/Category/model/useCreateCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useEffect } from "react"

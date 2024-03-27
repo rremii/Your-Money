@@ -1,5 +1,5 @@
 import { SideBarBtn } from "@shared/ui/SideBarBtn.tsx"
-import Categories from "@shared/assets/LightTheme/categories.png"
+import Categories from "../../../../public/icons/general/categories.png"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import React from "react"

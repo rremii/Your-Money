@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Categories from "@shared/assets/LightTheme/categories.png"
+import Categories from "../../../../public/icons/general/categories.png"
 import { useEditAccount } from "@entities/Account/model/useEditAccount.tsx"
 import { memo, useEffect } from "react"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"

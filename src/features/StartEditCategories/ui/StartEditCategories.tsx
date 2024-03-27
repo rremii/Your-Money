@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Categories from "@shared/assets/LightTheme/categories.png"
+import Categories from "../../../../public/icons/general/categories.png"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setCategoriesEditMode } from "@entities/UI/model/PagesSlice.ts"
 

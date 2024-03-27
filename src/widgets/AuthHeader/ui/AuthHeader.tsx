@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import React, { FC } from "react"
-import Categories from "@shared/assets/LightTheme/categories.png"
+import Categories from "../../../../public/icons/general/categories.png"
 
 interface props {
   children: React.ReactNode

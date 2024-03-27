@@ -1,6 +1,6 @@
 {
 	"name": "Your Money",
-	"short_name": "Your Money",
+	"short_name": "",
 	"description": "No commerce app, that can help you to handle your money spending",
 	"icons": [
 		{
@@ -22,7 +22,7 @@
 			"purpose": "any"
 		},
 		{
-			"src": "/icons/maskable_icon.png",
+			"src": "/icons/favicon.ico",
 			"sizes": "225x225",
 			"type": "image/png",
 			"purpose": "maskable"

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Category from "@shared/assets/LightTheme/categories.png"
+import Category from "../../../../public/icons/general/categories.png"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import {
   openMenu,

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { FC } from "react"
-import Categories from "@shared/assets/LightTheme/categories.png"
+import Categories from "../../../../public/icons/general/categories.png"
 import {
   openMenu,
   setEditAccountMenuType,

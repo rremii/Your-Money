@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { OptionBtn } from "@features/ChangeDateRangeModal/ui/OptionBtn.tsx"
-import Categories from "@shared/assets/LightTheme/categories.png"
+import Categories from "../../../../public/icons/general/categories.png"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu, openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import {

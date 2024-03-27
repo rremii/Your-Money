@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { TransactionType } from "@entities/Transaction/types.ts"
 import { FC } from "react"
-import Categories from "@shared/assets/LightTheme/categories.png"
+import Categories from "../../../../public/icons/general/categories.png"
 import {
   openMenu,
   setEditCategoryMenuType,

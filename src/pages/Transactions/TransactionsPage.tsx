@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Header } from "@widgets/Header"
-import Categories from "@shared/assets/LightTheme/categories.png"
+import Categories from "../../../public/icons/general/categories.png"
 import { DateSubHeader } from "@widgets/Header/ui/DateSubHeader.tsx"
 import { TransactionsSlider } from "@widgets/TransactionsMenu/ui/TransactionsSlider.tsx"
 import { StartCreatingTrans } from "@features/StartCreatingTrans/ui/StartCreatingTrans.tsx"
