@@ -1,6 +1,5 @@
 import { PassportStrategy } from "@nestjs/passport"
-import { Profile, Strategy, VerifyCallback } from "passport-google-oauth20"
-import * as process from "process"
+import { Profile, Strategy } from "passport-google-oauth20"
 import { ConfigService } from "@nestjs/config"
 import { Injectable } from "@nestjs/common"
 

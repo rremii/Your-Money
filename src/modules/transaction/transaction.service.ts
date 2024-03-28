@@ -1,10 +1,4 @@
-import {
-  BadRequestException,
-  Dependencies,
-  forwardRef,
-  Inject,
-  Injectable,
-} from "@nestjs/common"
+import { BadRequestException, Injectable } from "@nestjs/common"
 import { CreateTransactionDto } from "./dto/create-transaction.dto"
 import {
   Transaction,
@@ -16,17 +10,14 @@ import {
   DataSource,
   EntityManager,
   In,
-  MoreThan,
   MoreThanOrEqual,
   Repository,
 } from "typeorm"
 import { InjectRepository } from "@nestjs/typeorm"
-import { User } from "../users/entities/user.entity"
 import { Account } from "../account/entities/account.entity"
 import { ApiError } from "../../common/constants/errors"
 import { Category } from "../category/entities/category.entity"
 import { AccountHistoryService } from "../accountHistory/accountHistory.service"
-import { use } from "passport"
 import { EditTransactionDto } from "./dto/edit-transaction.dto"
 import { DeleteTransactionsDto } from "./dto/delete-transactions.dto"
 import { AccountHistoryPoint } from "../accountHistory/entities/accountHistoryPoint.entity"
@@ -37,12 +28,6 @@ export class TransactionService {
   constructor(
     @InjectRepository(TransactionEntity)
     private readonly transactionRepository: Repository<TransactionEntity>,
-    @InjectRepository(Category)
-    private readonly categoryRepository: Repository<Category>,
-    @InjectRepository(AccountHistoryPoint)
-    private readonly accountHistoryPointRepository: Repository<AccountHistoryPoint>,
-    @InjectRepository(Account)
-    private readonly accountRepository: Repository<Account>,
     private readonly accountHistoryService: AccountHistoryService,
     private readonly dataSource: DataSource,
   ) {}

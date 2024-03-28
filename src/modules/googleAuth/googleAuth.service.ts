@@ -10,8 +10,6 @@ import { GoogleLoginDto } from "./dto/google-login.dto"
 @Injectable()
 export class GoogleAuthService {
   constructor(
-    @InjectRepository(User)
-    private readonly usersRepository: Repository<User>,
     private readonly tokenService: TokenService,
     private readonly usersService: UsersService,
   ) {}

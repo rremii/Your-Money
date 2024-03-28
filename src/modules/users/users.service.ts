@@ -23,6 +23,10 @@ export class UsersService {
     private readonly categoryService: CategoryService,
   ) {}
 
+  async findUserById(id: number): Promise<User> {
+    return this.usersRepository.findOneBy({ id })
+  }
+
   async findUserByEmail(email: string): Promise<User> {
     return this.usersRepository.findOneBy({ email })
   }

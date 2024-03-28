@@ -15,8 +15,6 @@ import { CreateCategoryDto } from "./dto/create-category.dto"
 import { Category } from "./entities/category.entity"
 import { GetCategoriesDto } from "./dto/get-categories.dto"
 import { EditCategoryDto } from "./dto/edit-category.dto"
-import { UpdateResult } from "typeorm"
-import { DeleteCategoryDto } from "./dto/delete-category.dto"
 
 @Controller("category")
 export class CategoryController {

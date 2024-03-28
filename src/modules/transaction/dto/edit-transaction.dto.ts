@@ -1,5 +1,4 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator"
-import { TransactionType } from "../transaction.interface"
 import { Optional } from "@nestjs/common"
 
 export class EditTransactionDto {

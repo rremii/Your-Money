@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable } from "@nestjs/common"
+import {
+  BadRequestException,
+  forwardRef,
+  Inject,
+  Injectable,
+} from "@nestjs/common"
 import { CreateAccountDto } from "./dto/create-account.dto"
 import { Account } from "./entities/account.entity"
 import { InjectRepository } from "@nestjs/typeorm"
@@ -7,15 +12,15 @@ import { DataSource, Repository } from "typeorm"
 import { ApiError } from "../../common/constants/errors"
 import { defaultAccounts } from "./constants/defaultAccounts"
 import { GetAccountsDto } from "./dto/get-accounts.dto"
-import { Transaction } from "../transaction/entities/transaction.entity"
 import { EditAccountDto } from "./dto/edit-account.dto"
 import { TransactionService } from "../transaction/transaction.service"
+import { UsersService } from "../users/users.service"
 
 @Injectable()
 export class AccountService {
   constructor(
-    @InjectRepository(User)
-    private readonly usersRepository: Repository<User>,
+    @Inject(forwardRef(() => UsersService))
+    private readonly userService: UsersService,
     @InjectRepository(Account)
     private readonly accountRepository: Repository<Account>,
     private readonly transactionService: TransactionService,
@@ -117,7 +122,7 @@ export class AccountService {
     icon,
     currency,
   }: CreateAccountDto): Promise<Account> {
-    const user = await this.usersRepository.findOneBy({ id: userId })
+    const user = await this.userService.findUserById(userId)
     if (!user) throw new BadRequestException(ApiError.USER_NOT_FOUND)
 
     const existAccount = await this.accountRepository.findOneBy({

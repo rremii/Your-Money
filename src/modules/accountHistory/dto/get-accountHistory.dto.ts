@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { IsArray, IsString } from "class-validator"
 
 export class GetAccountHistoryDto {
   @IsArray()

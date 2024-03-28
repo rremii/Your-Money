@@ -1,7 +1,6 @@
 import {
   BaseEntity,
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -11,10 +10,7 @@ import {
 import { Account } from "../../account/entities/account.entity"
 import { ITransaction, TransactionType } from "../transaction.interface"
 import { Category } from "../../category/entities/category.entity"
-import { User } from "../../users/entities/user.entity"
 import { AccountHistoryPoint } from "../../accountHistory/entities/accountHistoryPoint.entity"
-import { getTimestamptz } from "../../../common/helpers/getTimestamptz"
-import { Currency } from "../../account/account.interface"
 
 @Entity()
 export class Transaction extends BaseEntity implements ITransaction {

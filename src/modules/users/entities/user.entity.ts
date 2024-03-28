@@ -4,13 +4,10 @@ import {
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
-  Unique,
 } from "typeorm"
 import { IUser } from "../users.interface"
 import { Account } from "../../account/entities/account.entity"
 import { Category } from "../../category/entities/category.entity"
-import { Transaction } from "../../transaction/entities/transaction.entity"
-import { AccountHistoryPoint } from "../../accountHistory/entities/accountHistoryPoint.entity"
 
 @Entity()
 export class User extends BaseEntity implements IUser {

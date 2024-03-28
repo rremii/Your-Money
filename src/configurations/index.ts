@@ -1,5 +1,4 @@
 import * as process from "process"
-import { registerAs } from "@nestjs/config"
 
 export default () => ({
   port: process.env.PORT || 5000,

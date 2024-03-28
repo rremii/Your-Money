@@ -10,7 +10,6 @@ import {
 } from "typeorm"
 import { User } from "../../users/entities/user.entity"
 import { CategoryType, ICategory } from "../category.interface"
-import { Account } from "../../account/entities/account.entity"
 import { Transaction } from "../../transaction/entities/transaction.entity"
 
 @Unique(["name"])

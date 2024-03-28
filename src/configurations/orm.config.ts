@@ -4,7 +4,6 @@ import { Code } from "../modules/Code/entities/code.entity"
 import { Account } from "src/modules/account/entities/account.entity"
 import { Category } from "../modules/category/entities/category.entity"
 import { Transaction } from "../modules/transaction/entities/transaction.entity"
-import { AccountHistoryModule } from "../modules/accountHistory/accountHistory.module"
 import { AccountHistoryPoint } from "../modules/accountHistory/entities/accountHistoryPoint.entity"
 
 export const getOrmConfig = async (config: ConfigService): Promise<any> => {

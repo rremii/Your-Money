@@ -1,6 +1,5 @@
 import {
   BadRequestException,
-  Dependencies,
   forwardRef,
   Inject,
   Injectable,
@@ -14,19 +13,19 @@ import { Category } from "./entities/category.entity"
 import { GetCategoriesDto } from "./dto/get-categories.dto"
 import { defaultCategories } from "./constants/defaultCategories"
 import { EditCategoryDto } from "./dto/edit-category.dto"
-import { Transaction } from "../transaction/entities/transaction.entity"
 import { DeleteCategoryDto } from "./dto/delete-category.dto"
 import { TransactionService } from "../transaction/transaction.service"
+import { UsersService } from "../users/users.service"
 
 @Injectable()
 export class CategoryService {
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
     private readonly transactionService: TransactionService,
     private readonly dataSource: DataSource,
+    @Inject(forwardRef(() => UsersService))
+    private readonly userService: UsersService,
   ) {}
 
   async createDefaultCategories(user: User) {
@@ -114,7 +113,7 @@ export class CategoryService {
     icon,
     type,
   }: CreateCategoryDto): Promise<Category> {
-    const user = await this.userRepository.findOneBy({ id: userId })
+    const user = await this.userService.findUserById(userId)
     if (!user) throw new BadRequestException(ApiError.USER_NOT_FOUND)
 
     const existCategory = await this.categoryRepository.findOneBy({

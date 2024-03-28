@@ -1,16 +1,6 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Post,
-  Query,
-  UsePipes,
-  ValidationPipe,
-} from "@nestjs/common"
+import { Controller, Get, Query } from "@nestjs/common"
 import { GetAccountHistoryDto } from "./dto/get-accountHistory.dto"
 import { AccountHistoryService } from "./accountHistory.service"
-import { InjectRepository } from "@nestjs/typeorm"
 
 @Controller("account-history")
 export class AccountHistoryController {

@@ -19,7 +19,6 @@ export class CodeService {
     private readonly codeRepository: Repository<Code>,
     private readonly mailerService: MailerService,
     private readonly usersService: UsersService,
-    private readonly configService: ConfigService,
   ) {}
 
   async sendConfirmCode({ email }: ConfirmEmailDto): Promise<DefaultResponse> {

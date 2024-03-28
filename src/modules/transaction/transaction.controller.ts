@@ -7,7 +7,6 @@ import {
   Post,
   Put,
   Query,
-  UseGuards,
   UsePipes,
   ValidationPipe,
 } from "@nestjs/common"
@@ -17,7 +16,6 @@ import { GetTransactionsDto } from "./dto/get-transactions.dto"
 import { TransactionService } from "./transaction.service"
 import { DeleteTransactionsDto } from "./dto/delete-transactions.dto"
 import { EditTransactionDto } from "./dto/edit-transaction.dto"
-import { RefreshTokenGuard } from "../../guards/refresh-token.guard"
 
 @Controller("transaction")
 export class TransactionController {
