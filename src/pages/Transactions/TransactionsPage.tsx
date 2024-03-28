@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import { Header } from "@widgets/Header"
-import Categories from "../../../public/icons/general/categories.png"
 import { DateSubHeader } from "@widgets/Header/ui/DateSubHeader.tsx"
 import { TransactionsSlider } from "@widgets/TransactionsMenu/ui/TransactionsSlider.tsx"
 import { StartCreatingTrans } from "@features/StartCreatingTrans/ui/StartCreatingTrans.tsx"
@@ -11,12 +10,8 @@ import { MainMenuPageLayout } from "@shared/ui/MainMenuPageLayout.tsx"
 const TransactionsPage = () => {
   return (
     <TransactionsLayout>
-      {/*<Header*/}
-      {/*  SubHeader={<DateSubHeader />}*/}
-      {/*  right={<img src={Categories} alt="" />}*/}
-      {/*/>*/}
       <Header>
-        <TopHeader right={<img src={Categories} />} />
+        <TopHeader />
         <DateSubHeader />
       </Header>
       <TransactionsSlider />
@@ -26,12 +21,5 @@ const TransactionsPage = () => {
 }
 export default TransactionsPage
 const TransactionsLayout = styled(MainMenuPageLayout)`
-  //width: 100%;
-  //height: 100%;
-  //max-height: calc(100vh - 55px);
-  //display: flex;
-  //flex-direction: column;
-  //position: relative;
-  //font-size: 30px;
-  //background-color: #ececec;
+
 `

@@ -1,19 +1,20 @@
 import { SideBarBtn } from "@shared/ui/SideBarBtn.tsx"
-import Categories from "../../../../public/icons/general/categories.png"
+import Categories from "/icons/general/categories.svg"
 import React from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 import { useTranslation } from "react-i18next"
+import CurrencyFormatIcon from "@icons/general/currency-format.svg?react"
 
 export const ChangeCurrencyFormat = React.memo(() => {
   const dispatch = useAppDispatch()
 
   const currencyFormat = useTypedSelector(
-    (state) => state.Settings.currencyFormat,
+    (state) => state.Settings.currencyFormat
   )
   const curCurrencySign = useTypedSelector(
-    (state) => state.Settings.curCurrencySign,
+    (state) => state.Settings.curCurrencySign
   )
   const { t } = useTranslation()
 
@@ -31,9 +32,9 @@ export const ChangeCurrencyFormat = React.memo(() => {
         quantity: exampleNumber,
         sign: "-",
         formatString: currencyFormat,
-        currencySign: curCurrencySign,
+        currencySign: curCurrencySign
       })}
-      icon={Categories}
+      Icon={CurrencyFormatIcon}
     />
   )
 })

@@ -21,10 +21,13 @@ export const Header: FC<props> = ({ children }) => {
 const HeaderLayout = styled.header<{
   $isActive?: boolean
 }>`
-  background-color: ${({ $isActive }) =>
-    $isActive ? "var(--account-color)" : "#707070"};
-  transition: 1s;
-  position: relative;
-  box-shadow: 0px 2px 4px 0px #0000003f;
-  z-index: 4;
+    background-color: ${({ $isActive }) =>
+            $isActive ? "var(--account-color)" : "#707070"};
+    transition: 1s;
+    position: relative;
+    box-shadow: 0px 2px 4px 0px #0000003f;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+
 `

@@ -1,9 +1,11 @@
 import { SideBarBtn } from "@shared/ui/SideBarBtn.tsx"
-import Categories from "../../../../public/icons/general/categories.png"
+import Categories from "/icons/general/categories.svg"
 import React from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useTranslation } from "react-i18next"
+import ScreenIcon from "@icons/general/new-view.svg?react"
+
 
 export const ChangeStartScreen = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -23,7 +25,7 @@ export const ChangeStartScreen = React.memo(() => {
       onClick={handleClick}
       title={t("sideBar.startScreen")}
       subTitle={t(translateScreenPath)}
-      icon={Categories}
+      Icon={ScreenIcon}
     />
   )
 })

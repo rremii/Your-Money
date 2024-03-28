@@ -25,7 +25,7 @@ export const CategoryCell: FC<props> = React.memo(
               currencySign,
               quantity: quantity,
               formatString: formatStr,
-              sign: quantity < 0 ? "-" : "",
+              sign: quantity < 0 ? "-" : ""
             })}
           </p>
         </div>
@@ -36,82 +36,84 @@ export const CategoryCell: FC<props> = React.memo(
         </div>
       </CellLayout>
     )
-  },
+  }
 )
 const CellLayout = styled.div<{
   $color?: string
   $percent?: number
 }>`
-  box-shadow: 0px 2px 4px 0px #00000019;
-  padding: 7px 15px;
-  height: 52px;
-  display: grid;
-  grid-template-columns: min-content 1fr;
-  grid-template-rows: repeat(2, min-content);
-  column-gap: 10px;
-  row-gap: 2px;
-  background-color: var(--sub-bg);
+    box-shadow: 0px 2px 4px 0px #00000019;
+    padding: 7px 15px;
+    height: 52px;
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: repeat(2, min-content);
+    column-gap: 10px;
+    row-gap: 2px;
+    background-color: var(--sub-bg);
 
-  .CategoryIcon {
-    grid-row: span 2;
-  }
-
-  .text-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .name {
-      color: var(--sub-txt);
-      font-family: Inter;
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
+    .CustomIcon {
+        grid-row: span 2;
     }
 
-    .quantity {
-      color: var(--main-txt);
-      font-family: Inter;
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
-  }
+    .text-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-  .percent-bar {
-    position: relative;
-    height: 5px;
-    display: flex;
-    align-items: center;
+        .name {
+            color: var(--sub-txt);
+            font-family: Inter;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
 
-    .bar {
-      position: absolute;
-      left: 0;
-      top: 0;
-      background-color: #d9d9d9;
-      height: 5px;
-      width: 100%;
-    }
-
-    .filled-bar {
-      z-index: 1;
-      height: 5px;
-      background-color: ${({ $color }) => $color || "#4CB050"};
-      width: ${({ $percent }) => $percent + "%"};
+        .quantity {
+            color: var(--main-txt);
+            font-family: Inter;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
     }
 
-    .percent {
-      z-index: 1;
-      padding: 0 7px;
-      background-color: var(--sub-bg);
-      color: ${({ $percent, $color }) => ($percent === 0 ? "#A9A9A9" : $color)};
-      font-family: Inter;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
+    .percent-bar {
+        width: 100%;
+
+        position: relative;
+        height: 5px;
+        display: flex;
+        align-items: center;
+
+        .bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #d9d9d9;
+            height: 5px;
+            width: 100%;
+        }
+
+        .filled-bar {
+            z-index: 1;
+            height: 5px;
+            background-color: ${({ $color }) => $color || "#4CB050"};
+            width: ${({ $percent }) => $percent + "%"};
+        }
+
+        .percent {
+            z-index: 1;
+            padding: 0 7px;
+            background-color: var(--sub-bg);
+            color: ${({ $percent, $color }) => ($percent === 0 ? "#A9A9A9" : $color)};
+            font-family: Inter;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
     }
-  }
 `

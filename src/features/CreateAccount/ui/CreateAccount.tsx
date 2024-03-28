@@ -1,10 +1,11 @@
 import styled from "styled-components"
-import Categories from "../../../../public/icons/general/categories.png"
+import Categories from "/icons/general/categories.svg"
 import { useCreateAccount } from "@entities/Account/model/useCreateAccount.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { memo, useEffect } from "react"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import SubmitIcon from "@icons/general/done.svg?react"
 
 export const CreateAccount = memo(() => {
   const dispatch = useAppDispatch()
@@ -26,13 +27,14 @@ export const CreateAccount = memo(() => {
       onClick={Create}
       className={"CreateAccount"}
     >
-      <img src={Categories} alt="create" />
+      <SubmitIcon className="icon" />
     </CreateAccountLayout>
   )
 })
 const CreateAccountLayout = styled.button`
-  img {
-    width: 100%;
-    height: 100%;
-  }
+    .icon {
+        fill: white;
+        width: 25px !important;
+        height: 25px !important;
+    }
 `

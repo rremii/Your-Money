@@ -16,8 +16,8 @@ const initialState: initialState = {
   balance: 0,
   color: "#5C6AC0",
   name: "All accounts",
-  icon: "",
-  currency: Currency.DefaultCurrency,
+  icon: "card",
+  currency: Currency.DefaultCurrency
 }
 
 const AllAccountSlice = createSlice({
@@ -28,7 +28,7 @@ const AllAccountSlice = createSlice({
       state,
       action: PayloadAction<
         Pick<IAccount, "name" | "balance" | "color" | "currency">
-      >,
+      >
     ) {
       const { name, color, balance, currency } = action.payload
       state.name = name
@@ -41,8 +41,8 @@ const AllAccountSlice = createSlice({
     },
     setAllAccountCurrency(state, action: PayloadAction<Currency>) {
       state.currency = action.payload
-    },
-  },
+    }
+  }
 })
 
 export const AllAccountReducer = AllAccountSlice.reducer

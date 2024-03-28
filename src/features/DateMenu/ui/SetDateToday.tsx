@@ -1,4 +1,4 @@
-import Category from "../../../../public/icons/general/categories.png"
+import Category from "/icons/general/categories.svg"
 import React from "react"
 import { PickDateBtn } from "@shared/ui/PickDateBtn.tsx"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
@@ -7,15 +7,16 @@ import { setEditTransDateStr } from "@entities/EditCreateTransaction/model/Trans
 import { Months } from "@shared/constants/Months.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useTranslation } from "react-i18next"
+import TodayIcon from "@icons/general/sun.svg?react"
 
 export const SetDateToday = () => {
   const dispatch = useAppDispatch()
 
   const color = useTypedSelector(
-    (state) => state.EditCreateTransaction.ChosenCategory.color,
+    (state) => state.EditCreateTransaction.ChosenCategory.color
   )
   const dateStr = useTypedSelector(
-    (state) => state.EditCreateTransaction.Transaction.dateStr,
+    (state) => state.EditCreateTransaction.Transaction.dateStr
   )
 
   const { t } = useTranslation()
@@ -41,7 +42,7 @@ export const SetDateToday = () => {
       isActive={isActive}
       color={color}
       title={t("general.time.today")}
-      img={Category}
+      Icon={<TodayIcon className="icon" />}
       subTitle={subTitle}
     />
   )

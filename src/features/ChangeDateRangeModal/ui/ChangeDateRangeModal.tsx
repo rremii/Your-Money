@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { Modal } from "@shared/ui/Modal.tsx"
 import { Overlay } from "@shared/ui/Overlay.tsx"
 import { OptionBtn } from "@features/ChangeDateRangeModal/ui/OptionBtn.tsx"
-import Categories from "../../../../public/icons/general/categories.png"
+import Categories from "/public/icons/general/categories.svg"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu, openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import {
@@ -10,21 +10,28 @@ import {
   setCurDate,
   setMonthFilter,
   setWeekFilter,
-  setYearFilter,
+  setYearFilter
 } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { timeGap } from "@shared/helpers/TimeGap.ts"
 import { memo } from "react"
 import { DateFilter } from "@entities/Transaction/types.ts"
 import { useTranslation } from "react-i18next"
 import { TranslateDateGap } from "@entities/DateSlider"
+import YearIcon from "@icons/general/year.svg?react"
+import WeekIcon from "@icons/general/week.svg?react"
+import AllTimeIcon from "@icons/general/infinity.svg?react"
+import MonthIcon from "@icons/general/month.svg?react"
+import DayIcon from "@icons/general/day.svg?react"
+
 
 export const ChangeDateRangeModal = memo(() => {
   const dispatch = useAppDispatch()
 
   const initDate = useTypedSelector((state) => state.Date.curMenu.dateFrom)
+  const dateFilter = useTypedSelector((state) => state.Date.dateFilter)
   const firstDay = useTypedSelector((state) => state.Settings.firstDay)
   const isOpen = useTypedSelector(
-    (state) => state.UI.Modals.dateRangeMenu.isOpen,
+    (state) => state.UI.Modals.dateRangeMenu.isOpen
   )
 
   const { t } = useTranslation()
@@ -67,7 +74,7 @@ export const ChangeDateRangeModal = memo(() => {
     const date = new Date(
       new Date().getFullYear(),
       new Date().getMonth(),
-      new Date().getDate(),
+      new Date().getDate()
     ).toUTCString()
     const slider = document.querySelector("#slider")
     if (!slider) return
@@ -97,48 +104,55 @@ export const ChangeDateRangeModal = memo(() => {
         <OptionBtn
           OnClick={SetAllTimeRange}
           title={t("dateRange.allTime")}
-          icon={<img src={Categories} alt="all time" />}
+          icon={<AllTimeIcon />}
+          isActive={dateFilter === "allTime"}
         />
         <OptionBtn
           OnClick={OpenSelectDayMenu}
           title={t("dateRange.selectDay")}
           subTitle={tranSelectDaySubTitle}
-          icon={<img src={Categories} alt="Select day" />}
+          icon={<DayIcon />}
         />
         <OptionBtn
           OnClick={SetWeekRange}
           title={t("general.time.week")}
           subTitle={transWeekSubTitle}
-          icon={<img src={Categories} alt="Week" />}
+          icon={<WeekIcon />}
+          isActive={dateFilter === "week"}
+
         />
         <OptionBtn
           OnClick={SetTodayRange}
           title={t("general.time.today")}
           subTitle={transTodaySubTitle}
-          icon={<img src={Categories} alt="Today" />}
+          isActive={dateFilter === "day"}
+          icon={<DayIcon />}
+
         />
         <OptionBtn
           OnClick={SetYearRange}
           title={t("general.time.year")}
           subTitle={transYearSubTitle}
-          icon={<img src={Categories} alt="Year" />}
+          isActive={dateFilter === "year"}
+          icon={<YearIcon />}
         />
         <OptionBtn
           OnClick={SetMonthRange}
           title={t("general.time.month")}
           subTitle={transMonthSubTitle}
-          icon={<img src={Categories} alt="Month" />}
+          isActive={dateFilter === "month"}
+          icon={<MonthIcon />}
         />
       </DateModalLayout>
     </>
   )
 })
 const DateModalLayout = styled(Modal)`
-  z-index: 55;
-  max-width: 310px;
-  padding: 0;
-  background-color: var(--sub-bg);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-rows: 95px;
+    z-index: 55;
+    max-width: 310px;
+    padding: 0;
+    background-color: var(--sub-bg);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 95px;
 `

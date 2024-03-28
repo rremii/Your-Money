@@ -1,35 +1,27 @@
-import Accounts from "../../../../public/icons/general/accounts.png"
-import AccountsActive from "../../../../public/icons/general/accounts-active.png"
-import Categories from "../../../../public/icons/general/categories.png"
-import CategoriesActive from "../../../../public/icons/general/categories-active.png"
-import TransActions from "../../../../public/icons/general/transactions.png"
-import TransActionsActive from "../../../../public/icons/general/transactions-active.png"
-import Overview from "../../../../public/icons/general/overview.png"
-import OverviewActive from "../../../../public/icons/general/overview-active.png"
+import Accounts from "@icons/general/accounts.svg?react"
+import Categories from "@icons/general/categories.svg?react"
+import TransActions from "@icons/general/transactions.svg?react"
+import Overview from "@icons/general/overview.svg?react"
 
 export const LinksData = [
   {
-    src: Accounts,
+    Icon: Accounts,
     name: "Accounts",
-    href: "/accounts",
-    srcActive: AccountsActive,
+    href: "/accounts"
   },
   {
-    src: Categories,
+    Icon: Categories,
     name: "Categories",
-    href: "/categories",
-    srcActive: CategoriesActive,
+    href: "/categories"
   },
   {
-    src: TransActions,
-    name: "TransActions",
-    href: "/transActions",
-    srcActive: TransActionsActive,
+    Icon: TransActions,
+    name: "Transactions",
+    href: "/transActions"
   },
   {
-    src: Overview,
+    Icon: Overview,
     name: "Overview",
-    href: "/overview",
-    srcActive: OverviewActive,
-  },
+    href: "/overview"
+  }
 ]

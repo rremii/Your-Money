@@ -12,7 +12,7 @@ interface props {
 }
 
 export const CustomIcon: FC<props> = ({ icon, boxColor, color, iconSize, boxSize, borderRadius }) => {
-  return <IconLayout className="CategoryIcon" $color={color} $boxColor={boxColor} $iconSize={iconSize}
+  return <IconLayout className="CustomIcon" $color={color} $boxColor={boxColor} $iconSize={iconSize}
                      $boxSize={boxSize}
                      $borderRadius={borderRadius}>
     {AccountCategoryIconComp.get(icon)}

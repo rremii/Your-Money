@@ -11,10 +11,10 @@ import { useTranslation } from "react-i18next"
 
 export const EditCreateAccountMenu = memo(() => {
   const isMenuOpen = useTypedSelector(
-    (state) => state.UI.Modals.editCreateAccountMenu.isOpen,
+    (state) => state.UI.Modals.editCreateAccountMenu.isOpen
   )
   const menuType = useTypedSelector(
-    (state) => state.UI.Modals.editCreateAccountMenu.menuType,
+    (state) => state.UI.Modals.editCreateAccountMenu.menuType
   )
   const color = useTypedSelector((state) => state.NewAccount.color)
 
@@ -46,34 +46,34 @@ const EditCreateAccountLayout = styled.section<{
   $isMenuOpen?: boolean
   $color?: string
 }>`
-  position: absolute;
-  z-index: 50;
-  width: 100vw;
-  height: 100vh;
-  max-width: 450px;
-  top: 0;
-  left: 0;
-  transition: transform 0.5s;
-  pointer-events: ${({ $isMenuOpen }) => ($isMenuOpen ? "initial" : "none")};
-  transform: ${({ $isMenuOpen }) =>
-    $isMenuOpen ? "translateX(0)" : "translateX(100%)"};
-  background-color: var(--main-bg);
+    position: absolute;
+    z-index: 50;
+    width: 100vw;
+    height: 100vh;
+    max-width: 450px;
+    top: 0;
+    left: 0;
+    transition: transform 0.5s;
+    pointer-events: ${({ $isMenuOpen }) => ($isMenuOpen ? "initial" : "none")};
+    transform: ${({ $isMenuOpen }) =>
+            $isMenuOpen ? "translateX(0)" : "translateX(100%)"};
+    background-color: var(--main-bg);
 
-  .section-header {
-    padding: 10px 15px;
-    background-color: var(--sub-bg);
-    font-weight: 400;
-    font-size: 14px;
-    font-family: Inter, sans-serif;
-    color: ${({ $color }) => $color || "black"};
-    box-shadow: 0 -5px 5px -5px #0000003f;
-  }
+    .section-header {
+        padding: 10px 15px;
+        background-color: var(--sub-bg);
+        font-weight: 400;
+        font-size: 14px;
+        font-family: Inter, sans-serif;
+        color: ${({ $color }) => $color || "black"};
+        box-shadow: 0 -5px 5px -5px #0000003f;
+    }
 
-  .colorfull-box {
-    background-color: ${({ $color }) => ($color ? $color : "#0BAD7B")};
-    color: #ffffff;
-    height: 130px;
-    //margin-bottom: 20px;
-    position: relative;
-  }
+    .colorfull-box {
+        background-color: ${({ $color }) => ($color ? $color : "#0BAD7B")};
+        color: #ffffff;
+        height: 130px;
+        //margin-bottom: 20px;
+        position: relative;
+    }
 `

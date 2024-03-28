@@ -1,9 +1,10 @@
 import { SideBarBtn } from "@shared/ui/SideBarBtn.tsx"
-import Categories from "../../../../public/icons/general/categories.png"
+import Categories from "/icons/general/categories.svg"
 import React from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useTranslation } from "react-i18next"
+import ThemeIcon from "@icons/general/paletee.svg?react"
 
 export const ChangeTheme = React.memo(() => {
   const dispatch = useAppDispatch()
@@ -21,7 +22,7 @@ export const ChangeTheme = React.memo(() => {
       onClick={handleClick}
       title={t("sideBar.theme")}
       subTitle={t("general.themes", { context: theme })}
-      icon={Categories}
+      Icon={ThemeIcon}
     />
   )
 })

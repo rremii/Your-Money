@@ -2,12 +2,14 @@ import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import {
   addToNum,
   removeLastNumber,
-  setOperator,
+  setOperator
 } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { MathOperatorType } from "@entities/EditCreateTransaction/helpers/CalcMathOperation.ts"
 import React, { useCallback, useMemo } from "react"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
+import BackspaceIcon from "@icons/general/backspace.svg?react"
+import DateIcon from "@icons/general/event.svg?react"
 
 interface ICalculatorBtn {
   OnClick: () => void
@@ -18,7 +20,7 @@ export const useGetCalculatorGridBtns = () => {
   const dispatch = useAppDispatch()
 
   const currency = useTypedSelector(
-    (state) => state.EditCreateTransaction.Transaction.currency,
+    (state) => state.EditCreateTransaction.Transaction.currency
   )
 
   const OpenDateMenu = useCallback(() => {
@@ -46,9 +48,9 @@ export const useGetCalculatorGridBtns = () => {
       { OnClick: () => SetOperator("div"), children: "÷" },
       { OnClick: () => SetOperator("mul"), children: "×" },
       { OnClick: () => SetOperator("sub"), children: "-" },
-      { OnClick: () => SetOperator("sum"), children: "+" },
+      { OnClick: () => SetOperator("sum"), children: "+" }
     ],
-    [],
+    []
   )
   const middleBtns: ICalculatorBtn[] = useMemo(
     () => [
@@ -63,25 +65,25 @@ export const useGetCalculatorGridBtns = () => {
       { OnClick: () => AddToNum(3), children: "3" },
       {
         OnClick: OpenCurrencyMenu,
-        children: DefaultCurrencySigns.get(currency),
+        children: DefaultCurrencySigns.get(currency)
       },
       { OnClick: () => AddToNum(0), children: "0" },
-      { OnClick: () => AddToNum("."), children: "." },
+      { OnClick: () => AddToNum("."), children: "." }
     ],
-    [currency],
+    [currency]
   )
 
   const rightBtns: ICalculatorBtn[] = useMemo(
     () => [
-      { OnClick: RemoveLastNum, children: "del" },
-      { OnClick: OpenDateMenu, children: "date" },
+      { OnClick: RemoveLastNum, children: <BackspaceIcon /> },
+      { OnClick: OpenDateMenu, children: <DateIcon /> }
     ],
-    [],
+    []
   )
 
   return {
     leftColumnBtns,
     middleBtns,
-    rightBtns,
+    rightBtns
   }
 }

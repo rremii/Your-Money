@@ -1,7 +1,8 @@
 import styled from "styled-components"
-import Categories from "../../../../public/icons/general/categories.png"
+import Categories from "/icons/general/categories.svg"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { setCategoriesEditMode } from "@entities/UI/model/PagesSlice.ts"
+import EditIcon from "@icons/general/edit.svg?react"
 
 export const StartEditCategories = () => {
   const dispatch = useAppDispatch()
@@ -12,11 +13,19 @@ export const StartEditCategories = () => {
 
   return (
     <StartEditLayout onClick={SetEditCategoriesMode}>
-      <img src={Categories} alt="edit" />
+      <EditIcon className="icon" />
     </StartEditLayout>
   )
 }
 const StartEditLayout = styled.button`
-  width: 20px;
-  height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+
+    .icon {
+        fill: white;
+    }
 `

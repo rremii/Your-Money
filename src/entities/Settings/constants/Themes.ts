@@ -6,9 +6,8 @@ export const LightTheme = [
 
   { property: "--main-txt", value: "#7E7E7E" },
   { property: "--sub-txt", value: "#000000" },
-  { property: "--pale-txt", value: "#A8A8A8" },
+  { property: "--pale-txt", value: "#A8A8A8" }
 
-  // { property: "--sidebar-separator", value: "#EFEFEF" },
 ]
 export const DarkTheme = [
   { property: "--main-bg", value: "#262a33" },
@@ -18,7 +17,6 @@ export const DarkTheme = [
 
   { property: "--main-txt", value: "#FCFCFE" },
   { property: "--sub-txt", value: "#FFFFFF" },
-  { property: "--pale-txt", value: "#7F848A" },
+  { property: "--pale-txt", value: "#7F848A" }
 
-  // { property: "--sidebar-separator", value: "#414141" },
 ]

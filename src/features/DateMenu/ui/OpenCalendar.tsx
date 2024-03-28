@@ -1,5 +1,5 @@
 import { PickDateBtn } from "@shared/ui/PickDateBtn.tsx"
-import Category from "../../../../public/icons/general/categories.png"
+import Category from "/icons/general/categories.svg"
 import React from "react"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { IsYesterday } from "@shared/helpers/IsYesterday.ts"
@@ -7,21 +7,22 @@ import { IsToday } from "@shared/helpers/IsToday.ts"
 import { Months } from "@shared/constants/Months.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useTranslation } from "react-i18next"
+import CalendarIcon from "@icons/general/event.svg?react"
 
 export const OpenCalendar = () => {
   const dispatch = useAppDispatch()
 
   const color = useTypedSelector(
-    (state) => state.EditCreateTransaction.ChosenCategory.color,
+    (state) => state.EditCreateTransaction.ChosenCategory.color
   )
   const dateStr = useTypedSelector(
-    (state) => state.EditCreateTransaction.Transaction.dateStr,
+    (state) => state.EditCreateTransaction.Transaction.dateStr
   )
 
   const { t } = useTranslation()
 
   const OpenCalendar = () => {
-    dispatch(openMenu("calendarMenu"))
+    dispatch(openMenu("transCalendarMenu"))
   }
 
   const date = new Date(dateStr)
@@ -39,7 +40,7 @@ export const OpenCalendar = () => {
       isActive={isActive}
       title={t("dateRange.selectDay")}
       subTitle={isActive ? subTitle : ""}
-      img={Category}
+      Icon={<CalendarIcon className="icon" />}
       OnClick={OpenCalendar}
     />
   )

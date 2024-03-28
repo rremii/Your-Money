@@ -1,10 +1,13 @@
 import styled from "styled-components"
-import Categories from "../../../../public/icons/general/categories.png"
+import Categories from "/icons/general/categories.svg"
 import { useLazyGetMeQuery } from "@entities/User/api/UserApi.ts"
 import React, { useEffect } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { IsCurDateToday } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { useTranslation } from "react-i18next"
+import DefaultAvatar from "@icons/general/avatar.svg?react"
+import CloudIcon from "@icons/general/cloud.svg?react"
+
 
 const time =
   new Date().getHours() +
@@ -26,17 +29,17 @@ export const SideBarHeader = React.memo(() => {
   const GetSectionsData = () => {
     if (isLoggedIn === "success") {
       return {
-        avatar: userInfo?.avatar || Categories,
+        avatar: userInfo?.avatar,
         email: userInfo?.email,
         name: userInfo?.name,
-        time: t("general.time.today") + ", " + time,
+        time: t("general.time.today") + ", " + time
       }
     } else {
       return {
-        avatar: Categories,
+        avatar: null,
         email: t("sideBar.header.email"),
         name: t("sideBar.header.name"),
-        time: t("sideBar.header.time"),
+        time: t("sideBar.header.time")
       }
     }
   }
@@ -44,10 +47,12 @@ export const SideBarHeader = React.memo(() => {
   return (
     <HeaderLayout $isActive={isCurDateToday}>
       <div className="avatar-box">
-        <img className="avatar" src={GetSectionsData().avatar} alt="avatar" />
+        {GetSectionsData().avatar ?
+          <img className="avatar" src={GetSectionsData().avatar || ""} alt="avatar" /> :
+          <DefaultAvatar />}
         <div className="extra-info">
           <span className="date">{GetSectionsData().time}</span>
-          <img src={Categories} alt="cloud" />
+          <CloudIcon />
         </div>
       </div>
       <div className="user-info">
@@ -60,58 +65,58 @@ export const SideBarHeader = React.memo(() => {
 const HeaderLayout = styled.header<{
   $isActive?: boolean
 }>`
-  padding-left: 20px;
-  width: 100%;
-  flex: 0 0 135px;
-  background-color: var(--account-color);
-  padding-top: 35px;
-  padding-right: 15px;
+    padding-left: 20px;
+    width: 100%;
+    flex: 0 0 135px;
+    background-color: var(--account-color);
+    padding-top: 35px;
+    padding-right: 15px;
 
-  .avatar-box {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    .avatar-box {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 10px;
 
-    .avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .extra-info {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+
+            .date {
+                color: #ffffff;
+                font-family: Inter;
+                font-size: 13px;
+                font-style: italic;
+                font-weight: 400;
+                line-height: normal;
+            }
+
+            img {
+                width: 25px;
+            }
+        }
     }
 
-    .extra-info {
-      display: flex;
-      align-items: center;
-      gap: 25px;
+    .user-info {
+        .name,
+        .email {
+            color: #ffffff;
+            font-family: Inter;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
 
-      .date {
-        color: #ffffff;
-        font-family: Inter;
-        font-size: 13px;
-        font-style: italic;
-        font-weight: 400;
-        line-height: normal;
-      }
-
-      img {
-        width: 25px;
-      }
+        .name {
+            font-size: 16px;
+        }
     }
-  }
-
-  .user-info {
-    .name,
-    .email {
-      color: #ffffff;
-      font-family: Inter;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-    }
-
-    .name {
-      font-size: 16px;
-    }
-  }
 `

@@ -52,7 +52,8 @@ export default defineConfig({
       "@shared": path.resolve(__dirname, "./src/shared"),
       "@entities": path.resolve(__dirname, "./src/entities"),
       "@features": path.resolve(__dirname, "./src/features"),
-      "@widgets": path.resolve(__dirname, "./src/widgets")
+      "@widgets": path.resolve(__dirname, "./src/widgets"),
+      "@icons": path.resolve(__dirname, "./public/icons")
     }
   },
   plugins: [svgr(), react(), VitePWA(manifestForPlugin)] //https://github.com/pd4d10/vite-plugin-svgr?tab=readme-ov-file#usage

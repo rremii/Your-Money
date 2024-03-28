@@ -7,7 +7,7 @@ export const Burger = () => {
   const dispatch = useAppDispatch()
 
   const isEditCategoriesMode = useTypedSelector(
-    (state) => state.UI.Pages.categoryPage.isCategoriesEditMode,
+    (state) => state.UI.Pages.categoryPage.isCategoriesEditMode
   )
 
   const OpenSideBar = () => {
@@ -38,43 +38,47 @@ export const Burger = () => {
 const BurgerLayout = styled.div<{
   $isArrow?: boolean
 }>`
-  cursor: pointer;
-  position: absolute;
-  z-index: 100;
-  left: 17px;
-  top: 26px;
-
-  .container {
+    cursor: pointer;
+    position: absolute;
+    z-index: 100;
+    left: 17px;
+    top: 15px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
     display: flex;
-    flex-direction: column;
-    width: 18px;
-    gap: 3px;
-    transition: all 0.4s;
-    transform: rotate(180deg);
+    align-items: center;
+    justify-content: center;
 
-    span {
-      transition: transform 0.4s;
-      width: 100%;
-      height: 2px;
-      background-color: white;
-    }
-  }
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 18px;
+        gap: 3px;
+        transition: all 0.4s;
+        transform: rotate(180deg);
 
-  .arrow {
-    transform: rotate(360deg);
-
-    span:nth-child(1) {
-      transform: rotate(-45deg) scaleX(0.5) scaleY(0.8) translateX(-10px)
-        translateY(-2.5px);
+        span {
+            transition: transform 0.4s;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+        }
     }
 
-    span:nth-child(2) {
-      transform: translateX(1px) scaleY(1);
-    }
+    .arrow {
+        transform: rotate(360deg);
 
-    span:nth-child(3) {
-      transform: rotate(45deg) scaleX(0.5) scaleY(0.8) translateX(-10px)
-        translateY(1.8px);
+        span:nth-child(1) {
+            transform: rotate(-45deg) scaleX(0.5) scaleY(0.8) translateX(-10px) translateY(-2.5px);
+        }
+
+        span:nth-child(2) {
+            transform: translateX(1px) scaleY(1);
+        }
+
+        span:nth-child(3) {
+            transform: rotate(45deg) scaleX(0.5) scaleY(0.8) translateX(-10px) translateY(1.8px);
+        }
     }
-  }
 `

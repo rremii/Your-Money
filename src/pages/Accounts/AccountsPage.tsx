@@ -20,12 +20,4 @@ const AccountsPage = () => {
 }
 export default AccountsPage
 const AccountsLayout = styled(MainMenuPageLayout)`
-  //width: 100%;
-  //height: 100%;
-  //display: flex;
-  //flex-direction: column;
-  //position: relative;
-  //font-size: 30px;
-  //max-height: calc(100vh - 55px);
-  //background-color: white;
 `

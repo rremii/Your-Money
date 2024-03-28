@@ -20,12 +20,13 @@ export const SubmitBtn: FC<props> = memo(
         <IconLayout>{children}</IconLayout>
       </SubmitBtnLayout>
     )
-  },
+  }
 )
 const SubmitBtnLayout = styled(CalculatorBtn)`
-  grid-row: span 2;
+    grid-row: span 2;
 `
 const IconLayout = styled.span`
-  color: white;
-  grid-row: 3 /5;
+    color: white;
+    fill: white;
+    grid-row: 3 /5;
 `

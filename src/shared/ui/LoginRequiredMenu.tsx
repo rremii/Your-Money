@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { FC } from "react"
-import Caregories from "../../../public/icons/general/categories.png"
+import Caregories from "/icons/general/categories.svg"
 
 interface props {
   nodeRef?: (node?: Element | null | undefined) => void
@@ -14,15 +14,15 @@ export const LoginRequiredMenu: FC<props> = ({ nodeRef }) => {
   )
 }
 const LoginRequiredMenuLayout = styled.div`
-  scroll-snap-stop: always;
-  scroll-snap-align: center;
-  min-width: 100%;
-  flex: 0 1 100%;
-  max-height: calc(100vh - 55px);
+    scroll-snap-stop: always;
+    scroll-snap-align: center;
+    min-width: 100%;
+    flex: 0 1 100%;
+    max-height: calc(100vh - 55px);
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  background-color: var(--main-bg);
+    background-color: var(--main-bg);
 `

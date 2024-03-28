@@ -21,7 +21,7 @@ const IconComponents: IconComponents = {
   health: HealthComp,
   leisure: LeisureComp,
   restaurant: RestaurantComp,
-  transport: TransportComp,
+  transport: TransportComp
 }
 
 interface GetComponentsProps {

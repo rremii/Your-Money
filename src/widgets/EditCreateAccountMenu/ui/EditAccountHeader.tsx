@@ -1,17 +1,18 @@
 import styled from "styled-components"
-import Categories from "../../../../public/icons/general/categories.png"
+import Categories from "/icons/general/categories.svg"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { resetEditAccount } from "@entities/Account/model/NewAccountSlice.ts"
 import { CreateAccount } from "@features/CreateAccount/ui/CreateAccount.tsx"
 import { EditAccount } from "@features/EditAccount/ui/EditAccount.tsx"
 import { useTranslation } from "react-i18next"
+import ArrowBack from "@icons/general/arrow-back.svg?react"
 
 export const EditAccountHeader = () => {
   const dispatch = useAppDispatch()
 
   const menuType = useTypedSelector(
-    (state) => state.UI.Modals.editCreateAccountMenu.menuType,
+    (state) => state.UI.Modals.editCreateAccountMenu.menuType
   )
   const { t } = useTranslation()
 
@@ -30,26 +31,11 @@ export const EditAccountHeader = () => {
 
   return (
     <HeaderLayout>
-      {menuType === "create" && (
-        <button>
-          <img
-            className="cancel"
-            onClick={CloseAccountMenu}
-            src={Categories}
-            alt="cancel"
-          />
-        </button>
-      )}
-      {menuType === "edit" && (
-        <button>
-          <img
-            className="arrow"
-            onClick={CloseAccountMenu}
-            src={Categories}
-            alt="back"
-          />
-        </button>
-      )}
+      <button onClick={CloseAccountMenu}>
+        <ArrowBack
+          className="cancel"
+        />
+      </button>
 
       <h1 className="title">
         {menuType === "create"
@@ -62,28 +48,31 @@ export const EditAccountHeader = () => {
   )
 }
 const HeaderLayout = styled.header`
-  height: 50px;
-  display: flex;
-  padding: 0 18px;
-  align-items: center;
+    height: 50px;
+    display: flex;
+    padding: 0 18px;
+    align-items: center;
 
-  .cancel,
-  .EditAccount,
-  .CreateAccount,
-  .arrow {
-    width: 17px;
-    height: 17px;
-    //background-color: red;
-  }
+    .cancel,
+    .EditAccount,
+    .CreateAccount,
+    .arrow {
+        width: 25px;
+        height: 25px;
 
-  .title {
-    margin-left: 30px;
-    flex: 1 1 auto;
-    color: #ffffff;
-    font-family: Inter;
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
+        & * {
+            fill: white;
+        }
+    }
+
+    .title {
+        margin-left: 30px;
+        flex: 1 1 auto;
+        color: #ffffff;
+        font-family: Inter;
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
 `

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import Categories from "../../../../public/icons/general/categories.png"
+import Categories from "/icons/general/categories.svg"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { resetEditCategory } from "@entities/Category/model/NewCategorySlice.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
@@ -7,12 +7,14 @@ import React from "react"
 import { CreateCategory } from "@features/CreateCategory/ui/CreateCategory.tsx"
 import { EditCategory } from "@features/EditCategory/ui/EditCategory.tsx"
 import { useTranslation } from "react-i18next"
+import ArrowBack from "@icons/general/arrow-back.svg?react"
+
 
 export const EditCategoryHeader = () => {
   const dispatch = useAppDispatch()
 
   const menuType = useTypedSelector(
-    (state) => state.UI.Modals.editCreateCategoryMenu.menuType,
+    (state) => state.UI.Modals.editCreateCategoryMenu.menuType
   )
 
   const { t } = useTranslation()
@@ -32,26 +34,11 @@ export const EditCategoryHeader = () => {
 
   return (
     <HeaderLayout>
-      {menuType === "create" && (
-        <button>
-          <img
-            className="cancel"
-            onClick={CloseCategoryMenu}
-            src={Categories}
-            alt="cancel"
-          />
-        </button>
-      )}
-      {menuType === "edit" && (
-        <button>
-          <img
-            className="arrow"
-            onClick={CloseCategoryMenu}
-            src={Categories}
-            alt="back"
-          />
-        </button>
-      )}
+      <button className={"cancel"}
+              onClick={CloseCategoryMenu}>
+        <ArrowBack />
+      </button>
+
 
       <h2 className="title">
         {menuType === "create"
@@ -64,28 +51,31 @@ export const EditCategoryHeader = () => {
   )
 }
 const HeaderLayout = styled.header`
-  height: 50px;
-  display: flex;
-  padding: 0 18px;
-  align-items: center;
+    height: 50px;
+    display: flex;
+    padding: 0 18px;
+    align-items: center;
 
-  .cancel,
-  .CreateCategory,
-  .EditCategory,
-  .arrow {
-    width: 17px;
-    height: 17px;
-    //background-color: red;
-  }
+    .cancel,
+    .CreateCategory,
+    .EditCategory,
+    .arrow {
+        width: 25px;
+        height: 25px;
 
-  .title {
-    margin-left: 30px;
-    flex: 1 1 auto;
-    color: #ffffff;
-    font-family: Inter;
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
+        & * {
+            fill: white;
+        }
+    }
+
+    .title {
+        margin-left: 30px;
+        flex: 1 1 auto;
+        color: #ffffff;
+        font-family: Inter;
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
 `

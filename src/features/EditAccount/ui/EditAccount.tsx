@@ -1,9 +1,10 @@
 import styled from "styled-components"
-import Categories from "../../../../public/icons/general/categories.png"
+import Categories from "/icons/general/categories.svg"
 import { useEditAccount } from "@entities/Account/model/useEditAccount.tsx"
 import { memo, useEffect } from "react"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
+import SubmitIcon from "@icons/general/done.svg?react"
 
 export const EditAccount = memo(() => {
   const dispatch = useAppDispatch()
@@ -24,13 +25,14 @@ export const EditAccount = memo(() => {
       onClick={Edit}
       className={"EditAccount"}
     >
-      <img src={Categories} alt="edit" />
+      <SubmitIcon className="icon" />
     </EditAccountLayout>
   )
 })
 const EditAccountLayout = styled.button`
-  img {
-    width: 100%;
-    height: 100%;
-  }
+    .icon {
+        fill: white;
+        width: 25px !important;
+        height: 25px !important;
+    }
 `

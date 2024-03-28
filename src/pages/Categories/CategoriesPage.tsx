@@ -13,7 +13,7 @@ import { MainMenuPageLayout } from "@shared/ui/MainMenuPageLayout.tsx"
 
 const CategoriesPage = () => {
   const isCategoriesEditMode = useTypedSelector(
-    (state) => state.UI.Pages.categoryPage.isCategoriesEditMode,
+    (state) => state.UI.Pages.categoryPage.isCategoriesEditMode
   )
 
   return (
@@ -38,12 +38,4 @@ const CategoriesPage = () => {
 }
 export default CategoriesPage
 const CategoriesLayout = styled(MainMenuPageLayout)`
-  //width: 100%;
-  //height: 100%;
-  //max-height: calc(100vh - 55px);
-  //display: flex;
-  //flex-direction: column;
-  //position: relative;
-  //font-size: 30px;
-  //background-color: #ececec;
 `
