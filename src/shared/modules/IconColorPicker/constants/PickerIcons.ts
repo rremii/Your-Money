@@ -5,7 +5,26 @@ export const pickerIcons = {
     "health",
     "leisure",
     "restaurant",
-    "transport"
+    "transport",
+    "shopping",
+    "groceries",
+    "airplaneTicket",
+    "apartment",
+    "casino",
+    "hotel",
+    "localBar",
+    "nightLife",
+    "roomService",
+    "sportsBar",
+    "trip"
   ],
-  accountIcons: ["cup", "burger"]
+  accountIcons: [
+    "card",
+    "cash",
+    "dataTable",
+    "money",
+    "payments",
+    "savings",
+    "wallet"
+  ]
 }
