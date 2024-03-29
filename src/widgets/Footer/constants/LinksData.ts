@@ -17,7 +17,7 @@ export const LinksData = [
   {
     Icon: TransActions,
     name: "Transactions",
-    href: "/transActions"
+    href: "/transactions"
   },
   {
     Icon: Overview,

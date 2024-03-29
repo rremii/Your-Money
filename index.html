@@ -6,14 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Money</title>
   <meta name="description" content="No commerce app, that can help you to handle your money spending">
-  <link rel="stylesheet" type="text/css" href="src/shared/preloader/preloader.css">
+  <link rel="stylesheet" type="text/css" href="src/shared/modules/preloader/preloader.css">
   <link
     rel="apple-touch-icon"
     sizes="180X180"
-    href="./public/icons/apple-touch-icon.png"
+    href="/icons/apple-touch-icon.avif"
   />
+  <link rel="preload" href="/icons/android-chrome-512x512.avif" as="image">
   <meta name="theme-color" content="#171717" />
   <link rel="manifest" href="/site.webmanifest" />
+
 </head>
 <body>
 
@@ -21,7 +23,7 @@
 <div id="root">
 
   <div id="preloader">
-    <img class="preloader-icon" src="public/icons/general/categories.png" alt="preloader">
+    <img class="preloader-icon" src="/icons/android-chrome-512x512.avif" alt="preloader">
   </div>
 </div>
 <script type="module" src="/src/main.tsx"></script>

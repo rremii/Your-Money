@@ -20,7 +20,6 @@ import { AccountIconPickerModal } from "@features/AccountIconPickerModal/ui/Acco
 import { AccountCurrencyModal } from "@features/AccountCurrencyModal/ui/AccountCurrencyModal.tsx"
 import { ChangeLanguageModal } from "@features/ChangeLanguageModal/ui/ChangeLanguageModal.tsx"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { usePreloader } from "@shared/hooks/usePreloader.tsx"
 import { useI18n } from "@shared/i18n/useI18n.tsx"
 import { ChangeThemeModal } from "@features/ChangeThemeModal/ui/ChangeThemeModal.tsx"
 import { useTheme } from "@entities/Settings/hooks/useTheme.tsx"
@@ -39,7 +38,6 @@ interface Props {
 }
 
 const AppLayout: FC<Props> = ({ children }) => {
-  const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
   const language = useTypedSelector((state) => state.Settings.language)
   const theme = useTypedSelector((state) => state.Settings.theme)
   useI18n(language)
@@ -49,7 +47,6 @@ const AppLayout: FC<Props> = ({ children }) => {
   useAuth()
   useStartScreen()
   useTheme(theme)
-  usePreloader(isLoggedIn)
   return (
     <LayoutStyles>
       {children}
@@ -90,13 +87,13 @@ const AppLayout: FC<Props> = ({ children }) => {
 }
 export default AppLayout
 const LayoutStyles = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  max-width: 450px;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  margin: 0 auto;
-  background-color: var(--sub-bg);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 450px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    background-color: var(--sub-bg);
 `
