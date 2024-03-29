@@ -10,5 +10,5 @@ export const defaultCategories: Array<Omit<ICategory, "id" | "userId">> = [
   { name: "Restaurant", icon: "restaurant", color: "#316CFF", type: "expense" },
   { name: "Transport", icon: "transport", color: "#AF8A6D", type: "expense" },
 
-  { name: "Salary", icon: "salary", color: "red", type: "income" },
+  { name: "Salary", icon: "salary", color: "#009788", type: "income" },
 ]
