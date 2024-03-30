@@ -1,11 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { CurrencyMenuType } from "@features/DefaultCurrencyModal/types.ts"
-import {
-  EditCreateAccountType,
-  EditCreateCategoryType,
-  EditCreateMenuType,
-  Menus,
-} from "@entities/UI/types.ts"
+import { EditCreateAccountType, EditCreateCategoryType, EditCreateMenuType, Menus } from "@entities/UI/types.ts"
 
 interface initialState {
   editCreateTransMenu: {

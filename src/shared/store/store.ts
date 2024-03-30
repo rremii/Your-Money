@@ -1,8 +1,4 @@
-import {
-  combineReducers,
-  configureStore,
-  PreloadedState,
-} from "@reduxjs/toolkit"
+import { combineReducers, configureStore, PreloadedState } from "@reduxjs/toolkit"
 import { Api } from "../api/config/Api"
 import { AuthReducer } from "@entities/Auth/model/AuthSlice.ts"
 import { DateReducer } from "@entities/DateSlider/model/DateSliderSlice.ts"

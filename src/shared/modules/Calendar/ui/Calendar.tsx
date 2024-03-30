@@ -2,11 +2,7 @@ import styled from "styled-components"
 import React, { FC, useContext, useEffect } from "react"
 import { MonthSlider } from "@shared/modules/Calendar/ui/MonthSlider.tsx"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
-import {
-  setCalendarColor,
-  setCurCalendarDate,
-  updateMenuDates,
-} from "@shared/modules/Calendar/model/Actions.ts"
+import { setCalendarColor, setCurCalendarDate, updateMenuDates } from "@shared/modules/Calendar/model/Actions.ts"
 import { YearSlider } from "@shared/modules/Calendar/ui/YearSlider.tsx"
 import { Header } from "@shared/modules/Calendar/ui/Header.tsx"
 

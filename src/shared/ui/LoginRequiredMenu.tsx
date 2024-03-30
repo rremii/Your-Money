@@ -1,16 +1,19 @@
 import styled from "styled-components"
 import { FC } from "react"
 import PreloaderIcon from "@icons/general/preloader.svg?react"
+import { useTranslation } from "react-i18next"
 
 interface props {
   nodeRef?: (node?: Element | null | undefined) => void
 }
 
 export const LoginRequiredMenu: FC<props> = ({ nodeRef }) => {
+  const { t } = useTranslation()
+
   return (
     <LoginRequiredMenuLayout className="LoginRequiredMenu" ref={nodeRef}>
       <PreloaderIcon className="preloader" />
-      <h2>Please login to get an access to the page</h2>
+      <h2>{t("loginRequiredMenu")}</h2>
     </LoginRequiredMenuLayout>
   )
 }
@@ -31,6 +34,9 @@ const LoginRequiredMenuLayout = styled.div`
         font-family: Inter, sans-serif;
         font-size: 15px;
         color: var(--sub-txt);
+        max-width: 80%;
+        text-align: center;
+        line-height: 1.5;
     }
 
     .preloader {

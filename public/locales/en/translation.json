@@ -231,5 +231,7 @@
   "editCategoriesMenu": {
     "title": "Edit categories"
   },
-  "toastOfflineWarn": "Please login, the maximum amount of transactions is limited by 20 and synchronization is not available"
+  "toastPWA": "You can also go for the PWA version",
+  "loginRequiredMenu": "Please login to get an access to the page",
+  "noTransactionsMenu": "No transactions yet"
 }

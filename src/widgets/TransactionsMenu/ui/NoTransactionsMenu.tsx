@@ -1,17 +1,19 @@
 import styled from "styled-components"
 import { FC } from "react"
-import Caregories from "/icons/general/categories.svg"
 import NoTransIcon from "@icons/general/no-transactions.svg?react"
+import { useTranslation } from "react-i18next"
 
 interface props {
   nodeRef?: (node?: Element | null | undefined) => void
 }
 
 export const NoTransactionsSection: FC<props> = ({ nodeRef }) => {
+  const { t } = useTranslation()
+
   return (
     <NoTransactionsLayout ref={nodeRef}>
       <NoTransIcon className="icon" />
-      <h2>No transactions yet</h2>
+      <h2>{t("noTransactionsMenu")}</h2>
     </NoTransactionsLayout>
   )
 }
@@ -28,6 +30,9 @@ const NoTransactionsLayout = styled.div`
         font-family: Inter, sans-serif;
         font-size: 15px;
         color: var(--sub-txt);
+        max-width: 80%;
+        text-align: center;
+        line-height: 1.5;
     }
 
     .icon {

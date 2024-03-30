@@ -12,10 +12,7 @@ import { TransDate } from "@shared/ui/TransDate.tsx"
 import { OptionsSection } from "@widgets/EditCreateTransMenu/ui/OptionsSection.tsx"
 import { resetEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { resetTransCalculator } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
-import {
-  closeMenu,
-  setEditCreateMenuType,
-} from "@entities/UI/model/ModalsSlice.ts"
+import { closeMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { EditCreateMenuType } from "@entities/UI/types.ts"
 import { CreateTransaction } from "@features/CreateTransaction/ui/CreateTransaction.tsx"
 import { EditTransaction } from "@features/EditTransaction/ui/EditTransaction.tsx"

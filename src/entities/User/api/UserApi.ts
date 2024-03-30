@@ -1,9 +1,5 @@
 import { Api } from "@shared/api/config/Api"
-import {
-  ChangeNameDto,
-  ChangePasswordDto,
-  IUserInfo,
-} from "@entities/User/types.ts"
+import { ChangeNameDto, ChangePasswordDto, IUserInfo } from "@entities/User/types.ts"
 import { DefaultResponse } from "@entities/Auth/types.ts"
 
 export const UserApi = Api.injectEndpoints({

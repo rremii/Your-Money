@@ -1,10 +1,6 @@
 import styled from "styled-components"
-import Category from "/icons/general/categories.svg"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import {
-  openMenu,
-  setEditCreateMenuType
-} from "@entities/UI/model/ModalsSlice.ts"
+import { openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { useDeleteTransaction } from "@entities/Transaction/model/useDeleteTransaction.tsx"
 import { useTranslation } from "react-i18next"
 import DeleteIcon from "@icons/general/delete.svg?react"

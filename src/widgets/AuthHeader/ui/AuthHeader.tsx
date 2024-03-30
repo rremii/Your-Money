@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import React, { FC } from "react"
-import Categories from "/icons/general/categories.svg"
 import ArrowBack from "@icons/general/arrow-back.svg?react"
 
 interface props {

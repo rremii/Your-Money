@@ -1,7 +1,4 @@
-import {
-  DateFilter,
-  IConvertedTransaction,
-} from "@entities/Transaction/types.ts"
+import { DateFilter, IConvertedTransaction } from "@entities/Transaction/types.ts"
 import { transByDate } from "@entities/Transaction/helpers/TransByDate.ts"
 import { DayType } from "@shared/constants/Days.ts"
 

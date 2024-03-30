@@ -1,9 +1,5 @@
 import { ChartOptions } from "chart.js"
-import {
-  DateFilter,
-  IConvertedTransaction,
-  ITransaction,
-} from "@entities/Transaction/types.ts"
+import { DateFilter, IConvertedTransaction, ITransaction } from "@entities/Transaction/types.ts"
 import { IsDateBetween } from "@shared/helpers/IsDateBetween.ts"
 import { ICategory } from "@entities/Category/type.ts"
 import { Days, DayType, FullDays } from "@shared/constants/Days.ts"

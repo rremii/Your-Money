@@ -1,8 +1,5 @@
 import { useCallback, useEffect, useRef } from "react"
-import {
-  shiftTransMenuIdsLeft,
-  shiftTransMenuIdsRight,
-} from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { shiftTransMenuIdsLeft, shiftTransMenuIdsRight } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { useAppDispatch } from "@shared/hooks/storeHooks.ts"
 import { DateFilter } from "@entities/Transaction/types.ts"
 

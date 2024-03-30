@@ -2,10 +2,7 @@ import styled from "styled-components"
 import { Doughnut } from "react-chartjs-2"
 import React, { FC } from "react"
 import { GetDoughnutConfig } from "@widgets/CategoriesMenu/model/GetDoughnutConfig.ts"
-import {
-  IConvertedTransaction,
-  TransactionType,
-} from "@entities/Transaction/types.ts"
+import { IConvertedTransaction, TransactionType } from "@entities/Transaction/types.ts"
 import { SumAllTransactions } from "@widgets/OverviewMenu/model/dataTransformHelpers.ts"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"

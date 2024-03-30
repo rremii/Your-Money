@@ -1,9 +1,5 @@
 import { Api } from "@shared/api/config/Api.ts"
-import {
-  AccountResponse,
-  CreateAccountDto,
-  EditAccountDto,
-} from "@entities/Account/types.ts"
+import { AccountResponse, CreateAccountDto, EditAccountDto } from "@entities/Account/types.ts"
 import { ICategory } from "@entities/Category/type.ts"
 
 export const AccountsApi = Api.injectEndpoints({

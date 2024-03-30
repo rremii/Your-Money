@@ -1,10 +1,6 @@
 import styled from "styled-components"
-import Categories from "/icons/general/categories.svg"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import {
-  shiftTransMenuIdsLeft,
-  shiftTransMenuIdsRight
-} from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { shiftTransMenuIdsLeft, shiftTransMenuIdsRight } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useTranslation } from "react-i18next"
 import { TranslateDateGap } from "@entities/DateSlider"

@@ -4,7 +4,7 @@ import {
   hideLoadingToast,
   loadingToastShowProps,
   resetLoadingToast,
-  showLoadingToast,
+  showLoadingToast
 } from "@shared/GlobalModules/Toasts/model/LoadingToastSlice.ts"
 
 export const useLoadingToast = (isShown: boolean, message: string) => {

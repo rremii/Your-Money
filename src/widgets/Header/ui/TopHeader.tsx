@@ -5,7 +5,6 @@ import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.
 import { openMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { useTranslation } from "react-i18next"
 import ExpendIcon from "@icons/general/expend.svg?react"
-import { Burger } from "@features/Burger/ui/Burger.tsx"
 
 interface props {
   right?: React.ReactNode

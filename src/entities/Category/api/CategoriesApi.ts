@@ -1,9 +1,5 @@
 import { Api } from "@shared/api/config/Api.ts"
-import {
-  CreateCategoryDto,
-  EditCategoryDto,
-  ICategory,
-} from "@entities/Category/type.ts"
+import { CreateCategoryDto, EditCategoryDto, ICategory } from "@entities/Category/type.ts"
 
 export const CategoriesApi = Api.injectEndpoints({
   endpoints: (build) => ({

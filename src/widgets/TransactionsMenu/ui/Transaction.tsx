@@ -1,15 +1,8 @@
 import styled from "styled-components"
-import Account from "../../../../public/icons/general/accounts.svg"
 import React, { FC } from "react"
-import {
-  IConvertedTransaction,
-  TransactionType
-} from "@entities/Transaction/types.ts"
+import { IConvertedTransaction, TransactionType } from "@entities/Transaction/types.ts"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import {
-  setEditCurrency,
-  setEditTransaction
-} from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
+import { setEditCurrency, setEditTransaction } from "@entities/EditCreateTransaction/model/TransactionSlice.ts"
 import { setEditTransQuantity } from "@entities/EditCreateTransaction/model/CalculatorSlice.ts"
 import { setCategory } from "@entities/EditCreateTransaction/model/ChosenCategory.ts"
 import { setAccount } from "@entities/EditCreateTransaction/model/ChosenAccount.ts"
@@ -17,10 +10,7 @@ import { useAccount } from "@entities/Account/model/useAccount.tsx"
 import { useCategory } from "@entities/Category/model/useCategory.tsx"
 import { GetMe } from "@entities/User/api/UserApi.ts"
 import { DefaultCurrencySigns } from "@entities/Settings/constants/CurrencySigns.ts"
-import {
-  openMenu,
-  setEditCreateMenuType
-} from "@entities/UI/model/ModalsSlice.ts"
+import { openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { CustomIcon } from "@shared/ui/CustomIcon/CustomIcon.tsx"
 import { FormatCurrencyString } from "@entities/Settings/helpers/FormatCurrency.ts"
 

@@ -1,9 +1,8 @@
 import styled from "styled-components"
-import Categories from "/icons/general/categories.svg"
 import { useLazyGetMeQuery } from "@entities/User/api/UserApi.ts"
 import React, { useEffect } from "react"
 import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { IsCurDateToday } from "@entities/DateSlider/model/DateSliderSlice.ts"
+import { IsChosenDateCurDate } from "@entities/DateSlider/model/DateSliderSlice.ts"
 import { useTranslation } from "react-i18next"
 import DefaultAvatar from "@icons/general/avatar.svg?react"
 import CloudIcon from "@icons/general/cloud.svg?react"
@@ -16,7 +15,7 @@ const time =
 
 export const SideBarHeader = React.memo(() => {
   const isLoggedIn = useTypedSelector((state) => state.Auth.isLoggedIn)
-  const isCurDateToday = useTypedSelector(IsCurDateToday)
+  const isCurDateToday = useTypedSelector(IsChosenDateCurDate)
 
   const [getMe, { data: userInfo }] = useLazyGetMeQuery()
   const { t } = useTranslation()

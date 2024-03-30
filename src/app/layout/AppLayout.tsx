@@ -32,6 +32,7 @@ import { WeekDayModal } from "@features/ChangeFirstDayWeekModal/ui/WeekDayModal.
 import { ChangeStartScreenModal } from "@features/ChangeStartScreenModal/ui/ChangeStartScreenModal.tsx"
 import { useStartScreen } from "@entities/Settings/hooks/useStartScreen.tsx"
 import { useAuth } from "@entities/Auth"
+import { usePwaToast } from "@entities/Pwa/model/usePwaToast.tsx"
 
 interface Props {
   children: React.ReactNode
@@ -45,6 +46,7 @@ const AppLayout: FC<Props> = ({ children }) => {
   useAllTransDateGap()
 
   useAuth()
+  usePwaToast()
   useStartScreen()
   useTheme(theme)
   return (

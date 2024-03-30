@@ -10,10 +10,10 @@ interface props {
 }
 
 export const AllAccountsInfo: FC<props> = ({
-  allBalance,
-  currencySign,
-  currencyFormat,
-}) => {
+                                             allBalance,
+                                             currencySign,
+                                             currencyFormat
+                                           }) => {
   const { t } = useTranslation()
 
   const getBalanceStyleClass = (): string => {
@@ -29,8 +29,8 @@ export const AllAccountsInfo: FC<props> = ({
           {FormatCurrencyString({
             formatString: currencyFormat,
             currencySign,
-            sign: "",
-            quantity: allBalance,
+            sign: allBalance < 0 ? "-" : "",
+            quantity: allBalance
           })}
         </p>
       </div>
@@ -38,45 +38,45 @@ export const AllAccountsInfo: FC<props> = ({
   )
 }
 const AccountsInfoLayout = styled.section`
-  .accounts-top-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 42px;
-    padding: 0 15px;
+    .accounts-top-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 42px;
+        padding: 0 15px;
 
-    .title {
-      color: var(--main-txt);
-      font-family: Inter;
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
+        .title {
+            color: var(--main-txt);
+            font-family: Inter;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+
+        .neg-balance {
+            color: #e25e76 !important;
+        }
+
+        .pos-balance {
+            color: #0bad7b !important;
+        }
+
+        .balance {
+            color: var(--sub-txt);
+            font-family: Inter;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+
+            span {
+                font-family: Inter;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                font-size: 14px;
+            }
+        }
     }
-
-    .neg-balance {
-      color: #e25e76 !important;
-    }
-
-    .pos-balance {
-      color: #0bad7b !important;
-    }
-
-    .balance {
-      color: var(--sub-txt);
-      font-family: Inter;
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-
-      span {
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        font-size: 14px;
-      }
-    }
-  }
 `

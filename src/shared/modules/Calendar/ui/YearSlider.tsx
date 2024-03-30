@@ -1,11 +1,7 @@
 import styled from "styled-components"
 import { useContext, useEffect, useRef } from "react"
 import { CalendarContext } from "@shared/modules/Calendar/model/Context.ts"
-import {
-  setCalendarType,
-  setCurCalendarDate,
-  updateMenuDates,
-} from "@shared/modules/Calendar/model/Actions.ts"
+import { setCalendarType, setCurCalendarDate, updateMenuDates } from "@shared/modules/Calendar/model/Actions.ts"
 
 export const YearSlider = () => {
   const { color, chosenDateStr } = useContext(CalendarContext)

@@ -3,7 +3,10 @@ import { DateFilter } from "@entities/Transaction/types.ts"
 import { RootState } from "@shared/store/store.ts"
 import { DayType } from "@shared/constants/Days.ts"
 import { timeGap } from "@shared/helpers/TimeGap.ts"
-import { IsToday } from "@shared/helpers/IsToday.ts"
+import { IsToday } from "@entities/DateSlider/model/IsToday.ts"
+import { IsCurWeek } from "@entities/DateSlider/model/IsCurWeek.ts"
+import { IsCurMonth } from "@entities/DateSlider/model/IsCurMonth.ts"
+import { IsCurYear } from "@entities/DateSlider/model/IsCurYear.ts"
 
 interface initialState {
   initDate: string
@@ -24,19 +27,19 @@ const initialState = {
   initDate: new Date(
     new Date().getFullYear(),
     new Date().getMonth(),
-    new Date().getDate(),
+    new Date().getDate()
   ).toUTCString(),
   curMenu: {
     dateGap: "",
     id: 0,
-    dateFrom: "",
+    dateFrom: ""
   },
   allTransDateGap: {
     dateFrom: "",
-    dateTo: "",
+    dateTo: ""
   },
   dateFilter: window.localStorage.getItem("dateFilter") || "day",
-  dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5],
+  dateMenuIds: [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
 } as initialState
 
 const DateSliderSlice = createSlice({
@@ -51,24 +54,24 @@ const DateSliderSlice = createSlice({
       state.curMenu = {
         dateGap,
         id: 0,
-        dateFrom: dateFrom.toUTCString(),
+        dateFrom: dateFrom.toUTCString()
       }
     },
     setWeekFilter(
       state,
-      action: PayloadAction<{ initDate: string; firstDay: DayType }>,
+      action: PayloadAction<{ initDate: string; firstDay: DayType }>
     ) {
       state.dateFilter = "week"
       const { dateGap, dateFrom } = timeGap.GetWeekGap(
         action.payload.firstDay,
         0,
-        action.payload.initDate,
+        action.payload.initDate
       )
       state.dateMenuIds = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
       state.curMenu = {
         dateGap,
         id: 0,
-        dateFrom: dateFrom.toUTCString(),
+        dateFrom: dateFrom.toUTCString()
       }
     },
     setMonthFilter(state, action: PayloadAction<string>) {
@@ -78,7 +81,7 @@ const DateSliderSlice = createSlice({
       state.curMenu = {
         dateGap,
         id: 0,
-        dateFrom: dateFrom.toUTCString(),
+        dateFrom: dateFrom.toUTCString()
       }
     },
     setYearFilter(state, action: PayloadAction<string>) {
@@ -88,7 +91,7 @@ const DateSliderSlice = createSlice({
       state.curMenu = {
         dateGap,
         id: 0,
-        dateFrom: dateFrom.toUTCString(),
+        dateFrom: dateFrom.toUTCString()
       }
     },
     setAllTimeFilter(state) {
@@ -99,19 +102,19 @@ const DateSliderSlice = createSlice({
     },
     setCurMenu(
       state,
-      action: PayloadAction<{ dateGap: string; id: number; dateFrom: string }>,
+      action: PayloadAction<{ dateGap: string; id: number; dateFrom: string }>
     ) {
       state.curMenu = action.payload
     },
     setAllTransDateGap(
       state,
-      action: PayloadAction<{ dateFrom: string; dateTo: string }>,
+      action: PayloadAction<{ dateFrom: string; dateTo: string }>
     ) {
       state.allTransDateGap = action.payload
     },
     shiftTransMenuIdsRight(
       state,
-      action: PayloadAction<{ shiftAmount: number }>,
+      action: PayloadAction<{ shiftAmount: number }>
     ) {
       if (state.dateFilter === "allTime") return
 
@@ -127,12 +130,12 @@ const DateSliderSlice = createSlice({
 
       state.dateMenuIds = [
         ...transMenuIds.slice(shiftAmount, transMenuIds.length),
-        ...newIds,
+        ...newIds
       ]
     },
     shiftTransMenuIdsLeft(
       state,
-      action: PayloadAction<{ shiftAmount: number }>,
+      action: PayloadAction<{ shiftAmount: number }>
     ) {
       if (state.dateFilter === "allTime") return
 
@@ -148,10 +151,10 @@ const DateSliderSlice = createSlice({
 
       state.dateMenuIds = [
         ...newIds,
-        ...transMenuIds.slice(0, transMenuIds.length - shiftAmount),
+        ...transMenuIds.slice(0, transMenuIds.length - shiftAmount)
       ]
-    },
-  },
+    }
+  }
 })
 
 export const DateReducer = DateSliderSlice.reducer
@@ -164,10 +167,29 @@ export const {
   setWeekFilter,
   setYearFilter,
   setMonthFilter,
-  setAllTimeFilter,
+  setAllTimeFilter
 } = DateSliderSlice.actions
 
 export const IsCurDateToday = createSelector(
   (state: RootState) => state.Date.curMenu.dateFrom,
-  (date) => IsToday(date),
+  (date) => IsToday(date)
+)
+export const IsChosenDateCurDate = createSelector(
+  (state: RootState) => state.Date.curMenu.dateFrom,
+  (state: RootState) => state.Date.dateFilter,
+  (state: RootState) => state.Settings.firstDay,
+  (date, dateFilter, firstDay) => {
+    switch (dateFilter) {
+      case "day":
+        return IsToday(date)
+      case "week":
+        return IsCurWeek(date, firstDay)
+      case "month":
+        return IsCurMonth(date)
+      case "year":
+        return IsCurYear(date)
+      case "allTime":
+        return true
+    }
+  }
 )

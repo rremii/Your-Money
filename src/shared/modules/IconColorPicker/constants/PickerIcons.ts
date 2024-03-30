@@ -16,7 +16,8 @@ export const pickerIcons = {
     "nightLife",
     "roomService",
     "sportsBar",
-    "trip"
+    "trip",
+    "salary"
   ],
   accountIcons: [
     "card",

@@ -58,7 +58,8 @@ const IconComponents: IconComponents = {
   money: MoneyComp,
   payments: PaymentsComp,
   savings: SavingsComp,
-  wallet: WalletComp
+  wallet: WalletComp,
+  salary: PaymentsComp
 }
 
 interface GetComponentsProps {

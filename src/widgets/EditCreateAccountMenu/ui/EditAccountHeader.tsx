@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import Categories from "/icons/general/categories.svg"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { closeMenu } from "@entities/UI/model/ModalsSlice.ts"
 import { resetEditAccount } from "@entities/Account/model/NewAccountSlice.ts"

@@ -3,7 +3,7 @@ import {
   hideNotifyToast,
   notifyToastShowProps,
   resetNotifyToast,
-  showNotifyToast,
+  showNotifyToast
 } from "@shared/GlobalModules/Toasts/model/NotifyToastSlice.ts"
 import { useToast } from "@shared/GlobalModules/Toasts/model/useToast.tsx"
 

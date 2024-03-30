@@ -10,7 +10,7 @@ import {
   setPickerMenuTypeType,
   setPickerSectionTitlesType,
   setPickerSubTitlesType,
-  setPickerTitleType,
+  setPickerTitleType
 } from "@shared/modules/IconColorPicker/types.ts"
 
 export const setPickerCurColor = (payload: string) => {
