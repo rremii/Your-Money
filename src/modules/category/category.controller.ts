@@ -6,22 +6,22 @@ import {
   Param,
   ParseIntPipe,
   Post,
-  Put,
+  Put, UseGuards,
   UsePipes,
-  ValidationPipe,
-} from "@nestjs/common"
+  ValidationPipe
+} from "@nestjs/common";
 import { CategoryService } from "./category.service"
 import { CreateCategoryDto } from "./dto/create-category.dto"
 import { Category } from "./entities/category.entity"
 import { GetCategoriesDto } from "./dto/get-categories.dto"
 import { EditCategoryDto } from "./dto/edit-category.dto"
+import { AccessTokenGuard } from "../../guards/access-token.guard";
 
+@UseGuards(new AccessTokenGuard())
 @Controller("category")
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  //todo
-  // @UseGuards(new RefreshTokenGuard())
   @UsePipes(new ValidationPipe())
   @Put("")
   async editCategory(
@@ -44,7 +44,6 @@ export class CategoryController {
     return this.categoryService.deleteCategory({ id })
   }
 
-  // @UsePipes(new ValidationPipe())
   @Get("")
   async getCategories(
     @Param() getCategoriesDto: GetCategoriesDto,

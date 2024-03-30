@@ -6,22 +6,23 @@ import {
   Param,
   Post,
   Put,
-  Query,
+  Query, UseGuards,
   UsePipes,
-  ValidationPipe,
-} from "@nestjs/common"
+  ValidationPipe
+} from "@nestjs/common";
 import { CreateTransactionDto } from "./dto/create-transaction.dto"
 import { Transaction } from "./entities/transaction.entity"
 import { GetTransactionsDto } from "./dto/get-transactions.dto"
 import { TransactionService } from "./transaction.service"
 import { DeleteTransactionsDto } from "./dto/delete-transactions.dto"
 import { EditTransactionDto } from "./dto/edit-transaction.dto"
+import { AccessTokenGuard } from "../../guards/access-token.guard";
 
+@UseGuards(new AccessTokenGuard())
 @Controller("transaction")
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
 
-  // @UseGuards(new RefreshTokenGuard())
   @UsePipes(new ValidationPipe())
   @Post("")
   async createTransaction(
@@ -32,7 +33,6 @@ export class TransactionController {
     )
   }
 
-  // @UseGuards(new RefreshTokenGuard())
   @UsePipes(new ValidationPipe())
   @Put("")
   async editTransaction(
@@ -41,7 +41,6 @@ export class TransactionController {
     return this.transactionService.editTransaction(editTransactionDto)
   }
 
-  // @UseGuards(new RefreshTokenGuard())
   @Get("")
   async getTransByDateGap(
     @Query() getTransactionsDto: GetTransactionsDto,
@@ -49,7 +48,6 @@ export class TransactionController {
     return this.transactionService.getTransByDateGap(getTransactionsDto)
   }
 
-  // @UseGuards(new RefreshTokenGuard())
   @Delete("/:id")
   async deleteTransById(@Param() deleteTransactionDto: DeleteTransactionsDto) {
     return this.transactionService.deleteTransactionByIdTransaction(

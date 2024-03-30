@@ -6,22 +6,23 @@ import {
   Param,
   ParseIntPipe,
   Post,
-  Put,
+  Put, UseGuards,
   UsePipes,
-  ValidationPipe,
-} from "@nestjs/common"
+  ValidationPipe
+} from "@nestjs/common";
 import { AccountService } from "./account.service"
 import { CreateAccountDto } from "./dto/create-account.dto"
 import { Account } from "./entities/account.entity"
 import { GetAccountsDto } from "./dto/get-accounts.dto"
 import { EditAccountDto } from "./dto/edit-account.dto"
+import { RefreshTokenGuard } from "../../guards/refresh-token.guard";
+import { AccessTokenGuard } from "../../guards/access-token.guard";
 
+@UseGuards(new AccessTokenGuard())
 @Controller("account")
 export class AccountController {
   constructor(private readonly accountService: AccountService) {}
 
-  //todo
-  //@UseGuards(new RefreshTokenGuard())
   @UsePipes(new ValidationPipe())
   @Post("")
   async createAccount(
@@ -42,7 +43,7 @@ export class AccountController {
     return this.accountService.deleteAccount(id)
   }
 
-  // @UsePipes(new ValidationPipe())
+
   @Get("")
   async getAccounts(
     @Param() getAccountsDto: GetAccountsDto,
