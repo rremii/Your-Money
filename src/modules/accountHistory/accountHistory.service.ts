@@ -125,10 +125,13 @@ export class AccountHistoryService {
       accountId,
     })
 
-    const updatedHistoryPoints = historyPoints.map((historyPoint) => ({
-      ...historyPoint,
-      balance: historyPoint.balance + balanceDiff,
-    }))
+
+
+    const updatedHistoryPoints = historyPoints.map((historyPoint) =>{
+      historyPoint.balance  += balanceDiff
+      return historyPoint
+    })
+
 
     await manager.save(updatedHistoryPoints)
 

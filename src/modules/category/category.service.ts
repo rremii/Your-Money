@@ -101,6 +101,8 @@ export class CategoryService {
       return categoryWithTransIds
     } catch (err) {
       await queryRunner.rollbackTransaction()
+      console.error(err)
+      throw new BadRequestException(ApiError.CATEGORY_NOT_DELETED);
     } finally {
       await queryRunner.release()
     }

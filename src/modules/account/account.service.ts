@@ -96,6 +96,8 @@ export class AccountService {
       return accountWithTransIds
     } catch (err) {
       await queryRunner.rollbackTransaction()
+      console.error(err)
+      throw new BadRequestException(ApiError.ACCOUNT_NOT_DELETED);
     } finally {
       await queryRunner.release()
     }
