@@ -3,17 +3,19 @@ import { useTypedSelector } from "@shared/hooks/storeHooks.ts"
 import { useCallback, useEffect } from "react"
 import { ErrorResponse } from "@entities/Auth/types.ts"
 import { useLoadingToast, useNotifyToast } from "@shared/GlobalModules/Toasts"
+import { useTranslation } from "react-i18next"
 
 export const useCreateCategory = (userId?: number) => {
   const { name, icon, color, type } = useTypedSelector(
-    (state) => state.NewCategory,
+    (state) => state.NewCategory
   )
 
   const [createCategory, { isLoading, isError, error, isSuccess }] =
     useCreateCategoryMutation()
 
+  const { t } = useTranslation()
   const { ShowToast } = useNotifyToast(2000)
-  useLoadingToast(isLoading, "Creating a category...")
+  useLoadingToast(isLoading, t("category", { context: "creating" }))
 
   useEffect(() => {
     if (!isError) return

@@ -3,17 +3,19 @@ import { useCallback, useEffect } from "react"
 import { ErrorResponse } from "@entities/Auth/types.ts"
 import { useCreateAccountMutation } from "@entities/Account/api/AccountsApi.ts"
 import { useLoadingToast, useNotifyToast } from "@shared/GlobalModules/Toasts"
+import { useTranslation } from "react-i18next"
 
 export const useCreateAccount = (userId?: number) => {
   const { name, icon, color, currency } = useTypedSelector(
-    (state) => state.NewAccount,
+    (state) => state.NewAccount
   )
 
   const [createAccount, { isLoading, isError, error, isSuccess }] =
     useCreateAccountMutation()
 
+  const { t } = useTranslation()
   const { ShowToast } = useNotifyToast(2000)
-  useLoadingToast(isLoading, "Creating an account...")
+  useLoadingToast(isLoading, t("account", { context: "creating" }))
 
   useEffect(() => {
     if (!isError) return

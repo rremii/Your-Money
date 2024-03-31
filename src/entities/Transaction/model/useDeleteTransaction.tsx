@@ -4,18 +4,20 @@ import { useCloseTransMenu } from "@entities/Transaction/model/useCloseTransMenu
 import { useLoadingToast, useNotifyToast } from "@shared/GlobalModules/Toasts"
 import { useEffect } from "react"
 import { ErrorResponse } from "@entities/Auth/types.ts"
+import { useTranslation } from "react-i18next"
 
 export const useDeleteTransaction = () => {
   const transId = useTypedSelector(
-    (state) => state.EditCreateTransaction.Transaction.id,
+    (state) => state.EditCreateTransaction.Transaction.id
   )
 
   const [deleteTrans, { isLoading, isSuccess, isError, error }] =
     useDeleteTransactionMutation()
 
+  const { t } = useTranslation()
   useCloseTransMenu(isLoading, isSuccess)
   const { ShowToast } = useNotifyToast(2000)
-  useLoadingToast(isLoading, "Deleting the transaction...")
+  useLoadingToast(isLoading, t("transaction", { context: "deleting" }))
 
   useEffect(() => {
     if (!isError) return

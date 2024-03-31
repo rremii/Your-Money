@@ -2,13 +2,15 @@ import { useEffect } from "react"
 import { ErrorResponse } from "@entities/Auth/types.ts"
 import { useDeleteAccountMutation } from "@entities/Account/api/AccountsApi.ts"
 import { useLoadingToast, useNotifyToast } from "@shared/GlobalModules/Toasts"
+import { useTranslation } from "react-i18next"
 
 export const useDeleteAccount = () => {
   const [deleteAccount, { isError, error, isLoading }] =
     useDeleteAccountMutation()
 
+  const { t } = useTranslation()
   const { ShowToast } = useNotifyToast(2000)
-  useLoadingToast(isLoading, "Deleting the account...")
+  useLoadingToast(isLoading, t("account", { context: "deleting" }))
 
   useEffect(() => {
     if (!isError) return

@@ -233,5 +233,14 @@
   },
   "toastPWA": "You can also go for the PWA version",
   "loginRequiredMenu": "Please login to get an access to the page",
-  "noTransactionsMenu": "No transactions yet"
+  "noTransactionsMenu": "No transactions yet",
+  "transaction_creating": "Creating a transaction...",
+  "transaction_editing": "Editing the transaction...",
+  "transaction_deleting": "Deleting transaction...",
+  "category_creating": "Creating a category...",
+  "category_editing": "Editing the category...",
+  "category_deleting": "Deleting category...",
+  "account_creating": "Creating a account...",
+  "account_editing": "Editing the account...",
+  "account_deleting": "Deleting account..."
 }

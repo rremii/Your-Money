@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useAppDispatch, useTypedSelector } from "@shared/hooks/storeHooks.ts"
-import { openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
+import { closeMenu, openMenu, setEditCreateMenuType } from "@entities/UI/model/ModalsSlice.ts"
 import { useDeleteTransaction } from "@entities/Transaction/model/useDeleteTransaction.tsx"
 import { useTranslation } from "react-i18next"
 import DeleteIcon from "@icons/general/delete.svg?react"
@@ -27,6 +27,7 @@ export const OptionsSection = () => {
   }
 
   const OnDeleteClick = async () => {
+    dispatch(closeMenu("editCreateTransMenu"))
     await DeleteTransaction()
   }
 

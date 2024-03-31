@@ -233,5 +233,14 @@
   },
   "toastPWA": "Не нравиться браузер? скачай приложение!",
   "loginRequiredMenu": "Войдите в аккаунт для получения доступа к этой странице",
-  "noTransactionsMenu": "Операций пока не совершено"
+  "noTransactionsMenu": "Операций пока не совершено",
+  "transaction_creating": "Создаем операцию...",
+  "transaction_editing": "Изменяем операцию...",
+  "transaction_deleting": "Удаляем операцию...",
+  "category_creating": "Создаем категорию...",
+  "category_editing": "Изменяем категорию...",
+  "category_deleting": "Удаляем категорию...",
+  "account_creating": "Создаем счет...",
+  "account_editing": "Изменяем счет...",
+  "account_deleting": "Удаляем счет..."
 }

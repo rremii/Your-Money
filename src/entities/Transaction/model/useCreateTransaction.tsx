@@ -6,29 +6,32 @@ import { useLoadingToast, useNotifyToast } from "@shared/GlobalModules/Toasts"
 import { useEffect } from "react"
 import { ErrorResponse } from "@entities/Auth/types.ts"
 import { useCloseTransMenu } from "@entities/Transaction/model/useCloseTransMenu.tsx"
+import { useTranslation } from "react-i18next"
 
 export const useCreateTransaction = () => {
   const { type, title, dateStr } = useTypedSelector(
-    (state) => state.EditCreateTransaction.Transaction,
+    (state) => state.EditCreateTransaction.Transaction
   )
   const accountId = useTypedSelector(
-    (state) => state.EditCreateTransaction.ChosenAccount.id,
+    (state) => state.EditCreateTransaction.ChosenAccount.id
   )
   const categoryId = useTypedSelector(
-    (state) => state.EditCreateTransaction.ChosenCategory.id,
+    (state) => state.EditCreateTransaction.ChosenCategory.id
   )
   const quantity = useTypedSelector(
-    (state) => state.EditCreateTransaction.Calculator.quantity,
+    (state) => state.EditCreateTransaction.Calculator.quantity
   )
   const { data: user } = GetMe.useQueryState()
 
   const [createTransaction, { isLoading, isSuccess, isError, error }] =
     useCreateTransactionMutation()
 
+
+  const { t } = useTranslation()
   useCloseTransMenu(isLoading, isSuccess)
   const { GetConvertedCurrency } = useGetConvertedTransCurrency()
   const { ShowToast } = useNotifyToast(2000)
-  useLoadingToast(isLoading, "Creating a transaction...")
+  useLoadingToast(isLoading, t("transaction", { context: "creating" }))
 
   useEffect(() => {
     if (!isError) return
@@ -47,7 +50,7 @@ export const useCreateTransaction = () => {
       accountId: accountId,
       categoryId: categoryId,
       quantity: GetConvertedCurrency(),
-      date: dateStr,
+      date: dateStr
     })
   }
 
