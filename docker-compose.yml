@@ -1,0 +1,23 @@
+version: "3.6"
+services:
+  postgres:
+    container_name: your_money_postgres
+    image: postgis/postgis:16-3.4
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123qwe
+      - POSTGRES_DB=your_money
+    ports:
+      - 5432:5432
+  pgadmin:
+    container_name: your_money_pgadmin
+    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - postgres

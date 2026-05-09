@@ -25,7 +25,8 @@ export class CodeService {
     const existUser = await this.usersService.findUserByEmail(email)
     if (existUser) throw new BadRequestException(ApiError.USER_EXIST)
 
-    const code = uuid().slice(0, 6)
+    // const code = uuid().slice(0, 6)
+    const code = "111111"
 
     await this.mailerService.sendMail({
       to: email,

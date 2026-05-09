@@ -5,8 +5,11 @@ import { Account } from "src/modules/account/entities/account.entity"
 import { Category } from "../modules/category/entities/category.entity"
 import { Transaction } from "../modules/transaction/entities/transaction.entity"
 import { AccountHistoryPoint } from "../modules/accountHistory/entities/accountHistoryPoint.entity"
+import { TypeOrmModuleOptions } from "@nestjs/typeorm/dist/interfaces/typeorm-options.interface"
 
-export const getOrmConfig = async (config: ConfigService): Promise<any> => {
+export const getOrmConfig = async (
+  config: ConfigService,
+): Promise<TypeOrmModuleOptions> => {
   return {
     type: "postgres",
 
