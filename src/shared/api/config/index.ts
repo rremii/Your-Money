@@ -1,23 +1,23 @@
 import axios from "axios"
 
-export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/"
+export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001/"
 
 export const $api = axios.create({
   withCredentials: true,
   baseURL: API_URL,
-  headers: {}
+  headers: {},
 })
 export const $apiDefault = axios.create({
   withCredentials: true,
   baseURL: API_URL,
-  headers: {}
+  headers: {},
 })
 
 $api.interceptors.request.use((config) => {
   if (config.headers !== null) {
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     config.headers.Authorization = `Bearer ${localStorage.getItem(
-      "accessToken"
+      "accessToken",
     )}`
   }
   return config
@@ -37,7 +37,7 @@ $api.interceptors.response.use(
       try {
         const response = await axios.get<{ accessToken: string }>(
           API_URL + "auth/refresh",
-          { withCredentials: true }
+          { withCredentials: true },
         )
         localStorage.setItem("accessToken", response.data.accessToken)
         return await $api.request(originalRequest)
@@ -47,5 +47,5 @@ $api.interceptors.response.use(
       }
     }
     throw error
-  }
+  },
 )

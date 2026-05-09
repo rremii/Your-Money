@@ -24,9 +24,9 @@ export const SignUpInfoForm = () => {
   const {
     register,
     formState: { errors },
-    handleSubmit
+    handleSubmit,
   } = useForm<FormFields>({
-    resolver: yupResolver(infoFormSchema)
+    resolver: yupResolver(infoFormSchema),
   })
 
   const [t] = useTranslation()
@@ -47,8 +47,11 @@ export const SignUpInfoForm = () => {
             ref={imgRef}
             type="file"
           />
-          {curAvatar ? <img src={curAvatar || ""} alt="avatar" />
-            : <DefaultAvatar />}
+          {curAvatar ? (
+            <img src={curAvatar || ""} alt="avatar" />
+          ) : (
+            <DefaultAvatar width="70%" height="70%" />
+          )}
         </div>
         <FormField
           isError={Boolean(errors.root) || Boolean(errors.name)}
@@ -56,7 +59,7 @@ export const SignUpInfoForm = () => {
           input={{
             type: "text",
             placeholder: "",
-            registerData: { ...register("name") }
+            registerData: { ...register("name") },
           }}
         />
         {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
@@ -68,38 +71,41 @@ export const SignUpInfoForm = () => {
   )
 }
 const SignUpFormLayout = styled.div`
-    .avatar {
-        align-self: center;
-        width: 150px;
-        height: 150px;
-        position: relative;
-        border-radius: 50%;
-        overflow: hidden;
-        //background-color: grey;
+  .avatar {
+    align-self: center;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    //background-color: grey;
 
-        img {
-            width: 100%;
-            height: 100%;
-        }
-
-        input {
-            border-radius: 50%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            background-color: red;
-            width: 100%;
-            height: 100%;
-        }
-
-        input[type="file"]::-webkit-file-upload-button {
-            display: none;
-        }
+    img {
+      width: 100%;
+      height: 100%;
     }
 
-    .AuthSubmitBtn {
-        width: 150px;
-        height: 35px;
+    input {
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      background-color: red;
+      width: 100%;
+      height: 100%;
     }
+
+    input[type="file"]::-webkit-file-upload-button {
+      display: none;
+    }
+  }
+
+  .AuthSubmitBtn {
+    width: 150px;
+    height: 35px;
+  }
 `
